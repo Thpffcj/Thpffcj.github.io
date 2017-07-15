@@ -181,7 +181,8 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<p>request从浏览器过来，到达DispatcherServlet。DispatcherServlet可以拦截所有request。然后代理HandlerMapping去找Controller。HandlerMapping可以通过注解知道哪一个controller，HandlerInterceptor是我们所需要的。HandlerMapping将controller和HandlerInterceptor形成一个执行链条，作为一个Handler/HandlerAdapter返回给DispatcherServlet。Controller可以生成ModelAndView返还给DispatcherServlet。视图解析器ViewResollver告诉DispatcherServlet哪个视图是用来解析的。因此DispatcherServlet通过调用ViewResollver返回View对象。这时候就可以在页面上看到用户界面。<br><img src="http://oseihavwm.bkt.clouddn.com/springmvc.png" alt=""></p>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
