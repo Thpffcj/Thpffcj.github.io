@@ -196,6 +196,110 @@
 <p>编程范式<br>面向过程：C,Visual Basic…<br>面向对象：java,C#,C++,Scala…<br>函数式：Haskell,Erlang…</p>
 <p>数据类型(Java)<br>boolean,byte,char<br>short,int,long,float,double<br>String,Enum,Array<br>Object…</p>
 <p>32位int的范围?<br>-2^31~2^31-1<br>补码:取反加一(1000…0 -2^31, 1111…1 -1, 0000…0, 0, 0111…1 2^31-1)<br>好处：-1+1=0(1111…1+0000…1=0000…0)</p>
+<p>浮点数与定点数<br>符号位|指数部分|基数部分<br>64位double范围：+/-10^308<br>64位double精度:10^15<br>浮点数比较<br>a == b? Math.abs(a-b) &lt; eps?<br>使用BigDecimal算钱</p>
+<p>Java数据类型<br>primitive type vs Object<br>primitive type：int,long,float…<br>值类型<br>用a==b判断相等<br>Object:Integer,Long,Float,String…<br>引用类型<br>用a==b判断为是否为同一个Object<br>用a.equals(b),或Object.equals(a,b)判断是否相等<br>Boxing and Unboxing<br>Integer a = 2; //Boxing<br>Integer b = new Integer(2); //Boxing 箱子里是2，a,b指向箱子。<br>int v = a.intValue(); //Unboxing<br>new Integer(2) == 2?<br>new Integer(2) == new Integer(2)?<br>Integer.valueOf(2) == Integer.valueOf(2)?<br>Integer.valueOf(2).intValue() == 2?<br>new Integer(2).equals(new Integer(2))?</p>
+<p>编码技巧</p>
+<ol>
+<li>递归控制</li>
+<li>循环控制</li>
+<li>边界控制</li>
+<li>数据结构</li>
+</ol>
+<p>在白板上写程序<br>程序写在：白板，纸笔，Word文档，记事本。。。<br>修改不便；缩进不便；对齐困难<br>心里不抵触；先思考后写；不要惧怕修改/重写</p>
+<p>数学归纳法<br>用于证明断言对所有自然数成立<br>证明对于N=1成立。<br>证明N&gt;1时：如果对于N-1成立，那么对于N成立。</p>
+<p>递归控制<br>如何证明递归函数正确执行<br>数学归纳法中的数学/自然语言&lt;–&gt;程序语言<br>递归书写方法<br>严格定义递归函数作用，包括参数，返回值，Side-effect<br>先一般，后特殊<br>每次调用必须缩小问题规模<br>每次问题规模缩小程度必须为1</p>
+<p>递归的缺点<br>stack<br>函数调用开销<br>Stack Overflow!<br>问题规模:n million 栈大小？</p>
+<p>循环控制</p>
+<ul>
+<li>不要尝试递归-&gt;非递归<br>一般化方法仍需使用栈<br>代码复杂<br>不能根本的解决问题</li>
+<li>循环不变式<br>是一句断言定义各变量所满足的条件</li>
+<li>循环书写方法<br>定义循环不变式，并在循环体每次结束后保持循环不变式。<br>先一般，后特殊。<br>每次必须向前推进循环不变式中涉及的变量值。<br>每次推进的规模必须为1。</li>
+</ul>
+<h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><ul>
+<li>算法面试优秀不意味着技术面试优秀</li>
+<li><p>技术面试优秀不意味着能够拿到offer</p>
+</li>
+<li><p>如何准备算法面试<br>算法面试并没有那么难<br>学习切忌完美主义（高级数据结构和算法面试提及的概率很低 e.g. 红黑树 B-Tree 斐波那契堆 计算几何 数论 FFT）<br>不要轻视基础算法和数据结构，而只关注”有意思”的题目。<br>在学习和实践做题之间，要掌握平衡。</p>
+</li>
+<li><p>解决算法面试问题的整体思路</p>
+</li>
+</ul>
+<p>注意题目中的条件：</p>
+<ol>
+<li>给定一个有序数组。</li>
+<li>有一些题目中的条件本质是暗示</li>
+</ol>
+<p>当没有思路的时候：</p>
+<ol>
+<li>自己给自己几个简单的测试用例，试验一下。</li>
+<li>不要忽视暴力解法，暴力解法通常是思考的起点。</li>
+</ol>
+<p>优化算法：</p>
+<ol>
+<li>遍历常见的算法思路</li>
+<li>遍历常见的数据结构</li>
+<li>空间和时间的交换(哈希表)</li>
+<li>预处理信息(排序)</li>
+<li>在瓶颈初寻找答案(O(nlogn)+O(n^2);O(n^3))</li>
+</ol>
+<ul>
+<li>实际编写问题</li>
+</ul>
+<ol>
+<li>极端条件的判断</li>
+<li>变量名</li>
+<li>模块化，复用性</li>
+</ol>
+<ul>
+<li><p>一个时间复杂度的问题<br>有一个字符串数组，将数组中的每一个字符串按照字母序排序；之后再将整个字符串数组按照字典序排序。整个操作的时间复杂度？<br>假设最长的字符串长度为s；数组中有n个字符串<br>对每个字符串排序：O(slogs)<br>将数组中的每一个字符串按照字母序排序：O(n<em>slog(s))<br>将整个字符串数组按照字典序排序：O(s</em>nlog(n))<br>O(n<em>slog(s))+O(s</em>nlog(n))=O(n<em>s</em>(logs+logn))</p>
+</li>
+<li><p>算法复杂度在有些情况是用例相关的<br>插入排序算法O(n^2)<br>最差情况：O(n^2)<br>最好情况：O(n)<br>快速排序算法O(nlogn)<br>最差情况：O(n^2)<br>最好情况：O(nlogn)</p>
+</li>
+<li><p>数据规模的概念<br>如果要想在1S之内解决问题：</p>
+</li>
+</ul>
+<ol>
+<li>O(n^2)的算法可以处理大约10^4级别的数据；</li>
+<li>O(n)的算法可以处理大约10^8级别的数据；</li>
+<li>O(nlogn)的算法可以处理大约10^7级别的数据；<br>实际情况由于系数，处理数据量可能更少。</li>
+</ol>
+<ul>
+<li><p>空间复杂度<br>递归调用是有空间代价的<br>递归的深度是多少，空间复杂度就是多少。</p>
+</li>
+<li><p>如何写出正确的程序<br>写一个二分查找法：对于有序数组，才能使用二分查找法。保持循环的不变量。(定义在[l…r]的范围里寻找target)</p>
+</li>
+</ul>
+<ol>
+<li>明确变量的含义</li>
+<li>循环不变量</li>
+<li>小数据量调试</li>
+<li>大数据量测试</li>
+</ol>
+<ul>
+<li>有关树的面试题<br>容易理解<br>难度大，综合性强<br>二叉树的遍历<br>前序遍历：向遍历树根，然后前序遍历左子树，再前序遍历右子树。<br>中序遍历<br>后序遍历<br>层次遍历</li>
+</ul>
+<p>面向对象思想</p>
+<ul>
+<li>从用户(终端用户，使用你代码的用户)角度思考问题</li>
+<li>摒弃完全基于逻辑的思维</li>
+</ul>
+<p>类与对象<br>类的成员变量-&gt;对象状态<br>类的成员函数-&gt;对象行为<br>类的静态变量<br>类的静态函数</p>
+<p>类的静态变量，静态函数？<br>没有this引用，静态变量全局唯一一份<br>普通函数引用静态变量，函数？ OK<br>对象上引用静态变量，函数？ 编译器警告<br>静态函数引用普通成员变量，函数？ 编译错误</p>
+<p>类的特殊函数<br>构造函数<br>equals<br>hashCode<br>toString<br>a.equals(n) -&gt; a.hashCode()==b.hashCode()</p>
+<p>接口</p>
+<ul>
+<li>为什么要有接口的概念<br>从用户(使用实现的代码)角度看问题</li>
+<li>与类相比<br>由编译器强制的一个模块间协作的合约(Contract)<br>无成员变量<br>成员函数只有声明不能有实现</li>
+<li>接口与抽象类<br>从实现角度看<br>抽象类可以有成员变量<br>抽象类可以有部分实现<br>抽象类不可以多重继承，接口可以<br>But why?<br>从用户角度看问题<br>强调合约<br>强制协作双方无法犯错<br>例：包装链表类，实现Iterable接口<br>阅读接口注释，严格按照合约来实现<br>循环不变式用于假想的循环中</li>
+</ul>
+<p>继承与封装<br>继承<br>is-a关系<br>子类增加或修改基类(增加成员变量，函数)<br>Java中所有函数都相当于C++虚函数</p>
+<p>封装<br>默认也称package private<br>尽量只使用private和public</p>
+<p>高级知识点<br>并行计算<br>多线程<br>资源管理</p>
+<p>并行计算的方法<br>将数据拆分到每个节点上 如何拆分<br>每个节点并行的计算出结果 什么结果<br>将结果汇总 如何汇总</p>
+<p>外部排序<br>如何排序10G个元素<br>扩展的归并排序(将数据分为左右两半，分别归并排序，再把两个有序数组归并)<br>归并节点实现<br>K路归并(PriorityQueue pop和push时间复杂度logn)<br>缓冲区：读取每个队列最小的一批数据。<br>归并：使用Iterable<t>接口<br>可以不断获取下一个元素的能力。<br>元素存储/存取方式被抽象，与归并节点无关<br>Iterable<t> merge(List<iterable<t>&gt; sortedData);<br>归并数据源来自Iterable<t>.next()<br>如果缓冲区空，读取下一批元素放入缓冲区<br>给出缓冲区第一个元素<br>可配置项：缓冲区大小，如何读取下一批元素</t></iterable<t></t></t></p>
+<p>多线程<br>死锁分析<br>在任何地方都可以线程切换，甚至在一句语句中间<br>要尽力设想对自己最不利的情况<br>死锁条件，必须同时满足<br>互斥等待<br>hold and wait<br>循环等待<br>无法剥夺的等待<br>死锁防止<br>破除hold and wait -&gt; 一次性获得所有资源<br>破除循环等待 -&gt; 按顺序获取资源<br>破除无法剥夺的等待 -&gt; 加入超时</p>
+<p>线程池<br>创建线程开销大<br>线程池：预先建立好线程，等待任务派发<br>线程池的参数<br>corePoolSize：线程池中初始线程数量，可能处于等待状态<br>maximumPoolSize:线程池中允许最大允许线程数量<br>keepAliveTime:超出corePoolSize部分线程如果等待这些时间将被回收</p>
+<p>资源管理<br>Java垃圾回收<br>不被引用的对象会被回收<br>垃圾回收包括Minor GC 和 Full GC<br>垃圾回收时所有运行暂停<br>Java资源管理<br>内存会被回收，资源不会被释放<br>databaseConnection需要databaseConnection.close()来释放<br>C++资源管理<br>C++没有finally,没有try with resource<br>C++有析构函数</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
