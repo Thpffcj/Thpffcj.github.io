@@ -559,7 +559,553 @@ public interface SeckillDao {
      */
     void killByProcedure(Map&lt;String,Object&gt; paramMap);
 }
-</code></pre><h3 id="3-3-基于MyBatis来实现Dao"><a href="#3-3-基于MyBatis来实现Dao" class="headerlink" title="3.3 基于MyBatis来实现Dao"></a>3.3 基于MyBatis来实现Dao</h3>
+</code></pre><h3 id="3-3-基于MyBatis来实现Dao"><a href="#3-3-基于MyBatis来实现Dao" class="headerlink" title="3.3 基于MyBatis来实现Dao"></a>3.3 基于MyBatis来实现Dao</h3><p>当操纵数据库时，我们需要一个中间的映射过程，映射实体对象。Jdbc，Hibernate，Mybatis都是来做映射的。Mybatis帮你把数据库中的数据映射到对象，反过来对象映射到数据库中。<br><img src="http://oseihavwm.bkt.clouddn.com/mybatis.png" alt=""></p>
+<ul>
+<li>Mybatis特点：Mybatis想知道参数和你提供的SQL，剩下的事他来帮你处理。<br><img src="http://oseihavwm.bkt.clouddn.com/Mybatis2.png" alt=""></li>
+<li>SQL写在哪：1.XML提供SQL 2.注解提供SQL</li>
+<li>如何DAO接口：1.Mapper自动实现DAO接口 2.API编程方式实现DAO接口</li>
+</ul>
+<p>创建Mybatis全局配置文件</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    &lt;!-- 配置全局属性 --&gt;
+    &lt;settings&gt;
+        &lt;!-- 使用jdbc的getGeneratedKeys 获取数据库自增主键值 --&gt;
+        &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;true&quot;/&gt;
+        &lt;!-- 使用列别名替换列名 默认:true
+         select name as title from table
+         --&gt;
+        &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;
+        &lt;!-- 开启驼峰命名转换:Table(create_time) -&gt; Entity(createTime) --&gt;
+        &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+    &lt;/settings&gt;
+
+&lt;/configuration&gt;
+</code></pre><p>Mybatis实现DAO。为SeckilDao和SuccessKilledDao添加配置。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;org.seckill.dao.SeckillDao&quot;&gt;
+
+    &lt;!-- 目的:为DAO接口方法提供sql语句配置--&gt;
+
+    &lt;update id=&quot;reduceNumber&quot;&gt;
+        &lt;!-- 具体sql --&gt;
+        update
+          seckill
+        set
+          number = number - 1
+        where seckill_id = #{seckillId}
+        and start_time &lt;![CDATA[ &lt;= ]]&gt; #{killTime}
+        and end_time &gt;= #{killTime}
+        and number &gt; 0;
+    &lt;/update&gt;
+
+    &lt;select id=&quot;queryById&quot; resultType=&quot;Seckill&quot; parameterType=&quot;long&quot;&gt;
+        select seckill_id,name,number,start_time,end_time,create_time
+        from seckill
+        where seckill_id = #{seckillId}
+    &lt;/select&gt;
+
+    &lt;select id=&quot;queryAll&quot; resultType=&quot;Seckill&quot;&gt;
+        select seckill_id, name, number, start_time, end_time, create_time
+        from seckill
+        order by create_time DESC
+        limit #{offset}, #{limit}
+    &lt;/select&gt;
+
+    &lt;!-- mybatis调用存储过程 --&gt;
+    &lt;select id=&quot;killByProcedure&quot; statementType=&quot;CALLABLE&quot;&gt;
+        call execute_seckill(
+            #{seckillId,jdbcType=BIGINT,mode=IN},
+            #{phone,jdbcType=BIGINT,mode=IN},
+            #{killTime,jdbcType=TIMESTAMP,mode=IN},
+            #{result,jdbcType=INTEGER,mode=OUT}
+        )
+    &lt;/select&gt;
+
+&lt;/mapper&gt;
+</code></pre><h3 id="3-4-myBatis整合Spring理论"><a href="#3-4-myBatis整合Spring理论" class="headerlink" title="3.4 myBatis整合Spring理论"></a>3.4 myBatis整合Spring理论</h3><ul>
+<li>整合目标： 1.更少的编码 2.更少的配置 3.足够的灵活性</li>
+</ul>
+<p>配置Spring-dao.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;org.seckill.dao&quot;/&gt;
+    &lt;!-- 配置整合mybatis过程 --&gt;
+    &lt;!-- 1：配置数据库相关参数
+            properties的属性：${url}
+    --&gt;
+    &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
+    &lt;!-- 2:数据库连接池 --&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;!-- 配置连接池属性 --&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driver}&quot;/&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.url}&quot;/&gt;
+        &lt;property name=&quot;user&quot; value=&quot;${jdbc.username}&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+
+        &lt;!-- c3p0连接池私有属性 --&gt;
+        &lt;property name=&quot;maxPoolSize&quot; value=&quot;30&quot;/&gt;
+        &lt;property name=&quot;minPoolSize&quot; value=&quot;10&quot;/&gt;
+        &lt;!-- 关闭连接后不自动commit --&gt;
+        &lt;property name=&quot;autoCommitOnClose&quot; value=&quot;false&quot;/&gt;
+        &lt;!-- 获取连接超时时间 --&gt;
+        &lt;property name=&quot;checkoutTimeout&quot; value=&quot;1000&quot;/&gt;
+        &lt;!-- 当获取连接失败重试次数 --&gt;
+        &lt;property name=&quot;acquireRetryAttempts&quot; value=&quot;2&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 约定大于配置 --&gt;
+    &lt;!-- 3：配置SqlSessionFactory对象 --&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!-- 注入数据库连接池 --&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+        &lt;!-- 配置MyBatis全局配置文件:mybatis.config.xml --&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+        &lt;!-- 扫描entity包 使用别名 --&gt;
+        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;org.seckill.entity&quot;/&gt;
+        &lt;!-- 扫描sql配置文件：mapper需要的xml文件 --&gt;
+        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 4:配置扫描配置Dao接口包,动态实现Dao接口,并注入到Spring容器中 --&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;!-- 注入sqlSessionFactory --&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+        &lt;!-- 给出扫描Dao接口包 --&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;org.seckill.dao&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- RedisDao --&gt;
+    &lt;bean id=&quot;redisDao&quot; class=&quot;org.seckill.dao.cache.RedisDao&quot;&gt;
+        &lt;constructor-arg index=&quot;0&quot; value=&quot;localhost&quot;/&gt;
+        &lt;constructor-arg index=&quot;1&quot; value=&quot;6379&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><p>里面需要加载jdbc.properties</p>
+<pre><code>jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306/seckill?useUnicode=true&amp;characterEncoding=utf8
+jdbc.username=root
+jdbc.password=000000
+</code></pre><h3 id="3-5-DAO层单元测试编码"><a href="#3-5-DAO层单元测试编码" class="headerlink" title="3.5 DAO层单元测试编码"></a>3.5 DAO层单元测试编码</h3><pre><code>package org.seckill.dao;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.seckill.entity.Seckill;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+/**
+ * 配置spring和junit整合,junit启动时加载spring IOC容器
+ * Created by Thpffcj on 2017/7/22.
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+//告诉junit spring配置文件
+@ContextConfiguration({&quot;classpath:spring/spring-dao.xml&quot;})
+public class SeckillDaoTest {
+
+    //注入Dao实现类依赖,报错无影响，原因目前不知道,我认为这个报错是由于Dao接口只添加了mybatis自定义的@Mapper注解，
+    // 没有添加spring定义的@Component、@Repository等，所以IDEA不认为这是纳入Spring管理的Bean，导致在IDEA找不到
+    // autowire的Dao的来源,在配置文件中主动加上包扫描就可以消除报错。
+    @Resource
+    private SeckillDao seckillDao;
+
+    @Test
+    public void testReduceNumber() throws Exception {
+        Date killTime = new Date();
+        int updateCount = seckillDao.reduceNumber(1000L, killTime);
+        System.out.println(&quot;updateCount&quot;+updateCount);
+    }
+
+    @Test
+    public void testQueryById() throws Exception {
+        long id = 1000;
+        Seckill seckill = seckillDao.queryById(id);
+        System.out.println(seckill.getName());
+        System.out.println(seckill);
+    }
+
+    // java没有保存形参的记录, 需要Param注解
+    @Test
+    public void testQueryAll() throws Exception {
+        List&lt;Seckill&gt; seckillList = seckillDao.queryAll(0, 100);
+        for (Seckill seckill : seckillList) {
+            System.out.println(seckill);
+        }
+    }
+
+}
+</code></pre><h1 id="Java高并发秒杀API之Service层"><a href="#Java高并发秒杀API之Service层" class="headerlink" title="Java高并发秒杀API之Service层"></a>Java高并发秒杀API之Service层</h1><p>开始Service层的编码之前，我们首先需要进行Dao层编码之后的思考:在Dao层我们只完成了针对表的相关操作包括写了接口方法和映射文件中的sql语句，并没有编写逻辑的代码，例如对多个Dao层方法的拼接，当我们用户成功秒杀商品时我们需要进行商品的减库存操作(调用SeckillDao接口)和增加用户明细(调用SuccessKilledDao接口)，这些逻辑我们都需要在Service层完成。这也是一些初学者容易出现的错误，他们喜欢在Dao层进行逻辑的编写，其实Dao就是数据访问的缩写，它只进行数据的访问操作，接下来我们便进行Service层代码的编写。</p>
+<h2 id="1-秒杀Service接口设计"><a href="#1-秒杀Service接口设计" class="headerlink" title="1.秒杀Service接口设计"></a>1.秒杀Service接口设计</h2><p>首先创建一个service包用于存放我们的Service接口和其实现类，创建一个exception包用于存放service层出现的异常例如重复秒杀商品异常、秒杀已关闭等异常，一个dto包作为传输层,dto和entity的区别在于:entity用于业务数据的封装，而dto用于完成web和service层的数据传递。</p>
+<p>创建我们Service接口SeckillService，里面的方法应该是按”使用者”(程序员)的角度去设计。</p>
+<pre><code>package org.seckill.service;
+
+import org.seckill.dto.Exposer;
+import org.seckill.dto.SeckillExecution;
+import org.seckill.entity.Seckill;
+import org.seckill.exception.RepeatKillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.exception.SeckillException;
+
+import java.util.List;
+
+/**
+ * 业务接口：站在使用者角度设计接口
+ * 三个方面：方法定义粒度,参数,返回类型(return 类型/异常)
+ * Created by Thpffcj on 2017/7/22.
+ */
+public interface SeckillService {
+
+    /**
+     *查询所有秒杀记录
+     * @return
+     */
+    List&lt;Seckill&gt; getSeckillList();
+
+    /**
+     * 查询单个秒杀记录
+     * @param seckillId
+     * @return
+     */
+    Seckill getById(long seckillId);
+
+    /**
+     * 秒杀开启时输出秒杀接口地址,否则输出系统时间和秒杀时间
+     * @param seckillId
+     */
+    Exposer exportSeckillUrl(long seckillId);
+
+    /**
+     * 执行秒杀操作
+     * @param seckillId
+     * @param userPhone
+     * @param md5
+     */
+    SeckillExecution executeSeckill(long seckillId, long userPhone, String md5)
+        throws SeckillException, RepeatKillException, SeckillCloseException;
+
+    /**
+     * 执行秒杀操作通过存储过程
+     * @param seckillId
+     * @param userPhone
+     * @param md5
+     */
+    SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5);
+}
+</code></pre><p>该接口中前面两个方法返回的都是跟我们业务相关的对象，而后两个方法返回的对象与业务不相关，这两个对象我们用于封装service和web层传递的数据，在dto中创建所需的类。Exposer用于封装秒杀的地址信息。SeckillExecution.java，用于判断秒杀是否成功，成功就返回秒杀成功的所有信息(包括秒杀的商品id、秒杀成功状态、成功信息、用户明细)，失败就抛出一个我们允许的异常(重复秒杀异常、秒杀结束异常)。</p>
+<pre><code>package org.seckill.dto;
+
+/**
+ * 暴露秒杀地址DTO
+ * Created by Thpffcj on 2017/7/22.
+ */
+public class Exposer {
+
+    //是否开启秒杀
+    private boolean exposed;
+
+    //一种加密措施
+    private String md5;
+
+    //id
+    private long seckillId;
+
+    //系统当前时间(毫秒)
+    private long now;
+
+    //开启时间
+    private long start;
+
+    //结束时间
+    private long end;
+
+    public Exposer(boolean exposed, String md5, long seckillId) {
+        this.exposed = exposed;
+        this.md5 = md5;
+        this.seckillId = seckillId;
+    }
+
+    public Exposer(boolean exposed, long seckillId, long now, long start, long end) {
+        this.exposed = exposed;
+        this.seckillId = seckillId;
+        this.now = now;
+        this.start = start;
+        this.end = end;
+    }
+
+    public Exposer(boolean exposed, long seckillId) {
+        this.exposed = exposed;
+        this.seckillId = seckillId;
+    }
+
+    public boolean isExposed() {
+        return exposed;
+    }
+
+    public void setExposed(boolean exposed) {
+        this.exposed = exposed;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+
+    public long getSeckillId() {
+        return seckillId;
+    }
+
+    public void setSeckillId(long seckillId) {
+        this.seckillId = seckillId;
+    }
+
+    public long getNow() {
+        return now;
+    }
+
+    public void setNow(long now) {
+        this.now = now;
+    }
+
+    public long getStart() {
+        return start;
+    }
+
+    public void setStart(long start) {
+        this.start = start;
+    }
+
+    public long getEnd() {
+        return end;
+    }
+
+    public void setEnd(long end) {
+        this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Exposer{&quot; +
+                &quot;exposed=&quot; + exposed +
+                &quot;, md5=&apos;&quot; + md5 + &apos;\&apos;&apos; +
+                &quot;, seckillId=&quot; + seckillId +
+                &quot;, now=&quot; + now +
+                &quot;, start=&quot; + start +
+                &quot;, end=&quot; + end +
+                &apos;}&apos;;
+    }
+}
+</code></pre><p>然后需要创建我们在秒杀业务过程中允许的异常，重复秒杀异常RepeatKillException.java。秒杀关闭异常SeckillCloseException.java和一个异常包含与秒杀业务所有出现的异常SeckillException.java。</p>
+<pre><code>package org.seckill.exception;
+
+/**
+ * 秒杀相关业务异常
+ * Created by Thpffcj on 2017/7/22.
+ */
+public class SeckillException extends RuntimeException{
+
+    public SeckillException(String message) {
+        super(message);
+    }
+
+    public SeckillException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+</code></pre><p>到此，接口的工作便完成，接下来进行接口实现类的编码工作。</p>
+<p>在service包下创建impl包存放它的实现类，SeckillServiceImpl.java。</p>
+<pre><code>package org.seckill.service.impl;
+
+import org.apache.commons.collections.MapUtils;
+import org.seckill.dao.SeckillDao;
+import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
+import org.seckill.dto.Exposer;
+import org.seckill.dto.SeckillExecution;
+import org.seckill.entity.Seckill;
+import org.seckill.entity.SuccessKilled;
+import org.seckill.enums.SeckillStateEnum;
+import org.seckill.exception.RepeatKillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.exception.SeckillException;
+import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Thpffcj on 2017/7/22.
+ */
+@Service
+public class SeckillServiceImpl implements SeckillService{
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    //注入service依赖
+    @Autowired
+    private SeckillDao seckillDao;
+
+    @Autowired
+    private SuccessKilledDao successKilledDao;
+
+    @Autowired
+    private RedisDao redisDao;
+
+    //混淆md5
+    private final String slat = &quot;adfjlasdkjfkljsdkjflakdjsf&quot;;
+
+    public List&lt;Seckill&gt; getSeckillList() {
+        return seckillDao.queryAll(0, 4);
+    }
+
+    public Seckill getById(long seckillId) {
+        return seckillDao.queryById(seckillId);
+    }
+
+    public Exposer exportSeckillUrl(long seckillId) {
+
+        // 优化点:缓存优化:超时的基础上维护一致性
+        //1：访问redis
+        Seckill seckill = redisDao.getSeckill(seckillId);
+        if (seckill == null) {
+            //2:访问数据库
+            seckill = seckillDao.queryById(seckillId);
+            if (seckill == null) {
+                return new Exposer(false, seckillId);
+            } else {
+                //3:放入redis
+                redisDao.putSeckill(seckill);
+            }
+        }
+
+        Date startTime = seckill.getStartTime();
+        Date endTime = seckill.getEndTime();
+        //系统当前时间
+        Date nowTime = new Date();
+        if(nowTime.getTime() &lt; startTime.getTime() ||
+                nowTime.getTime() &gt; endTime.getTime()){
+            return new Exposer(false, seckillId, nowTime.getTime(),
+                    startTime.getTime(), endTime.getTime());
+        }
+        //转化特定字符串的过程，不可逆
+        String md5 = getMD5(seckillId);  //TODO
+        return new Exposer(true, md5, seckillId);
+    }
+
+    @Transactional
+    /**
+     * 使用注解控制事务方法的优点:
+     * 1:开发团队达成一致约定,明确标注事务方法的编程风格。
+     * 2:保证事务方法的执行时间尽可能短,不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部.
+     * 3:不是所有的方法都需要事务,如只有一条修改操作,只读操作不需要事务控制.
+     */
+    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+
+        if (md5 == null || !md5.equals(getMD5(seckillId))) {
+            throw new SeckillException(&quot;seckill data rewrite&quot;);
+        }
+        //执行秒杀逻辑:减库存 + 记录购买行为
+        Date nowTime = new Date();
+
+        try {
+            //记录购买行为
+            int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
+            //唯一:seckillId,userPhone
+            if (insertCount &lt;= 0) {
+                //重复秒杀
+                throw new RepeatKillException(&quot;seckill repeated&quot;);
+            } else {
+                //减库存,热点商品竞争
+                int updateCount = seckillDao.reduceNumber(seckillId, nowTime);
+                if (updateCount &lt;= 0) {
+                    //没有更新到记录，秒杀结束,rollback
+                    throw new SeckillCloseException(&quot;seckill is closed&quot;);
+                } else {
+                    //秒杀成功 commit
+                    SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
+                    return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS, successKilled);
+                }
+            }
+        } catch (SeckillCloseException e1) {
+            throw e1;
+        } catch (RepeatKillException e2) {
+            throw e2;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            //所有编译期异常 转化为运行期异常
+            throw new SeckillException(&quot;seckill inner error:&quot; + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) {
+        if (md5 == null || !md5.equals(getMD5(seckillId))) {
+            return new SeckillExecution(seckillId, SeckillStateEnum.DATE_REWRITE);
+        }
+        Date killTime = new Date();
+        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+        map.put(&quot;seckillId&quot;, seckillId);
+        map.put(&quot;phone&quot;, userPhone);
+        map.put(&quot;killTime&quot;, killTime);
+        map.put(&quot;result&quot;, null);
+        //执行存储过程,result被复制
+        try {
+            seckillDao.killByProcedure(map);
+            //获取result
+            int result = MapUtils.getInteger(map, &quot;result&quot;, -2);
+            if (result == 1) {
+                SuccessKilled sk = successKilledDao.
+                        queryByIdWithSeckill(seckillId, userPhone);
+                return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS, sk);
+            } else {
+                return new SeckillExecution(seckillId, SeckillStateEnum.stateOf(result));
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
+        }
+    }
+
+    private String getMD5(long seckillId){
+        String base = seckillId + &quot;/&quot; + slat;
+        String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
+        return md5;
+    }
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
