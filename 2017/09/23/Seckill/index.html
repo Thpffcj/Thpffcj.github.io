@@ -756,7 +756,7 @@ public class SeckillDaoTest {
 
 }
 </code></pre><h1 id="Java高并发秒杀API之Service层"><a href="#Java高并发秒杀API之Service层" class="headerlink" title="Java高并发秒杀API之Service层"></a>Java高并发秒杀API之Service层</h1><p>开始Service层的编码之前，我们首先需要进行Dao层编码之后的思考:在Dao层我们只完成了针对表的相关操作包括写了接口方法和映射文件中的sql语句，并没有编写逻辑的代码，例如对多个Dao层方法的拼接，当我们用户成功秒杀商品时我们需要进行商品的减库存操作(调用SeckillDao接口)和增加用户明细(调用SuccessKilledDao接口)，这些逻辑我们都需要在Service层完成。这也是一些初学者容易出现的错误，他们喜欢在Dao层进行逻辑的编写，其实Dao就是数据访问的缩写，它只进行数据的访问操作，接下来我们便进行Service层代码的编写。</p>
-<h2 id="1-秒杀Service接口设计"><a href="#1-秒杀Service接口设计" class="headerlink" title="1.秒杀Service接口设计"></a>1.秒杀Service接口设计</h2><p>首先创建一个service包用于存放我们的Service接口和其实现类，创建一个exception包用于存放service层出现的异常例如重复秒杀商品异常、秒杀已关闭等异常，一个dto包作为传输层,dto和entity的区别在于:entity用于业务数据的封装，而dto用于完成web和service层的数据传递。</p>
+<h2 id="1-秒杀业务接口设计与实现"><a href="#1-秒杀业务接口设计与实现" class="headerlink" title="1.秒杀业务接口设计与实现"></a>1.秒杀业务接口设计与实现</h2><h3 id="1-1-秒杀Service接口设计"><a href="#1-1-秒杀Service接口设计" class="headerlink" title="1.1 秒杀Service接口设计"></a>1.1 秒杀Service接口设计</h3><p>首先创建一个service包用于存放我们的Service接口和其实现类，创建一个exception包用于存放service层出现的异常例如重复秒杀商品异常、秒杀已关闭等异常，一个dto包作为传输层,dto和entity的区别在于:entity用于业务数据的封装，而dto用于完成web和service层的数据传递。</p>
 <p>创建我们Service接口SeckillService，里面的方法应该是按”使用者”(程序员)的角度去设计。</p>
 <pre><code>package org.seckill.service;
 
@@ -936,7 +936,7 @@ public class SeckillException extends RuntimeException{
     }
 }
 </code></pre><p>到此，接口的工作便完成，接下来进行接口实现类的编码工作。</p>
-<p>在service包下创建impl包存放它的实现类，SeckillServiceImpl.java。</p>
+<h3 id="1-2-秒杀Service接口实现"><a href="#1-2-秒杀Service接口实现" class="headerlink" title="1.2 秒杀Service接口实现"></a>1.2 秒杀Service接口实现</h3><p>在service包下创建impl包存放它的实现类，SeckillServiceImpl.java。</p>
 <pre><code>package org.seckill.service.impl;
 
 import org.apache.commons.collections.MapUtils;
@@ -1103,6 +1103,448 @@ public class SeckillServiceImpl implements SeckillService{
         String base = seckillId + &quot;/&quot; + slat;
         String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
         return md5;
+    }
+}
+</code></pre><p>代码中，我们返回的state和stateInfo参数信息应该是输出给前端的，但是我们不想在我们的return代码中硬编码这两个参数，所以我们应该考虑用枚举的方式将这些常量封装起来，新建一个枚举包enums，创建一个枚举类型SeckillStatEnum.java</p>
+<pre><code>package org.seckill.enums;
+
+/**
+ * 使用枚举表述常量数据字段
+ * Created by Thpffcj on 2017/7/22.
+ */
+public enum SeckillStateEnum {
+    SUCCESS(1, &quot;秒杀成功&quot;),
+    END(0, &quot;秒杀结束&quot;),
+    REPEAT_KILL(-1, &quot;重复秒杀&quot;),
+    INNER_ERROR(-2, &quot;系统异常&quot;),
+    DATE_REWRITE(-3, &quot;数据篡改&quot;);
+
+    private int state;
+
+    private String stateinfo;
+
+    SeckillStateEnum(int state, String stateinfo) {
+        this.state = state;
+        this.stateinfo = stateinfo;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public String getStateinfo() {
+        return stateinfo;
+    }
+
+    public static SeckillStateEnum stateOf(int index){
+        for ( SeckillStateEnum state: values()) {
+            if(state.getState() == index){
+                return state;
+            }
+        }
+        return null;
+    }
+}
+</code></pre><h2 id="2-使用Spring托管Service依赖配置"><a href="#2-使用Spring托管Service依赖配置" class="headerlink" title="2.使用Spring托管Service依赖配置"></a>2.使用Spring托管Service依赖配置</h2><p><img src="http://oseihavwm.bkt.clouddn.com/Spring.png" alt=""><br><img src="http://oseihavwm.bkt.clouddn.com/Spring2.png" alt=""></p>
+<p>在spring包下创建一个spring-service.xml。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
+    &lt;!-- 扫描service包下所有使用注解的类型 --&gt;
+    &lt;context:component-scan base-package=&quot;org.seckill.service&quot;/&gt;
+
+    &lt;!-- 配置事务管理器 --&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;!-- 注入数据库连接池 --&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置基于注解的声明式事务
+        默认使用注解来管理事务行为
+    --&gt;
+    &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/Spring3.png" alt=""></p>
+<p>然后采用注解的方式将Service的实现类加入到Spring IOC容器中:</p>
+<pre><code>//@Component @Service @Dao @Controller
+@Service
+public class SeckillServiceImpl implements SeckillService {
+
+    //注入service依赖
+    @Autowired
+    private SeckillDao seckillDao;
+}
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/Spring4.png" alt=""></p>
+<h2 id="3-配置并使用spring声明式事务"><a href="#3-配置并使用spring声明式事务" class="headerlink" title="3.配置并使用spring声明式事务"></a>3.配置并使用spring声明式事务</h2><p>声明式事务的使用方式:1.早期使用的方式:ProxyFactoryBean+XMl.2.tx:advice+aop命名空间，这种配置的好处就是一次配置永久生效。3.注解@Transactional的方式。在实际开发中，建议使用第三种对我们的事务进行控制。下面让我们来配置声明式事务，在spring-service.xml中添加对事务的配置: </p>
+<pre><code>&lt;!-- 配置事务管理器 --&gt;
+   &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+       &lt;!-- 注入数据库连接池 --&gt;
+       &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+   &lt;/bean&gt;
+
+   &lt;!-- 配置基于注解的声明式事务
+       默认使用注解来管理事务行为
+   --&gt;
+   &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+</code></pre><p>然后在Service实现类的方法中，在需要进行事务声明的方法上加上事务的注解:</p>
+<pre><code>@Transactional
+   /**
+    * 使用注解控制事务方法的优点:
+    * 1:开发团队达成一致约定,明确标注事务方法的编程风格。
+    * 2:保证事务方法的执行时间尽可能短,不要穿插其他网络操作RPC/HTTP请求或者剥离到事务方法外部.
+    * 3:不是所有的方法都需要事务,如只有一条修改操作,只读操作不需要事务控制.
+    */
+   public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {}
+</code></pre><h2 id="4-完成Service集成测试"><a href="#4-完成Service集成测试" class="headerlink" title="4.完成Service集成测试"></a>4.完成Service集成测试</h2><p>在SeckillService接口中使用IDEA快捷键shift+command+T，快速生成junit测试类。</p>
+<pre><code>package org.seckill.service.impl;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.seckill.dto.Exposer;
+import org.seckill.dto.SeckillExecution;
+import org.seckill.entity.Seckill;
+import org.seckill.exception.RepeatKillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created by Thpffcj on 2017/7/22.
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+//告诉junit spring配置文件
+@ContextConfiguration({&quot;classpath:spring/spring-dao.xml&quot;,
+                        &quot;classpath:spring/spring-service.xml&quot;})
+public class SeckillServiceImplTest {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private SeckillService seckillService;
+
+    @Test
+    public void getSeckillList() throws Exception {
+        List&lt;Seckill&gt; list = seckillService.getSeckillList();
+        logger.info(&quot;list={}&quot;,list);
+    }
+
+    @Test
+    public void getById() throws Exception {
+        long id = 1000L;
+        Seckill seckill = seckillService.getById(id);
+        logger.info(&quot;seckill={}&quot;,seckill);
+    }
+
+    //集成测试代码完整逻辑,注意可重复执行.
+    @Test
+    public void testSeckillLogic() throws Exception {
+        long id = 1001;
+        Exposer exposer = seckillService.exportSeckillUrl(id);
+        if (exposer.isExposed()) {
+            logger.info(&quot;exposer={}&quot;, exposer);
+            long phone = 13502171127L;
+            String md5 = exposer.getMd5();
+            try {
+                SeckillExecution execution = seckillService.executeSeckill(id, phone, md5);
+                logger.info(&quot;result={}&quot;, execution);
+            } catch (RepeatKillException e) {
+                logger.error(e.getMessage());
+            } catch (SeckillCloseException e) {
+                logger.error(e.getMessage());
+            }
+        } else {
+            //秒杀未开启
+            logger.warn(&quot;exposer={}&quot;, exposer);
+        }
+    }
+
+    @Test
+    public void executeSeckillProcedure() {
+        long seckillId = 1001;
+        long phone = 13680111241L;
+        Exposer exposer = seckillService.exportSeckillUrl(seckillId);
+        if (exposer.isExposed()) {
+            String md5 = exposer.getMd5();
+            SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, phone, md5);
+            logger.info(execution.getStateInfo());
+        }
+    }
+
+}
+</code></pre><p>在测试中我们使用了日志，添加logback.xml。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration debug=&quot;true&quot;&gt;
+    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;!-- encoders are  by default assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder --&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;root level=&quot;debug&quot;&gt;
+        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;
+    &lt;/root&gt;
+&lt;/configuration&gt;
+</code></pre><p>目前为止，Dao层和Service层的集成测试我们都已经完成，接下来进行Web层的开发编码工作。</p>
+<h1 id="Java高并发秒杀API之web层"><a href="#Java高并发秒杀API之web层" class="headerlink" title="Java高并发秒杀API之web层"></a>Java高并发秒杀API之web层</h1><h2 id="1-设计Restful接口"><a href="#1-设计Restful接口" class="headerlink" title="1.设计Restful接口"></a>1.设计Restful接口</h2><h3 id="1-1-前端交互流程设计"><a href="#1-1-前端交互流程设计" class="headerlink" title="1.1 前端交互流程设计"></a>1.1 前端交互流程设计</h3><p>对于一个系统，需要产品经理、前端工程师和后端工程师的参数，产品经理将用户的需求做成一个开发文档交给前端工程师和后端工程师，前端工程师为系统完成页面的开发，后端工程师为系统完成业务逻辑的开发。对于我们这个秒杀系统，它的前端交互流程设计如下图:</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%89%8D%E7%AB%AF.png" alt=""></p>
+<p>这个流程图就告诉了我们详情页的流程逻辑，前端工程师根据这个流程图设计页面，而我们后端工程师根据这个流程图开发我们对应的代码。前端交互流程是系统开发中很重要的一部分。</p>
+<h3 id="1-2-Restful接口设计学习"><a href="#1-2-Restful接口设计学习" class="headerlink" title="1.2 Restful接口设计学习"></a>1.2 Restful接口设计学习</h3><p>什么是Restful?它就是一种优雅的URI表述方式，用来设计我们资源的访问URL。通过这个URL的设计，我们就可以很自然的感知到这个URL代表的是哪种业务场景或者什么样的数据或资源。基于Restful设计的URL，对于我们接口的使用者、前端、web系统或者搜索引擎甚至是我们的用户，都是非常友好的。</p>
+<ul>
+<li>URL设计：/模块/资源/{标识}/集合1/…<br>/user/{uid}/friends -&gt;好友列表<br>/user/{uid}/followers -&gt;关注者列表</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/restful.png" alt=""></p>
+<h2 id="2-SpringMVC整合spring"><a href="#2-SpringMVC整合spring" class="headerlink" title="2.SpringMVC整合spring"></a>2.SpringMVC整合spring</h2><h3 id="2-1-使用SpringMVC理论"><a href="#2-1-使用SpringMVC理论" class="headerlink" title="2.1 使用SpringMVC理论"></a>2.1 使用SpringMVC理论</h3><p><img src="http://oseihavwm.bkt.clouddn.com/handler.png" alt=""></p>
+<p>我们了解一下SpringMVC运行流程。第一步用户会发送一个请求，所有的请求都会映射到DispatcherServlet，这是一个中央控制器Servlet，会拦截所有的请求。他默认会用到DefaultAnnotation HandlerMapping这个主要作用就是映射我们的URL，每个URL对应哪个具体的handler。映射完之后他会使用默认的DefaultAnnotation HandlerAdapter用来做handler适配，最终会衔接我们的自己开发的SeckillController，如果用到拦截器的话，也会把拦截器绑定到流程中，最终他的产出是ModelAndView，然后交付到中央控制器。控制器会发现你应用的是一个InternalResource ViewResolver(默认的jsp view)。他会把Model和list.jsp相结合最终返回给我们用户。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Springmvc.png" alt=""></p>
+<ul>
+<li>请求方法细节处理<ol>
+<li>请求参数绑定 </li>
+<li>请求方式限制</li>
+<li>请求转发和重定向</li>
+<li>数据模型赋值</li>
+<li>返回json数据</li>
+<li>cookie访问</li>
+</ol>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Springmvc2.png" alt=""></p>
+<h3 id="2-2-整合配置SpringMVC框架"><a href="#2-2-整合配置SpringMVC框架" class="headerlink" title="2.2 整合配置SpringMVC框架"></a>2.2 整合配置SpringMVC框架</h3><p>首先在WEB-INF的web.xml中进行我们前端控制器DispatcherServlet的配置。</p>
+<pre><code>&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;
+         version=&quot;3.1&quot;
+         metadata-complete=&quot;true&quot;&gt;
+    &lt;!-- 修改servlet版本为3.1 --&gt;
+    &lt;!-- 配置DispatcherServlet --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;seckill-dispatcher&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!-- 配置springMVC需要加载的配置文件
+            spring-dao.xml,spring-service.xml,spring-web.xml
+            Mybatis -&gt; spring -&gt; springMVC
+         --&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:spring/spring-*.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;seckill-dispatcher&lt;/servlet-name&gt;
+        &lt;!-- 默认匹配所有的请求 --&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><p>然后在spring容器中进行web层相关bean(即Controller)的配置，在spring包下创建一个spring-web.xml。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    &lt;!-- 配置SpringMVC --&gt;
+    &lt;!-- 1:开启SpringMVC注解模式 --&gt;
+    &lt;!-- 简化配置:
+        (1)自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter
+        (2)提供一系列:数据绑定,数字和日期的format @NumberFormat,@DataTimeFormat,
+            xml,json默认读写支持.
+     --&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!--
+        2:静态资源默认servlet配置
+        1:加入对静态资源的处理:js,gif,png
+        2:允许使用&quot;/&quot;做整体映射
+     --&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+
+    &lt;!--3:配置jsp显示ViewResolver --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;viewClass&quot; value=&quot;org.springframework.web.servlet.view.JstlView&quot;/&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!--4:扫描web相关的bean --&gt;
+    &lt;context:component-scan base-package=&quot;org.seckill.web&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><h2 id="3-实现秒杀相关的Restful接口"><a href="#3-实现秒杀相关的Restful接口" class="headerlink" title="3.实现秒杀相关的Restful接口"></a>3.实现秒杀相关的Restful接口</h2><p>Controller中的每一个方法都对应我们系统中的一个资源URL，其设计应该遵循Restful接口的设计风格。创建一个web包用于放web层Controller开发的代码，在该包下创建<br>SeckillController。</p>
+<pre><code>package org.seckill.web;
+
+import org.seckill.dto.Exposer;
+import org.seckill.dto.SeckillExecution;
+import org.seckill.dto.SeckillResult;
+import org.seckill.entity.Seckill;
+import org.seckill.enums.SeckillStateEnum;
+import org.seckill.exception.RepeatKillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by Thpffcj on 2017/7/23.
+ */
+@Controller
+@RequestMapping(&quot;/seckill&quot;)
+// url: /模块/资源/{id}/细分  /seckill/list
+public class SeckillController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private SeckillService seckillService;
+
+    @RequestMapping(value = &quot;/list&quot;, method = RequestMethod.GET)
+    public String list(Model model){
+        //获取列表页
+        List&lt;Seckill&gt; list = seckillService.getSeckillList();
+        model.addAttribute(&quot;list&quot;, list);
+        //list.jsp + model = ModelAndView
+        // WEB-INF/jsp/&quot;list&quot;.jsp
+        return &quot;list&quot;;
+    }
+
+    @RequestMapping(value = &quot;/{seckillId}/detail&quot;, method = RequestMethod.GET)
+    public String detail(@PathVariable(&quot;seckillId&quot;) Long seckillId, Model model){
+        if(seckillId == null) {
+            return &quot;redirect:/seckill/list&quot;;
+        }
+        Seckill seckill = seckillService.getById(seckillId);
+        if(seckill == null) {
+            return &quot;forward:/seckill/list&quot;;
+        }
+        model.addAttribute(&quot;seckill&quot;, seckill);
+        return &quot;detail&quot;;
+    }
+
+    //ajax json
+    @RequestMapping(value = &quot;/{seckillId}/exposer&quot;, method = RequestMethod.POST,
+                produces = {&quot;application/json;charset=UTF-8&quot;})
+    @ResponseBody
+    public SeckillResult&lt;Exposer&gt; exposer(@PathVariable(&quot;seckillId&quot;) Long seckillId){
+        SeckillResult&lt;Exposer&gt; result;
+        try{
+            Exposer exposer = seckillService.exportSeckillUrl(seckillId);
+            result = new SeckillResult&lt;Exposer&gt;(true, exposer);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new SeckillResult&lt;Exposer&gt;(false, e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = &quot;/{seckillId}/{md5}/execution&quot;, method = RequestMethod.POST,
+            produces = {&quot;application/json;charset=UTF-8&quot;})
+    @ResponseBody
+    public SeckillResult&lt;SeckillExecution&gt; execute(@PathVariable(&quot;seckillId&quot;) Long seckillId, @PathVariable(&quot;md5&quot;) String md5,
+                                                   @CookieValue(value = &quot;killPhone&quot;, required = false) Long phone){
+        //springmvc valid
+        if(phone == null) {
+            return new SeckillResult&lt;SeckillExecution&gt;(false, &quot;未注册&quot;);
+        }
+        SeckillResult&lt;SeckillExecution&gt; result;
+        try {
+            // 存储过程调用
+            SeckillExecution seckillExecution = seckillService.executeSeckillProcedure(seckillId,phone,md5);
+            return new SeckillResult&lt;SeckillExecution&gt;(true, seckillExecution);
+        } catch (RepeatKillException e) {
+            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT_KILL);
+            return new SeckillResult&lt;SeckillExecution&gt;(true, execution);
+        } catch (SeckillCloseException e) {
+            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.END);
+            return new SeckillResult&lt;SeckillExecution&gt;(true, execution);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
+            return new SeckillResult&lt;SeckillExecution&gt;(true, execution);
+        }
+    }
+
+    @RequestMapping(value = &quot;/time/now&quot;, method = RequestMethod.GET)
+    @ResponseBody
+    public SeckillResult&lt;Long&gt; time(){
+        Date now = new Date();
+        return new SeckillResult&lt;Long&gt;(true, now.getTime());
+    }
+}
+</code></pre><p>Controller开发中的方法完全是对照Service接口方法进行开发的，第一个方法用于访问我们商品的列表页，第二个方法访问商品的详情页，第三个方法用于返回一个json数据，数据中封装了我们商品的秒杀地址，第四个方法用于封装用户是否秒杀成功的信息，第五个方法用于返回系统当前时间。代码中涉及到一个将返回秒杀商品地址封装为json数据的一个VO类，即SeckillResult.java，在dto包中创建它。</p>
+<pre><code>package org.seckill.dto;
+
+/**
+ * Created by Thpffcj on 2017/7/23.
+ */
+//所有的ajax请求返回类型,封装json结果
+public class SeckillResult&lt;T&gt; {
+
+    private boolean success;
+
+    private T data;
+
+    private String erroor;
+
+    public SeckillResult(boolean success, T data) {
+        this.success = success;
+        this.data = data;
+    }
+
+    public SeckillResult(boolean success, String erroor) {
+        this.success = success;
+        this.erroor = erroor;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getErroor() {
+        return erroor;
+    }
+
+    public void setErroor(String erroor) {
+        this.erroor = erroor;
     }
 }
 </code></pre>
