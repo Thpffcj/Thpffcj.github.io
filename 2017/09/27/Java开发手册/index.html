@@ -256,11 +256,230 @@
 </blockquote>
 </li>
 </ol>
-<h3 id="2-常量定义"><a href="#2-常量定义" class="headerlink" title="2. 常量定义"></a>2. 常量定义</h3>
+<h3 id="2-常量定义"><a href="#2-常量定义" class="headerlink" title="2. 常量定义"></a>2. 常量定义</h3><ol>
+<li><p>【强制】不允许任何魔法值（即未经定义的常量）直接出现在代码中。</p>
+<blockquote>
+<p>反例：String key = “Id#taobao_” + tradeId;<br>cache.put(key, value);</p>
+</blockquote>
+</li>
+<li><p>【强制】long 或者 Long 初始赋值时，使用大写的 L，不能是小写的 l，小写容易跟数字 1 混淆，造成误解。</p>
+<blockquote>
+<p>说明：Long a = 2l; 写的是数字的 21，还是 Long 型的 2?</p>
+</blockquote>
+</li>
+<li><p>【推荐】不要使用一个常量类维护所有常量，按常量功能进行归类，分开维护。</p>
+<blockquote>
+<p>说明：大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于理解和维护。<br>正例：缓存相关常量放在类 CacheConsts 下；系统配置相关常量放在类 ConfigConsts 下。</p>
+</blockquote>
+</li>
+<li><p>【推荐】如果变量值仅在一个范围内变化，且带有名称之外的延伸属性，定义为枚举类。下面正例中的数字就是延伸信息，表示星期几。</p>
+<blockquote>
+<p>正例：public Enum { MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6), SUNDAY(7);}</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="3-代码格式"><a href="#3-代码格式" class="headerlink" title="3. 代码格式"></a>3. 代码格式</h3><ol>
+<li><p>【强制】大括号的使用约定。如果是大括号内为空，则简洁地写成{}即可，不需要换行；如果是非空代码块则：<br>1.1 左大括号前不换行。<br>1.2 左大括号后换行。<br>1.3 右大括号前换行。<br>1.4 右大括号后还有 else 等代码则不换行；表示终止的右大括号后必须换行。</p>
+</li>
+<li><p>【强制】 左小括号和字符之间不出现空格；同样，右小括号和字符之间也不出现空格。</p>
+<blockquote>
+<p>反例：if (空格 a == b 空格)</p>
+</blockquote>
+</li>
+<li><p>【强制】if/for/while/switch/do 等保留字与括号之间都必须加空格。</p>
+</li>
+<li><p>【强制】任何二目、三目运算符的左右两边都需要加一个空格。</p>
+<blockquote>
+<p>说明：运算符包括赋值运算符=、逻辑运算符&amp;&amp;、加减乘除符号等。</p>
+</blockquote>
+</li>
+<li><p>【强制】采用 4 个空格缩进，禁止使用 tab 字符。</p>
+<blockquote>
+<p>说明：如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。IDEA 设置 tab 为 4 个空格时，请勿勾选 Use tab character；而在 eclipse 中，必须勾选 insert spaces for tabs。</p>
+</blockquote>
+<pre><code>正例： （涉及 1-5 点）
+public static void main(String[] args) {
+    // 缩进 4 个空格 
+    String say = &quot;hello&quot;; 
+    // 运算符的左右必须有一个空格 
+    int flag = 0; 
+    // 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格 
+    if (flag == 0) { 
+        System.out.println(say); 
+    } 
+
+    // 左大括号前加空格且不换行；左大括号后换行 
+    if (flag == 1) { 
+        System.out.println(&quot;world&quot;); 
+    // 右大括号前换行，右大括号后有 else，不用换行 
+    } else { 
+        System.out.println(&quot;ok&quot;); 
+    // 在右大括号后直接结束，则必须换行 
+    } 
+}
+</code></pre></li>
+<li><p>【强制】注释的双斜线与注释内容之间有且仅有一个空格。</p>
+<blockquote>
+<p>正例：// 注释内容，注意在//和注释内容之间有一个空格。</p>
+</blockquote>
+</li>
+<li><p>【强制】单行字符数限制不超过 120 个，超出需要换行，换行时遵循如下原则：<br>7.1 第二行相对第一行缩进 4 个空格，从第三行开始，不再继续缩进，参考示例。<br>7.2 运算符与下文一起换行。<br>7.3 方法调用的点符号与下文一起换行。<br>7.4 方法调用时，多个参数，需要换行时，在逗号后进行。<br>7.5 在括号前不要换行，见反例。</p>
+<blockquote>
+<p>正例：<br>StringBuffer sb = new StringBuffer();<br>// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行<br>sb.append(“zi”).append(“xin”)…<br>.append(“huang”)…<br>.append(“huang”)…<br>.append(“huang”);<br>反例：<br>StringBuffer sb = new StringBuffer();<br>// 超过 120 个字符的情况下，不要在括号前换行<br>sb.append(“zi”).append(“xin”)…append<br>(“huang”);<br>// 参数很多的方法调用可能超过 120 个字符，不要在逗号前换行<br>method(args1, args2, args3, …<br>, argsX); </p>
+</blockquote>
+</li>
+<li><p>【强制】方法参数在定义和传入时，多个参数逗号后边必须加空格。</p>
+<blockquote>
+<p>正例：下例中实参的”a”,后边必须要有一个空格。<br>method(“a”, “b”, “c”);</p>
+</blockquote>
+</li>
+<li><p>【强制】IDE 的 text file encoding 设置为 UTF-8; IDE 中文件的换行符使用 Unix 格式，不要使用 Windows 格式。</p>
+</li>
+<li><p>【推荐】方法体内的执行语句组、变量的定义语句组、不同的业务逻辑之间或者不同的语义之间插入一个空行。相同业务逻辑和语义之间不需要插入空行。</p>
+<blockquote>
+<p>说明：没有必要插入多个空行进行隔开。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="4-OOP-规约"><a href="#4-OOP-规约" class="headerlink" title="4. OOP 规约"></a>4. OOP 规约</h3><ol>
+<li><p>【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。</p>
+</li>
+<li><p>【强制】所有的覆写方法，必须加@Override 注解。</p>
+<blockquote>
+<p>说明：getObject()与 get0bject()的问题。一个是字母的 O，一个是数字的 0，加@Override可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错。</p>
+</blockquote>
+</li>
+<li><p>【强制】相同参数类型，相同业务含义，才可以使用 Java 的可变参数，避免使用 Object。</p>
+<blockquote>
+<p>说明：可变参数必须放置在参数列表的最后。（提倡同学们尽量不用可变参数编程）<br>正例：public User getUsers(String type, Integer… ids) {…}</p>
+</blockquote>
+</li>
+<li><p>【强制】外部正在调用或者二方库依赖的接口，不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加@Deprecated 注解，并清晰地说明采用的新接口或者新服务是什么。</p>
+</li>
+<li><p>【强制】不能使用过时的类或方法。</p>
+<blockquote>
+<p>说明：java.net.URLDecoder 中的方法 decode(String encodeStr) 这个方法已经过时，应该使用双参数 decode(String source, String encode)。接口提供方既然明确是过时接口，那么有义务同时提供新的接口；作为调用方来说，有义务去考证过时方法的新实现是什么</p>
+</blockquote>
+</li>
+<li><p>【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用equals。</p>
+<blockquote>
+<p>正例：”test”.equals(object);<br>反例：object.equals(“test”);<br>说明：推荐使用 java.util.Objects#equals（JDK7 引入的工具类）</p>
+</blockquote>
+</li>
+<li><p>【强制】所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较。</p>
+<blockquote>
+<p>说明：对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。</p>
+</blockquote>
+</li>
+<li><p>【强制】构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中。</p>
+</li>
+<li><p>【推荐】 类内方法定义顺序依次是：公有方法或保护方法 &gt; 私有方法 &gt; getter/setter方法。</p>
+<blockquote>
+<p>说明：公有方法是类的调用者和维护者最关心的方法，首屏展示最好；保护方法虽然只是子类<br>关心，也可能是“模板设计模式”下的核心方法；而私有方法外部一般不需要特别关心，是一个黑盒实现；因为承载的信息价值较低，所有 Service 和 DAO 的 getter/setter 方法放在类体最后。</p>
+</blockquote>
+</li>
+<li><p>【推荐】setter 方法中，参数名称与类成员变量名称一致，this.成员名 = 参数名。在getter/setter 方法中，不要增加业务逻辑，增加排查问题的难度。</p>
+</li>
+<li><p>【推荐】循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。</p>
+<blockquote>
+<p>append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。<br>反例：<br>String str = “start”;<br>for (int i = 0; i &lt; 100; i++) {<br>str = str + “hello”;<br>} </p>
+</blockquote>
+</li>
+</ol>
+<h3 id="5-集合处理"><a href="#5-集合处理" class="headerlink" title="5. 集合处理"></a>5. 集合处理</h3><ol>
+<li><p>【强制】关于 hashCode 和 equals 的处理，遵循如下规则：<br>1.1 只要重写 equals，就必须重写 hashCode。<br>1.2 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写这两个方法。<br>1.3 如果自定义对象做为 Map 的键，那么必须重写 hashCode 和 equals。</p>
+<blockquote>
+<p>说明：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象作为 key 来使用。</p>
+</blockquote>
+</li>
+<li><p>【强制】ArrayList的subList结果不可强转成ArrayList，否则会抛出ClassCastException异常，即 java.util.RandomAccessSubList cannot be cast to java.util.ArrayList.</p>
+<blockquote>
+<p>说明：subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList ，而是ArrayList 的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。</p>
+</blockquote>
+</li>
+<li><p>【强制】在 subList 场景中，高度注意对原集合元素个数的修改，会导致子列表的遍历、增加、删除均会产 ConcurrentModificationException 异常。</p>
+</li>
+<li><p>【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一样的数组，大小就是 list.size()。</p>
+<blockquote>
+<p>说明：使用 toArray 带参方法，入参分配的数组空间不够大时，toArray 方法内部将重新分配内存空间，并返回新数组地址；如果数组元素大于实际所需，下标为[ list.size() ]的数组元素将被置为 null，其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素个数一致。</p>
+</blockquote>
+</li>
+<li><p>【强制】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常。</p>
+<blockquote>
+<p>说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList体现的是适配器模式，只是转换接口，后台的数据仍是数组。<br>String[] str = new String[] { “you”, “wu” };<br>List list = Arrays.asList(str);<br>第一种情况：list.add(“yangguanbao”); 运行时异常。<br>第二种情况：str[0] = “gujin”; 那么 list.get(0)也会随之修改。</p>
+</blockquote>
+</li>
+<li><p>【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator方式，如果并发操作，需要对 Iterator 对象加锁。</p>
+</li>
+<li><p>【强制】 在 JDK7 版本及以上，Comparator 要满足如下三个条件，不然 Arrays.sort，Collections.sort 会报 IllegalArgumentException 异常。<br>说明：三个条件如下<br>7.1 x，y 的比较结果和 y，x 的比较结果相反。<br>7.2 x&gt;y，y&gt;z，则 x&gt;z。<br>7.3 x=y，则 x，z 比较结果和 y，z 比较结果相同。</p>
+</li>
+<li><p>【推荐】集合初始化时，指定集合初始值大小。</p>
+<blockquote>
+<p>说明：HashMap 使用 HashMap(int initialCapacity) 初始化，<br>正例：initialCapacity = (需要存储的元素个数 / 负载因子) + 1。注意负载因子（即 loader factor）默认为 0.75，如果暂时无法确定初始值大小，请设置为 16（即默认值）。<br>反例：HashMap 需要放置 1024 个元素，由于没有设置容量初始大小，随着元素不断增加，容量 7 次被迫扩大，resize 需要重建 hash 表，严重影响性能。</p>
+</blockquote>
+</li>
+<li><p>【推荐】使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历。</p>
+<blockquote>
+<p>说明：keySet 其实是遍历了 2 次，一次是转为 Iterator 对象，另一次是从 hashMap 中取出key 所对应的 value。而 entrySet 只是遍历了一次就把 key 和 value 都放到了 entry 中，效率更高。如果是 JDK8，使用 Map.foreach 方法。<br>正例：values()返回的是 V 值集合，是一个 list 集合对象；keySet()返回的是 K 值集合，是一个 Set 集合对象；entrySet()返回的是 K-V 值组合集合。</p>
+</blockquote>
+</li>
+<li><p>【参考】合理利用好集合的有序性(sort)和稳定性(order)，避免集合的无序性(unsort)和不稳定性(unorder)带来的负面影响。</p>
+<blockquote>
+<p>说明：有序性是指遍历的结果是按某种比较规则依次排列的。稳定性指集合每次遍历的元素次序是一定的。如：ArrayList 是 order/unsort；HashMap 是 unorder/unsort；TreeSet 是order/sort。</p>
+</blockquote>
+</li>
+<li><p>【参考】利用 Set 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 List 的contains 方法进行遍历、对比、去重操作。</p>
+</li>
+</ol>
+<h3 id="6-并发处理"><a href="#6-并发处理" class="headerlink" title="6. 并发处理"></a>6. 并发处理</h3><ol>
+<li><p>【强制】获取单例对象需要保证线程安全，其中的方法也要保证线程安全。</p>
+<blockquote>
+<p>说明：资源驱动类、工具类、单例工厂类都需要注意。</p>
+</blockquote>
+</li>
+<li><p>【强制】创建线程或线程池时请指定有意义的线程名称，方便出错时回溯。</p>
+</li>
+<li><p>【强制】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程。</p>
+<blockquote>
+<p>说明：使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，解决资源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或者“过度切换”的问题。</p>
+</blockquote>
+</li>
+<li><p>【强制】线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。</p>
+</li>
+</ol>
+<h3 id="7-控制语句"><a href="#7-控制语句" class="headerlink" title="7. 控制语句"></a>7. 控制语句</h3><ol>
+<li><p>【强制】在一个 switch 块内，每个 case 要么通过 break/return 等来终止，要么注释说明程序将继续执行到哪一个 case 为止；在一个 switch 块内，都必须包含一个 default 语句并且放在最后，即使它什么代码也没有。</p>
+</li>
+<li><p>【强制】在 if/else/for/while/do 语句中必须使用大括号。即使只有一行代码，避免采用单行的编码方式：if (condition) statements;</p>
+</li>
+<li><p>【推荐】表达异常的分支时，少用 if-else 方式，这种方式可以改写成</p>
+<blockquote>
+<p>说明：如果非得使用 if()…else if()…else…方式表达逻辑，【强制】避免后续代码维护困难，请勿超过 3 层。<br>正例：超过 3 层的 if-else 的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现。</p>
+</blockquote>
+</li>
+<li><p>【推荐】除常用方法（如 getXxx/isXxx）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</p>
+<blockquote>
+<p>说明：很多 if 语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，才能明确什么样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？</p>
+</blockquote>
+</li>
+<li><p>【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量、获取数据库连接，进行不必要的 try-catch 操作（这个 try-catch 是否可以移至循环体外）。</p>
+</li>
+<li><p>【推荐】接口入参保护，这种场景常见的是用于做批量操作的接口。</p>
+</li>
+<li><p>【参考】下列情形，需要进行参数校验：<br>7.1 调用频次低的方法。<br>7.2 执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失。<br>7.3 需要极高稳定性和可用性的方法。<br>7.4 对外提供的开放接口，不管是 RPC/API/HTTP 接口。<br>7.5 敏感权限入口。</p>
+</li>
+<li><p>【参考】下列情形，不需要进行参数校验：<br>8.1 极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。<br>8.2 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同一个应用中，部署在同一台服务器中，所以 DAO 的参数校验，可以省略。<br>8.3 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</p>
+</li>
+</ol>
+<h3 id="8-注释规约"><a href="#8-注释规约" class="headerlink" title="8. 注释规约"></a>8. 注释规约</h3><h2 id="二-异常日志"><a href="#二-异常日志" class="headerlink" title="二.异常日志"></a>二.异常日志</h2>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/09/28/Design-Patterns/" style="float: left;">
+        ← Design Patterns
+    </a>
     
     
     <a class="pull-right" href="/2017/09/23/Seckill/">
