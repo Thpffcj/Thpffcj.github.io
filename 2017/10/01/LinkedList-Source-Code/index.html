@@ -182,6 +182,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<p>LinkedList是一个常用的集合类，用于顺序存储元素。LinkedList经常和ArrayList一起被提及。大部分人应该都知道ArrayList内部采用数组保存元素，适合用于随机访问比较多的场景，而随机插入、删除等操作因为要移动元素而比较慢。LinkedList内部采用链表的形式存储元素，随机访问比较慢，但是插入、删除元素比较快，一般认为时间复杂都是O(1)</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/LinkedList.png" alt=""></p>
 <h2 id="1-LinkedList-类的定义"><a href="#1-LinkedList-类的定义" class="headerlink" title="1. LinkedList 类的定义"></a>1. LinkedList 类的定义</h2><pre><code>public class LinkedList&lt;E&gt;
     extends AbstractSequentialList&lt;E&gt;
     implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
@@ -481,6 +482,10 @@ public int indexOf(Object o) {
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/10/02/HashMap-Source-Code/" style="float: left;">
+        ← Java 源码学习系列4——HashMap
+    </a>
     
     
     <a class="pull-right" href="/2017/10/01/ArrayList-Source-Code/">
