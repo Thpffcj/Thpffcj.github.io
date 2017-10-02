@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Java 源码学习系列4——HashMap | Thpffcj的树洞</title>
+  <title>Java 源码学习系列5——HashMap | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,7 +177,7 @@
       </time>
     
 </span>
-                <h1>Java 源码学习系列4——HashMap</h1>
+                <h1>Java 源码学习系列5——HashMap</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -191,12 +191,11 @@
 <li>HashMap存储的内容是键值对(key-value)映射，key、value都可以为null。</li>
 <li>HashMap中的映射不是有序的。</li>
 <li>实现了Cloneable接口，能被克隆。</li>
-<li><p>实现了Serializable接口，支持序列化。</p>
-<p> public class HashMap<k,v> extends AbstractMap<k,v></k,v></k,v></p>
-<pre><code>implements Map&lt;K,V&gt;, Cloneable, Serializable
-</code></pre></li>
+<li>实现了Serializable接口，支持序列化。</li>
 </ol>
-<h2 id="2-HashMap-类的属性"><a href="#2-HashMap-类的属性" class="headerlink" title="2. HashMap 类的属性"></a>2. HashMap 类的属性</h2><pre><code>// 默认的初始容量（容量为HashMap中槽的数目）是16
+<pre><code>public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Cloneable, Serializable
+</code></pre><h2 id="2-HashMap-类的属性"><a href="#2-HashMap-类的属性" class="headerlink" title="2. HashMap 类的属性"></a>2. HashMap 类的属性</h2><pre><code>// 默认的初始容量（容量为HashMap中槽的数目）是16
 static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
 
 // 最大容量（必须是2的幂且小于2的30次方，传入容量过大将被这个值替换）
@@ -616,7 +615,7 @@ final Node&lt;K,V&gt; getNode(int hash, Object key) {
     }
     return null;
 }
-</code></pre><h2 id="6-一些常用集合的对比"><a href="#6-一些常用集合的对比" class="headerlink" title="6. 一些常用集合的对比"></a>6. 一些常用集合的对比</h2><ul>
+</code></pre><h2 id="5-一些常用集合的对比"><a href="#5-一些常用集合的对比" class="headerlink" title="5. 一些常用集合的对比"></a>5. 一些常用集合的对比</h2><ul>
 <li>HashMap有三种数据结构，数组，链表，红黑树。</li>
 <li>如果冲突节点到8时，就把链表转换成红黑树；</li>
 <li>如果bucket满了(超过load factor*current capacity)，就要resize。</li>
@@ -642,6 +641,10 @@ final Node&lt;K,V&gt; getNode(int hash, Object key) {
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/10/02/LinkedHashMap-Source-Code/" style="float: left;">
+        ← Java 源码学习系列6——LinkedHashMap
+    </a>
     
     
     <a class="pull-right" href="/2017/10/01/LinkedList-Source-Code/">
