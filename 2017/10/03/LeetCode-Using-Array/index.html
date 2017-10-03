@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>LeetCode 算法面试分类解法 Using-Array | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-03T09:46:40.000Z" itemprop="datePublished">
+          2017-10-03
+      </time>
+    
+</span>
+                <h1>LeetCode 算法面试分类解法 Using-Array</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="数组中的问题其实最常见"><a href="#数组中的问题其实最常见" class="headerlink" title="数组中的问题其实最常见"></a>数组中的问题其实最常见</h3><ul>
+<li>排序：选择排序，插入排序，归并排序，快速排序</li>
+<li>查找：二分查找法</li>
+<li>数据结构：栈，队列，堆</li>
+</ul>
+<h3 id="如何写出正确的程序"><a href="#如何写出正确的程序" class="headerlink" title="如何写出正确的程序"></a>如何写出正确的程序</h3><p>写一个二分查找法：对于有序数组，才能使用二分查找法。保持循环的不变量。(定义在[l…r]的范围里寻找target)</p>
+<ol>
+<li>明确变量的含义</li>
+<li>循环不变量</li>
+<li>小数据量调试</li>
+<li>大数据量测试</li>
+</ol>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/16
+ */
+
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;cassert&gt;
+#include &lt;ctime&gt;
+#include &quot;util.h&quot;
+
+using namespace std;
+
+template&lt;typename T&gt;
+int binarySearch( T arr[], int n, T target ){
+
+    int l = 0, r = n-1; // 在[l...r]的范围里寻找target
+    while( l &lt;= r ){    // 当 l == r时,区间[l...r]依然是有效的
+        int mid = l + (r-l)/2;
+        if( arr[mid] == target ) return mid;
+        if( target &gt; arr[mid] )
+            l = mid + 1;  // target在[mid+1...r]中; [l...mid]一定没有target
+        else    // target &lt; arr[mid]
+            r = mid - 1;  // target在[l...mid-1]中; [mid...r]一定没有target
+    }
+
+    return -1;
+}
+</code></pre><h2 id="LeetCode-283-Move-Zeros"><a href="#LeetCode-283-Move-Zeros" class="headerlink" title="LeetCode 283 Move Zeros"></a>LeetCode 283 Move Zeros</h2><pre><code>/**
+ * Given an array nums, write a function to move all 0&apos;s to the end of it while maintaining the relative order of the non-zero
+ * elements.
+ * For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+ *
+ * Note:
+ * You must do this in-place without making a copy of the array.
+ * Minimize the total number of operations.
+ */
+</code></pre><p>最直观思路，我们扫描一遍数组，将其中的非0元素全部拿出来，填补到原先的数组中，之后将没填补的位置全部填充为0。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    // 时间复杂度 O(n)
+    // 空间复杂度 O(n)
+    void moveZeroes(vector&lt;int&gt;&amp; nums) {
+
+        vector&lt;int&gt; nonZeroElements;
+
+        // 将vec中所有非0元素放入nonZeroElements中
+        for( int i = 0; i &lt; nums.size(); i++ ) {
+            if( nums[i] ) {
+                nonZeroElements.push_back( nums[i] );
+            }
+        }
+
+        // 将nonZeroElements中的所有元素依次放入到nums开始的位置
+        for ( int i = 0; i &lt; nonZeroElements.size(); i++ ) {
+            nums[i] = nonZeroElements[i];
+        }
+
+        // 将nums剩余的位置放置为0
+        for ( int i = nonZeroElements.size(); i &lt; nums.size(); i++ ) {
+            nums[i] = 0;
+        }
+    }
+};
+</code></pre><p>这个算法最明显的一个问题是使用了一个O(n)的空间，使用了辅助空间。我们完全不需要使用辅助空间，我们只需要遍历这个数组，在遍历过程中一旦遇到非0的元素，就把这个元素直接放到前面的位置。由于非0元素的个数一定小于等于整个数组的元素个数，所以我们不用担心这个赋值过程覆盖掉有用信息。换句话说，我们可以设置另外一个索引k，我们只需要在[0,k)中保存所有当前遍历过的非0元素。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    // 时间复杂度 O(n)
+    // 空间复杂度 O(1)
+    void moveZeroes(vector&lt;int&gt;&amp; nums) {
+
+        int k = 0; // nums中, [0...k)的元素均为非0元素
+
+        // 遍历到第i个元素后,保证[0...i]中所有非0元素
+        // 都按照顺序排列在[0...k)中
+        for( int i = 0; i &lt; nums.size(); i++ ) {
+            if ( nums[i] ) {
+                nums[k++] = nums[i];
+            }
+        }
+
+        // 将nums剩余的位置放置为0
+        for( int i = k ; i &lt; nums.size() ; i ++ ) {
+            nums[i] = 0;
+        }
+    }
+};
+</code></pre><p>这个算法虽然原地完成了Move Zeros操作，但是当我们将所有的非0元素都挪到了数组前头之后，我们还需要花费一些操作来把后面的元素都置为0。一个显而易见的想法就是有没有可能我们把所有非0元素移到前面之后，相应的0元素都已经放在了后面呢？我们可以通过将非0元素与0元素交换位置来达到这种效果。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    // 时间复杂度 O(n)
+    // 空间复杂度 O(1)
+    void moveZeroes(vector&lt;int&gt;&amp; nums) {
+
+        int k = 0; // nums中, [0...k)的元素均为非0元素
+
+        // 遍历到第i个元素后,保证[0...i]中所有非0元素
+        // 都按照顺序排列在[0...k)中
+        // 同时, [k...i] 为0
+        for( int i = 0; i &lt; nums.size(); i++ ) {
+            if ( nums[i] ) {
+                if ( i != k) {
+                    swap( nums[k++], nums[i] );
+                }
+                else {
+                    k++;
+                }
+            }
+        }
+    }
+};
+</code></pre><h2 id="LeetCode-75-Sort-Colors"><a href="#LeetCode-75-Sort-Colors" class="headerlink" title="LeetCode 75 Sort Colors"></a>LeetCode 75 Sort Colors</h2><pre><code>/**
+ * Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the
+ * colors in the order red, white and blue.
+ * Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+ *
+ * Note:
+ * You are not suppose to use the library&apos;s sort function for this problem.
+ */
+</code></pre><p>对于这个问题，由于所有元素的取值只有0,1,2三种，实在是太有限了。所有，我们可以想到一个很直接的思路，我们只需要扫描一遍数组，然后统计出0,1,2三个元素各自的个数，最后从头开始填充各自的个数。这个思路就是计数排序的思路。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    // 时间复杂度: O(n)
+    // 空间复杂度: O(k), k为元素的取值范围
+    // 对整个数组遍历了两遍
+    void sortColors(vector&lt;int&gt;&amp; nums) {
+
+        int count[3] = {0}; // 存放0,1,2三个元素的频率
+        for ( int i = 0; i &lt; nums.size(); i++ ) {
+            assert( nums[i] &gt;= 0 &amp;&amp; nums[i] &lt;= 2 );
+            count[nums[i]]++;
+        }
+
+        int index = 0;
+        for (int i = 0; i &lt; count[0]; i++ ) {
+            nums[index++] = 0;
+        }
+        for (int i = 0; i &lt; count[1]; i++ ) {
+            nums[index++] = 1;
+        }
+        for (int i = 0; i &lt; count[2]; i++ ) {
+            nums[index++] = 2;
+        }
+    }
+};
+</code></pre><p>我们有没有可能只扫描这个数组一遍来完成排序呢？最终排好序的数组很像三路快速排序的样子。三路快速排序就是每次选取一个标定点，将整个数组分成了三份，<v,==v,>v。之后递归对<v和>v的地方继续进行三路快排。对于这个问题，我们只需要进行一次三路快排就可以了。</v和></v,==v,></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Sort%20Colors.png" alt=""></p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    // 时间复杂度: O(n)
+    // 空间复杂度: O(1)
+    // 对整个数组只遍历了一遍
+    void sortColors(vector&lt;int&gt;&amp; nums) {
+
+        int zero = -1;          // [0...zero] == 0
+        int two = nums.size();  // [two...n-1] == 2
+        for ( int i = 0; i &lt; two; ) {
+            if ( nums[i] == 1 ) {
+                i++;
+            } else if ( nums[i] == 2 ) {
+                swap( nums[i], nums[--two] );
+            } else {
+                assert( nums[i] == 0 );
+                swap( nums[i++], nums[++zero] );
+            }
+        }
+    }
+};
+</code></pre><h2 id="Two-Sum-II-Input-array-is-sorted"><a href="#Two-Sum-II-Input-array-is-sorted" class="headerlink" title="Two Sum II - Input array is sorted"></a>Two Sum II - Input array is sorted</h2><pre><code>/**
+ * Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific
+ * target number.
+ * The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less
+ * than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
+ * You may assume that each input would have exactly one solution and you may not use the same element twice.
+ *
+ * Input: numbers={2, 7, 11, 15}, target=9
+ * Output: index1=1, index2=2
+ */
+</code></pre><p>最直观的思考：暴力解法。双层遍历，O(n^2)。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+// 时间复杂度: O(n^2)
+// 空间复杂度: O(1)
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) {
+
+        assert( numbers.size() &gt;= 2 );
+        // assert( isSorted(numbers) );
+
+        for( int i = 0 ; i &lt; numbers.size() ; i ++ )
+            for( int j = i+1 ; j &lt; numbers.size() ; j ++ )
+                if( numbers[i] + numbers[j] == target ){
+                    int res[2] = {i+1, j+1};
+                    return vector&lt;int&gt;(res, res+2);
+                }
+
+
+        throw invalid_argument(&quot;the input has no solution&quot;);
+    }
+};
+</code></pre><p>暴力解法没有充分利用原数组的性质——有序。有序？二分搜索？我们依次遍历每一个数据nums[i]，对于每一个nums[i]都在剩余的数组中二分查找target-nums[i]。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+using namespace std;
+
+// 时间复杂度: O(nlogn)
+// 空间复杂度: O(1)
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) {
+
+        assert( numbers.size() &gt;= 2 );
+        // assert( isSorted(numbers) );
+
+        for( int i = 0 ; i &lt; numbers.size() - 1 ; i ++ ){
+
+            int j = binarySearch( numbers, i+1, numbers.size()-1, target - numbers[i] );
+            if( j != -1 ){
+                int res[2] = {i+1, j+1};
+                return vector&lt;int&gt;(res, res+2);
+            }
+        }
+
+        throw invalid_argument(&quot;the input has no solution&quot;);
+    }
+</code></pre><p>这两个索引一定是一左一右的，所以在初始化时我们可以选择左边的索引i和最右边的索引j。我们看nums[i]+nums[j]==target，如果等于我们就找到了解，如果小于target，我们只能将i向右移，反之我们将j向右移。我们通常将这种方法叫对撞指针。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/17
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+using namespace std;
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) {
+
+        assert( numbers.size() &gt;= 2 );
+        // assert( isSorted(numbers) );
+
+        int l = 0, r = numbers.size()-1;
+        while ( l &lt; r ) {
+
+            if ( numbers[l] + numbers[r] == target) {
+                int res[2] = {l+1, r+1};
+                return vector&lt;int&gt;(res, res+2);
+            } else if (numbers[l] + numbers[r] &lt; target ) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+        throw invalid_argument(&quot;the input has no solution&quot;);
+    }
+};
+</code></pre><h2 id="209-Minimum-Size-Subarray-Sum"><a href="#209-Minimum-Size-Subarray-Sum" class="headerlink" title="209 Minimum Size Subarray Sum"></a>209 Minimum Size Subarray Sum</h2><pre><code>/**
+ * Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which
+ * the sum ≥ s. If there isn&apos;t one, return 0 instead.
+ * For example, given the array [2,3,1,2,4,3] and s = 7,the subarray [4,3] has the minimal length under the problem constraint.
+ */
+</code></pre><p>暴力解法：遍历所有的连续子数组[i…j]，计算其和sum，验证sum&gt;=s。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 暴力解法
+// 时间复杂度: O(n^3)
+// 空间复杂度: O(1)
+class Solution {
+public:
+    int minSubArrayLen(int s, vector&lt;int&gt;&amp; nums) {
+
+        int res = nums.size() + 1;
+        for( int l = 0 ; l &lt; nums.size() ; l ++ ) {
+            for (int r = l; r &lt; nums.size(); r++) {
+                int sum = 0;
+                for (int i = l; i &lt;= r; i++) {
+                    sum += nums[i];
+                }
+                if (sum &gt;= s) {
+                    res = min(res, r - l + 1);
+                }
+            }
+        }
+
+        if( res == nums.size() + 1 )
+            return 0;
+
+        return res;
+    }
+};
+</code></pre><p>优化暴力解：O(n^2)：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 优化暴力解
+// 时间复杂度: O(n^2)
+// 空间复杂度: O(n)
+class Solution {
+public:
+    int minSubArrayLen(int s, vector&lt;int&gt;&amp; nums) {
+
+        // sums[i]存放nums[0...i-1]的和
+        vector&lt;int&gt; sums(nums.size()+1,0);
+        for( int i = 1 ; i &lt;= nums.size() ; i ++ ) {
+            sums[i] = sums[i-1] + nums[i-1];
+        }
+
+        int res = nums.size() + 1;
+        for( int l = 0 ; l &lt; nums.size() ; l ++ ) {
+            for( int r = l ; r &lt; nums.size() ; r ++ ){
+                // 使用sums[r+1] - sums[l] 快速获得nums[l...r]的和
+                if( sums[r+1] - sums[l] &gt;= s ) {
+                    res = min( res , r - l + 1 );
+                }
+            }
+        }
+
+        if( res == nums.size() + 1 ) {
+            return 0;
+        }
+
+        return res;
+    }
+};
+</code></pre><p>暴力解的问题：大量的重复计算。比如说我们现在遍历到了一个子数组nums[i…j]，此时我们其实可以很快的知道nums[i…j-1]的和，我们只需要减去一个元素。我们可以设计这样一个思路，我们现在看到了一个从i到j的连续子数组，如果它的和还不到s的话，我就往后多看一个数据，把它也纳入考虑的子数组中，如果还不到s,我们继续向后看，知道某一时刻它们的和大于s，我就找到了满足题意的子数组，把他的长度记录下来。然后从i开始缩小子数组，它的和就会变小，直到子数组的和变得比s小。再移动右边指针，以此类推。这也就是滑动窗口的思路。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)
+class Solution {
+public:
+    int minSubArrayLen(int s, vector&lt;int&gt;&amp; nums) {
+
+        int l = 0, r = -1; // nums[l...r]为我们的滑动窗口
+        int sum = 0;
+        int res = nums.size() + 1;
+
+        while( l &lt; nums.size() ) { // 窗口的左边界在数组范围内,则循环继续
+
+            if ( r + 1 &lt; nums.size() &amp;&amp; sum &lt; s) {
+                r++;
+                sum += nums[r];
+            } else { // r已经到头 或者 sum &gt;= s
+                sum -= nums[l];
+                l++;
+            }
+            if (sum &gt;= s) {
+                res = min(res, r-l+1 );
+            }
+        }
+
+        if( res == nums.size() + 1 ) {
+            return 0;
+        }
+        return res;
+
+    }
+};
+</code></pre><h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3 Longest Substring Without Repeating Characters"></a>3 Longest Substring Without Repeating Characters</h2><pre><code>/**
+ * Given a string, find the length of the longest substring without repeating characters.
+ * Examples:
+ * Given &quot;abcabcbb&quot;, the answer is &quot;abc&quot;, which the length is 3.
+ * Given &quot;bbbbb&quot;, the answer is &quot;b&quot;, with the length of 1.
+ * Given &quot;pwwkew&quot;, the answer is &quot;wke&quot;, with the length of 3. Note that the answer must be a substring, &quot;pwke&quot; is a subsequence
+ * and not a substring.
+ */
+</code></pre><p>我们已经学习了滑动窗口，我们考察s[i…j]中还没有重复字符，j向右移，以此类推，直到某一刻，下一个字符与数组中出现相同字符，记录长度，i++直到把重复字符排除出去，这个j就可以包含刚才的重复字符，我们得到了一个新的没有重复字符的数组。i和j这个区间就形成了一个滑动窗口。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+
+        // 保存所有ASCII码出现次数
+       int freq[256] = {0};
+
+        int l = 0, r = -1; //滑动窗口为s[l...r]
+        int res = 0;
+
+        // 整个循环从 l == 0; r == -1 这个空窗口开始
+        // 到l == s.size(); r == s.size()-1 这个空窗口截止
+        // 在每次循环里逐渐改变窗口, 维护freq, 并记录当前窗口中是否找到了一个新的最优值
+        while (l &lt; s.size() ) {
+
+            if ( r + 1 &lt; s.size() &amp;&amp; freq[s[r+1]] == 0) {
+                r++;
+                freq[s[r]]++;
+            } else { //r已经到头 || freq[s[r+1]] == 1
+                freq[s[l]]--;
+                l++;
+            }
+
+            res = max( res , r-l+1);
+        }
+
+        return res;
+    }
+};
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/10/03/TreeMap-Source-Code/">
+        Java 源码学习系列7——TreeMap →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
