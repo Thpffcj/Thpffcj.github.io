@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>LeetCode 算法面试分类解法 Stack-and-Queue | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-05T01:48:47.000Z" itemprop="datePublished">
+          2017-10-05
+      </time>
+    
+</span>
+                <h1>LeetCode 算法面试分类解法 Stack-and-Queue</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们在这篇博客主要介绍一下栈和队列这两种基础数据结构的使用。</p>
+<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><pre><code>/**
+ * Given a string containing just the characters &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos;, determine if the input string is valid.
+ * The brackets must close in the correct order, &quot;()&quot; and &quot;()[]{}&quot; are all valid but &quot;(]&quot; and &quot;([)]&quot; are not.
+ */
+</code></pre><p>这是一道经典的使用栈来判断括号是否匹配的算法问题。我们遍历如果遇见左方向的括号，就把它推入栈。一旦遇到右括号，就把栈顶的元素拿出来，看看栈顶的元素是否与当前遍历的右括号匹配，如果匹配则把左括号弹出栈，以此类推。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/21
+ */
+
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string s) {
+
+        stack&lt;char&gt; stack;
+        for ( int i = 0; i &lt; s.size(); i++) {
+            if ( s[i] == &apos;(&apos; || s[i] == &apos;[&apos; || s[i] == &apos;{&apos; ) {
+                stack.push( s[i] );
+            } else {
+
+                if ( stack.size() == 0 ) {
+                    return false;
+                }
+
+                char c = stack.top();
+                stack.pop();
+
+                char match;
+                if( s[i] == &apos;)&apos; ) {
+                    match = &apos;(&apos;;
+                } else if( s[i] == &apos;]&apos; ) {
+                    match = &apos;[&apos;;
+                } else{
+                    assert( s[i] == &apos;}&apos; );
+                    match = &apos;{&apos;;
+                }
+
+                if ( c != match) {
+                    return false;
+                }
+            }
+        }
+
+        if( stack.size() != 0 )
+            return false;
+
+        return true;
+    }
+};
+</code></pre><p>栈顶元素反应了在嵌套的层次关系中，最近的需要匹配的元素。</p>
+<h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a>144. Binary Tree Preorder Traversal</h2><p>其实栈和递归之间的关系相当密切。</p>
+<pre><code>/**
+ * Given a binary tree, return the preorder traversal of its nodes&apos; values.
+ * For example:
+ * Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+   return [1,2,3].
+ */
+</code></pre><p>我们首先使用递归来完成二叉树前序遍历：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/21
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    vector&lt;int&gt; preorderTraversal(TreeNode* root) {
+
+        vector&lt;int&gt; res;
+        __preorderTraversal( root , res );
+        return res;
+    }
+
+private:
+    void __preorderTraversal( TreeNode* node, vector&lt;int&gt; &amp;res ){
+
+        if( node ){
+            res.push_back( node-&gt;val );
+            __preorderTraversal( node-&gt;left, res );
+            __preorderTraversal( node-&gt;right, res );
+        }
+    }
+};
+</code></pre><p>现在使用栈模拟系统栈，写出非递归程序：我们先推入右孩子，在再推入左孩子，最后推入打印，这样由于栈的后进先出就完成了先序遍历。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/21
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;stack&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+struct Command{
+    string s;   // go, print
+    TreeNode* node;
+    Command(string s, TreeNode* node): s(s), node(node){}
+};
+
+class Solution {
+public:
+    vector&lt;int&gt; preorderTraversal(TreeNode* root) {
+
+        vector&lt;int&gt; res;
+        if ( root == NULL) {
+            return res;
+        }
+
+        stack&lt;Command&gt; stack;
+        stack.push( Command(&quot;go&quot;, root) );
+
+        while ( !stack.empty()) {
+
+            Command command = stack.top();
+            stack.pop();
+
+            if ( command.s == &quot;print&quot;) {
+                res.push_back( command.node -&gt; val );
+            } else {
+                assert( command.s == &quot;go&quot; );
+                if ( command.node -&gt; right) {
+                    stack.push( Command(&quot;go&quot;, command.node-&gt;right ) );
+                }
+                if ( command.node -&gt; left) {
+                    stack.push( Command(&quot;go&quot;, command.node-&gt;left ) );
+                }
+                stack.push( Command(&quot;print&quot;, command.node));
+            }
+        }
+        return res;
+    }
+};
+</code></pre><h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><p>其实对于队列Queue来说，它主要处理的算法问题就是广度优先遍历(树：层序遍历，图：无权图的最短路径)</p>
+<pre><code>/**
+ * Given a binary tree, return the level order traversal of its nodes&apos; values. (ie, from left to right, level by level).
+ * For example:
+ * Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its level order traversal as:
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+ */
+</code></pre><p>这其实就是二叉树的层序遍历，但却是很多公司的面试题，在平时还是要多注重典型基础数据结构的应用。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/22
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {
+
+        vector&lt;vector&lt;int&gt;&gt; res;
+        if ( root == NULL) {
+            return res;
+        }
+
+        queue&lt; pair&lt;TreeNode*, int&gt; &gt; q;
+        q.push( make_pair( root, 0 ) );
+        while( !q.empty() ) {
+
+            TreeNode* node = q.front().first;
+            int level = q.front().second;
+            q.pop();
+
+            if ( level == res.size() ) {
+                res.push_back( vector&lt;int&gt;() );
+            }
+
+            res[level].push_back( node-&gt;val );
+
+            if( node-&gt;left ) {
+                q.push( make_pair( node-&gt;left, level+1 ) );
+            }
+            if( node-&gt;right ) {
+                q.push( make_pair( node-&gt;right, level+1 ) );
+            }
+        }
+
+        return res;
+    }
+};
+</code></pre><h2 id="279-Perfect-Squares"><a href="#279-Perfect-Squares" class="headerlink" title="279. Perfect Squares"></a>279. Perfect Squares</h2><p>当我们对图进行广度优先遍历的时候可以解决最短路径的问题。但其实很多算法问题，我们使用图的最短路径这一思路来解决，但是这个问题第一眼看上去却不像一个图论问题，在问题的描述中没有非常明确的告诉我们需要使用图来解决问题，在这种情况下我们需要对问题深入分析并建模。</p>
+<pre><code>/**
+ * Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+ * For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
+ */
+</code></pre><ul>
+<li><p>直觉解法？贪心？<br>12 = 9 + 1 + 1 + 1<br>12 = 4 + 4 + 4<br>关于贪心算法我们后续还会有介绍，贪心算法实现起来比较简单，但我们很容易陷入一个误区，一个问题不能用贪心算法来解决我们却以为可以使用贪心算法来解决。</p>
+</li>
+<li><p>对于这个问题建模：<br>整个问题转化为一个图论问题<br>从n到0，每个数字表示一个节点<br>如果有两个数字x到y相差一个完全平方数，则连接一条边<br>我们得到了一个无权图<br>原问题转化成，求这个无权图中从n到0的最短路径</p>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Perfect%20Squares.png" alt=""></p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/22
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+
+using namespace std;
+
+// Memory Limit Exceed
+class Solution {
+public:
+    int numSquares(int n) {
+
+        queue&lt; pair&lt;int, int&gt; &gt; q;
+        q.push( make_pair( n, 0 ) );
+
+        while ( !q.empty() ) {
+            int num = q.front().first;
+            int step = q.front().second;
+            q.pop();
+
+            if ( num == 0 ) {
+                return step;
+            } else {
+                for ( int i = 1; num - i*i &gt;= 0; i++ ) {
+                    q.push( make_pair( num - i*i, step + 1) );
+                }
+            }
+        }
+
+        throw invalid_argument(&quot;No Solution.&quot;);
+    }
+};
+</code></pre><p>这样实现的程序并不是一个标准的广度优先实现，它是有性能问题的，问题来自我们每一次都将num-i*i推入了队列中，其中包含有大量的重复，因为每一个数字我们可以从多种路径到达。</p>
+<p>为了处理冗余，我们设立一个新数组visited表示从0到n这n+1个数字有没有被访问过。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/22
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stdexcept&gt;
+
+using namespace std;
+
+// 使用visited数组,记录每一个入队元素
+class Solution {
+public:
+    int numSquares(int n) {
+
+        if( n == 0 )
+            return 0;
+
+        queue&lt; pair&lt;int,int&gt; &gt; q;
+        q.push( make_pair( n , 0 ) );
+
+        vector&lt;bool&gt; visited(n+1, false);
+        visited[n] = true;
+
+        while( !q.empty() ){
+            int num = q.front().first;
+            int step = q.front().second;
+            q.pop();
+
+            for( int i = 1 ; ; i ++ ){
+                int a = num - i*i;
+                if( a &lt; 0 )
+                    break;
+
+                if( !visited[a] ){
+                    if( a == 0 )
+                        return step + 1;
+                    q.push( make_pair( a , step + 1 ) );
+                    visited[a] = true;
+                }
+            }
+        }
+
+        throw invalid_argument(&quot;No Solution.&quot;);
+    }
+};
+</code></pre><h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a>347. Top K Frequent Elements</h2><p>优先队列是一种特殊的队列，通常优先队列的底层实现是堆。对于堆得底层实现需要我们可以使用白板编程。</p>
+<pre><code>/**
+ * Given a non-empty array of integers, return the k most frequent elements.
+ * For example,
+ * Given [1,1,1,2,2,3] and k = 2, return [1,2].
+ */
+</code></pre><p>最简单的思路：扫描一遍统计频率：排序找到前k个出现频率最高的元素，O(nlogn)。</p>
+<p>经过思考，其实我们可以维护一个含有k个元素的优先队列。如果遍历到的元素比队列中的最小频率元素的频率高，则取出队列中最小频率的元素，将新元素入队。最终，队列中剩下的，就是前k个出现频率最高的元素。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/22
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;unordered_map&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;int&gt; topKFrequent(vector&lt;int&gt;&amp; nums, int k) {
+
+        assert( k &gt; 0 );
+
+        // 统计每个元素出现的频率
+        unordered_map&lt;int,int&gt; freq;
+        for(int i = 0 ; i &lt; nums.size() ; i ++ )
+            freq[nums[i]] ++;
+
+        assert( k &lt;= freq.size() );
+
+        // 扫描freq,维护当前出现频率最高的k个元素
+        // 在优先队列中,按照频率排序,所以数据对是 (频率,元素) 的形式
+        priority_queue&lt; pair&lt;int,int&gt; , vector&lt;pair&lt;int,int&gt;&gt; , greater&lt;pair&lt;int,int&gt;&gt; &gt; pq;
+        for( unordered_map&lt;int,int&gt;::iterator iter = freq.begin() ;
+             iter != freq.end() ; iter ++ ){
+            if( pq.size() == k ){
+                if( iter-&gt;second &gt; pq.top().first ){
+                    pq.pop();
+                    pq.push( make_pair( iter-&gt;second , iter-&gt;first) );
+                }
+            }
+            else
+                pq.push( make_pair( iter-&gt;second , iter-&gt;first ) );
+        }
+
+        vector&lt;int&gt; res;
+        while( !pq.empty() ){
+            res.push_back( pq.top().second );
+            pq.pop();
+        }
+
+        return res;
+    }
+};
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/10/04/LeetCode-About-Linked-List/">
+        LeetCode 算法面试分类解法 About-Linked-List →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
