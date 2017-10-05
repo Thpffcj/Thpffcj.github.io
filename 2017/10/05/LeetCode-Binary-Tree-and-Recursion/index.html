@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>LeetCode 算法面试分类解法 Stack-and-Queue | Thpffcj的树洞</title>
+  <title>LeetCode 算法面试分类解法 Binary-Tree-and-Recursion | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,89 +172,168 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2017-10-05T01:48:47.000Z" itemprop="datePublished">
+      <time datetime="2017-10-05T07:26:23.000Z" itemprop="datePublished">
           2017-10-05
       </time>
     
 </span>
-                <h1>LeetCode 算法面试分类解法 Stack-and-Queue</h1>
+                <h1>LeetCode 算法面试分类解法 Binary-Tree-and-Recursion</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们在这篇博客主要介绍一下栈和队列这两种基础数据结构的使用。</p>
-<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><pre><code>/**
- * Given a string containing just the characters &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos;, determine if the input string is valid.
- * The brackets must close in the correct order, &quot;()&quot; and &quot;()[]{}&quot; are all valid but &quot;(]&quot; and &quot;([)]&quot; are not.
+      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客我们主要来看二叉树和二叉树问题中使用递归来解决问题的思路。这类问题有时思路很简单，这是因为二叉树具有天然的递归结构，所以我们使用递归的解法解决二叉树有关的问题就变得非常明显。</p>
+<h2 id="104-Maximum-Depth-of-Binary-Tree"><a href="#104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="104. Maximum Depth of Binary Tree"></a>104. Maximum Depth of Binary Tree</h2><pre><code>/**
+ * Given a binary tree, find its maximum depth.
+ * The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
  */
-</code></pre><p>这是一道经典的使用栈来判断括号是否匹配的算法问题。我们遍历如果遇见左方向的括号，就把它推入栈。一旦遇到右括号，就把栈顶的元素拿出来，看看栈顶的元素是否与当前遍历的右括号匹配，如果匹配则把左括号弹出栈，以此类推。</p>
+</code></pre><p>使用递归解决问题时，要想清楚递归终止条件和递归过程。</p>
 <pre><code>/**
- * Created by Thpffcj on 2017/9/21
+ * Created by Thpffcj on 2017/9/23
  */
 
 #include &lt;iostream&gt;
-#include &lt;stack&gt;
-#include &lt;cassert&gt;
 
 using namespace std;
 
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Solution {
 public:
-    bool isValid(string s) {
+    int maxDepth(TreeNode* root) {
 
-        stack&lt;char&gt; stack;
-        for ( int i = 0; i &lt; s.size(); i++) {
-            if ( s[i] == &apos;(&apos; || s[i] == &apos;[&apos; || s[i] == &apos;{&apos; ) {
-                stack.push( s[i] );
-            } else {
-
-                if ( stack.size() == 0 ) {
-                    return false;
-                }
-
-                char c = stack.top();
-                stack.pop();
-
-                char match;
-                if( s[i] == &apos;)&apos; ) {
-                    match = &apos;(&apos;;
-                } else if( s[i] == &apos;]&apos; ) {
-                    match = &apos;[&apos;;
-                } else{
-                    assert( s[i] == &apos;}&apos; );
-                    match = &apos;{&apos;;
-                }
-
-                if ( c != match) {
-                    return false;
-                }
-            }
+        if ( root == NULL) {
+            return 0;
         }
 
-        if( stack.size() != 0 )
-            return false;
-
-        return true;
+        int leftMaxDepth = maxDepth( root-&gt;left );
+        int rightMaxDepth = maxDepth( root-&gt;right );
+        return max( leftMaxDepth, rightMaxDepth) + 1;
     }
 };
-</code></pre><p>栈顶元素反应了在嵌套的层次关系中，最近的需要匹配的元素。</p>
-<h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a>144. Binary Tree Preorder Traversal</h2><p>其实栈和递归之间的关系相当密切。</p>
-<pre><code>/**
- * Given a binary tree, return the preorder traversal of its nodes&apos; values.
- * For example:
- * Given binary tree {1,#,2,3},
-   1
-    \
-     2
-    /
-   3
-   return [1,2,3].
+</code></pre><h2 id="226-Invert-Binary-Tree"><a href="#226-Invert-Binary-Tree" class="headerlink" title="226. Invert Binary Tree"></a>226. Invert Binary Tree</h2><pre><code>/**
+ *Invert a binary tree.
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+to
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
  */
-</code></pre><p>我们首先使用递归来完成二叉树前序遍历：</p>
+</code></pre><p>反转一颗二叉树，这是一道非常有名的面试题。<br>This problem was inspired by this original tweet by Max Howell:<br>Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.</p>
 <pre><code>/**
- * Created by Thpffcj on 2017/9/21
+ * Created by Thpffcj on 2017/9/23
  */
 
 #include &lt;iostream&gt;
+
+using namespace std;
+
+/// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+
+        if ( root == NULL ) {
+            return NULL;
+        }
+
+        invertTree( root-&gt;left );
+        invertTree( root-&gt;right );
+        swap ( root-&gt;left, root-&gt;right );
+
+        return root;
+    }
+};
+</code></pre><h2 id="112-Path-Sum"><a href="#112-Path-Sum" class="headerlink" title="112. Path Sum"></a>112. Path Sum</h2><p>有的时候递归的终止条件是存在陷阱的。</p>
+<pre><code>/**
+ * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along
+ * the path equals the given sum.
+ * For example:
+ * Given the below binary tree and sum = 22,
+              5
+             / \
+            4   8
+           /   / \
+          11  13  4
+         /  \      \
+        7    2      1
+   return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.
+ */
+</code></pre><p>采取递归来解决这个问题，我们可以从头结点开始，向它的左右孩子节点寻找sum-根节点的值，不断向下寻找。这道题陷阱在于终止条件不是node == NULL。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/23
+ */
+
+#include &lt;iostream&gt;
+
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+
+        if ( root == NULL) {
+            return false;
+        }
+        if ( root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL) {
+            return root-&gt;val == sum;
+        }
+
+        if ( hasPathSum( root-&gt;left , sum - root-&gt;val ) ) {
+            return true;
+        }
+        if ( hasPathSum( root-&gt;right , sum - root-&gt;val ) ) {
+            return true;
+        }
+
+        return false;
+    }
+};
+</code></pre><h2 id="257-Binary-Tree-Paths"><a href="#257-Binary-Tree-Paths" class="headerlink" title="257. Binary Tree Paths"></a>257. Binary Tree Paths</h2><p>我们如何使用递归的返回值来解决问题。</p>
+<pre><code>/**
+ * Given a binary tree, return all root-to-leaf paths.
+ * For example, given the following binary tree:
+   1
+ /   \
+2     3
+ \
+  5
+All root-to-leaf paths are:
+[&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;]
+ */
+</code></pre><p>对于每一个节点，就是该节点的值加上“-&gt;”再加上左子树的路径字符串和右子树路径字符串。当到达叶节点时，将字符串加入结果集。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/23
+ */
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 #include &lt;vector&gt;
 
 using namespace std;
@@ -269,304 +348,160 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) {
+    vector&lt;string&gt; binaryTreePaths(TreeNode* root) {
 
-        vector&lt;int&gt; res;
-        __preorderTraversal( root , res );
+        vector&lt;string&gt; res;
+
+        if ( root == NULL ) {
+            return res;
+        }
+
+        if ( root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL ) {
+            res.push_back( to_string(root-&gt;val) );
+            return res;
+        }
+
+        vector&lt;string&gt; leftS = binaryTreePaths( root-&gt;left );
+        for ( int i = 0; i &lt; leftS.size(); i++ ) {
+            res.push_back( to_string(root-&gt;val) + &quot;-&gt;&quot; + leftS[i] );
+        }
+
+        vector&lt;string&gt; rightS = binaryTreePaths( root-&gt;right );
+        for ( int i = 0; i &lt; rightS.size(); i++ ) {
+            res.push_back( to_string(root-&gt;val) + &quot;-&gt;&quot; + rightS[i] );
+        }
+
+        return res;
+    }
+};
+</code></pre><h2 id="437-Path-Sum-III"><a href="#437-Path-Sum-III" class="headerlink" title="437. Path Sum III"></a>437. Path Sum III</h2><pre><code>/**
+ * You are given a binary tree in which each node contains an integer value.
+ * Find the number of paths that sum to a given value.
+ * The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes
+ * to child nodes).
+ * The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.
+ * Example:
+ * root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
+      10
+     /  \
+    5   -3
+   / \    \
+  3   2   11
+ / \   \
+3  -2   1
+Return 3. The paths that sum to 8 are:
+1.  5 -&gt; 3
+2.  5 -&gt; 2 -&gt; 1
+3. -3 -&gt; 11
+ */
+</code></pre><p>猛地一看这个描述，和我们之前的Path Sum是一样的。但是区别在于我们对于路径的定义不一定要起始于根节点，终止于叶子结点，路径可以从任意节点开始，但是只能是向下走的。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Path%20Sum.png" alt=""></p>
+<p>在一个节点上要通过三个部分获得答案，第一个部分看看有没有一条路径，它包含node这个节点，并且它的和为sum,这个路径我们进入findPath这个子过程，这个子过程本身又是一个递归函数。另外的两部分就是要在node的左右子树去寻找没有这个ndoe节点的值，有没有这样的路径，他们的和仍然为sum，这件事就是我们PathSum这个函数所做的。在node-&gt;left和node-&gt;right分别调用PathSum的过程中，他们也会调用findPath来求解。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/23
+ */
+
+#include &lt;iostream&gt;
+
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+
+public:
+    // 在以root为根节点的二叉树中,寻找和为sum的路径,返回这样的路径个数
+    int pathSum(TreeNode* root, int sum) {
+
+        if ( root == NULL) {
+            return 0;
+        }
+
+        int res = findPath( root, sum );
+        res += pathSum( root-&gt;left,  sum );
+        res += pathSum( root-&gt;right, sum );
+
         return res;
     }
 
 private:
-    void __preorderTraversal( TreeNode* node, vector&lt;int&gt; &amp;res ){
 
-        if( node ){
-            res.push_back( node-&gt;val );
-            __preorderTraversal( node-&gt;left, res );
-            __preorderTraversal( node-&gt;right, res );
-        }
-    }
-};
-</code></pre><p>现在使用栈模拟系统栈，写出非递归程序：我们先推入右孩子，在再推入左孩子，最后推入打印，这样由于栈的后进先出就完成了先序遍历。</p>
-<pre><code>/**
- * Created by Thpffcj on 2017/9/21
- */
+    // 在以node为根节点的二叉树中,寻找包含node的路径,和为sum
+    // 返回这样的路径个数
+    int findPath( TreeNode* node, int num){
 
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;stack&gt;
-#include &lt;cassert&gt;
-
-using namespace std;
-
-// Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
-struct Command{
-    string s;   // go, print
-    TreeNode* node;
-    Command(string s, TreeNode* node): s(s), node(node){}
-};
-
-class Solution {
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) {
-
-        vector&lt;int&gt; res;
-        if ( root == NULL) {
-            return res;
-        }
-
-        stack&lt;Command&gt; stack;
-        stack.push( Command(&quot;go&quot;, root) );
-
-        while ( !stack.empty()) {
-
-            Command command = stack.top();
-            stack.pop();
-
-            if ( command.s == &quot;print&quot;) {
-                res.push_back( command.node -&gt; val );
-            } else {
-                assert( command.s == &quot;go&quot; );
-                if ( command.node -&gt; right) {
-                    stack.push( Command(&quot;go&quot;, command.node-&gt;right ) );
-                }
-                if ( command.node -&gt; left) {
-                    stack.push( Command(&quot;go&quot;, command.node-&gt;left ) );
-                }
-                stack.push( Command(&quot;print&quot;, command.node));
-            }
-        }
-        return res;
-    }
-};
-</code></pre><h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><p>其实对于队列Queue来说，它主要处理的算法问题就是广度优先遍历(树：层序遍历，图：无权图的最短路径)</p>
-<pre><code>/**
- * Given a binary tree, return the level order traversal of its nodes&apos; values. (ie, from left to right, level by level).
- * For example:
- * Given binary tree [3,9,20,null,null,15,7],
-    3
-   / \
-  9  20
-    /  \
-   15   7
-return its level order traversal as:
-[
-  [3],
-  [9,20],
-  [15,7]
-]
- */
-</code></pre><p>这其实就是二叉树的层序遍历，但却是很多公司的面试题，在平时还是要多注重典型基础数据结构的应用。</p>
-<pre><code>/**
- * Created by Thpffcj on 2017/9/22
- */
-
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;cassert&gt;
-
-using namespace std;
-
-// Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
-class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {
-
-        vector&lt;vector&lt;int&gt;&gt; res;
-        if ( root == NULL) {
-            return res;
-        }
-
-        queue&lt; pair&lt;TreeNode*, int&gt; &gt; q;
-        q.push( make_pair( root, 0 ) );
-        while( !q.empty() ) {
-
-            TreeNode* node = q.front().first;
-            int level = q.front().second;
-            q.pop();
-
-            if ( level == res.size() ) {
-                res.push_back( vector&lt;int&gt;() );
-            }
-
-            res[level].push_back( node-&gt;val );
-
-            if( node-&gt;left ) {
-                q.push( make_pair( node-&gt;left, level+1 ) );
-            }
-            if( node-&gt;right ) {
-                q.push( make_pair( node-&gt;right, level+1 ) );
-            }
-        }
-
-        return res;
-    }
-};
-</code></pre><h2 id="279-Perfect-Squares"><a href="#279-Perfect-Squares" class="headerlink" title="279. Perfect Squares"></a>279. Perfect Squares</h2><p>当我们对图进行广度优先遍历的时候可以解决最短路径的问题。但其实很多算法问题，我们使用图的最短路径这一思路来解决，但是这个问题第一眼看上去却不像一个图论问题，在问题的描述中没有非常明确的告诉我们需要使用图来解决问题，在这种情况下我们需要对问题深入分析并建模。</p>
-<pre><code>/**
- * Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
- * For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
- */
-</code></pre><ul>
-<li><p>直觉解法？贪心？<br>12 = 9 + 1 + 1 + 1<br>12 = 4 + 4 + 4<br>关于贪心算法我们后续还会有介绍，贪心算法实现起来比较简单，但我们很容易陷入一个误区，一个问题不能用贪心算法来解决我们却以为可以使用贪心算法来解决。</p>
-</li>
-<li><p>对于这个问题建模：<br>整个问题转化为一个图论问题<br>从n到0，每个数字表示一个节点<br>如果有两个数字x到y相差一个完全平方数，则连接一条边<br>我们得到了一个无权图<br>原问题转化成，求这个无权图中从n到0的最短路径</p>
-</li>
-</ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Perfect%20Squares.png" alt=""></p>
-<pre><code>/**
- * Created by Thpffcj on 2017/9/22
- */
-
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-
-using namespace std;
-
-// Memory Limit Exceed
-class Solution {
-public:
-    int numSquares(int n) {
-
-        queue&lt; pair&lt;int, int&gt; &gt; q;
-        q.push( make_pair( n, 0 ) );
-
-        while ( !q.empty() ) {
-            int num = q.front().first;
-            int step = q.front().second;
-            q.pop();
-
-            if ( num == 0 ) {
-                return step;
-            } else {
-                for ( int i = 1; num - i*i &gt;= 0; i++ ) {
-                    q.push( make_pair( num - i*i, step + 1) );
-                }
-            }
-        }
-
-        throw invalid_argument(&quot;No Solution.&quot;);
-    }
-};
-</code></pre><p>这样实现的程序并不是一个标准的广度优先实现，它是有性能问题的，问题来自我们每一次都将num-i*i推入了队列中，其中包含有大量的重复，因为每一个数字我们可以从多种路径到达。</p>
-<p>为了处理冗余，我们设立一个新数组visited表示从0到n这n+1个数字有没有被访问过。</p>
-<pre><code>/**
- * Created by Thpffcj on 2017/9/22
- */
-
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;stdexcept&gt;
-
-using namespace std;
-
-// 使用visited数组,记录每一个入队元素
-class Solution {
-public:
-    int numSquares(int n) {
-
-        if( n == 0 )
+        if ( node == NULL ) {
             return 0;
-
-        queue&lt; pair&lt;int,int&gt; &gt; q;
-        q.push( make_pair( n , 0 ) );
-
-        vector&lt;bool&gt; visited(n+1, false);
-        visited[n] = true;
-
-        while( !q.empty() ){
-            int num = q.front().first;
-            int step = q.front().second;
-            q.pop();
-
-            for( int i = 1 ; ; i ++ ){
-                int a = num - i*i;
-                if( a &lt; 0 )
-                    break;
-
-                if( !visited[a] ){
-                    if( a == 0 )
-                        return step + 1;
-                    q.push( make_pair( a , step + 1 ) );
-                    visited[a] = true;
-                }
-            }
         }
 
-        throw invalid_argument(&quot;No Solution.&quot;);
+        int res = 0;
+        if ( node-&gt;val == num ) {
+            res += 1;
+        }
+
+        res += findPath( node-&gt;left, num - node-&gt;val );
+        res += findPath( node-&gt;right, num - node-&gt;val );
+
+        return res;
     }
 };
-</code></pre><h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a>347. Top K Frequent Elements</h2><p>优先队列是一种特殊的队列，通常优先队列的底层实现是堆。对于堆得底层实现需要我们可以使用白板编程。</p>
+</code></pre><h2 id="235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="235. Lowest Common Ancestor of a Binary Search Tree"></a>235. Lowest Common Ancestor of a Binary Search Tree</h2><p>二分搜索树：<br>每个节点的键值大于左孩子<br>每个节点的键值小于右孩子<br>以左右孩子为跟的子树仍为二分搜索树</p>
 <pre><code>/**
- * Given a non-empty array of integers, return the k most frequent elements.
- * For example,
- * Given [1,1,1,2,2,3] and k = 2, return [1,2].
+ * Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+ * According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as
+ * the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+        _______6______
+       /              \
+    ___2__          ___8__
+   /      \        /      \
+   0      _4       7       9
+         /  \
+         3   5
+ * For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a
+ * node can be a descendant of itself according to the LCA definition.
  */
-</code></pre><p>最简单的思路：扫描一遍统计频率：排序找到前k个出现频率最高的元素，O(nlogn)。</p>
-<p>经过思考，其实我们可以维护一个含有k个元素的优先队列。如果遍历到的元素比队列中的最小频率元素的频率高，则取出队列中最小频率的元素，将新元素入队。最终，队列中剩下的，就是前k个出现频率最高的元素。</p>
+</code></pre><p>如果我们给的p,q节点都小于node节点，那么他们最近的公共祖先一定在ndoe左边。如果我们给的p,q节点都大于node节点，那么他们最近的公共祖先一定在ndoe右边。如果一小一大，那么node一定是最近的公众祖先。</p>
 <pre><code>/**
- * Created by Thpffcj on 2017/9/22
+ * Created by Thpffcj on 2017/9/23
  */
 
 #include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;unordered_map&gt;
 #include &lt;cassert&gt;
 
 using namespace std;
 
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Solution {
 public:
-    vector&lt;int&gt; topKFrequent(vector&lt;int&gt;&amp; nums, int k) {
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 
-        assert( k &gt; 0 );
+        assert( p!= NULL &amp;&amp; q != NULL);
 
-        // 统计每个元素出现的频率
-        unordered_map&lt;int,int&gt; freq;
-        for(int i = 0 ; i &lt; nums.size() ; i ++ )
-            freq[nums[i]] ++;
-
-        assert( k &lt;= freq.size() );
-
-        // 扫描freq,维护当前出现频率最高的k个元素
-        // 在优先队列中,按照频率排序,所以数据对是 (频率,元素) 的形式
-        priority_queue&lt; pair&lt;int,int&gt; , vector&lt;pair&lt;int,int&gt;&gt; , greater&lt;pair&lt;int,int&gt;&gt; &gt; pq;
-        for( unordered_map&lt;int,int&gt;::iterator iter = freq.begin() ;
-             iter != freq.end() ; iter ++ ){
-            if( pq.size() == k ){
-                if( iter-&gt;second &gt; pq.top().first ){
-                    pq.pop();
-                    pq.push( make_pair( iter-&gt;second , iter-&gt;first) );
-                }
-            }
-            else
-                pq.push( make_pair( iter-&gt;second , iter-&gt;first ) );
+        if ( root == NULL) {
+            return NULL;
         }
 
-        vector&lt;int&gt; res;
-        while( !pq.empty() ){
-            res.push_back( pq.top().second );
-            pq.pop();
+        if( p-&gt;val &lt; root-&gt;val &amp;&amp; q-&gt;val &lt; root-&gt;val ) {
+            return lowestCommonAncestor( root-&gt;left, p, q);
+        }
+        if( p-&gt;val &gt; root-&gt;val &amp;&amp; q-&gt;val &gt; root-&gt;val ) {
+            return lowestCommonAncestor( root-&gt;right, p, q);
         }
 
-        return res;
+        return root;
     }
 };
 </code></pre>
@@ -575,13 +510,9 @@ public:
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2017/10/05/LeetCode-Binary-Tree-and-Recursion/" style="float: left;">
-        ← LeetCode 算法面试分类解法 Binary-Tree-and-Recursion
-    </a>
     
-    
-    <a class="pull-right" href="/2017/10/04/LeetCode-About-Linked-List/">
-        LeetCode 算法面试分类解法 About-Linked-List →
+    <a class="pull-right" href="/2017/10/05/LeetCode-Stack-and-Queue/">
+        LeetCode 算法面试分类解法 Stack-and-Queue →
     </a>
     
 </nav>
