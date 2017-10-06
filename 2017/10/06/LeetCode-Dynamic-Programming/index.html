@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>LeetCode 算法面试分类解法 Dynamic-Programming | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-06T01:16:53.000Z" itemprop="datePublished">
+          2017-10-06
+      </time>
+    
+</span>
+                <h1>LeetCode 算法面试分类解法 Dynamic-Programming</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>动态规划是一个设计感比较强，艺术感比较强的一种算法设计思想。</p>
+<p>到底什么是动态规划？<br>下面是一个斐波那契数列的递归解法：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+
+int num = 0;
+
+int fib( int n ){
+
+    num ++;
+
+    if( n == 0 )
+        return 0;
+
+    if( n == 1 )
+        return 1;
+
+    return fib(n-1) + fib(n-2);
+}
+
+int main() {
+
+    num = 0;
+
+    int n = 42;
+    time_t startTime = clock();
+    int res = fib(n);
+    time_t endTime = clock();
+
+    cout&lt;&lt;&quot;fib(&quot;&lt;&lt;n&lt;&lt;&quot;) = &quot;&lt;&lt;res&lt;&lt;endl;
+    cout&lt;&lt;&quot;time : &quot;&lt;&lt;double(endTime-startTime)/CLOCKS_PER_SEC&lt;&lt;&quot; s&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;run function fib() &quot;&lt;&lt;num&lt;&lt;&quot;times.&quot;&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre><p>通过计时我们会发现这个算法很慢，为什么这个解法效率这么低呢？当我们需要计算fib(5)时，它的递归树是：</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Fibonacci.png" alt=""></p>
+<p>从这个图可以看出这里面有大量的重复计算，我们怎样避免呢，我们可以在程序的外面做一个数组memo，其实memo[i]就记忆了第i个斐波那契数列。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+vector&lt;int&gt; memo;
+int num = 0;
+
+// 记忆化搜索
+int fib( int n ){
+
+    num ++;
+
+    if( n == 0 )
+        return 0;
+
+    if( n == 1 )
+        return 1;
+
+    if( memo[n] == -1 )
+        memo[n] = fib(n-1) + fib(n-2);
+
+    return memo[n];
+}
+
+int main() {
+
+    num = 0;
+
+    int n = 42;
+    memo = vector&lt;int&gt;(n+1,-1);
+
+    time_t startTime = clock();
+    int res = fib(n);
+    time_t endTime = clock();
+
+    cout&lt;&lt;&quot;fib(&quot;&lt;&lt;n&lt;&lt;&quot;) = &quot;&lt;&lt;res&lt;&lt;endl;
+    cout&lt;&lt;&quot;time : &quot;&lt;&lt;double(endTime-startTime)/CLOCKS_PER_SEC&lt;&lt;&quot; s&quot;&lt;&lt;endl;
+    cout&lt;&lt;&quot;run function fib() &quot;&lt;&lt;num&lt;&lt;&quot;times.&quot;&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre><p>我们采用一个memo数组来记忆，所以叫做记忆化搜索。记忆化搜索其实就是在递归的过程中添加计划化，是一种自上向下的解决问题，我们假设基本的问题已经解决了，我们已经会求fib(n-1)和fib(n-2)了，那么我们就能求第n个数了。</p>
+<p>如果我们能自上而下解决问题，我们也能自下而上解决问题，只不过很多时候我们习惯于前者。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+// 动态规划
+int fib( int n ){
+
+    vector&lt;int&gt; memo(n+1, -1);
+
+    memo[0] = 0;
+    memo[1] = 1;
+    for( int i = 2 ; i &lt;= n ; i ++ )
+        memo[i] = memo[i-1] + memo[i-2];
+
+    return memo[n];
+}
+
+int main() {
+
+    // 结果会溢出,这里只看性能
+    int n = 1000;
+
+    time_t startTime = clock();
+    int res = fib(n);
+    time_t endTime = clock();
+
+    cout&lt;&lt;&quot;fib(&quot;&lt;&lt;n&lt;&lt;&quot;) = &quot;&lt;&lt;res&lt;&lt;endl;
+    cout&lt;&lt;&quot;time : &quot;&lt;&lt;double(endTime-startTime)/CLOCKS_PER_SEC&lt;&lt;&quot; s&quot;&lt;&lt;endl;
+
+    return 0;
+}
+</code></pre><p>我们先解决小数据量解决问题，之后层层递推来解决更大数据量的问题，通常这个过程就叫做动态规划。这个时间和记忆化搜索的时间复杂度是相当的，不过动态规划没有递归的调用，不需要额外调用和栈空间。</p>
+<p>动态规划：将原问题拆解成若干子问题，同时保存子问题的答案，使得每个子问题只求解一次，最终获得原问题的答案。</p>
+<h2 id="70-Climbing-Stairs"><a href="#70-Climbing-Stairs" class="headerlink" title="70. Climbing Stairs"></a>70. Climbing Stairs</h2><pre><code>/**
+ * You are climbing a stair case. It takes n steps to reach to the top.
+ * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+ */
+</code></pre><p>我们来看一下递归的思路，把一个大的问题分解成小的问题。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Climbing%20Stars.png" alt=""></p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 记忆化搜索
+class Solution {
+private:
+    vector&lt;int&gt; memo;
+
+    int calcWays(int n){
+
+        if( n == 0 || n == 1)
+            return 1;
+
+        if( memo[n] == -1 )
+            memo[n] = calcWays(n-1) + calcWays(n-2);
+
+        return memo[n];
+    }
+public:
+    int climbStairs(int n) {
+
+        memo = vector&lt;int&gt;(n+1,-1);
+        return calcWays(n);
+    }
+};
+</code></pre><p>我们会发现和上面斐波那契一样，很轻易可以转化为动态规划解法。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 动态规划
+class Solution {
+
+public:
+    int climbStairs(int n) {
+
+        vector&lt;int&gt; memo(n+1, -1);
+        memo[0] = 1;
+        memo[1] = 1;
+
+        for ( int i = 2; i &lt;= n; i++ ) {
+            memo[i] = memo[i-1] + memo[i-2];
+        }
+
+        return memo[n];
+    }
+};
+</code></pre><h2 id="343-Integer-Break"><a href="#343-Integer-Break" class="headerlink" title="343. Integer Break"></a>343. Integer Break</h2><pre><code>/**
+ * Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers.
+ * Return the maximum product you can get.
+ * For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4).
+ * Note: You may assume that n is not less than 2 and not larger than 58.
+ */
+</code></pre><p>对于一个问题如果没有问题时，我们可以先考虑暴力解法。话句话说，我们使用什么样的方式，才能把正整数n的所有分割枚举出来，我们无法知道有几重循环，通常我们需要使用递归的手段。<br>暴力解法：回溯遍历将一个数做分割的所有可能性。O(2^n)</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Integer%20Break.png" alt=""></p>
+<p>之所以递归树存在，是因为它有最优子结构<br>通过求子问题的最优解，可以获得原问题的最优解。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    int max3( int a , int b , int c ){
+        return max( a , max(b,c) );
+    }
+
+    // 将n进行分割(至少分割两部分), 可以获得的最大乘积
+    int breakInteger( int n ){
+
+        if( n == 1 )
+            return 1;
+
+        int res = -1;
+        for( int i = 1 ; i &lt;= n-1 ; i ++ )
+            res = max3( res , i*(n-i) , i * breakInteger(n-i) );
+        return res;
+    }
+public:
+    int integerBreak(int n) {
+        assert( n &gt;= 1 );
+        return breakInteger(n);
+    }
+};
+</code></pre><p>它包含重叠子问题，下面是记忆化搜索版本：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    vector&lt;int&gt; memo;
+
+    int max3( int a , int b , int c ){
+        return max( a , max(b,c) );
+    }
+
+    // 将n进行分割(至少分割两部分), 可以获得的最大乘积
+    int breakInteger( int n ){
+
+        if( n == 1 )
+            return 1;
+
+        if( memo[n] != -1 )
+            return memo[n];
+
+        int res = -1;
+        for( int i = 1 ; i &lt;= n-1 ; i ++ )
+            res = max3( res , i*(n-i) , i * breakInteger(n-i) );
+        memo[n] = res;
+        return res;
+    }
+public:
+    int integerBreak(int n) {
+        assert( n &gt;= 1 );
+        memo = vector&lt;int&gt;(n+1, -1);
+        return breakInteger(n);
+    }
+};
+</code></pre><p>下面我们使用自底向上的方法，也就是动态规划解决这个问题：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+
+private:
+    int max3( int a , int b , int c ){
+        return max(max(a,b),c);
+    }
+public:
+    int integerBreak(int n) {
+
+        // memo[i] 表示将数字i分割(至少分割成两部分)后得到的最大乘积
+        vector&lt;int&gt; memo(n+1, -1);
+
+        memo[1] = 1;
+        for ( int i = 2; i &lt;= n; i++ ) {
+            // 求解memo[i]
+            for ( int j = 1; j &lt;= i-1; j++ ) {
+                // j + (i-j)
+                memo[i] = max3( memo[i], j*(i-j), j*memo[i-j] );
+            }
+        }
+
+        return memo[n];
+
+    }
+};
+</code></pre><h2 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h2><pre><code>/**
+ * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only
+ * constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically
+ * contact the police if two adjacent houses were broken into on the same night.
+ * Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you
+ * can rob tonight without alerting the police.
+ */
+</code></pre><p>首先依然是如果没有思路的话，先考虑暴力解法。检查所有的房子，对每个组合，检查是否有相邻的房子，如果没有，记录其价值，找最大值。O((2^n)*n)</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/House%20Robber.png" alt=""></p>
+<p>注意其中对状态的定义：<br>考虑偷取[x…n-1]范围里的房子(函数的定义)</p>
+<p>根据对状态的定义，决定状态的转移：<br>f(0) = max{ v(0) + f(2), v(1) + f(3), v(2) + f(4), … , v(n-3) + f(n-1), v(n-2), v(n-1)}(状态转移方程)</p>
+<p>实际上我们的递归函数就是在实现状态转移。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    // memo[i] 表示考虑抢劫 nums[i...n) 所能获得的最大收益
+    vector&lt;int&gt; memo;
+
+    // 考虑抢劫nums[index...nums.size())这个范围的所有房子
+    int tryRob( vector&lt;int&gt; &amp;nums, int index){
+
+        if( index &gt;= nums.size() )
+            return 0;
+
+        if( memo[index] != -1 )
+            return memo[index];
+
+        int res = 0;
+        for( int i = index ; i &lt; nums.size() ; i ++ )
+            res = max(res, nums[i] + tryRob(nums, i+2));
+        memo[index] = res;
+        return res;
+    }
+public:
+    int rob(vector&lt;int&gt;&amp; nums) {
+
+        memo = vector&lt;int&gt;(nums.size(), -1);
+        return tryRob(nums, 0);
+    }
+};
+</code></pre><p>给出动态规划解法：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+
+public:
+    int rob(vector&lt;int&gt;&amp; nums) {
+
+        int n = nums.size();
+
+        if( n == 0 ) {
+            return 0;
+        }
+
+        // memo[i] 表示考虑抢劫 nums[i...n) 所能获得的最大收益
+        vector&lt;int&gt; memo(n, 0);
+        memo[n-1] = nums[n-1];
+        for( int i = n-2 ; i &gt;= 0 ; i -- ) {
+            for (int j = i; j &lt; n; j++) {
+                memo[i] = max(memo[i], nums[j] + (j + 2 &lt; n ? memo[j + 2] : 0) );
+            }
+        }
+
+        return memo[0];
+    }
+};
+</code></pre><p>我们所强调的是对于动态规划来说，我们要清晰自己对状态的定义，在我们之前的定义我们是去考虑偷取[x…n-1]范围里的房子(函数的定义)。对于同样的问题，很多时候我们可以设立不同的状态得到同样正确的答案。</p>
+<p>改变对状态的定义：<br>考虑偷取[0…x]范围里的房子(函数的定义)。实现如下：</p>
+<p>记忆化搜索：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 改变状态定义
+class Solution {
+private:
+    // memo[i] 表示考虑抢劫 nums[0...i] 所能获得的最大收益
+    vector&lt;int&gt; memo;
+
+    // 考虑抢劫nums[0...index]这个范围的所有房子
+    int tryRob( vector&lt;int&gt; &amp;nums, int index){
+
+        if( index &lt; 0 )
+            return 0;
+
+        if( memo[index] != -1 )
+            return memo[index];
+
+        int res = 0;
+        for( int i = 0 ; i &lt;= index ; i ++ )
+            res = max(res, nums[i] + tryRob(nums, i-2));
+        memo[index] = res;
+        return res;
+    }
+public:
+    int rob(vector&lt;int&gt;&amp; nums) {
+
+        memo = vector&lt;int&gt;(nums.size(), -1);
+        return tryRob(nums, nums.size() - 1 );
+    }
+};
+</code></pre><p>动态规划：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// 改变状态定义
+class Solution {
+
+public:
+    int rob(vector&lt;int&gt;&amp; nums) {
+
+        int n = nums.size();
+        if( n == 0 ) {
+            return 0;
+        }
+
+        // memo[i] 表示考虑抢劫 nums[0...i] 所能获得的最大收益
+        vector&lt;int&gt; memo(n, 0);
+        memo[0] = nums[0];
+        for( int i = 1 ; i &lt; n ; i ++ )
+            for (int j = i; j &gt;= 0; j--)
+                memo[i] = max(memo[i], nums[j] + (j - 2 &gt;= 0 ? memo[j - 2] : 0) );
+
+        return memo[n-1];
+    }
+};
+</code></pre><h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0-1 背包问题"></a>0-1 背包问题</h2><p>有一个背包，他的容量为C(Capacity)。现在有n中不同的物品，编号为0…n-1，其中每一件物品的重量为w(i)，价值为v(i)。问可以向这个背包中盛放哪些物品，使得在不超过背包容量的基础上，物品的总价值最大。</p>
+<p>这类组合问题，我们都可以使用递归来完成。只是我们在其中能不能找到重叠子问题，最优子结构进而转化成记忆化搜索或动态规划来解决。</p>
+<p>对于这个问题，我们有两个约束条件<br>首先我们要在n个物品里选，第二点他的容量要小于等于一个给定的数值C。</p>
+<p>F(n,C)考虑将n个物品放进容量为C的背包，使得价值最大。<br>F(i,C) = max{F(i-1, C), v(i) + F(i-1, C-w(i))}</p>
+<p>依然，我们先使用自顶向下使用记忆化搜索：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Knapsack01{
+
+private:
+    vector&lt;vector&lt;int&gt;&gt; memo;
+
+    // 用 [0...index]的物品,填充容积为c的背包的最大价值
+    int bestValue(const vector&lt;int&gt; &amp;w, const vector&lt;int&gt; v, int index, int c){
+
+        if( c &lt;= 0 || index &lt; 0 ) {
+            return 0;
+        }
+
+        if( memo[index][c] != -1 ) {
+            return memo[index][c];
+        }
+
+        int res = bestValue(w, v, index-1, c);
+        if( c &gt;= w[index] ) {
+            res = max( res , v[index] + bestValue(w, v, index-1, c-w[index]) );
+        }
+
+        memo[index][c] = res;
+        return res;
+    }
+public:
+    int knapsack01(const vector&lt;int&gt; &amp;w, const vector&lt;int&gt; &amp;v, int C){
+
+        assert( w.size() == v.size() &amp;&amp; C &gt;= 0 );
+        int n = w.size();
+        if( n == 0 || C == 0 )
+            return 0;
+
+        memo = vector&lt;vector&lt;int&gt;&gt;( n, vector&lt;int&gt;(C+1,-1));
+        return bestValue(w, v, n-1, C);
+    }
+};
+</code></pre><p>使用动态规划自底向上解决：</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/0-1%E8%83%8C%E5%8C%85.png" alt=""></p>
+<p>每个位置都由两个位置决定。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/26
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Knapsack01{
+
+public:
+    // 用 [0...index]的物品,填充容积为c的背包的最大价值
+    int knapsack01(const vector&lt;int&gt; &amp;w, const vector&lt;int&gt; &amp;v, int C){
+
+        assert( w.size() == v.size() &amp;&amp; C &gt;= 0 );
+
+        if ( n == 0) {
+            return 0;
+        }
+
+        int n = w.size();
+        vector&lt;vector&lt;int&gt;&gt; memo( n, vector&lt;int&gt;(C+1,0));
+
+        for ( int j = 0; j &lt;= C; j++ ) {
+            memo[0][j] = ( j &gt;= w[0] ? v[0] : 0 );
+        }
+
+        for ( int i = 1; i &lt; n; i++ ) {
+            for ( int j = 0; j &lt;= C; j++ ) {
+                // 0~i这些物品容积为j的背包获得的最大值
+                memo[i][j] = memo[i-1][j];
+                if( j &gt;= w[i] ) {
+                    memo[i][j] = max( memo[i][j], v[i] + memo[i-1][j-w[i]]);
+                }
+            }
+        }
+
+        return memo[n-1][C];
+    }
+};
+</code></pre><p>注意这个问题使用了两个变量来定义状态。</p>
+<h2 id="0-1-背包问题优化"><a href="#0-1-背包问题优化" class="headerlink" title="0-1 背包问题优化"></a>0-1 背包问题优化</h2><p>上面的0-1背包问题的时间复杂度：O(n<em>C),空间复杂度：O(n</em>C)。</p>
+<p>我们分析一下状态转移方程：F(i,C) = max{F(i-1, C), v(i) + F(i-1, C-w(i))}<br>第i行元素只依赖于第i-1行元素。理论上，只需要保持两行元素。空间复杂度：O(2*C)=O(C)。</p>
+<p>我们使用两行轮流使用完成背包问题。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/27
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Knapsack01{
+
+public:
+    int knapsack01(const vector&lt;int&gt; &amp;w, const vector&lt;int&gt; &amp;v, int C){
+        assert( w.size() == v.size() &amp;&amp; C &gt;= 0 );
+        int n = w.size();
+        if( n == 0 &amp;&amp; C == 0 )
+            return 0;
+
+        vector&lt;vector&lt;int&gt;&gt; memo( 2, vector&lt;int&gt;(C+1,0));
+
+        for( int j = 0 ; j &lt;= C ; j ++ )
+            memo[0][j] = ( j &gt;= w[0] ? v[0] : 0 );
+
+        for( int i = 1 ; i &lt; n ; i ++ )
+            for( int j = 0 ; j &lt;= C ; j ++ ){
+                memo[i%2][j] = memo[(i-1)%2][j];
+                if( j &gt;= w[i] )
+                    memo[i%2][j] = max( memo[i%2][j], v[i] + memo[(i-1)%2][j-w[i]]);
+            }
+        return memo[(n-1)%2][C];
+    }
+};
+</code></pre><p>只使用一行完成背包问题，比较复杂：我们从右向左刷新内容</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/0-1%E8%83%8C%E5%8C%852.png" alt=""></p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/27
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Knapsack01{
+
+public:
+    int knapsack01(const vector&lt;int&gt; &amp;w, const vector&lt;int&gt; &amp;v, int C){
+        assert( w.size() == v.size() &amp;&amp; C &gt;= 0 );
+        int n = w.size();
+        if( n == 0 || C == 0 )
+            return 0;
+
+        vector&lt;int&gt; memo(C+1,0);
+
+        for( int j = 0 ; j &lt;= C ; j ++ )
+            memo[j] = ( j &gt;= w[0] ? v[0] : 0 );
+
+        for( int i = 1 ; i &lt; n ; i ++ )
+            for( int j = C ; j &gt;= w[i] ; j -- )
+                memo[j] = max( memo[j], v[i] + memo[j-w[i]]);
+
+        return memo[C];
+    }
+};
+</code></pre><h2 id="416-Partition-Equal-Subset-Sum"><a href="#416-Partition-Equal-Subset-Sum" class="headerlink" title="416. Partition Equal Subset Sum"></a>416. Partition Equal Subset Sum</h2><pre><code>/**
+ * Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets such that
+ * the sum of elements in both subsets is equal.
+ * Note:
+ * Each of the array element will not exceed 100.
+ * The array size will not exceed 200.
+ * Example 1:
+ * Input: [1, 5, 11, 5]
+ * Output: true
+ * Explanation: The array can be partitioned as [1, 5, 5] and [11].
+ * Example 2:
+ * Input: [1, 2, 3, 5]
+ * Output: false
+ * Explanation: The array cannot be partitioned into equal sum subsets.
+ */
+</code></pre><p>典型的背包问题，在n个物品中选出一定物品，填满sum/2的背包。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/27
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    // memo[i][c] 表示使用索引为[0...i]的这些元素,是否可以完全填充一个容量为c的背包
+    // -1 表示为未计算; 0 表示不可以填充; 1 表示可以填充
+    vector&lt;vector&lt;int&gt;&gt; memo;
+
+    // 使用nums[0...index], 是否可以完全填充一个容量为sum的背包
+    bool tryPartition(const vector&lt;int&gt; &amp;nums, int index, int sum){
+
+        if( sum == 0 ) {
+            return true;
+        }
+
+        if( sum &lt; 0 || index &lt; 0 ) {
+            return false;
+
+        }
+
+        if( memo[index][sum] != -1 ) {
+            return memo[index][sum] == 1;
+        }
+
+        memo[index][sum] = (tryPartition(nums, index-1 , sum ) ||
+                            tryPartition(nums, index-1 , sum - nums[index] ) ) ? 1 : 0;
+
+        return memo[index][sum] == 1;
+    }
+public:
+    bool canPartition(vector&lt;int&gt;&amp; nums) {
+
+        int sum = 0;
+        for( int i = 0 ; i &lt; nums.size() ; i ++ ){
+            assert( nums[i] &gt; 0 );
+            sum += nums[i];
+        }
+
+        if( sum%2 ) {
+            return false;
+        }
+
+        memo = vector&lt;vector&lt;int&gt;&gt;(nums.size(), vector&lt;int&gt;(sum/2+1,-1));
+        return tryPartition(nums, nums.size()-1 , sum/2 );
+    }
+};
+</code></pre><p>自底向上使用动态规划：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/27
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+
+public:
+    bool canPartition(vector&lt;int&gt;&amp; nums) {
+
+        int sum = 0;
+        for( int i = 0 ; i &lt; nums.size() ; i ++ ){
+            assert( nums[i] &gt; 0 );
+            sum += nums[i];
+        }
+
+        if( sum%2 ) {
+            return false;
+        }
+
+        int n = nums.size();
+        int C = sum / 2;
+        vector&lt;bool&gt; memo(C+1, false);
+
+        for ( int i = 0; i &lt;= C; i++ ) {
+            memo[i] = ( nums[0] == i );
+        }
+
+        for ( int i = 1; i &lt; n; i++ ) {
+            for ( int j = C; j &gt;= nums[i]; j-- ) {
+                memo[j] = memo[j] || memo[ j - nums[i] ];
+            }
+        }
+
+        return memo[C];
+    }
+};
+</code></pre><h2 id="300-Longest-Increasing-Subsequence"><a href="#300-Longest-Increasing-Subsequence" class="headerlink" title="300. Longest Increasing Subsequence"></a>300. Longest Increasing Subsequence</h2><pre><code>/**
+ * Given an unsorted array of integers, find the length of longest increasing subsequence.
+ * For example,
+ * Given [10, 9, 2, 5, 3, 7, 101, 18],
+ * The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS
+ * combination, it is only necessary for you to return the length.
+ * Your algorithm should run in O(n2) complexity.
+ */
+</code></pre><p>暴力解法：选择所有的子序列进行判断。O((2^n)*n)</p>
+<p>LIS(i)表示以第i个数字为结尾的最长上升子序列的长度。<br>LIS(i)表示[0…i]的范围内，选择数字nums[i]可以获得的最长上升子序列的长度。</p>
+<p>LIS(i) = max(1+LIS(j) if nums[i]&gt;nums[j]) (j&lt;i)</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Increasing%20Subsequence.png" alt=""></p>
+<p>使用递归加记忆化搜索：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/28
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Solution {
+
+private:
+    vector&lt;int&gt; memo;
+
+    // 以 nums[index] 为结尾的最长上升子序列的长度
+    int getMaxLength(const vector&lt;int&gt; &amp;nums, int index){
+
+        if( memo[index] != -1 ) {
+            return memo[index];
+        }
+
+        int res = 1;
+        for( int i = 0 ; i &lt;= index-1 ; i ++ ) {
+            if( nums[index] &gt; nums[i] ) {
+                res = max( res , 1 + getMaxLength(nums,i) );
+            }
+        }
+
+        memo[index] = res;
+        return res;
+    }
+public:
+    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
+
+        if( nums.size() == 0 ) {
+            return 0;
+        }
+
+        memo = vector&lt;int&gt;( nums.size() , -1 );
+        int res = 1;
+        for( int i = 0 ; i &lt; nums.size() ; i ++ ) {
+            res = max(res, getMaxLength(nums, i));
+        }
+
+        return res;
+    }
+};
+</code></pre><p>使用动态规划：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/28
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Solution {
+
+public:
+    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
+
+        if( nums.size() == 0 ) {
+            return 0;
+        }
+
+        // memo[i] 表示以 nums[i] 为结尾的最长上升子序列的长度
+        vector&lt;int &gt;memo( nums.size() , 1 );
+        for ( int i = 1; i &lt; nums.size(); i++ ) {
+            for ( int j = 0; j &lt; i; j++ ) {
+                if ( nums[j] &lt; nums[i] ) {
+                    memo[i] = max( memo[i], 1 + memo[j]);
+                }
+            }
+        }
+
+        int res = 1;
+        for ( int i = 0; i &lt; nums.size(); i++ ) {
+            res = max( res, memo[i] );
+        }
+        return res;
+    }
+};
+</code></pre><h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给出两个字符串S1，S2，求这两个字符串的最长公共子序列的长度。</p>
+<p>LCS(m,n)表示S1[0…m]和S2[0…n]的最长公共子序列的长度。</p>
+<p>S1[m] == S2[n]：<br>LCS(m,n) = 1 + LCS(m-1, n-1)<br>S1[m] != S2[n]：<br>LCS(m,n) = max( LCS(m-1, n), LCS(m, n-1) )</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Common%20Subsequence.png" alt=""></p>
+<p>记忆化搜索：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/28
+ */
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+// 记忆化搜索
+class LCS{
+
+private:
+    vector&lt;vector&lt;int&gt; &gt; memo;
+
+    // 求s1[0...m]和s2[0...n]的最长公共子序列的长度值
+    int __LCS( const string &amp;s1, const string &amp;s2 , int m , int n ){
+
+        if( m &lt; 0 || n &lt; 0 )
+            return 0;
+
+        if( memo[m][n] != -1 )
+            return memo[m][n];
+
+        int res = 0;
+        if( s1[m] == s2[n] )
+            res = 1 + __LCS( s1 , s2 , m-1 , n-1 );
+        else
+            res = max( __LCS( s1 , s2 , m-1 , n ) ,
+                       __LCS( s1 , s2 , m , n-1 ) );
+        memo[m][n] = res;
+        return res;
+    }
+
+    // 通过memo反向求解s1和s2的最长公共子序列
+    string __getLCS( const string &amp;s1, const string &amp;s2 ){
+
+        int m = s1.size() - 1;
+        int n = s2.size() - 1;
+//        for( int i = 0 ; i &lt;= m ; i ++ ){
+//            for( int j = 0 ; j &lt;= n ; j ++ )
+//                cout&lt;&lt;memo[i][j]&lt;&lt;&quot;\t&quot;;
+//            cout&lt;&lt;endl;
+//        }
+
+        string res = &quot;&quot;;
+        while( m &gt;= 0 &amp;&amp; n &gt;= 0 )
+            if( s1[m] == s2[n] ){
+                res = s1[m] + res;
+                m --;
+                n --;
+            }
+            else if( m == 0 )
+                n --;
+            else if( n == 0 )
+                m --;
+            else{
+                if( memo[m-1][n] &gt; memo[m][n-1] )
+                    m --;
+                else
+                    n --;
+            }
+
+        return res;
+    }
+
+public:
+    string getLCS( const string &amp;s1, const string &amp;s2){
+
+        memo = vector&lt;vector&lt;int&gt; &gt;( s1.size() , vector&lt;int&gt;(s2.size(),-1) );
+        __LCS( s1, s2, s1.size()-1, s2.size()-1);
+        return __getLCS( s1 , s2 );
+    }
+};
+</code></pre><p>动态规划：</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/28
+ */
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+// 动态规划
+class LCS{
+
+public:
+    string getLCS( const string &amp;s1, const string &amp;s2){
+
+        int m = s1.size();
+        int n = s2.size();
+
+        // 对memo的第0行和第0列进行初始化
+        vector&lt;vector&lt;int&gt; &gt; memo( m , vector&lt;int&gt;(n,0) );
+        for( int j = 0 ; j &lt; n ; j ++ )
+            if( s1[0] == s2[j] )
+                memo[0][j] = 1;
+
+        for( int i = 0 ; i &lt; m ; i ++ )
+            if( s1[i] == s2[0] )
+                memo[i][0] = 1;
+
+        // 动态规划的过程
+        for( int i = 1 ; i &lt; m ; i ++ )
+            for( int j = 1 ; j &lt; n ; j ++ )
+                if( s1[i] == s2[j] )
+                    memo[i][j] = 1 + memo[i-1][j-1];
+                else
+                    memo[i][j] = max( memo[i-1][j] , memo[i][j-1] );
+
+//        for( int i = 0 ; i &lt; m ; i ++ ){
+//            for( int j = 0 ; j &lt; n ; j ++ )
+//                cout&lt;&lt;memo[i][j]&lt;&lt;&quot;\t&quot;;
+//            cout&lt;&lt;endl;
+//        }
+
+        // 通过memo反向求解s1和s2的最长公共子序列
+        m = s1.size()-1;
+        n = s2.size()-1;
+        string res = &quot;&quot;;
+        while( m &gt;= 0 &amp;&amp; n &gt;= 0 )
+            if( s1[m] == s2[n] ){
+                res = s1[m] + res;
+                m --;
+                n --;
+            }
+            else if( m == 0 )
+                n --;
+            else if( n == 0 )
+                m --;
+            else{
+                if( memo[m-1][n] &gt; memo[m][n-1] )
+                    m --;
+                else
+                    n --;
+            }
+
+        return res;
+    }
+};
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/10/06/LeetCode-Recurion-and-Backstracking/">
+        LeetCode 算法面试分类解法 Recurion-and-Backstracking →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
