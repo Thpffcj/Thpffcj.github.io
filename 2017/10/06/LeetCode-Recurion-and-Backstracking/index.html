@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>LeetCode 算法面试分类解法 Recurion-and-Backstracking | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-05T23:47:36.000Z" itemprop="datePublished">
+          2017-10-06
+      </time>
+    
+</span>
+                <h1>LeetCode 算法面试分类解法 Recurion-and-Backstracking</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>在计算机问题中，大量的问题都需要使用递归算法，上一篇博客我们介绍了一下二叉树中的递归问题。现在我们来看递归算法中非常经典的思想回溯法，这样的算法思想通常都应用在一类问题上，这类问题叫做树型问题，这类问题他本身没有定义在一颗二叉树中，但我们具体分析这个问题时就会发现解决这个问题的思路本质是一颗树的形状。</p>
+<h2 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17. Letter Combinations of a Phone Number"></a>17. Letter Combinations of a Phone Number</h2><pre><code>/**
+ *Given a digit string, return all possible letter combinations that the number could represent.
+ * A mapping of digit to letters (just like on the telephone buttons) is given below.
+ * Input:Digit string &quot;23&quot;
+ * Output: [&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].
+ */
+</code></pre><p>比如我们输入的digits=“23”，2能代表abc三个字母，当2代表a时，3代表def，同理我们就可以画出一棵树。<br>递归过程：<br>digits是数字字符串<br>s(digits)是digits所能代表的字母字符串<br>s(digits[0…n-1]) = letter(digits[0]) + s(digits[1…n-1]) = letter(digits[0]) + letter(digits[1]) + s(digits[2…n-1]) = …</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/23
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    const string letterMap[10] = {
+            &quot; &quot;,    //0
+            &quot;&quot;,     //1
+            &quot;abc&quot;,  //2
+            &quot;def&quot;,  //3
+            &quot;ghi&quot;,  //4
+            &quot;jkl&quot;,  //5
+            &quot;mno&quot;,  //6
+            &quot;pqrs&quot;, //7
+            &quot;tuv&quot;,  //8
+            &quot;wxyz&quot;  //9
+    };
+
+    vector&lt;string&gt; res;
+
+    // s中保存了此时从digits[0...index-1]翻译得到的一个字母字符串
+    // 寻找和digits[index]匹配的字母, 获得digits[0...index]翻译得到的解
+    void findCombination(const string &amp;digits, int index, const string &amp;s){
+
+        cout&lt;&lt;index&lt;&lt;&quot; : &quot;&lt;&lt;s&lt;&lt;endl;
+        if( index == digits.size() ){
+            res.push_back( s );
+            cout&lt;&lt;&quot;get &quot;&lt;&lt;s&lt;&lt;&quot; , return&quot;&lt;&lt;endl;
+            return;
+        }
+
+        char c = digits[index];
+        assert( c &gt;= &apos;0&apos; &amp;&amp; c &lt;= &apos;9&apos; &amp;&amp; c != &apos;1&apos;);
+        string letters = letterMap[c-&apos;0&apos;];
+        for( int i = 0 ; i &lt; letters.size() ; i ++ ){
+            cout&lt;&lt;&quot;digits[&quot;&lt;&lt;index&lt;&lt;&quot;] = &quot;&lt;&lt;c&lt;&lt;&quot; , use &quot;&lt;&lt;letters[i]&lt;&lt;endl;
+            findCombination(digits, index+1, s + letters[i]);
+        }
+
+        cout&lt;&lt;&quot;digits[&quot;&lt;&lt;index&lt;&lt;&quot;] = &quot;&lt;&lt;c&lt;&lt;&quot; complete, return&quot;&lt;&lt;endl;
+
+        return;
+    }
+
+public:
+    vector&lt;string&gt; letterCombinations(string digits) {
+
+        res.clear();
+
+        if( digits == &quot;&quot; )
+            return res;
+
+        findCombination(digits, 0, &quot;&quot;);
+
+        return res;
+    }
+};
+</code></pre><p>递归调用的一个重要特征-要返回。回溯法师暴力解法的一个主要实现手段。</p>
+<h2 id="46-Permutations"><a href="#46-Permutations" class="headerlink" title="46. Permutations"></a>46. Permutations</h2><pre><code>/**
+ * Given a collection of distinct numbers, return all possible permutations.
+ * For example,
+ * [1,2,3] have the following permutations:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+ */
+</code></pre><p>回溯算法能处理一类重要的问题是排列问题，如果我们要用1,2,3进行排列，我们可以先抽出一个元素，比如我们现在抽出1，那么我们下面要做的事就是使用2,3两个元素构造排列。我们有需要抽出一个元素，如果我们抽出2，我们剩下唯一的元素就是3，我们通过这个路径获得排列123，用23排列如果选3，那么就剩下2我们得到排列132。相应的我们考虑最开始选择2或者选择3。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Permutations.png" alt=""></p>
+<p>这也是一个树形问题<br>Perms(nums[0…n-1]) = {取出一个数字} + Perms(nums[{0…n-1} - 这个数字])</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/24
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Solution {
+private:
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;bool&gt; used;
+
+    // p中保存了一个有index-1个元素的排列。
+    // 向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+    void generatePermutation( const vector&lt;int&gt;&amp; nums, int index, vector&lt;int&gt;&amp; p){
+
+        if ( index == nums.size() ) {
+            res.push_back(p);
+            cout&lt;&lt;&quot;------------&quot;&lt;&lt;endl;
+            return;
+        }
+
+        for ( int i = 0; i &lt; nums.size(); i++ ) {
+            if ( !used[i] ) {
+                p.push_back( nums[i] );
+                used[i] = true;
+                cout&lt;&lt;&quot;begin&quot;&lt;&lt;endl;
+                printVector(p);
+                generatePermutation(nums, index+1, p);
+                cout&lt;&lt;&quot;end&quot;&lt;&lt;endl;
+                printVector(p);
+                // 状态回溯
+                p.pop_back();
+                used[i] = false;
+            }
+        }
+
+        cout&lt;&lt;&quot;***********&quot;&lt;&lt;endl;
+        return;
+    }
+
+    void printVector(const vector&lt;int&gt; &amp;nums) {
+        cout&lt;&lt;&quot;print &quot;;
+        for( int i = 0 ; i &lt; nums.size() ; i ++ ){
+            cout&lt;&lt;nums[i]&lt;&lt;&quot; &quot;;
+        }
+        cout&lt;&lt;endl;
+    }
+
+public:
+    vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt;&amp; nums) {
+
+        res.clear();
+        if ( nums.size() ==0 ) {
+            return res;
+        }
+
+        used = vector&lt;bool&gt;(nums.size(), false);
+        vector&lt;int&gt; p;
+        generatePermutation( nums, 0, p);
+
+        return res;
+    }
+};
+</code></pre><p>回溯的意思就是要回去，递归函数自动保证了回去，但是我们设置的其他变量如果有必要的话也必须要回到原位。</p>
+<h2 id="77-Combinations"><a href="#77-Combinations" class="headerlink" title="77. Combinations"></a>77. Combinations</h2><p>上面我们用回溯法解决了排列问题，现在我们来解决组合问题。</p>
+<pre><code>/**
+ * Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
+ * For example,
+ * If n = 4 and k = 2, a solution is:
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+ */
+</code></pre><p>我们在1，2，3，4中取出你两个数。在第一步时如果我们取1，那么接下来就在2，3，4中取一个数，我们可以得到组合12，13，14。如果第一步取2，那么第二步在3，4中取一个数，可以得到组合23，24。如果我们第一步取3，那么第二步只能取4，得到组合34。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/24
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    vector&lt;vector&lt;int&gt;&gt; res;
+
+    // 求解C(n,k), 当前已经找到的组合存储在c中, 需要从start开始搜索新的元素
+    void generateCombinations(int n, int k, int start, vector&lt;int&gt; &amp;c){
+
+        if ( c.size() == k ) {
+            res.push_back(c);
+            return;
+        }
+
+        for ( int i = start; i &lt;= n; i++ ) {
+            c.push_back(i);
+            generateCombinations(n, k, i + 1, c);
+            // 回溯状态
+            c.pop_back();
+        }
+
+        return;
+    }
+public:
+    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) {
+
+        res.clear();
+        if ( n &lt;= 0 || k &lt;= 0 || k &gt; n) {
+            return res;
+        }
+
+        vector&lt;int&gt; c;
+        generateCombinations(n, k, 1, c);
+
+        return res;
+    }
+};
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/Combinations.png" alt=""></p>
+<p>这是我们对这道题递归树建立的模型，在这个模型里存在一个地方我们是明显没必要去走的，就是在于最后的地方，我们根本不需要去尝试取4，这是因为我们取4之后无法再取任意一个数了。在我们上面的算法中我们还是尝试取了4，取完4之后当取第二个数时发现我们什么都取不了了，所以只好再返回回去，对于这一部分我们完全可以把它剪掉。换句话说，我们只尝试取1,2,3。</p>
+<p>回溯法的剪枝</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/24
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    vector&lt;vector&lt;int&gt;&gt; res;
+
+    // 求解C(n,k), 当前已经找到的组合存储在c中, 需要从start开始搜索新的元素
+    void generateCombinations(int n, int k, int start, vector&lt;int&gt; &amp;c){
+
+        if( c.size() == k ){
+            res.push_back(c);
+            return;
+        }
+
+        // 还有k - c.size()个空位, 所以,[i...n]中至少要有k-c.size()个元素
+        // i最多为 n - (k-c.size()) + 1
+        for( int i = start ; i &lt;= n - (k-c.size()) + 1 ; i ++ ){
+            c.push_back( i );
+            generateCombinations(n, k, i + 1 , c );
+            c.pop_back();
+        }
+
+        return;
+    }
+public:
+    vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) {
+
+        res.clear();
+        if( n &lt;= 0 || k &lt;= 0 || k &gt; n )
+            return res;
+
+        vector&lt;int&gt; c;
+        generateCombinations(n, k, 1, c);
+
+        return res;
+    }
+};
+</code></pre><h2 id="79-Word-Search"><a href="#79-Word-Search" class="headerlink" title="79. Word Search"></a>79. Word Search</h2><p>二维平面使用回溯法</p>
+<pre><code>/**
+ * Given a 2D board and a word, find if the word exists in the grid.
+ * The word can be constructed from letters of sequentially adjacent cell, where &quot;adjacent&quot; cells are those horizontally
+ * or vertically neighboring. The same letter cell may not be used more than once.
+ * For example,
+ * Given board =
+[
+  [&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;E&apos;],
+  [&apos;S&apos;,&apos;F&apos;,&apos;C&apos;,&apos;S&apos;],
+  [&apos;A&apos;,&apos;D&apos;,&apos;E&apos;,&apos;E&apos;]
+]
+word = &quot;ABCCED&quot;, -&gt; returns true,
+word = &quot;SEE&quot;, -&gt; returns true,
+word = &quot;ABCB&quot;, -&gt; returns false.
+ */
+</code></pre><p>对于每一个位置，我们按照上右下左从四个方向寻找，当选择的方向匹配时，则选择这个位置继续进行上右下左寻找，如果四个方向都不匹配，则退回上一步的位置寻找下一个方向。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Word%20Search.png" alt=""></p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/24
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    int d[4][2] = {{-1,0},{0,1},{1,0},{0,-1}};
+    int m,n;
+    vector&lt;vector&lt;bool&gt;&gt; visited;
+
+    bool inArea( int x , int y ){
+        return x &gt;= 0 &amp;&amp; x &lt; m &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; n;
+    }
+
+    // 从board[startx][starty]开始, 寻找word[index...word.size())
+    bool searchWord( const vector&lt;vector&lt;char&gt;&gt; &amp;board, const string&amp; word, int index,
+                     int startx, int starty ){
+
+        if ( index == word.size() - 1 ) {
+            return board[startx][starty] == word[index];
+        }
+
+        if ( board[startx][starty] == word[index] ) {
+            visited[startx][starty] = true;
+            // 从startx, starty出发,向四个方向寻找
+            for ( int i = 0; i &lt; 4; i++) {
+                int newx = startx + d[i][0];
+                int newy = starty + d[i][1];
+                if ( inArea( newx, newy ) &amp;&amp; ! visited[newx][newy]) {
+                    if( searchWord( board, word, index+1, newx, newy) ) {
+                        return true;
+                    }
+                }
+            }
+            visited[startx][starty] = false;
+        }
+
+        return false;
+    }
+public:
+    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) {
+
+        m = board.size();
+        assert( m &gt; 0 );
+        n = board[0].size();
+
+        visited = vector&lt;vector&lt;bool&gt;&gt;(m,vector&lt;bool&gt;(n,false));
+
+        for ( int i = 0; i &lt; board.size(); i++ ) {
+            for ( int j = 0; j &lt; board[i].size(); j++) {
+                if( searchWord( board, word, 0 , i, j) ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+};
+</code></pre><h2 id="200-Number-of-Islands"><a href="#200-Number-of-Islands" class="headerlink" title="200. Number of Islands"></a>200. Number of Islands</h2><p>floodfill算法，一类经典问题</p>
+<pre><code>/**
+ * Given a 2d grid map of &apos;1&apos;s (land) and &apos;0&apos;s (water), count the number of islands. An island is surrounded by water and is formed
+ * by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+ * Example 1:
+ * 11110
+ * 11010
+ * 11000
+ * 00000
+ * Answer: 1
+ *
+ * Example 2:
+ * 11000
+ * 11000
+ * 00100
+ * 00011
+ */
+</code></pre><p>首先我们从二维数组最开始的地方(0,0)找起，这个地方是1，我们就找到了一个新的岛屿，但我们需要标记和这块陆地同属于一个岛屿的陆地，当我们寻找下一个岛屿的时候才不会重复。那么这个过程就是floodfill过程。其实就是从初始点开始进行一次深度优先遍历，和上面那道题的寻找很相似，对每一个岛屿进行四个方向寻找。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/24
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    int d[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
+    int m,n;
+    vector&lt;vector&lt;bool&gt;&gt; visited;
+
+    bool inArea( int x , int y ){
+        return x &gt;= 0 &amp;&amp; x &lt; m &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; n;
+    }
+
+    // 从grid[x][y]的位置开始,进行floodfill
+    // 保证(x,y)合法,且grid[x][y]是没有被访问过的陆地
+    void dfs( vector&lt;vector&lt;char&gt;&gt;&amp; grid , int x , int y ){
+
+        //assert( inArea(x,y) );
+        visited[x][y] = true;
+        for( int i = 0 ; i &lt; 4 ; i ++ ){
+            int newx = x + d[i][0];
+            int newy = y + d[i][1];
+            if( inArea(newx, newy) &amp;&amp; !visited[newx][newy] &amp;&amp; grid[newx][newy] == &apos;1&apos; ) {
+                dfs( grid , newx , newy );
+            }
+        }
+
+        return;
+    }
+public:
+    int numIslands(vector&lt;vector&lt;char&gt;&gt;&amp; grid) {
+
+        m = grid.size();
+        if ( m == 0 ) {
+            return 0;
+        }
+        n = grid[0].size();
+        visited = vector&lt;vector&lt;bool&gt; &gt;(m,vector&lt;bool&gt;(n,false));
+
+        int res = 0;
+        for ( int i = 0; i &lt; m; i++) {
+            for ( int j = 0; j &lt; n; j++) {
+                if ( grid[i][j] == &apos;1&apos; &amp;&amp; !visited[i][j] ) {
+                    res++;
+                    dfs( grid, i, j);
+                }
+            }
+        }
+
+        return res;
+    }
+};
+</code></pre><p>在这里，我们似乎没有看见回溯的过程，也就是说我们不需要找到一个位置让visited[x][y]为false,这是因为我们的目的就是要把和最初我们运行的(i,j)这个点相连接的岛屿全部标记上，而不是在其中找到某一个特定的序列或者一个具体的值，所以我们只标记true,不会把它倒着标记成false。所以对于这个问题是否叫做回溯法，这是一个见仁见智的问题。在搜索的过程中一定会回去，这是递归的特性。但它没有对信息进行重置。不过它的解题思路是经典的floodfill。</p>
+<h2 id="51-N-Queens"><a href="#51-N-Queens" class="headerlink" title="51. N-Queens"></a>51. N-Queens</h2><p>回溯法师经典人工智能的基础</p>
+<pre><code>/**
+ *The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+ * Given an integer n, return all distinct solutions to the n-queens puzzle.
+ * Each solution contains a distinct board configuration of the n-queens&apos; placement, where &apos;Q&apos; and &apos;.&apos; both indicate a queen and
+ * an empty space respectively.
+ * For example,
+ * There exist two distinct solutions to the 4-queens puzzle:
+[
+ [&quot;.Q..&quot;,  // Solution 1
+  &quot;...Q&quot;,
+  &quot;Q...&quot;,
+  &quot;..Q.&quot;],
+
+ [&quot;..Q.&quot;,  // Solution 2
+  &quot;Q...&quot;,
+  &quot;...Q&quot;,
+  &quot;.Q..&quot;]
+]
+ */
+</code></pre><p>对于四皇后为例看一下如何递归回溯。首先肯定每行都应该有一个皇后，否则就会有一行出现多个皇后。那么第二行只能在第三个位置或第四个位置，考虑第三个位置。那么第三行无论在哪都会有冲突。说明我们第二行的皇后不能放在第三个位置，我们回溯，在第四个位置放置皇后。<br>每一次在一行中尝试摆放一个皇后，来看我们能不能摆下这个皇后，如果不能摆下，回去上一行重新摆放上一行皇后的位置，直到我们在四行都摆放皇后。<br>对于不合法情况有多种方法，都是根据几何学寻找位置关系，实现之一参考代码。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/25
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+private:
+    vector&lt;bool&gt; col, dia1, dia2;
+    vector&lt;vector&lt;string&gt;&gt; res;
+
+    // 尝试在一个n皇后问题中, 摆放第index行的皇后位置
+    void putQueen(int n , int index, vector&lt;int&gt; &amp;row){
+
+        if ( index == n ) {
+            res.push_back( generateBoard(n,row) );
+            return;
+        }
+
+        for ( int i = 0; i &lt; n; i++ ) {
+            // 尝试将第index行的皇后摆放在第i列
+            if ( !col[i] &amp;&amp; !dia1[index+i] &amp;&amp; !dia2[index-i+n-1] ) {
+                row.push_back(i);
+                col[i] = true;
+                dia1[index+i] = true;
+                dia2[index-i+n-1] = true;
+                putQueen(n, index+1, row);
+                col[i] = false;
+                dia1[index+i] = false;
+                dia2[index-i+n-1] = false;
+                row.pop_back();
+            }
+        }
+
+        return;
+    }
+
+    vector&lt;string&gt; generateBoard( int n, vector&lt;int&gt; &amp;row ){
+
+        assert( row.size() == n );
+        vector&lt;string&gt; board(n, string(n, &apos;.&apos;));
+        for( int i = 0 ; i &lt; n ; i ++ ) {
+            board[i][row[i]] = &apos;Q&apos;;
+        }
+
+        return board;
+    }
+public:
+    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) {
+
+        res.clear();
+
+        col = vector&lt;bool&gt;(n, false);
+        dia1 = vector&lt;bool&gt;(2*n-1, false);
+        dia2 = vector&lt;bool&gt;(2*n-1, false);
+
+        vector&lt;int&gt; row;
+        putQueen(n, 0, row);
+
+        return res;
+    }
+};
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/10/05/LeetCode-Binary-Tree-and-Recursion/">
+        LeetCode 算法面试分类解法 Binary-Tree-and-Recursion →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
