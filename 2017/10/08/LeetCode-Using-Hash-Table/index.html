@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>LeetCode 算法面试分类解法 Using-Hash-Table | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-08T12:39:46.000Z" itemprop="datePublished">
+          2017-10-08
+      </time>
+    
+</span>
+                <h1>LeetCode 算法面试分类解法 Using-Hash-Table</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们来关注另一类非常重要的计算机问题：查找问题</p>
+<h3 id="两类查找问题"><a href="#两类查找问题" class="headerlink" title="两类查找问题"></a>两类查找问题</h3><ul>
+<li>查找有无<br>元素a是否存在？ set;集合</li>
+<li>查找对应关系(键值对应)<br>元素a出现了几次？map;字典</li>
+</ul>
+<h3 id="set和map"><a href="#set和map" class="headerlink" title="set和map"></a>set和map</h3><p>通常语言的标准库都内置set和map</p>
+<ul>
+<li>容器类</li>
+<li>屏蔽实现细节</li>
+<li>了解语言中标准库里常见容器类的使用</li>
+</ul>
+<h2 id="349-Intersection-of-Two-Arrays"><a href="#349-Intersection-of-Two-Arrays" class="headerlink" title="349. Intersection of Two Arrays"></a>349. Intersection of Two Arrays</h2><pre><code>/**
+ * Given two arrays, write a function to compute their intersection.
+ * Example:
+ * Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
+ * Note:
+ * Each element in the result must be unique.
+ * The result can be in any order.
+ */
+</code></pre><p>我们可以首先把nums1中的元素全部放入set中，之后依次查找nums2中的元素是否在这个set中，我们把它放进公共set中。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/18
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_set&gt;
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+
+        unordered_set&lt;int&gt; record;
+        for ( int i = 0; i &lt; nums1.size(); i++ ) {
+            record.insert( nums1[i] );
+        }
+
+        unordered_set&lt;int&gt; resultSet;
+        for ( int i = 0; i &lt; nums2.size(); i++ ) {
+            if ( record.find( nums2[i] ) != record.end() ) {
+                resultSet.insert( nums2[i] );
+            }
+        }
+
+        vector&lt;int&gt; resultVector;
+        for( unordered_set&lt;int&gt;::iterator iter = resultSet.begin() ; iter != resultSet.end() ; iter ++ ) {
+            resultVector.push_back( *iter );
+        }
+
+        return resultVector;
+    }
+};
+</code></pre><h2 id="350-Intersection-of-Two-Arrays-II"><a href="#350-Intersection-of-Two-Arrays-II" class="headerlink" title="350. Intersection of Two Arrays II"></a>350. Intersection of Two Arrays II</h2><pre><code>/**
+ * Given two arrays, write a function to compute their intersection.
+ * Example:
+ * Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
+ * Note:
+ * Each element in the result should appear as many times as it shows in both arrays.
+ * The result can be in any order.
+ */
+</code></pre><p>这里我们就可以看出来，元素出现的次数就变得有意义了。我们在记录数组中的每一个元素时，也应该记录它出现的次数，这就是一个典型的键值对应问题，每一个元素都对应它出现的频次，所以我们应该选择map这个数据结构。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/19
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;int&gt; intersect(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+
+        unordered_map&lt;int, int&gt; record;
+        for( int i = 0 ; i &lt; nums1.size() ; i ++ )
+            if( record.find(nums1[i]) == record.end() )
+                record.insert( make_pair(nums1[i],1));
+            else
+                record[nums1[i]] += 1;
+
+        vector&lt;int&gt; resultVector;
+        for( int i = 0 ; i &lt; nums2.size() ; i ++ )
+            if( record.find(nums2[i]) != record.end() &amp;&amp;
+                record[ nums2[i] ] &gt; 0 ){
+                resultVector.push_back( nums2[i] );
+                record[nums2[i]] --;
+                if( record[nums2[i]] == 0 )
+                    record.erase( nums2[i] );
+            }
+
+        return resultVector;
+    }
+};
+</code></pre><h2 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1. Two Sum"></a>1. Two Sum</h2><pre><code>/**
+ * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+ * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+ * Example:
+ * Given nums = [2, 7, 11, 15], target = 9,
+ * Because nums[0] + nums[1] = 2 + 7 = 9,
+ * return [0, 1].
+ */
+</code></pre><p>像我们数组问题介绍过的一个问题，我们可以使用双索引对撞的技术：首先需要排序，时间复杂度O(nlogn)+O(n)=O(nlogn)。我们在这里使用查找表，将所有元素放入查找表，之后对于每一个元素a，查找target-a是否存在。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/20
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+#include &lt;unordered_map&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;nums, int target) {
+
+        unordered_map&lt;int, int&gt; record;
+        for ( int i = 0; i &lt; nums.size(); i++) {
+
+            int complement = target - nums[i];
+            if ( record.find( complement ) != record.end() ) {
+                int res[2] = {i, record[complement]};
+                return vector&lt;int&gt;(res, res+2);
+            }
+
+            record[nums[i]] = i;
+        }
+
+        throw invalid_argument(&quot;the input has no solution&quot;);
+    }
+};
+</code></pre><h2 id="454-4Sum-II"><a href="#454-4Sum-II" class="headerlink" title="454. 4Sum II"></a>454. 4Sum II</h2><pre><code>/**
+ * Given four lists A, B, C, D of integer values, compute how many tuples (i, j, k, l) there are such that A[i] + B[j] +
+ * C[k] + D[l] is zero.
+ * To make problem a bit easier, all A, B, C, D have same length of N where 0 ≤ N ≤ 500. All integers are in the range of
+ * -228 to 228 - 1 and the result is guaranteed to be at most 231 - 1.
+ *
+ * Example:
+ *
+ * Input:
+ * A = [ 1, 2]
+ * B = [-2,-1]
+ * C = [-1, 2]
+ * D = [ 0, 2]
+ *
+ * Output
+ * 2
+ *
+ * Explanation:
+ * The two tuples are:
+ * 1. (0, 0, 0, 1) -&gt; A[0] + B[0] + C[0] + D[1] = 1 + (-2) + (-1) + 2 = 0
+ * 2. (1, 1, 0, 0) -&gt; A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0
+ */
+</code></pre><p>首先我们可以想到暴力解法四重循环，500^4=62500000000，一般计算机肯定承受不了。我们可以将D中的元素放入查找表，然后遍历ABC来查找target-D,O(n^3)。顺理成章，将C+D的每一种可能放入查找表：O(n^2)，这是时间复杂度是O(n^2)。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/20
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;cassert&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    int fourSumCount(vector&lt;int&gt;&amp; A, vector&lt;int&gt;&amp; B, vector&lt;int&gt;&amp; C, vector&lt;int&gt;&amp; D) {
+
+        assert( A.size() == B.size() &amp;&amp; B.size() == C.size() &amp;&amp; C.size() == D.size() );
+
+        unordered_map&lt;int ,int&gt; record;
+        for ( int i = 0; i &lt; C.size(); i++ ) {
+            for ( int j = 0; j &lt; D.size(); j++ ) {
+                record[ C[i] + D[j] ]++;
+            }
+        }
+
+        int res = 0;
+        for ( int i = 0; i &lt; A.size(); i++) {
+            for ( int j = 0; j &lt; B.size(); j++ ) {
+                if ( record.find( 0 -A[i] - B[j] ) != record.end() ) {
+                    res += record[0 -A[i] - B[j]];
+                }
+            }
+        }
+
+        return res;
+    }
+};
+</code></pre><h2 id="447-Number-of-Boomerangs"><a href="#447-Number-of-Boomerangs" class="headerlink" title="447. Number of Boomerangs"></a>447. Number of Boomerangs</h2><pre><code>/**
+ * Given n points in the plane that are all pairwise distinct, a &quot;boomerang&quot; is a tuple of points (i, j, k) such that the
+ * distance between i and j equals the distance between i and k (the order of the tuple matters).
+ * Find the number of boomerangs. You may assume that n will be at most 500 and coordinates of points are all in the range
+ * [-10000, 10000] (inclusive).
+ *
+ * Example:
+ * Input:
+ * [[0,0],[1,0],[2,0]]
+ *
+ * Output:
+ * 2
+ *
+ * Explanation:
+ * The two boomerangs are [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]]
+ */
+</code></pre><p>观察到i是一个枢纽，对于每个点i，遍历其余点到i的距离，O(n^2)。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/20
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;cassert&gt;
+#include &lt;stdexcept&gt;
+
+using namespace std;
+
+class Solution {
+public:
+    int numberOfBoomerangs(vector&lt;pair&lt;int, int&gt;&gt;&amp; points) {
+
+        int res = 0;
+        for ( int i = 0; i &lt; points.size(); i++ ) {
+
+            // record中存储 点i 到所有其他点的距离出现的频次
+            unordered_map&lt;int, int&gt; record;
+            for ( int j = 0; j &lt; points.size(); j++ ) {
+                if ( j != i) {
+                    record[ dis(points[i], points[j] ) ]++;
+                }
+            }
+
+            for( unordered_map&lt;int, int&gt;::iterator iter = record.begin() ; iter != record.end() ; iter ++ ) {
+                res += (iter-&gt;second)*(iter-&gt;second-1);
+            }
+        }
+        return res;
+    }
+
+private:
+    int dis( const pair&lt;int,int&gt; &amp;pa, const pair&lt;int,int&gt; &amp;pb){
+        return (pa.first - pb.first) * (pa.first - pb.first) +
+               (pa.second - pb.second) * (pa.second - pb.second);
+    }
+
+};
+</code></pre><h2 id="219-Contains-Duplicate-II"><a href="#219-Contains-Duplicate-II" class="headerlink" title="219. Contains Duplicate II"></a>219. Contains Duplicate II</h2><pre><code>/**
+ *Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute
+ * difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
+ */
+</code></pre><p>这个问题可以使用我们之前使用过的滑动窗口</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Contains%20Duplicate.png" alt=""></p>
+<p>在区间l到l+k中如果我们能找到i位置的值等于j的话，他们索引的差一定是小于k的。这样我们的问题就变成了，在数组中我们能不能找到一个长度为k+1的区间，在这个区间里存在两个元素，这两个元素相等。如果没有，我们就要看下一个元素，相应的l+1,看新元素在l+1到l+k区间中有没有和它一样的元素，一旦有的话，我们就找到了这个问题的答案。如果没有的话，我们要把新的元素纳入我们区间中，右区间+1，以此类推，区间不断右移。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/20
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_set&gt;
+
+using namespace std;
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(k)
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector&lt;int&gt;&amp; nums, int k) {
+
+        if( nums.size() &lt;= 1 )
+            return false;
+
+        if( k &lt;= 0 )
+            return false;
+
+        unordered_set&lt;int&gt; record;
+        for ( int i = 0; i &lt; nums.size(); i++ ) {
+
+            if ( record.find(nums[i]) != record.end() ) {
+                return true;
+            }
+
+            record.insert( nums[i] );
+
+            // 保持record中最多有k个元素
+            // 因为在下一次循环中会添加一个新元素,使得总共考虑k+1个元素
+            if ( record.size() == k+1 ) {
+                record.erase( nums[i-k] );
+            }
+        }
+
+        return false;
+    }
+};
+</code></pre><h2 id="220-Contains-Duplicate-III"><a href="#220-Contains-Duplicate-III" class="headerlink" title="220. Contains Duplicate III"></a>220. Contains Duplicate III</h2><pre><code>/**
+ * Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that
+ * nums[i] = nums[j] and the absolute difference between i and j is at most k.
+ */
+</code></pre><p>这道题和上面很像，只不过寻找的条件从相等变成了寻找大于等于fabs(v-x)&lt;=t的元素。实际上我们要找的元素范围就是v-t到v+t之间。</p>
+<pre><code>/**
+ * Created by Thpffcj on 2017/9/20
+ */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;set&gt;
+#include &lt;cassert&gt;
+#include &lt;stdexcept&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+// 时间复杂度: O(nlogn)
+// 空间复杂度: O(k)
+class Solution {
+public:
+    bool containsNearbyAlmostDuplicate(vector&lt;int&gt;&amp; nums, int k, int t) {
+
+        set&lt;long long&gt; record;
+        for( int i = 0 ; i &lt; nums.size() ; i ++ ){
+
+            if( record.lower_bound( (long long)nums[i] - (long long)t ) != record.end() &amp;&amp;
+                *record.lower_bound( (long long)nums[i] - (long long)t ) &lt;= (long long)nums[i] + (long long)t ) {
+                return true;
+            }
+
+            record.insert((long long int &amp;&amp;) nums[i]);
+
+            if( record.size() == k + 1 )
+                record.erase( nums[i-k] );
+        }
+
+        return false;
+    }
+};
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/10/09/LeetCode-Stack-and-Queue/" style="float: left;">
+        ← LeetCode 算法面试分类解法 Stack-and-Queue
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/10/08/LeetCode-Using-Array/">
+        LeetCode 算法面试分类解法 Using-Array →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

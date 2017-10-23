@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2017 | Thpffcj的树洞</title>
+  <title>Junit 源码学习(一) | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,117 +166,58 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/09/23/Seckill/">Seckill</a></h4>
-                            
-                            <p><time datetime="2017-09-23T02:12:47.000Z"><a href="/2017/09/23/Seckill/">2017-09-23</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/09/15/Google-Interview/">Google Interview</a></h4>
-                            
-                            <p><time datetime="2017-09-15T08:15:32.000Z"><a href="/2017/09/15/Google-Interview/">2017-09-15</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/29/菜鸟程序员学习之路/">菜鸟程序员学习之路</a></h4>
-                            
-                            <p><time datetime="2017-07-29T03:01:50.000Z"><a href="/2017/07/29/菜鸟程序员学习之路/">2017-07-29</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/02/Idea-Web/">Idea_Web</a></h4>
-                            
-                            <p><time datetime="2017-07-02T11:49:53.000Z"><a href="/2017/07/02/Idea-Web/">2017-07-02</a></time></p>
-                        </div>
-                    
-                        
-                            </div><div class="row boxes">
-                            
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/02/Quantour/">Maven整合的Web项目</a></h4>
-                            
-                            <p><time datetime="2017-07-02T06:14:41.000Z"><a href="/2017/07/02/Quantour/">2017-07-02</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/07/01/build-a-blog/">使用hexo+github搭建个人博客教程</a></h4>
-                            
-                            <p><time datetime="2017-07-01T01:12:30.000Z"><a href="/2017/07/01/build-a-blog/">2017-07-01</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-13T12:17:23.000Z" itemprop="datePublished">
+          2017-10-13
+      </time>
+    
+</span>
+                <h1>Junit 源码学习(一)</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>JUnit 是由 Erich Gamma 和 Kent Beck 编写的一个开源的单元测试框架。它属于白盒测试，只要将待测类继承 TestCase 类，就可以利用 JUnit 的一系列机制进行便捷的自动测试了。<br>JUnit 的设计精简，易学易用，但是功能却非常强大，这归因于它内部完善的代码结构。 Erich Gamma 是著名的 GOF 之一，因此 JUnit 中深深渗透了扩展性优良的设计模式思想。 JUnit 提供的 API 既可以让您写出测试结果明确的可重用单元测试用例，也提供了单元测试用例成批运行的功能。在已经实现的框架中，用户可以选择三种方式来显示测试结果，并且显示的方式本身也是可扩展的。</p>
+<h2 id="Junit的工程结构"><a href="#Junit的工程结构" class="headerlink" title="Junit的工程结构"></a>Junit的工程结构</h2><ul>
+<li>runner:定义了Junit模型中的许多基本概念，只要是一些虚类和接口，是整个Junit工程的基石</li>
+<li>runners:提供了从注解中使用反射完成测试用例执行的实现</li>
+<li>interval:提供了在Runner中许多虚类的默认实现，包括各类 RunnerBuilder如基于注解提供Builder、各类Matchers、各类Request如类测试Request、方法测试Request。</li>
+<li>rules:用于用户自定义扩展，规定对于不同statement的用户自定义行为</li>
+<li>matchers:主要用于AssertThat方法，在4.4之后废弃</li>
+<li>validator:从类、方法和域多个方面检查测试样例</li>
+<li>experimental:一些测试特性</li>
+</ul>
+<p><img src="" alt=""></p>
+<h2 id="Runner中的基本概念"><a href="#Runner中的基本概念" class="headerlink" title="Runner中的基本概念"></a>Runner中的基本概念</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://suemi94.com/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/junit-runner.html" target="_blank" rel="external">Junit源码阅读(一)之Junit的基本概念</a></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/10/23/DatabaseCourse/" style="float: left;">
+        ← 数据库复习
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/10/12/LeetCode-Greedy-Algorithms/">
+        LeetCode 算法面试分类解法 Greedy-Algorithms →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

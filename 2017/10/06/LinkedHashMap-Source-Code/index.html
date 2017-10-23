@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Java 源码学习系列6——LinkedHashMap | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-10-06T06:38:36.000Z" itemprop="datePublished">
+          2017-10-06
+      </time>
+    
+</span>
+                <h1>Java 源码学习系列6——LinkedHashMap</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>同 HashMap 一样，LinkedHashMap 也是对 Map 接口的一种基于链表和哈希表的实现。实际上， LinkedHashMap 是 HashMap 的子类，其扩展了 HashMap 增加了双向链表的实现。相较于 HashMap 的迭代器中混乱的访问顺序，LinkedHashMap 可以提供可以预测的迭代访问，即按照插入序 (insertion-order) 或访问序 (access-order) 来对哈希表中的元素进行迭代。</p>
+<h2 id="1-LinkedHashMap-类的定义"><a href="#1-LinkedHashMap-类的定义" class="headerlink" title="1. LinkedHashMap 类的定义"></a>1. LinkedHashMap 类的定义</h2><pre><code>public class LinkedHashMap&lt;K,V&gt;
+    extends HashMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;
+</code></pre><p>从类声明中可以看到，LinkedHashMap 确实是继承了 HashMap，因而 HashMap 中的一些基本操作，如哈希计算、扩容、查找等，在 LinkedHashMap 中都和父类 HashMap 是一致的。</p>
+<p>但是，和 HashMap 有所区别的是，LinkedHashMap 支持按插入序 (insertion-order) 或访问序 (access-order) 来访问其中的元素。所谓插入顺序，就是 Entry 被添加到 Map 中的顺序，更新一个 Key 关联的 Value 并不会对插入顺序造成影响；而访问顺序则是对所有 Entry 按照最近访问 (least-recently) 到最远访问 (most-recently) 进行排序，读写都会影响到访问顺序，但是对迭代器 (entrySet(), keySet(), values()) 的访问不会影响到访问顺序。</p>
+<h2 id="2-LinkedHashMap-类的属性"><a href="#2-LinkedHashMap-类的属性" class="headerlink" title="2. LinkedHashMap 类的属性"></a>2. LinkedHashMap 类的属性</h2><p>LinkedHashMap的节点Entry<k,v>继承自HashMap.Node<k,v>，在其基础上扩展了一下。改成了一个双向链表。</k,v></k,v></p>
+<pre><code>/**
+ * HashMap.Node subclass for normal LinkedHashMap entries.
+ */
+static class Entry&lt;K,V&gt; extends Node&lt;K,V&gt; {
+    Entry&lt;K,V&gt; before, after;
+    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+        super(hash, key, value, next);
+    }
+}
+
+// 双向链表的头结点
+transient Entry&lt;K,V&gt; head;
+
+// 双向链表的尾节点
+transient Entry&lt;K,V&gt; tail;
+
+// accessOrder 用来区分对LinkedHashMap中元素顺序。
+accessOrder为false时（默认为false），按照插入顺序，
+accessOrder为true时，按照访问顺序。
+final boolean accessOrder;
+</code></pre><p>为了实现双向链表，LinkedHashMap 的节点在父类的基础上增加了 before/after 引用，并且使用 head 和 tail 分别保存双向链表的头和尾。同时，增加了一个标识来保存 LinkedHashMap 的迭代顺序是插入序还是访问序。</p>
+<p>由于父类 HashMap 的节点中存在 next 引用，可以将每个桶中的元素都当作一个单链表看待；LinkedHashMap 的每个桶中当然也保留了这个单链表关系，不过这个关系由父类进行管理，LinkedHashMap 中只会对双向链表的关系进行管理。LinkedHashMap 中所有的元素都被串联在一个双向链表中。</p>
+<h2 id="3-LinkedHashMap-类的构造方法"><a href="#3-LinkedHashMap-类的构造方法" class="headerlink" title="3. LinkedHashMap 类的构造方法"></a>3. LinkedHashMap 类的构造方法</h2><pre><code>public LinkedHashMap() {
+    super();
+    accessOrder = false;
+}
+
+// 指定初始化时的容量
+public LinkedHashMap(int initialCapacity) {
+    super(initialCapacity);
+    accessOrder = false;
+}
+
+// 指定初始化时的容量，和扩容的加载因子
+public LinkedHashMap(int initialCapacity, float loadFactor) {
+    super(initialCapacity, loadFactor);
+    accessOrder = false;
+}
+
+// 指定初始化时的容量，和扩容的加载因子，以及迭代输出节点的顺序
+public LinkedHashMap(int initialCapacity,
+                     float loadFactor,
+                     boolean accessOrder) {
+    super(initialCapacity, loadFactor);
+    this.accessOrder = accessOrder;
+}
+
+// 利用另一个Map 来构建
+public LinkedHashMap(Map&lt;? extends K, ? extends V&gt; m) {
+    super();
+    accessOrder = false;
+    // 批量插入一个map中的所有数据到本集合中。
+    putMapEntries(m, false);
+}
+</code></pre><p>实际上LinkedHashMap的构造函数是调用父类HashMap的构造函数实现的。</p>
+<h2 id="4-LinkedHashMap-类的常用的方法"><a href="#4-LinkedHashMap-类的常用的方法" class="headerlink" title="4. LinkedHashMap 类的常用的方法"></a>4. LinkedHashMap 类的常用的方法</h2><h3 id="1-get"><a href="#1-get" class="headerlink" title="1. get"></a>1. get</h3><pre><code>public V get(Object key) {
+    Node&lt;K,V&gt; e;
+    if ((e = getNode(hash(key), key)) == null)
+        return null;
+    if (accessOrder)
+        afterNodeAccess(e);
+    return e.value;
+}
+</code></pre><p>如果在这是一个根据accessOrder来迭代的LinkedHashMap，那么在get和getOrDefault访问操作中还要增加更新链表结构的函数，将最近访问的节点放到链表最后。</p>
+<pre><code>void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last
+    Entry&lt;K,V&gt; last;
+    if (accessOrder &amp;&amp; (last = tail) != e) {
+        Entry&lt;K,V&gt; p =
+            (Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+        p.after = null;
+        // 特殊情况，处理头节点
+        if (b == null)
+            head = a;
+        else
+            b.after = a;
+        if (a != null)
+            a.before = b;
+        // 特殊情况，处理尾节点
+        else
+            last = b;
+        if (last == null)
+            head = p;
+        else {
+            p.before = last;
+            last.after = p;
+        }
+        tail = p;
+        ++modCount;
+    }
+}
+</code></pre><h3 id="2-put"><a href="#2-put" class="headerlink" title="2. put"></a>2. put</h3><p>LinkedHashMap并没有重写任何put方法。但是其重写了构建新节点的newNode()方法.<br>newNode()会在HashMap的putVal()方法里被调用，putVal()方法会在批量插入数据putMapEntries(Map&lt;? extends K, ? extends V&gt; m, boolean evict)或者插入单个数据public V put(K key, V value)时被调用。</p>
+<p>LinkedHashMap重写了newNode(),在每次构建新节点时，通过linkNodeLast(p);将新节点链接在内部双向链表的尾部。</p>
+<pre><code>Node&lt;K,V&gt; newNode(int hash, K key, V value, Node&lt;K,V&gt; e) {
+    Entry&lt;K,V&gt; p =
+        new Entry&lt;K,V&gt;(hash, key, value, e);
+    linkNodeLast(p);
+    return p;
+}
+
+private void linkNodeLast(Entry&lt;K,V&gt; p) {
+    Entry&lt;K,V&gt; last = tail;
+    tail = p;
+    if (last == null)
+        head = p;
+    else {
+        p.before = last;
+        last.after = p;
+    }
+}
+</code></pre><p>另外，LinkedHashMap重写了afterNodeInsertion这个回调方法，在put一个关键字不存在的节点之后会调用这个方法：</p>
+<pre><code>// 回调函数，新节点插入之后回调，根据evict判断是否需要删除最
+老插入的节点。如果实现LruCache会用到这个方法。
+void afterNodeInsertion(boolean evict) { // possibly remove eldest
+    Entry&lt;K,V&gt; first;
+    // 默认返回false 则不删除节点
+    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(fisrst)) {
+        K key = first.key;
+        removeNode(hash(key), key, null, false, true);
+    }
+}
+</code></pre><p>在 afterNodeInsertion 中，如果 removeEldestEntry(first) 节点返回 true，则会将头部节点删除。如果想要实现一个固定容量的 Map，可以在继承 LinkedHashMap 后重写 removeEldestEntry 方法。在 LinkedHashMap 中，该方法始终返回 false。</p>
+<pre><code>protected boolean removeEldestEntry(Map.Entry&lt;K,V&gt; eldest) {
+    return false;
+}
+</code></pre><p>put操作如果关键字已经存在，会调用上面afterNodeAccess回调方法。</p>
+<h3 id="3-remove"><a href="#3-remove" class="headerlink" title="3. remove"></a>3. remove</h3><p>LinkedHashMap的remove方法没有复写HashMap的remove方法，但是同样实现了afterNodeRemoval这个回调方法：</p>
+<pre><code>// 在删除节点e时，同步将e从双向链表上删除
+void afterNodeRemoval(Node&lt;K,V&gt; e) { // unlink
+    Entry&lt;K,V&gt; p =
+        (Entry&lt;K,V&gt;)e, b = p.before, a = p.after;
+    // 待删除节点 p 的前置后置节点都置空
+    p.before = p.after = null;
+    // 如果前置节点是null，则现在的头结点应该是后置节点a
+    if (b == null)
+        head = a;
+    // 否则将前置节点b的后置节点指向a
+    else
+        b.after = a;
+    // 同理如果后置节点时null ，则尾节点应是b
+    if (a == null)
+        tail = b;
+    // 否则更新后置节点a的前置节点为b
+    else
+        a.before = b;
+}
+</code></pre><h3 id="4-containsValue"><a href="#4-containsValue" class="headerlink" title="4. containsValue"></a>4. containsValue</h3><p>它重写了该方法，相比HashMap的实现，更为高效。</p>
+<pre><code>/**
+ * @param value value whose presence in this map is to be tested
+ * @return &lt;tt&gt;true&lt;/tt&gt; if this map maps one or more keys to the
+ *         specified value
+ */
+public boolean containsValue(Object value) {
+    for (Entry&lt;K,V&gt; e = head; e != null; e = e.after) {
+        V v = e.value;
+        if (v == value || (value != null &amp;&amp; value.equals(v)))
+            return true;
+    }
+    return false;
+}
+</code></pre><p>对比HashMap，是用两个for循环遍历，相对低效。</p>
+<pre><code>/**
+ * @param value value whose presence in this map is to be tested
+ * @return &lt;tt&gt;true&lt;/tt&gt; if this map maps one or more keys to the
+ *         specified value
+ */
+public boolean containsValue(Object value) {
+    Node&lt;K,V&gt;[] tab; V v;
+    if ((tab = table) != null &amp;&amp; size &gt; 0) {
+        for (int i = 0; i &lt; tab.length; ++i) {
+            for (Node&lt;K,V&gt; e = tab[i]; e != null; e = e.next) {
+                if ((v = e.value) == value ||
+                    (value != null &amp;&amp; value.equals(v)))
+                    return true;
+            }
+        }
+    }
+    return false;
+}
+</code></pre><h2 id="5-遍历及迭代器"><a href="#5-遍历及迭代器" class="headerlink" title="5. 遍历及迭代器"></a>5. 遍历及迭代器</h2><p>因为 LinkeHashMap 的所有的节点都在一个双向链表中，因而可以通过该双向链表来遍历所有的 Entry。而在 HashMap 中，要遍历所有的 Entry，则要依次遍历所有桶中的单链表。相比较而言，从时间复杂度的角度来看，LinkedHashMap 的复杂度为 O(size())，而 HashMap 则为 O(capacity + size())。</p>
+<pre><code>abstract class LinkedHashIterator {
+    Entry&lt;K,V&gt; next;
+    Entry&lt;K,V&gt; current;
+    int expectedModCount;
+
+    LinkedHashIterator() {
+        next = head;
+        expectedModCount = modCount;
+        current = null;
+    }
+
+    public final boolean hasNext() {
+        return next != null;
+    }
+
+    // nextNode() 就是迭代器里的next()方法 。
+    // 该方法的实现可以看出，迭代LinkedHashMap，就是从内部维护的双链表的表头开始循环输出。
+    final Entry&lt;K,V&gt; nextNode() {
+        Entry&lt;K,V&gt; e = next;
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+        if (e == null)
+            throw new NoSuchElementException();
+        current = e;
+        next = e.after;
+        return e;
+    }
+
+    // 删除方法 最终还是调用了HashMap的removeNode方法
+    public final void remove() {
+        Node&lt;K,V&gt; p = current;
+        if (p == null)
+            throw new IllegalStateException();
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+        current = null;
+        K key = p.key;
+        removeNode(hash(key), key, null, false, false);
+        expectedModCount = modCount;
+    }
+}
+</code></pre><p>可以看到，在遍历所有节点时是通过节点的 after 引用进行的。这样，可以双链表的头部遍历到到双链表的尾部，就不用像 HahsMap 那样访问空槽了。</p>
+<h2 id="6-使用-LinkedHashMap-实现-LRU-Cache"><a href="#6-使用-LinkedHashMap-实现-LRU-Cache" class="headerlink" title="6. 使用 LinkedHashMap 实现 LRU Cache"></a>6. 使用 LinkedHashMap 实现 LRU Cache</h2><p>LinkedHashMap 的访问序可以方便地用来实现一个 LRU Cache。在访问序模式下，尾部节点是最近一次被访问的节点 (least-recently)，而头部节点则是最远访问 (most-recently) 的节点。因而在决定失效缓存的时候，将头部节点移除即可。</p>
+<p>但是，由于链表是无界的，但缓存往往是资源受限的，如何确定何时移除最远访问的缓存呢？前面分析过，在 afterNodeInsertion 中，会调用 removeEldestEntry 来决定是否将最老的节点移除，因而我们可以使用 LinkedHashMap 的子类，并重写 removeEldestEntry 方法，当 Enrty 的数量超过缓存的容量是返回 true 即可。</p>
+<p>下面给出基于 LinkedHashMap 实现的 LRU Cache 的代码：</p>
+<pre><code>public class CacheImpl&lt;K,V&gt; {
+    private Map&lt;K, V&gt; cache;
+    private int capacity;
+
+    public enum POLICY {
+        LRU, FIFO
+    }
+
+    public CacheImpl(int cap, POLICY policy) {
+        this.capacity = cap;
+        cache = new LinkedHashMap&lt;K, V&gt;(cap, 0.75f, policy.equals(POLICY.LRU)){
+            //超出容量就删除最老的值
+            @Override
+            protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) {
+                return size() &gt; capacity;
+            }
+        };
+    }
+
+    public V get(K key) {
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        }
+        return null;
+    }
+
+    public void set(K key, V val) {
+        cache.put(key, val);
+    }
+
+    public void printKV() {
+        System.out.println(&quot;key value in cache&quot;);
+        for (Map.Entry&lt;K,V&gt; entry : cache.entrySet()) {
+            System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+        }
+    }
+
+    public static void main(String[] args) {
+        CacheImpl&lt;Integer, String&gt; cache = new CacheImpl(5, POLICY.LRU);
+
+        cache.set(1, &quot;first&quot;);
+        cache.set(2, &quot;second&quot;);
+        cache.set(3, &quot;third&quot;);
+        cache.set(4, &quot;fourth&quot;);
+        cache.set(5, &quot;fifth&quot;);
+        cache.printKV();
+
+        cache.get(1);
+        cache.get(2);
+        cache.printKV();
+
+        cache.set(6, &quot;sixth&quot;);
+        cache.printKV();
+    }
+}
+</code></pre><h2 id="7-一些常用集合的对比"><a href="#7-一些常用集合的对比" class="headerlink" title="7. 一些常用集合的对比"></a>7. 一些常用集合的对比</h2><p>LinkedHashMap相对于HashMap的源码比，是很简单的。因为大树底下好乘凉。它继承了HashMap，仅重写了几个方法，以改变它迭代遍历时的顺序。这也是其与HashMap相比最大的不同。<br>在每次插入数据，或者访问、修改数据时，会增加节点、或调整链表的节点顺序。以决定迭代时输出的顺序。</p>
+<ul>
+<li>accessOrder ,默认是false，则迭代时输出的顺序是插入节点的顺序。若为true，则输出的顺序是按照访问节点的顺序。为true时，可以在这基础之上构建一个LruCache.</li>
+<li>LinkedHashMap并没有重写任何put方法。但是其重写了构建新节点的newNode()方法.在每次构建新节点时，将新节点链接在内部双向链表的尾部</li>
+<li>accessOrder=true的模式下,在afterNodeAccess()函数中，会将当前被访问到的节点e，移动至内部的双向链表的尾部。值得注意的是，afterNodeAccess()函数中，会修改modCount,因此当你正在accessOrder=true的模式下,迭代LinkedHashMap时，如果同时查询访问数据，也会导致fail-fast，因为迭代的顺序已经改变。</li>
+<li>nextNode() 就是迭代器里的next()方法 。<br>该方法的实现可以看出，迭代LinkedHashMap，就是从内部维护的双链表的表头开始循环输出。<br>而双链表节点的顺序在LinkedHashMap的增、删、改、查时都会更新。以满足按照插入顺序输出，还是访问顺序输出。<br>它与HashMap比，还有一个小小的优化，重写了containsValue()方法，直接遍历内部链表去比对value值是否相等。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/ArrayList2.png" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.im/post/5997ff966fb9a024851009b7" target="_blank" rel="external">面试必备：LinkedHashMap源码解析（JDK8）</a><br><a href="http://blog.jrwang.me/2016/java-collections-linkedhashmap/" target="_blank" rel="external">Java 容器源码分析之 LinkedHashMap</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/10/07/HashSet-Source-Code/" style="float: left;">
+        ← Java 源码学习系列7——HashSet
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/10/05/HashMap-Source-Code/">
+        Java 源码学习系列5——HashMap →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
