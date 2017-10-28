@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>数据库复习 | Thpffcj的树洞</title>
+  <title>【置顶】 博客目录 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,94 +172,83 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2017-10-23T03:35:00.000Z" itemprop="datePublished">
-          2017-10-23
+      <time datetime="2017-10-28T07:33:44.000Z" itemprop="datePublished">
+          2017-10-28
       </time>
     
 </span>
-                <h1>数据库复习</h1>
+                <h1>【置顶】 博客目录</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="1-执行步骤"><a href="#1-执行步骤" class="headerlink" title="1. 执行步骤"></a>1. 执行步骤</h3><ul>
-<li>语法检查：检查SQL拼写是否符合语法规范</li>
-<li>语义检查：检查访问对象是否符合存在及用户是否具有相应权限</li>
-<li>解析：在共享池中检查是否有完全相同的之前完全解析好的，如果存在，跳过选择执行计划和产生计划，直接运行</li>
-<li>硬解析：就是对提交的SQL完全重新从头进行解析，创建解析树，生成执行计划对SQL的执行来说是开销昂贵的动作，在很多项目中对功能相同的代码要保持一致性，用绑定变量</li>
-<li>软解析：在共享池（shared pool）中找到了与之完全相同的SQL解析好的结果会跳过硬解析后面的两个步骤</li>
-<li>执行计划：以缩排列表的方式显示SQL语句的执行步骤</li>
+      		<p>随着博客越来越多，这里手动放一个置顶目录来方便自己查找复习一些记录的知识。</p>
+<h2 id="LeetCode-学习心得"><a href="#LeetCode-学习心得" class="headerlink" title="LeetCode 学习心得"></a>LeetCode 学习心得</h2><ul>
+<li><p><a href="http://www.thpffcj.com/2017/10/08/LeetCode-Using-Array/" target="_blank" rel="external">LeetCode 算法面试分类解法 Using-Array</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/08/LeetCode-Using-Hash-Table/" target="_blank" rel="external">LeetCode 算法面试分类解法 Using-Hash-Table</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/09/LeetCode-Stack-and-Queue/" target="_blank" rel="external">LeetCode 算法面试分类解法 Stack-and-Queue</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/09/LeetCode-About-Linked-List/" target="_blank" rel="external">LeetCode 算法面试分类解法 About-Linked-List</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/10/LeetCode-Binary-Tree-and-Recursion/" target="_blank" rel="external">LeetCode 算法面试分类解法 Binary-Tree-and-Recursion</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/11/LeetCode-Recurion-and-Backstracking/" target="_blank" rel="external">LeetCode 算法面试分类解法 Recurion-and-Backstracking</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/11/LeetCode-Dynamic-Programming/" target="_blank" rel="external">LeetCode 算法面试分类解法 Dynamic-Programming</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/12/LeetCode-Greedy-Algorithms/" target="_blank" rel="external">LeetCode 算法面试分类解法 Greedy-Algorithms</a></p>
+</li>
 </ul>
-<h3 id="2-SQL和优化器概念"><a href="#2-SQL和优化器概念" class="headerlink" title="2. SQL和优化器概念"></a>2. SQL和优化器概念</h3><ul>
-<li>优化器：借助关系理论（关系代数）提供的语义无误的原始查询进行有效的等价变换，寻找最优路径，产生性能最优的执行方案</li>
-<li>优化：在数据处理的真正被执行的时候发生</li>
-<li>影响优化的因素：索引，数据的物理布局，可用内存大小，可用处理器个数，直接或间接涉及的表和索引的数据量</li>
-<li>Sql语句先执行关系操作，再执行非关系操作(order by)</li>
+<h2 id="源码学习"><a href="#源码学习" class="headerlink" title="源码学习"></a>源码学习</h2><ul>
+<li><p><a href="http://www.thpffcj.com/2017/09/30/String-Source-Code/" target="_blank" rel="external">Java 源码学习系列1——String</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/02/Integer-Source-Code/" target="_blank" rel="external">Java 源码学习系列2——Integer</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/03/ArrayList-Source-Code/" target="_blank" rel="external">Java 源码学习系列3——ArrayList</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/04/LinkedList-Source-Code/" target="_blank" rel="external">Java 源码学习系列4——LinkedList</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/05/HashMap-Source-Code/" target="_blank" rel="external">Java 源码学习系列5——HashMap</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/06/LinkedHashMap-Source-Code/" target="_blank" rel="external">Java 源码学习系列6——LinkedHashMap</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/07/HashSet-Source-Code/" target="_blank" rel="external">Java 源码学习系列7——HashSet</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/13/Junit-1/" target="_blank" rel="external">Junit 源码学习(一)</a></p>
+</li>
 </ul>
-<h3 id="3-使用SQL语句要考虑的因素"><a href="#3-使用SQL语句要考虑的因素" class="headerlink" title="3. 使用SQL语句要考虑的因素"></a>3. 使用SQL语句要考虑的因素</h3><ol>
-<li><p>数据总量<br>Sql考虑最重要的因素：必须访问的数据总量；没有确定目标容量之前，很难判断查询执行的效率</p>
+<h2 id="练习小项目"><a href="#练习小项目" class="headerlink" title="练习小项目"></a>练习小项目</h2><ul>
+<li><p><a href="http://www.thpffcj.com/2017/07/02/Quantour/" target="_blank" rel="external">Maven整合的Web项目</a></p>
 </li>
-<li><p>定义结果集的查询条件<br>好的查询条件：满足此条件的数据很少，可以过滤很多数据<br>Where字句：特别在子查询或视图中可能有多个where字句，过滤的效率有高有低，受到其他因素的影响<br>影响因素：过滤条件，主要的sql语句，庞大的数据对查询影响</p>
+<li><p><a href="http://www.thpffcj.com/2017/07/02/Idea-Web/" target="_blank" rel="external">Idea_Web</a></p>
 </li>
-<li><p>结果集的大小</p>
+<li><p><a href="http://www.thpffcj.com/2017/09/23/Seckill/" target="_blank" rel="external">Seckill</a></p>
 </li>
-<li><p>获得结果集所涉及的表的数量<br>表的数量会影响性能<br>连接：太多的表连接（八张）就该质疑设计的正确性了；对于优化器，随着表数量增加，复杂度指数增长；编写太多表的复杂查询时，多种方式连接的选择失误几率很高<br>视图：会掩盖多表连接的事实，减少复杂查询和复杂视图</p>
-</li>
-<li><p>并发的用户数（同时修改数据的用户数）</p>
-</li>
-</ol>
-<ul>
-<li>设计时要注意：数据块访问争用，阻塞，闩定，保证读取的一致性</li>
-<li>一般而言，整体的吞吐量&gt;个体响应时间</li>
-<li>数据存贮采用固定大小的区块，可以存取多条记录，I/O交互简单，在内存与缓冲中好处理；但是当修改后的数据太长，则会进行迁移到另一个block存储；数据块的太大，会带来数据块的访问争用的问题，影响并发性能</li>
 </ul>
-<h3 id="4-过滤"><a href="#4-过滤" class="headerlink" title="4. 过滤"></a>4. 过滤</h3><ol>
-<li>如何限定结果集是最为关键的因素，是使用SQL各种技巧的判定因素</li>
-<li>过滤条件的含义：<br>Where字句和having字句<br>Join过滤条件<br>Select过滤条件</li>
-<li>过滤条件的好坏，取决于<br>最终需要的数据是什么，来自哪些表<br>哪些输入值会传递到DBMS引擎<br>能过滤掉不想要的数据的条件有哪些<br>高效过滤条件是查询的主要驱动力</li>
-</ol>
-<h3 id="5-SQL语句方面注意"><a href="#5-SQL语句方面注意" class="headerlink" title="5. SQL语句方面注意"></a>5. SQL语句方面注意</h3><ol>
-<li><p>注意在做否定意义的查询要小心进入陷阱</p>
-<pre><code>如，没有选修‘B2’课程的学生 ：
-　　select students.*
-　　from students, grades
-　　where students.sno=grades.sno
-　　AND grades.cno &lt;&gt; ’B2’（一定选课，但是没有选课的人）
-　　上面的查询方式是错误的，正确方式见下方：
-　　select * from students（选出了没有选课的学生+选课的学生且没有选课B2）
-　　where not exists (select * from grades
-where grades.sno=students.sno AND cno=&apos;B2&apos;)
-</code></pre></li>
-<li><p>关于JOIN</p>
+<h2 id="杂记"><a href="#杂记" class="headerlink" title="杂记"></a>杂记</h2><ul>
+<li><p><a href="http://www.thpffcj.com/2017/07/01/build-a-blog/" target="_blank" rel="external">使用hexo+github搭建个人博客教程</a></p>
 </li>
-</ol>
-<p>JOIN: 如果表中有至少一个匹配，则返回行（INNER JOIN）<br>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行<br>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行<br>FULL JOIN: 只要其中一个表中存在匹配，就返回行</p>
-<h3 id="6-SQL查询优化总结"><a href="#6-SQL查询优化总结" class="headerlink" title="6. SQL查询优化总结"></a>6. SQL查询优化总结</h3><ol>
-<li>暗示查询优化器如何优化<br>使用join来暗示表连接顺序，当有多表连接操作时，考虑使用exists和in操作来优化；<br>如果不使用join则是让查询优化器自己优化，自己确定表连接顺序（先小表，再大表），效率可能较低</li>
-<li>将多维度的查询进行降维处理，一次连接的表不要超过3张，超过了就将非关联子查询变成内嵌视图，降维处理</li>
-<li>考虑取出的数据在表中的比例，当查询返回记录超过数据总量10%就不使用索引，查询结果集少于10%是好的查询条件</li>
-<li>避免在高层使用distinct，使用exists和in来处理</li>
-<li>避免在高层使用select *，这样会产生冗余的结果集，降低性能</li>
-</ol>
-<h3 id="7-非关联子查询变成内嵌视图—降低查询维度"><a href="#7-非关联子查询变成内嵌视图—降低查询维度" class="headerlink" title="7. 非关联子查询变成内嵌视图—降低查询维度"></a>7. 非关联子查询变成内嵌视图—降低查询维度</h3><h2 id="嵌套查询判断消耗"><a href="#嵌套查询判断消耗" class="headerlink" title="嵌套查询判断消耗"></a>嵌套查询判断消耗</h2><h3 id="1-摆脱distinct，使用exists和in操作"><a href="#1-摆脱distinct，使用exists和in操作" class="headerlink" title="1. 摆脱distinct，使用exists和in操作"></a>1. 摆脱distinct，使用exists和in操作</h3><ol>
-<li><p>避免在最高层使用distinct（会产生错误结果集），因为发现重复的数据容易发现不准确的连接难，发现结果的不正确就更难了</p>
+<li><p><a href="http://www.thpffcj.com/2017/07/29/%E8%8F%9C%E9%B8%9F%E7%A8%8B%E5%BA%8F%E5%91%98%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" target="_blank" rel="external">菜鸟程序员学习之路</a></p>
 </li>
-<li><p>摆脱distinct的方法：使用exists和in，exits需要用到嵌套子查询</p>
+<li><p><a href="http://www.thpffcj.com/2017/09/15/Google-Interview/" target="_blank" rel="external">Google Interview</a></p>
 </li>
-</ol>
-<p>3. </p>
+<li><p><a href="http://www.thpffcj.com/2017/09/27/Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" target="_blank" rel="external">Java开发手册</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/09/28/Design-Patterns/" target="_blank" rel="external">Design Patterns</a></p>
+</li>
+<li><p><a href="http://www.thpffcj.com/2017/10/23/DatabaseCourse/" target="_blank" rel="external">数据库复习</a></p>
+</li>
+</ul>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2017/10/28/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
-    </a>
     
-    
-    <a class="pull-right" href="/2017/10/13/Junit-1/">
-        Junit 源码学习(一) →
+    <a class="pull-right" href="/2017/10/23/DatabaseCourse/">
+        数据库复习 →
     </a>
     
 </nav>
