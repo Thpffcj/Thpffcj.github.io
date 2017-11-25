@@ -415,15 +415,349 @@
 </ol>
 </li>
 </ul>
-<h3 id="3-XHMTL现行规范"><a href="#3-XHMTL现行规范" class="headerlink" title="3. XHMTL现行规范"></a>3. XHMTL现行规范</h3>
+<h3 id="3-XHMTL现行规范"><a href="#3-XHMTL现行规范" class="headerlink" title="3. XHMTL现行规范"></a>3. XHMTL现行规范</h3><h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><h3 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1. 概念"></a>1. 概念</h3><p>HTML5是HTML标准的下一个版本</p>
+<h3 id="2-与HTML4的区别"><a href="#2-与HTML4的区别" class="headerlink" title="2. 与HTML4的区别"></a>2. 与HTML4的区别</h3><p><strong>1. 简化的语法</strong><br>HTML5添加了许多新的语法特征，其中包括&lt;video&gt;,&lt;audio&gt;和&lt;canvas&gt;元素，同时整合了SVG内容。这些元素是为了更容易的在网页中添加和处理多媒体和图片内容而添加的。其他新的元素包括&lt;section&gt;,&lt;article&gt;,&lt;header&gt;和&lt;nav&gt;是为了丰富文档的数据内容。新的属性的添加也是为了同样的目的。同时也有一些属性和元素被移出掉了。一些元素，像&lt;a&gt;,&lt;cite&gt;和&lt;menu&gt;被修改，重新定义或标准化了。</p>
+<p><strong>2. &lt;canvas&gt; 标记取代Flash</strong><br>Canvas元素是HTML5的一部分，允许脚本动态渲染位图像。Canvas由一个可绘制地区HTML代码中的属性定义决定高度和宽度。javaScript代码可以访问该地区，通过一套完整的绘图功能类似于其他通用二维API，从而使动态生成图形。其一些可能的用途，包括使用Canvas构造图形，动画，游戏和图片。</p>
+<p><strong>3. 新的&lt;header&gt;和&lt;footer&gt;标记</strong><br>使用新标记替换掉&amp;ltdiv&gt;标记是HTML5在语义方面的主要成就。&amp;ltdiv&gt;在HTML4里广泛使用，但是它所表达的语义太弱，在声明网页组织结构里不同的区块任务面前它毫无用武之地。新的HTML5标记 – 例如 &amp;ltarticle&gt;,&amp;ltaside&gt;，&amp;ltnav&gt;,&amp;ltfigure&gt;,&amp;ltheader&gt;,&amp;ltfooter&gt; – 会更有用和更方便，这些标记能够让你指明网页不同区域的用途，清楚的显示网站的结构。SEO搜索引擎更易优化。</p>
+<p><strong>4. 新的 &lt;section&gt; 和&lt;article&gt; 标记</strong><br>HTML5中引入的新的 &lt;section&gt; 和 &lt;article&gt; 标记可以让开发人员更好的标注页面上的这些区域。在同一个页面中可以使用多个&lt;footer&gt;元素，即可以用作页面整体的页脚，也可以作为一个内容区块的结尾，例如，我们可以将&lt;footer&gt;直接写在&lt;section&gt;或是&lt;article&gt;中。</p>
+<p><strong>5. 新的 &lt;menu&gt; 和&lt;figure&gt; 标记</strong><br>新的&lt;menu&gt;标记可以被用作普通的菜单，也可以用在工具条和右键菜单上，虽然这些东西在页面上并不常用。类似的，新的 &lt;figure&gt; 标记是一种更专业的管理页面上文字和图像的方式。当然，你可以用样式表来控制文字和图像，但使用HTML5内置的这个标记更适合。</p>
+<p><strong>6. 新的 &lt;audio&gt; 和 &lt;video&gt; 标记</strong><br>新的&amp;ltaudio&gt; 和 &amp;ltvideo&gt; 标记可能是HTML5中增加的最有用处的两个东西了。正如标记名称，它们是用来嵌入音频和视频文件的。</p>
+<pre><code>&lt;audio autoplay=&quot;autoplay&quot; controls=&quot;controls&quot;&gt;
+    &lt;source src=&quot;music.ogg&quot;
+    &lt;source src=&quot;music.mp3&quot; /&gt;
+&lt;/audio&gt;
+</code></pre><p><strong>7. 全新的表单设计</strong></p>
+<p><strong>8.不再使用 &lt;b&gt; 和 &lt;font&gt; 标记，将内容和展示分离</strong></p>
+<p><strong>9. 不再使用 &lt;frame&gt;, &lt;center&gt;, &lt;big&gt; 标记</strong></p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="1-几种方式"><a href="#1-几种方式" class="headerlink" title="1. 几种方式"></a>1. 几种方式</h3><p><strong>1. 内联样式</strong><br>内联样式是直接在html标签上定义该标签的css样式，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 内部样式</strong><br>内部样式是写在html文件中，且包含在&lt;style&gt;&lt;/style&gt;代码中，style写在head里面如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    div&#123;width:100px;height:100px;&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;div&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>3. 外部样式</strong><br>外部样式是通过在html中引用外部css文件来控制样式，如：html文件中写入引用语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link href=&quot;css文件路径&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="2-css盒模型"><a href="#2-css盒模型" class="headerlink" title="2. css盒模型"></a>2. css盒模型</h3><h3 id="3-响应式网页设计，主要手段"><a href="#3-响应式网页设计，主要手段" class="headerlink" title="3. 响应式网页设计，主要手段"></a>3. 响应式网页设计，主要手段</h3><p>响应式网站设计由三个关键组成部分：</p>
+<ol>
+<li>media query</li>
+<li>流动网络</li>
+<li>灵活缩放的图片</li>
+</ol>
+<ul>
+<li>基于RWD而设计的网站利用CSS3 media queries 规则来自动适应不同访问设备的屏幕尺寸和显示要求。</li>
+<li>流动网络采用页面元素大小的相对单位(百分比/EM)，而非传统设计使用的绝对单位(像素/点数)，以确定页面各组成元素的大小。</li>
+<li>最后，图片大小也是采用相对单位而灵活缩放，不至于在小屏幕的移动设备上超出显示区域。</li>
+</ul>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="1-优缺点"><a href="#1-优缺点" class="headerlink" title="1. 优缺点"></a>1. 优缺点</h3><p><strong>1. 优点</strong></p>
+<ul>
+<li>使用JavaScript就可以在客户端进行数据验证</li>
+<li>JavaScript可以方便操纵各种浏览器的对象</li>
+<li>可以使用JavaScript来控制浏览器的外观，状态甚至运行方式</li>
+<li>可以根据用户的需要”定制”浏览器，从而使网页更加友好</li>
+<li>JavaScript可以使多种任务仅在用户端就可以完成而不需要网络和服务器的参与，从而支持分布式的运算和处理</li>
+</ul>
+<p><strong>2. 缺点</strong></p>
+<ul>
+<li>JavaScript简单性</li>
+<li>解释执行</li>
+<li>基于对象，一个变量可以赋不同类型的值，弱类型，会产生很多难以查到的错误基本语法</li>
+</ul>
+<h3 id="2-First-class-functions"><a href="#2-First-class-functions" class="headerlink" title="2. First-class functions"></a>2. First-class functions</h3><ul>
+<li>JS里面的function是基础的变量类型之一，可以作为参数或返回值，可以赋给变量，可以做闭包。</li>
+<li>Firstclass function 以 functions 来构造对象</li>
+<li>Function 对象是JavaScript里面的固有对象，所有的函数实际上都是一个Function对象</li>
+</ul>
+<h3 id="3-事件驱动编程"><a href="#3-事件驱动编程" class="headerlink" title="3. 事件驱动编程"></a>3. 事件驱动编程</h3><ul>
+<li><p>JavaScript是基于对象(object-based)的语言。这与Java不同,Java是面向对象的语言。而基于对象的基本特征，就是采用事件驱动(event-driven)。它是在用形界面的环境下，使得一切输入变化简单化。通常鼠标或热键的动作我们称之为事件(Event)，而由鼠标或热键引发的一连串程序的动作，称之为事件驱动(Event Driver)。而对事件进行处理程序或函数，我们称之为事件处理程序(Event Handler)。</p>
+</li>
+<li><p>在JavaScript中对象事件的处理通常由函数(Function)担任。其基本格式与函数全部一样，可以将前面所介绍的所有函数作为事件处理程序。<br>格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Function 事件处理名(参数表)&#123;</div><div class="line">    事件处理语句集;</div><div class="line">    ……</div><div class="line">&#125;</div><div class="line"></div><div class="line">1. 单击事件onClick：button，radio，reset button，submit</div><div class="line">2. onChange改变事件</div><div class="line">3. 选中事件onSelect</div><div class="line">4. 获得焦点事件onFocus</div><div class="line">5. 失去焦点onBlur</div><div class="line">6. 载入文件onLoad</div><div class="line">7. 卸载文件onUnload：当Web页面退出时引发onUnload事件，并可更新Cookie的状态。</div></pre></td></tr></table></figure>
+</li>
+<li><p>事务注册的方法</p>
+<ul>
+<li><p>inline:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;somewhere.html&quot; onClick=&quot;myFunction()&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>traditional</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.onclick=myFunction;</div></pre></td></tr></table></figure>
+</li>
+<li><p>DOM 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.addEventListener(&quot;click&quot;,myFunction);</div></pre></td></tr></table></figure>
+</li>
+<li><p>IE:(evil enough!)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.attachEvent(&apos;onclick&apos;,myFunction);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Prototype…and so on:(prefered)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Event.observe(&apos;target&apos;,&apos;click&apos;,myFunction);</div><div class="line">document.observe(&apos;dom:loaded&apos;myFunction);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-面向对象"><a href="#4-面向对象" class="headerlink" title="4. 面向对象"></a>4. 面向对象</h3><p><strong>1. 用JavaScript实现类</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function myClass()</div><div class="line">&#123;</div><div class="line">    //此处相当于构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 如何获得一个类的实例</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var obj1 = new myClass();</div></pre></td></tr></table></figure></p>
+<p><strong>3. 对象的成员的引用</strong><br>在JavaScript中引用一个类的属性或方法的方法有以下三种。</p>
+<ul>
+<li><p>点号操作符:这是一种最普遍的引用方式，就不累赘。即如下形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名.属性名;</div><div class="line">对象名.方法名;</div></pre></td></tr></table></figure>
+</li>
+<li><p>方括号引用:JavaScript中允许用方括号引用对象的成员。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名[&quot;属性名&quot;];</div><div class="line">对象名[&quot;方法名&quot;];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里方括号内是代表属性或方法名的字符串，不一定是字符串常量。也可以使用变量。这样就可以使用变量传递属性或方法名。为编程带来了方便。在某些情况下，代码中不能确定要调用那个属性或方法时，就可以采用这种方式。否则，如果使用点号操作符，还需要使用条件判断来调用属性或方法。<br>另外，使用方括号引用的属性和方法名还可以以数字开头，或者出现空格，而使用点号引用的属性和方法名则遵循标示符的规则。但一般不提倡使用非标示符的命名方法。</p>
+<p><strong>4. 匿名函数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function()&#123;  </div><div class="line">    //这里忽略jQuery所有实现  </div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>匿名函数就是没有实际名字的函数。<br>例如我们在设定一个DOM元素事件处理函数的时候，我们通常都不会为他们定名字，而是赋予它的对应事件引用一个匿名函数。<br>对匿名函数的调用其实还有一种做法，也就是我们看到的jQuery片段——使用()将匿名函数括起来，然后后面再加一对小括号（包含参数列表）。</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h3 id="1-XHTML-XML-与DOM树"><a href="#1-XHTML-XML-与DOM树" class="headerlink" title="1. XHTML/XML 与DOM树"></a>1. XHTML/XML 与DOM树</h3><p>DOM 是 W3C（万维网联盟） 的推荐标准。DOM 定义了访问诸如 XML 和 XHTML 文档的标准。</p>
+<p>DOM的全称是Document Object Model，也即文档对象模型。在应用程序中，基于DOM的XML分析器将一个XML文档转换成一个对象模型的集合（通常称DOM树），应用程序正是通过对这个对象模型的操作，来实现对XML文档数据的操作。通过DOM接口，应用程序可以在任何时候访问XML文档中的任何一部分数据，因此，这种利用DOM接口的机制也被称作随机访问机制。<br>DOM接口提供了一种通过分层对象模型来访问XML文档信息的方式，这些分层对象模型依据XML的文档结构形成了一棵节点树。无论XML文档中所描述的是什么类型的信息，即便是制表数据、项目列表或一个文档，利用DOM所生成的模型都是节点树的形式。也就是说，DOM强制使用树模型来访问XML文档中的信息。由于XML本质上就是一种分层结构，所以这种描述方法是相当有效的。</p>
+<h3 id="2-DOMO-DOM2事件流（捕获、目标和冒泡）"><a href="#2-DOMO-DOM2事件流（捕获、目标和冒泡）" class="headerlink" title="2. DOMO DOM2事件流（捕获、目标和冒泡）"></a>2. DOMO DOM2事件流（捕获、目标和冒泡）</h3><p><strong>1. 事件流</strong></p>
+<ul>
+<li>事件冒泡(IE事件流)<br>事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深的那个节点）接受，然后逐级向上传播到较为不具体的节点（文档）。</li>
+<li>事件捕获(Netscape事件流)<br>不太具体的节点更早收到事件，而具体的节点最后收到节点。</li>
+<li>DOM事件流<br>“DOM2级事件”规定的事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。<br>DOM2：捕获阶段不含实际目标，不涉及事件目标，只为截获事件提供机会。</li>
+</ul>
+<h3 id="3-观察者模式"><a href="#3-观察者模式" class="headerlink" title="3. 观察者模式"></a>3. 观察者模式</h3><p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者，使它们能够自动更新自己。</p>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><h3 id="1-同步，异步通讯"><a href="#1-同步，异步通讯" class="headerlink" title="1. 同步，异步通讯"></a>1. 同步，异步通讯</h3><h3 id="2-Ajax请求"><a href="#2-Ajax请求" class="headerlink" title="2. Ajax请求"></a>2. Ajax请求</h3><p>AJAX 指异步 JavaScript 及 XML(Asynchronous JavaScript And XML)<br>Ajax的核心是JavaScript对象XmlHttpRequest。该对象在Internet Explorer 5中首次引入，它是一种支持异步请求的技术。简而言之，XmlHttpRequest使您可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。</p>
+<h3 id="3-Ajax优缺点"><a href="#3-Ajax优缺点" class="headerlink" title="3. Ajax优缺点"></a>3. Ajax优缺点</h3><p><strong>1. 优点</strong></p>
+<ul>
+<li>AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。</li>
+<li>通过 AJAX，您的 JavaScript 可使用 JavaScript 的 XMLHttpRequest 对象来直接与服务器进行通信。通过这个对象，您的 JavaScript 可在不重载页面的情况与 Web 服务器交换数据。</li>
+<li>AJAX 在浏览器与 Web 服务器之间使用异步数据传输（HTTP 请求），这样就可使网页从服务器请求少量的信息，而不是整个页面。</li>
+<li>AJAX 可使因特网应用程序更小、更快，更友好。</li>
+<li>AJAX 是一种独立于 Web 服务器软件的浏览器技术。</li>
+<li>最大优点：更迅捷的响应速度，就是能在不更新整个页面的前提下维护数据。这使得Web应用程序更为迅捷地回应用户动作，并避免了在网络上发送那些没有改变过的信息。</li>
+</ul>
+<p><strong>2. 缺点</strong></p>
+<ul>
+<li>对应用Ajax最主要的批评就是，它可能破坏浏览器后退按钮的正常行为。</li>
+<li>使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中。</li>
+<li>网络延迟——即用户发出请求到服务器发出响应之间的间隔——需要慎重考虑。</li>
+<li>一些手持设备（如手机、PDA等）现在还不能很好的支持Ajax。</li>
+<li>用JavaScript作的Ajax引擎，JavaScript的兼容性和DeBug都是让人头痛的事。</li>
+<li>Ajax的无刷新重载，由于页面的变化没有刷新重载那么明显，所以容易给用户带来困扰――用户不太清楚现在的数据是新的还是已经更新过的；现有的解决有：在相关位置提示、数据更新的区域设计得比较明显、数据更新后给用户提示等。</li>
+<li>对串流媒体的支持没有FLASH、Java Applet好。</li>
+</ul>
+<h3 id="4-XSS"><a href="#4-XSS" class="headerlink" title="4. XSS"></a>4. XSS</h3><p>XSS又叫CSS (Cross Site Script) ，跨站脚本攻击。它指的是恶意攻击者往Web页面里插入恶意脚本代码，当用户浏览该页之时，嵌入其中Web里面的脚本代码会被执行，从而达到恶意攻击用户的特殊目的。XSS属于被动式的攻击，因为其被动且不好利用，所以许多人常忽略其危害性。<br>XSS攻击分成两类，一类是来自内部的攻击，主要指的是利用程序自身的漏洞，构造跨站语句，如:dvbbs的showerror.asp存在的跨站漏洞。<br>另一类则是来自外部的攻击，主要指的自己构造XSS跨站漏洞网页或者寻找非目标机以外的有跨站漏洞的网页。如当我们要渗透一个站点，我们自己构造一个有跨站漏洞的网页，然后构造跨站语句，通过结合其它技术，如社会工程学等，欺骗目标服务器的管理员打开。<br>攻击Yahoo Mail 的Yamanner 蠕虫是一个著名的XSS 攻击实例。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="1-基准测试"><a href="#1-基准测试" class="headerlink" title="1. 基准测试"></a>1. 基准测试</h3><p>常用工具：Apache Bench，Siege, http_load<br>影响因素：<br>Geographical location 地理位置<br>Network issues  网络问题<br>Response size   响应大小<br>Code processing 编码处理<br>Browser behavior  浏览器行为<br>Web server configuration web服务器配置</p>
+<h3 id="2-优化思路，技术"><a href="#2-优化思路，技术" class="headerlink" title="2. 优化思路，技术"></a>2. 优化思路，技术</h3><p><strong>1. 浏览器</strong></p>
+<ul>
+<li>文件感知优化：尽早分派各种文档，并尽快使页面处于交互状态。</li>
+<li>思考式优化：浏览器不断学习用户导航模式来推测优化。</li>
+<li>使用的四种方法<ol>
+<li>资源预取（和优先级）</li>
+<li>DNS预解析</li>
+<li>TCP预连接</li>
+<li>网页预渲染</li>
+</ol>
+</li>
+</ul>
+<p><strong>2. CSS Optimization Rules</strong></p>
+<ul>
+<li>Place the CSS styles at the top of the HTML document</li>
+<li>Avoid certain CSS expressions</li>
+<li>Minify the CSS files</li>
+</ul>
+<p><strong>3. Image Optimization Rules</strong></p>
+<ul>
+<li>Use desired image sizes instead of resizing within HTML using width and height attributes</li>
+<li>Create sprites像素图 when possible</li>
+</ul>
+<p><strong>4. JavaScript Optimization</strong></p>
+<ul>
+<li>Place JavaScript at the bottom of the HTML</li>
+<li>Minify JavaScript</li>
+<li>Make JavaScript external</li>
+</ul>
+<p><strong>5. Server Optimization</strong></p>
+<ul>
+<li>Whether the server utilizes Gzip/bzip2 compression</li>
+<li>Whether DNS lookups are reduced</li>
+<li>Whether ETags are implemented</li>
+</ul>
+<p><strong>6. Optimize HTML</strong></p>
+<ul>
+<li>Standards compliant</li>
+<li>Remove whitespace</li>
+<li>Simple structures</li>
+<li>Browser compatibility</li>
+<li>Mobile compatibility</li>
+<li>Note:Web Standards</li>
+</ul>
+<p><strong>7. Use Text Instead of Images</strong></p>
+<ul>
+<li>Use CSS and HTML</li>
+<li>Avoid images for headers</li>
+<li>Text is always better for SEO</li>
+<li>Text will always render faster</li>
+<li>Balance good design with great performance</li>
+</ul>
+<p><strong>8. Cache Your Output</strong></p>
+<ul>
+<li>Minimize Server processing</li>
+<li>Server caching for dynamic content</li>
+<li>Browser caching for static resources</li>
+<li>cache Ajax requests</li>
+</ul>
+<p><strong>9. Avoid Bad Request</strong></p>
+<ul>
+<li>Check for 404 errors</li>
+<li>Avoid redirects on resources</li>
+<li>Monitor server errors</li>
+</ul>
+<p><strong>10. PHP Optimization Rules</strong></p>
+<ul>
+<li>PHP Code Optimization<ul>
+<li>Always declare your static</li>
+<li>Use Class Constants<ul>
+<li>Parsed at compile time, no execution everhead</li>
+<li>Faster lookups due to a smaller hash</li>
+<li>“Namespacing” &amp; shorter hash names</li>
+<li>Cleaner code speeds up debugging</li>
+</ul>
+</li>
+<li>Calculating loop length in advance</li>
+<li>Using a foreach loop instead of either a while or for loop</li>
+<li>Using fread() for small file data access and file_get_contents for large files</li>
+</ul>
+</li>
+<li>Opcode Caching<ul>
+<li>Alternative PHP Cache (APC)</li>
+<li>XCache</li>
+<li>Variable Caching: The value of implementing variable caching</li>
+</ul>
+</li>
+</ul>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<li>HTTP<br>超文本传输协议(HyperText Transfer Protocol)。是互联网应用最为广泛的一种网络协议，所有WWW的文件都必须遵守这个表水准。</li>
+<li>XML<br>可扩展标记语言(Extensible Markup Language)。标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。</li>
+<li>rest<br>表述性状态传递(Representational State Transfer)。是一种针对网络应用的设计和开发方式，可以降低开发的复杂性，提高系统的可伸缩性。</li>
+<li>Ajax<br>异步JacaScript和XML(Asynchronous JavaScript And XML)。是指一种创建交互式网页应用的网页开发技术。通过在后台与服务器进行少量数据交换，Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+<li>ria<br>丰富互联网程序(Rich Internet Applications)。具有高度互动性，丰富用户体验以及功能强大的客户端。</li>
+<li>svg<br>可缩放矢量图形(Scalable Vector Graphics)。是基于可扩展标记语言(标准通用标记语言的子集)，用于描述二维矢量图的一种图形格式。</li>
+<li>xss<br>跨站脚本攻击(Cross Site Scripting)。为不和层叠样式表(Cascading Style Sheets)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意heml代码。当用户浏览该页时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的目的。</li>
+<li>wsdl<br>网络服务描述语言(Web Services Description Language)。是Web Service的描述语言，它包含一系列描述某个Web Service的定义。</li>
+<li>mashup<br>糅合mashup。是当今网络上新出现的一种网络现象，将两种以上使用公共或者私有数据库的Web应用，加在一起，形成一个整合应用。</li>
+<li><p>SOP</p>
+</li>
+<li><p>WWW</p>
+</li>
+<li><p>IP</p>
+</li>
+<li><p>DNS</p>
+</li>
+<li><p>URL</p>
+</li>
+<li><p>URI</p>
+</li>
+<li><p>URN</p>
+</li>
+<li><p>HTML</p>
+</li>
+<li><p>XHTML</p>
+</li>
+<li><p>DOCTYPE</p>
+</li>
+<li><p>SEO</p>
+</li>
+<li><p>CSS</p>
+</li>
+<li><p>DOM</p>
+</li>
+<li><p>MVC</p>
+</li>
+<li><p>ZF</p>
+</li>
+<li><p>TCP</p>
+</li>
+<li><p>RTT</p>
+</li>
+<li><p>CRLF</p>
+</li>
+<li><p>PCRE</p>
+</li>
+<li><p>APC</p>
+</li>
+<li><p>CDN</p>
+</li>
+<li><p>CDATA</p>
+</li>
+<li><p>JSON</p>
+</li>
+<li><p>RPC</p>
+</li>
+<li><p>SOA</p>
+</li>
+<li><p>WSDL</p>
+</li>
+<li><p>UDDI</p>
+</li>
+<li><p>SOAP</p>
+</li>
+<li><p>API</p>
+</li>
+<li><p>HATEOAS</p>
+</li>
+</ul>
+<h2 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h2><h3 id="1-为什么不建议table布局"><a href="#1-为什么不建议table布局" class="headerlink" title="1. 为什么不建议table布局"></a>1. 为什么不建议table布局</h3><ul>
+<li>Table要比其他html标记占更多的字节</li>
+<li>Table会阻挡浏览器渲染引擎的渲染顺序</li>
+<li>Table里显示图片时需要你把单个，有逻辑性的图片切成多个图</li>
+<li>在某些浏览器中Table里的文字的拷贝会出现问题</li>
+<li>Table会影响其内部的某些布局属性的生效(比如&lt;td&gt;里的元素的height:100%)</li>
+<li>一旦学会了CSS知识，你会发现使用table做页面布局会变得更麻烦</li>
+<li>table对于页面布局者来说，从语义上看是不正确的</li>
+<li>table代码会让阅读者抓狂</li>
+<li>table一旦设计完成就变成死的，很难通过CSS让它展现新的面貌</li>
+</ul>
+<h3 id="2-表单验证是什么，有哪几种方式并比较"><a href="#2-表单验证是什么，有哪几种方式并比较" class="headerlink" title="2. 表单验证是什么，有哪几种方式并比较"></a>2. 表单验证是什么，有哪几种方式并比较</h3><ul>
+<li>Form标签中增加onsubmit=check()</li>
+<li>Input type=Button按钮中Onclick=”submitForm()”</li>
+<li>Input type=submit 中 onclick=return check()</li>
+</ul>
+<h3 id="3-bigpipe的原理和优缺点"><a href="#3-bigpipe的原理和优缺点" class="headerlink" title="3. bigpipe的原理和优缺点"></a>3. bigpipe的原理和优缺点</h3><p>要利用该Web服务器和浏览器之间的并行性，BigPipe首先分解网页成多个可调用的Pagelets。正如流水线微处理器划分一个指令的生命周期为(“取指令”,”指令解码”,”执行”,”写回寄存器”等)多个阶段，BigPipe的页面生成过程分为以下几个阶段：</p>
+<ol>
+<li>请求解析：Web服务器解析和完整性检查的HTTP请求。</li>
+<li>数据获取：Web服务器从存储层获取数据。</li>
+<li>标记生成：Web服务器生成的响应的HTML标记。</li>
+<li>网络传输：响应从Web服务器传送到浏览器。</li>
+<li>CSS的下载：浏览器下载网页的CSS请求。</li>
+<li>DOM树结构和CSS样式：浏览器构造的DOM文档树，然后应用它的CSS规则。</li>
+<li>JavaScript下载：浏览器下载网页中JavaScript引用的资源。、</li>
+<li>JavaScript执行：浏览器的网页执行JavaScript代码。</li>
+</ol>
+<ul>
+<li>前三个阶段执行，由Web服务器，最后四个阶段是由浏览器执行。每个Pagelet必须经过所有这些阶段顺序，但BigPipe在不同的阶段使几个Pagelets同时执行。</li>
+<li>在BigPipe，一个用户请求的生命周期是这样的：在浏览器发送一个HTTP请求到Web服务器。在收到的HTTP请求，并在上面进行一些全面的检查，网站服务器立即发回一个未关闭的HTML文件，其中包括一个HTML 标签和标签的开始标签。标签包括BigPipe的JavaScript库来解析Pagelet以后收到的答复。在标签，有一个模板，它指定了页面的逻辑结构和Pagelets占位符。</li>
+<li>在客户端在收到Pagelet通过“onPageletArrive”发出的指令，BigPipe的JavaScript库将首先下载它的CSS资源；在CSS资源被下载完成后，BigPipe将在Pagelet的标记HTML显示它的innerHTML。多个Pagelets的CSS可在同一时间下载，它们可以根据其各自CSS的下载完成情况来确认显示顺序。在BigPipe中，JavaScript资源的优先级低于CSS和页面内容。因此，BigPipe不会在所有Pagelets显示出来之前下载任何Pagelet中的JavaScript。然后，所有Pagelets的JavaScript异步下载。最后Pagelet的JavaScript初始化代码根据其各自的下载完成情况来确定执行顺序。</li>
+<li>这种高度并行系统的最终结果是，多个Pagelets的不同执行阶段同时进行。例如，浏览器可以正在下载三个Pagelets CSS的资源，同时已经显示另一Pagelet内容，与此同时，服务器也在生成新的Pagelet。从用户的角度来看，页面是逐步呈现的。最开始的网页内容会更快的显示，这大大减少了用户的对页面延时的感知。</li>
+<li>优点：节约时间，用户体验好。</li>
+<li>缺点：一个pagelet阻塞，会导致后面的pagelet阻塞，影响效率。</li>
+</ul>
+<h3 id="4-HTML5"><a href="#4-HTML5" class="headerlink" title="4. HTML5"></a>4. HTML5</h3><ol>
+<li>HTML5加入了语义化标签</li>
+<li>离线存储</li>
+<li>有效支持多种设备访问，与操作系统集成的更监牢</li>
+<li>数据连接，改善前后数据交互，websocket技术减少了header traffic，不需要轮询，全双工</li>
+<li>多媒体支持标签</li>
+<li>增加了三维，图形和特效</li>
+<li>性能与集成</li>
+<li>支持CSS3</li>
+<li>无插件范式</li>
+</ol>
+<h3 id="5-Why-CSS"><a href="#5-Why-CSS" class="headerlink" title="5. Why CSS"></a>5. Why CSS</h3><ol>
+<li>使用了CSS的文档更加灵活，简洁</li>
+<li>基本格式工具</li>
+<li>方便管理多个文档</li>
+<li>使用类选择器可节省时间</li>
+<li>更多格式化的机会</li>
+</ol>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
+    <a class="pull-left" href="/2017/11/20/Java8-in-Action-1/" style="float: left;">
+        ← Java8 学习笔记(一)
+    </a>
     
-    <a class="pull-right" href="/2017/10/28/置顶目录/">
-        【置顶】 博客目录 →
+    
+    <a class="pull-right" href="/2017/10/23/DatabaseCourse/">
+        数据库复习 →
     </a>
     
 </nav>
