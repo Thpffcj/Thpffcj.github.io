@@ -477,6 +477,87 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 <li>从本质上来说降低了并发的个数，但是在数据量非常庞大的情况下，降低并发所带来的缺陷远远小于分区所提高的性能。</li>
 <li>由于强制的数据聚合可能会导致其他数据的分散，所以不同的查询请求也可能会形成性能上的矛盾。</li>
 </ul>
+<h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><h3 id="1-一些概念"><a href="#1-一些概念" class="headerlink" title="1. 一些概念"></a>1. 一些概念</h3><ul>
+<li>关系型数据库无法直观地解决层次式问题，所以需要一种变换。关系型数据表中的字段之间是平级且等价的，没有层次关系。</li>
+<li>层次式结构（树状结构）不能直接放在关系型数据库中，需要变换一种形式。树状结构中，节点之间有父子关系，存在兄弟节点，有根节点也有子节点。</li>
+<li>简单树状结构要求：一个节点只有一个父节点；所有的节点类型都是一样的。</li>
+<li>简单树状结构的例子：档案位置（楼-&gt;层-&gt;房间-&gt;橱-&gt;柜），找到档案是一个自顶向下的遍历过程；风险分析（解决对冲基金的风险问题，一个基金可能包含多种基金、股票，甚至有可能包含平级的基金。计算一个基金的风险，要计算这个基金的组成部分的加权风险）。</li>
+</ul>
+<h3 id="2-三种树状结构模型"><a href="#2-三种树状结构模型" class="headerlink" title="2. 三种树状结构模型"></a>2. 三种树状结构模型</h3><p><strong>1. 邻接模型</strong></p>
+<ul>
+<li>邻接模型：id，parent_id(指向上级)。邻接模式使用由下向上的记录方式，也就是在数据模型中每个节点会记录其父节点的信息。</li>
+<li>特性：<ul>
+<li>插入、移动、删除节点快捷</li>
+<li>只支持单父节点，不支持多父节点</li>
+<li>Connect by 容易实现</li>
+<li>递归实现，用oracle的with，表示出树的层次</li>
+<li>删除子树较难</li>
+<li>三种模型中性能最高，每秒返回的查询记录数最多，遍历一次，不是基于关系的处理，性能最好</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 物化路径</strong></p>
+<ul>
+<li>物化路径：PathID（1，1.1，1.2，1.1.1，1.2.1，…），使用层次式的路径明确地标识出来，一般用字符串存路径。每一个节点都存储在树中的位置信息，它允许节点之间有顺序（因为路径的标识有顺序），比如家族族谱。</li>
+<li>特性：<ul>
+<li>查询编写不困难，找出适当的记录并缩排显示容易</li>
+<li>计算由路径导出的层次不方便</li>
+<li>查询复杂度主要在路径字符串的处理</li>
+<li>树的的深度要自己写函数计算，可以计算“.”的数目或者去掉“.”后字符串的长度</li>
+<li>子节点有顺序，但不应该暗示任何兄弟节点的排序</li>
+<li>会产生重复记录的问题</li>
+<li>物化路径path不应该该是KEY，即使他们有唯一性</li>
+<li>所选择的编码方式不需要完全中立</li>
+<li>三种模型中性能中等</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 嵌套集合模型</strong></p>
+<ul>
+<li>嵌套集合模型：每一个节点都有一个左编号，都有一个右编号，left_num,right_num，某节点后代的left_num和right_num都会在该节点的left_num和right_num范围内。</li>
+<li>特性：<ul>
+<li>易理解，查找某一个节点的子节点很容易，但是对结果集排序不好操作，缩排无法处理</li>
+<li>适合深度优先遍历</li>
+<li>动态计算深度困难，不要显示人造根节点，为了缩排显示要硬编码最大深度，缩排处理会降低查询性能</li>
+<li>数据元素之间不再是点和线的关系，而是以容纳和被容纳的方式</li>
+<li>计算量大，对存储程序要求高。它是基于指针的解决方案</li>
+<li>数据更新，删除，插入开销很大，较少使用</li>
+<li>三种模型中，查询的性能最低</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-查询方式"><a href="#3-查询方式" class="headerlink" title="3. 查询方式"></a>3. 查询方式</h3><ul>
+<li>为了检查效率和性能，分别用不同模型解决如下两个问题：</li>
+<li>法国将军Dominique Vandamme指挥哪些部队，以缩排方式或简单列表的方式显示他们。注意，所有的commander字段都构建了索引（简称Vandamme查询）</li>
+<li>Scottish Highlanders的每个团各属于哪个部队（自底向上的查询）。在部队的名称（description字段）上没有索引，唯一的方法是在description字段中查找“Highland”字符串，在没有任何全文索引的情况下，这个问题简称highland问题</li>
+</ul>
+<p><strong>1. 自顶向下查询：Vandamme查询</strong></p>
+<ul>
+<li><p>邻接模式:递归实现，效率较低，使用CONNECT BY实现</p>
+</li>
+<li><p>使用递归实现</p>
+</li>
+<li><p>物化路径模型：path中前半段相同的即为结果，假设mp_depth()函数返回当前节点深度</p>
+</li>
+<li><p>嵌套集合模型：直接找到在left_num和right_num中间的所有节点，缩进比较难处理</p>
+</li>
+<li><p>自顶向下效率：嵌套集合&lt;物化路径&lt;邻间模型</p>
+</li>
+</ul>
+<p><strong>2. 自底向上访问：Highland查询</strong></p>
+<ul>
+<li><p>邻接模式:Connect by相当容易实现</p>
+</li>
+<li><p>物化路径模型：仅找出适当的记录并缩排显示算容易</p>
+</li>
+<li><p>自底向上：邻间&gt;物化路径&gt;嵌套集合</p>
+</li>
+</ul>
+<h2 id="对冗余的控制（反范式模式）"><a href="#对冗余的控制（反范式模式）" class="headerlink" title="对冗余的控制（反范式模式）"></a>对冗余的控制（反范式模式）</h2><h3 id="1-Pattern-1-合并1对1关系"><a href="#1-Pattern-1-合并1对1关系" class="headerlink" title="1. Pattern 1 合并1对1关系"></a>1. Pattern 1 合并1对1关系</h3><p>问题是会产生大量空值，若两边都部分参与则不能合并。部分参与为绝大部分都参与时适合使用Pattern 1。</p>
+<h3 id="2-Pattern-2-1对N关系用非键值进行连接"><a href="#2-Pattern-2-1对N关系用非键值进行连接" class="headerlink" title="2. Pattern 2 1对N关系用非键值进行连接"></a>2. Pattern 2 1对N关系用非键值进行连接</h3><p>适用条件：两表连接时最主要的事务都与某非键值相关</p>
+<h3 id="3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"><a href="#3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键" class="headerlink" title="3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"></a>3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键</h3><h3 id="4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"><a href="#4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中" class="headerlink" title="4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"></a>4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中</h3><h3 id="5-Pattern-5-引入重复组"><a href="#5-Pattern-5-引入重复组" class="headerlink" title="5. Pattern 5 引入重复组"></a>5. Pattern 5 引入重复组</h3><p>通常对于一个多值属性，值不太多(&lt;=10)，且不会经常改变，可以在表中建多个有关此属性的列。如一个人的地址，可能有4个</p>
+<h3 id="6-Pattern-6-建立提取表"><a href="#6-Pattern-6-建立提取表" class="headerlink" title="6. Pattern 6 建立提取表"></a>6. Pattern 6 建立提取表</h3><p>为了避免查询和更新这两个不同操作的矛盾。可以将更新和查询放在两张表中，从表中提取查询表，专门用于查询，是适用于查询实时性不严的情况。</p>
+<h3 id="7-Pattern-7-分区"><a href="#7-Pattern-7-分区" class="headerlink" title="7. Pattern 7 分区"></a>7. Pattern 7 分区</h3><p>列分区：数据冗余，主键每次都要<br>表大，有些列不常用，采用分区方式，常用的在一个区，不常用的在另一个区。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -484,7 +565,7 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2017/11/15/WebCourse/" style="float: left;">
-        ← WebCourse
+        ← 面向Web的计算复习
     </a>
     
     

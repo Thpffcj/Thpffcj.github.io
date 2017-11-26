@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>WebCourse | Thpffcj的树洞</title>
+  <title>面向Web的计算复习 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,7 +177,7 @@
       </time>
     
 </span>
-                <h1>WebCourse</h1>
+                <h1>面向Web的计算复习</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -511,6 +511,28 @@
 <li>DOM事件流<br>“DOM2级事件”规定的事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。<br>DOM2：捕获阶段不含实际目标，不涉及事件目标，只为截获事件提供机会。</li>
 </ul>
 <h3 id="3-观察者模式"><a href="#3-观察者模式" class="headerlink" title="3. 观察者模式"></a>3. 观察者模式</h3><p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者，使它们能够自动更新自己。</p>
+<h2 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p><strong>1. 具有良好的格式</strong><br>标记一定要拥有结尾标记，如&lt;name&gt;coolsun&lt;/name&gt;</p>
+<p><strong>2. 具有验证机制</strong><br>XML的标记是程序员自己定义的，标记的定义和使用是否符合语法，需要验证。XML有两种验证方法：一种是DTD（Document Type Definition），即文档类型定义，DTD是一个专门的文件，用来定义和校验XML文档中的标记；另一种是XML Schema，用XML语法描述，它比DTD更优越，多个Schema可以复合使用XML名称空间，可以详细定义元素的内容及属性值的数据类型。</p>
+<p><strong>3. 灵活的WEB应用</strong><br>在XML中，数据和显示格式是分离设计的，HTML提供显示的内容，而XML描述数据本身。</p>
+<p><strong>4. 丰富的显示样式</strong><br>XML数据定义打印、显示排版信息主要有3种方法：用CSS定义打印和显示排版信息；用XSLT转换到HTML进行显示和打印；用XSLT转换成XSL的FO（Formatter Object）进行显示和打印</p>
+<p><strong>5. XML是电子数据交换（EDI）的格式</strong><br>XML是为互联网的数据交换而设计，它不仅仅是SGML定义的用于描述的文档，而且在电子商务等各个领域使用数据交换成为可能。</p>
+<p><strong>6. 便捷的数据处理</strong><br>XML可以很方便地与数据库中的表进行相互转换。XML使计算机能够很简易地读取和存储资料，并确保数据结构精确。</p>
+<p><strong>7. 面向对象的特性</strong><br>XML是信息的对象化语言。DTD和Schema是界面和类（Interface和Class），XML是对象实例（Object），XSL是方法和实现（Method和Implement）。XML-Data解决了XML类的继承问题。</p>
+<p><strong>8. 开放的标准</strong><br>XML基于的标准是为Web进行过优化的。由于XML彻底把标识的概念同显示分开了，处理者能够在结构化的数据中嵌套程序化的描述以表明如何显示数据。XML是信息的高层封装与运输的标准。</p>
+<p><strong>9. 选择性更新</strong><br>通过XML，数据可以在选择的局部小范围内更新。每当一部分数据变化后，不需要重发整个结构化的数据。</p>
+<p><strong>10. XML是一个技术大家族</strong><br>XML是一套完整的方案，有一系列相关技术，包括文件数据验证、显示输出、文件转换、文档对象和连接等。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1. 树状存储</strong><br>虽然搜索效率极高，但是插入和修改比较困难。</p>
+<p><strong>2. 大数据量低效率</strong><br>XML的文本表现手法、标记的符号化会导致XML数据比二进制表现数据量增加，尤其当数据量很大的时候，效率就成为很大的问题。</p>
+<p><strong>3. 管理功能不完善</strong><br>XML文档做为数据提供着使用，没有数据库系统那样完善的管理功能。</p>
+<p><strong>4. 通信难</strong><br>由于XML是元置标语言，任何人、公司和组织都可以利用它定义新的标准，这些标准间的通信就成了巨大的问题。</p>
+<h3 id="3-应用"><a href="#3-应用" class="headerlink" title="3. 应用"></a>3. 应用</h3><ul>
+<li>XML 简化数据传输</li>
+<li>XML 把数据从 HTML 分离</li>
+<li>XML 简化数据共享</li>
+<li>XML 简化平台的变更</li>
+<li>XML 使您的数据更有用</li>
+<li>XML 用于创建新的 Internet 语言（XHTML是基于xml开发的标准）</li>
+</ul>
 <h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><h3 id="1-同步，异步通讯"><a href="#1-同步，异步通讯" class="headerlink" title="1. 同步，异步通讯"></a>1. 同步，异步通讯</h3><h3 id="2-Ajax请求"><a href="#2-Ajax请求" class="headerlink" title="2. Ajax请求"></a>2. Ajax请求</h3><p>AJAX 指异步 JavaScript 及 XML(Asynchronous JavaScript And XML)<br>Ajax的核心是JavaScript对象XmlHttpRequest。该对象在Internet Explorer 5中首次引入，它是一种支持异步请求的技术。简而言之，XmlHttpRequest使您可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。</p>
 <h3 id="3-Ajax优缺点"><a href="#3-Ajax优缺点" class="headerlink" title="3. Ajax优缺点"></a>3. Ajax优缺点</h3><p><strong>1. 优点</strong></p>
 <ul>
@@ -631,66 +653,30 @@
 <li>xss<br>跨站脚本攻击(Cross Site Scripting)。为不和层叠样式表(Cascading Style Sheets)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意heml代码。当用户浏览该页时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的目的。</li>
 <li>wsdl<br>网络服务描述语言(Web Services Description Language)。是Web Service的描述语言，它包含一系列描述某个Web Service的定义。</li>
 <li>mashup<br>糅合mashup。是当今网络上新出现的一种网络现象，将两种以上使用公共或者私有数据库的Web应用，加在一起，形成一个整合应用。</li>
-<li><p>SOP</p>
-</li>
-<li><p>WWW</p>
-</li>
-<li><p>IP</p>
-</li>
-<li><p>DNS</p>
-</li>
-<li><p>URL</p>
-</li>
-<li><p>URI</p>
-</li>
-<li><p>URN</p>
-</li>
-<li><p>HTML</p>
-</li>
-<li><p>XHTML</p>
-</li>
-<li><p>DOCTYPE</p>
-</li>
-<li><p>SEO</p>
-</li>
-<li><p>CSS</p>
-</li>
-<li><p>DOM</p>
-</li>
-<li><p>MVC</p>
-</li>
-<li><p>ZF</p>
-</li>
-<li><p>TCP</p>
-</li>
-<li><p>RTT</p>
-</li>
-<li><p>CRLF</p>
-</li>
-<li><p>PCRE</p>
-</li>
-<li><p>APC</p>
-</li>
-<li><p>CDN</p>
-</li>
-<li><p>CDATA</p>
-</li>
-<li><p>JSON</p>
-</li>
-<li><p>RPC</p>
-</li>
-<li><p>SOA</p>
-</li>
-<li><p>WSDL</p>
-</li>
-<li><p>UDDI</p>
-</li>
-<li><p>SOAP</p>
-</li>
-<li><p>API</p>
-</li>
-<li><p>HATEOAS</p>
-</li>
+<li>SOP<br>同源协议(Same-Origin-Policy)。现在的网络浏览器的安全模式是根据SOP，并对网络应用提供了一些基础的保护功能。一般一个网址通常由protocol，domain，porl三个部分组成，而根据SOP协议，如果一个网址只要至少一个部分不符合，便不能进入到先前进入的非同源网址。</li>
+<li>WWW<br>环球信息网(World Wide Web)。中文名字为”万维网”，常简称为Web。分为Web客户端和Web服务器程序。 </li>
+<li>IP<br>网络之间互连的协议(Internet Protocol)。也就是为计算机网络相互连接进行通信而设计的协议。在因特网中，它是能使连接到网上的所有计算机网络实现相互通信的一套原则，规定了计算机在因特网上进行通信应当遵守的规则。</li>
+<li>DNS<br>域名系统(Domain Name System)。因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的使用互联网。而不用记住能够被机器直接读取的IP字符串。通过主机名，最终得到该主机名对应的IP地址过程叫做域名解析(或主机名解析)。DNS协议运行在UDP协议之上，使用端口53。</li>
+<li>URL<br>统一资源定位符(Uniform Resource Locator)。是互联网上标准资源的地址。互联网上的每一个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</li>
+<li>URI<br>统一资源标识符(Uniform Resource Identifier)。是一个用于标识某一互联网资源名称的字符串。该种标识允许用户对任何(包括本地和互联网)的资源通过特定的协议进行交互操作。UPI由包括确定的语法和相关协定的方案所定义。</li>
+<li>URN<br>统一资源名称(Uniform Resource Name)。唯一标识一个实体的标识符，但是不能给出实体的位置。系统可以先在本地寻找一个实体，在它试着在Web上找到该实体之前。它也允许Web的位置改变，然而这个实体却还是能够被找到。</li>
+<li>HTML<br>超文本标记语言(HyperText Markup Language)。标准通用标记语言下的一个应用。”超文本”就是指页面内可以包含图片，链接，甚至音乐，程序等非文字元素。超文本标记语言的结构包括”头”部分和”主体”部分，其中头部提供关于网页的信息，主体部分提供网页的具体内容。</li>
+<li>XHTML<br>可扩展超文本标记语言(Extensible HyperText Markup Language)。是一种置标语言，表达方式与超文本标记语言类似，不过语法上更加严格。从继承关系上讲，HTML是一种基于标准通用置标语言的应用，是一种非常灵活的置标语言，而XHTML则基于可扩展标记语言，可扩展标记语言是标准通用置标语言的一个子集。</li>
+<li>DOCTYPE<br>DOCTYPE标签是一种标准通用标记语言的文档类型声明，它的目的是要告诉标准通用标记语言解析器，它应该使用什么样的文档类型定义(DTD)来解析文档。</li>
+<li>SEO<br>搜索引擎优化(Search Engine optimization)。SEO是指通过</li>
+<li>CSS<br>层叠样式表(Cascading Style Sheets)。层叠样式表是一种用来表现HTML(标准通用标记语言的一个应用)或XML(标准通用标记语言的一个子集)等文件样式的计算机语言。</li>
+<li>DOM<br>文档对象模型(Document Object Model)。是W3C组织推荐的处理可扩展标志语言的标准编程接口。</li>
+<li>MVC<br>模型视图控制器(Model View Controller)。是一种软件设计典范，用一种业务逻辑，数据，界面分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重复编写业务逻辑。</li>
+<li>TCP<br>传输控制协议(Transmission Control Protocol)。是一种面向连接的，可靠的，基于字节流的传输层通信协议。</li>
+<li>APC<br>可选PHP缓存(Alternative PHP Cache)。是一种对PHP有效的开放源高速缓冲存储器工具，可用于缓存和优化Web服务器上的PHP代码，改善服务器性能。</li>
+<li>CDN<br>内容分发网络(Content Delivery Network)。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈环节，使内容传输的更快，更稳定。</li>
+<li>JSON<br>JavaScript对象表示法(JavaScript Object Notation)。是一种轻量级的数据交换格式。它基于ECMAScript的一个子集。JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯(包括C，C++，C#，Java，Python等)。这些特性使JSON成为理想的数据交换语言。易与人阅读和编写，同时也易于机器解析和生成(一般用于提升网络传输速率)。</li>
+<li>RPC<br>远程过程调用协议(Remote Procedure Call Protocol)。他是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。</li>
+<li>SOA<br>面向服务的体系结构(Service-Oriented Architecture)。是一个组件模型，它将引用程序的不同功能单元(称为服务)通过这些服务之间定义良好的接口和契约联系起来。</li>
+<li>WSDL<br>网络服务描述语言(Web Service Description Language)。是Web Service的描述语言，它包括一系列描述某个Web Service的定义。</li>
+<li>UDDI<br>统一描述，发现和集成协议(Universal Description Discovery and Integration)。是一种目录服务，企业可以使用它对Web Service进行注册和搜索。</li>
+<li>SOAP<br>简单对象访问协议(Simple Object Access Protocol)。是交换数据的一种协议规范，是一种轻量的，简单的，基于XML(标准通用标记语言下的一个子类)的协议，它被设计成在WEB上交换结构化的和固化的信息。</li>
+<li>API<br>应用编程接口(Application Programming Interface)。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。</li>
 </ul>
 <h2 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h2><h3 id="1-为什么不建议table布局"><a href="#1-为什么不建议table布局" class="headerlink" title="1. 为什么不建议table布局"></a>1. 为什么不建议table布局</h3><ul>
 <li>Table要比其他html标记占更多的字节</li>
