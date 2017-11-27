@@ -181,25 +181,110 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="为性能而设计"><a href="#为性能而设计" class="headerlink" title="为性能而设计"></a>为性能而设计</h2><h3 id="1-提高性能的方法"><a href="#1-提高性能的方法" class="headerlink" title="1. 提高性能的方法"></a>1. 提高性能的方法</h3><ol>
-<li><p>数据结构的设计<br>对数据表进行规范化，可以保持适当的冗余量，建立有用的索引，尽量减少表与表之间的关联，运用存储过程等。</p>
+      		<h2 id="1-为性能而设计"><a href="#1-为性能而设计" class="headerlink" title="1. 为性能而设计"></a>1. 为性能而设计</h2><h3 id="1-提高性能的方法"><a href="#1-提高性能的方法" class="headerlink" title="1. 提高性能的方法"></a>1. 提高性能的方法</h3><p><strong>1. 数据结构的设计</strong></p>
+<ul>
+<li>对数据表进行规范化，可以保持适当的冗余量，建立有用的索引，尽量减少表与表之间的关联，运用存储过程等。</li>
+</ul>
+<p><strong>2. 处理流程</strong></p>
+<ul>
+<li>采用异步处理可以允许用户发出操作之后去做其他工作，数据库进行集中的批处理，当处理完毕后通知用户。</li>
+<li>采用同步处理时用户必须等待数据库操作并返回结果，期间不能做其他操作，适合数据库进行实时交易。</li>
+<li>要根据系统的需求选择一种合适的手段，这会影响物理结构的设计。</li>
+</ul>
+<p><strong>3. 数据集中化</strong></p>
+<ul>
+<li>分布式数据存储具有更灵活的体系结构，但是有缺点：<ul>
+<li>远程数据的透明引用访问代价很高。</li>
+<li>不同的数据源数据结合极为困难</li>
+<li>存取结构复杂，保密性不易控制</li>
+<li>因此，将数据集中化会提高数据库速度，并且在部署上服务离数据越近，速度会越快。离数据越近，访问速度越快。代码里DBMS核心越近运行越快，充分利用每次数据库的访问。Block使用充分，命中率高，所需IO操作少。</li>
+</ul>
 </li>
-<li><p>处理流程<br>采用异步处理可以允许用户发出操作之后去做其他工作，数据库进行集中的批处理，当处理完毕后通知用户。<br>采用同步处理时用户必须等待数据库操作并返回结果，期间不能做其他操作，适合数据库进行实时交易。<br>要根据系统的需求选择一种合适的手段，这会影响物理结构的设计。</p>
+</ul>
+<p><strong>4. 保持数据库连接的稳定。连接稳定减少交互</strong></p>
+<p><strong>5. 充分利用每次的数据库访问，减少服务与数据库之间的交互</strong></p>
+<p><strong>6. 优化SQL语句</strong></p>
+<p><strong>7. 谨慎的使用自定义函数</strong><br>不当的位置会使自定义函数执行次数过多而造成性能下降</p>
+<p><strong>8. 构建稳定的应用需要防御是编程，但在合理的情况下可以使用进攻式编程。</strong></p>
+<h3 id="2-提高性能的原则"><a href="#2-提高性能的原则" class="headerlink" title="2. 提高性能的原则"></a>2. 提高性能的原则</h3><p><strong>1. 减少数据访问（减少磁盘访问）</strong></p>
+<ul>
+<li>创建并使用正确的索引，建立索引通常应该考虑：<ul>
+<li>索引对于查询的效率提高多少</li>
+<li>索引对DML(INSERT,UPDATE,DELETE)附加的开销有多少</li>
+<li>索引应该建在哪些列上</li>
+<li>哪些情况能用到索引</li>
+</ul>
 </li>
-<li><p>数据集中化</p>
+<li>只通过索引访问数据<ul>
+<li>需要检索的数据全部在索引中</li>
+</ul>
 </li>
-<li><p>保持数据库连接的稳定。连接稳定减少交互</p>
+<li>优化SQL执行计划<ul>
+<li>设计适合业务逻辑的良好SQL（表数量，join数量）</li>
+</ul>
 </li>
-<li><p>充分利用每次的数据库访问，减少服务与数据库之间的交互</p>
+<li>代码中使用函数始终应该首选DBMS自带函数，代码的执行越接近DBMS核心，则代码执行速度越快</li>
+<li>慎用自定义函数。（自定义函数中可能隐藏有查询，阻碍了基于代价的优化器（CBO）对整个查询的优化效果，子查询隐藏在函数中，优化器“鞭长莫及”）</li>
+</ul>
+<p><strong>2. 返回更少数据（减少网络传输或磁盘访问）（不需要的数据不要取出来）</strong></p>
+<ul>
+<li>数据分页处理（限制每次取出数据的数量）<ul>
+<li>客户端（应用程序或浏览器）分页</li>
+<li>应用服务器分页</li>
+<li>数据库SQL分页</li>
+</ul>
 </li>
-<li><p>优化SQL语句</p>
+<li>只返回需要的字段<ul>
+<li>通过去除不必要的返回字段可以提高性能</li>
+<li>减少数据在网络上传输开销</li>
+<li>减少服务器数据处理开销</li>
+<li>减少客户端内存占用</li>
+<li>字段变更时提前发现问题，减少程序bug</li>
+<li>如果访问的所有字段刚好在一个索引里面，则可以使用纯索引访问提高性能</li>
+</ul>
 </li>
-<li><p>谨慎的使用自定义函数<br>不当的位置会使自定义函数执行次数过多而造成性能下降</p>
+</ul>
+<p><strong>3. 减少交互次数（减少网络传输）（需要的数据以尽量少的交互次数全部取出））</strong></p>
+<ul>
+<li>批量处理数据，每次数据库连接应该完成尽可能多的工作，充分利用每次数据库访问</li>
+<li>使用INList 代替多个 where，减少SQL查询的次数</li>
+<li>设置每次返回结果的Fetch Size<ul>
+<li>可以加大fetch size,这样可以减少结果数据传输的交互次数及服务器数据准备时间，提高性能</li>
+</ul>
 </li>
-<li><p>构建稳定的应用需要防御是编程，但在合理的情况下可以使用进攻式编程。</p>
+<li>使用存储过程<ul>
+<li>大型数据库一般都支持存储过程，合理的利用存储过程也可以提高系统性能。</li>
+<li>各个DBMS内部变成方式有较大差异，存储过程移植性不好，存储过程中会包含一定的业务逻辑，使得系统维护和管理更加困难，所以普通业务逻辑尽量不要使用存储过程</li>
+</ul>
 </li>
-</ol>
-<h3 id="2-提高性能的原则"><a href="#2-提高性能的原则" class="headerlink" title="2. 提高性能的原则"></a>2. 提高性能的原则</h3><h3 id="3-集中式分布式"><a href="#3-集中式分布式" class="headerlink" title="3. 集中式分布式"></a>3. 集中式分布式</h3><p><strong>1. 集中式DBS</strong></p>
+</ul>
+<p><strong>4. 减少服务器CPU开销（减少CPU及内存开销）</strong></p>
+<ul>
+<li>使用绑定变量<ul>
+<li>绑定变量是指SQL中对编号的值采用变量参数的形式提交，而不是在SQL中直接拼写对应的值（java里面的preparedStatement）</li>
+</ul>
+</li>
+<li>合理使用排序<ul>
+<li>需要注意是否一定要这么做了，大记录集排序不仅增加了CPU开销，而且可能会由于内存不足发生硬盘排序的现象，当发生硬盘排序时性能会急剧下降</li>
+</ul>
+</li>
+<li>减少模糊查找，例如like</li>
+<li>不要把太多的复杂计算交给数据库<ul>
+<li>大量复杂运算在数据库里不利于数据库高并发处理</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 优化数据库物理存储及其环境</strong></p>
+<ul>
+<li>选择性能优良的数据库服务器</li>
+<li>数据库物理存储的考虑<ul>
+<li>客户离数据越近，访问速度越快</li>
+<li>数据分散磁盘存储，减小单个磁盘的访问压力，增加数据库对于并发的处理能力</li>
+</ul>
+</li>
+<li>数据表的分区</li>
+</ul>
+<h3 id="3-集中式分布式"><a href="#3-集中式分布式" class="headerlink" title="3. 集中式分布式"></a>3. 集中式分布式</h3><p><strong>1. 集中式DBS</strong></p>
 <ul>
 <li>定义：是指数据库中的数据集中存储在一台计算机上，数据的处理集中在一台计算机上完成。 </li>
 <li>数据集中化：提高数据库速度，并且在部署上服务离数据越近，速度会越快。Block使用充分，命中率高，所需io操作少；缺点是：单点故障，会带来很大损失，解决方式是热备份或灾难备份。</li>
@@ -210,7 +295,7 @@
 </li>
 <li>集中式数据库系统的缺点：<ul>
 <li>当中心站点计算机或数据库系统不能运行时，在系统恢复之前所有用户都不能使用系统。从终端到中心站点的通信开销是很昂贵的。</li>
-<li>对共享数据的集中控制会成为并发和吞吐的瓶颈</li>
+<li>对共享数据的集中控制会成为并发和吞吐的瓶颈。</li>
 </ul>
 </li>
 </ul>
@@ -240,7 +325,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="1-索引概念"><a href="#1-索引概念" class="headerlink" title="1. 索引概念"></a>1. 索引概念</h3><p><strong>1. 索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。是一种以原子粒度访问数据的手段，而不是为了大量数据的访问。是一种数据访问方式，索引是顺序存取</strong></p>
+<h2 id="2-索引"><a href="#2-索引" class="headerlink" title="2. 索引"></a>2. 索引</h2><h3 id="1-索引概念"><a href="#1-索引概念" class="headerlink" title="1. 索引概念"></a>1. 索引概念</h3><p><strong>1. 索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。是一种以原子粒度访问数据的手段，而不是为了大量数据的访问。是一种数据访问方式，索引是顺序存取</strong></p>
 <p><strong>2. 索引分类</strong></p>
 <ul>
 <li>聚簇索引：按照数据存放的物理位置为顺序的，索引的叶节点就是物理上的叶节点，聚簇索引能提高多行检索的速度</li>
@@ -248,6 +333,7 @@
 <li>一个表最多只能有一个聚簇索引</li>
 </ul>
 <p><strong>3. 索引结构：B树</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/B%E6%A0%91%E7%B4%A2%E5%BC%95.png" alt=""></p>
 <p><strong>4. 索引目的：提高查询效率</strong></p>
 <p><strong>5. 索引使用时的考虑</strong></p>
 <ul>
@@ -269,7 +355,11 @@
 <li>系统生成键使用数字比使用字符串效率高</li>
 <li>不使用系统生成键，可能会导致插入时主键取值不唯一，有利于主键的唯一性</li>
 </ul>
-<h3 id="2-索引的优点"><a href="#2-索引的优点" class="headerlink" title="2. 索引的优点"></a>2. 索引的优点</h3><p><strong>1. 什么时候使用B树索引</strong><br>仅当要通过索引访问表中很少一部分行<br>如果要处理表中多行，而且可以使用索引而不用表</p>
+<h3 id="2-索引的优点"><a href="#2-索引的优点" class="headerlink" title="2. 索引的优点"></a>2. 索引的优点</h3><p><strong>1. 什么时候使用B树索引</strong></p>
+<ul>
+<li>仅当要通过索引访问表中很少一部分行</li>
+<li>如果要处理表中多行，而且可以使用索引而不用表</li>
+</ul>
 <p><strong>2. 索引的5种优点</strong></p>
 <ul>
 <li>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</li>
@@ -308,14 +398,32 @@
 <li>对于那些定义为text, image和bit数据类型的列不应该增加索引。这是因为，这些列的数据量要么相当大，要么取值很少,不利于使用索引。</li>
 <li>当修改性能远远大于检索性能时，不应该创建索引。这是因为，修改性能和检索性能是互相矛盾的。当增加索引时，会提高检索性能，但是会降低修改性能。当减少索引时，会提高修改性能，降低检索性能。因此，当修改性能远远大于检索性能时，不应该创建索引。</li>
 </ul>
-<p><strong>4. 为什么没有使用我的索引？(不使用索引的情况)</strong><br>主要是因为：使用索引反而得不到正确结果；或使查询效率变得更慢。</p>
+<p><strong>4. 为什么没有使用我的索引？(不使用索引的情况)</strong></p>
+<p>主要是因为：使用索引反而得不到正确结果；或使查询效率变得更慢。</p>
 <ul>
-<li>情况1：我们在使用B+树索引，而且谓词中没有使用索引的最前列<br>表T，T(X,Y)上有索引，做SELECT * FROM T WHERE Y=5<br>跳跃式索引（仅CBO）</li>
+<li>情况1：我们在使用B+树索引，而且谓词中没有使用索引的最前列<ul>
+<li>表T，T(X,Y)上有索引，做SELECT * FROM T WHERE Y=5</li>
+<li>跳跃式索引（仅CBO）</li>
+</ul>
+</li>
 <li>情况2：使用SELECT COUNT(*) FROM T，而且T上有索引，但是优化器仍然全表扫描，不带任何条件的count会引起全表扫描。</li>
-<li>情况3：对于一个有索引的列作出函数查询<br>Select * from t where f(indexed_col) = value</li>
-<li>情况4：隐形函数查询（主要是时间和类型变化这种隐形函数查询）<br>不等于符”&lt;&gt;”会限制索引，引起全表扫描，如果改成or就可以使用索引了。<br>is null查询条件也会屏蔽索引。</li>
-<li>情况5：此时如果用了索引，实际反而会更慢<br>数据量本来不够大，oracle自己计算后认为不用索引更合算，则CBO不会选择用索引</li>
-<li>情况6：没有正确的统计信息，造成CBO无法做出正确的选择<br>如果查询优化器认为索引会使查询变慢，则不会使用索引。表分析就是收集表和索引的信息，生成的统计信息会存在user_tables这个视图。CBO根据这些信息决定SQL最佳的执行路径。</li>
+<li>情况3：对于一个有索引的列作出函数查询<ul>
+<li>Select * from t where f(indexed_col) = value</li>
+</ul>
+</li>
+<li>情况4：隐形函数查询（主要是时间和类型变化这种隐形函数查询）<ul>
+<li>不等于符”&lt;&gt;”会限制索引，引起全表扫描，如果改成or就可以使用索引了。</li>
+<li>is null查询条件也会屏蔽索引。</li>
+</ul>
+</li>
+<li>情况5：此时如果用了索引，实际反而会更慢<ul>
+<li>数据量本来不够大，oracle自己计算后认为不用索引更合算，则CBO不会选择用索引</li>
+</ul>
+</li>
+<li>情况6：没有正确的统计信息，造成CBO无法做出正确的选择<ul>
+<li>如果查询优化器认为索引会使查询变慢，则不会使用索引。表分析就是收集表和索引的信息，生成的统计信息会存在user_tables这个视图。CBO根据这些信息决定SQL最佳的执行路径。</li>
+</ul>
+</li>
 <li>其他：<ul>
 <li>对于两个公有字段的表，如果在做外表的表上对该字段建立索引，则该索引不会被使用因为外表的数据访问方式是全表扫描。</li>
 <li>查询使用了两个条件用or连接，如果条件1中的字段有索引而条件2中字段没有，则仍会全表扫描。</li>
@@ -333,15 +441,30 @@
 <p><strong>2. 哈希索引</strong></p>
 <ul>
 <li>所谓Hash索引，实际上就是通过一定的Hash算法，将需要索引的键值进行Hash运算，然后将得到的Hash值存入一个Hash表中。每次需要检索的时候，都会将检索条件进行相同算法的Hash运算，再和Hash表中的Hash值进行比较，并得出相应的信息。</li>
-<li>HASH索引在有限制条件(需要指定一个确定的值而不是一个值范围)的情况下非常有用。</li>
-<li>HASH的缺点<ul>
-<li>Hash 索引仅仅能满足”=”,”IN”和”&lt;=&gt;”查询，不能使用范围查询。<br>由于 Hash 索引比较的是进行 Hash 运算之后的 Hash 值，所以它只能用于等值的过滤，不能用于基于范围的过滤，因为经过相应的 Hash 算法处理之后的 Hash 值的大小关系，并不能保证和Hash运算前完全一样。</li>
-<li>Hash 索引无法被用来避免数据的排序操作。<br>由于 Hash 索引中存放的是经过 Hash 计算之后的 Hash 值，而且Hash值的大小关系并不一定和 Hash 运算前的键值完全一样，所以数据库无法利用索引的数据来避免任何排序运算。</li>
-<li>Hash 索引不能利用部分索引键查询。<br>对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，而不是单独计算 Hash 值，所以通过组合索引的前面一个或几个索引键进行查询的时候，Hash 索引也无法被利用。</li>
-<li>Hash 索引在任何时候都不能避免表扫描。<br>前面已经知道，Hash 索引是将索引键通过 Hash 运算之后，将 Hash运算结果的 Hash 值和所对应的行指针信息存放于一个 Hash 表中，由于不同索引键存在相同 Hash 值，所以即使取满足某个 Hash 键值的数据的记录条数，也无法从 Hash 索引中直接完成查询，还是要通过访问表中的实际数据进行相应的比较，并得到相应的结果。</li>
+<li>Hash索引在有限制条件(需要指定一个确定的值而不是一个值范围)的情况下非常有用。</li>
+<li>Hash的缺点<ul>
+<li>Hash 索引仅仅能满足”=”,”IN”和”&lt;=&gt;”查询，不能使用范围查询。<ul>
+<li>由于 Hash 索引比较的是进行 Hash 运算之后的 Hash 值，所以它只能用于等值的过滤，不能用于基于范围的过滤，因为经过相应的 Hash 算法处理之后的 Hash 值的大小关系，并不能保证和Hash运算前完全一样。</li>
 </ul>
 </li>
-<li>Hash 索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高。<br>对于选择性比较低的索引键，如果创建 Hash 索引，那么将会存在大量记录指针信息存于同一个 Hash 值相关联。这样要定位某一条记录时就会非常麻烦，会浪费多次表数据的访问，而造成整体性能低下。</li>
+<li>Hash 索引无法被用来避免数据的排序操作。<ul>
+<li>由于 Hash 索引中存放的是经过 Hash 计算之后的 Hash 值，而且Hash值的大小关系并不一定和 Hash 运算前的键值完全一样，所以数据库无法利用索引的数据来避免任何排序运算。</li>
+</ul>
+</li>
+<li>Hash 索引不能利用部分索引键查询。<ul>
+<li>对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，而不是单独计算 Hash 值，所以通过组合索引的前面一个或几个索引键进行查询的时候，Hash 索引也无法被利用。</li>
+</ul>
+</li>
+<li>Hash 索引在任何时候都不能避免表扫描。<ul>
+<li>前面已经知道，Hash 索引是将索引键通过 Hash 运算之后，将 Hash运算结果的 Hash 值和所对应的行指针信息存放于一个 Hash 表中，由于不同索引键存在相同 Hash 值，所以即使取满足某个 Hash 键值的数据的记录条数，也无法从 Hash 索引中直接完成查询，还是要通过访问表中的实际数据进行相应的比较，并得到相应的结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hash 索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高。<ul>
+<li>对于选择性比较低的索引键，如果创建 Hash 索引，那么将会存在大量记录指针信息存于同一个 Hash 值相关联。这样要定位某一条记录时就会非常麻烦，会浪费多次表数据的访问，而造成整体性能低下。</li>
+</ul>
+</li>
 </ul>
 <p><strong>3. 函数索引</strong></p>
 <ul>
@@ -359,7 +482,7 @@
 <li>也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。通过倒排索引，可以根据单词快速获取包含这个单词的文档列表。倒排索引主要由两个部分组成：“单词词典”和“倒排文件”。</li>
 <li>“倒排索引”是实现单词到文档映射关系的最佳实现方式和最有效的索引结构。</li>
 </ul>
-<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="1-执行步骤"><a href="#1-执行步骤" class="headerlink" title="1. 执行步骤"></a>1. 执行步骤</h3><ul>
+<h2 id="3-SQL优化"><a href="#3-SQL优化" class="headerlink" title="3. SQL优化"></a>3. SQL优化</h2><h3 id="1-执行步骤"><a href="#1-执行步骤" class="headerlink" title="1. 执行步骤"></a>1. 执行步骤</h3><ul>
 <li>语法检查：检查SQL拼写是否符合语法规范</li>
 <li>语义检查：检查访问对象是否符合存在及用户是否具有相应权限</li>
 <li>解析：在共享池中检查是否有完全相同的之前完全解析好的，如果存在，跳过选择执行计划和产生计划，直接运行</li>
@@ -372,31 +495,64 @@
 <li>优化：在数据处理的真正被执行的时候发生</li>
 <li>影响优化的因素：索引，数据的物理布局，可用内存大小，可用处理器个数，直接或间接涉及的表和索引的数据量</li>
 <li>Sql语句先执行关系操作，再执行非关系操作(order by)</li>
+<li>逻辑查询处理阶段简介<ul>
+<li>FROM：对FROM子句中的前两个表执行笛卡尔积（Cartesian product)(交叉联接），生成虚拟表VT1。</li>
+<li>ON：对VT1应用ON筛选器。只有那些使<join_condition>为真的行才被插入VT2。</join_condition></li>
+<li>OUTER(JOIN)：如 果指定了OUTER JOIN（相对于CROSS JOIN 或(INNER JOIN),保留表（preserved table：左外部联接把左表标记为保留表，右外部联接把右表标记为保留表，完全外部联接把两个表都标记为保留表）中未找到匹配的行将作为外部行添加到 VT2,生成VT3.如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表为止。</li>
+<li>WHERE：对VT3应用WHERE筛选器。只有使<where_condition>为true的行才被插入VT4。</where_condition></li>
+<li>GROUP BY：按GROUP BY子句中的列列表对VT4中的行分组，生成VT5。</li>
+<li>CUBE|ROLLUP：把超组(Suppergroups)插入VT5,生成VT6。</li>
+<li>HAVING：对VT6应用HAVING筛选器。只有使<having_condition>为true的组才会被插入VT7。</having_condition></li>
+<li>SELECT：处理SELECT列表，产生VT8。</li>
+<li>DISTINCT：将重复的行从VT8中移除，产生VT9。</li>
+<li>ORDER BY：将VT9中的行按ORDER BY 子句中的列列表排序，生成游标（VC10)。</li>
+<li>TOP：从VC10的开始处选择指定数量或比例的行，生成表VT11,并返回调用者。</li>
 </ul>
-<h3 id="3-使用SQL语句要考虑的因素"><a href="#3-使用SQL语句要考虑的因素" class="headerlink" title="3. 使用SQL语句要考虑的因素"></a>3. 使用SQL语句要考虑的因素</h3><ol>
-<li><p>数据总量<br>Sql考虑最重要的因素：必须访问的数据总量；没有确定目标容量之前，很难判断查询执行的效率</p>
 </li>
-<li><p>定义结果集的查询条件<br>好的查询条件：满足此条件的数据很少，可以过滤很多数据<br>Where字句：特别在子查询或视图中可能有多个where字句，过滤的效率有高有低，受到其他因素的影响<br>影响因素：过滤条件，主要的sql语句，庞大的数据对查询影响</p>
+</ul>
+<h3 id="3-使用SQL语句要考虑的因素"><a href="#3-使用SQL语句要考虑的因素" class="headerlink" title="3. 使用SQL语句要考虑的因素"></a>3. 使用SQL语句要考虑的因素</h3><p><strong>1. 数据总量</strong></p>
+<ul>
+<li>Sql考虑最重要的因素：必须访问的数据总量；没有确定目标容量之前，很难判断查询执行的效率</li>
+</ul>
+<p><strong>2. 定义结果集的查询条件</strong></p>
+<ul>
+<li>好的查询条件：满足此条件的数据很少，可以过滤很多数据</li>
+<li>Where字句：特别在子查询或视图中可能有多个where字句，过滤的效率有高有低，受到其他因素的影响</li>
+<li>影响因素：过滤条件，主要的sql语句，庞大的数据对查询影响</li>
+</ul>
+<p><strong>3. 结果集的大小</strong></p>
+<ul>
+<li>查询所返回的数据量，重要而被忽略<ul>
+<li>取决于表的大小和过滤条件的细节</li>
+<li>例外是若干个独立使用效率不高的条件结合起来<br>效率非常高</li>
+</ul>
 </li>
-<li><p>结果集的大小</p>
-</li>
-<li><p>获得结果集所涉及的表的数量<br>表的数量会影响性能<br>连接：太多的表连接（八张）就该质疑设计的正确性了；对于优化器，随着表数量增加，复杂度指数增长；编写太多表的复杂查询时，多种方式连接的选择失误几率很高<br>视图：会掩盖多表连接的事实，减少复杂查询和复杂视图</p>
-</li>
-<li><p>并发的用户数（同时修改数据的用户数）</p>
-</li>
-</ol>
+<li>从技术角度来看，查询结果集的大小并不重<br>要，重要的是用户的感觉</li>
+<li>熟练的开发者应该努力使响应时间与返回的<br>记录数成比例</li>
+</ul>
+<p><strong>4. 获得结果集所涉及的表的数量</strong></p>
+<ul>
+<li>表的数量会影响性能</li>
+<li>连接：太多的表连接（八张）就该质疑设计的正确性了；对于优化器，随着表数量增加，复杂度指数增长；编写太多表的复杂查询时，多种方式连接的选择失误几率很高</li>
+<li>视图：会掩盖多表连接的事实，减少复杂查询和复杂视图</li>
+</ul>
+<p><strong>5. 并发的用户数（同时修改数据的用户数）</strong></p>
 <ul>
 <li>设计时要注意：数据块访问争用，阻塞，闩定，保证读取的一致性</li>
 <li>一般而言，整体的吞吐量&gt;个体响应时间</li>
 <li>数据存贮采用固定大小的区块，可以存取多条记录，I/O交互简单，在内存与缓冲中好处理；但是当修改后的数据太长，则会进行迁移到另一个block存储；数据块的太大，会带来数据块的访问争用的问题，影响并发性能</li>
 </ul>
-<h3 id="4-过滤"><a href="#4-过滤" class="headerlink" title="4. 过滤"></a>4. 过滤</h3><ol>
+<h3 id="4-过滤"><a href="#4-过滤" class="headerlink" title="4. 过滤"></a>4. 过滤</h3><ul>
 <li>如何限定结果集是最为关键的因素，是使用SQL各种技巧的判定因素</li>
-<li>过滤条件的含义：<br>Where字句和having字句<br>Join过滤条件<br>Select过滤条件</li>
-<li>过滤条件的好坏，取决于<br>最终需要的数据是什么，来自哪些表<br>哪些输入值会传递到DBMS引擎<br>能过滤掉不想要的数据的条件有哪些<br>高效过滤条件是查询的主要驱动力</li>
-</ol>
-<h3 id="5-SQL语句方面注意"><a href="#5-SQL语句方面注意" class="headerlink" title="5. SQL语句方面注意"></a>5. SQL语句方面注意</h3><ol>
-<li><p>注意在做否定意义的查询要小心进入陷阱</p>
+<li>过滤条件的含义：<ul>
+<li>Where字句和having字句</li>
+<li>Join过滤条件</li>
+<li>Select过滤条件</li>
+</ul>
+</li>
+<li>过滤条件的好坏，取决于最终需要的数据是什么，来自哪些表哪些输入值会传递到DBMS引擎能过滤掉不想要的数据的条件有哪些高效过滤条件是查询的主要驱动力</li>
+</ul>
+<h3 id="5-SQL语句方面注意"><a href="#5-SQL语句方面注意" class="headerlink" title="5. SQL语句方面注意"></a>5. SQL语句方面注意</h3><p><strong>1. 注意在做否定意义的查询要小心进入陷阱</strong></p>
 <pre><code>如，没有选修‘B2’课程的学生 ：
 　　select students.*
 　　from students, grades
@@ -406,28 +562,82 @@
 　　select * from students（选出了没有选课的学生+选课的学生且没有选课B2）
 　　where not exists (select * from grades
 where grades.sno=students.sno AND cno=&apos;B2&apos;)
-</code></pre></li>
-<li><p>关于JOIN</p>
+</code></pre><p><strong>2. 关于JOIN</strong></p>
+<ul>
+<li>JOIN: 如果表中有至少一个匹配，则返回行（INNER JOIN）</li>
+<li>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行</li>
+<li>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行</li>
+<li>FULL JOIN: 只要其中一个表中存在匹配，就返回行</li>
+</ul>
+<h3 id="6-SQL查询优化总结"><a href="#6-SQL查询优化总结" class="headerlink" title="6. SQL查询优化总结"></a>6. SQL查询优化总结</h3><p><strong>1. 暗示查询优化器如何优化</strong></p>
+<ul>
+<li>使用join来暗示表连接顺序，当有多表连接操作时，考虑使用exists和in操作来优化；</li>
+<li>如果不使用join则是让查询优化器自己优化，自己确定表连接顺序（先小表，再大表），效率可能较低</li>
+</ul>
+<p><strong>2. 将多维度的查询进行降维处理</strong></p>
+<ul>
+<li>一次连接的表不要超过3张，超过了就将非关联子查询变成内嵌视图，降维处理</li>
+</ul>
+<p><strong>3. 考虑取出的数据在表中的比例</strong></p>
+<ul>
+<li>当查询返回记录超过数据总量10%就不使用索引，查询结果集少于10%是好的查询条件</li>
+</ul>
+<p><strong>4. 避免在高层使用distinct，使用exists和in来处理</strong></p>
+<p><strong>5. 避免在高层使用select *，这样会产生冗余的结果集，降低性能</strong></p>
+<h2 id="4-嵌套查询判断消耗"><a href="#4-嵌套查询判断消耗" class="headerlink" title="4. 嵌套查询判断消耗"></a>4. 嵌套查询判断消耗</h2><h3 id="1-摆脱distinct，使用exists和in操作"><a href="#1-摆脱distinct，使用exists和in操作" class="headerlink" title="1. 摆脱distinct，使用exists和in操作"></a>1. 摆脱distinct，使用exists和in操作</h3><p><strong>1. 避免在最高层使用distinct（会产生错误结果集），因为发现重复的数据容易发现不准确的连接难，发现结果的不正确就更难了</strong></p>
+<p><strong>2. 摆脱distinct的方法：使用exists和in，exits需要用到嵌套子查询</strong></p>
+<ul>
+<li>exists查询<ul>
+<li>需要使用关联嵌套，子查询中要使用外层查询的表中的字段信息</li>
+<li>内部查询中的join关系与外部表没有直接的叉乘关系，而是带入外部查询的结果值到内部查询中，减少一次叉乘次数，但是内部查询要带入多次外部表的值</li>
+<li>exits被优化一次后多次执行，查询不需要完整执行产生结果集，只要满足条件，判定行集非空，就为true；可能找到第一条满足条件的数据，就执行完毕返回；子查询时间难以估算。经过查询优化器优化后，优化的时间远远超过执行的时间，虽然执行多次，效率反而更高 </li>
+<li>exits暗示查询优化器，这是一个内部查询优化，优化器采用随机方式，独立优化</li>
+<li>外部查询所用到的字段条件所对应的内层查询字段一定要在表中加上索引，提高内部查询的效率（BMW中orders表要在custid字段添加索引）</li>
+<li>避免了distinct所带来的结果集的错误</li>
+<li>适用于：外部条件在结果集中所占比率较小的情况，可以减少子查询的次数（BMW中属于最近6月买BMW较少的情况）</li>
+</ul>
 </li>
-</ol>
-<p>JOIN: 如果表中有至少一个匹配，则返回行（INNER JOIN）<br>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行<br>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行<br>FULL JOIN: 只要其中一个表中存在匹配，就返回行</p>
-<h3 id="6-SQL查询优化总结"><a href="#6-SQL查询优化总结" class="headerlink" title="6. SQL查询优化总结"></a>6. SQL查询优化总结</h3><ol>
-<li>暗示查询优化器如何优化<br>使用join来暗示表连接顺序，当有多表连接操作时，考虑使用exists和in操作来优化；<br>如果不使用join则是让查询优化器自己优化，自己确定表连接顺序（先小表，再大表），效率可能较低</li>
-<li>将多维度的查询进行降维处理，一次连接的表不要超过3张，超过了就将非关联子查询变成内嵌视图，降维处理</li>
-<li>考虑取出的数据在表中的比例，当查询返回记录超过数据总量10%就不使用索引，查询结果集少于10%是好的查询条件</li>
-<li>避免在高层使用distinct，使用exists和in来处理</li>
-<li>避免在高层使用select *，这样会产生冗余的结果集，降低性能</li>
-</ol>
-<h3 id="7-非关联子查询变成内嵌视图—降低查询维度"><a href="#7-非关联子查询变成内嵌视图—降低查询维度" class="headerlink" title="7. 非关联子查询变成内嵌视图—降低查询维度"></a>7. 非关联子查询变成内嵌视图—降低查询维度</h3><h2 id="嵌套查询判断消耗"><a href="#嵌套查询判断消耗" class="headerlink" title="嵌套查询判断消耗"></a>嵌套查询判断消耗</h2><h3 id="1-摆脱distinct，使用exists和in操作"><a href="#1-摆脱distinct，使用exists和in操作" class="headerlink" title="1. 摆脱distinct，使用exists和in操作"></a>1. 摆脱distinct，使用exists和in操作</h3><ol>
-<li><p>避免在最高层使用distinct（会产生错误结果集），因为发现重复的数据容易发现不准确的连接难，发现结果的不正确就更难了</p>
+<li>in查询<ul>
+<li>可以使用关联子查询和非关联子查询</li>
+<li>非关联子查询中，内层查询不在依赖外层查询，优化一次后只需要执行一次，但必须完整执行，再和外部查询比较取出交集</li>
+<li>非关联子查询不需要在于外层字段有关的字段上添加索引，因为二者没有关系</li>
+<li>适用于：外部查询条件所占比例比较大的情况，in的效率会远远高于exists效率</li>
+</ul>
 </li>
-<li><p>摆脱distinct的方法：使用exists和in，exits需要用到嵌套子查询</p>
-</li>
-</ol>
-<h2 id="物理组织的优化"><a href="#物理组织的优化" class="headerlink" title="物理组织的优化"></a>物理组织的优化</h2><h3 id="1-堆文件"><a href="#1-堆文件" class="headerlink" title="1. 堆文件"></a>1. 堆文件</h3><p><strong>1. 文件结构</strong><br>堆文件就是一般的数据表，使用“heap”的结构，数据没有特定的顺序;<br>表是无组织的，只要有空间，数据可以被放在任何地方。堆文件的表和表主键上的索引要分别留出空间。</p>
+</ul>
+<p><strong>3. 例子</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/BMW.png" alt=""></p>
+<ul>
+<li>找出最近6个月住在nanjing，购买了<br>BMW的所有客户(不对的方式)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">select distinct c.custname</div><div class="line">from customers c</div><div class="line">  join orders o</div><div class="line">    on o.custid = c.custid</div><div class="line">  join orderdetail od</div><div class="line">    on od.ordid = o.ordid</div><div class="line">  join articles a</div><div class="line">    on a.artid = od.artid</div><div class="line">where c.city = &apos;Nanjing&apos;</div><div class="line">      and a.artname = &apos;BMW&apos;</div><div class="line">      and o.ordered &gt;= somefunc /*函数，返回六个月前的具体日期*/</div></pre></td></tr></table></figure>
+<ul>
+<li>改进：摆脱distinct的方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select c.custname</div><div class="line">from customers c</div><div class="line">where c.city = &apos;Nanjing&apos;</div><div class="line">    and exists (select null</div><div class="line">        from orders o,</div><div class="line">            orderdetail od,</div><div class="line">            articles a</div><div class="line">        where a.artname = &apos;BMW&apos;</div><div class="line">            and a.artid = od.artid</div><div class="line">            and od.ordid = o.ordid</div><div class="line">            and o.custid = c.custid</div><div class="line">            and o.ordered &gt;= somefunc )</div></pre></td></tr></table></figure>
+<ul>
+<li>非关联子查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select custname</div><div class="line">from customers</div><div class="line">where city = &apos;Nanjing&apos;</div><div class="line">    and custid in (</div><div class="line">        select o.custid</div><div class="line">            from orders o,</div><div class="line">                 orderdetail od,</div><div class="line">                 articles a</div><div class="line">            where a.artname = &apos;BMW&apos;</div><div class="line">                and a.artid = od.artid</div><div class="line">                and od.ordid = o.ordid</div><div class="line">                and o.ordered &gt;= somefunc)</div></pre></td></tr></table></figure>
+<p><strong>4. 降维优化的过程</strong></p>
+<ul>
+<li>再回头看订单和客户的例子</li>
+<li>在订单完成前有不同状态，记录在<br>orderstatus（ordid,status,statusdate）中</li>
+<li>需求是：列出所有尚未标记为完成状态的订<br>单的下列字段：订单号，客户名，订单的最<br>后状态，以及设置状态的时间</li>
+</ul>
+<ul>
+<li>非关联子查询变成内嵌视图</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select c.custname, o.ordid, os.status, os.statusdate</div><div class="line">from customers c,</div><div class="line">  orders o,</div><div class="line">  orderstatus os,</div><div class="line">  (select ordid, max(statusdate) laststatusdate</div><div class="line">   from orderstatus</div><div class="line">   group by ordid) x</div><div class="line">where o.ordid = os.ordid</div><div class="line">      and os.statusdate = x.laststatusdate</div><div class="line">      and os.ordid = x.ordid</div><div class="line">      and os.status != &apos;COMPLETE&apos;</div><div class="line">      and o.custid = c.custid</div></pre></td></tr></table></figure>
+<h2 id="5-物理组织的优化"><a href="#5-物理组织的优化" class="headerlink" title="5. 物理组织的优化"></a>5. 物理组织的优化</h2><ul>
+<li>行迁移：当一个行上的更新操作(原来的数据存在且没有减少)导致当前的数据不能在容纳在当前块，我们需要进行行迁移。一个行迁移意味着整行数据将会移动，仅仅保留的是一个转移地址。因此整行数据都被移动，原始的数据块上仅仅保留的是指向新块的一个地址信息。</li>
+</ul>
+<h3 id="1-堆文件"><a href="#1-堆文件" class="headerlink" title="1. 堆文件"></a>1. 堆文件</h3><p><strong>1. 文件结构</strong><br>堆文件就是一般的数据表，使用“heap”的结构，数据没有特定的顺序;<br>表是无组织的，只要有空间，数据可以被放在任何地方。堆文件的表和表主键上的索引要分别留出空间。</p>
 <p><strong>2. 读取/访问方式</strong><br>获取表中的数据是按命中率来得到的。没有明确的先后之分，在进行全表扫描时，并不是先插入的数据就先获取。数据的存放是随机的，也可以根据可用空闲的空间来决定。</p>
-<h3 id="2-索引组织表IOT"><a href="#2-索引组织表IOT" class="headerlink" title="2. 索引组织表IOT"></a>2. 索引组织表IOT</h3><p><strong>1. IOT(index organized table)索引组织表</strong><br>当索引中增加额外的字段（一个或多个，它们本身与实际搜索条件无关，但包含查询所需的数据），能提高某个频繁运行的查询的速度。</p>
-<p><strong>2. 存取方式/访问方式</strong><br>数据的存放是严格规定的，记录的存放是排序的，查询效率非常高。数据插入以前其实就已经确定了其位置，所以不管插入的先后顺序，它在那个物理上的哪个位置与插入的先后顺序无关。这样在进行查询的时候就可以少访问很多blocks，但是插入的时候，速度就比普通的表要慢一些。</p>
+<h3 id="2-索引组织表IOT"><a href="#2-索引组织表IOT" class="headerlink" title="2. 索引组织表IOT"></a>2. 索引组织表IOT</h3><p><strong>1. IOT(index organized table)索引组织表</strong></p>
+<p>当索引中增加额外的字段（一个或多个，它们本身与实际搜索条件无关，但包含查询所需的数据），能提高某个频繁运行的查询的速度。</p>
+<p><strong>2. 存取方式/访问方式</strong></p>
+<p>数据的存放是严格规定的，记录的存放是排序的，查询效率非常高。数据插入以前其实就已经确定了其位置，所以不管插入的先后顺序，它在那个物理上的哪个位置与插入的先后顺序无关。这样在进行查询的时候就可以少访问很多blocks，但是插入的时候，速度就比普通的表要慢一些。</p>
 <p><strong>3. 优点</strong></p>
 <ul>
 <li>记录排序，查询效率惊人（最大的优点）。</li>
@@ -477,13 +687,26 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 <li>从本质上来说降低了并发的个数，但是在数据量非常庞大的情况下，降低并发所带来的缺陷远远小于分区所提高的性能。</li>
 <li>由于强制的数据聚合可能会导致其他数据的分散，所以不同的查询请求也可能会形成性能上的矛盾。</li>
 </ul>
-<h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><h3 id="1-一些概念"><a href="#1-一些概念" class="headerlink" title="1. 一些概念"></a>1. 一些概念</h3><ul>
+<p><strong>5. 分区的最佳方法</strong></p>
+<ul>
+<li>按什么字段进行分区要整体考虑，因为：更新分区键会引起移动数据，应该避免这么做。<ul>
+<li>例如：实现服务队列，类型(T1..Tn),每一个类型三种状态（W|P|D）等待，处理，结束状态<ul>
+<li>按照请求类型分区，分成（T1.。Tn）个分区：如果有p1–Pn个进程来请求，可以有N的并发，并发压力均匀的分散到不同的分区，并发进程数可控制的。</li>
+<li>按照状态来分区：数据分成三个区域W，P，D，允许分区键的移动，记录可以跨分区移动，提高处理效率。 将所有W状态的放到W分区，降低了轮询的开销, 没有并发问题，不需要锁住某条记录，读W一条记录，就删掉，写入P区分。没有资源并发冲突。读的进程和处理进程可以单独处理。W分区读取在等待状态的数据非常快，不用检索。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当数据分区键均匀分布时，分区表查询收益最大</li>
+</ul>
+<h2 id="6-层次结构"><a href="#6-层次结构" class="headerlink" title="6. 层次结构"></a>6. 层次结构</h2><h3 id="1-一些概念"><a href="#1-一些概念" class="headerlink" title="1. 一些概念"></a>1. 一些概念</h3><ul>
 <li>关系型数据库无法直观地解决层次式问题，所以需要一种变换。关系型数据表中的字段之间是平级且等价的，没有层次关系。</li>
 <li>层次式结构（树状结构）不能直接放在关系型数据库中，需要变换一种形式。树状结构中，节点之间有父子关系，存在兄弟节点，有根节点也有子节点。</li>
 <li>简单树状结构要求：一个节点只有一个父节点；所有的节点类型都是一样的。</li>
 <li>简单树状结构的例子：档案位置（楼-&gt;层-&gt;房间-&gt;橱-&gt;柜），找到档案是一个自顶向下的遍历过程；风险分析（解决对冲基金的风险问题，一个基金可能包含多种基金、股票，甚至有可能包含平级的基金。计算一个基金的风险，要计算这个基金的组成部分的加权风险）。</li>
 </ul>
 <h3 id="2-三种树状结构模型"><a href="#2-三种树状结构模型" class="headerlink" title="2. 三种树状结构模型"></a>2. 三种树状结构模型</h3><p><strong>1. 邻接模型</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%82%BB%E6%8E%A5%E6%A8%A1%E5%9E%8B.png" alt=""></p>
 <ul>
 <li>邻接模型：id，parent_id(指向上级)。邻接模式使用由下向上的记录方式，也就是在数据模型中每个节点会记录其父节点的信息。</li>
 <li>特性：<ul>
@@ -497,6 +720,7 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 </li>
 </ul>
 <p><strong>2. 物化路径</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%A9%E5%8C%96%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9E%8B.png" alt=""></p>
 <ul>
 <li>物化路径：PathID（1，1.1，1.2，1.1.1，1.2.1，…），使用层次式的路径明确地标识出来，一般用字符串存路径。每一个节点都存储在树中的位置信息，它允许节点之间有顺序（因为路径的标识有顺序），比如家族族谱。</li>
 <li>特性：<ul>
@@ -513,6 +737,7 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 </li>
 </ul>
 <p><strong>3. 嵌套集合模型</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%B5%8C%E5%A5%97%E9%9B%86%E5%90%88%E6%A8%A1%E5%9E%8B.png" alt=""></p>
 <ul>
 <li>嵌套集合模型：每一个节点都有一个左编号，都有一个右编号，left_num,right_num，某节点后代的left_num和right_num都会在该节点的left_num和right_num范围内。</li>
 <li>特性：<ul>
@@ -533,31 +758,51 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 </ul>
 <p><strong>1. 自顶向下查询：Vandamme查询</strong></p>
 <ul>
-<li><p>邻接模式:递归实现，效率较低，使用CONNECT BY实现</p>
-</li>
-<li><p>使用递归实现</p>
-</li>
-<li><p>物化路径模型：path中前半段相同的即为结果，假设mp_depth()函数返回当前节点深度</p>
-</li>
-<li><p>嵌套集合模型：直接找到在left_num和right_num中间的所有节点，缩进比较难处理</p>
-</li>
-<li><p>自顶向下效率：嵌套集合&lt;物化路径&lt;邻间模型</p>
-</li>
+<li>邻接模式:递归实现，效率较低，使用CONNECT BY实现</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E9%82%BB%E6%8E%A5%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<ul>
+<li>使用递归实现</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E9%82%BB%E6%8E%A5%E6%A8%A1%E5%9E%8B%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0.png" alt=""></p>
+<ul>
+<li>物化路径模型：path中前半段相同的即为结果，假设mp_depth()函数返回当前节点深度</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E7%89%A9%E5%8C%96%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<ul>
+<li>嵌套集合模型：直接找到在left_num和right_num中间的所有节点，缩进比较难处理</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E5%B5%8C%E5%A5%97%E9%9B%86%E5%90%88%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<ul>
+<li>自顶向下效率：嵌套集合&lt;物化路径&lt;邻间模型</li>
 </ul>
 <p><strong>2. 自底向上访问：Highland查询</strong></p>
 <ul>
-<li><p>邻接模式:Connect by相当容易实现</p>
-</li>
-<li><p>物化路径模型：仅找出适当的记录并缩排显示算容易</p>
-</li>
-<li><p>自底向上：邻间&gt;物化路径&gt;嵌套集合</p>
-</li>
+<li>邻接模式:Connect by相当容易实现</li>
 </ul>
-<h2 id="对冗余的控制（反范式模式）"><a href="#对冗余的控制（反范式模式）" class="headerlink" title="对冗余的控制（反范式模式）"></a>对冗余的控制（反范式模式）</h2><h3 id="1-Pattern-1-合并1对1关系"><a href="#1-Pattern-1-合并1对1关系" class="headerlink" title="1. Pattern 1 合并1对1关系"></a>1. Pattern 1 合并1对1关系</h3><p>问题是会产生大量空值，若两边都部分参与则不能合并。部分参与为绝大部分都参与时适合使用Pattern 1。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E9%82%BB%E6%8E%A5%E6%A8%A1%E5%BC%8F.png" alt=""></p>
+<ul>
+<li>物化路径模型：仅找出适当的记录并缩排显示算容易</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%89%A9%E5%8C%96%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<ul>
+<li>嵌套集合模型</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E5%B5%8C%E5%A5%97%E9%9B%86%E5%90%88%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<ul>
+<li>自底向上：邻间&gt;物化路径&gt;嵌套集合</li>
+</ul>
+<h2 id="7-对冗余的控制（反范式模式）"><a href="#7-对冗余的控制（反范式模式）" class="headerlink" title="7. 对冗余的控制（反范式模式）"></a>7. 对冗余的控制（反范式模式）</h2><h3 id="1-Pattern-1-合并1对1关系"><a href="#1-Pattern-1-合并1对1关系" class="headerlink" title="1. Pattern 1 合并1对1关系"></a>1. Pattern 1 合并1对1关系</h3><p>问题是会产生大量空值，若两边都部分参与则不能合并。部分参与为绝大部分都参与时适合使用Pattern 1。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E4%B8%80.png" alt=""></p>
 <h3 id="2-Pattern-2-1对N关系用非键值进行连接"><a href="#2-Pattern-2-1对N关系用非键值进行连接" class="headerlink" title="2. Pattern 2 1对N关系用非键值进行连接"></a>2. Pattern 2 1对N关系用非键值进行连接</h3><p>适用条件：两表连接时最主要的事务都与某非键值相关</p>
-<h3 id="3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"><a href="#3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键" class="headerlink" title="3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"></a>3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键</h3><h3 id="4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"><a href="#4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中" class="headerlink" title="4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"></a>4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中</h3><h3 id="5-Pattern-5-引入重复组"><a href="#5-Pattern-5-引入重复组" class="headerlink" title="5. Pattern 5 引入重复组"></a>5. Pattern 5 引入重复组</h3><p>通常对于一个多值属性，值不太多(&lt;=10)，且不会经常改变，可以在表中建多个有关此属性的列。如一个人的地址，可能有4个</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E4%BA%8C.png" alt=""></p>
+<h3 id="3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"><a href="#3-Pattern-3-在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键" class="headerlink" title="3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键"></a>3. Pattern 3 在1对N关系中复制外键，减少join表数量，将另一表的主键复制变成外键</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E4%B8%89.png" alt=""></p>
+<h3 id="4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"><a href="#4-Pattern-4-多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中" class="headerlink" title="4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中"></a>4. Pattern 4 多对多关系中复制属性，把两张表中经常需要的属性都拷贝到中间的关系表中</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E5%9B%9B.png" alt=""></p>
+<h3 id="5-Pattern-5-引入重复组"><a href="#5-Pattern-5-引入重复组" class="headerlink" title="5. Pattern 5 引入重复组"></a>5. Pattern 5 引入重复组</h3><p>通常对于一个多值属性，值不太多(&lt;=10)，且不会经常改变，可以在表中建多个有关此属性的列。如一个人的地址，可能有4个</p>
 <h3 id="6-Pattern-6-建立提取表"><a href="#6-Pattern-6-建立提取表" class="headerlink" title="6. Pattern 6 建立提取表"></a>6. Pattern 6 建立提取表</h3><p>为了避免查询和更新这两个不同操作的矛盾。可以将更新和查询放在两张表中，从表中提取查询表，专门用于查询，是适用于查询实时性不严的情况。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E5%85%AD.png" alt=""></p>
 <h3 id="7-Pattern-7-分区"><a href="#7-Pattern-7-分区" class="headerlink" title="7. Pattern 7 分区"></a>7. Pattern 7 分区</h3><p>列分区：数据冗余，主键每次都要<br>表大，有些列不常用，采用分区方式，常用的在一个区，不常用的在另一个区。</p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%93%E7%A0%B4%E8%8C%83%E5%BC%8F%E4%B8%83.png" alt=""></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
