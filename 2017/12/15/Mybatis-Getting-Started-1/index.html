@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>初识 Mybatis | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-15T08:42:16.000Z" itemprop="datePublished">
+          2017-12-15
+      </time>
+    
+</span>
+                <h1>初识 Mybatis</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
+<h2 id="Servlet-JSP-JDBC"><a href="#Servlet-JSP-JDBC" class="headerlink" title="Servlet + JSP + JDBC"></a>Servlet + JSP + JDBC</h2><p>刚好这学期J2EE的第一作业需要这三个技术，在正式学习mybatis之前，我们先使用JDBC来完成基本项目，然后发现其中的一些不便也能让我们更好的发现mybatis的优点。</p>
+<h3 id="1-使用xml方法配置servlet"><a href="#1-使用xml方法配置servlet" class="headerlink" title="1. 使用xml方法配置servlet"></a>1. 使用xml方法配置servlet</h3><pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;servlet.ListServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ListServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/List.action&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><h3 id="2-重写doGet方法"><a href="#2-重写doGet方法" class="headerlink" title="2. 重写doGet方法"></a>2. 重写doGet方法</h3><ul>
+<li>使用”select 列名”的方式提高查询效率</li>
+<li>使代码整体左移：按组合键 Shift+Tab</li>
+</ul>
+<pre><code>@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    try {
+        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+        Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://127.0.0.1:3306/micro_message&quot;,&quot;root&quot;,&quot;000000&quot;);
+        String sql = &quot;SELECT id, command, description, content FROM message&quot;;
+        PreparedStatement statement = conn.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery();
+        List&lt;Message&gt; messageList = new ArrayList&lt;Message&gt;();
+        while(rs.next()){
+            Message message = new Message();
+            message.setId(rs.getString(&quot;ID&quot;));
+            message.setCommand(rs.getString(&quot;COMMAND&quot;));
+            message.setContent(rs.getString(&quot;CONTENT&quot;));
+            message.setDescription(rs.getString(&quot;DESCRIPTION&quot;));
+            messageList.add(message);
+        }
+        req.setAttribute(&quot;messageList&quot;, messageList);
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    req.getRequestDispatcher(&quot;/WEB-INF/jsp/back/list.jsp&quot;).forward(req, resp);
+}
+</code></pre><ul>
+<li>Message是和数据库表一样的javabean</li>
+</ul>
+<h3 id="3-使用JSP显示业务结果"><a href="#3-使用JSP显示业务结果" class="headerlink" title="3. 使用JSP显示业务结果"></a>3. 使用JSP显示业务结果</h3><ul>
+<li>页面放在web-inf下便于控制和管理</li>
+<li>通过文件夹合理管理各类文件</li>
+<li>首先引入JSTL标签</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;%@ page isELIgnored=&quot;false&quot; %&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + &quot;://&quot; + request.getServerName() + &quot;:&quot; + request.getServerPort() + path + &quot;/&quot;;
+%&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=9; IE=8; IE=7; IE=EDGE&quot;/&gt;
+    &lt;title&gt;内容列表页面&lt;/title&gt;
+    &lt;link href=&quot;&lt;%= basePath %&gt;resources/css/all.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
+    &lt;script src=&quot;&lt;%= basePath %&gt;resources/js/common/jquery-1.8.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;&lt;%= basePath %&gt;resources/js/back/list.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body style=&quot;background: #e1e9eb;&quot;&gt;
+&lt;form action=&quot;&lt;%= basePath %&gt;List.action&quot; id=&quot;mainForm&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;currentPage&quot; id=&quot;currentPage&quot; value=&quot;${page.currentPage}&quot;/&gt;
+
+    &lt;div class=&quot;right&quot;&gt;
+        &lt;div class=&quot;current&quot;&gt;当前位置：&lt;a href=&quot;javascript:void(0)&quot; style=&quot;color:#6E6E6E;&quot;&gt;内容管理&lt;/a&gt; &amp;gt; 内容列表&lt;/div&gt;
+        &lt;div class=&quot;rightCont&quot;&gt;
+            &lt;p class=&quot;g_title fix&quot;&gt;内容列表 &lt;a class=&quot;btn03&quot; href=&quot;#&quot;&gt;新 增&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;a class=&quot;btn03&quot;
+                                                                                                    href=&quot;javascript:deleteBatch(&apos;&lt;%=basePath%&gt;&apos;);&quot;&gt;删
+                除&lt;/a&gt;&lt;/p&gt;
+            &lt;table class=&quot;tab1&quot;&gt;
+                &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;td width=&quot;90&quot; align=&quot;right&quot;&gt;指令名称：&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;input name=&quot;command&quot; type=&quot;text&quot; class=&quot;allInput&quot; value=&quot;${command}&quot;/&gt;
+                    &lt;/td&gt;
+                    &lt;td width=&quot;90&quot; align=&quot;right&quot;&gt;描述：&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;input name=&quot;description&quot; type=&quot;text&quot; class=&quot;allInput&quot; value=&quot;${description}&quot;/&gt;
+                    &lt;/td&gt;
+                    &lt;td width=&quot;85&quot; align=&quot;right&quot;&gt;&lt;input type=&quot;submit&quot; class=&quot;tabSub&quot; value=&quot;查 询&quot;/&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+            &lt;div class=&quot;zixun fix&quot;&gt;
+                &lt;table class=&quot;tab2&quot; width=&quot;100%&quot;&gt;
+                    &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;&lt;input type=&quot;checkbox&quot; id=&quot;all&quot; onclick=&quot;&quot;/&gt;&lt;/th&gt;
+                        &lt;th&gt;序号&lt;/th&gt;
+                        &lt;th&gt;指令名称&lt;/th&gt;
+                        &lt;th&gt;描述&lt;/th&gt;
+                        &lt;th&gt;操作&lt;/th&gt;
+                    &lt;/tr&gt;
+                    &lt;c:forEach items=&quot;${messageList}&quot; var=&quot;message&quot; varStatus=&quot;status&quot;&gt;
+                        &lt;tr &lt;c:if test=&quot;${status.index % 2 != 0}&quot;&gt;style=&apos;background-color:#ECF6EE;&apos;&lt;/c:if&gt;&gt;
+                            &lt;td&gt;&lt;input type=&quot;checkbox&quot; name=&quot;id&quot; value=&quot;${message.id}&quot;/&gt;&lt;/td&gt;
+                            &lt;td&gt;${status.index + 1}&lt;/td&gt;
+                            &lt;td&gt;${message.command}&lt;/td&gt;
+                            &lt;td&gt;${message.description}&lt;/td&gt;
+                            &lt;td&gt;
+                                &lt;a href=&quot;#&quot;&gt;修改&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                &lt;a href=&quot;${basePath}DeleteOneServlet.action?id=${message.id}&quot;&gt;删除&lt;/a&gt;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/c:forEach&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="4-在进行下一步之前，我们首先进行代码重构"><a href="#4-在进行下一步之前，我们首先进行代码重构" class="headerlink" title="4. 在进行下一步之前，我们首先进行代码重构"></a>4. 在进行下一步之前，我们首先进行代码重构</h3><pre><code>/**
+ * 列表页面初始化控制
+ * Created by Thpffcj on 2017/7/1.
+ */
+public class ListServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 设置编码
+        req.setCharacterEncoding(&quot;UTF-8&quot;);
+        // 接受页面的值
+        String command = req.getParameter(&quot;command&quot;);
+        String description = req.getParameter(&quot;description&quot;);
+        // 向页面传值
+        req.setAttribute(&quot;command&quot;, command);
+        req.setAttribute(&quot;description&quot;, description);
+        ListService listService = new ListService();
+        // 查询消息列表并传给页面
+        req.setAttribute(&quot;messageList&quot;, listService.queryMessageList(command, description));
+        req.getRequestDispatcher(&quot;/WEB-INF/jsp/back/list.jsp&quot;).forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
+}
+</code></pre><ul>
+<li>添加DAO层，同时将上面使用的String换成StringBuilder</li>
+</ul>
+<pre><code>/**
+ * 和message表相关的数据库操作
+ */
+public class MessageDao {
+
+    /**
+     * 根据查询条件查询消息列表
+     */
+    public List&lt;Message&gt; queryMessageList(String command, String description) {
+
+        List&lt;Message&gt; messageList = new ArrayList&lt;Message&gt;();
+
+        try {
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+            Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://127.0.0.1:3306/micro_message&quot;,&quot;root&quot;,&quot;000000&quot;);
+            StringBuilder sql = new StringBuilder(&quot;select ID,COMMAND,DESCRIPTION,CONTENT from MESSAGE where 1=1&quot;);
+            List&lt;String&gt; paramList = new ArrayList&lt;String&gt;();
+            if(command != null &amp;&amp; !&quot;&quot;.equals(command.trim())) {
+                sql.append(&quot; and COMMAND=?&quot;);
+                paramList.add(command);
+            }
+            if(description != null &amp;&amp; !&quot;&quot;.equals(description.trim())) {
+                sql.append(&quot; and DESCRIPTION like &apos;%&apos; ? &apos;%&apos;&quot;);
+                paramList.add(description);
+            }
+            PreparedStatement statement = conn.prepareStatement(sql.toString());
+            for(int i = 0; i &lt; paramList.size(); i++) {
+                statement.setString(i + 1, paramList.get(i));
+            }
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()) {
+                Message message = new Message();
+                messageList.add(message);
+                message.setId(rs.getString(&quot;ID&quot;));
+                message.setCommand(rs.getString(&quot;COMMAND&quot;));
+                message.setDescription(rs.getString(&quot;DESCRIPTION&quot;));
+                message.setContent(rs.getString(&quot;CONTENT&quot;));
+            }
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return messageList;
+    }
+}
+</code></pre><ul>
+<li>servlet和dao层之间还有service，此处省略。</li>
+<li>servlet一般来说做的事就只是接收页面的值，向页面传值，业务需要调用service，最后是跳转。</li>
+</ul>
+<h2 id="正式认识MyBatis"><a href="#正式认识MyBatis" class="headerlink" title="正式认识MyBatis"></a>正式认识MyBatis</h2><h3 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis&lt;/   artifactId&gt;
+    &lt;version&gt;3.4.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="2-添加配置文件"><a href="#2-添加配置文件" class="headerlink" title="2. 添加配置文件"></a>2. 添加配置文件</h3><pre><code>&lt;environments default=&quot;development&quot;&gt;
+    &lt;environment id=&quot;development&quot;&gt;
+        &lt;transactionManager type=&quot;JDBC&quot;&gt;
+            &lt;property name=&quot;&quot; value=&quot;&quot;/&gt;
+        &lt;/transactionManager&gt;
+        &lt;dataSource type=&quot;UNPOOLED&quot;&gt;
+            &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+            &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://127.0.0.1:3306/micro_message&quot;/&gt;
+            &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+            &lt;property name=&quot;password&quot; value=&quot;000000&quot;/&gt;
+        &lt;/dataSource&gt;
+    &lt;/environment&gt;
+&lt;/environments&gt;
+</code></pre><ul>
+<li><p>我们现在使用JDBC，把获取连接，执行SQL语句，获取操作结果封装信息，返回操作结果都放在DAO层。其实DAO层就只关心执行SQL语句，得到结果返回出去。</p>
+</li>
+<li><p>在MyBatis里向DAO层提供对象的名字叫SqlSession。</p>
+</li>
+<li><strong>SqlSession的作用</strong><ul>
+<li>向SQL语句传入参数</li>
+<li>执行SQL语句</li>
+<li>获取执行SQL语句的结果</li>
+<li>事务的控制</li>
+</ul>
+</li>
+<li><strong>如何得到SqlSession</strong><ul>
+<li>通过配置文件获取数据库连接相关信息</li>
+<li>通过配置信息构建SqlSessionFactory</li>
+<li>通过SqlSessionFactory打开数据库会话</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * 访问数据库类
+ */
+public class DBAccess {
+    public SqlSession getSqlSession() throws IOException {
+        // 通过配置文件获取数据库连接信息
+        Reader reader = Resources.getResourceAsReader(&quot;config/Configuration.xml&quot;);
+        // 通过配置信息构建一个SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        // 通过sqlSessionFactory打开一个数据库会话
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        return sqlSession;
+    }
+}
+</code></pre><ul>
+<li>修改DAO层</li>
+</ul>
+<pre><code>/**
+ * 根据查询条件查询消息列表
+ */
+public List&lt;Message&gt; queryMessageList(Map&lt;String,Object&gt; parameter) {
+    DBAccess dbAccess = new DBAccess();
+    List&lt;Message&gt; messageList = new ArrayList&lt;Message&gt;();
+    SqlSession sqlSession = null;
+    try {
+        sqlSession = dbAccess.getSqlSession();
+        // 通过sqlSession执行SQL语句
+        IMessage imessage = sqlSession.getMapper(IMessage.class);
+        messageList = imessage.queryMessageList(parameter);
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if(sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+    return messageList;
+}
+</code></pre><h3 id="3-添加SQL语句配置文件"><a href="#3-添加SQL语句配置文件" class="headerlink" title="3. 添加SQL语句配置文件"></a>3. 添加SQL语句配置文件</h3><pre><code>&lt;mapper namespace=&quot;dao.IMessage&quot;&gt;
+</code></pre><ul>
+<li><p>namespace保证不同文件的id可以重复。</p>
+</li>
+<li><p>type就是数据库的字段对应了java中的哪个类。字标签里有两种标签id和result，数据库是主键，就使用id属性。column是数据库中的列名，property是java类中的属性。</p>
+</li>
+</ul>
+<pre><code>&lt;resultMap type=&quot;bean.Message&quot; id=&quot;MessageResult&quot;&gt;
+    &lt;id column=&quot;ID&quot; jdbcType=&quot;INTEGER&quot; property=&quot;id&quot;/&gt;
+    &lt;result column=&quot;COMMAND&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;command&quot;/&gt;
+    &lt;result column=&quot;DESCRIPTION&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;description&quot;/&gt;
+    &lt;result column=&quot;CONTENT&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;content&quot;/&gt;
+&lt;/resultMap&gt;
+</code></pre><ul>
+<li>添加语句配置，parameterTye是传入参数类型。</li>
+<li>JSP中可以使用EL表达式，在mybatis中我们使用OGNL表达式进行一些变量操作。其中直接支持java的一些方法。</li>
+</ul>
+<pre><code>&lt;sql id=&quot;columns&quot;&gt;ID,COMMAND,DESCRIPTION,CONTENT&lt;/sql&gt;
+
+&lt;select id=&quot;queryMessageList&quot; parameterType=&quot;java.util.Map&quot; resultMap=&quot;MessageResult&quot;&gt;
+    select &lt;include refid=&quot;columns&quot;/&gt; from MESSAGE
+    &lt;where&gt;
+        &lt;if test=&quot;message.command != null and !&amp;quot;&amp;quot;.equals(message.command.trim())&quot;&gt;
+            and COMMAND=#{message.command}
+        &lt;/if&gt;
+        &lt;if test=&quot;message.description != null and !&amp;quot;&amp;quot;.equals(message.description.trim())&quot;&gt;
+            and DESCRIPTION like &apos;%&apos; #{message.description} &apos;%&apos;
+        &lt;/if&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
+</code></pre><ul>
+<li>id属性就是为这条语句起一个名字，好让SqlSession通过名称去调用。</li>
+<li><p>resultMapd这个属性指向resultMap这个标签。</p>
+</li>
+<li><p>在核心配置文件中添加mappers</p>
+</li>
+</ul>
+<pre><code>&lt;mappers&gt;
+    &lt;mapper resource=&quot;config/sqlxml/Message.xml&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre><ul>
+<li>这样的话我们看不见我们写的SQL是什么样的，配置文件里也无法打断点，我们怎么进行有效的调试呢？</li>
+</ul>
+<h3 id="4-应用log4j调试动态SQL"><a href="#4-应用log4j调试动态SQL" class="headerlink" title="4. 应用log4j调试动态SQL"></a>4. 应用log4j调试动态SQL</h3><pre><code>log4j.rootLogger=DEBUG,Console
+log4j.appender.Console=org.apache.log4j.ConsoleAppender
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n
+log4j.logger.org.apache=INFO
+</code></pre><ul>
+<li>properties文件里存的都是key=value这样的形式，需要用到properties的时候，我们可以用key来获取value。</li>
+</ul>
+<h3 id="5-实现mybatis删除功能"><a href="#5-实现mybatis删除功能" class="headerlink" title="5. 实现mybatis删除功能"></a>5. 实现mybatis删除功能</h3><pre><code>/**
+ * 单条删除
+ */
+public void deleteOne(int id) {
+    DBAccess dbAccess = new DBAccess();
+    SqlSession sqlSession = null;
+    try {
+        sqlSession = dbAccess.getSqlSession();
+        // 通过sqlSession执行SQL语句
+        sqlSession.delete(&quot;Message.deleteOne&quot;, id);
+        sqlSession.commit();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if(sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+}
+</code></pre><ul>
+<li>涉及更新操作时sqlSession需要主动commit。</li>
+<li>当参数是基本类型时，参数名使用_parameter。</li>
+</ul>
+<pre><code>&lt;delete id=&quot;deleteOne&quot; parameterType=&quot;int&quot;&gt;
+  delete from MESSAGE where ID = #{_parameter}
+&lt;/delete&gt;
+</code></pre><ul>
+<li>在jsp添加删除并添加servlet</li>
+</ul>
+<pre><code>&lt;td&gt;
+    &lt;a href=&quot;#&quot;&gt;修改&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+    &lt;a href=&quot;${basePath}DeleteOneServlet.action?id=${message.id}&quot;&gt;删除&lt;/a&gt;
+&lt;/td&gt;
+
+ &lt;servlet&gt;
+    &lt;servlet-name&gt;DeleteOneServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;servlet.DeleteOneServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;DeleteOneServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/DeleteOneServlet.action&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><ul>
+<li><strong>批量删除</strong></li>
+</ul>
+<pre><code>/**
+ * 多条删除
+ */
+public void deleteBatch(List&lt;Integer&gt; ids) {
+    DBAccess dbAccess = new DBAccess();
+    SqlSession sqlSession = null;
+    try {
+        sqlSession = dbAccess.getSqlSession();
+        // 通过sqlSession执行SQL语句
+        sqlSession.delete(&quot;Message.deleteBatch&quot;, ids);
+        sqlSession.commit();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if(sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+}
+</code></pre><ul>
+<li>separator指每一项之间的分割。</li>
+</ul>
+<pre><code>&lt;delete id=&quot;deleteBatch&quot; parameterType=&quot;java.util.List&quot;&gt;
+    delete from MESSAGE where ID in(
+    &lt;foreach collection=&quot;list&quot; item=&quot;item&quot; separator=&quot;,&quot;&gt;
+        #{item}
+    &lt;/foreach&gt;
+    )
+&lt;/delete&gt;
+</code></pre><h2 id="一对多关系的配置"><a href="#一对多关系的配置" class="headerlink" title="一对多关系的配置"></a>一对多关系的配置</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;mapper namespace=&quot;Command&quot;&gt;
+    &lt;resultMap type=&quot;bean.Command&quot; id=&quot;Command&quot;&gt;
+        &lt;id column=&quot;C_ID&quot; jdbcType=&quot;INTEGER&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;NAME&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;name&quot;/&gt;
+        &lt;result column=&quot;DESCRIPTION&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;description&quot;/&gt;
+        &lt;collection property=&quot;contentList&quot; resultMap=&quot;CommandContent.Content&quot;/&gt;
+    &lt;/resultMap&gt;
+
+    &lt;select id=&quot;queryCommandList&quot; parameterType=&quot;bean.Command&quot; resultMap=&quot;Command&quot;&gt;
+        select a.ID C_ID,a.NAME,a.DESCRIPTION,b.ID,b.CONTENT,b.COMMAND_ID
+        from COMMAND a left join COMMAND_CONTENT b
+        on a.ID=b.COMMAND_ID
+        &lt;where&gt;
+            &lt;if test=&quot;name != null and !&amp;quot;&amp;quot;.equals(name.trim())&quot;&gt;
+                and a.NAME=#{name}
+            &lt;/if&gt;
+            &lt;if test=&quot;description != null and !&amp;quot;&amp;quot;.equals(description.trim())&quot;&gt;
+                and a.DESCRIPTION like &apos;%&apos; #{description} &apos;%&apos;
+            &lt;/if&gt;
+        &lt;/where&gt;
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre><ul>
+<li>collection表示一对多关系</li>
+</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper
+    PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+    &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;CommandContent&quot;&gt;
+  &lt;resultMap type=&quot;bean.CommandContent&quot; id=&quot;Content&quot;&gt;
+    &lt;id column=&quot;ID&quot; jdbcType=&quot;INTEGER&quot; property=&quot;id&quot;/&gt;
+    &lt;result column=&quot;CONTENT&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;content&quot;/&gt;
+    &lt;result column=&quot;COMMAND_ID&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;commandId&quot;/&gt;
+  &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/12/18/SSMCampusShops-1/" style="float: left;">
+        ← SSMCampusShops-1
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/12/Big-Data-Getting-Started-2/">
+        Big-Data-Getting-Started-2 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
