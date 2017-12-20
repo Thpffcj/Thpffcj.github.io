@@ -182,6 +182,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<p>前一段时间快速使用了一些redis的命令，这里想要深入了解一下redis的各种使用方法。这里对简单命令的介绍没有在虚拟机上运行，运行情况可以参考：<br><a href="http://www.thpffcj.com/2017/12/02/Redis-Getting-Started-1/" target="_blank" rel="external">Redis 基础命令演示</a></p>
+<hr>
 <h2 id="1-Redis初识"><a href="#1-Redis初识" class="headerlink" title="1. Redis初识"></a>1. Redis初识</h2><ul>
 <li>高性能Key-Value服务器</li>
 <li>多种数据结构</li>
@@ -296,7 +297,10 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 [root@localhost data]# ll
 总用量 4
 -rw-r--r--. 1 root root 1354 12月 20 09:49 6382.log
-</code></pre><h2 id="2-API的理解和使用"><a href="#2-API的理解和使用" class="headerlink" title="2. API的理解和使用"></a>2. API的理解和使用</h2><h3 id="1-通用命令"><a href="#1-通用命令" class="headerlink" title="1. 通用命令"></a>1. 通用命令</h3><ul>
+</code></pre><p><br></p>
+<hr>
+<p><br></p>
+<h2 id="2-API的理解和使用"><a href="#2-API的理解和使用" class="headerlink" title="2. API的理解和使用"></a>2. API的理解和使用</h2><h3 id="1-通用命令"><a href="#1-通用命令" class="headerlink" title="1. 通用命令"></a>1. 通用命令</h3><ul>
 <li>keys:遍历所有key。<ul>
 <li>一般不在生产环境使用。</li>
 <li>keys怎么用：热备从节点。scan。</li>
@@ -315,37 +319,38 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <table>
 <thead>
 <tr>
-<th style="text-align:left">命令</th>
+<th style="text-align:center">命令</th>
 <th style="text-align:center">时间复杂度</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">keys</td>
+<td style="text-align:center">keys</td>
 <td style="text-align:center">O(n)</td>
 </tr>
 <tr>
-<td style="text-align:left">dbsize</td>
+<td style="text-align:center">dbsize</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">del</td>
+<td style="text-align:center">del</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">exists</td>
+<td style="text-align:center">exists</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">expire</td>
+<td style="text-align:center">expire</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">type</td>
+<td style="text-align:center">type</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 </tbody>
 </table>
+<hr>
 <h3 id="2-数据结构和内部编码"><a href="#2-数据结构和内部编码" class="headerlink" title="2. 数据结构和内部编码"></a>2. 数据结构和内部编码</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E5%86%85%E9%83%A8%E7%BC%96%E7%A0%81.png" alt=""></p>
 <ul>
 <li>数据结构有不同的实现方法：内存比较昂贵，在不同情况下可能使用不同的内部编码来达到时间换空间和空间换时间的效果。</li>
@@ -359,6 +364,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 </li>
 <li>用户不需要知道内部编码，其实也是面向接口编程的一种实践。</li>
 </ul>
+<hr>
 <h3 id="3-单线程"><a href="#3-单线程" class="headerlink" title="3. 单线程"></a>3. 单线程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8D%95%E7%BA%BF%E7%A8%8B1.png" alt=""></p>
 <ul>
 <li>redis在一个瞬间只会执行一个命令。</li>
@@ -375,6 +381,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 </ul>
 </li>
 </ul>
+<hr>
 <h3 id="4-字符串"><a href="#4-字符串" class="headerlink" title="4. 字符串"></a>4. 字符串</h3><p><strong>1. 结构和命令</strong></p>
 <ul>
 <li>使用场景：<ul>
@@ -452,44 +459,45 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <table>
 <thead>
 <tr>
-<th style="text-align:left">命令</th>
+<th style="text-align:center">命令</th>
 <th style="text-align:center">含义</th>
 <th style="text-align:center">时间复杂度</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">set key value</td>
+<td style="text-align:center">set key value</td>
 <td style="text-align:center">设置key - value</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">get key value</td>
+<td style="text-align:center">get key value</td>
 <td style="text-align:center">获取key - value</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">del key value</td>
+<td style="text-align:center">del key value</td>
 <td style="text-align:center">删除key - value</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">setnx set xx</td>
+<td style="text-align:center">setnx set xx</td>
 <td style="text-align:center">根据key是否存在设置key - value</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">incr decr</td>
+<td style="text-align:center">incr decr</td>
 <td style="text-align:center">计数</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">mget mset</td>
+<td style="text-align:center">mget mset</td>
 <td style="text-align:center">批量操作key - value</td>
 <td style="text-align:center">O(n)</td>
 </tr>
 </tbody>
 </table>
+<hr>
 <h3 id="5-哈希"><a href="#5-哈希" class="headerlink" title="5. 哈希"></a>5. 哈希</h3><p><strong>1. 结构和命令</strong></p>
 <ul>
 <li>所有哈希的命令都是以H开头</li>
@@ -546,33 +554,33 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <table>
 <thead>
 <tr>
-<th style="text-align:left">string</th>
+<th style="text-align:center">string</th>
 <th style="text-align:center">hash</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">get</td>
+<td style="text-align:center">get</td>
 <td style="text-align:center">hget</td>
 </tr>
 <tr>
-<td style="text-align:left">set setnx</td>
+<td style="text-align:center">set setnx</td>
 <td style="text-align:center">hset hsetnx</td>
 </tr>
 <tr>
-<td style="text-align:left">del</td>
+<td style="text-align:center">del</td>
 <td style="text-align:center">hdel</td>
 </tr>
 <tr>
-<td style="text-align:left">incr incyby decr decrby</td>
+<td style="text-align:center">incr incyby decr decrby</td>
 <td style="text-align:center">hincrby</td>
 </tr>
 <tr>
-<td style="text-align:left">mset</td>
+<td style="text-align:center">mset</td>
 <td style="text-align:center">hmset</td>
 </tr>
 <tr>
-<td style="text-align:left">mget</td>
+<td style="text-align:center">mget</td>
 <td style="text-align:center">hmget</td>
 </tr>
 </tbody>
@@ -632,33 +640,34 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <table>
 <thead>
 <tr>
-<th style="text-align:left">命令</th>
+<th style="text-align:center">命令</th>
 <th style="text-align:center">时间复杂度</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">hget hset hdel</td>
+<td style="text-align:center">hget hset hdel</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">hexists</td>
+<td style="text-align:center">hexists</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">hincrby</td>
+<td style="text-align:center">hincrby</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">hgetall hvals hkeys</td>
+<td style="text-align:center">hgetall hvals hkeys</td>
 <td style="text-align:center">O(1)</td>
 </tr>
 <tr>
-<td style="text-align:left">hmget hmset</td>
+<td style="text-align:center">hmget hmset</td>
 <td style="text-align:center">O(n)</td>
 </tr>
 </tbody>
 </table>
+<hr>
 <h3 id="6-列表"><a href="#6-列表" class="headerlink" title="6. 列表"></a>6. 列表</h3><p><strong>1. 结构和命令</strong></p>
 <ul>
 <li>特点<ul>
@@ -740,6 +749,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 </ul>
 </li>
 </ul>
+<hr>
 <h3 id="6-集合"><a href="#6-集合" class="headerlink" title="6. 集合"></a>6. 集合</h3><p><strong>1. 结构和命令</strong></p>
 <ul>
 <li>特点<ul>
@@ -785,6 +795,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 </ul>
 </li>
 </ul>
+<hr>
 <h3 id="7-有序集合"><a href="#7-有序集合" class="headerlink" title="7. 有序集合"></a>7. 有序集合</h3><p><strong>1. 结构和命令</strong></p>
 <ul>
 <li>所有的API都是以Z开头</li>
@@ -841,6 +852,9 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <li>zinterstore</li>
 <li>zunionstore</li>
 </ul>
+<p><br></p>
+<hr>
+<p><br></p>
 <h2 id="3-Redis客户端"><a href="#3-Redis客户端" class="headerlink" title="3. Redis客户端"></a>3. Redis客户端</h2><h3 id="1-Java客户端：Jedis"><a href="#1-Java客户端：Jedis" class="headerlink" title="1. Java客户端：Jedis"></a>1. Java客户端：Jedis</h3><pre><code>// 生成一个Jedis对象，这个对象负责和指定Redis节点进行通信。
 Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
 // jedis执行set操作
