@@ -297,8 +297,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 [root@localhost data]# ll
 总用量 4
 -rw-r--r--. 1 root root 1354 12月 20 09:49 6382.log
-</code></pre><p><br></p>
-<hr>
+</code></pre><hr>
 <p><br></p>
 <h2 id="2-API的理解和使用"><a href="#2-API的理解和使用" class="headerlink" title="2. API的理解和使用"></a>2. API的理解和使用</h2><h3 id="1-通用命令"><a href="#1-通用命令" class="headerlink" title="1. 通用命令"></a>1. 通用命令</h3><ul>
 <li>keys:遍历所有key。<ul>
@@ -852,7 +851,8 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <li>zinterstore</li>
 <li>zunionstore</li>
 </ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a><br></h2><p><br></p>
+<hr>
+<p><br></p>
 <h2 id="3-Redis客户端"><a href="#3-Redis客户端" class="headerlink" title="3. Redis客户端"></a>3. Redis客户端</h2><h3 id="1-Java客户端：Jedis"><a href="#1-Java客户端：Jedis" class="headerlink" title="1. Java客户端：Jedis"></a>1. Java客户端：Jedis</h3><pre><code>// 生成一个Jedis对象，这个对象负责和指定Redis节点进行通信。
 Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
 // jedis执行set操作
