@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Redis 基础命令演示 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-02T02:05:58.000Z" itemprop="datePublished">
+          2017-12-02
+      </time>
+    
+</span>
+                <h1>Redis 基础命令演示</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>ifconfig</p>
+<p>虚拟机装的是centos7 需要将redis.conf里bind 127.0.0.1 改为0.0.0.0</p>
+<pre><code>redis.clients.jedis.exceptions.JedisConnectionException: java.net.SocketTimeoutException: connect timed out
+
+    at redis.clients.jedis.Connection.connect(Connection.java:207)
+    at redis.clients.jedis.BinaryClient.connect(BinaryClient.java:93)
+    at redis.clients.jedis.Connection.sendCommand(Connection.java:126)
+    at redis.clients.jedis.BinaryClient.set(BinaryClient.java:110)
+    at redis.clients.jedis.Client.set(Client.java:47)
+    at redis.clients.jedis.Jedis.set(Jedis.java:120)
+    at jedis.JedisDemo1.demo1(JedisDemo1.java:16)
+    ...
+</code></pre><p>那怎么开启一个端口呢<br>添加<br>firewall-cmd –zone=public –add-port=80/tcp –permanent    （–permanent永久生效，没有此参数重启后失效）<br>重新载入<br>firewall-cmd –reload<br>查看<br>firewall-cmd –zone= public –query-port=80/tcp<br>删除<br>firewall-cmd –zone= public –remove-port=80/tcp –permanent</p>
+<pre><code>127.0.0.1:6379&gt; set company imooc
+OK
+127.0.0.1:6379&gt; get company
+&quot;imooc&quot;
+127.0.0.1:6379&gt; getset company google
+&quot;imooc&quot;
+127.0.0.1:6379&gt; get company
+&quot;google&quot;
+127.0.0.1:6379&gt; set person Thpffcj
+OK
+127.0.0.1:6379&gt; get person
+&quot;Thpffcj&quot;
+127.0.0.1:6379&gt; del person
+(integer) 1
+127.0.0.1:6379&gt; get person
+(nil)
+127.0.0.1:6379&gt; incr num
+(integer) 1
+127.0.0.1:6379&gt; get num
+&quot;1&quot;
+127.0.0.1:6379&gt; incr num
+(integer) 2
+127.0.0.1:6379&gt; get num
+&quot;2&quot;
+127.0.0.1:6379&gt; incr company
+(error) ERR value is not an integer or out of range
+127.0.0.1:6379&gt; decr num
+(integer) 1
+127.0.0.1:6379&gt; get num
+&quot;1&quot;
+127.0.0.1:6379&gt; incrby num 5
+(integer) 6
+127.0.0.1:6379&gt; get num
+&quot;6&quot;
+127.0.0.1:6379&gt; decrby num 3
+(integer) 3
+127.0.0.1:6379&gt; get num
+&quot;3&quot;
+127.0.0.1:6379&gt; append num 5
+(integer) 2
+127.0.0.1:6379&gt; get num
+&quot;35&quot;
+
+127.0.0.1:6379&gt; hset myhash username Thpffcj
+(integer) 1
+127.0.0.1:6379&gt; hset myhash age 20
+(integer) 1
+127.0.0.1:6379&gt; hmset myhash2 username rose age 18
+OK
+127.0.0.1:6379&gt; hget myhash username
+&quot;Thpffcj&quot;
+127.0.0.1:6379&gt; hmget myhash
+(error) ERR wrong number of arguments for &apos;hmget&apos; command
+127.0.0.1:6379&gt; hmget myhash username age
+1) &quot;Thpffcj&quot;
+2) &quot;20&quot;
+127.0.0.1:6379&gt; hgetall myhash
+1) &quot;username&quot;
+2) &quot;Thpffcj&quot;
+3) &quot;age&quot;
+4) &quot;20&quot;
+127.0.0.1:6379&gt; hdel myhash2 username
+(integer) 1
+127.0.0.1:6379&gt; hgetall myhash2
+1) &quot;age&quot;
+2) &quot;18&quot;
+127.0.0.1:6379&gt; hdel myhash2 username
+(integer) 0
+127.0.0.1:6379&gt; del myhash2
+(integer) 1
+127.0.0.1:6379&gt; hgetall myhash2
+(empty list or set)
+127.0.0.1:6379&gt; hincrby myhash age 5
+(integer) 25
+127.0.0.1:6379&gt; hget myhash age
+&quot;25&quot;
+127.0.0.1:6379&gt; hexists myhash username
+(integer) 1
+127.0.0.1:6379&gt; hexists myhash password
+(integer) 0
+127.0.0.1:6379&gt; hlen myhash
+(integer) 2
+127.0.0.1:6379&gt; hkeys myhash
+1) &quot;username&quot;
+2) &quot;age&quot;
+127.0.0.1:6379&gt; hvals myhash
+1) &quot;Thpffcj&quot;
+2) &quot;25&quot;
+</code></pre><p>Redis问题<br>MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.<br>Redis被配置为保存数据库快照，但它目前不能持久化到硬盘。用来修改集合数据的命令不能用。请查看Redis日志的详细错误信息。<br>解决方案<br>将stop-writes-on-bgsave-error设置为no<br>127.0.0.1:6379&gt; config set stop-writes-on-bgsave-error no</p>
+<p>127.0.0.1:6379&gt; lpush mylist a b c<br>(integer) 3<br>127.0.0.1:6379&gt; lpush mylist 1 2 3<br>(integer) 6<br>127.0.0.1:6379&gt; rpush mylist2 a b c<br>(integer) 3<br>127.0.0.1:6379&gt; rpush mylist2 1 2 3<br>(integer) 6<br>127.0.0.1:6379&gt; lrange mylist 0 5<br>1) “3”<br>2) “2”<br>3) “1”<br>4) “c”<br>5) “b”<br>6) “a”<br>127.0.0.1:6379&gt; lrange mylist2 0 -1<br>1) “a”<br>2) “b”<br>3) “c”<br>4) “1”<br>5) “2”<br>6) “3”<br>127.0.0.1:6379&gt; lpop mylist<br>“3”<br>127.0.0.1:6379&gt; rpop mylist<br>“a”<br>127.0.0.1:6379&gt; lrange mylist 0 -1<br>1) “2”<br>2) “1”<br>3) “c”<br>4) “b”<br>127.0.0.1:6379&gt; llen mylist<br>(integer) 4<br>127.0.0.1:6379&gt; llen mylist3<br>(integer) 0<br>127.0.0.1:6379&gt; lpushx mylist x<br>(integer) 5<br>127.0.0.1:6379&gt; lpushx mylist3 x<br>(integer) 0<br>127.0.0.1:6379&gt; lpush mylist3 1 2 3 1 2 3 1 2 3<br>(integer) 9<br>127.0.0.1:6379&gt; lrem mylist3 2 3<br>(integer) 2<br>127.0.0.1:6379&gt; lrange mylist3 0 -1<br>1) “2”<br>2) “1”<br>3) “2”<br>4) “1”<br>5) “3”<br>6) “2”<br>7) “1”<br>127.0.0.1:6379&gt; lrem mylist3 -2 1<br>(integer) 2<br>127.0.0.1:6379&gt; lrange mylist3 0 -1<br>1) “2”<br>2) “1”<br>3) “2”<br>4) “3”<br>5) “2”<br>127.0.0.1:6379&gt; lrem mylist3 0 2<br>(integer) 3<br>127.0.0.1:6379&gt; lrange mylist3 0 -1<br>1) “1”<br>2) “3”<br>127.0.0.1:6379&gt; lrange mylist 0 -1<br>1) “3”<br>2) “2”<br>3) “1”<br>4) “c”<br>5) “b”<br>6) “a”<br>127.0.0.1:6379&gt; lset mylist 3 mmm<br>OK<br>127.0.0.1:6379&gt; lrange mylist 0 -1<br>1) “3”<br>2) “2”<br>3) “1”<br>4) “mmm”<br>5) “b”<br>6) “a”<br>127.0.0.1:6379&gt; lpush mylist4 a b c<br>(integer) 3<br>127.0.0.1:6379&gt; lpush mylist4 a b c<br>(integer) 6<br>127.0.0.1:6379&gt; lrange mylist4 0 -1<br>1) “c”<br>2) “b”<br>3) “a”<br>4) “c”<br>5) “b”<br>6) “a”<br>127.0.0.1:6379&gt; linsert mylist4 before b 11<br>(integer) 7<br>127.0.0.1:6379&gt; lrange mylist4 0 -1<br>1) “c”<br>2) “11”<br>3) “b”<br>4) “a”<br>5) “c”<br>6) “b”<br>7) “a”<br>127.0.0.1:6379&gt; linsert mylist4 after b 22<br>(integer) 8<br>127.0.0.1:6379&gt; lrange mylist4 0 -1<br>1) “c”<br>2) “11”<br>3) “b”<br>4) “22”<br>5) “a”<br>6) “c”<br>7) “b”<br>8) “a”<br>127.0.0.1:6379&gt; lpush mylist5 1 2 3<br>(integer) 3<br>127.0.0.1:6379&gt; lpush mylist6 a b c<br>(integer) 3<br>127.0.0.1:6379&gt; rpoplpush mylist5 mylist6<br>“1”<br>127.0.0.1:6379&gt; lrange mylist5 0 -1<br>1) “3”<br>2) “2”<br>127.0.0.1:6379&gt; lrange mylist6 0 -1<br>1) “1”<br>2) “c”<br>3) “b”<br>4) “a”</p>
+<p>127.0.0.1:6379&gt; sadd myset a b c<br>(integer) 3<br>127.0.0.1:6379&gt; sadd myset a<br>(integer) 0<br>127.0.0.1:6379&gt; sadd myset 1 2 3<br>(integer) 3<br>127.0.0.1:6379&gt; srem myset 1 2<br>(integer) 2<br>127.0.0.1:6379&gt; smembers myset<br>1) “a”<br>2) “3”<br>3) “c”<br>4) “b”<br>127.0.0.1:6379&gt; sismember myset a<br>(integer) 1<br>127.0.0.1:6379&gt; sismember myset x<br>(integer) 0</p>
+<p>127.0.0.1:6379&gt; sadd mya1 a b c<br>(integer) 3<br>127.0.0.1:6379&gt; sadd myb1 a c 1 3<br>(integer) 4<br>127.0.0.1:6379&gt; sdiff mya1 myb1<br>1) “b”<br>127.0.0.1:6379&gt; sinter mya1 myb1<br>1) “c”<br>2) “a”<br>127.0.0.1:6379&gt; sunion mya1 myb1<br>1) “b”<br>2) “a”<br>3) “1”<br>4) “3”<br>5) “c”</p>
+<p>127.0.0.1:6379&gt; smembers myset<br>1) “a”<br>2) “3”<br>3) “c”<br>4) “b”<br>127.0.0.1:6379&gt; scard myset<br>(integer) 4<br>127.0.0.1:6379&gt; srandmember myset<br>“3”<br>127.0.0.1:6379&gt; srandmember myset<br>“b”<br>127.0.0.1:6379&gt; sdiffstore my1 mya1 myb1<br>(integer) 1<br>127.0.0.1:6379&gt; smembers my1<br>1) “b”<br>127.0.0.1:6379&gt; sinterstore my2 mya1 myb1<br>(integer) 2<br>127.0.0.1:6379&gt; smembers my2<br>1) “c”<br>2) “a”</p>
+<p>127.0.0.1:6379&gt; zadd mysort 70 zs 80 ls 90 ww<br>(integer) 3<br>127.0.0.1:6379&gt; zadd mysort 100 zs<br>(integer) 0<br>127.0.0.1:6379&gt; zscore mysort zs<br>“100”<br>127.0.0.1:6379&gt; zcard mysort<br>(integer) 3<br>127.0.0.1:6379&gt; zrem mysort ww<br>(integer) 1<br>127.0.0.1:6379&gt; zadd mysort 85 jack 95 rose<br>(integer) 2<br>127.0.0.1:6379&gt; zrange mysort 0 -1<br>1) “ls”<br>2) “jack”<br>3) “rose”<br>4) “zs”<br>127.0.0.1:6379&gt; zrange mysort 0 -1 withscores<br>1) “ls”<br>2) “80”<br>3) “jack”<br>4) “85”<br>5) “rose”<br>6) “95”<br>7) “zs”<br>8) “100”<br>127.0.0.1:6379&gt; zrevrange mysort 0 -1 withscores<br>1) “zs”<br>2) “100”<br>3) “rose”<br>4) “95”<br>5) “jack”<br>6) “85”<br>7) “ls”<br>8) “80”</p>
+<p>127.0.0.1:6379&gt; zremrangebyrank mysort 0 4<br>(integer) 4<br>127.0.0.1:6379&gt; zadd mysort 80 zs 90 ls 100 ws<br>(integer) 3<br>127.0.0.1:6379&gt; zremrangebyscore mysort 80 100<br>(integer) 3<br>127.0.0.1:6379&gt; zrange mysort 0 -1<br>(empty list or set)<br>127.0.0.1:6379&gt; zadd mysort 70 zs 80 ls 90 ww<br>(integer) 3<br>127.0.0.1:6379&gt; zrangebyscore mysort 0 100<br>1) “zs”<br>2) “ls”<br>3) “ww”<br>127.0.0.1:6379&gt; zrangebyscore mysort 0 100 withscores<br>1) “zs”<br>2) “70”<br>3) “ls”<br>4) “80”<br>5) “ww”<br>6) “90”<br>127.0.0.1:6379&gt; zrangebyscore mysort 0 100 withscores limit 0 2<br>1) “zs”<br>2) “70”<br>3) “ls”<br>4) “80”<br>127.0.0.1:6379&gt; zincrby mysort 3 ls<br>“83”<br>127.0.0.1:6379&gt; zscore mysort ls<br>“83”<br>127.0.0.1:6379&gt; zcount mysort 80 90<br>(integer) 2</p>
+<p>127.0.0.1:6379&gt; keys *<br>1) “name”<br>2) “company”<br>3) “mysort”<br>4) “num”<br>127.0.0.1:6379&gt; exists mysort<br>(integer) 1<br>127.0.0.1:6379&gt; get company<br>“google”<br>127.0.0.1:6379&gt; rename company newcompany<br>OK<br>127.0.0.1:6379&gt; get company<br>(nil)<br>127.0.0.1:6379&gt; get newcompany<br>“google”<br>127.0.0.1:6379&gt; expire newcompany 1000<br>(integer) 1<br>127.0.0.1:6379&gt; ttl newcompany<br>(integer) 966<br>127.0.0.1:6379&gt; type newcompany<br>string<br>127.0.0.1:6379&gt; type mysort<br>zset</p>
+<p>127.0.0.1:6379&gt; select 1<br>OK<br>127.0.0.1:6379[1]&gt; keys <em><br>(empty list or set)<br>127.0.0.1:6379[1]&gt; select 0<br>OK<br>127.0.0.1:6379&gt; keys </em><br>1) “num”<br>2) “name”<br>3) “mysort”<br>4) “newcompany”</p>
+<p>127.0.0.1:6379&gt; move mysort 1<br>(integer) 1<br>127.0.0.1:6379&gt; select 1<br>OK<br>127.0.0.1:6379[1]&gt; keys *<br>1) “mysort”</p>
+<p>127.0.0.1:6379&gt; set num 1<br>OK<br>127.0.0.1:6379&gt; get num<br>“1”<br>127.0.0.1:6379&gt; get num<br>“2”<br>127.0.0.1:6379&gt; multi<br>OK<br>127.0.0.1:6379&gt; incr num<br>QUEUED<br>127.0.0.1:6379&gt; incr num<br>QUEUED<br>127.0.0.1:6379&gt; exec<br>1) (integer) 3<br>2) (integer) 4<br>127.0.0.1:6379&gt; set user tom<br>OK<br>127.0.0.1:6379&gt; get user<br>“tom”<br>127.0.0.1:6379&gt; multi<br>OK<br>127.0.0.1:6379&gt; set user jerry<br>QUEUED<br>127.0.0.1:6379&gt; discard<br>OK<br>127.0.0.1:6379&gt; get user<br>“tom”</p>
+<p>127.0.0.1:6379&gt; incr num<br>(integer) 2<br>127.0.0.1:6379&gt; get num<br>“2”<br>127.0.0.1:6379&gt; get num<br>“2”<br>127.0.0.1:6379&gt; get num<br>“4”</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/12/03/Nginx-Getting-Started/" style="float: left;">
+        ← Nginx-Getting-Started
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/11/25/Object-oriented-software-construction/">
+        面向对象软件构造 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
