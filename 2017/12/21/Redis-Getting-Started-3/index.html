@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Redis 持久化 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-21T12:28:55.000Z" itemprop="datePublished">
+          2017-12-21
+      </time>
+    
+</span>
+                <h1>Redis 持久化</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>我们在上一篇博客复习了一下redis各种集合的API，接下来我们来和redis持久化相关的一些问题。</p>
+<hr>
+<h2 id="1-Redis持久化的取舍和选择"><a href="#1-Redis持久化的取舍和选择" class="headerlink" title="1. Redis持久化的取舍和选择"></a>1. Redis持久化的取舍和选择</h2><h3 id="1-什么是持久化"><a href="#1-什么是持久化" class="headerlink" title="1. 什么是持久化"></a>1. 什么是持久化</h3><ul>
+<li><strong>redis所有数据保持在内存中，对数据的更新将异步地保存到磁盘上。</strong></li>
+</ul>
+<h3 id="2-持久化方式"><a href="#2-持久化方式" class="headerlink" title="2. 持久化方式"></a>2. 持久化方式</h3><ul>
+<li><strong>快照</strong><ul>
+<li>MySQL Dump</li>
+<li>Redis RDB</li>
+</ul>
+</li>
+<li><strong>写日志</strong><ul>
+<li>MySQL Binlog</li>
+<li>Hbase HLog</li>
+<li>Redis AOF</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-RDB"><a href="#2-RDB" class="headerlink" title="2. RDB"></a>2. RDB</h2><h3 id="1-什么是RDB"><a href="#1-什么是RDB" class="headerlink" title="1. 什么是RDB"></a>1. 什么是RDB</h3><p><img src="http://oseihavwm.bkt.clouddn.com/RDB.png" alt=""></p>
+<h3 id="2-触发机制-主要三种方式"><a href="#2-触发机制-主要三种方式" class="headerlink" title="2. 触发机制 - 主要三种方式"></a>2. 触发机制 - 主要三种方式</h3><p><strong>1. save(同步)</strong></p>
+<ul>
+<li>客户端向redis发送一条save命令，redis会帮我们生成RDB文件。</li>
+<li>问题：由于是同步命令，执行save的时候，假如我们的save非常慢(数据量多)，会造成redis的阻塞。</li>
+<li>文件策略：如存在老的RDB文件，新替代老。</li>
+<li>复杂度：O(N)。</li>
+</ul>
+<p><strong>2. bgsave(异步)</strong></p>
+<ul>
+<li>客户端执行bgsave命令，它使用了linux的fork()函数，生成了主进程的一个redis子进程，让子进程完成RDB的生成。RDB生成之后，会告诉主进程RDB生成成功。</li>
+<li>如果fork执行非常慢(大多数情况下非常快)，依然会阻塞redis。</li>
+<li>redis会正常响应客户端，因为createRDB这样重的操作是让子进程进行操作的。</li>
+<li>文件策略和复杂度与save相同。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">save</th>
+<th style="text-align:center">bgsave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IO类型</td>
+<td style="text-align:center">同步</td>
+<td style="text-align:center">异步</td>
+</tr>
+<tr>
+<td style="text-align:center">阻塞</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是(阻塞发生在fork)</td>
+</tr>
+<tr>
+<td style="text-align:center">复杂度</td>
+<td style="text-align:center">O(N)</td>
+<td style="text-align:center">O(N)</td>
+</tr>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">不会消耗额外内存</td>
+<td style="text-align:center">不阻塞客户端命令</td>
+</tr>
+<tr>
+<td style="text-align:center">缺点</td>
+<td style="text-align:center">阻塞客户端命令</td>
+<td style="text-align:center">需要fork，消耗内存</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. 自动</strong></p>
+<ul>
+<li>redis提供了save配置来进行自动持久化</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">配置</th>
+<th style="text-align:center">seconds</th>
+<th style="text-align:center">changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">save</td>
+<td style="text-align:center">900</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">save</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">save</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">10000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在60秒改变了10000条数据，在300秒改变了10条数据，在900秒改变了一条数据，进行自动持久化。RDB文件生成是内部调用bgsave。</li>
+<li>具体配置可以修改。</li>
+<li>无法控制生成RDB频率。</li>
+</ul>
+<p><strong>3. 配置</strong></p>
+<ul>
+<li>我们来看一下redis默认配置文件中给出的配置</li>
+<li>save：自动持久化</li>
+<li>dbfilename：RDB名字</li>
+<li>dir：RDB等日志文件存放位置</li>
+<li>stop-writes-on-bgsave-error：bgsave发生错误时是否停止写入</li>
+<li>rdbcompression：RDB文件是否采用压缩的格式</li>
+<li>rdbchecksum：是否对RDB文件进行校验和</li>
+</ul>
+<pre><code>save 900 1
+save 300 10
+save 60 10000
+dbfilename dump.rdb
+dir ./
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+</code></pre><p><strong>4. 最佳配置</strong></p>
+<ul>
+<li>关闭自动持久化</li>
+<li>dbfilename：使用端口号进行文件区别</li>
+<li>dir：根据redis数量进行分盘</li>
+</ul>
+<pre><code>dbfilename dump-${port}.rdb
+dir /bigdistpath
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+</code></pre><h3 id="3-触发机制-不容忽略方式"><a href="#3-触发机制-不容忽略方式" class="headerlink" title="3. 触发机制 - 不容忽略方式"></a>3. 触发机制 - 不容忽略方式</h3><p><strong>1. 全量复制</strong></p>
+<p><strong>2. debug reload</strong></p>
+<p><strong>3. shutdown</strong></p>
+<h3 id="4-试验"><a href="#4-试验" class="headerlink" title="4. 试验"></a>4. 试验</h3><ul>
+<li>修改配置文件以便远程连接<ul>
+<li>bind 0.0.0.0</li>
+<li>protected-mode no</li>
+</ul>
+</li>
+<li>使用jedis随便添加些数据</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; dbsize
+(integer) 1000000
+
+127.0.0.1:6379&gt; info memory
+# Memory
+used_memory:105221280
+used_memory_human:100.35M
+...
+</code></pre><ul>
+<li>我们提前在另一个窗口准备好执行命令</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; set hello word
+OK
+127.0.0.1:6379&gt; get hello 
+</code></pre><ul>
+<li>在第一个窗口执行save，接着执行get hello，发现被阻塞</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; save
+OK
+(4.77s)
+
+127.0.0.1:6379&gt; get hello
+&quot;word&quot;
+(2.22s)
+</code></pre><ul>
+<li>我们还可以去data目录(配置文件指定)下看到生成的RDB文件</li>
+</ul>
+<pre><code>[root@localhost redis]# cd data/
+[root@localhost data]# ll
+总用量 52428
+-rw-r--r--. 1 root root     7365 12月 21 14:29 6379.log
+-rw-r--r--. 1 root root     4809 12月 20 23:40 6382.log
+-rw-r--r--. 1 root root 53666783 12月 21 14:29 dump-6379.rdb
+</code></pre><ul>
+<li>接下来我们验证一下bgsive</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; bgsave
+Background saving started
+</code></pre><ul>
+<li>使用命令发现调用子进程，同时get hello没有阻塞</li>
+</ul>
+<pre><code>[root@localhost redis]# ps -ef | grep redis-
+root       4987      1  1 14:21 ?        00:00:15 redis-server 0.0.0.0:6379
+root       5271   3826  0 14:33 pts/0    00:00:00 redis-cli
+root       5304   4987 56 14:36 ?        00:00:01 redis-rdb-bgsave 0.0.0.0:6379
+root       5306   5143  0 14:36 pts/2    00:00:00 grep --color=auto redis-
+</code></pre><ul>
+<li>最后我们来看一下自动持久化策略</li>
+</ul>
+<pre><code>#save 900 1
+#save 300 10
+save 60 5
+</code></pre><ul>
+<li>可以通过flushall清空数据</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; flushall
+OK
+(0.70s)
+127.0.0.1:6379&gt; dbsize
+(integer) 0
+</code></pre><ul>
+<li>插入数据</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; set a b
+OK
+127.0.0.1:6379&gt; set c d
+OK
+127.0.0.1:6379&gt; set e f
+OK
+127.0.0.1:6379&gt; set g h
+OK
+127.0.0.1:6379&gt; set i j
+OK
+127.0.0.1:6379&gt; set m n
+OK
+</code></pre><ul>
+<li>查看日志，发现进行了自动持久化</li>
+</ul>
+<pre><code>[root@localhost data]# tail -f 6379.log
+
+5475:M 21 Dec 14:45:03.075 * 5 changes in 60 seconds. Saving...
+5475:M 21 Dec 14:45:03.077 * Background saving started by pid 5494
+5494:C 21 Dec 14:45:05.018 * DB saved on disk
+5494:C 21 Dec 14:45:05.019 * RDB: 10 MB of memory used by copy-on-write
+5475:M 21 Dec 14:45:05.073 * Background saving terminated with success
+</code></pre><h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><ul>
+<li>RDB是Redis内存到硬盘的快照，用于持久化。</li>
+<li>sava通常会阻塞Redis。</li>
+<li>bgsava不会阻塞Redis，但是会fork新进程。</li>
+<li>save自动配置满足任一就会被执行。</li>
+<li>有些触发机制不用忽视。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-AOF"><a href="#3-AOF" class="headerlink" title="3. AOF"></a>3. AOF</h2><h3 id="1-RDB有什么问题"><a href="#1-RDB有什么问题" class="headerlink" title="1. RDB有什么问题"></a>1. RDB有什么问题</h3><p><strong>1. 耗时，耗性能</strong></p>
+<ul>
+<li>RDB生成过程其实就是将内存中的数据dump到硬盘当中，形成一个RDB文件。</li>
+<li>首先是比较耗时的，我们要将所有数据进行一个dump，是一个O(N)的过程，本身的写也会消耗很多CPU。</li>
+<li>其次是一个内存的消耗，我们知道bgsive有一个fork的过程。</li>
+<li>还有就是IO性能的消耗。</li>
+</ul>
+<p><strong>2. 不可控，丢失数据</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">配置</th>
+<th style="text-align:center">seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T1</td>
+<td style="text-align:center">执行多个写命令</td>
+</tr>
+<tr>
+<td style="text-align:center">T2</td>
+<td style="text-align:center">满足RDB自动创建的条件</td>
+</tr>
+<tr>
+<td style="text-align:center">T3</td>
+<td style="text-align:center">再次执行多个写命令</td>
+</tr>
+<tr>
+<td style="text-align:center">T4</td>
+<td style="text-align:center">宕机</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>T3到T4之间的数据写入就会丢失</li>
+</ul>
+<h3 id="2-AOF运行原理，创建"><a href="#2-AOF运行原理，创建" class="headerlink" title="2. AOF运行原理，创建"></a>2. AOF运行原理，创建</h3><ul>
+<li><strong>客户端写一条数据，就在日志追加一条写命令</strong></li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/AOF.png" alt=""></p>
+<h3 id="3-AOF的三种策略"><a href="#3-AOF的三种策略" class="headerlink" title="3. AOF的三种策略"></a>3. AOF的三种策略</h3><ul>
+<li><strong>always</strong><ul>
+<li>redis在执行写命令的时候，实际上不是直接写在文件系统当中，而是写在硬盘的缓冲区当中。缓冲区会根据一些策略刷新到硬盘当中。</li>
+<li>always是说每条命令fsync到硬盘，这样redis的写入数据就会不丢失。</li>
+</ul>
+</li>
+<li><strong>everysec</strong><ul>
+<li>everysec是说每秒把缓冲区fsync到硬盘。</li>
+<li>在高写入量时会适当保护硬盘。</li>
+<li>缺点是如果出现了故障，有可能会丢失一秒的数据。</li>
+<li>这是一个默认值。</li>
+</ul>
+</li>
+<li><strong>no</strong><ul>
+<li>OS决定fsync，由操作系统决定什么时候该写入硬盘。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">always</th>
+<th style="text-align:center">everysec</th>
+<th style="text-align:center">no</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">不丢失数据</td>
+<td style="text-align:center">每秒一次fsync</td>
+<td style="text-align:center">不用管</td>
+</tr>
+<tr>
+<td style="text-align:center">缺点</td>
+<td style="text-align:center">IO开销较大，一般的sata盘只有几百TPS</td>
+<td style="text-align:center">丢一秒数据</td>
+<td style="text-align:center">不可控</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-AOF重写"><a href="#4-AOF重写" class="headerlink" title="4. AOF重写"></a>4. AOF重写</h3><ul>
+<li>set hello world  set hello java  set hello hehe =&gt; set hello hehe</li>
+<li>incr counter  incr counter =&gt; set counter 2</li>
+<li>rpush mylist a  rpush mylist b  rpush mylist c =&gt; rpush mylist a b c</li>
+<li>过期数据 =&gt; 重写过程是没有用的</li>
+</ul>
+<p><strong>把一些可以优化的命令进行化简，从而达到两个目的</strong></p>
+<ul>
+<li>减少硬盘占用量</li>
+<li>加速恢复速度</li>
+</ul>
+<h3 id="5-AOF重写实现的两种方式"><a href="#5-AOF重写实现的两种方式" class="headerlink" title="5. AOF重写实现的两种方式"></a>5. AOF重写实现的两种方式</h3><p><strong>1. bgrewriteaof</strong></p>
+<ul>
+<li>客户端向redis发送一条命令bgrewriteaof，redis会返回OK并异步执行。redis接收到这个命令后会fork出一个子进程来完成AOF的重写。</li>
+<li>这里的AOF重写就是将redis内存中的数据进行一次回溯，回溯成AOF文件，是从redis内存中进行一个重写。</li>
+</ul>
+<p><strong>2. AOF重写配置</strong></p>
+<ul>
+<li>配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">配置名</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">auto-aof-rewrite-min-size</td>
+<td style="text-align:center">AOF文件重写需要的尺寸</td>
+</tr>
+<tr>
+<td style="text-align:center">auto-aof-rewrite-percentage</td>
+<td style="text-align:center">AOF文件增长率</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>统计</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">统计名</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">aof-current-size</td>
+<td style="text-align:center">AOF当前尺寸(单位：字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">aof-base-size</td>
+<td style="text-align:center">AOF上次启动和重写的尺寸(单位：字节)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>自动触发时机<ul>
+<li>aof-current-size &gt; auto-aof-rewrite-min-size</li>
+<li>(aof-current-size - aof-base-size) / aof-base-size &gt; auto-aof-rewrite-percentage</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/AOF%E9%87%8D%E5%86%99%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<h3 id="6-AOF配置"><a href="#6-AOF配置" class="headerlink" title="6. AOF配置"></a>6. AOF配置</h3><ul>
+<li>我们修改一下redis默认配置文件中给出的配置</li>
+</ul>
+<pre><code>appendonly yes
+appendfilename &quot;appendonly.aof&quot;
+appendfsync everysec
+dir /home/redis/data
+no-appendfsync-on-rewrite yes
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</code></pre><ul>
+<li>进行一些简单操作</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; set hello java
+OK
+127.0.0.1:6379&gt; set hello redis
+OK
+127.0.0.1:6379&gt; incr counter
+(integer) 1
+127.0.0.1:6379&gt; incr counter
+(integer) 2
+127.0.0.1:6379&gt; rpush list a
+(integer) 1
+127.0.0.1:6379&gt; rpush list b
+(integer) 2
+127.0.0.1:6379&gt; rpush list c
+(integer) 3
+</code></pre><ul>
+<li>查看AOF文件是否生成</li>
+</ul>
+<pre><code>[root@localhost redis]# cd data
+[root@localhost data]# ll
+总用量 40
+-rw-r--r--. 1 root root 21736 12月 21 16:57 6379.log
+-rw-r--r--. 1 root root  4809 12月 20 23:40 6382.log
+-rw-r--r--. 1 root root   277 12月 21 16:58 appendonly.aof
+-rw-r--r--. 1 root root   127 12月 21 15:22 dump-6379.rdb
+</code></pre><ul>
+<li>查看文件内容</li>
+</ul>
+<pre><code>[root@localhost data]# more appendonly.aof 
+
+...
+*3
+$3
+set
+$5
+hello
+$5
+world
+...
+</code></pre><ul>
+<li><p>我们稍微看一下文件格式</p>
+<ul>
+<li>*3表示下面这个命令有3个参数</li>
+<li>$3表示下面一个数据的字节长度</li>
+</ul>
+</li>
+<li><p>下面我们来看下重写</p>
+</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; bgrewriteaof
+Background append only file rewriting started
+</code></pre><ul>
+<li>再次打开appendonly.aof，我们发现只保留了set hello redis。</li>
+</ul>
+<pre><code>*3
+$3
+SET
+$5
+hello
+$5
+redis
+</code></pre><h3 id="7-RDB和AOF的抉择"><a href="#7-RDB和AOF的抉择" class="headerlink" title="7. RDB和AOF的抉择"></a>7. RDB和AOF的抉择</h3><p><strong>1. RDB和AOF比较</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">RDB</th>
+<th style="text-align:center">AOF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">启动优先级</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">高</td>
+</tr>
+<tr>
+<td style="text-align:center">体积</td>
+<td style="text-align:center">小</td>
+<td style="text-align:center">大</td>
+</tr>
+<tr>
+<td style="text-align:center">恢复速度</td>
+<td style="text-align:center">快</td>
+<td style="text-align:center">慢</td>
+</tr>
+<tr>
+<td style="text-align:center">数据安全性</td>
+<td style="text-align:center">丢数据</td>
+<td style="text-align:center">根据策略决定</td>
+</tr>
+<tr>
+<td style="text-align:center">轻重</td>
+<td style="text-align:center">重</td>
+<td style="text-align:center">轻</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. RDB最佳策略</strong></p>
+<ul>
+<li>“关”</li>
+<li>集中管理</li>
+<li>主从，从开？</li>
+</ul>
+<p><strong>3. AOF最佳策略</strong></p>
+<ul>
+<li>“开”：缓存和存储</li>
+<li>AOF重写集中管理</li>
+<li>everysec</li>
+</ul>
+<p><strong>4. 最佳策略</strong></p>
+<ul>
+<li>小分片</li>
+<li>缓存或者存储</li>
+<li>监控(硬盘，内存，负载，网络)</li>
+<li>足够的内存</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="4-开发运维常见问题"><a href="#4-开发运维常见问题" class="headerlink" title="4. 开发运维常见问题"></a>4. 开发运维常见问题</h2><h3 id="1-fork操作"><a href="#1-fork操作" class="headerlink" title="1. fork操作"></a>1. fork操作</h3><p><strong>1. 同步操作</strong></p>
+<p><strong>2. 与内存量息息相关：内存越大，耗时越长(与机器类型有关)</strong></p>
+<p><strong>3. info：latest_fork_usec</strong></p>
+<p><strong>4. 改善fork</strong></p>
+<ul>
+<li>优先使用物理机或者高效支持fork操作的虚拟化技术。</li>
+<li>控制redis实例最大可用内存：maxmemory。</li>
+<li>合理配置linux内存分配策略：vm.overcommit_memory=1。</li>
+<li>降低fork频率：例如放宽AOF重写自动触发时机，不必要的全量复制。</li>
+</ul>
+<h3 id="2-子进程开销和优化"><a href="#2-子进程开销和优化" class="headerlink" title="2. 子进程开销和优化"></a>2. 子进程开销和优化</h3><p><strong>1. CPU</strong></p>
+<ul>
+<li>开销：RDB和AOF文件生成，属于CPU密集型。</li>
+<li>优化：不做CPU绑定，不和CPU密集型部署。</li>
+</ul>
+<p><strong>2. 内存</strong></p>
+<ul>
+<li>开销：fork内存开销，copy-on-write。</li>
+<li>优化：禁止支持大的内存页分配 ： echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled。</li>
+</ul>
+<p><strong>3. 硬盘</strong></p>
+<ul>
+<li>开销：AOF和RDB文件写入，可以结合iostat,iotop分析。</li>
+<li>优化：<ul>
+<li>不要和高硬盘负载服务部署在一起：存储服务，消息队列等。</li>
+<li>不要进行AOF追加：no-appendfsync-on-rewrite = yes。</li>
+<li>根据写入量决定磁盘类型：例如ssd。</li>
+<li>单机多实例持久化文件目录可以考虑分盘。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-AOF追加阻塞"><a href="#3-AOF追加阻塞" class="headerlink" title="3. AOF追加阻塞"></a>3. AOF追加阻塞</h3><ul>
+<li>如果使用了AOF，我们通常会使用每秒刷盘的这样一个策略。</li>
+<li>首先主线程去写入AOF缓冲区，同时还有一个AOF同步线程去同步每秒刷盘的操作，同时还会记录最近的一次同步时间。</li>
+<li>主线程还会对比和上次AOF的时间，如果距离上次同步时间超过两秒，主线程会阻塞。</li>
+<li>解决方法主要参考上面关于硬盘的优化。</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/20/Redis-Getting-Started-2/">
+        Redis 入门 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

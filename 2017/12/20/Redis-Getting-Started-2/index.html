@@ -882,14 +882,245 @@ String value = jedis.get(&quot;hello&quot;);
 </ul>
 </li>
 </ul>
-<h3 id="2-Python客户端：redis-py"><a href="#2-Python客户端：redis-py" class="headerlink" title="2. Python客户端：redis-py"></a>2. Python客户端：redis-py</h3><h3 id="3-Go客户端：Redigo"><a href="#3-Go客户端：Redigo" class="headerlink" title="3. Go客户端：Redigo"></a>3. Go客户端：Redigo</h3>
+<h3 id="2-Python客户端：redis-py"><a href="#2-Python客户端：redis-py" class="headerlink" title="2. Python客户端：redis-py"></a>2. Python客户端：redis-py</h3><h3 id="3-Go客户端：Redigo"><a href="#3-Go客户端：Redigo" class="headerlink" title="3. Go客户端：Redigo"></a>3. Go客户端：Redigo</h3><hr>
+<p><br></p>
+<h2 id="4-Redis的一些其他功能"><a href="#4-Redis的一些其他功能" class="headerlink" title="4. Redis的一些其他功能"></a>4. Redis的一些其他功能</h2><h3 id="1-慢查询"><a href="#1-慢查询" class="headerlink" title="1. 慢查询"></a>1. 慢查询</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></p>
+<ul>
+<li>慢查询发生在第3阶段。</li>
+<li>客户端超时不一定慢查询，但慢查询是客户端超时的一个可能因素。</li>
+</ul>
+<p><strong>1. 两个配置 - slowlog-max-len：我们的慢查询队列长度是多少</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%85%A2%E6%9F%A5%E8%AF%A2%E9%98%9F%E5%88%97.png" alt=""></p>
+<ul>
+<li>先进先出队列</li>
+<li>固定长度</li>
+<li>保存在内存中</li>
+</ul>
+<p><strong>2. 两个配置 - slowlog-log-slower-than：当查询时间小于多少我们认为是慢查询</strong></p>
+<ul>
+<li>慢查询阈值(单位：微秒)</li>
+<li>slowlog-log-slower-than = 0，记录所有命令</li>
+<li>slowlog-log-slower-than &lt; 0，不记录任何命令</li>
+</ul>
+<p><strong>3. 配置方法</strong></p>
+<ul>
+<li>默认值<ul>
+<li>config get slowlog-max-len = 128</li>
+<li>config get slowlog-log-slower-than = 10000</li>
+</ul>
+</li>
+<li>修改配置文件重启</li>
+<li>动态配置</li>
+</ul>
+<p><strong>4. 慢查询命令</strong></p>
+<ul>
+<li>slowlog get [n] ： 获取慢查询队列</li>
+<li>slowlog len ： 获取慢查询队列长度</li>
+<li>slowlog reset ： 清空慢查询队列</li>
+</ul>
+<p><strong>5. 运维经验</strong></p>
+<ul>
+<li>slowlog-max-len不要设置过小，通常设置1000左右。</li>
+<li>slowlog-log-slower-than不要设置过大，默认10ms，通常设置1ms。</li>
+<li>理解命令生命周期。</li>
+<li>定期持久化慢查询。</li>
+</ul>
+<hr>
+<h3 id="2-pipeline"><a href="#2-pipeline" class="headerlink" title="2. pipeline"></a>2. pipeline</h3><ul>
+<li>1次时间 = 1次网络时间 + 1次命令时间</li>
+<li>n次时间 = n次网络时间 + n次命令时间</li>
+</ul>
+<p><strong>1. 什么是流水线</strong></p>
+<ul>
+<li>将一批命令进行批量打包，在服务端进行批量计算，然后按顺序将结果返回给我们。</li>
+<li>1次pipeline(n条命令) = 1次网络时间 + n次命令时间</li>
+<li>两点注意<ul>
+<li>Redis的命令时间都是微秒级别。</li>
+<li>pipeline每次条数要控制(网络)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. pipeline-Jedis实现</strong></p>
+<pre><code>public void PipelineTest() {
+    Jedis jedis = new Jedis(&quot;192.168.242.129&quot;, 6379);
+    for (int i = 0; i &lt; 100; i++) {
+        Pipeline pipeline = jedis.pipelined();
+        for (int j = i * 100; j &lt; (i + 1) * 100; j++) {
+            pipeline.hset(&quot;hashkey:&quot; + j, &quot;field&quot; + j, &quot;value&quot; + j);
+        }
+        pipeline.syncAndReturnAll();
+    }
+}
+</code></pre><p><strong>3. 与原生M操作？</strong></p>
+<ul>
+<li>M操作是原子操作</li>
+<li>Pipeline不是原子操作</li>
+</ul>
+<p><strong>4. 使用建议</strong></p>
+<ul>
+<li>注意每次Pipeline携带数据量。</li>
+<li>Pipeline每次只能作用在一个Redis节点上。</li>
+<li>M操作与Pipeline的区别。</li>
+</ul>
+<hr>
+<h3 id="3-发布订阅"><a href="#3-发布订阅" class="headerlink" title="3. 发布订阅"></a>3. 发布订阅</h3><p><strong>1. 角色</strong></p>
+<ul>
+<li>发布者(publisher)</li>
+<li>订阅者(subscriber)</li>
+<li>频道(channel)</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%91%E5%B8%83%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<p><strong>2. API</strong></p>
+<ul>
+<li>publish(发布命令)<ul>
+<li>publish channel message</li>
+</ul>
+</li>
+<li>subscribe(订阅)<ul>
+<li>subscribe [channel] #一个或多个</li>
+</ul>
+</li>
+<li>unsubscribe(取消订阅)<ul>
+<li>unsubscribe [channel] #一个或多个</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 消息队列</strong></p>
+<ul>
+<li>发布订阅特点是发布消息之后其他所有订阅者都可以获得消息。</li>
+<li>消息队列是一种抢的过程，发布者发布了一条消息只有一个订阅者获得。(redis并没有提供这种功能)</li>
+</ul>
+<p><strong>4. 发布订阅总结</strong></p>
+<ul>
+<li>发布订阅模式中的角色</li>
+<li>重要的API</li>
+</ul>
+<hr>
+<h3 id="4-bitmap-位图"><a href="#4-bitmap-位图" class="headerlink" title="4. bitmap(位图)"></a>4. bitmap(位图)</h3><pre><code>127.0.0.1:6379&gt; set hello big
+OK
+127.0.0.1:6379&gt; getbit hello 0
+(integer) 0
+127.0.0.1:6379&gt; getbit hello 1
+(integer) 1
+</code></pre><ul>
+<li>对于redis，我可以直接操作位。</li>
+</ul>
+<p><strong>1. 相关API</strong></p>
+<ul>
+<li>setbit<ul>
+<li>setbit key offset value：给位图指定索引设置值</li>
+</ul>
+</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; setbit hello 7 1
+(integer) 0
+127.0.0.1:6379&gt; get hello
+&quot;cig&quot;
+</code></pre><ul>
+<li>getbit<ul>
+<li>getbit key offset：获取指定偏移量的值</li>
+</ul>
+</li>
+<li>bitcount<ul>
+<li>bitcount key [start end]：获取位图指定范围(start到end，单位为字节，如果不指定就是获取全部)位值为1的个数</li>
+</ul>
+</li>
+<li>bitop<ul>
+<li>bitop op destkey key [key …]：做多个Bitmap的and(交集),or(并集),not(非),xor(异或)操作并将结果保存在destkey中</li>
+</ul>
+</li>
+<li>bitpos<ul>
+<li>bitpos key targetBit [start] [end]：计算位图指定范围(start到end，单位为字节，如果不指定就是获取全部)第一个偏移量对应的值等于targetBit的位置</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 独立用户统计</strong></p>
+<ul>
+<li>使用set和bitmap</li>
+<li>1亿用户，每天5千万独立访问</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">每个userid占用空间</th>
+<th style="text-align:center">需要存储的用户量</th>
+<th style="text-align:center">全部内存量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">set</td>
+<td style="text-align:center">32位(整型)</td>
+<td style="text-align:center">50000000</td>
+<td style="text-align:center">200MB</td>
+</tr>
+<tr>
+<td style="text-align:center">bitmap</td>
+<td style="text-align:center">1位</td>
+<td style="text-align:center">100000000</td>
+<td style="text-align:center">12.5MB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. 使用经验</strong></p>
+<ul>
+<li>type = string，最大512M</li>
+<li>注意setbit时的偏移量，可能有较大耗时</li>
+<li>位图不是绝对的好</li>
+</ul>
+<hr>
+<h3 id="5-HyperLogLog"><a href="#5-HyperLogLog" class="headerlink" title="5. HyperLogLog"></a>5. HyperLogLog</h3><p><strong>1. 基于HyperLogLog算法：极小空间完成独立数量统计</strong></p>
+<ul>
+<li>本质还是字符串</li>
+</ul>
+<p><strong>2. 三个命令</strong></p>
+<ul>
+<li>pfadd key element [element …]：向hyperLogLog添加元素</li>
+<li>pfcount key [key …]：计算hyperloglog的独立总数</li>
+<li>pfmerge destkey sourcekey [sourcekey …]：合并多个hyperloglog</li>
+</ul>
+<p><strong>3. 使用经验</strong></p>
+<ul>
+<li>是否能容忍错误？(错误率：0.81%)</li>
+<li>是否需要单条数据？</li>
+</ul>
+<hr>
+<h3 id="6-GEO"><a href="#6-GEO" class="headerlink" title="6. GEO"></a>6. GEO</h3><p><strong>1. GEO(地理信息定位)：存储经纬度，计算两地距离，范围计算等</strong></p>
+<p><strong>2. 使用场景</strong></p>
+<ul>
+<li>摇一摇</li>
+<li>周围餐馆，酒店</li>
+</ul>
+<p><strong>3. API</strong></p>
+<ul>
+<li>geoadd<ul>
+<li>geo key longitude latitude member [longitude latitude member …]：增加地理位置信息</li>
+</ul>
+</li>
+<li>geopos<ul>
+<li>geopos key member [member …]：获取地理位置信息</li>
+</ul>
+</li>
+<li>geodisk<ul>
+<li>geodisk key member1 member2 [unit]：获取两个地理位置的距离(unit：m(米 …)</li>
+</ul>
+</li>
+<li>georadius</li>
+</ul>
+<p><strong>4. 相关说明</strong></p>
+<ul>
+<li>since 3.2+</li>
+<li>type geoKey = zset</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2017/12/21/Redis-Getting-Started-3/" style="float: left;">
+        ← Redis 持久化
     </a>
     
     
