@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Redis 复制的原理与优化及 Reids Sentinel实现高可用 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-22T00:35:10.000Z" itemprop="datePublished">
+          2017-12-22
+      </time>
+    
+</span>
+                <h1>Redis 复制的原理与优化及 Reids Sentinel实现高可用</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>我们在上一篇博客复习了一下redis持久化的相关问题，现在我们来看一些和redis主从复制和使用redis sentinel实现高可用相关的一些问题。</p>
+<hr>
+<h2 id="1-主从复制"><a href="#1-主从复制" class="headerlink" title="1. 主从复制"></a>1. 主从复制</h2><h3 id="1-主从复制的作用"><a href="#1-主从复制的作用" class="headerlink" title="1. 主从复制的作用"></a>1. 主从复制的作用</h3><ul>
+<li>数据副本</li>
+<li>扩展读性能</li>
+<li>一个master可以有多个slave</li>
+<li>一个slave只能有一个master</li>
+<li>数据流向是单向的，master到slave</li>
+</ul>
+<h3 id="2-主从复制配置"><a href="#2-主从复制配置" class="headerlink" title="2. 主从复制配置"></a>2. 主从复制配置</h3><p><strong>1. 两种实现方式</strong></p>
+<ul>
+<li>slaveof命令<ul>
+<li>在6380上执行(slaveof 对方的ip) ，当它接收到这条命令之后，我们就实现了复制的流程。</li>
+<li>这个复制命令是异步的，执行命令后会立刻返回。实际上要很多步骤和时间。</li>
+<li>可以执行(slave no one)取消复制，不过并不会清除之前同步的数据，只是说以后的数据不会再同步到这台机器上。</li>
+</ul>
+</li>
+<li>配置<ul>
+<li>slaveof ip port</li>
+<li>slave-read-only yes 从节点只做读的操作，达到完全一致的情况。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方式</th>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">无需重启</td>
+<td style="text-align:center">统一配置</td>
+</tr>
+<tr>
+<td style="text-align:center">缺点</td>
+<td style="text-align:center">不便于管理</td>
+<td style="text-align:center">需要重启</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-实验"><a href="#3-实验" class="headerlink" title="3. 实验"></a>3. 实验</h3><ul>
+<li>我们希望master是6379，slave是6380</li>
+<li>如果是在一台机器上实验，需要两个配置文件，一个端口是6379，一个是6380。还有一些其他配置最好分开，比如RDB保存名称，其实主从复制需要依靠RDB文件</li>
+<li>在6380配置文件中添加主节点，并启动两个节点</li>
+</ul>
+<pre><code>slaveof 127.0.0.1 6379
+</code></pre><ul>
+<li>可以看到6379分片是master状态，所有节点默认都是主节点</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-server config/redis-6379.conf 
+[root@localhost redis]# redis-cli 
+127.0.0.1:6379&gt; info replication
+# Replication
+role:master
+connected_slaves:0
+</code></pre><ul>
+<li>6380节点可以看到是一个从节点</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 6380 info replication
+# Replication
+role:slave
+master_host:127.0.0.1
+master_port:6379
+</code></pre><ul>
+<li>简单看一下数据的同步</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli
+127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; exit       
+[root@localhost redis]# redis-cli -p 6380
+127.0.0.1:6380&gt; get hello
+&quot;world&quot;
+127.0.0.1:6380&gt; set hello java
+(error) READONLY You can&apos;t write against a read only slave.
+</code></pre><ul>
+<li>我们查看一下6379.log，发现同步过程需要RDB参与，所以前面说到两个配置不能使用同一个RDB文件</li>
+</ul>
+<pre><code>...
+4123:M 22 Dec 09:13:15.162 * Slave 127.0.0.1:6380 asks for synchronization
+4123:M 22 Dec 09:13:15.162 * Full resync requested by slave 127.0.0.1:6380
+4123:M 22 Dec 09:13:15.167 * Starting BGSAVE for SYNC with target: disk
+4123:M 22 Dec 09:13:15.169 * Background saving started by pid 4189
+4189:C 22 Dec 09:13:15.180 * DB saved on disk
+4189:C 22 Dec 09:13:15.180 * RDB: 6 MB of memory used by copy-on-write
+4123:M 22 Dec 09:13:15.202 * Background saving terminated with success
+4123:M 22 Dec 09:13:15.202 * Synchronization with slave 127.0.0.1:6380 succeeded
+...
+</code></pre><ul>
+<li>查看6380.log</li>
+</ul>
+<pre><code>...
+4183:S 22 Dec 09:13:15.162 * Connecting to MASTER 127.0.0.1:6379
+4183:S 22 Dec 09:13:15.162 * MASTER &lt;-&gt; SLAVE sync started
+4183:S 22 Dec 09:13:15.162 * Non blocking connect for SYNC fired the event.
+4183:S 22 Dec 09:13:15.162 * Master replied to PING, replication can continue...
+4183:S 22 Dec 09:13:15.162 * Partial resynchronization not possible (no cached master)
+4183:S 22 Dec 09:13:15.171 * Full resync from master: e386f2149fafc462e528ef9e29177612743b14dd:0
+4183:S 22 Dec 09:13:15.202 * MASTER &lt;-&gt; SLAVE sync: receiving 232 bytes from master
+4183:S 22 Dec 09:13:15.202 * MASTER &lt;-&gt; SLAVE sync: Flushing old data
+4183:S 22 Dec 09:13:15.202 * MASTER &lt;-&gt; SLAVE sync: Loading DB in memory
+4183:S 22 Dec 09:13:15.203 * MASTER &lt;-&gt; SLAVE sync: Finished with success
+...
+</code></pre><ul>
+<li>在6380执行slaveof no one</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 6380
+127.0.0.1:6380&gt; slaveof no one
+OK
+127.0.0.1:6380&gt; info replication
+# Replication
+role:master
+...
+</code></pre><ul>
+<li>主从复制从节点会把之前的数据全部清除</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli
+127.0.0.1:6379&gt; flushall
+OK
+127.0.0.1:6379&gt; mset a b c d e f g h m n
+OK
+127.0.0.1:6379&gt; dbsize
+(integer) 5
+127.0.0.1:6379&gt; exit
+[root@localhost redis]# redis-cli -p 6380
+127.0.0.1:6380&gt; flushall
+OK
+127.0.0.1:6380&gt; set hello world
+OK
+127.0.0.1:6380&gt; dbsize
+(integer) 1
+127.0.0.1:6380&gt; slaveof 127.0.0.1 6379
+OK
+127.0.0.1:6380&gt; get hello
+(nil)
+</code></pre><h3 id="4-全量复制和部分复制"><a href="#4-全量复制和部分复制" class="headerlink" title="4. 全量复制和部分复制"></a>4. 全量复制和部分复制</h3><p><strong>1. run_id</strong></p>
+<ul>
+<li>redis每次启动都会有一个随机id保证这个redis的标识。</li>
+<li>假如6380复制6379，就有一些记录，当我发现6379的run_id发生了变化，他可能做了一些重启或其他重大变化，我就要把它的数据全部同步过来。</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 6379 info server | grep run
+run_id:5f40738868084d52e1b097a03abbcb7b088e44ef
+
+[root@localhost redis]# redis-cli -p 6380 info server | grep run
+run_id:b853eafd17c444c6500fc89406d1ddd7fa81b1fb
+</code></pre><p><strong>2. 偏移量</strong></p>
+<ul>
+<li>一个数据写入量的字节，记录了我们写了多少数据。</li>
+<li>当两个节点偏移量一致的时候，就是一种完全同步。如果不一致，可能主写了很多数据，还没有同步。</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 6379 info replication
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=127.0.0.1,port=6380,state=online,offset=196,lag=1
+master_replid:255e5f084bf01c0a7e8ebb114548e7478978ed6d
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:196
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:196
+
+[root@localhost redis]# redis-cli -p 6379 set hello java
+OK
+
+[root@localhost redis]# redis-cli -p 6379 info replication
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=127.0.0.1,port=6380,state=online,offset=337,lag=1
+master_replid:255e5f084bf01c0a7e8ebb114548e7478978ed6d
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:337
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:337
+</code></pre><p><strong>3. 全量复制</strong></p>
+<ul>
+<li>redis提供了全量复制的功能，首先将本身的RDB文件，也就是当前状态去同步给slave，在此期间，它写入的命令会单独记录起来，当RDB文件加载完之后，它会通过偏移量的对比，将这个期间写入的值同步给slave。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%85%A8%E9%87%8F%E5%A4%8D%E5%88%B6.png" alt=""></p>
+<p><strong>4. 全量复制开销</strong></p>
+<ul>
+<li>bgsive时间</li>
+<li>RDB文件网络传输时间</li>
+<li>从节点清空数据时间</li>
+<li>从节点加载RDB的时间</li>
+<li>可能的AOF重写时间</li>
+</ul>
+<p><strong>5. 部分复制</strong></p>
+<ul>
+<li>除了上面的开销以外，假如master和slave之间的网络发生了抖动，一段时间内这些数据就会进行丢失，对于slave来说这段时间master更新数据我是不知道的，最简单的方法就是我再做一次全量复制。</li>
+<li>在redis 2.8中提供了部分复制。</li>
+<li>如果发生了抖动，相当于连接断开了，但是在master写命令的时候，它会写一份复制缓冲区的命令，当slave再次连接master的时候，使用pysnc命令告诉我当前的偏移量是多少。如果你传输的偏移量是在buffer的范围内的，会返回continue(如果offset不在buffer范围内，说明你错过了太多信息，需要全量复制)，会将offset开始，到buffer队列结尾的返回。有效降低了全量复制的开销。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%83%A8%E5%88%86%E5%A4%8D%E5%88%B6.png" alt=""></p>
+<h3 id="5-开发与运维中的问题"><a href="#5-开发与运维中的问题" class="headerlink" title="5. 开发与运维中的问题"></a>5. 开发与运维中的问题</h3><p><strong>1. 读写分离</strong></p>
+<ul>
+<li>读写分离：读流量分摊到从节点</li>
+<li>可能遇到的问题：<ul>
+<li>复制数据的延迟</li>
+<li>读到过期数据(懒惰删除，定时任务)</li>
+<li>从节点故障</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 主从配置不一致</strong></p>
+<ul>
+<li>例如maxmemory不一致：丢失数据</li>
+<li>例如数据结构优化参数(例如hash-max-ziplist-entries)：内存不一致</li>
+</ul>
+<p><strong>3. 规避全量复制</strong></p>
+<ul>
+<li>第一次全量复制<ul>
+<li>第一次不可避免</li>
+<li>小主节点，低峰(夜间)</li>
+</ul>
+</li>
+<li>节点运行ID不匹配<ul>
+<li>主节点重启(运行ID变化)</li>
+<li>故障转移，例如哨兵或集群</li>
+</ul>
+</li>
+<li>复制积压缓冲区不足<ul>
+<li>网络中断，部分复制无法满足</li>
+<li>增大复制缓冲区配置rel_backlog_size，网络”增强”</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 规避复制风暴</strong></p>
+<ul>
+<li>单主节点复制风暴<ul>
+<li>问题：主节点重启，多从节点复制</li>
+<li>解决：更换复制拓扑</li>
+</ul>
+</li>
+<li>单机器复制风暴<ul>
+<li>问题：机器宕机后，大量全量复制</li>
+<li>解决：主节点分散多机器</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Redis-Sentinel"><a href="#2-Redis-Sentinel" class="headerlink" title="2. Redis Sentinel"></a>2. Redis Sentinel</h2><h3 id="1-主从复制高可用？"><a href="#1-主从复制高可用？" class="headerlink" title="1. 主从复制高可用？"></a>1. 主从复制高可用？</h3><ul>
+<li>为主提供一个备份</li>
+<li>为主实现一个分流</li>
+<li>如果主节点出现了故障，故障转移基本上是需要手工来完成的</li>
+</ul>
+<p><strong>1. 主从复制问题</strong></p>
+<ul>
+<li>手动故障转移</li>
+<li>写能力和存储能力受限</li>
+</ul>
+<h3 id="2-Redis-Sentinel架构"><a href="#2-Redis-Sentinel架构" class="headerlink" title="2. Redis Sentinel架构"></a>2. Redis Sentinel架构</h3><ul>
+<li>首先依然是一个主从结构</li>
+<li>同时还有很多Redis Sentinel节点，它的作用是完成对redis的故障判断和故障转移</li>
+<li>客户端不会直接向redis获取数据，不会记住redis的某个ip，而是直接记住Redis Sentinel的地址</li>
+<li>Redis Sentinel会时刻对master和slave进行一个监控，他知道谁是master谁是slave</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Redis%20Sentinel%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<ul>
+<li>故障转移和手动过程很类似</li>
+<li>多个sentinel发现并确认master有问题</li>
+<li>选举出一个sentine作为领导</li>
+<li>选出一个slave作为新的master</li>
+<li>通知其余slave成为新的master的slave</li>
+<li>通知客户端主从变化</li>
+<li>等待老的master复活成为新的master的slave</li>
+<li>sentinel可以监控多套master和slave</li>
+</ul>
+<h3 id="3-安装与配置"><a href="#3-安装与配置" class="headerlink" title="3. 安装与配置"></a>3. 安装与配置</h3><ul>
+<li>配置开启主从节点</li>
+<li>配置开启sentinel监控主节点(sentinel是特殊的的redis)</li>
+<li>实际应该多机器</li>
+<li>详细配置节点</li>
+</ul>
+<p><strong>1. 介绍配置</strong></p>
+<ul>
+<li>主节点master-7000，从节点7001和7002</li>
+<li><p>sentinel-26379,26380,26381</p>
+</li>
+<li><p>关于配置我们前面博客已经了解了很多，直接给出主节点配置</p>
+</li>
+</ul>
+<pre><code>port 7000
+daemonize yes
+pidfile /var/run/redis_7000.pid
+logfile &quot;7000.log&quot;
+dir /home/redis/data
+</code></pre><ul>
+<li>从节点配置</li>
+</ul>
+<pre><code>port 7001
+daemonize yes
+pidfile /var/run/redis_7001.pid
+logfile &quot;7001.log&quot;
+dir /home/redis/data
+slaveof 127.0.0.1 7000
+
+port 7002
+daemonize yes
+pidfile /var/run/redis_7002.pid
+logfile &quot;7002.log&quot;
+dir /home/redis/data
+slaveof 127.0.0.1 7000
+</code></pre><ul>
+<li>sentinel主要配置<ul>
+<li>sentinel monitor：监控主节点名字是什么，ip和端口是什么，最后一个参数是指几个sentinel认为master有问题了就会发动下一步的故障转移</li>
+<li>sentinel down-after-milliseconds：sentinel对master判断，如果多长时间ping不通就认为有问题</li>
+<li>sentinel parallel-syncs：选择新的master，其他老的slave会对新的master进行复制，复制是并发的还是串行的。我们设置为1，每次只能复制一个，可以减轻master的压力</li>
+<li>sentinel failover-timeout：故障转移时间</li>
+</ul>
+</li>
+</ul>
+<pre><code>port ${port}
+dir /home/redis/data
+logfile &quot;${port}.log&quot;
+sentinel monitor mymaster 127.0.0.1 7000 2
+sentinel down-after-milliseconds mymaster 30000
+sentinel parallel-syncs mymaster 1
+sentinel failover-timeout mymaster 180000
+</code></pre><p><strong>2. 配置演示</strong></p>
+<ul>
+<li>按照上面配置文件配置并启动三个节点</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-server config/redis-7000.conf 
+[root@localhost redis]# redis-server config/redis-7001.conf 
+[root@localhost redis]# redis-server config/redis-7002.conf 
+
+[root@localhost redis]# ps -ef | grep redis-server | grep 700
+root       5003      1  0 19:46 ?        00:00:00 redis-server 0.0.0.0:7000
+root       5012      1  0 19:46 ?        00:00:00 redis-server 0.0.0.0:7001
+root       5022      1  0 19:46 ?        00:00:00 redis-server 0.0.0.0:7002
+</code></pre><ul>
+<li>添加sentinel配置</li>
+</ul>
+<pre><code>[root@localhost redis]# cp sentinel.conf config/
+[root@localhost redis]# cd config/
+[root@localhost config]# cat sentinel.conf  | grep -v &quot;#&quot; | grep -v &quot;^$&quot; &gt; redis-sentinel-26379.conf
+</code></pre><ul>
+<li>修改sentinel配置</li>
+</ul>
+<pre><code>[root@localhost config]# vi redis-sentinel-26379.conf 
+
+port 26379
+daemonize yes
+dir /home/redis/data/sentinel
+logfile &quot;26379.log&quot;
+sentinel monitor mymaster 127.0.0.1 7000 2
+sentinel down-after-milliseconds mymaster 30000
+sentinel parallel-syncs mymaster 1
+sentinel failover-timeout mymaster 180000
+</code></pre><ul>
+<li>启动并查看进程</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-sentinel config/redis-sentinel-26379.conf 
+[root@localhost redis]# ps -ef | grep redis-sentinel
+root       4226      1  0 22:03 ?        00:00:00 redis-sentinel *:26379 [sentinel]
+</code></pre><ul>
+<li>连接sentinel，使用info可以看到sentinel信息</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 26379
+127.0.0.1:26379&gt; ping
+PONG
+127.0.0.1:26379&gt; info
+...
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:7000,slaves=2,sentinels=1
+...
+</code></pre><ul>
+<li>我们重新打开刚才的配置文件，发现自动生成了一些新的配置，说明sentinel会自动发现我们的slave</li>
+</ul>
+<pre><code>[root@localhost redis]# cat config/redis-sentinel-26379.conf 
+port 26379
+daemonize yes
+dir &quot;/home/redis-4.0.5/data/sentinel&quot;
+logfile &quot;26379.log&quot;
+sentinel myid d8fe6557617f240f2441be5a879c90883a5079d6
+sentinel monitor mymaster 127.0.0.1 7000 2
+sentinel config-epoch mymaster 0
+sentinel leader-epoch mymaster 0
+# Generated by CONFIG REWRITE
+sentinel known-slave mymaster 127.0.0.1 7002
+sentinel known-slave mymaster 127.0.0.1 7001
+sentinel current-epoch 0
+</code></pre><ul>
+<li>我们偷懒完成其他两个sentinel配置</li>
+</ul>
+<pre><code>[root@localhost config]# sed &quot;s/26379/26380/g&quot; redis-sentinel-26379.conf &gt; redis-sentinel-26380.conf 
+[root@localhost config]# sed &quot;s/26379/26381/g&quot; redis-sentinel-26379.conf &gt; redis-sentinel-26381.conf 
+</code></pre><ul>
+<li>启动23380端口</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-sentinel config/redis-sentinel-26380.conf 
+[root@localhost redis]# redis-cli -p 26380
+127.0.0.1:26380&gt; info
+...
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:7000,slaves=2,sentinels=1
+...
+</code></pre><ul>
+<li>这里我们看到sentinels=1。这就奇怪了，我们已经启动了2个sentinel啊，我怀疑刚才的偷懒可能有一些问题，打开26380检查一下：我们发现刚才执行后配置文件中自动生成了myid，复制过程中也复制了，把id删除，关闭26380并重新启动，同样删除26381配置文件中复制过来的26379的myid</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 26381 shutdown
+[root@localhost redis]# redis-sentinel config/redis-sentinel-26381.conf 
+[root@localhost redis]# redis-cli -p 26381
+127.0.0.1:26381&gt; info
+...
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:7000,slaves=2,sentinels=3
+...
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-Sentinel客户端及故障转移"><a href="#3-Sentinel客户端及故障转移" class="headerlink" title="3. Sentinel客户端及故障转移"></a>3. Sentinel客户端及故障转移</h2><h3 id="1-客户端实现基本原理"><a href="#1-客户端实现基本原理" class="headerlink" title="1. 客户端实现基本原理"></a>1. 客户端实现基本原理</h3><p><strong>1. 遍历sentinel节点集合，获取一个可用的sentinel节点</strong></p>
+<p><strong>2. 执行sentinel的API传入masterName，获得master节点的真正地址和端口</strong></p>
+<p><strong>3. sentinel获得节点后还会执行role或者role replication进行一次验证</strong></p>
+<p><strong>4. 如果master节点发生了变化，sentinel是可以感知的，redis数据节点变化的通知会发送给客户端</strong></p>
+<h3 id="2-故障转移演练"><a href="#2-故障转移演练" class="headerlink" title="2. 故障转移演练"></a>2. 故障转移演练</h3><p><strong>1. 客户端高可用观察</strong></p>
+<ul>
+<li>使用jedis连接centinel</li>
+</ul>
+<pre><code>public void RedisSentinelFailoverTest() {
+
+    String masterName = &quot;mymaster&quot;;
+    Set&lt;String&gt; sentinels = new HashSet&lt;&gt;();
+    sentinels.add(&quot;127.0.0.1:26379&quot;);
+    sentinels.add(&quot;127.0.0.1:26380&quot;);
+    sentinels.add(&quot;127.0.0.1:26381&quot;);
+
+    JedisSentinelPool jedisSentinelPool = new JedisSentinelPool(masterName, sentinels);
+}
+</code></pre><ul>
+<li>发现报错</li>
+</ul>
+<pre><code>redis.clients.jedis.exceptions.JedisConnectionException: All sentinels down, cannot determine where is mymaster master is running...
+
+at redis.clients.jedis.JedisSentinelPool.initSentinels(JedisSentinelPool.java:180)
+at redis.clients.jedis.JedisSentinelPool.&lt;init&gt;(JedisSentinelPool.java:95)
+at redis.clients.jedis.JedisSentinelPool.&lt;init&gt;(JedisSentinelPool.java:82)
+</code></pre><ul>
+<li>怀疑是ip地址有误，换成虚拟机ip地址192.168.242.129，发现报新的错误</li>
+</ul>
+<pre><code>警告: Cannot get master address from sentinel running @ 192.168.242.129:26380. Reason: redis.clients.jedis.exceptions.JedisDataException: DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface. If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. 2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. 3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. 4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.. Trying next one.
+十二月 23, 2017 9:57:25 上午 redis.clients.jedis.JedisSentinelPool initSentinels
+</code></pre><ul>
+<li><p>这个错误就比较明显了，在sentinel配置中也像普通节点一样，关闭保护模式，连接成功</p>
+</li>
+<li><p>我们现在写一个死循环，让redis不断增加节点，然后杀死主节点7000，看看会发生什么</p>
+</li>
+</ul>
+<pre><code>public void RedisSentinelFailoverTest() {
+
+    String masterName = &quot;mymaster&quot;;
+    Set&lt;String&gt; sentinels = new HashSet&lt;&gt;();
+    sentinels.add(&quot;192.168.242.129:26379&quot;);
+    sentinels.add(&quot;192.168.242.129:26380&quot;);
+    sentinels.add(&quot;192.168.242.129:26381&quot;);
+
+    JedisSentinelPool jedisSentinelPool = new JedisSentinelPool(masterName, sentinels);
+
+    int counter = 0;
+    while (true) {
+        counter++;
+        Jedis jedis = null;
+        try {
+            jedis = jedisSentinelPool.getResource();
+            int index = new Random().nextInt(100000);
+            String key = &quot;k-&quot; + index;
+            String value = &quot;v-&quot; + index;
+            jedis.set(key, value);
+            if (counter % 100 == 0) {
+                System.out.println(jedis.get(key));
+            }
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+</code></pre><ul>
+<li>此时发现又报错找不到节点，我们原来是在虚拟机上做一些操作所以写127.0.0.1没事，现在为了在虚拟机外连接，将所有配置ip的地方都换成虚拟机ip地址192.168.242.129，发现程序不断打印节点信息</li>
+<li>杀死7000节点，使用info server查到进程id</li>
+</ul>
+<pre><code>127.0.0.1:7000&gt; info server
+# Server
+...
+process_id:5991
+...
+
+[root@localhost redis]# kill -9 5991
+</code></pre><ul>
+<li>发现程序产生了大量报错，因为他的故障转移是需要时间的</li>
+</ul>
+<pre><code>信息: Created JedisPool to master at 192.168.242.129:7000
+v-10360
+v-1527
+v-96986
+v-41507
+v-64630
+
+...
+Caused by: java.net.ConnectException: Connection refused: connect
+at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+at java.net.Socket.connect(Socket.java:589)
+at redis.clients.jedis.Connection.connect(Connection.java:184)
+... 31 more
+...
+
+...
+v-74169
+v-53527
+v-58618
+v-80320
+v-23413
+v-51509
+</code></pre><ul>
+<li>一段时间后故障恢复，不过第一次尝试的时候故障一致不能恢复，停下来去看配置文件，发现7001的配置文件的RDB文件忘记改了，还是redis-6379.rdb，数据记录混在一起造成无法恢复故障。</li>
+</ul>
+<p><strong>2. 服务端日志分析：数据节点和sentinel节点</strong></p>
+<ul>
+<li>我们首先看一下主节点7000的日志，因为我们使用kill -9杀死进程，所有日志并没有什么变化，最后一条记录还是同步成功</li>
+</ul>
+<pre><code>[root@localhost data]# tail -f 7000.log 
+
+4218:C 23 Dec 10:53:26.497 * RDB: 8 MB of memory used by copy-on-write
+4176:M 23 Dec 10:53:26.597 * Background saving terminated with success
+4176:M 23 Dec 10:53:26.598 * Synchronization with slave 192.168.242.129:7002 succeeded
+</code></pre><ul>
+<li>我们再看一下7001日志，首先在杀死7000后，他已经和主节点失联了，一直在尝试连接</li>
+</ul>
+<pre><code>4184:S 23 Dec 10:54:38.856 * Connecting to MASTER 192.168.242.129:7000
+4184:S 23 Dec 10:54:38.857 * MASTER &lt;-&gt; SLAVE sync started
+4184:S 23 Dec 10:54:38.857 # Error condition on socket for SYNC: Connection refused
+4184:S 23 Dec 10:54:39.864 * Connecting to MASTER 192.168.242.129:7000
+4184:S 23 Dec 10:54:39.865 * MASTER &lt;-&gt; SLAVE sync started
+4184:S 23 Dec 10:54:39.865 # Error condition on socket for SYNC: Connection refused
+4184:S 23 Dec 10:54:40.872 * Connecting to MASTER 192.168.242.129:7000
+4184:S 23 Dec 10:54:40.872 * MASTER &lt;-&gt; SLAVE sync started
+4184:S 23 Dec 10:54:40.873 # Error condition on socket for SYNC: Connection refused
+</code></pre><ul>
+<li>然后它形成了自己的一个master状态，而且接收到了一条用户请求，希望那个让他成为新的master。并进行了一个配置的重写</li>
+</ul>
+<pre><code>4184:M 23 Dec 10:54:42.227 * Discarding previously cached master state.
+4184:M 23 Dec 10:54:42.227 * MASTER MODE enabled (user request from &apos;id=5 addr=192.168.242.129:49264 fd=10 name=sentinel-35e89218-cmd age=64 idle=0 flags=x db=0 sub=0 psub=0 multi=3 qbuf=0 qbuf-free=32768 obl=36 oll=0 omem=0 events=r cmd=exec&apos;)
+4184:M 23 Dec 10:54:42.229 # CONFIG REWRITE executed with success.
+</code></pre><ul>
+<li>接着我们看到7002去复制新的master7001</li>
+</ul>
+<pre><code>4184:M 23 Dec 10:54:43.156 * Slave 192.168.242.129:7002 asks for synchronization
+4184:M 23 Dec 10:54:43.157 * Partial resynchronization request from 192.168.242.129:7002 accepted. Sending 464 bytes of backlog starting from offset 93371.
+</code></pre><ul>
+<li><p>我们来看一下sentinel的日志26379，这里日志比较多，我们看一些简单的</p>
+</li>
+<li><p>我们看到了sdown，就是说他认为7000下线了</p>
+</li>
+</ul>
+<pre><code>4221:X 23 Dec 10:54:41.923 # +sdown master mymaster 192.168.242.129 7000
+</code></pre><ul>
+<li>然后他希望成为一个领导者，其他sentinel给他投票</li>
+</ul>
+<pre><code>4221:X 23 Dec 10:54:42.039 # +vote-for-leader 35e89218cd8bbc8f30cda79f75ab6af88ad3dc2e 14
+4221:X 23 Dec 10:54:42.717 # +config-update-from sentinel 35e89218cd8bbc8f30cda79f75ab6af88ad3dc2e 192.168.242.129 26380 @ mymaster 192.168.242.129 7000
+</code></pre><ul>
+<li>然后他选出新的master，并让其他slave成为新master的slave</li>
+</ul>
+<pre><code>4221:X 23 Dec 10:54:42.717 # +switch-master mymaster 192.168.242.129 7000 192.168.242.129 7001
+4221:X 23 Dec 10:54:42.717 * +slave slave 192.168.242.129:7002 192.168.242.129 7002 @ mymaster 192.168.242.129 7001
+</code></pre><h3 id="3-三个定时任务"><a href="#3-三个定时任务" class="headerlink" title="3. 三个定时任务"></a>3. 三个定时任务</h3><p><strong>1. 每10秒每个sentinel对master和slave执行info</strong></p>
+<ul>
+<li>发现slave节点</li>
+<li>确认主从关系</li>
+</ul>
+<p><strong>2. 每2秒每个sentinel通过master节点的channel交换信息(pub/sub)</strong></p>
+<ul>
+<li>通过<strong>sentinel</strong>:hell频道交互</li>
+<li>交互对节点的”看法”和自身信息</li>
+</ul>
+<p><strong>3. 每1秒每个sentinel对其他sentinel和redis执行ping</strong></p>
+<ul>
+<li>心跳检测，失败判定依据</li>
+</ul>
+<h3 id="4-主观下线和客观下线"><a href="#4-主观下线和客观下线" class="headerlink" title="4. 主观下线和客观下线"></a>4. 主观下线和客观下线</h3><ul>
+<li>我们重新看一下当时的配置</li>
+</ul>
+<pre><code>sentinel monitor &lt;masterName&gt; &lt;ip&gt; &lt;port&gt; &lt;quorum&gt;
+sentinel down-after-millseconds &lt;masterName&gt; &lt;timeout&gt;
+</code></pre><ul>
+<li>主观下线：每个sentinel节点对Redis节点失败的”偏见”</li>
+<li>客观下线：所有sentinel节点对Redis节点失败”达成共识”(超过quorum个统一)</li>
+<li>sentinel is-master-down-by-addr</li>
+</ul>
+<h3 id="5-领导者选举"><a href="#5-领导者选举" class="headerlink" title="5. 领导者选举"></a>5. 领导者选举</h3><ul>
+<li>原因：只有一个sentinel节点完成故障转移。</li>
+<li>选举：通过sentinel is-master-down-by-addr命令希望成为领导者。<ul>
+<li>每个做主观下线的sentinel节点向其他sentinel节点发送命令，要求将他设置为领导者。</li>
+<li>收到命令的sentinel节点如果没有同意通过其他sentinel节点发送的命令，那么将同意该请求，否则拒绝。</li>
+<li>如果该sentinel节点发现自己的票数已经超过sentinel集合半数且超过quorum，那么它将成为领导者。</li>
+<li>如果此过程有过个sentinel节点成为了领导者，那么将等待一段时间重新进行选举。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-故障转移"><a href="#6-故障转移" class="headerlink" title="6. 故障转移"></a>6. 故障转移</h3><p><strong>1. 从slave节点中选出一个”合适的”节点作为新的master节点</strong></p>
+<ul>
+<li>选择slave-priority(slave节点优先级)最高的slave节点，如果存在则返回，不存在则继续。</li>
+<li>选择复制偏移量最大的slave节点(复制的最完整)，如果存在则返回，不存在则继续。</li>
+<li>选择runId最小的slave节点。</li>
+</ul>
+<p><strong>2. 对上面的slave节点执行slaveof no one命令让其成为master节点</strong></p>
+<p><strong>3. 向剩余的slave节点发送命令，让他们成为新master节点的slave节点，复制规则和parallel-syncs参数有关</strong></p>
+<p><strong>4. 更新对原来的master节点配置为slave，并保持着对其”关注”，当其恢复后命令他去复制新的master节点</strong></p>
+<h3 id="7-常见的开发运维问题"><a href="#7-常见的开发运维问题" class="headerlink" title="7. 常见的开发运维问题"></a>7. 常见的开发运维问题</h3><p><strong>1. 节点运维</strong></p>
+<ul>
+<li>原因：<ul>
+<li>机器下线：例如过保等情况。</li>
+<li>机器性能不足：例如CPU，内存，硬盘，网络等。</li>
+<li>节点自身故障：例如服务不稳定等。</li>
+</ul>
+</li>
+<li>节点下线<ul>
+<li>主节点：sentinel failover <mastername>。</mastername></li>
+<li>从节点：临时下线还是永久下线，例如是否做一些清理工作。但是要考虑读写分离的情况。</li>
+<li>seninel节点：同上。</li>
+</ul>
+</li>
+<li>节点上线：<ul>
+<li>主节点：sentinel failover 进行替换。</li>
+<li>从节点：slaveof即可，sentinel节点可以感知。</li>
+<li>seninel节点：参考其他sentinel节点启动即可。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 高可用读写分离</strong></p>
+<ul>
+<li>可以参考JedisSentinelPool的实现。</li>
+<li>从节点的作用<ul>
+<li>副本：高可用的基础。</li>
+<li>扩展：读能力。</li>
+</ul>
+</li>
+<li>三个”消息”<ul>
+<li>+switch-master：切换主节点(从节点晋升主节点)。</li>
+<li>+convert-to-slave：切换从节点(原主节点降为从节点)。</li>
+<li>+sdown：主观下线。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-回顾总结"><a href="#8-回顾总结" class="headerlink" title="8. 回顾总结"></a>8. 回顾总结</h3><ul>
+<li>Redis Sentinel是Redis的高可用配置实现方案：故障发现，故障自动转移，配置中心，客户端通知。</li>
+<li>Redis Sentinel从Redis2.8版本开始才正式生产可用，之前版本生产不可用。</li>
+<li>尽可能在不同物理机上部署Redis Sentinel所有节点。</li>
+<li>Redis Sentinel中的Sentinel节点个数应改为大于等于3，且最好为奇数。</li>
+<li>Redis Sentinel中的数据节点与普通节点没有区别。</li>
+<li>客户端初始化连接的是Sentinel节点集合，不再是具体的Redis节点，但Sentinel只是配置中心不是代理。</li>
+<li>Redis Sentinel通过三个定时任务实现了Sentinel节点对于主节点，从节点，其余Sentinel节点的监控。</li>
+<li>Redis Sentinel在对节点做失败判定时分为主观下线和客观下线。</li>
+<li>看懂Redis Sentinel故障转移日志对于Redis Sentinel以及问题排查非常有帮助。</li>
+<li>Redis Sentinel实现读写分离高可用可以依赖Sentinel节点的消息通知，获取Redis数据节点的状态变化。</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/21/Redis-Getting-Started-3/">
+        Redis 持久化 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
