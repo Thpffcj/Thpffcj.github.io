@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Redis 集群 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-24T07:23:13.000Z" itemprop="datePublished">
+          2017-12-24
+      </time>
+    
+</span>
+                <h1>Redis 集群</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>前面我们学习了Redis 复制的原理与优化及 Reids Sentinel实现高可用，接下来我们了解一下redis集群的相关知识。</p>
+<ul>
+<li>注意：如果想要远程连接，最好不要配置为127.0.0.1(下面有些配置为了方便直接写了127.0.0.1)</li>
+</ul>
+<h2 id="1-Redis-Cluster"><a href="#1-Redis-Cluster" class="headerlink" title="1. Redis Cluster"></a>1. Redis Cluster</h2><h3 id="1-呼唤集群"><a href="#1-呼唤集群" class="headerlink" title="1. 呼唤集群"></a>1. 呼唤集群</h3><p><strong>1. 并发量</strong></p>
+<ul>
+<li>10万/每秒 -&gt; 业务需要100万/每秒呢？</li>
+</ul>
+<p><strong>2. 数据量</strong></p>
+<ul>
+<li>机器内存：16~256G -&gt; 业务需要500G呢？</li>
+</ul>
+<p><strong>3. 解决方法</strong></p>
+<ul>
+<li>配置”强悍”的机器：超大内存，牛X CPU等。</li>
+<li>正确的解决方法：分布式：简单的认为加机器。</li>
+</ul>
+<h3 id="2-数据分布"><a href="#2-数据分布" class="headerlink" title="2. 数据分布"></a>2. 数据分布</h3><p><strong>1. 分布式数据库 - 数据分区</strong></p>
+<ul>
+<li>顺序分区<ul>
+<li>特点：<ul>
+<li>数据分散度易倾斜</li>
+<li>键值业务相关</li>
+<li>可顺序访问</li>
+<li>不支持批量操作</li>
+</ul>
+</li>
+<li>典型产品：<ul>
+<li>BigTable</li>
+<li>HBase</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>哈希分布(例如节点取模)<ul>
+<li>特点：<ul>
+<li>数据分散度高</li>
+<li>键值分布业务无关</li>
+<li>无法顺序访问</li>
+<li>支持批量操作</li>
+</ul>
+</li>
+<li>典型产品：<ul>
+<li>一致性哈希Memcache</li>
+<li>Redis Cluster</li>
+<li>其他缓存产品</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>哈希分区种类：<ul>
+<li>节点取余分区</li>
+<li>一致性哈希分区</li>
+<li>虚拟槽分区</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 节点取余</strong></p>
+<ul>
+<li>优势：非常简单。</li>
+<li>客户端分片：哈希 + 取余。</li>
+<li>节点伸缩：数据节点关系变化，导致数据迁移。</li>
+<li>迁移数量和添加节点数量有关：建议翻倍扩容。</li>
+</ul>
+<p><strong>3. 一致性哈希</strong></p>
+<ul>
+<li>客户端分片：哈希 + 顺时针(优化取余)。</li>
+<li>节点伸缩：只影响临近节点，但是还是有数据迁移。</li>
+<li>翻倍伸缩：保证最小迁移数据和负载均衡。</li>
+</ul>
+<p><strong>4. 虚拟槽分区</strong></p>
+<ul>
+<li>预设虚拟槽：每个槽映射一个数据子集，一般比节点数大。</li>
+<li>良好的哈希函数：例如CRC16。</li>
+<li>服务端管理节点，槽，数据：例如Redis Cluster。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E6%A7%BD%E5%88%86%E9%85%8D.png" alt=""></p>
+<h3 id="3-搭建集群"><a href="#3-搭建集群" class="headerlink" title="3. 搭建集群"></a>3. 搭建集群</h3><p><strong>1. 基本架构</strong></p>
+<ul>
+<li>分布式情况下，节点之间是相互通信的。</li>
+<li>Redis Cluster架构<ul>
+<li>节点：cluster-enabled：yes(是否是一个集群模式)</li>
+<li>meet：A向B发送meet B返回pong，说明A和B已经进行消息的交流。如果A和C之前也是通的，说明B和C之间也应该能够交换消息(所有节点共享消息)</li>
+<li>指派槽：为了负载均衡，会给每个节点指派槽</li>
+<li>复制</li>
+</ul>
+</li>
+<li>Redis Cluster特性<ul>
+<li>复制</li>
+<li>高可用</li>
+<li>分片 </li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Redis-Cluster安装配置"><a href="#4-Redis-Cluster安装配置" class="headerlink" title="4. Redis Cluster安装配置"></a>4. Redis Cluster安装配置</h3><p><strong>1. 原生命令安装 - 理解架构</strong></p>
+<ul>
+<li>配置开启节点</li>
+</ul>
+<pre><code>port ${port}
+daemonize yes
+dir &quot;/home/redis/data&quot;
+dbfilename &quot;sump-${port}.rdb&quot;
+logfile &quot;${port}.log&quot;
+cluster-enabled yes
+cluster-config-file nodes-${port}.conf
+</code></pre><ul>
+<li>meet</li>
+</ul>
+<pre><code>redis-cli -h 192.168.242.129 -p 7000 cluster meet 192.168.242.129 7001
+redis-cli -h 192.168.242.129 -p 7000 cluster meet 192.168.242.129 7002
+redis-cli -h 192.168.242.129 -p 7000 cluster meet 192.168.242.129 7003
+redis-cli -h 192.168.242.129 -p 7000 cluster meet 192.168.242.129 7004
+redis-cli -h 192.168.242.129 -p 7000 cluster meet 192.168.242.129 7005
+</code></pre><ul>
+<li>Cluster节点主要配置</li>
+</ul>
+<pre><code>cluster-enabled yes
+cluster-node-timeout 15000
+cluster-config-file &quot;nodes.conf&quot;
+cluster-require-full-coverage yes
+</code></pre><ul>
+<li>指派槽</li>
+</ul>
+<pre><code>cluster addslots slot [slot ...]
+
+redis-cli -h 192.168.242.129 -p 7000 cluster addslots {0...5461}
+redis-cli -h 192.168.242.129 -p 7000 cluster addslots {5462...10922}
+redis-cli -h 192.168.242.129 -p 7000 cluster addslots {10923...16383}
+</code></pre><ul>
+<li>主从</li>
+</ul>
+<pre><code>cluster replicate node-id
+
+redis-cli -h 192.168.242.129 -p 7003 cluster replicate {node-id-7000}
+redis-cli -h 192.168.242.129 -p 7004 cluster replicate {node-id-7001}
+redis-cli -h 192.168.242.129 -p 7005 cluster replicate {node-id-7002}
+</code></pre><p><strong>2. 搭建集群 - 具体安装</strong></p>
+<ul>
+<li>添加7000节点配置</li>
+</ul>
+<pre><code>protected-mode no
+port 7000
+daemonize yes
+dir &quot;/home/redis/data&quot;
+logfile &quot;7000.log&quot;
+dbfilename &quot;dump-7000.rdb&quot;
+cluster-enabled yes
+cluster-config-file nodes-7000.conf
+cluster-require-full-coverage no
+</code></pre><ul>
+<li>使用sed快速生成其他配置文件</li>
+</ul>
+<pre><code>[root@localhost config]# sed &apos;s/7000/7001/g&apos; redis-7000.conf &gt; redis-7001.conf 
+[root@localhost config]# sed &apos;s/7000/7002/g&apos; redis-7000.conf &gt; redis-7002.conf 
+[root@localhost config]# sed &apos;s/7000/7003/g&apos; redis-7000.conf &gt; redis-7003.conf 
+[root@localhost config]# sed &apos;s/7000/7004/g&apos; redis-7000.conf &gt; redis-7004.conf 
+[root@localhost config]# sed &apos;s/7000/7005/g&apos; redis-7000.conf &gt; redis-7005.conf 
+</code></pre><ul>
+<li>启动所有节点并查看进程</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-server config/redis-7000.conf 
+[root@localhost redis]# redis-server config/redis-7001.conf 
+[root@localhost redis]# redis-server config/redis-7002.conf 
+[root@localhost redis]# redis-server config/redis-7003.conf 
+[root@localhost redis]# redis-server config/redis-7004.conf 
+[root@localhost redis]# redis-server config/redis-7005.conf 
+[root@localhost redis]# ps -ef | grep redis-server
+root       5034      1  0 18:43 ?        00:00:00 redis-server *:7000 [cluster]
+root       5050      1  0 18:44 ?        00:00:00 redis-server *:7001 [cluster]
+root       5058      1  0 18:44 ?        00:00:00 redis-server *:7002 [cluster]
+root       5066      1  0 18:44 ?        00:00:00 redis-server *:7003 [cluster]
+root       5074      1  0 18:44 ?        00:00:00 redis-server *:7004 [cluster]
+root       5082      1  0 18:44 ?        00:00:00 redis-server *:7005 [cluster]
+</code></pre><ul>
+<li>我们登录一个节点并输入命令，发现系统提示集群属于下线状态</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000
+127.0.0.1:7000&gt; set hello world
+(error) CLUSTERDOWN Hash slot not served
+</code></pre><ul>
+<li>我们可以简单看一下集群的信息，我们还没有分配槽</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster info
+cluster_state:fail
+cluster_slots_assigned:0
+cluster_slots_ok:0
+cluster_slots_pfail:0
+cluster_slots_fail:0
+cluster_known_nodes:1
+cluster_size:0
+cluster_current_epoch:0
+cluster_my_epoch:0
+cluster_stats_messages_sent:0
+cluster_stats_messages_received:0
+</code></pre><ul>
+<li>搭建集群 - meet</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster meet 192.168.242.129 7001
+OK
+[root@localhost redis]# redis-cli -p 7000 cluster nodes
+53c2b87482d2e87e581d12553c4f5623113144f3 192.168.242.129:7001@17001 master - 0 1514026353438 1 connected
+7a646c22385df7aeda43946777d2d2bc7f3b7315 192.168.242.129:7000@17000 myself,master - 0 0 0 connected
+</code></pre><ul>
+<li>发现7000已经和7001发生了握手，继续执行命令，最后我们发现7005能发现其他节点，说明他们都是互通的</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7005 cluster nodes
+d57b719f47a276d4b011c7b4c9a5ef7c03d97ad3 192.168.242.129:7003@17003 master - 0 1514026441443 0 connected
+1c718959f6082ab013e7c4e17b5773d5c00e8ffe 192.168.242.129:7005@17005 myself,master - 0 1514026440000 5 connected
+7a646c22385df7aeda43946777d2d2bc7f3b7315 192.168.242.129:7000@17000 master - 0 1514026442000 3 connected
+c0a7b5ebf298b447f2a9decb198febbde35209d0 192.168.242.129:7004@17004 master - 0 1514026443455 4 connected
+11c1f71f0b7840c9e6e031ca41366bca55910d98 192.168.242.129:7002@17002 master - 0 1514026441000 2 connected
+53c2b87482d2e87e581d12553c4f5623113144f3 192.168.242.129:7001@17001 master - 0 1514026442450 1 connected
+</code></pre><ul>
+<li>搭建集群 - 分配槽</li>
+<li>我们不可能一个一个分配槽，编写一个简单的脚本进行分配</li>
+</ul>
+<pre><code>start=$1
+end=$2
+port=$3
+for slot in `seq ${start} ${end}`
+do
+    echo &quot;slot:${slot}&quot;
+    redis-cli -h 192.168.242.129 -p ${port} cluster addslots ${slot}
+done
+</code></pre><ul>
+<li>执行脚本，发现槽分配完成</li>
+</ul>
+<pre><code>[root@localhost script]# sh addslots.sh 0 5461 7000
+
+127.0.0.1:7000&gt; cluster nodes
+11c1f71f0b7840c9e6e031ca41366bca55910d98 192.168.242.129:7002@17002 master - 0 1514027407209 2 connected
+7a646c22385df7aeda43946777d2d2bc7f3b7315 192.168.242.129:7000@17000 myself,master - 0 1514027404000 3 connected 0-5461
+</code></pre><ul>
+<li>继续分配其他两个节点</li>
+</ul>
+<pre><code>[root@localhost script]# sh addslots.sh 5462 10922 7001
+[root@localhost script]# sh addslots.sh 10923 16383 7002
+</code></pre><ul>
+<li>我们看一下集群的状态，集群状态是OK的，而且槽都是成功分配的</li>
+</ul>
+<pre><code>[root@localhost script]# redis-cli -p 7000 cluster info
+cluster_state:ok
+cluster_slots_assigned:16384
+cluster_slots_ok:16384
+cluster_slots_pfail:0
+cluster_slots_fail:0
+cluster_known_nodes:6
+cluster_size:3
+cluster_current_epoch:5
+cluster_my_epoch:3
+cluster_stats_messages_ping_sent:1301
+cluster_stats_messages_pong_sent:1287
+cluster_stats_messages_meet_sent:5
+cluster_stats_messages_sent:2593
+cluster_stats_messages_ping_received:1287
+cluster_stats_messages_pong_received:1306
+cluster_stats_messages_received:2593
+</code></pre><ul>
+<li>搭建集群 - 主从分配</li>
+<li>7003是7000从节点，执行cluster replicate</li>
+</ul>
+<pre><code>[root@localhost script]# redis-cli -p 7000 cluster nodes
+11c1f71f0b7840c9e6e031ca41366bca55910d98 192.168.242.129:7002@17002 master - 0 1514027878252 2 connected 10923-16383
+7a646c22385df7aeda43946777d2d2bc7f3b7315 192.168.242.129:7000@17000 myself,master - 0 1514027878000 3 connected 0-5461
+53c2b87482d2e87e581d12553c4f5623113144f3 192.168.242.129:7001@17001 master - 0 1514027879267 1 connected 5462-10922
+c0a7b5ebf298b447f2a9decb198febbde35209d0 192.168.242.129:7004@17004 master - 0 1514027879000 4 connected
+d57b719f47a276d4b011c7b4c9a5ef7c03d97ad3 192.168.242.129:7003@17003 master - 0 1514027880275 0 connected
+1c718959f6082ab013e7c4e17b5773d5c00e8ffe 192.168.242.129:7005@17005 master - 0 1514027878000 5 connected
+
+[root@localhost script]#  redis-cli -h 192.168.242.129 -p 7003 cluster replicate 7a646c22385df7aeda43946777d2d2bc7f3b7315
+OK
+[root@localhost script]#  redis-cli -h 192.168.242.129 -p 7004 cluster replicate 53c2b87482d2e87e581d12553c4f5623113144f3
+OK
+[root@localhost script]#  redis-cli -h 192.168.242.129 -p 7005 cluster replicate 11c1f71f0b7840c9e6e031ca41366bca55910d98
+OK
+</code></pre><ul>
+<li>看一下节点状态，发现7003,7004，7005分别是7000,7001,7002的从节点</li>
+</ul>
+<pre><code>[root@localhost script]# redis-cli -p 7000 cluster nodes
+11c1f71f0b7840c9e6e031ca41366bca55910d98 192.168.242.129:7002@17002 master - 0 1514028084077 2 connected 10923-16383
+7a646c22385df7aeda43946777d2d2bc7f3b7315 192.168.242.129:7000@17000 myself,master - 0 1514028083000 3 connected 0-5461
+53c2b87482d2e87e581d12553c4f5623113144f3 192.168.242.129:7001@17001 master - 0 1514028083063 1 connected 5462-10922
+c0a7b5ebf298b447f2a9decb198febbde35209d0 192.168.242.129:7004@17004 slave 53c2b87482d2e87e581d12553c4f5623113144f3 0 1514028082054 4 connected
+d57b719f47a276d4b011c7b4c9a5ef7c03d97ad3 192.168.242.129:7003@17003 slave 7a646c22385df7aeda43946777d2d2bc7f3b7315 0 1514028081044 3 connected
+1c718959f6082ab013e7c4e17b5773d5c00e8ffe 192.168.242.129:7005@17005 slave 11c1f71f0b7840c9e6e031ca41366bca55910d98 0 1514028082000 5 connected
+</code></pre><ul>
+<li>通过cluster slots查看信息</li>
+</ul>
+<pre><code>[root@localhost script]# redis-cli -p 7000 cluster slots
+1) 1) (integer) 10923
+   2) (integer) 16383
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7002
+      3) &quot;11c1f71f0b7840c9e6e031ca41366bca55910d98&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7005
+      3) &quot;1c718959f6082ab013e7c4e17b5773d5c00e8ffe&quot;
+2) 1) (integer) 0
+   2) (integer) 5461
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7000
+      3) &quot;7a646c22385df7aeda43946777d2d2bc7f3b7315&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7003
+      3) &quot;d57b719f47a276d4b011c7b4c9a5ef7c03d97ad3&quot;
+3) 1) (integer) 5462
+   2) (integer) 10922
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7001
+      3) &quot;53c2b87482d2e87e581d12553c4f5623113144f3&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7004
+      3) &quot;c0a7b5ebf298b447f2a9decb198febbde35209d0&quot;
+</code></pre><ul>
+<li>启动节点，发现可以写入数据了，集群安装成功</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -c -p 7000
+127.0.0.1:7000&gt; set hello world
+OK
+</code></pre><p><strong>2. 官方工具安装</strong></p>
+<ul>
+<li>redis cluster官方提供了ruby的安装脚本</li>
+<li><p>Ruby环境准备</p>
+<ul>
+<li>下载，编译，安装Ruby</li>
+<li>安装rubygem redis</li>
+<li>安装redis-trib.rb</li>
+</ul>
+</li>
+<li><p>下载ruby</p>
+</li>
+</ul>
+<pre><code>[root@localhost Thpffcj]# wget https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz
+</code></pre><ul>
+<li>解压缩，编译</li>
+</ul>
+<pre><code>[root@localhost Thpffcj]# tar -xvf ruby-2.3.1.tar.gz 
+
+[root@localhost ruby-2.3.1]# ./configure -prefix=/usr/local/ruby
+
+[root@localhost ruby-2.3.1]# make &amp;&amp; make install
+
+[root@localhost ruby-2.3.1]# cd /usr/local/ruby/
+[root@localhost ruby]# cp bin/ruby /usr/local/bin
+[root@localhost ruby]# cp bin/gem /usr/local/bin
+
+[root@localhost ruby-2.3.1]# ruby -v
+ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
+</code></pre><ul>
+<li>安装客户端</li>
+</ul>
+<pre><code>[root@localhost Thpffcj]# wget http://rubygems.org/downloads/redis-3.3.0.gem
+
+[root@localhost Thpffcj]# gem install -l redis-3.3.0.gem 
+
+[root@localhost Thpffcj]# gem list -- check redis gem
+</code></pre><ul>
+<li><p>遇见无法看懂的bug：<a href="https://stackoverflow.com/questions/27378519/gem-install-error-related-to-missing-library" target="_blank" rel="external">https://stackoverflow.com/questions/27378519/gem-install-error-related-to-missing-library</a></p>
+</li>
+<li><p>通过redis-trib.rb搭建集群</p>
+</li>
+<li><p>启动各个节点，这里我为了学习方便，采用视频中使用的3.0.7版本，去掉配置文件中protected-mode no(3.2版本出现)</p>
+</li>
+</ul>
+<pre><code>[root@localhost src]# cp redis-trib.rb /usr/local/bin
+
+[root@localhost redis-3.0.7]# redis-server config/redis-7000.conf 
+[root@localhost redis-3.0.7]# redis-server config/redis-7001.conf 
+[root@localhost redis-3.0.7]# redis-server config/redis-7002.conf 
+[root@localhost redis-3.0.7]# redis-server config/redis-7003.conf 
+[root@localhost redis-3.0.7]# redis-server config/redis-7004.conf 
+[root@localhost redis-3.0.7]# redis-server config/redis-7005.conf 
+</code></pre><ul>
+<li>执行命令</li>
+</ul>
+<pre><code>[root@localhost src]# ./redis-trib.rb create --replicas 1 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005
+
+- 它会返回一个执行计划
+
+
+&gt;&gt;&gt; Creating cluster
+&gt;&gt;&gt; Performing hash slots allocation on 6 nodes...
+Using 3 masters:
+127.0.0.1:7000
+127.0.0.1:7001
+127.0.0.1:7002
+Adding replica 127.0.0.1:7003 to 127.0.0.1:7000
+Adding replica 127.0.0.1:7004 to 127.0.0.1:7001
+Adding replica 127.0.0.1:7005 to 127.0.0.1:7002
+M: a6058b01c21ca99ffcdd18a38b14ab03330cf933 127.0.0.1:7000
+   slots:0-5460 (5461 slots) master
+M: 9b90c1640f92e2bda9ba5c902ffdd4227d9344d0 127.0.0.1:7001
+   slots:5461-10922 (5462 slots) master
+M: 517410e8513cf74fca20cfdd9691cc397bf034bc 127.0.0.1:7002
+   slots:10923-16383 (5461 slots) master
+S: ac2b1c40f9ad64264a54055771dec751f049409c 127.0.0.1:7003
+   replicates a6058b01c21ca99ffcdd18a38b14ab03330cf933
+S: 71d65e320723bcbda60f9e6161a31ebc74e4e369 127.0.0.1:7004
+   replicates 9b90c1640f92e2bda9ba5c902ffdd4227d9344d0
+S: 0517e201b0d8a9bf71a3bf5f242bd0f66e33145b 127.0.0.1:7005
+   replicates 517410e8513cf74fca20cfdd9691cc397bf034bc
+Can I set the above configuration? (type &apos;yes&apos; to accept): 
+</code></pre><ul>
+<li>完成构建集群</li>
+</ul>
+<p><strong>3. 总结</strong></p>
+<ul>
+<li>原生命令安装<ul>
+<li>理解Redis Cluster架构</li>
+<li>生产环境不使用</li>
+</ul>
+</li>
+<li>官方工具安装<ul>
+<li>高效，准确</li>
+<li>生产环境可以使用</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>可视化部署</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-深入Redis-Cluster"><a href="#2-深入Redis-Cluster" class="headerlink" title="2. 深入Redis Cluster"></a>2. 深入Redis Cluster</h2><h3 id="1-集群伸缩"><a href="#1-集群伸缩" class="headerlink" title="1. 集群伸缩"></a>1. 集群伸缩</h3><p><strong>1. 伸缩原理</strong></p>
+<ul>
+<li>集群伸缩：槽和数据在节点之间的移动</li>
+</ul>
+<p><strong>2. 扩展集群</strong></p>
+<ul>
+<li>准备新节点<ul>
+<li>集群模式</li>
+<li>配置和其他节点统一</li>
+<li>启动后是孤儿节点</li>
+</ul>
+</li>
+<li>加入集群<ul>
+<li>meet</li>
+<li>作用：<ul>
+<li>为它迁移槽和数据实现扩容</li>
+<li>作为从节点负责故障转移</li>
+</ul>
+</li>
+<li>建议使用redis-trib.rb能够避免新节点已经加入其他集群，造成故障</li>
+</ul>
+</li>
+<li>迁移槽和数据<ul>
+<li>槽迁移计划<ul>
+<li>重新平均槽数量</li>
+<li>每个槽拿出一定数量到新节点</li>
+</ul>
+</li>
+<li>迁移数据<ul>
+<li>对目标节点发送：cluster setslot {slot} importing {sourceNodeId}命令，让目标节点准备导入槽的数据</li>
+<li>对源节点发送：cluster setslot {slot} migrating {targetNodeId}命令，让源节点准备迁出槽的数据</li>
+<li>源节点循环执行：cluster getKeysinslot {slot} {count}命令，每次获取count个属于槽的键</li>
+<li>在源节点执行：migrate {targetIp} {targetPort} key 0 {timeout}命令把指定key迁移</li>
+<li>重复执行步骤3~4直到槽下所有的键数据迁移到目标节点</li>
+<li>向集群内所有主节点发送：cluster setslot {slot} node {targetnodeId}命令，通知槽分配给目标节点</li>
+<li>pipeline migrate(since 3.0.6 3.2.8 fix)</li>
+</ul>
+</li>
+<li>添加从节点</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 集群扩容演示</strong></p>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster nodes
+244168ea672d881d6e1eee4a50afcea27dc65fb8 192.168.242.129:7004@17004 slave 5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 0 1514185802000 4 connected
+63adbbda48fcf0a3de92082eb771ca0640989d5e 192.168.242.129:7000@17000 myself,master - 0 1514185804000 2 connected 1-5461
+5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 192.168.242.129:7001@17001 master - 0 1514185807027 1 connected 5462-10922
+2f6a0261427a8ffafe4262928ab59d920290c4e8 192.168.242.129:7005@17005 slave c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 0 1514185804000 5 connected
+09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4 192.168.242.129:7003@17003 slave 63adbbda48fcf0a3de92082eb771ca0640989d5e 0 1514185806015 3 connected
+c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514185805000 0 connected 10923-16383
+</code></pre><ul>
+<li>我们现在是三主三从的模式，现在要加入7006和7007，7007是7006的从，要从7000,7001,7002迁移一部分数据给7006</li>
+</ul>
+<pre><code>[root@localhost config]# sed &apos;s/7000/7006/g&apos; redis-7000.conf &gt; redis-7006.conf 
+[root@localhost config]# sed &apos;s/7000/7007/g&apos; redis-7000.conf &gt; redis-7007.conf 
+
+[root@localhost redis]# redis-server config/redis-7006.conf 
+[root@localhost redis]# redis-server config/redis-7007.conf 
+</code></pre><ul>
+<li>将这两个节点加入集群</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster meet 192.168.242.129 7006
+OK
+[root@localhost redis]# redis-cli -p 7000 cluster meet 192.168.242.129 7007
+OK
+</code></pre><ul>
+<li>查看节点信息并添加主从关系</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster nodes
+244168ea672d881d6e1eee4a50afcea27dc65fb8 192.168.242.129:7004@17004 slave 5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 0 1514186155000 4 connected
+63adbbda48fcf0a3de92082eb771ca0640989d5e 192.168.242.129:7000@17000 myself,master - 0 1514186154000 2 connected 1-5461
+5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 192.168.242.129:7001@17001 master - 0 1514186156636 1 connected 5462-10922
+a307acd083ce621cacca6757df8034d2b869ce86 192.168.242.129:7006@17006 master - 0 1514186154000 6 connected
+2f6a0261427a8ffafe4262928ab59d920290c4e8 192.168.242.129:7005@17005 slave c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 0 1514186154446 5 connected
+6461b46234a4ff7c0a02589964fabcd172aa9f74 192.168.242.129:7007@17007 master - 0 1514186155631 7 connected
+09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4 192.168.242.129:7003@17003 slave 63adbbda48fcf0a3de92082eb771ca0640989d5e 0 1514186155000 3 connected
+c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514186153440 0 connected 10923-16383
+[root@localhost redis]# redis-cli -h 192.168.242.129 -p 7007 cluster replicate a307acd083ce621cacca6757df8034d2b869ce86
+OK
+</code></pre><ul>
+<li>使用redis-trib.rb</li>
+</ul>
+<pre><code>[root@localhost redis]# src/redis-trib.rb reshard 192.168.242.129:7000
+...
+[OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+[OK] All 16384 slots covered.
+How many slots do you want to move (from 1 to 16384)? 
+</code></pre><ul>
+<li>我们选择移动4096个槽去7006，并选择从所有节迁移</li>
+</ul>
+<pre><code>How many slots do you want to move (from 1 to 16384)? 4096
+What is the receiving node ID? a307acd083ce621cacca6757df8034d2b869ce86
+Please enter all the source node IDs.
+  Type &apos;all&apos; to use all the nodes as source nodes for the hash slots.
+  Type &apos;done&apos; once you entered all the source nodes IDs.
+Source node #1:all
+</code></pre><ul>
+<li><p>我们看到迁移速度还是比较快的，实际上槽里有数据的话可以速度会慢一些</p>
+</li>
+<li><p>我们看见7006节点是由三部分组成的</p>
+</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster nodes | grep master
+63adbbda48fcf0a3de92082eb771ca0640989d5e 192.168.242.129:7000@17000 myself,master - 0 1514187027000 2 connected 1366-5461
+5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 192.168.242.129:7001@17001 master - 0 1514187029843 1 connected 6827-10922
+a307acd083ce621cacca6757df8034d2b869ce86 192.168.242.129:7006@17006 master - 0 1514187028000 8 connected 0-1365 5462-6826 10923-12287
+c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514187027000 0 connected 12288-16383
+</code></pre><p><strong>3. 收缩集群</strong></p>
+<ul>
+<li>下线迁移槽</li>
+<li>忘记节点<ul>
+<li>redis-&gt;cli &gt; cluster forget {downNodeId}</li>
+</ul>
+</li>
+<li>关闭节点</li>
+</ul>
+<p><strong>4. 集群收缩演示</strong></p>
+<ul>
+<li>我们希望将7006和7007进行下线</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster nodes
+244168ea672d881d6e1eee4a50afcea27dc65fb8 192.168.242.129:7004@17004 slave 5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 0 1514198031000 4 connected
+5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 192.168.242.129:7001@17001 master - 0 1514198033155 1 connected 6827-10922
+63adbbda48fcf0a3de92082eb771ca0640989d5e 192.168.242.129:7000@17000 myself,master - 0 1514198031000 2 connected 1366-5461
+6461b46234a4ff7c0a02589964fabcd172aa9f74 192.168.242.129:7007@17007 slave a307acd083ce621cacca6757df8034d2b869ce86 0 1514198032146 8 connected
+a307acd083ce621cacca6757df8034d2b869ce86 192.168.242.129:7006@17006 master - 0 1514198030000 8 connected 0-1365 5462-6826 10923-12287
+09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4 192.168.242.129:7003@17003 slave 63adbbda48fcf0a3de92082eb771ca0640989d5e 0 1514198032000 3 connected
+c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514198030000 0 connected 12288-16383
+2f6a0261427a8ffafe4262928ab59d920290c4e8 192.168.242.129:7005@17005 slave c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 0 1514198032000 5 connected
+</code></pre><ul>
+<li>进行槽转移</li>
+</ul>
+<pre><code>[root@localhost redis]# src/redis-trib.rb reshard --from a307acd083ce621cacca6757df8034d2b869ce86 --to 63adbbda48fcf0a3de92082eb771ca0640989d5e --slots 1366 192.168.242.129:7006
+[root@localhost redis]# src/redis-trib.rb reshard --from a307acd083ce621cacca6757df8034d2b869ce86 --to 5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 --slots 1365 192.168.242.129:7006
+[root@localhost redis]# src/redis-trib.rb reshard --from a307acd083ce621cacca6757df8034d2b869ce86 --to c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 --slots 1365 192.168.242.129:7006
+</code></pre><ul>
+<li>现在7006上已经没有任何槽了，现在我们要进行遗忘</li>
+</ul>
+<pre><code>[root@localhost redis]# src/redis-trib.rb del-node 192.168.242.129:7000 6461b46234a4ff7c0a02589964fabcd172aa9f74
+[root@localhost redis]# src/redis-trib.rb del-node 192.168.242.129:7000 a307acd083ce621cacca6757df8034d2b869ce86
+</code></pre><ul>
+<li>发现两个节点已经不属于集群了</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 cluster nodes244168ea672d881d6e1eee4a50afcea27dc65fb8 192.168.242.129:7004@17004 slave 5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 0 1514199050672 10 connected
+5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1 192.168.242.129:7001@17001 master - 0 1514199051679 10 connected 5462-10922
+63adbbda48fcf0a3de92082eb771ca0640989d5e 192.168.242.129:7000@17000 myself,master - 0 1514199050000 9 connected 0-5461
+09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4 192.168.242.129:7003@17003 slave 63adbbda48fcf0a3de92082eb771ca0640989d5e 0 1514199049661 9 connected
+c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514199048000 11 connected 10923-16383
+2f6a0261427a8ffafe4262928ab59d920290c4e8 192.168.242.129:7005@17005 slave c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 0 1514199049000 11 connected
+</code></pre><h3 id="2-客户端路由"><a href="#2-客户端路由" class="headerlink" title="2. 客户端路由"></a>2. 客户端路由</h3><p><strong>1. moved 重定向</strong></p>
+<pre><code>[root@localhost redis]# redis-cli -c -p 7000
+127.0.0.1:7000&gt; cluster keyslot hello
+(integer) 866
+127.0.0.1:7000&gt; set hello world
+OK
+127.0.0.1:7000&gt; cluster keyslot php
+(integer) 9244
+127.0.0.1:7000&gt; set php best
+-&gt; Redirected to slot [9244] located at 192.168.242.129:7001
+OK
+</code></pre><p><strong>2. ask 重定向</strong></p>
+<ul>
+<li>moved和ask<ul>
+<li>两者都是客户端重定向</li>
+<li>moved：槽已经确定迁移</li>
+<li>ask：槽还在迁移中</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. smart 客户端</strong></p>
+<ul>
+<li>smart客户端实现原理<ul>
+<li>追求性能<ul>
+<li>从集群中选一个可运行的节点，使用cluster slots初始化槽和节点映射。</li>
+<li>将cluster slots的结果映射到本地，为每个节点创建JedisPool。</li>
+<li>准备执行命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4.png" alt=""></p>
+<ul>
+<li>smart客户端使用：JedisCluster<ul>
+<li>单例：内置了所有节点的连接池</li>
+<li>无需手动借还连接池</li>
+<li>合理设置commons-pool</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>spring整合redis</p>
+</li>
+<li><p>写一个jediscluster工厂类</p>
+</li>
+</ul>
+<pre><code>import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPoolConfig;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by Thpffcj on 2017/12/25.
+ */
+public class JedisClusterFactory {
+
+    private JedisCluster jedisCluster;
+
+    private List&lt;String&gt; hostPortList;
+
+    private int timeout;
+
+    public void init() {
+        // 这里可以设置相关参数
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        Set&lt;HostAndPort&gt; nodeSet = new HashSet&lt;&gt;();
+        for (String hostPort : hostPortList) {
+            String[] arr = hostPort.split(&quot;:&quot;);
+            if (arr.length != 2) {
+                continue;
+            }
+            nodeSet.add(new HostAndPort(arr[0], Integer.parseInt(arr[1])));
+        }
+        jedisCluster = new JedisCluster(nodeSet, timeout, jedisPoolConfig);
+    }
+
+    public void destory() {
+        if (jedisCluster != null) {
+            try {
+                jedisCluster.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public JedisCluster getJedisCluster() {
+        return jedisCluster;
+    }
+
+    public void setHostPortList(List&lt;String&gt; hostPortList) {
+        this.hostPortList = hostPortList;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+}
+</code></pre><ul>
+<li>随便写一个spring配置文件</li>
+</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+    &lt;bean id=&quot;jedisClusterFactory&quot; class=&quot;JedisClusterFactory&quot;
+          init-method=&quot;init&quot; destroy-method=&quot;destory&quot;&gt;
+        &lt;property name=&quot;hostPortList&quot;&gt;
+            &lt;list&gt;
+                &lt;value&gt;192.168.242.129:7000&lt;/value&gt;
+                &lt;value&gt;192.168.242.129:7001&lt;/value&gt;
+                &lt;value&gt;192.168.242.129:7002&lt;/value&gt;
+                &lt;value&gt;192.168.242.129:7003&lt;/value&gt;
+                &lt;value&gt;192.168.242.129:7004&lt;/value&gt;
+                &lt;value&gt;192.168.242.129:7005&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;timeout&quot; value=&quot;1000&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;jedisCluster&quot; factory-bean=&quot;jedisClusterFactory&quot;
+          factory-method=&quot;getJedisCluster&quot;&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id=&quot;redisClusterService&quot; class=&quot;RedisClusterImpl&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><ul>
+<li>添加service层</li>
+</ul>
+<pre><code>import redis.clients.jedis.JedisCluster;
+
+import javax.annotation.Resource;
+
+/**
+ * Created by Thpffcj on 2017/12/25.
+ */
+public class RedisClusterImpl implements RedisService {
+
+    @Resource(name = &quot;jedisCluster&quot;)
+    private JedisCluster jedisCluster;
+
+    @Override
+    public String set(String key, String value) {
+        return jedisCluster.set(key, value);
+    }
+
+    @Override
+    public String get(String key) {
+        return jedisCluster.get(key);
+    }
+}
+</code></pre><ul>
+<li>添加测试用例</li>
+</ul>
+<pre><code>import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotNull;
+
+/**
+ * Created by Thpffcj on 2017/12/25.
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+// 告诉junit spring配置文件
+@ContextConfiguration({ &quot;classpath:spring-test.xml&quot;})
+public class JedisClusterTest {
+
+    @Resource(name = &quot;redisClusterService&quot;)
+    private RedisService redisClusterService;
+
+    @Test
+    public void testNotNull() {
+        assertNotNull(redisClusterService);
+        redisClusterService.set(&quot;hello&quot;, &quot;world&quot;);
+        assertTrue(&quot;world&quot;.equals(redisClusterService.get(&quot;hello&quot;)));
+    }
+}
+</code></pre><h3 id="3-多节点命令实现"><a href="#3-多节点命令实现" class="headerlink" title="3. 多节点命令实现"></a>3. 多节点命令实现</h3><ul>
+<li>假如说我们要执行scan操作，我们知道scan是扫描节点所有的键值，rediscluster不能支持扫描所有节点，我们要求在所有节点分别执行命令</li>
+</ul>
+<pre><code>// 获取所有节点的JedisPool
+Map&lt;String, JedisPool&gt; jedisPoolMap = jedisCluster.getClusterNodes();
+for (Entry&lt;String, JedisPool&gt; entry : jedisPoolMap.entrySet()) {
+    // 获取每个节点的Jedis连接
+    Jedis jedis = entry.getValue().getResource();
+    // 只删除主节点数据
+    if (!isMaster(jedis)) {
+        continue;
+    }
+    // finally close
+}
+</code></pre><h3 id="4-批量操作怎么实现"><a href="#4-批量操作怎么实现" class="headerlink" title="4. 批量操作怎么实现"></a>4. 批量操作怎么实现</h3><p><strong>mget mset 必须在一个槽</strong></p>
+<p><strong>四种批量优化的方法</strong></p>
+<ul>
+<li>串行mget<ul>
+<li>我们执行mget，写一个for循环执行每一个get</li>
+<li>n次网络时间</li>
+<li>优点：编程简单，少量keys满足需求</li>
+<li>缺点：大量keys请求延迟严重</li>
+</ul>
+</li>
+<li>串行IO<ul>
+<li>我在客户端本地做一个内聚，本地有槽和节点的对应关系，就按节点对get进行分组，执行n次pipeline就可以完成对应的mget</li>
+<li>nodes次网络时间</li>
+<li>优点：编程简单，少量节点满足需求</li>
+<li>缺点：大量node延迟严重</li>
+</ul>
+</li>
+<li>并行IO<ul>
+<li>就是多线程进行串行IO</li>
+<li>1次网络时间</li>
+<li>优点：利用并行特性，延迟取决于最慢的节点</li>
+<li>缺点：编程复杂，超时定位问题难</li>
+</ul>
+</li>
+<li>hash_tag<ul>
+<li>mget(hash_tag)</li>
+<li>1次网络时间</li>
+<li>优点：性能最高</li>
+<li>缺点：读写增加tag的维护成本，tag分布易出现数据倾斜</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-故障转移"><a href="#5-故障转移" class="headerlink" title="5. 故障转移"></a>5. 故障转移</h3><p><strong>1. 故障发现</strong></p>
+<ul>
+<li>通过ping/pong消息实现故障发现：不需要sentinel</li>
+<li>主观下线和客观下线<ul>
+<li>主观下线：<ul>
+<li>定义：某个节点认为另一个节点不可用，”偏见”。</li>
+<li>流程：ping成功更新最后通信时间。如果ping失败，通信失败就会通信异常断开连接，有一个定时任务，如果节点最后通信时间超过node-timeout标记pfail状态。</li>
+</ul>
+</li>
+<li>客观下线：<ul>
+<li>当半数以上持有槽的主节点都标记某节点主观下线。</li>
+<li>流程：主节点接收ping消息，消息包含其他pfail节点，他会将主观下线消息添加到故障链表中。</li>
+<li>尝试客观下线：计算有效下线报告数量，如果大于槽节点总数一半，更新为客观下线，并向集群广播下线节点的fail消息。</li>
+<li>通知集群内所有节点标记故障节点为客观下线。</li>
+<li>通知故障节点的从节点触发故障转移流程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 故障恢复</strong></p>
+<ul>
+<li>资格检查<ul>
+<li>每个从节点检查与故障主节点的断线时间。</li>
+<li>超过cluster-node-timeout * cluster-slave-validity-factor取消资格。</li>
+<li>cluster-slave-validity-factor：默认是10。</li>
+</ul>
+</li>
+<li>准备选举时间</li>
+<li>选举投票</li>
+<li>替换主节点<ul>
+<li>当前从节点取消复制变为主节点(slaveof no one)。</li>
+<li>执行clusterDelSlot撤销故障主节点负责的槽，并执行clusterAddSlot把这些槽分配给自己。</li>
+<li>向集群广播自己的pong消息，表明已经替换了故障从节点。</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 故障演练</strong></p>
+<ul>
+<li>执行kill-9节点模拟宕机</li>
+<li>观察客户端故障恢复时间</li>
+<li><p>观察各个节点的日志</p>
+</li>
+<li><p>先写一个死循环便于查看故障</p>
+</li>
+</ul>
+<pre><code>@Test
+public void test() throws InterruptedException {
+    int i = 0;
+    while (true) {
+        try {
+            String key = &quot;key&quot; + i;
+            String value = &quot;value&quot; + i;
+            redisClusterService.set(key, value);
+            TimeUnit.SECONDS.sleep(1);
+            i++;
+            if (i%100 == 0) {
+                System.out.println(i);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+</code></pre><ul>
+<li>杀死进程，发现出现很多异常</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7000 info server | grep process_id
+process_id:3868
+[root@localhost redis]# kill -9 3868
+
+Caused by: java.net.SocketTimeoutException: connect timed out
+    at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+    at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+    at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+    at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+    at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+    at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+    at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+    at java.net.Socket.connect(Socket.java:589)
+    at redis.clients.jedis.Connection.connect(Connection.java:184)
+    ... 46 more
+</code></pre><ul>
+<li>一段时间后故障消除重新启动7000节点，发现7000已经成为了从节点</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 7005 cluster slots
+1) 1) (integer) 5462
+   2) (integer) 10922
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7001
+      3) &quot;5b39b23994f32b8d75590bdc9ab7c8df4ddc05d1&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7004
+      3) &quot;244168ea672d881d6e1eee4a50afcea27dc65fb8&quot;
+2) 1) (integer) 0
+   2) (integer) 5461
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7003
+      3) &quot;09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7000
+      3) &quot;63adbbda48fcf0a3de92082eb771ca0640989d5e&quot;
+3) 1) (integer) 10923
+   2) (integer) 16383
+   3) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7002
+      3) &quot;c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2&quot;
+   4) 1) &quot;192.168.242.129&quot;
+      2) (integer) 7005
+      3) &quot;2f6a0261427a8ffafe4262928ab59d920290c4e8&quot;
+</code></pre><ul>
+<li>这里我们可以看日志文件进一步了解故障各个阶段，不过和上一篇博客中redis sentinel中故障日志类似，这里就不重复粘贴日志</li>
+</ul>
+<h3 id="6-Redis-Cluster开发运维常见问题"><a href="#6-Redis-Cluster开发运维常见问题" class="headerlink" title="6. Redis Cluster开发运维常见问题"></a>6. Redis Cluster开发运维常见问题</h3><p><strong>1. 集群完整性</strong></p>
+<ul>
+<li>cluster-require-full-coverage默认为yes<ul>
+<li>集群中16384个槽全部可用：保证集群完整性。</li>
+<li>节点故障或者正在故障转移：(error) CLUSTERDOWN The cluster is down。</li>
+</ul>
+</li>
+<li>大多数业务无法容忍，cluster-require-full-coverage建议设置为no</li>
+</ul>
+<ul>
+<li>使用9000~9005六个节点</li>
+</ul>
+<pre><code>protected-mode no
+port 9000
+daemonize yes
+dir &quot;/home/Thpffcj/redis/data&quot;
+logfile &quot;9000.log&quot;
+dbfilename &quot;dump-9000.rdb&quot;
+cluster-enabled yes
+cluster-config-file nodes-9000.conf
+cluster-require-full-coverage yes
+</code></pre><ul>
+<li>其他节点配置相似，启动所有节点</li>
+<li>启动集群</li>
+</ul>
+<pre><code>[root@localhost redis]# src/redis-trib.rb create --replicas 1 127.0.0.1:9000 127.0.0.1:9001 127.0.0.1:9002 127.0.0.1:9003 127.0.0.1:9004 127.0.0.1:9005
+</code></pre><ul>
+<li>发现节点状态已经失败</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -p 9000 shutdown
+[root@localhost redis]# redis-cli -p 9003 shutdown
+[root@localhost redis]# redis-cli -p 9002
+127.0.0.1:9002&gt; cluster info
+cluster_state:fail
+cluster_slots_assigned:16384
+cluster_slots_ok:10923
+cluster_slots_pfail:0
+cluster_slots_fail:5461
+cluster_known_nodes:6
+cluster_size:3
+cluster_current_epoch:6
+cluster_my_epoch:3
+cluster_stats_messages_ping_sent:953
+cluster_stats_messages_pong_sent:151
+cluster_stats_messages_meet_sent:5
+cluster_stats_messages_fail_sent:6
+cluster_stats_messages_sent:1115
+cluster_stats_messages_ping_received:151
+cluster_stats_messages_pong_received:134
+cluster_stats_messages_fail_received:2
+cluster_stats_messages_received:287
+</code></pre><ul>
+<li>集群是一个下线状态</li>
+</ul>
+<pre><code>127.0.0.1:9002&gt; set hello world
+(error) CLUSTERDOWN The cluster is down
+</code></pre><p><strong>2. 带宽消耗</strong></p>
+<ul>
+<li>官方建议：&lt;=1000个节点</li>
+<li>ping/pong消息</li>
+<li>不容忽视的带宽消耗</li>
+<li>三个方面：<ul>
+<li>消息发送频率：节点发现与其他节点最后通信时间超过cluster-node-timeout/2时会直接发送ping消息。</li>
+<li>消息数据量：slots槽数组(2KB空间)和整个集群1/10的状态数据(10个节点状态数据约1KB)。</li>
+<li>节点部署的机器规模：集群分布的机器越多且每台机器划分的节点数越均匀，则集群内整体的可用带宽越高。</li>
+</ul>
+</li>
+<li>一个例子：<ul>
+<li>规模：节点200个，20台物理机(每台10各节点)</li>
+<li>cluster-node-timeout = 15000，ping/pong带宽约为25MB。</li>
+<li>cluster-node-timeout = 20000，ping/pong带宽低于15MB。</li>
+</ul>
+</li>
+<li>优化：<ul>
+<li>避免”大”集群：避免多业务使用一个集群，大业务可以多集群。</li>
+<li>cluster-node-timeout：带宽和故障转移速度的均衡。</li>
+<li>尽量均匀分配到多机器上：保证高可用和带宽。</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Pub/Sub广播</strong></p>
+<ul>
+<li>任何一个节点执行publish，它会将这个消息在集群中发布。</li>
+<li>问题：publish在集群每个节点广播：加重带宽。</li>
+<li>解决：单独”走”一套Redis Sentinel。</li>
+</ul>
+<p><strong>4. 集群倾斜</strong></p>
+<ul>
+<li>数据倾斜：内存不均<ul>
+<li>节点和槽分配不均。<ul>
+<li>redis-trib.rb info ip:port查看节点，槽，键值分布。</li>
+<li>redis-trib.rb rebalance ip:port进行均衡(谨慎使用)。</li>
+</ul>
+</li>
+<li>不同槽对应键值数量差异较大。<ul>
+<li>CRC16正常情况下比较均匀。</li>
+<li>可能存在hash_tag。</li>
+<li>cluster countkeysinslot {slot}获取槽对应键值个数。</li>
+</ul>
+</li>
+<li>包含bigkey。<ul>
+<li>bigkey：例如大字符串，几百万的元素的hash，set等</li>
+<li>从节点：redis-cli –bigkeys。</li>
+<li>优化：优化数据结构。</li>
+</ul>
+</li>
+<li>内存相关配置不一致。<ul>
+<li>hash-max-ziplist-value，ser-max-intset-entries等。</li>
+<li>优化：定期”检查”配置一致性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>请求倾斜：热点<ul>
+<li>热点key：重要的key或者bigkey。</li>
+<li>优化：<ul>
+<li>避免bigkey。</li>
+<li>热键不要用hash_tag。</li>
+<li>当一致性不高时，可以使用本地缓存 + MQ。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>[root@localhost redis]# src/redis-trib.rb info 127.0.0.1:7000
+127.0.0.1:7000 (63adbbda...) -&gt; 0 keys | 5462 slots | 1 slaves.
+192.168.242.129:7002 (c59973c6...) -&gt; 0 keys | 5461 slots | 1 slaves.
+192.168.242.129:7001 (5b39b239...) -&gt; 0 keys | 5461 slots | 1 slaves.
+[OK] 0 keys in 3 masters.
+0.00 keys per slot on average.
+</code></pre><p><strong>5. 读写分离</strong></p>
+<ul>
+<li>只读连接：集群模式的从节点不接受任何读写请求<ul>
+<li>重定向到负责槽的主节点。</li>
+<li>readonly命令可以读：连接级别命令。</li>
+</ul>
+</li>
+</ul>
+<pre><code>[root@localhost redis]# redis-cli -c -p 7000
+127.0.0.1:7000&gt; set hello world
+OK
+127.0.0.1:7000&gt; exit
+[root@localhost redis]# redis-cli -c -p 7003
+127.0.0.1:7003&gt; get hello
+-&gt; Redirected to slot [866] located at 192.168.242.129:7000
+&quot;world&quot;
+
+[root@localhost redis]# redis-cli -c -p 7003
+127.0.0.1:7003&gt; readonly
+OK
+127.0.0.1:7003&gt; get hello
+&quot;world&quot;
+</code></pre><ul>
+<li>读写分离：更加复杂<ul>
+<li>同样的问题：复制延迟，读取过期数据，从节点故障。</li>
+<li>修改客户端：cluster slaves {nodeId}。</li>
+</ul>
+</li>
+</ul>
+<p><strong>6. 数据迁移</strong></p>
+<ul>
+<li>官方迁移工具：redis-trib.rb import<ul>
+<li>只能从单机迁移到集群。</li>
+<li>不支持在线迁移：source需要停写。</li>
+<li>不支持断点续传。</li>
+<li>单线程迁移：影响速度。</li>
+</ul>
+</li>
+<li>在线迁移：<ul>
+<li>唯品会：redis-migrate-tool。</li>
+<li>豌豆荚：redis-port。</li>
+</ul>
+</li>
+</ul>
+<p><strong>7. 集群vs单机</strong></p>
+<ul>
+<li>集群限制：<ul>
+<li>key批量操作支持有限：例如mget，mset必须在一个slot。</li>
+<li>key事务和Lua支持有限：操作的key必须在一个节点。</li>
+<li>key是数据分区的最小粒度：不支持bigkey分区。</li>
+<li>不支持多个数据库：集群模式下只有一个db 0。</li>
+<li>复制只支持一层：不支持树形复制结构。</li>
+</ul>
+</li>
+<li>分布式Redis不一定好<ul>
+<li>Redis Cluster：满足容量和性能的扩展性，很多业务”不需要”。<ul>
+<li>大多数时客户端性能会”降低”。</li>
+<li>命令无法跨界点使用。</li>
+<li>Lua和事务无法跨节点使用。</li>
+<li>客户端维护更复杂：SDK和应用本身消耗(例如更多的连接池)。</li>
+</ul>
+</li>
+<li>很多场景Redis Sentinel已经足够好。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-集群总结"><a href="#7-集群总结" class="headerlink" title="7. 集群总结"></a>7. 集群总结</h3><p><strong>1. Redis cluster数据分区规则采用虚拟槽方式(16384个槽)，每个节点负责一部分槽和相关数据，实现数据和请求的负载均衡</strong></p>
+<p><strong>2. 搭建集群划分为四个步骤：准备节点，节点握手，分配槽，复制。redis-trib.rb工具用于快速搭建集群</strong></p>
+<p><strong>3. 集群伸缩通过在节点之间移动槽和相关数据实现</strong></p>
+<ul>
+<li>扩容时根据槽迁移计划把槽从源节点迁移到新节点。</li>
+<li>收缩时如果下线的节点有负责的槽需要迁移到其他节点，再通过cluster forget命令让集群内所有节点忘记被下线节点。</li>
+</ul>
+<p><strong>4. 使用smart客户端操作集群达到通信效率最大化，客户端内部负责计算维护键-&gt;槽-&gt;节点的映射，用于快速定位到目标节点</strong></p>
+<p><strong>5. 集群自动故障转移过程分为故障发现和节点恢复。节点下线分为主观下线和客观下线，当超过半数主节点认为故障节点为主观下线时标记它为客观下线状态。从节点负责对客观下线的主节点触发故障恢复流程，保证集群的可用性</strong></p>
+<p><strong>6. 开发运维常见问题包括：超大规模集群带宽消耗，pub/sub广播问题，集群倾斜问题，单机和集群对比等</strong></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/22/Redis-Getting-Started-4/">
+        Redis 复制的原理与优化及 Reids Sentinel实现高可用 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

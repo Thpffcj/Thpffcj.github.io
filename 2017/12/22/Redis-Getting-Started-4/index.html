@@ -195,7 +195,7 @@
 <li>slaveof命令<ul>
 <li>在6380上执行(slaveof 对方的ip) ，当它接收到这条命令之后，我们就实现了复制的流程。</li>
 <li>这个复制命令是异步的，执行命令后会立刻返回。实际上要很多步骤和时间。</li>
-<li>可以执行(slave no one)取消复制，不过并不会清除之前同步的数据，只是说以后的数据不会再同步到这台机器上。</li>
+<li>可以执行(slaveof no one)取消复制，不过并不会清除之前同步的数据，只是说以后的数据不会再同步到这台机器上。</li>
 </ul>
 </li>
 <li>配置<ul>
@@ -453,7 +453,7 @@ repl_backlog_histlen:337
 <ul>
 <li>故障转移和手动过程很类似</li>
 <li>多个sentinel发现并确认master有问题</li>
-<li>选举出一个sentine作为领导</li>
+<li>选举出一个sentinel作为领导</li>
 <li>选出一个slave作为新的master</li>
 <li>通知其余slave成为新的master的slave</li>
 <li>通知客户端主从变化</li>
@@ -462,7 +462,7 @@ repl_backlog_histlen:337
 </ul>
 <h3 id="3-安装与配置"><a href="#3-安装与配置" class="headerlink" title="3. 安装与配置"></a>3. 安装与配置</h3><ul>
 <li>配置开启主从节点</li>
-<li>配置开启sentinel监控主节点(sentinel是特殊的的redis)</li>
+<li>配置开启sentinel监控主节点(sentinel是特殊的的redis节点)</li>
 <li>实际应该多机器</li>
 <li>详细配置节点</li>
 </ul>
@@ -754,7 +754,7 @@ v-51509
 4184:S 23 Dec 10:54:40.872 * MASTER &lt;-&gt; SLAVE sync started
 4184:S 23 Dec 10:54:40.873 # Error condition on socket for SYNC: Connection refused
 </code></pre><ul>
-<li>然后它形成了自己的一个master状态，而且接收到了一条用户请求，希望那个让他成为新的master。并进行了一个配置的重写</li>
+<li>然后它形成了自己的一个master状态，而且接收到了一条用户请求，希望让他成为新的master。并进行了一个配置的重写</li>
 </ul>
 <pre><code>4184:M 23 Dec 10:54:42.227 * Discarding previously cached master state.
 4184:M 23 Dec 10:54:42.227 * MASTER MODE enabled (user request from &apos;id=5 addr=192.168.242.129:49264 fd=10 name=sentinel-35e89218-cmd age=64 idle=0 flags=x db=0 sub=0 psub=0 multi=3 qbuf=0 qbuf-free=32768 obl=36 oll=0 omem=0 events=r cmd=exec&apos;)
@@ -878,8 +878,8 @@ sentinel down-after-millseconds &lt;masterName&gt; &lt;timeout&gt;
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2017/12/24/Redis-Getting-Started-5/" style="float: left;">
+        ← Redis 集群
     </a>
     
     
