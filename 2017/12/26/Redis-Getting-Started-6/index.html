@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Redis 缓存和云平台 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-12-26T10:45:24.000Z" itemprop="datePublished">
+          2017-12-26
+      </time>
+    
+</span>
+                <h1>Redis 缓存和云平台</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Redis的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-1/" target="_blank" rel="external">Redis 基础命令演示</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-2/" target="_blank" rel="external">Redis 入门</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-3/" target="_blank" rel="external">Redis 持久化</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-4/" target="_blank" rel="external">Redis 复制的原理与优化及 Reids Sentinel实现高可用</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-5/" target="_blank" rel="external">Redis 集群</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/24/Redis-Getting-Started-6/" target="_blank" rel="external">Redis 缓存和云平台</a></li>
+</ul>
+</li>
+</ul>
+<p>上一篇博客我们花了很大篇幅学习Redis 集群的相关知识，我们知道Redis其实大部分情况使用做缓存的，这里我们就来简单了解一下Redis缓存相关知识。</p>
+<hr>
+<h2 id="1-Redis-缓存"><a href="#1-Redis-缓存" class="headerlink" title="1. Redis 缓存"></a>1. Redis 缓存</h2><h3 id="1-缓存的受益于成本"><a href="#1-缓存的受益于成本" class="headerlink" title="1. 缓存的受益于成本"></a>1. 缓存的受益于成本</h3><p><strong>1. 受益</strong></p>
+<ul>
+<li>加速读写<ul>
+<li>通过缓存加速读写速度：CPU L1/L2/L3 Cache，Linux page Cache加速硬盘读写，浏览器缓存，Ehcache缓存数据库结果。</li>
+</ul>
+</li>
+<li>降低后端负载<ul>
+<li>后端服务器通过前端缓存降低负载：业务端使用Redis降低后后端MySQL负载等。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 成本</strong></p>
+<ul>
+<li>数据不一致：缓存层和数据层有时间窗口不一致，和更新策略有关</li>
+<li>代码维护成本：多了一层缓存逻辑</li>
+<li>运维成本：例如Redis Cluster</li>
+</ul>
+<p><strong>3. 使用场景</strong></p>
+<ul>
+<li>降低后端负载：<ul>
+<li>对高消耗的SQL：join结果集/分组统计结果缓存。</li>
+</ul>
+</li>
+<li>加速请求响应：<ul>
+<li>利用Redis/Memcache优化IO响应时间。</li>
+</ul>
+</li>
+<li>大量写合并为批量写：<ul>
+<li>如计数器先Redis累计再批量写DB。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-缓存更新策略"><a href="#2-缓存更新策略" class="headerlink" title="2. 缓存更新策略"></a>2. 缓存更新策略</h3><p><strong>1. LRU/LFU/FIFO算法剔除：例如maxmemory-policy</strong></p>
+<ul>
+<li>一致性：最差</li>
+<li>维护成本：低</li>
+</ul>
+<p><strong>2. 超时剔除：例如expire</strong></p>
+<ul>
+<li>一致性：较差</li>
+<li>维护成本：低</li>
+</ul>
+<p><strong>3. 主动更新：开发控制生命周期</strong></p>
+<ul>
+<li>一致性：强</li>
+<li>维护成本：高</li>
+</ul>
+<p><strong>4. 两条建议</strong></p>
+<ul>
+<li>低一致性：最大内存和淘汰策略</li>
+<li>高一致性：超时剔除和主动更新结合，最大内存和淘汰策略兜底</li>
+</ul>
+<h3 id="3-缓存粒度控制"><a href="#3-缓存粒度控制" class="headerlink" title="3. 缓存粒度控制"></a>3. 缓存粒度控制</h3><ul>
+<li>从MySQL获取用户信息</li>
+<li>设置用户信息缓存</li>
+<li>缓存粒度：<ul>
+<li>全部属性</li>
+<li>部分重要属性</li>
+</ul>
+</li>
+<li>缓存粒度控制：<ul>
+<li>通用性：全量属性更好。</li>
+<li>占用空间：部分属性更好。</li>
+<li>代码维护：表面上全量属性更好。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-缓存穿透问题"><a href="#4-缓存穿透问题" class="headerlink" title="4. 缓存穿透问题"></a>4. 缓存穿透问题</h3><p><strong>1. 缓存穿透问题 - 大量请求不命中</strong></p>
+<ul>
+<li>原因：<ul>
+<li>业务代码自身问题。</li>
+<li>恶意攻击，爬虫等等。</li>
+</ul>
+</li>
+<li>如何发现：<ul>
+<li>业务的响应时间。</li>
+<li>业务本身问题。</li>
+<li>相关指标：总调用数，缓存层命中数，存储层命中数。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 解决方法</strong></p>
+<ul>
+<li>缓存空对象<ul>
+<li>两个问题：<ul>
+<li>需要更多的键。</li>
+<li>缓存层和存储层数据”短期”不一致。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>布隆过滤器拦截<ul>
+<li>在过滤器里已经被过滤了，就不被认为这个请求是有效的，就不会访问cache。</li>
+<li>要么需要对过滤器实时更新，要么是一个比较固定的数据集。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-无底洞问题"><a href="#5-无底洞问题" class="headerlink" title="5. 无底洞问题"></a>5. 无底洞问题</h3><ul>
+<li>问题描述：2010年，Facebook有了3000个Memcache节点。</li>
+<li>发现问题：”加”机器性能没有提升，反而下降。</li>
+<li>无底洞问题关键点：<ul>
+<li>更多的机器 != 更高的新能</li>
+<li>批量接口需求(mget,mset等)</li>
+<li>数据增长与水平扩展需求</li>
+</ul>
+</li>
+<li>优化IO的几种方法：<ul>
+<li>命令本身优化：例如慢查询keys，hgetall bigkey。</li>
+<li>减少网络通信次数。</li>
+<li>降低接入成本：例如客户端长连接/连接池，NIO等。</li>
+</ul>
+</li>
+<li>四种批量优化的方法<ul>
+<li>串行mget<ul>
+<li>我们执行mget，写一个for循环执行每一个get</li>
+<li>n次网络时间</li>
+<li>优点：编程简单，少量keys满足需求</li>
+<li>缺点：大量keys请求延迟严重</li>
+</ul>
+</li>
+<li>串行IO<ul>
+<li>我在客户端本地做一个内聚，本地有槽和节点的对应关系，就按节点对get进行分组，执行n次pipeline就可以完成对应的mget</li>
+<li>nodes次网络时间</li>
+<li>优点：编程简单，少量节点满足需求</li>
+<li>缺点：大量node延迟严重</li>
+</ul>
+</li>
+<li>并行IO<ul>
+<li>就是多线程进行串行IO</li>
+<li>1次网络时间</li>
+<li>优点：利用并行特性，延迟取决于最慢的节点</li>
+<li>缺点：编程复杂，超时定位问题难</li>
+</ul>
+</li>
+<li>hash_tag<ul>
+<li>mget(hash_tag)</li>
+<li>1次网络时间</li>
+<li>优点：性能最高</li>
+<li>缺点：读写增加tag的维护成本，tag分布易出现数据倾斜</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-热点key重建优化"><a href="#6-热点key重建优化" class="headerlink" title="6. 热点key重建优化"></a>6. 热点key重建优化</h3><ul>
+<li>问题描述：热点key + 较长的重建时间</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%83%AD%E7%82%B9key%E9%87%8D%E5%BB%BA.png" alt=""></p>
+<ul>
+<li>大量的线程做缓存重建。</li>
+<li>三个目标<ul>
+<li>减少重建缓存的次数。</li>
+<li>数据尽可能一致。</li>
+<li>减少潜在危险。</li>
+</ul>
+</li>
+<li>两个解决：<ul>
+<li>互斥锁：重建过程加锁，其他访问获取缓存发现重建过程被锁住了，会进行等待并输出。<ul>
+<li>优点：思路简单，保证一致性。</li>
+<li>缺点：代码复杂度增加，存在死锁风险。</li>
+</ul>
+</li>
+<li>永远不过期：<ul>
+<li>缓存层面：没有设置过期时间(没有用expire)。</li>
+<li>功能层面：为每个value添加逻辑过期时间，一但发现超过逻辑过期时间后，会使用单独的线程去构建缓存。</li>
+<li>优点：基本杜绝热点key重建问题。</li>
+<li>缺点：不保证一致性，逻辑过期时间增加维护成本和内存成本。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h3><p><strong>1. 缓存受益：加速读写，降低后端存储负载</strong></p>
+<p><strong>2. 缓存成本：缓存和存储数据不一致性，代码维护成本，运维成本</strong></p>
+<p><strong>3. 推荐结合剔除，超时，主动更新三种方案共同完成</strong></p>
+<p><strong>4. 穿透问题：使用缓存空对象和布隆过滤器来解决，注意他们各自的适用场景和局限性</strong></p>
+<p><strong>5. 无底洞问题：分布式缓存中，有更多的机器不保证有更高的性能。有四种批量操作的方式：串行命令，串行IO，并行IO，hash_tag</strong></p>
+<p><strong>6. 雪崩问题：缓存层高可用，客户端降级，提前演练是解决雪崩问题的重要方法</strong></p>
+<p><strong>7. 热点key问题：互斥锁，”永远不过期”能够在一定程度上解决热点key问题，开发人员在使用时要了解它们各自的使用成本</strong></p>
+<p><br></p>
+<hr>
+<h2 id="2-Redis云平台CacheCloud"><a href="#2-Redis云平台CacheCloud" class="headerlink" title="2. Redis云平台CacheCloud"></a>2. Redis云平台CacheCloud</h2><h3 id="1-Redis规模化运维困扰"><a href="#1-Redis规模化运维困扰" class="headerlink" title="1. Redis规模化运维困扰"></a>1. Redis规模化运维困扰</h3><ul>
+<li>问题：<ul>
+<li>发布构建繁琐，私搭乱盖</li>
+<li>节点&amp;机器等运维成本</li>
+<li>监控报警初级</li>
+</ul>
+</li>
+<li>CacheCloud<ul>
+<li>一键开启Redis(Standalone,Sentinel,Cluster)。</li>
+<li>机器，应用，实例监控和报警。</li>
+<li>客户端：透明使用，性能上报。</li>
+<li>可视化运维：配置，扩容，Failover，机器/应用/实例上下线。</li>
+<li>已存在Redis直接接入和数据迁移。</li>
+<li><a href="https://github.com/sohutv/cachecloud" target="_blank" rel="external">https://github.com/sohutv/cachecloud</a></li>
+</ul>
+</li>
+<li>使用场景：<ul>
+<li>全量视频缓存(视频播放API)：跨机房高可用。</li>
+<li>消息队列同步(RedisMQ中间件)。</li>
+<li>分布式布隆过滤器(百万QPS)。</li>
+<li>技术系统：技术(播放数)。</li>
+<li>其他：排行榜，社交(直播)，实时计算(反作弊)等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-快速构建"><a href="#2-快速构建" class="headerlink" title="2. 快速构建"></a>2. 快速构建</h3><ul>
+<li>由于这个需要在linux环境下有数据库等环境，在以后有能力熟练配置环境后再看这部分内容。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-Redis总结"><a href="#3-Redis总结" class="headerlink" title="3. Redis总结"></a>3. Redis总结</h2><ul>
+<li>通过一周左右时间学习，也快速了解了redis的一些相关知识，写了一篇博客，这里对所有知识进行一个总结。</li>
+</ul>
+<h3 id="1-Redis初识：单机安装部署-版本选择-，边界-使用场景"><a href="#1-Redis初识：单机安装部署-版本选择-，边界-使用场景" class="headerlink" title="1. Redis初识：单机安装部署(版本选择)，边界(使用场景)"></a>1. Redis初识：单机安装部署(版本选择)，边界(使用场景)</h3><h3 id="2-API理解和使用：单线程，5种数据结构使用和选择"><a href="#2-API理解和使用：单线程，5种数据结构使用和选择" class="headerlink" title="2. API理解和使用：单线程，5种数据结构使用和选择"></a>2. API理解和使用：单线程，5种数据结构使用和选择</h3><h3 id="3-Redis客户端使用：jedis，redis-py等，客户端很”简单”"><a href="#3-Redis客户端使用：jedis，redis-py等，客户端很”简单”" class="headerlink" title="3. Redis客户端使用：jedis，redis-py等，客户端很”简单”"></a>3. Redis客户端使用：jedis，redis-py等，客户端很”简单”</h3><h3 id="4-瑞士军刀Redis：慢查询，pipeline，发布订阅，bitmap等"><a href="#4-瑞士军刀Redis：慢查询，pipeline，发布订阅，bitmap等" class="headerlink" title="4. 瑞士军刀Redis：慢查询，pipeline，发布订阅，bitmap等"></a>4. 瑞士军刀Redis：慢查询，pipeline，发布订阅，bitmap等</h3><h3 id="5-Redis持久化：RDB和AOF的优缺点和最佳实践"><a href="#5-Redis持久化：RDB和AOF的优缺点和最佳实践" class="headerlink" title="5. Redis持久化：RDB和AOF的优缺点和最佳实践"></a>5. Redis持久化：RDB和AOF的优缺点和最佳实践</h3><h3 id="6-Redis复制：配制方法，全量和部分复制，常见运维问题"><a href="#6-Redis复制：配制方法，全量和部分复制，常见运维问题" class="headerlink" title="6. Redis复制：配制方法，全量和部分复制，常见运维问题"></a>6. Redis复制：配制方法，全量和部分复制，常见运维问题</h3><h3 id="7-Redis-Sentinel：高可用，架构，”新”的客户端，基本原理"><a href="#7-Redis-Sentinel：高可用，架构，”新”的客户端，基本原理" class="headerlink" title="7. Redis Sentinel：高可用，架构，”新”的客户端，基本原理"></a>7. Redis Sentinel：高可用，架构，”新”的客户端，基本原理</h3><h3 id="8-Redis-Cluster：数据分布，架构，安装部署，扩容，客户端，常见问题"><a href="#8-Redis-Cluster：数据分布，架构，安装部署，扩容，客户端，常见问题" class="headerlink" title="8. Redis Cluster：数据分布，架构，安装部署，扩容，客户端，常见问题"></a>8. Redis Cluster：数据分布，架构，安装部署，扩容，客户端，常见问题</h3><h3 id="9-缓存设计与优化：粒度，更新策略，无底洞问题，穿透，雪崩，热点key"><a href="#9-缓存设计与优化：粒度，更新策略，无底洞问题，穿透，雪崩，热点key" class="headerlink" title="9. 缓存设计与优化：粒度，更新策略，无底洞问题，穿透，雪崩，热点key"></a>9. 缓存设计与优化：粒度，更新策略，无底洞问题，穿透，雪崩，热点key</h3><h3 id="10-CacheCloud：平台化Redis开发运维工具"><a href="#10-CacheCloud：平台化Redis开发运维工具" class="headerlink" title="10. CacheCloud：平台化Redis开发运维工具"></a>10. CacheCloud：平台化Redis开发运维工具</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/12/24/Redis-Getting-Started-5/">
+        Redis 集群 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
