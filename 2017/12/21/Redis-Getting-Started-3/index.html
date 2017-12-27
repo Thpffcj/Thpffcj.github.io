@@ -230,36 +230,36 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">save</th>
-<th style="text-align:center">bgsave</th>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">&nbsp;&nbsp;save</th>
+<th style="text-align:left">&nbsp;&nbsp;bgsave</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">IO类型</td>
-<td style="text-align:center">同步</td>
-<td style="text-align:center">异步</td>
+<td style="text-align:left">IO类型</td>
+<td style="text-align:left">&nbsp;&nbsp;同步</td>
+<td style="text-align:left">&nbsp;&nbsp;异步</td>
 </tr>
 <tr>
-<td style="text-align:center">阻塞</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是(阻塞发生在fork)</td>
+<td style="text-align:left">阻塞</td>
+<td style="text-align:left">&nbsp;&nbsp;是</td>
+<td style="text-align:left">&nbsp;&nbsp;是(阻塞发生在fork)</td>
 </tr>
 <tr>
-<td style="text-align:center">复杂度</td>
-<td style="text-align:center">O(N)</td>
-<td style="text-align:center">O(N)</td>
+<td style="text-align:left">复杂度</td>
+<td style="text-align:left">&nbsp;&nbsp;O(N)</td>
+<td style="text-align:left">&nbsp;&nbsp;O(N)</td>
 </tr>
 <tr>
-<td style="text-align:center">优点</td>
-<td style="text-align:center">不会消耗额外内存</td>
-<td style="text-align:center">不阻塞客户端命令</td>
+<td style="text-align:left">优点</td>
+<td style="text-align:left">&nbsp;&nbsp;不会消耗额外内存</td>
+<td style="text-align:left">&nbsp;&nbsp;不阻塞客户端命令</td>
 </tr>
 <tr>
-<td style="text-align:center">缺点</td>
-<td style="text-align:center">阻塞客户端命令</td>
-<td style="text-align:center">需要fork，消耗内存</td>
+<td style="text-align:left">缺点</td>
+<td style="text-align:left">&nbsp;&nbsp;阻塞客户端命令</td>
+<td style="text-align:left">&nbsp;&nbsp;需要fork，消耗内存</td>
 </tr>
 </tbody>
 </table>
@@ -270,26 +270,26 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">配置</th>
-<th style="text-align:center">seconds</th>
-<th style="text-align:center">changes</th>
+<th style="text-align:left">配置</th>
+<th style="text-align:left">&nbsp;&nbsp;seconds</th>
+<th style="text-align:left">&nbsp;&nbsp;changes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">save</td>
-<td style="text-align:center">900</td>
-<td style="text-align:center">1</td>
+<td style="text-align:left">save</td>
+<td style="text-align:left">&nbsp;&nbsp;900</td>
+<td style="text-align:left">&nbsp;&nbsp;1</td>
 </tr>
 <tr>
-<td style="text-align:center">save</td>
-<td style="text-align:center">300</td>
-<td style="text-align:center">10</td>
+<td style="text-align:left">save</td>
+<td style="text-align:left">&nbsp;&nbsp;300</td>
+<td style="text-align:left">&nbsp;&nbsp;10</td>
 </tr>
 <tr>
-<td style="text-align:center">save</td>
-<td style="text-align:center">60</td>
-<td style="text-align:center">10000</td>
+<td style="text-align:left">save</td>
+<td style="text-align:left">&nbsp;&nbsp;60</td>
+<td style="text-align:left">&nbsp;&nbsp;10000</td>
 </tr>
 </tbody>
 </table>
@@ -443,26 +443,26 @@ OK
 <table>
 <thead>
 <tr>
-<th style="text-align:center">配置</th>
-<th style="text-align:center">动作</th>
+<th style="text-align:left">配置</th>
+<th style="text-align:left">&nbsp;&nbsp;动作</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">T1</td>
-<td style="text-align:center">执行多个写命令</td>
+<td style="text-align:left">T1</td>
+<td style="text-align:left">&nbsp;&nbsp;执行多个写命令</td>
 </tr>
 <tr>
-<td style="text-align:center">T2</td>
-<td style="text-align:center">满足RDB自动创建的条件</td>
+<td style="text-align:left">T2</td>
+<td style="text-align:left">&nbsp;&nbsp;满足RDB自动创建的条件</td>
 </tr>
 <tr>
-<td style="text-align:center">T3</td>
-<td style="text-align:center">再次执行多个写命令</td>
+<td style="text-align:left">T3</td>
+<td style="text-align:left">&nbsp;&nbsp;再次执行多个写命令</td>
 </tr>
 <tr>
-<td style="text-align:center">T4</td>
-<td style="text-align:center">宕机</td>
+<td style="text-align:left">T4</td>
+<td style="text-align:left">&nbsp;&nbsp;宕机</td>
 </tr>
 </tbody>
 </table>
@@ -494,24 +494,24 @@ OK
 <table>
 <thead>
 <tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">always</th>
-<th style="text-align:center">everysec</th>
-<th style="text-align:center">no</th>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">&nbsp;&nbsp;always</th>
+<th style="text-align:left">&nbsp;&nbsp;everysec</th>
+<th style="text-align:left">&nbsp;&nbsp;no</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">优点</td>
-<td style="text-align:center">不丢失数据</td>
-<td style="text-align:center">每秒一次fsync</td>
-<td style="text-align:center">不用管</td>
+<td style="text-align:left">优点</td>
+<td style="text-align:left">&nbsp;&nbsp;不丢失数据</td>
+<td style="text-align:left">&nbsp;&nbsp;每秒一次fsync</td>
+<td style="text-align:left">&nbsp;&nbsp;不用管</td>
 </tr>
 <tr>
-<td style="text-align:center">缺点</td>
-<td style="text-align:center">IO开销较大，一般的sata盘只有几百TPS</td>
-<td style="text-align:center">丢一秒数据</td>
-<td style="text-align:center">不可控</td>
+<td style="text-align:left">缺点</td>
+<td style="text-align:left">&nbsp;&nbsp;IO开销较大，一般的sata盘只有几百TPS</td>
+<td style="text-align:left">&nbsp;&nbsp;丢一秒数据</td>
+<td style="text-align:left">&nbsp;&nbsp;不可控</td>
 </tr>
 </tbody>
 </table>
@@ -538,18 +538,18 @@ OK
 <table>
 <thead>
 <tr>
-<th style="text-align:center">配置名</th>
-<th style="text-align:center">含义</th>
+<th style="text-align:left">配置名</th>
+<th style="text-align:left">&nbsp;&nbsp;含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">auto-aof-rewrite-min-size</td>
-<td style="text-align:center">AOF文件重写需要的尺寸</td>
+<td style="text-align:left">auto-aof-rewrite-min-size</td>
+<td style="text-align:left">&nbsp;&nbsp;AOF文件重写需要的尺寸</td>
 </tr>
 <tr>
-<td style="text-align:center">auto-aof-rewrite-percentage</td>
-<td style="text-align:center">AOF文件增长率</td>
+<td style="text-align:left">auto-aof-rewrite-percentage</td>
+<td style="text-align:left">&nbsp;&nbsp;AOF文件增长率</td>
 </tr>
 </tbody>
 </table>
@@ -560,17 +560,17 @@ OK
 <thead>
 <tr>
 <th style="text-align:center">统计名</th>
-<th style="text-align:center">含义</th>
+<th style="text-align:left">&nbsp;&nbsp;含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">aof-current-size</td>
-<td style="text-align:center">AOF当前尺寸(单位：字节)</td>
+<td style="text-align:left">&nbsp;&nbsp;AOF当前尺寸(单位：字节)</td>
 </tr>
 <tr>
 <td style="text-align:center">aof-base-size</td>
-<td style="text-align:center">AOF上次启动和重写的尺寸(单位：字节)</td>
+<td style="text-align:left">&nbsp;&nbsp;AOF上次启动和重写的尺寸(单位：字节)</td>
 </tr>
 </tbody>
 </table>
@@ -662,35 +662,35 @@ redis
 <thead>
 <tr>
 <th style="text-align:center">命令</th>
-<th style="text-align:center">RDB</th>
-<th style="text-align:center">AOF</th>
+<th style="text-align:left">&nbsp;&nbsp;RDB</th>
+<th style="text-align:left">&nbsp;&nbsp;AOF</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">启动优先级</td>
-<td style="text-align:center">低</td>
-<td style="text-align:center">高</td>
+<td style="text-align:left">&nbsp;&nbsp;低</td>
+<td style="text-align:left">&nbsp;&nbsp;高</td>
 </tr>
 <tr>
 <td style="text-align:center">体积</td>
-<td style="text-align:center">小</td>
-<td style="text-align:center">大</td>
+<td style="text-align:left">&nbsp;&nbsp;小</td>
+<td style="text-align:left">&nbsp;&nbsp;大</td>
 </tr>
 <tr>
 <td style="text-align:center">恢复速度</td>
-<td style="text-align:center">快</td>
-<td style="text-align:center">慢</td>
+<td style="text-align:left">&nbsp;&nbsp;快</td>
+<td style="text-align:left">&nbsp;&nbsp;慢</td>
 </tr>
 <tr>
 <td style="text-align:center">数据安全性</td>
-<td style="text-align:center">丢数据</td>
-<td style="text-align:center">根据策略决定</td>
+<td style="text-align:left">&nbsp;&nbsp;丢数据</td>
+<td style="text-align:left">&nbsp;&nbsp;根据策略决定</td>
 </tr>
 <tr>
 <td style="text-align:center">轻重</td>
-<td style="text-align:center">重</td>
-<td style="text-align:center">轻</td>
+<td style="text-align:left">&nbsp;&nbsp;重</td>
+<td style="text-align:left">&nbsp;&nbsp;轻</td>
 </tr>
 </tbody>
 </table>
