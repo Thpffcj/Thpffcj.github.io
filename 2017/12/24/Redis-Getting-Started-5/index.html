@@ -469,7 +469,7 @@ OK
 [root@localhost script]#  redis-cli -h 192.168.242.129 -p 7005 cluster replicate 11c1f71f0b7840c9e6e031ca41366bca55910d98
 OK
 </code></pre><ul>
-<li>看一下节点状态，发现7003,7004，7005分别是7000,7001,7002的从节点</li>
+<li>看一下节点状态，发现7003，7004，7005分别是7000，7001，7002的从节点</li>
 </ul>
 <pre><code>[root@localhost script]# redis-cli -p 7000 cluster nodes
 11c1f71f0b7840c9e6e031ca41366bca55910d98 192.168.242.129:7002@17002 master - 0 1514028084077 2 connected 10923-16383
@@ -694,6 +694,7 @@ a307acd083ce621cacca6757df8034d2b869ce86 192.168.242.129:7006@17006 master - 0 1
 6461b46234a4ff7c0a02589964fabcd172aa9f74 192.168.242.129:7007@17007 master - 0 1514186155631 7 connected
 09e74cda7aa87aa73b42ec0e63d9f514a49ad9f4 192.168.242.129:7003@17003 slave 63adbbda48fcf0a3de92082eb771ca0640989d5e 0 1514186155000 3 connected
 c59973c6c5083dbe1cef3f2bde681f5bbde2dbe2 192.168.242.129:7002@17002 master - 0 1514186153440 0 connected 10923-16383
+
 [root@localhost redis]# redis-cli -h 192.168.242.129 -p 7007 cluster replicate a307acd083ce621cacca6757df8034d2b869ce86
 OK
 </code></pre><ul>
