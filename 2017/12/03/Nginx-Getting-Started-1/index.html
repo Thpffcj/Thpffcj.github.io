@@ -32,6 +32,7 @@
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
     <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
     
     <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
     
@@ -497,14 +498,15 @@ error_log  /var/log/nginx/error.log warn;
 </ul>
 <pre><code>[root@localhost nginx]# tail -f /var/log/nginx/error.log 
 </code></pre><ul>
-<li><p>access_log后面也是存放路径，main是nginx的log_format的名字，表示以main的格式要求记录到access_log里面</p>
-<p>  log_format  main  ‘$remote_addr - $remote_user [$time_local] “$request” ‘</p>
-<pre><code>&apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
-&apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
-</code></pre><p>  access_log  /var/log/nginx/access.log  main;</p>
-</li>
-<li><p>$接字符串就表示nginx的变量，每个变量通过一定的符号连接在一起，就组成了一定的格式要求</p>
-</li>
+<li>access_log后面也是存放路径，main是nginx的log_format的名字，表示以main的格式要求记录到access_log里面</li>
+</ul>
+<pre><code>log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
+                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+
+access_log  /var/log/nginx/access.log  main;
+</code></pre><ul>
+<li>$接字符串就表示nginx的变量，每个变量通过一定的符号连接在一起，就组成了一定的格式要求</li>
 </ul>
 <p><strong>3. Nginx变量</strong></p>
 <ul>
