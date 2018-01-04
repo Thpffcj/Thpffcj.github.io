@@ -244,11 +244,92 @@ LeetCode 算法面试分类解法 Binary-Tree
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2017/12/27/Nginx-Getting-Started-2/">Nginx 中间架构</a></h3>
+                    <h3><a href="/2018/01/04/Big-Data-Getting-Started-3/">分布式文件系统HDFS</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2017-12-27T15:29:45.000Z" itemprop="datePublished">
-          2017-12-27
+      <time datetime="2018-01-04T09:07:13.000Z" itemprop="datePublished">
+          2018-01-04
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        通过上一篇博客对hadoop的概念介绍，我们接下来首先了解一下Hadoop核心组件之分布式文件系统HDFS。
+
+
+1. 分布式文件系统HDFS1. 什么是HDFS
+Hadoop实现了一个分布式文件系统(Hadoop Distrubuted System)，简称HDFS
+源自于Google的GFS论文
+发表于2003年，HDFS是GFS的克隆版
+
+2. HDFS的设计目标
+非常巨大的分布式文件系统
+运行在普通廉价的硬件上
+易扩展，为用户提
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/01/04/Big-Data-Getting-Started-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/01/02/Sorting-Algorithm/">排序算法</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-01-02T01:04:43.000Z" itemprop="datePublished">
+          2018-01-02
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. O(n^2)的排序算法1. 为什么要学习O(n^2)的排序算法
+基础
+编码简单，易于实现，是一些简单场景的首选
+在一些特殊情况下，简单的排序算法更有效
+简单的排序算法思想衍生出复杂的排序算法
+作为子过程，改进更复杂的排序算法
+
+2. 选择排序 Selection Sort
+每一次从待排序的数据元素中选出最小(或最大)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。
+
+package algorithms.sort;
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/01/02/Sorting-Algorithm/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/12/28/Nginx-Getting-Started-2/">Nginx 中间架构</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-12-28T15:29:45.000Z" itemprop="datePublished">
+          2017-12-28
       </time>
     
 </span>
@@ -258,44 +339,43 @@ LeetCode 算法面试分类解法 Binary-Tree
                     <p>
                       
                         Nginx 基础入门
-静态资源类型
 
+1. 静态资源WEB服务1. 静态资源类型
 非服务器动态运行生成的文件
 
 
 
 
 类型
-种类
+&nbsp;种类
 
 
 
 
 浏览器渲染
-HTML,CSS,JS
+&nbsp;HTML,CSS,JS
 
 
 图片
-JPEG,GIF,PNG
+&nbsp;JPEG,GIF,PNG
 
 
 视频
-FLV,MPEG
+&nbsp;FLV,MPEG
 
 
 文件
-TXT,等任意下载文件
+&nbsp;TXT,等任意下载文件
 
 
 
-静态资源服务场景 - CDN
-[root@localhost nginx]# nginx -s reload -c /etc/nginx/nginx.conf 
-[root@localhost images
+2. 静态资源服务场景 - CDN
+CDN的全称是Content Delivery Network，即内容分发网络。
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2017/12/27/Nginx-Getting-Started-2/">Read More...</a>
+                        <a href="/2017/12/28/Nginx-Getting-Started-2/">Read More...</a>
                     </p>
                     
                 </div>
@@ -549,78 +629,6 @@ Redis 缓存和云平台
                     
                     <p class="pull-right readMore">
                         <a href="/2017/12/18/SSMCampusShops-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/12/15/Mybatis-Getting-Started-1/">初识 Mybatis</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-12-15T08:42:16.000Z" itemprop="datePublished">
-          2017-12-15
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。
-Servlet + JSP + JDBC刚好这学期J2EE的第一作业需要这三个技术
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/12/15/Mybatis-Getting-Started-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/12/12/Big-Data-Getting-Started-2/">Big-Data-Getting-Started-2</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-12-12T09:07:13.000Z" itemprop="datePublished">
-          2017-12-12
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-HDFS特点：扩展性，容错性，海量数据存储
-将文件切分成指定大小的数据块并以多副本的方式存储在多个机器上
-数据切分，多副本，容错等操作对用户是透明的
-
-Hadoop核心组件之资源调度系统YARN
-YARN：Yet Another Resource Negotiator
-负责整个集群资源的管理和调度
-YARN特点：扩展性，容错性，多框架资源统一调度
-
-Hadoop核心组件之分布式计算计算框架MapReduce
-源自于Google的Map
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/12/12/Big-Data-Getting-Started-2/">Read More...</a>
                     </p>
                     
                 </div>
