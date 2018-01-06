@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>分布式计算框架MapReduce | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-06T00:52:13.000Z" itemprop="datePublished">
+          2018-01-06
+      </time>
+    
+</span>
+                <h1>分布式计算框架MapReduce</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-MapReduce概述"><a href="#1-MapReduce概述" class="headerlink" title="1. MapReduce概述"></a>1. MapReduce概述</h2><ul>
+<li>源自于Google的MapReduce论文，论文发表于2004年12月</li>
+<li>Hadoop MapReduce 是 Google MapReduce 的克隆版</li>
+<li>MapReduce优点：海量数据离线处理 &amp; 易开发 &amp; 易运行</li>
+<li>MapReduce缺点：实时流式计算</li>
+<li>官方介绍：<a href="http://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html" target="_blank" rel="external">MapReduce Tutorial</a></li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-MapReduce编程模型"><a href="#2-MapReduce编程模型" class="headerlink" title="2. MapReduce编程模型"></a>2. MapReduce编程模型</h2><h3 id="1-MapReduce编程模型之通过wordcount词频统计分析案例入门"><a href="#1-MapReduce编程模型之通过wordcount词频统计分析案例入门" class="headerlink" title="1. MapReduce编程模型之通过wordcount词频统计分析案例入门"></a>1. MapReduce编程模型之通过wordcount词频统计分析案例入门</h3><ul>
+<li>wordcount：统计文件中每个单词出现的次数，我们在之前的学习中，data目录下有一个文本文件</li>
+</ul>
+<pre><code>[root@localhost data]# pwd
+/home/thpffcj/data
+[root@localhost data]# cat hello.txt 
+hadoop welcome
+hadoop hdfs mapreduce
+hadoop hdfs
+</code></pre><ul>
+<li>需求：求wordcount<ul>
+<li>分而治之：A MapReduce job usually splits the input data-set into independent chunks which are processed by the map tasks in a completely parallel manner. The framework sorts the outputs of the maps, which are then input to the reduce tasks. Typically both the input and the output of the job are stored in a file-system. The framework takes care of scheduling tasks, monitoring them and re-executes the failed tasks.</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/MapRudece%20wordcount.png" alt=""></p>
+<h3 id="2-MapReduce编程模型之Map和Reduce阶段"><a href="#2-MapReduce编程模型之Map和Reduce阶段" class="headerlink" title="2. MapReduce编程模型之Map和Reduce阶段"></a>2. MapReduce编程模型之Map和Reduce阶段</h3><ul>
+<li>将作业拆分成Map阶段和Reudce阶段</li>
+<li>Map阶段：Map Tasks</li>
+<li>Reduce阶段：Reduce Tasks</li>
+</ul>
+<h3 id="3-MapReduce编程模型之执行步骤"><a href="#3-MapReduce编程模型之执行步骤" class="headerlink" title="3. MapReduce编程模型之执行步骤"></a>3. MapReduce编程模型之执行步骤</h3><p><strong>1. 执行步骤</strong></p>
+<ul>
+<li>准备map处理的输入数据</li>
+<li>Mapper处理</li>
+<li>Shuffle</li>
+<li>Reduce处理</li>
+<li>结果输出</li>
+</ul>
+<p><strong>2. 官网介绍</strong></p>
+<ul>
+<li>The MapReduce framework operates exclusively on <key, value=""> pairs, that is, the framework views the input to the job as a set of <key, value=""> pairs and produces a set of <key, value=""> pairs as the output of the job, conceivably of different types.</key,></key,></key,></li>
+<li>The key and value classes have to be serializable by the framework and hence need to implement the Writable interface. Additionally, the key classes have to implement the WritableComparable interface to facilitate sorting by the framework.</li>
+</ul>
+<p><strong>3. Writable接口</strong></p>
+<ul>
+<li>上面说了key和value需要被序列化，因此要实现Writable接口，什么是Writable接口呢，官网上给出了链接，不过我们也可以使用IDE查看这个接口</li>
+</ul>
+<pre><code>/**
+ * A serializable object which implements a simple, efficient, serialization 
+ * protocol, based on {@link DataInput} and {@link DataOutput}.
+ *
+ * &lt;p&gt;Any &lt;code&gt;key&lt;/code&gt; or &lt;code&gt;value&lt;/code&gt; type in the Hadoop Map-Reduce
+ * framework implements this interface.&lt;/p&gt;
+ * 
+ * &lt;p&gt;Implementations typically implement a static &lt;code&gt;read(DataInput)&lt;/code&gt;
+ * method which constructs a new instance, calls {@link #readFields(DataInput)} 
+ * and returns the instance.&lt;/p&gt;
+ * 
+ * &lt;p&gt;Example:&lt;/p&gt;
+ * &lt;p&gt;&lt;blockquote&gt;&lt;pre&gt;
+ *     public class MyWritable implements Writable {
+ *       // Some data     
+ *       private int counter;
+ *       private long timestamp;
+ *       
+ *       public void write(DataOutput out) throws IOException {
+ *         out.writeInt(counter);
+ *         out.writeLong(timestamp);
+ *       }
+ *       
+ *       public void readFields(DataInput in) throws IOException {
+ *         counter = in.readInt();
+ *         timestamp = in.readLong();
+ *       }
+ *       
+ *       public static MyWritable read(DataInput in) throws IOException {
+ *         MyWritable w = new MyWritable();
+ *         w.readFields(in);
+ *         return w;
+ *       }
+ *     }
+ * &lt;/pre&gt;&lt;/blockquote&gt;&lt;/p&gt;
+ */
+@InterfaceAudience.Public
+@InterfaceStability.Stable
+public interface Writable {
+  /** 
+   * Serialize the fields of this object to &lt;code&gt;out&lt;/code&gt;.
+   * 
+   * @param out &lt;code&gt;DataOuput&lt;/code&gt; to serialize this object into.
+   * @throws IOException
+   */
+  void write(DataOutput out) throws IOException;
+
+  /** 
+   * Deserialize the fields of this object from &lt;code&gt;in&lt;/code&gt;.  
+   * 
+   * &lt;p&gt;For efficiency, implementations should attempt to re-use storage in the 
+   * existing object where possible.&lt;/p&gt;
+   * 
+   * @param in &lt;code&gt;DataInput&lt;/code&gt; to deseriablize this object from.
+   * @throws IOException
+   */
+  void readFields(DataInput in) throws IOException;
+}
+</code></pre><ul>
+<li>这里还有一个示例，我们后面也会按照这个规范来实现</li>
+<li>官网上说key不仅要实现Writable接口还要实现WritableComparable接口，因为MapReduce默认是帮我们做排序的</li>
+</ul>
+<h3 id="4-MapReduce执行流程"><a href="#4-MapReduce执行流程" class="headerlink" title="4. MapReduce执行流程"></a>4. MapReduce执行流程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<ul>
+<li>关于InputFormat，OutputFormat都可以向上面一样在IDE里查看源码</li>
+</ul>
+<h3 id="4-MapReduce核心概念"><a href="#4-MapReduce核心概念" class="headerlink" title="4. MapReduce核心概念"></a>4. MapReduce核心概念</h3><ul>
+<li>Split：交由MapReduce作业来处理的数据块，是MapReduce中最小的计算单元<ul>
+<li>HDFS：blocksize 是HDFS中最小的存储单元，默认128M</li>
+<li>默认情况下：他们两是一一对应的，也可以手工设置他们之间的关系(不建议)</li>
+</ul>
+</li>
+<li>InputFormat：将我们的输入数据进行分片(split)<ul>
+<li>用的比较多的是子类TextInputFormat：处理文本格式的数据</li>
+</ul>
+</li>
+<li>OutputFormat：输出</li>
+<li>Combiner</li>
+<li>Partitioner</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-MapReduce架构"><a href="#3-MapReduce架构" class="headerlink" title="3. MapReduce架构"></a>3. MapReduce架构</h2><h3 id="1-MapReduce架构之MapReduce1-X"><a href="#1-MapReduce架构之MapReduce1-X" class="headerlink" title="1. MapReduce架构之MapReduce1.X"></a>1. MapReduce架构之MapReduce1.X</h3><p><img src="http://oseihavwm.bkt.clouddn.com/hadoop1.x%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<ul>
+<li>JobTracker：<ul>
+<li>作业的管理者</li>
+<li>将作业分解成一堆的任务：Task(MapTask和ReduceTask)</li>
+<li>将任务分派给TaskTracker运行</li>
+<li>作业的监控，容错处理(task作业挂了，重启task的机制)</li>
+<li>在一定的时间间隔内，JT没有收到TT的信息，TT可能是挂了，TT上运行的任务会被指派到其他TT上去执行</li>
+</ul>
+</li>
+<li>TaskTracker：<ul>
+<li>任务的执行者</li>
+<li>在TT上执行Task(MapTask和ReduceTask)</li>
+<li>会与JT进行交互：执行/启动/停止作业，发送心跳信息给JT</li>
+</ul>
+</li>
+<li>MapTask：<ul>
+<li>自己开发的map任务交由该Task处理</li>
+<li>解析每条记录的数据，交给自己的map方法处理</li>
+<li>将map的输出结果写到本地磁盘(有些作业仅有map没有reduce，直接将结果写在HDFS)</li>
+</ul>
+</li>
+<li>ReduceTask：<ul>
+<li>将MapTask输出的数据进行读取</li>
+<li>按照数据进行分组传给我们自己编写的reduce方法</li>
+<li>输出结果写到HDFS</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-MapReduce架构之MapReduce2-X"><a href="#2-MapReduce架构之MapReduce2-X" class="headerlink" title="2. MapReduce架构之MapReduce2.X"></a>2. MapReduce架构之MapReduce2.X</h3><p><img src="http://oseihavwm.bkt.clouddn.com/MapReduce2.x%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<ul>
+<li>关于这部分架构我们已经在上面一篇博客对YARN介绍介绍了，这里放一张图加深印象</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="4-MapReduce编程"><a href="#4-MapReduce编程" class="headerlink" title="4. MapReduce编程"></a>4. MapReduce编程</h2><h3 id="1-WordCount案例开发Java版本"><a href="#1-WordCount案例开发Java版本" class="headerlink" title="1. WordCount案例开发Java版本"></a>1. WordCount案例开发Java版本</h3><pre><code>package cn.edu.nju.hadoop.mapreduce;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+import java.io.IOException;
+
+/**
+ * Created by Thpffcj on 2018/1/6.
+ * 使用MapReduce开发WordCount应用程序
+ */
+public class WordCountApp {
+
+    /**
+     * Map：读取输入的文件
+     */
+    public static class MyMapper extends Mapper&lt;LongWritable, Text, Text, LongWritable&gt;{
+
+        LongWritable one = new LongWritable(1);
+
+        @Override
+        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+
+            // 接收到的每一行数据
+            String line = value.toString();
+
+            //按照指定分隔符进行拆分
+            String[] words = line.split(&quot; &quot;);
+
+            for(String word : words) {
+                // 通过上下文把map的处理结果输出
+                context.write(new Text(word), one);
+            }
+        }
+    }
+
+    /**
+     * Reduce：归并操作
+     */
+    public static class MyReducer extends Reducer&lt;Text, LongWritable, Text, LongWritable&gt; {
+
+        @Override
+        protected void reduce(Text key, Iterable&lt;LongWritable&gt; values, Context context) throws IOException, InterruptedException {
+
+            long sum = 0;
+            for(LongWritable value : values) {
+                // 求key出现的次数总和
+                sum += value.get();
+            }
+
+            // 最终统计结果的输出
+            context.write(key, new LongWritable(sum));
+        }
+    }
+
+    /**
+     * 定义Driver：封装了MapReduce作业的所有信息
+     */
+    public static void main(String[] args) throws Exception {
+
+        //创建Configuration
+        Configuration configuration = new Configuration();
+
+        //创建Job
+        Job job = Job.getInstance(configuration, &quot;wordcount&quot;);
+
+        //设置job的处理类
+        job.setJarByClass(WordCountApp.class);
+
+        //设置作业处理的输入路径
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+
+        //设置map相关参数
+        job.setMapperClass(MyMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+
+        //设置reduce相关参数
+        job.setReducerClass(MyReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+
+        //设置作业处理的输出路径
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+}
+</code></pre><ul>
+<li>我们代码开发完成后应该打包到服务器上去运行</li>
+<li>我们是maven项目，打包非常容易，打好包后复制到虚拟机上</li>
+</ul>
+<pre><code>[root@localhost lib]# ls
+hadoop-1.0-SNAPSHOT.jar
+</code></pre><ul>
+<li><p>先看一下输入文件有没有</p>
+<p>  [root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -ls /<br>  18/01/06 14:49:33 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>  Found 5 items<br>  -rw-r–r–   1 root supergroup  311585484 2018-01-03 19:10 /hadoop-2.6.0-cdh5.7.0.tar.gz<br>  drwxr-xr-x   - root supergroup          0 2018-01-04 13:47 /hdfsapi<br>  -rw-r–r–   1 root supergroup         49 2018-01-03 15:39 /hello.txt<br>  drwx——   - root supergroup          0 2018-01-05 19:32 /tmp<br>  drwxr-xr-x   - root supergroup          0 2018-01-05 19:32 /user</p>
+</li>
+<li><p>运行jar包</p>
+</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT.jar cn.edu.nju.hadoop.mapreduce.WordCountApp hdfs://192.168.92.130:8020/hello.txt hdfs://192.168.92.130:8020/output/wc
+</code></pre><ul>
+<li>打开网页 <a href="http://192.168.92.130:8088" target="_blank" rel="external">http://192.168.92.130:8088</a> (本机ip) 我们可以看见wordcount正在运行</li>
+<li>查看结果</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -ls /output/wc
+18/01/06 14:54:10 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 root supergroup          0 2018-01-06 14:53 /output/wc/_SUCCESS
+-rw-r--r--   1 root supergroup         38 2018-01-06 14:53 /output/wc/part-r-00000
+
+
+[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -text /output/wc/part-r-00000
+18/01/06 14:55:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoop    3
+hdfs    2
+mapreduce    1
+welcome    1
+</code></pre><ul>
+<li>基本的wordcount我们就开发完成了，但是其中还是有一些问题</li>
+</ul>
+<h3 id="2-WordCount案例开发Java版本2"><a href="#2-WordCount案例开发Java版本2" class="headerlink" title="2. WordCount案例开发Java版本2"></a>2. WordCount案例开发Java版本2</h3><ul>
+<li>我们再执行一下wordcount，发现出现了异常</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT.jar cn.edu.nju.hadoop.mapreduce.WordCountApp hdfs://192.168.92.130:8020/hello.txt hdfs://192.168.92.130:8020/output/wc
+18/01/06 14:58:35 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+18/01/06 14:58:36 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+18/01/06 14:58:36 WARN security.UserGroupInformation: PriviledgedActionException as:root (auth:SIMPLE) cause:org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://192.168.92.130:8020/output/wc already exists
+Exception in thread &quot;main&quot; org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://192.168.92.130:8020/output/wc already exists
+    at org.apache.hadoop.mapreduce.lib.output.FileOutputFormat.checkOutputSpecs(FileOutputFormat.java:146)
+    at org.apache.hadoop.mapreduce.JobSubmitter.checkSpecs(JobSubmitter.java:270)
+    at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:143)
+    at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1307)
+    at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1304)
+    at java.security.AccessController.doPrivileged(Native Method)
+    at javax.security.auth.Subject.doAs(Subject.java:422)
+    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+    at org.apache.hadoop.mapreduce.Job.submit(Job.java:1304)
+    at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1325)
+    at cn.edu.nju.hadoop.mapreduce.WordCountApp.main(WordCountApp.java:93)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:498)
+    at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+    at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+</code></pre><ul>
+<li>出错原因说文件已经存在</li>
+<li><strong>在MR中，输出文件是不能事先存在的</strong><ul>
+<li>先手工通过shell的方式将输出文件夹先删除</li>
+<li>在代码中完成自动删除完成</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>修改上面写的main方法</li>
+</ul>
+<pre><code>/**
+ * 定义Driver：封装了MapReduce作业的所有信息
+ */
+public static void main(String[] args) throws Exception {
+
+    //创建Configuration
+    Configuration configuration = new Configuration();
+
+    // 准备清理已存在的输出目录
+    Path outputPath = new Path(args[1]);
+    FileSystem fileSystem = FileSystem.get(configuration);
+    if(fileSystem.exists(outputPath)){
+        fileSystem.delete(outputPath, true);
+        System.out.println(&quot;output file exists, but is has deleted&quot;);
+    }
+
+    //创建Job
+    Job job = Job.getInstance(configuration, &quot;wordcount&quot;);
+
+    //设置job的处理类
+    job.setJarByClass(WordCount2App.class);
+
+    //设置作业处理的输入路径
+    FileInputFormat.setInputPaths(job, new Path(args[0]));
+
+    //设置map相关参数
+    job.setMapperClass(MyMapper.class);
+    job.setMapOutputKeyClass(Text.class);
+    job.setMapOutputValueClass(LongWritable.class);
+
+    //设置reduce相关参数
+    job.setReducerClass(MyReducer.class);
+    job.setOutputKeyClass(Text.class);
+    job.setOutputValueClass(LongWritable.class);
+
+    //设置作业处理的输出路径
+    FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+    System.exit(job.waitForCompletion(true) ? 0 : 1);
+}
+</code></pre><ul>
+<li>使用新jar包运行，发现输出了删除路径的打印</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT.jar cn.edu.nju.hadoop.mapreduce.WordCount2App hdfs://192.168.92.130:8020/hello.txt hdfs://192.168.92.130:8020/output/wc
+18/01/06 15:08:32 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+output file exists, but is has deleted
+18/01/06 15:08:33 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+</code></pre><h3 id="3-MapReduce编程之Combiner"><a href="#3-MapReduce编程之Combiner" class="headerlink" title="3. MapReduce编程之Combiner"></a>3. MapReduce编程之Combiner</h3><ul>
+<li>本地的reducer</li>
+<li>减少Map Task输出的数据量及数据网络传输量</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Combiner.png" alt=""></p>
+<ul>
+<li>Combiner案例开发，其实我们只需要上面代码基础上通过job设置combiner处理类</li>
+</ul>
+<pre><code>//设置map相关参数
+job.setMapperClass(MyMapper.class);
+job.setMapOutputKeyClass(Text.class);
+job.setMapOutputValueClass(LongWritable.class);
+
+//设置reduce相关参数
+job.setReducerClass(MyReducer.class);
+job.setOutputKeyClass(Text.class);
+job.setOutputValueClass(LongWritable.class);
+
+//通过job设置combiner处理类，其实逻辑上和我们的reduce是一模一样的
+job.setCombinerClass(MyReducer.class);
+</code></pre><ul>
+<li>使用场景：<ul>
+<li>求和，次数</li>
+<li>平均数等情况不适用</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-MapReduce编程之Partitioner"><a href="#4-MapReduce编程之Partitioner" class="headerlink" title="4. MapReduce编程之Partitioner"></a>4. MapReduce编程之Partitioner</h3><ul>
+<li>Partitioner决定Map Task输出的数据交由哪个Reduce Task处理</li>
+<li>默认实现：分发的key的hash值对Reduce Task个数取模</li>
+<li>Partitioner案例开发，我们先新添加一个文本</li>
+</ul>
+<pre><code>xiaomi 300
+huawei 300
+xiaomi 400
+huawei 350
+iphone7 400
+iphone7 800
+nokia 280
+</code></pre><ul>
+<li>想把不同手机交由不同reduce处理，首先修改MyMapper类</li>
+</ul>
+<pre><code>/**
+ * Map：读取输入的文件
+ */
+public static class MyMapper extends Mapper&lt;LongWritable, Text, Text, LongWritable&gt;{
+
+    @Override
+    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+
+        // 接收到的每一行数据
+        String line = value.toString();
+
+        //按照指定分隔符进行拆分
+        String[] words = line.split(&quot; &quot;);
+
+        context.write(new Text(words[0]), new LongWritable(Long.parseLong(words[1])));
+    }
+}
+</code></pre><ul>
+<li>创建MyPartitioner</li>
+</ul>
+<pre><code>public static class MyPartitioner extends Partitioner&lt;Text, LongWritable&gt; {
+
+    @Override
+    public int getPartition(Text key, LongWritable value, int numPartitions) {
+
+        if(key.toString().equals(&quot;xiaomi&quot;)) {
+            return 0;
+        }
+        if(key.toString().equals(&quot;huawei&quot;)) {
+            return 1;
+        }
+        if(key.toString().equals(&quot;iphone7&quot;)) {
+            return 2;
+        }
+        return 3;
+    }
+}
+</code></pre><ul>
+<li>修改main函数</li>
+</ul>
+<pre><code>//设置map相关参数
+job.setMapperClass(MyMapper.class);
+job.setMapOutputKeyClass(Text.class);
+job.setMapOutputValueClass(LongWritable.class);
+
+//设置reduce相关参数
+job.setReducerClass(MyReducer.class);
+job.setOutputKeyClass(Text.class);
+job.setOutputValueClass(LongWritable.class);
+
+//通过job设置combiner处理类，其实逻辑上和我们的reduce是一模一样的
+job.setCombinerClass(MyReducer.class);
+
+//设置job的partition
+job.setPartitionerClass(MyPartitioner.class);
+//设置4个reducer，每个分区一个
+job.setNumReduceTasks(4);
+</code></pre><ul>
+<li>打包执行</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT.jar cn.edu.nju.hadoop.mapreduce.PartitionerApp hdfs://192.168.92.130:8020/partitioner.txt hdfs://192.168.92.130:8020/output/partitioner
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -ls /output/partitioner
+18/01/06 15:46:08 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 5 items
+-rw-r--r--   1 root supergroup          0 2018-01-06 15:44 /output/partitioner/_SUCCESS
+-rw-r--r--   1 root supergroup         11 2018-01-06 15:44 /output/partitioner/part-r-00000
+-rw-r--r--   1 root supergroup         11 2018-01-06 15:44 /output/partitioner/part-r-00001
+-rw-r--r--   1 root supergroup         13 2018-01-06 15:44 /output/partitioner/part-r-00002
+-rw-r--r--   1 root supergroup         10 2018-01-06 15:44 /output/partitioner/part-r-00003
+</code></pre><ul>
+<li>我们打开part-r-00000</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -text /output/partitioner/part-r-00000
+18/01/06 15:47:29 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+xiaomi    700
+</code></pre><h3 id="5-jobhistory"><a href="#5-jobhistory" class="headerlink" title="5. jobhistory"></a>5. jobhistory</h3><ul>
+<li>记录以运行完的MapReduce信息到指定的HDFS目录下</li>
+<li>默认是不开启的</li>
+<li>配置四组参数</li>
+</ul>
+<pre><code>[root@localhost hadoop]# vi mapred-site.xml
+
+
+&lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;
+    &lt;value&gt;192.168.92.130:10020&lt;/value&gt;
+    &lt;description&gt;MapReduce JobHistory Server IPC host:port&lt;/description&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;
+    &lt;value&gt;192.168.92.130:19888&lt;/value&gt;
+    &lt;description&gt;MapReduce JobHistory Server Web UI host:port&lt;/description&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.done-dir&lt;/name&gt;
+    &lt;value&gt;/history/done&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.intermediate-done-dir&lt;/name&gt;
+    &lt;value&gt;/history/done_intermediate&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><ul>
+<li>我们重启一下yran服务，启动historyserver</li>
+</ul>
+<pre><code>[root@localhost sbin]# ./mr-jobhistory-daemon.sh start historyserver
+
+[root@localhost sbin]# jps
+9841 ResourceManager
+9953 NodeManager
+4788 NameNode
+4900 DataNode
+10308 JobHistoryServer
+5097 SecondaryNameNode
+10345 Jps
+</code></pre><ul>
+<li>我们执行以前执行过的计算PI</li>
+</ul>
+<pre><code>[root@localhost mapreduce]# hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar pi 2 3
+</code></pre><ul>
+<li>我们打开页面 <a href="http://192.168.92.130:8088" target="_blank" rel="external">http://192.168.92.130:8088</a> 点击任务最后面的History，可以看到这次运行的信息，去掉url后面的参数直接访问 <a href="http://192.168.92.130:19888/jobhistory" target="_blank" rel="external">http://192.168.92.130:19888/jobhistory</a> 我们可以看到一起执行过得一些历史记录</li>
+<li>我们随意点进去一个任务记录，点log，发现显示Aggregation is not enabled. Try the nodemanager at localhost:8042</li>
+<li>我们还需要修改yarn-site.xml</li>
+</ul>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;yarn.log-aggregation-enable&lt;/name&gt;
+    &lt;value&gt;true&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><ul>
+<li>重启yarn，再次跑pi项目，发现可以在网页上查看相关日志了</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/05/Big-Data-Getting-Started-4/">
+        分布式资源调度YARN →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
