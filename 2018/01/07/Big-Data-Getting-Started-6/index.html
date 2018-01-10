@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Hadoop项目实战 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-07T01:07:13.000Z" itemprop="datePublished">
+          2018-01-07
+      </time>
+    
+</span>
+                <h1>Hadoop项目实战</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Hadoop的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2017/12/12/Big-Data-Getting-Started-2/" target="_blank" rel="external">大数据概述</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="external">分布式文件系统HDFS</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="external">分布式资源调度YARN</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="external">分布式计算框架MapReduce</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/07/Big-Data-Getting-Started-6/" target="_blank" rel="external">Hadoop项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-7/" target="_blank" rel="external">Hadoop集成Spring的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/09/Big-Data-Getting-Started-8/" target="_blank" rel="external">大数据相关技术拓展</a></li>
+</ul>
+</li>
+</ul>
+<p>在前面的博客我们都在介绍Hadoop一些概念，在这篇博客我们将进行实战演练Hadoop，用Hadoop解决一个简单的问题。</p>
+<hr>
+<h2 id="1-用户行为日志概述"><a href="#1-用户行为日志概述" class="headerlink" title="1. 用户行为日志概述"></a>1. 用户行为日志概述</h2><h3 id="1-为什么要记录行为日志"><a href="#1-为什么要记录行为日志" class="headerlink" title="1. 为什么要记录行为日志"></a>1. 为什么要记录行为日志</h3><ul>
+<li>用户行为日志：用户每次访问网站时所有的行为数据(访问，浏览，搜索，点击…)</li>
+<li>为什么要记录行为日志<ul>
+<li>网站页面的访问量</li>
+<li>网站的黏性</li>
+<li>推荐</li>
+</ul>
+</li>
+<li>用户行为日志生成渠道<ul>
+<li>Nginx</li>
+<li>Ajax</li>
+</ul>
+</li>
+<li>用户行为日志内容<ul>
+<li>访问者IP地址</li>
+<li>访问者账号</li>
+<li>访问时间和区域</li>
+<li>访问者所使用的客户端</li>
+<li>模块 app ID</li>
+<li>跳转的链接地址</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-日志数据内容"><a href="#2-日志数据内容" class="headerlink" title="2. 日志数据内容"></a>2. 日志数据内容</h3><ul>
+<li>访问的系统属性<ul>
+<li>操作系统，浏览器等等</li>
+</ul>
+</li>
+<li>访问特征<ul>
+<li>点击的url，从哪个url跳转过来的(referer)，页面上的停留时间等</li>
+</ul>
+</li>
+<li>访问信息<ul>
+<li>session_id，访问ip等</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-用户行为日志分析的意义"><a href="#3-用户行为日志分析的意义" class="headerlink" title="3. 用户行为日志分析的意义"></a>3. 用户行为日志分析的意义</h3><ul>
+<li>网站的眼睛</li>
+<li>网站的神经</li>
+<li>网站的大脑</li>
+</ul>
+<h3 id="4-离线数据处理架构"><a href="#4-离线数据处理架构" class="headerlink" title="4. 离线数据处理架构"></a>4. 离线数据处理架构</h3><ul>
+<li>数据采集<ul>
+<li>Flume：web日志写入到HDFS</li>
+</ul>
+</li>
+<li>数据清洗<ul>
+<li>脏数据</li>
+<li>Spark，Hive，MapReduce 或者是其他的一些分布式计算框架</li>
+<li>清洗完之后的数据可以存放在HDFS(Hive/Spark SQL)</li>
+</ul>
+</li>
+<li>数据处理<ul>
+<li>按照我们的需要进行相应业务的统计和分析</li>
+<li>Spark，Hive，MapReduce 或者是其他的一些分布式计算框架</li>
+</ul>
+</li>
+<li>数据处理结果入库<ul>
+<li>结果可以存放到RDBMS，NoSQL</li>
+</ul>
+</li>
+<li>数据可视化展示  <ul>
+<li>通过图形化展示的方式展现出来</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%A6%BB%E7%BA%BF%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-项目需求"><a href="#2-项目需求" class="headerlink" title="2. 项目需求"></a>2. 项目需求</h2><ul>
+<li>需求：统计主站访问日志的浏览器访问次数</li>
+<li>我是随便从nginx日志里拿了几条记录</li>
+</ul>
+<pre><code>Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:07:18 +0800] &quot;GET /index.html HTTP/1.1&quot; 304 0 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:07:21 +0800] &quot;GET /index.html HTTP/1.1&quot; 304 0 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:07:22 +0800] &quot;GET /index.html HTTP/1.1&quot; 304 0 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:07:46 +0800] &quot;GET /index.html HTTP/1.1&quot; 403 169 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:08:13 +0800] &quot;GET /index.html HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:13:44 +0800] &quot;GET /index.html HTTP/1.1&quot; 304 0 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0192.168.242.129 - - [27/Dec/2017:23:13:45 +0800] &quot;GET /index.html HTTP/1.1&quot; 304 0 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot; &quot;-&quot;
+</code></pre><ul>
+<li>根据日志信息抽取出浏览器信息</li>
+<li>针对不同的浏览器进行统计操作</li>
+<li>既然我们要抽取浏览器信息，就需要自己写一个工具，不过当我们需要某样功能的工具时，我们可以先去github上找一下是否有开源的工具</li>
+<li>我们直接使用开源工具 <a href="https://github.com/LeeKemp/UserAgentParser" target="_blank" rel="external">LeeKemp/UserAgentParser</a></li>
+</ul>
+<pre><code>$ git clone git@github.com:LeeKemp/UserAgentParser.git
+</code></pre><ul>
+<li>安装jar到我们本地仓库</li>
+</ul>
+<pre><code>$ mvn clean install -DskipTest
+</code></pre><ul>
+<li>然后在我们的pom文件中添加依赖</li>
+</ul>
+<pre><code>&lt;!-- 添加UserAgent解析的依赖 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.kumkee&lt;/groupId&gt;
+    &lt;artifactId&gt;UserAgentParser&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>我们写个测试类来看一下github拉下来的工具</li>
+</ul>
+<pre><code>@Test
+public void testUserAgentParser() {
+
+    String source = &quot;Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;;
+
+    UserAgentParser userAgentParser = new UserAgentParser();
+    UserAgent agent = userAgentParser.parse(source);
+
+    String browser = agent.getBrowser();
+    String engine = agent.getEngine();
+    String engineVersion = agent.getEngineVersion();
+    String os = agent.getOs();
+    String platform = agent.getPlatform();
+    boolean isMobile = agent.isMobile();
+
+    System.out.println(browser + &quot; , &quot; + engine + &quot; , &quot; + engineVersion + &quot; , &quot; + os + &quot; , &quot;
+            + platform + &quot; , &quot; + isMobile);
+}
+</code></pre><ul>
+<li>写一个读数据的方法，需要读文件并选出需要的字段，文件就是上面看到的从nginx的log中复制的七条</li>
+</ul>
+<pre><code>@Test
+public void testReadFile() throws Exception {
+
+    String path = &quot;D:/Idea/code/HadoopTrain/src/resources/log.txt&quot;;
+
+    BufferedReader reader = new BufferedReader(
+            new InputStreamReader(new FileInputStream(new File(path))));
+    String line = &quot;&quot;;
+
+    UserAgentParser userAgentParser = new UserAgentParser();
+    while (line != null) {
+        line = reader.readLine();
+        if (StringUtils.isNotBlank(line)) {
+            String source = line.substring(getCharacterPosition(line, &quot;\&quot;&quot;, 5)) + 1;
+            UserAgent agent = userAgentParser.parse(source);
+
+            String browser = agent.getBrowser();
+            String engine = agent.getEngine();
+            String engineVersion = agent.getEngineVersion();
+            String os = agent.getOs();
+            String platform = agent.getPlatform();
+            boolean isMobile = agent.isMobile();
+
+            System.out.println(browser + &quot; , &quot; + engine + &quot; , &quot; + engineVersion + &quot; , &quot; + os + &quot; , &quot;
+                    + platform + &quot; , &quot; + isMobile);
+        }
+    }
+}
+
+/**
+ * 获取指定字符串中指定标识的字符串出现的索引位置
+ * @param value
+ * @param operator
+ * @param index
+ * @return
+ */
+private int getCharacterPosition(String value, String operator, int index) {
+    Matcher slashmatcher = Pattern.compile(operator).matcher(value);
+    int mIdx = 0;
+    while (slashmatcher.find()) {
+        mIdx++;
+        if (mIdx == index) {
+            break;
+        }
+    }
+    return slashmatcher.start();
+}
+</code></pre><ul>
+<li>我们统计一下各个不同的浏览器访问的次数</li>
+</ul>
+<pre><code>@Test
+public void testReadFile() throws Exception {
+
+    String path = &quot;D:/Idea/code/HadoopTrain/src/resources/log.txt&quot;;
+
+    BufferedReader reader = new BufferedReader(
+            new InputStreamReader(new FileInputStream(new File(path))));
+    String line = &quot;&quot;;
+
+    Map&lt;String, Integer&gt; browserMap = new HashMap&lt;&gt;();
+
+    UserAgentParser userAgentParser = new UserAgentParser();
+    while (line != null) {
+        line = reader.readLine();
+        if (StringUtils.isNotBlank(line)) {
+            String source = line.substring(getCharacterPosition(line, &quot;\&quot;&quot;, 5)) + 1;
+            UserAgent agent = userAgentParser.parse(source);
+
+            String browser = agent.getBrowser();
+
+            Integer browserValue = browserMap.get(browser);
+            if (browserValue != null) {
+                browserMap.put(browser, browserValue + 1);
+            } else {
+                browserMap.put(browser, 1);
+            }
+        }
+    }
+    for (Map.Entry&lt;String, Integer&gt; entry : browserMap.entrySet()) {
+        System.out.println(entry.getKey() + &quot; : &quot; + entry.getValue());
+    }
+}
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-功能实现"><a href="#3-功能实现" class="headerlink" title="3. 功能实现"></a>3. 功能实现</h2><ul>
+<li><p>上面我们单机的测试已经成功了，现在我们要把本地的功能移植到MapReduce上</p>
+</li>
+<li><p>其实仿照上一个博客学的wordvount，其实这个工作也很简单</p>
+</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/1/8.
+ */
+public class LogApp {
+
+    /**
+     * Map：读取输入的文件
+     */
+    public static class MyMapper extends Mapper&lt;LongWritable, Text, Text, LongWritable&gt; {
+
+        LongWritable one = new LongWritable(1);
+        private UserAgentParser userAgentParser;
+
+        @Override
+        protected void setup(Context context) throws IOException, InterruptedException {
+            userAgentParser = new UserAgentParser();
+        }
+
+        @Override
+        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+
+            // 接收到的每一行数据：其实就是一行日志信息
+            String line = value.toString();
+
+            String source = line.substring(getCharacterPosition(line, &quot;\&quot;&quot;, 5)) + 1;
+            UserAgent agent = userAgentParser.parse(source);
+            String browser = agent.getBrowser();
+
+            // 通过上下文把map的处理结果输出
+            context.write(new Text(browser), one);
+        }
+
+        @Override
+        protected void cleanup(Context context) throws IOException, InterruptedException {
+            userAgentParser = null;
+        }
+    }
+
+    /**
+     * Reduce：归并操作
+     */
+    public static class MyReducer extends Reducer&lt;Text, LongWritable, Text, LongWritable&gt; {
+
+        @Override
+        protected void reduce(Text key, Iterable&lt;LongWritable&gt; values, Context context) throws IOException, InterruptedException {
+
+            long sum = 0;
+            for (LongWritable value : values) {
+                // 求key出现的次数总和
+                sum += value.get();
+            }
+
+            // 最终统计结果的输出
+            context.write(key, new LongWritable(sum));
+        }
+    }
+
+    /**
+     * 获取指定字符串中指定标识的字符串出现的索引位置
+     *
+     * @param value
+     * @param operator
+     * @param index
+     * @return
+     */
+    private static int getCharacterPosition(String value, String operator, int index) {
+        Matcher slashmatcher = Pattern.compile(operator).matcher(value);
+        int mIdx = 0;
+        while (slashmatcher.find()) {
+            mIdx++;
+            if (mIdx == index) {
+                break;
+            }
+        }
+        return slashmatcher.start();
+    }
+
+    /**
+     * 定义Driver：封装了MapReduce作业的所有信息
+     */
+    public static void main(String[] args) throws Exception {
+
+        //创建Configuration
+        Configuration configuration = new Configuration();
+
+        // 准备清理已存在的输出目录
+        Path outputPath = new Path(args[1]);
+        FileSystem fileSystem = FileSystem.get(configuration);
+        if (fileSystem.exists(outputPath)) {
+            fileSystem.delete(outputPath, true);
+            System.out.println(&quot;output file exists, but is has deleted&quot;);
+        }
+
+        //创建Job
+        Job job = Job.getInstance(configuration, &quot;LogApp&quot;);
+
+        //设置job的处理类
+        job.setJarByClass(LogApp.class);
+
+        //设置作业处理的输入路径
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+
+        //设置map相关参数
+        job.setMapperClass(LogApp.MyMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+
+        //设置reduce相关参数
+        job.setReducerClass(LogApp.MyReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+
+        //设置作业处理的输出路径
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+}
+</code></pre><ul>
+<li>但我们这里要注意，我们本地用了一个外部依赖工具类，服务器是没有的，在pom中加入plugin告诉我们要将依赖也打进jar包</li>
+</ul>
+<pre><code>&lt;!-- mvn assembly:assembly --&gt;
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+            &lt;configuration&gt;
+                &lt;archive&gt;
+                    &lt;manifest&gt;
+                        &lt;mainClass&gt;&lt;/mainClass&gt;
+                    &lt;/manifest&gt;
+                &lt;/archive&gt;
+                &lt;descriptorRefs&gt;
+                    &lt;desctiptorRef&gt;jar-with-dependencies&lt;/desctiptorRef&gt;
+                &lt;/descriptorRefs&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre><ul>
+<li>使用mvn assembly打包</li>
+</ul>
+<pre><code>$ mvn assembly:assembly
+</code></pre><ul>
+<li>我们发现target下多了一个hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar包，把这个jar包也放到lib目录下</li>
+<li>将测试日志上传HDFS</li>
+</ul>
+<pre><code>[root@localhost sbin]# hadoop fs -put /home/thpffcj/data/log.txt /
+</code></pre><ul>
+<li>执行命令</li>
+</ul>
+<pre><code>[root@localhost sbin]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar cn.edu.nju.hadoop.project.LogApp /log.txt /browserout
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>[root@localhost sbin]# hadoop fs -ls /browserout
+18/01/08 19:49:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 root supergroup          0 2018-01-08 19:47 /browserout/_SUCCESS
+-rw-r--r--   1 root supergroup         10 2018-01-08 19:47 /browserout/part-r-00000
+[root@localhost sbin]# hadoop fs -text /browserout/part-r-00000
+18/01/08 19:49:22 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Firefox    7
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/08/Big-Data-Getting-Started-7/" style="float: left;">
+        ← Hadoop集成Spring的使用
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/06/Big-Data-Getting-Started-5/">
+        分布式计算框架MapReduce →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

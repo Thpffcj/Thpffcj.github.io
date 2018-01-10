@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Big-Data-Getting-Started-2 | Thpffcj的树洞</title>
+  <title>大数据概述 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,26 +177,88 @@
       </time>
     
 </span>
-                <h1>Big-Data-Getting-Started-2</h1>
+                <h1>大数据概述</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<ul>
+<li>下面是这段时间系统了解Hadoop的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2017/12/12/Big-Data-Getting-Started-2/" target="_blank" rel="external">大数据概述</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="external">分布式文件系统HDFS</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="external">分布式资源调度YARN</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="external">分布式计算框架MapReduce</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/07/Big-Data-Getting-Started-6/" target="_blank" rel="external">Hadoop项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-7/" target="_blank" rel="external">Hadoop集成Spring的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/09/Big-Data-Getting-Started-8/" target="_blank" rel="external">大数据相关技术拓展</a></li>
+</ul>
+</li>
+</ul>
+<p>明年大概会选择考研，大三上学期多出了很多空闲时间，在大学最后这段属于自己的空闲时间，想借此机会了解一下很火的大数据，这是第一篇正经记录大数据学习过程的博客，主要了解一下大数据的相关知识。</p>
+<hr>
+<h2 id="1-大数据概述"><a href="#1-大数据概述" class="headerlink" title="1. 大数据概述"></a>1. 大数据概述</h2><h3 id="1-大数据涉及到的技术"><a href="#1-大数据涉及到的技术" class="headerlink" title="1. 大数据涉及到的技术"></a>1. 大数据涉及到的技术</h3><ul>
+<li>数据采集</li>
+<li>数据存储</li>
+<li>数据处理/分析/挖掘</li>
+<li>可视化</li>
+</ul>
+<h3 id="2-大数据在技术架构上带来的挑战"><a href="#2-大数据在技术架构上带来的挑战" class="headerlink" title="2. 大数据在技术架构上带来的挑战"></a>2. 大数据在技术架构上带来的挑战</h3><ul>
+<li>对现有数据库管理技术的挑战</li>
+<li>经典数据库技术并没有考虑数据的多类别</li>
+<li>实时性的技术挑战</li>
+<li>网络架构，数据中心，运维的挑战</li>
+</ul>
+<h3 id="3-大数据带来的其他挑战"><a href="#3-大数据带来的其他挑战" class="headerlink" title="3. 大数据带来的其他挑战"></a>3. 大数据带来的其他挑战</h3><ul>
+<li>数据隐私</li>
+<li>数据源的复杂多样</li>
+</ul>
+<h3 id="4-如何学好大数据"><a href="#4-如何学好大数据" class="headerlink" title="4. 如何学好大数据"></a>4. 如何学好大数据</h3><ul>
+<li>官网，官网，官网</li>
+<li>英文，英文，英文</li>
+<li>项目实战对知识点进行巩固和融会贯通</li>
+<li>社区活动：Meetup，开源社区大会，线下沙龙等</li>
+<li>切记：多动手，多练习，贵在坚持</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-初识Hadoop"><a href="#2-初识Hadoop" class="headerlink" title="2. 初识Hadoop"></a>2. 初识Hadoop</h2><ul>
+<li>开源的</li>
+<li>分布式存储 + 分布式计算平台</li>
+<li><a href="http://hadoop.apache.org/" target="_blank" rel="external">Hadoop官网</a></li>
+</ul>
+<h3 id="1-Hadoop包括模块"><a href="#1-Hadoop包括模块" class="headerlink" title="1. Hadoop包括模块"></a>1. Hadoop包括模块</h3><ul>
+<li>Hadoop Common: The common utilities that support the other Hadoop modules.</li>
+<li>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data.</li>
+<li>Hadoop YARN: A framework for job scheduling and cluster resource management.</li>
+<li>Hadoop MapReduce: A YARN-based system for parallel processing of large data sets.</li>
+</ul>
+<h3 id="2-Hadoop能做什么"><a href="#2-Hadoop能做什么" class="headerlink" title="2. Hadoop能做什么"></a>2. Hadoop能做什么</h3><ul>
+<li>创建大型数据仓库，PB级数据的存储，处理，分析，统计等业务<ul>
+<li>搜索引擎</li>
+<li>日志分析</li>
+<li>商务智能</li>
+<li>数据挖掘</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Hadoop核心组件之分布式文件系统HDFS"><a href="#3-Hadoop核心组件之分布式文件系统HDFS" class="headerlink" title="3. Hadoop核心组件之分布式文件系统HDFS"></a>3. Hadoop核心组件之分布式文件系统HDFS</h3><ul>
+<li>源自于Google的GFS论文，论文发表于2003年10月</li>
+<li>HDFS是GFS的克隆版</li>
 <li>HDFS特点：扩展性，容错性，海量数据存储</li>
 <li>将文件切分成指定大小的数据块并以多副本的方式存储在多个机器上</li>
 <li>数据切分，多副本，容错等操作对用户是透明的</li>
 </ul>
-<h3 id="Hadoop核心组件之资源调度系统YARN"><a href="#Hadoop核心组件之资源调度系统YARN" class="headerlink" title="Hadoop核心组件之资源调度系统YARN"></a>Hadoop核心组件之资源调度系统YARN</h3><ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Block%20Replication.png" alt=""></p>
+<h3 id="4-Hadoop核心组件之资源调度系统YARN"><a href="#4-Hadoop核心组件之资源调度系统YARN" class="headerlink" title="4. Hadoop核心组件之资源调度系统YARN"></a>4. Hadoop核心组件之资源调度系统YARN</h3><ul>
 <li>YARN：Yet Another Resource Negotiator</li>
 <li>负责整个集群资源的管理和调度</li>
 <li>YARN特点：扩展性，容错性，多框架资源统一调度</li>
 </ul>
-<h3 id="Hadoop核心组件之分布式计算计算框架MapReduce"><a href="#Hadoop核心组件之分布式计算计算框架MapReduce" class="headerlink" title="Hadoop核心组件之分布式计算计算框架MapReduce"></a>Hadoop核心组件之分布式计算计算框架MapReduce</h3><ul>
+<h3 id="5-Hadoop核心组件之分布式计算计算框架MapReduce"><a href="#5-Hadoop核心组件之分布式计算计算框架MapReduce" class="headerlink" title="5. Hadoop核心组件之分布式计算计算框架MapReduce"></a>5. Hadoop核心组件之分布式计算计算框架MapReduce</h3><ul>
 <li>源自于Google的MapReduce论文，论文发表于2004年12月</li>
 <li>MapReduce是Google MapReduce的克隆版</li>
 <li>MapReduce特点：扩展性，容错性，海量数据离线处理</li>
 </ul>
-<h3 id="Hadoop优势"><a href="#Hadoop优势" class="headerlink" title="Hadoop优势"></a>Hadoop优势</h3><ul>
+<h3 id="6-Hadoop优势"><a href="#6-Hadoop优势" class="headerlink" title="6. Hadoop优势"></a>6. Hadoop优势</h3><ul>
 <li>高可靠性：数据存储：数据块多副本</li>
 <li>高可靠性：数据计算：重新调度作业计算</li>
 <li>高扩展性：存储/计算资源不够时，可以横向的线性扩展机器</li>
@@ -204,8 +266,7 @@
 <li>其他：存储在廉价的机器上，降低成本</li>
 <li>成熟的生态圈</li>
 </ul>
-<p>Hadoop编年史</p>
-<ul>
+<h2 id="7-Hadoop编年史"><a href="#7-Hadoop编年史" class="headerlink" title="7. Hadoop编年史"></a>7. Hadoop编年史</h2><ul>
 <li>2002年10月，Doug Cutting和Mike Cafarella创建了开源网页爬虫项目Nutch。</li>
 <li>2003年10月，Google发表Google File System论文。</li>
 <li>2004年7月，Doug Cutting和Mike Cafarella在Nutch中实现了类似GFS的功能，即后来HDFS的前身。</li>
@@ -274,18 +335,25 @@
 <li>2015年10月，Cloudera公布继HBase以后的第一个Hadoop原生存储替代方案——Kudu。</li>
 <li>2015年12月，Cloudera发起的Impala和Kudu项目加入Apache孵化器。</li>
 </ul>
-<p><a href="http://www.infoq.com/cn/articles/hadoop-ten-years-interpretation-and-development-forecast" target="_blank" rel="external">Hadoop十年解读与发展预测
-</a></p>
-<p>狭义Hadoop与广义Hadoop</p>
-<ul>
+<h2 id="8-狭义Hadoop与广义Hadoop"><a href="#8-狭义Hadoop与广义Hadoop" class="headerlink" title="8. 狭义Hadoop与广义Hadoop"></a>8. 狭义Hadoop与广义Hadoop</h2><ul>
 <li>狭义Hadoop：是一个适合大数据分布式存储(HDFS)，分布式计算(MapReduce)和资源调度(YRAN)的平台。</li>
 <li>广义Hadoop：指的是Hadoop生态系统，Hadoop生态系统是一个很庞大的概念，hadoop是其中最重要最基础的一个部分，生态系统的每一个子系统只解决某一个特定的问题域(甚至可能很窄)，不搞统一性的一个全能系统，而是小而精的多个子系统。</li>
 </ul>
-<p>Hadoop生态系统的特点</p>
-<ul>
+<h2 id="9-Hadoop生态系统的特点"><a href="#9-Hadoop生态系统的特点" class="headerlink" title="9. Hadoop生态系统的特点"></a>9. Hadoop生态系统的特点</h2><ul>
 <li>开源，社区活跃</li>
 <li>囊括了大数据处理的方方面面</li>
 <li>成熟的生态圈</li>
+</ul>
+<h2 id="10-Hadoop常用发行版及选型"><a href="#10-Hadoop常用发行版及选型" class="headerlink" title="10. Hadoop常用发行版及选型"></a>10. Hadoop常用发行版及选型</h2><ul>
+<li>Apache Hadoop</li>
+<li>CDH：Cloudera Distributed Hadoop</li>
+<li>HDP：Hortonworks Data Platform</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h2><ul>
+<li><a href="http://www.infoq.com/cn/articles/hadoop-ten-years-interpretation-and-development-forecast" target="_blank" rel="external">Hadoop十年解读与发展预测
+</a></li>
 </ul>
 
             <div class="clearfix"></div>

@@ -181,7 +181,21 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-YARN概述"><a href="#1-YARN概述" class="headerlink" title="1. YARN概述"></a>1. YARN概述</h2><h3 id="1-YARN产生背景"><a href="#1-YARN产生背景" class="headerlink" title="1. YARN产生背景"></a>1. YARN产生背景</h3><ul>
+      		<ul>
+<li>下面是这段时间系统了解Hadoop的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2017/12/12/Big-Data-Getting-Started-2/" target="_blank" rel="external">大数据概述</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="external">分布式文件系统HDFS</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="external">分布式资源调度YARN</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="external">分布式计算框架MapReduce</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/07/Big-Data-Getting-Started-6/" target="_blank" rel="external">Hadoop项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-7/" target="_blank" rel="external">Hadoop集成Spring的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/09/Big-Data-Getting-Started-8/" target="_blank" rel="external">大数据相关技术拓展</a></li>
+</ul>
+</li>
+</ul>
+<p>学完分布式文件系统HDFS我们了解一下另一个核心组件分布式资源调度YARN。</p>
+<hr>
+<h2 id="1-YARN概述"><a href="#1-YARN概述" class="headerlink" title="1. YARN概述"></a>1. YARN概述</h2><h3 id="1-YARN产生背景"><a href="#1-YARN产生背景" class="headerlink" title="1. YARN产生背景"></a>1. YARN产生背景</h3><ul>
 <li><strong>MapReduce1.x存在的问题：单点故障 &amp; 节点压力大不易扩展</strong><ul>
 <li>MapReduce：Master/Slave架构，1个JobTracker带多个TaskTracker</li>
 <li>每个TaskTracker定期向JobTracker汇报自己的情况</li>
