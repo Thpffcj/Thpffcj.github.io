@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark Streaming入门 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-13T08:09:50.000Z" itemprop="datePublished">
+          2018-01-13
+      </time>
+    
+</span>
+                <h1>Spark Streaming入门</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>在了解了分布式日志收集框架Flume和分布式发布订阅消息系统Kafka之后，我们就需要了解我们的主角Spark Streaming了，Spark Streaming是建立在Spark上的实时计算框架，通过它提供的丰富的API、基于内存的高速执行引擎，用户可以结合流式、批处理和交互试查询应用。相比Strom真正的实时计算，其实Spark Streaming应该叫做小批次计算。这篇博客我们从官网看起，了解Spark Streaming基本情况并自己编写出官方基本实例体验实时流处理过程。</p>
+<hr>
+<h2 id="1-Spark-Streaming"><a href="#1-Spark-Streaming" class="headerlink" title="1. Spark Streaming"></a>1. Spark Streaming</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+<li>一贯的学习方法 - 官网：<strong><a href="http://spark.apache.org/docs/2.2.0/streaming-programming-guide.html" target="_blank" rel="external">Spark Streaming Programming Guide</a></strong></li>
+<li>Spark Streaming is an extension of the core Spark API that enables scalable, high-throughput, fault-tolerant stream processing of live data streams. </li>
+<li>Data can be ingested from many sources like Kafka, Flume, Kinesis, or TCP sockets, and can be processed using complex algorithms expressed with high-level functions like map, reduce, join and window. Finally, processed data can be pushed out to filesystems, databases, and live dashboards.</li>
+<li>In fact, you can apply Spark’s machine learning and graph processing algorithms on data streams.</li>
+<li>将不同的数据源的数据经过Spark Streaming处理过后将结果输出到外部文件系统</li>
+<li>特点<ul>
+<li>低延时</li>
+<li>能从错误中高效的恢复：fault-tolerant</li>
+<li>能够运行在成百上千的节点</li>
+<li>能够将批处理，机器学习，图计算等子框架和Spark Streaming综合起来使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><ul>
+<li>Real-time fraud detecrion in transactions</li>
+<li>React to anomalies in sensors in real-time</li>
+</ul>
+<h3 id="3-集成Spark生态系统的使用"><a href="#3-集成Spark生态系统的使用" class="headerlink" title="3. 集成Spark生态系统的使用"></a>3. 集成Spark生态系统的使用</h3><ul>
+<li>Combine batch with streaming processing</li>
+<li>Combine machine learning with streaming processing</li>
+<li>Combine SQL with streaming processing</li>
+</ul>
+<h3 id="4-发展史"><a href="#4-发展史" class="headerlink" title="4. 发展史"></a>4. 发展史</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Spark%20Streaming%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt=""></p>
+<h3 id="5-从词频统计功能着手入门"><a href="#5-从词频统计功能着手入门" class="headerlink" title="5. 从词频统计功能着手入门"></a>5. 从词频统计功能着手入门</h3><ul>
+<li><strong><a href="https://github.com/apache/spark" target="_blank" rel="external">Spark 源码 Github 地址</a></strong></li>
+</ul>
+<ul>
+<li><strong>spark-submit执行(生产)</strong></li>
+<li>我们要执行github上的一个例子 <a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/streaming/NetworkWordCount.scala" target="_blank" rel="external">NetworkWordCount </a></li>
+<li>To run this on your local machine, you need to first run a Netcat server</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ nc -lk 9999
+</code></pre><ul>
+<li>启动spark streaming</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-submit --master local[2] \
+&gt; --class org.apache.spark.examples.streaming.NetworkWordCount \
+&gt; --name NetworkWordCount \
+&gt; /home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/jars/spark-examples_2.11-2.2.0.jar thpffcj 9999
+</code></pre><ul>
+<li>随便去999控制台输入一些东西</li>
+</ul>
+<pre><code>a a a b b b c a
+</code></pre><ul>
+<li>发现统计出了词频</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515747592000 ms
+-------------------------------------------
+
+-------------------------------------------
+Time: 1515747593000 ms
+-------------------------------------------
+(b,3)
+(a,4)
+(c,1)
+
+-------------------------------------------
+Time: 1515747594000 ms
+-------------------------------------------
+</code></pre><ul>
+<li><strong>spark-shell执行(测试)</strong></li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-shell --master local[2]
+
+...
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  &apos;_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.2.0
+      /_/
+
+Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_151)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala&gt; 
+</code></pre><ul>
+<li>拷贝官网例子，直接贴到控制台上</li>
+</ul>
+<pre><code>import org.apache.spark.streaming.{Seconds, StreamingContext}
+val ssc = new StreamingContext(sc, Seconds(1))
+val lines = ssc.socketTextStream(&quot;thpffcj&quot;, 9999)
+val words = lines.flatMap(_.split(&quot; &quot;))
+val wordCounts = words.map(x =&gt; (x, 1)).reduceByKey(_ + _)
+wordCounts.print()
+ssc.start()
+ssc.awaitTermination()
+</code></pre><ul>
+<li>发现效果同上</li>
+</ul>
+<h3 id="6-工作原理"><a href="#6-工作原理" class="headerlink" title="6. 工作原理"></a>6. 工作原理</h3><ul>
+<li>工作原理：粗粒度<ul>
+<li>Spark Streaming接收到实时数据流，把数据按照指定的时间段切成一片片小的数据块，然后把小的数据块传给Spark Engine</li>
+</ul>
+</li>
+<li>工作原理：细粒度</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Spark%20Streaming%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-Spark-Streaming核心"><a href="#2-Spark-Streaming核心" class="headerlink" title="2. Spark Streaming核心"></a>2. Spark Streaming核心</h2><h3 id="1-核心概念"><a href="#1-核心概念" class="headerlink" title="1. 核心概念"></a>1. 核心概念</h3><ul>
+<li><strong>StreamingContext</strong><ul>
+<li>To initialize a Spark Streaming program, a StreamingContext object has to be created which is the main entry point of all Spark Streaming functionality.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>A StreamingContext object can be created from a SparkConf object.</li>
+</ul>
+<pre><code>import org.apache.spark._
+import org.apache.spark.streaming._
+
+val conf = new SparkConf().setAppName(appName).setMaster(master)
+val ssc = new StreamingContext(conf, Seconds(1))
+</code></pre><ul>
+<li>batch interval可以根据你的应用程序需求的延迟要求以及集群可用的资源情况来设置</li>
+<li>它使用了conf，我们查看源码，其实用的比较多的有两个构造方法</li>
+</ul>
+<pre><code>/**
+* Create a StreamingContext using an existing SparkContext.
+* @param sparkContext existing SparkContext
+* @param batchDuration the time interval at which streaming data will be divided into batches
+*/
+def this(sparkContext: SparkContext, batchDuration: Duration) = {
+    this(sparkContext, null, batchDuration)
+}
+
+/**
+* Create a StreamingContext by providing the configuration necessary for a new SparkContext.
+* @param conf a org.apache.spark.SparkConf object specifying Spark parameters
+* @param batchDuration the time interval at which streaming data will be divided into batches
+*/
+def this(conf: SparkConf, batchDuration: Duration) = {
+    this(StreamingContext.createNewSparkContext(conf), null, batchDuration)
+}
+</code></pre><ul>
+<li>After a context is defined, you have to do the following.<ul>
+<li>Define the input sources by creating input DStreams.</li>
+<li>Define the streaming computations by applying transformation and output operations to DStreams.</li>
+<li>Start receiving data and processing it using streamingContext.start().</li>
+<li>Wait for the processing to be stopped (manually or due to any error) using streamingContext.awaitTermination().</li>
+<li>The processing can be manually stopped using streamingContext.stop().</li>
+</ul>
+</li>
+<li>Points to remember:<ul>
+<li>Once a context has been started, no new streaming computations can be set up or added to it.</li>
+<li>Once a context has been stopped, it cannot be restarted.</li>
+<li>Only one StreamingContext can be active in a JVM at the same time.</li>
+<li>stop() on StreamingContext also stops the SparkContext. To stop only the StreamingContext, set the optional parameter of stop() called stopSparkContext to false.</li>
+<li>A SparkContext can be re-used to create multiple StreamingContexts, as long as the previous StreamingContext is stopped (without stopping the SparkContext) before the next StreamingContext is created.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Discretized Streams (DStreams)</strong><ul>
+<li>Discretized Stream or DStream is the basic abstraction provided by Spark Streaming. It represents a continuous stream of data, either the input data stream received from source, or the processed data stream generated by transforming the input stream.</li>
+<li>Internally, a DStream is represented by a continuous series of RDDs, which is Spark’s abstraction of an immutable, distributed dataset.</li>
+<li>Each RDD in a DStream contains data from a certain interval, as shown in the following figure.</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/streaming-dstream.png" alt=""></p>
+<ul>
+<li>对DStream操作算子，比如map/flatMap，其实底层会被翻译成为对DStream中的每个RDD都做相同的操作，因为一个DStream是由不同批次的RDD所构成的</li>
+</ul>
+<ul>
+<li><strong>Input DStreams and Receivers</strong><ul>
+<li>Input DStreams are DStreams representing the stream of input data received from streaming sources. </li>
+<li>Every input DStream (except file stream, discussed later in this section) is associated with a Receiver (Scala doc, Java doc) object which receives the data from a source and stores it in Spark’s memory for processing.</li>
+</ul>
+</li>
+<li>Spark Streaming provides two categories of built-in streaming sources.<ul>
+<li>Basic sources: Sources directly available in the StreamingContext API. Examples: file systems, and socket connections.</li>
+<li>Advanced sources: Sources like Kafka, Flume, Kinesis, etc. are available through extra utility classes. These require linking against extra dependencies as discussed in the linking section.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Transformations"><a href="#2-Transformations" class="headerlink" title="2. Transformations"></a>2. Transformations</h3><ul>
+<li>Similar to that of RDDs, transformations allow the data from the input DStream to be modified. DStreams support many of the transformations available on normal Spark RDD’s. Some of the common ones are as follows.<ul>
+<li>map(func)</li>
+<li>flatMap(func)</li>
+<li>filter(func)</li>
+<li>filter(func)</li>
+<li>union(otherStream)</li>
+<li>count()</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Output-Operations"><a href="#3-Output-Operations" class="headerlink" title="3. Output Operations"></a>3. Output Operations</h3><ul>
+<li>Output operations allow DStream’s data to be pushed out to external systems like a database or a file systems. Since the output operations actually allow the transformed data to be consumed by external systems, they trigger the actual execution of all the DStream transformations (similar to actions for RDDs). Currently, the following output operations are defined:<ul>
+<li>print()</li>
+<li>saveAsTextFiles(prefix, [suffix])</li>
+<li>saveAsObjectFiles(prefix, [suffix])</li>
+<li>saveAsHadoopFiles(prefix, [suffix])</li>
+<li>foreachRDD(func)</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-Spark-Streaming进阶"><a href="#3-Spark-Streaming进阶" class="headerlink" title="3. Spark Streaming进阶"></a>3. Spark Streaming进阶</h2><h3 id="1-带状态的算子：UpdateStateByKet"><a href="#1-带状态的算子：UpdateStateByKet" class="headerlink" title="1. 带状态的算子：UpdateStateByKet"></a>1. 带状态的算子：UpdateStateByKet</h3><ul>
+<li>The updateStateByKey operation allows you to maintain arbitrary state while continuously updating it with new information. To use this, you will have to do two steps.<ul>
+<li>Define the state - The state can be an arbitrary data type.</li>
+<li>Define the state update function - Specify with a function how to update the state using the previous state and the new values from an input stream.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-实战：计算到目前为止累计出现的单词个数写入到MySQL中"><a href="#2-实战：计算到目前为止累计出现的单词个数写入到MySQL中" class="headerlink" title="2. 实战：计算到目前为止累计出现的单词个数写入到MySQL中"></a>2. 实战：计算到目前为止累计出现的单词个数写入到MySQL中</h3><pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/12.
+  * 使用Spark Streaming完成有状态统计
+  */
+object StatefulWordCount {
+
+  def main(args: Array[String]): Unit = {
+
+    val sparkConf = new SparkConf().setAppName(&quot;StatefulWordCount&quot;).setMaster(&quot;local[2]&quot;);
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    // 如果使用了stateful的算子，必须要设置checkpoint
+    // 在生产环境中，建议大家把checkpoint设置到HDFS的某个文件夹中
+    ssc.checkpoint(&quot;.&quot;)
+
+    val lines = ssc.socketTextStream(&quot;192.168.92.130&quot;, 6789)
+
+    val result = lines.flatMap(_.split(&quot; &quot;)).map((_, 1))
+    val state = result.updateStateByKey[Int](updateFunction _)
+
+    state.print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+
+  /**
+    * 把当前的数据去更新已有的或者是老的数据
+    * @param currentValues  当前的
+    * @param preValues  老的
+    * @return
+    */
+  def updateFunction(currentValues: Seq[Int], preValues: Option[Int]): Option[Int] = {
+    val current = currentValues.sum
+    val pre = preValues.getOrElse(0)
+
+    Some(current + pre)
+  }
+}
+</code></pre><ul>
+<li>期间报了一个找不到一个类，上网搜一下需要一些包，我全添加进来了</li>
+</ul>
+<pre><code>&lt;!-- Spark SQL 依赖--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-sql_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-module-scala_2.11&lt;/artifactId&gt;
+    &lt;version&gt;2.6.5&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;net.jpountz.lz4&lt;/groupId&gt;
+    &lt;artifactId&gt;lz4&lt;/artifactId&gt;
+    &lt;version&gt;1.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.38&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.flume.flume-ng-clients&lt;/groupId&gt;
+    &lt;artifactId&gt;flume-ng-log4jappender&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>使用nc起一个6789的端口</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ nc -lk 6789
+</code></pre><ul>
+<li>启动代码，在6379控制台进行输入，两次输入最好隔一点时间，因为我们上面spark设置的统计时间是5秒，否则可能看不到第一组数据</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ nc -lk 6789
+a a a b c c
+a a a b c c
+</code></pre><ul>
+<li>回到idea发现达到了效果，第二次统计是全部词频，两个结果符合预期</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515806215000 ms
+-------------------------------------------
+(b,1)
+(a,3)
+(c,2)
+
+-------------------------------------------
+Time: 1515806220000 ms
+-------------------------------------------
+(b,2)
+(a,6)
+(c,4)
+</code></pre><ul>
+<li>上面我们使用Spark Streaming进行统计分析，现在我们要把结果存入MySQL中</li>
+<li><strong>Spark Streaming统计结果写入MySQL</strong></li>
+</ul>
+<pre><code>mysql&gt; create database spark;
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; use spark;
+Database changed
+
+mysql&gt; create table wordcount(
+    -&gt;     word varchar(50) default null,
+    -&gt;     wordcount int(10) default null
+    -&gt; );
+Query OK, 0 rows affected (0.35 sec)
+</code></pre><ul>
+<li>编写代码</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import java.sql.DriverManager
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * 使用Spark Streaming完成词频统计，并将结果写入到MySQL数据库中
+  */
+object ForeachRDDApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val sparkConf = new SparkConf().setAppName(&quot;ForeachRDDApp&quot;).setMaster(&quot;local[2]&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    val lines = ssc.socketTextStream(&quot;192.168.92.130&quot;, 6789)
+
+    val result = lines.flatMap(_.split(&quot; &quot;)).map((_, 1)).reduceByKey(_ + _)
+
+    // 此处仅仅是将统计结果输出到控制台
+    result.print()
+
+    // 将结果写入到MySQL
+    result.foreachRDD(rdd =&gt; {
+      rdd.foreachPartition(partitionOfRecords =&gt; {
+        val connection = createConnection()
+        partitionOfRecords.foreach(record =&gt; {
+          val sql = &quot;insert into wordcount(word, wordcount) values(&apos;&quot; + record._1 + &quot;&apos;,&quot; + record._2 + &quot;)&quot;
+          connection.createStatement().execute(sql)
+        })
+
+        connection.close()
+      })
+    })
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+
+  /**
+    * 获取MySQL的连接
+    */
+  def createConnection() = {
+    Class.forName(&quot;com.mysql.jdbc.Driver&quot;)
+    DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/spark&quot;, &quot;root&quot;, &quot;000000&quot;)
+  }
+}
+</code></pre><ul>
+<li>存在问题：<ul>
+<li>对于已有的数据做更新，而是所有的数据均为insert</li>
+<li>改进思路：<ul>
+<li>在插入数据前先判断单词是否存在，如果存在就update</li>
+<li>工作中：HBase/Redis</li>
+</ul>
+</li>
+<li>每个RDD的partition创建connection，建议改成连接池</li>
+</ul>
+</li>
+</ul>
+<pre><code>mysql&gt; select * from wordcount;
++------+-----------+
+| word | wordcount |
++------+-----------+
+| b    |         1 |
+| a    |         3 |
+| c    |         2 |
+| b    |         1 |
+| a    |         3 |
+| c    |         2 |
+| b    |         1 |
+| a    |         3 |
+| c    |         2 |
++------+-----------+
+</code></pre><h3 id="3-基于window的统计"><a href="#3-基于window的统计" class="headerlink" title="3. 基于window的统计"></a>3. 基于window的统计</h3><ul>
+<li>window：定时的进行一个时间段内的数据处理</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/streaming-dstream-window.png" alt=""></p>
+<ul>
+<li>window length - The duration of the window (3 in the figure).<ul>
+<li>窗口的长度</li>
+</ul>
+</li>
+<li>sliding interval - The interval at which the window operation is performed (2 in the figure).<ul>
+<li>窗口的间隔</li>
+</ul>
+</li>
+</ul>
+<pre><code>// Reduce last 30 seconds of data, every 10 seconds
+val windowedWordCounts = pairs.reduceByKeyAndWindow((a:Int,b:Int) =&gt; (a + b), Seconds(30), Seconds(10))
+</code></pre><h3 id="4-实战：黑名单过滤"><a href="#4-实战：黑名单过滤" class="headerlink" title="4. 实战：黑名单过滤"></a>4. 实战：黑名单过滤</h3><ul>
+<li>zs和ls是我们的黑名单，要把他们过滤掉</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * 黑名单过滤
+  */
+object TransformApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val sparkConf = new SparkConf().setMaster(&quot;local[2]&quot;).setAppName(&quot;NetworkWordCount&quot;)
+
+    // 创建StreamingContext需要两个参数：SparkConf和batch interval
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    // 构建黑名单
+    val blacks = List(&quot;zs&quot;, &quot;ls&quot;)
+    val blacksRDD = ssc.sparkContext.parallelize(blacks).map(x =&gt; (x, true))
+
+    val lines = ssc.socketTextStream(&quot;192.168.92.130&quot;, 6789)
+    val clicklog = lines.map(x =&gt; (x.split(&quot;,&quot;)(1), x)).transform(rdd =&gt; {
+      rdd.leftOuterJoin(blacksRDD)
+        .filter(x =&gt; x._2._2.getOrElse(false) != true)
+        .map(x =&gt; x._2._1)
+    })
+
+    clicklog.print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>输入三条记录</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ nc -lk 6789
+a a a b c c
+a a a b c c
+a a a b c c
+20180113,zs
+20180113,ls
+20180113,ww
+</code></pre><ul>
+<li>控制台得到了我们想要的结果</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515812175000 ms
+-------------------------------------------
+20180113,ww
+</code></pre><ul>
+<li>通过上面的例子，我们发现功能并不复杂，关键是掌握逻辑，根据需求分析出如何进行操作</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" style="float: left;">
+        ← Spark Streaming整合Flume
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/">
+        分布式发布订阅消息系统Kafka →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

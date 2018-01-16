@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark Streaming整合Flume | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-14T03:03:09.000Z" itemprop="datePublished">
+          2018-01-14
+      </time>
+    
+</span>
+                <h1>Spark Streaming整合Flume</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>要使用的基本框架都学完了就面临要将框架整合到一起，做过J2EE开发的人应该都有过整合过SSH，SSM等框架的经历，在对框架了解不深的情况下进场会出现各种情况，有时整合框架的时间比编写业务逻辑还要长。从这篇博客开始，我们要学习怎么把Flume，Kafka和Spark Streaming整合起来使用，最开始我们先来了解Spark Streaming整合Flume，官方提供了push和pull两种方式整合。</p>
+<hr>
+<h2 id="1-实战一：Flume-style-Push-based-Approach"><a href="#1-实战一：Flume-style-Push-based-Approach" class="headerlink" title="1. 实战一：Flume-style Push-based Approach"></a>1. 实战一：Flume-style Push-based Approach</h2><ul>
+<li><strong><a href="http://spark.apache.org/docs/2.2.0/streaming-flume-integration.html" target="_blank" rel="external">Spark 官网介绍</a></strong></li>
+<li>前面我们使用Spark Streaming都是基本数据源(filesystem等)</li>
+<li>高级数据源：<ul>
+<li>Kafka: Spark Streaming 2.2.0 is compatible with Kafka broker versions 0.8.2.1 or higher. </li>
+<li>Flume: Spark Streaming 2.2.0 is compatible with Flume 1.6.0. </li>
+<li>Kinesis: Spark Streaming 2.2.0 is compatible with Kinesis Client Library 1.2.1. </li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Spark-Streaming-Flume-Integration-Guide"><a href="#1-Spark-Streaming-Flume-Integration-Guide" class="headerlink" title="1. Spark Streaming + Flume Integration Guide"></a>1. Spark Streaming + Flume Integration Guide</h3><ul>
+<li>Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data.</li>
+</ul>
+<h3 id="2-Flume-Agent配置开发"><a href="#2-Flume-Agent配置开发" class="headerlink" title="2. Flume Agent配置开发"></a>2. Flume Agent配置开发</h3><ul>
+<li>Flume Agent的编写：<ul>
+<li>直接给出来配置，前面学习Flume的博客里介绍了配置文件的写法</li>
+</ul>
+</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cat flume_push_streaming.conf 
+# Name the components on this agent
+simple-agent.sources = netcat-source
+simple-agent.sinks = avro-sink
+simple-agent.channels = memory-channel
+
+# Describe/configure the source
+simple-agent.sources.netcat-source.type = netcat
+simple-agent.sources.netcat-source.bind = thpffcj
+simple-agent.sources.netcat-source.port = 44444
+
+# Describe the sink
+simple-agent.sinks.avro-sink.type = avro
+simple-agent.sinks.avro-sink.hostname = thpffcj
+simple-agent.sinks.avro-sink.port = 41414
+
+# Use a channel which buffers events in memory
+simple-agent.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+simple-agent.sources.netcat-source.channels = memory-channel
+simple-agent.sinks.avro-sink.channel = memory-channel
+</code></pre><h3 id="3-Spark-Streaming应用开发"><a href="#3-Spark-Streaming应用开发" class="headerlink" title="3. Spark Streaming应用开发"></a>3. Spark Streaming应用开发</h3><ul>
+<li>pom添加依赖</li>
+</ul>
+<pre><code>&lt;!-- Spark Streaming整合Flume 依赖--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-streaming-flume_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>先编写spark streaming代码</li>
+<li>这里跳过本地测试直接打包传到虚拟机运行(本地没有Flume)</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.flume.FlumeUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * Spark Streaming整合Flume的第一种方式
+  */
+object FlumePushWordCount {
+
+  def main(args: Array[String]): Unit = {
+
+    if(args.length != 2) {
+      System.err.println(&quot;Usage: FlumePushWordCount &lt;hostname&gt; &lt;port&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(hostname, port) = args
+
+    val sparkCof = new SparkConf() //.setMaster(&quot;local[2]&quot;).setAppName(&quot;FlumePushWordCount&quot;)
+    val ssc = new StreamingContext(sparkCof, Seconds(5))
+
+    val flumeStream = FlumeUtils.createStream(ssc, hostname, port.toInt)
+
+    flumeStream.map(x =&gt; new String(x.event.getBody.array()).trim)
+      .flatMap(_.split(&quot; &quot;)).map((_, 1)).reduceByKey(_ + _).print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>上传jar包</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ pwd
+/home/thpffcj/lib
+[thpffcj@thpffcj lib]$ ls
+hadoop-1.0-SNAPSHOT.jar                        SparkTrain-1.0.jar
+hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar
+</code></pre><ul>
+<li>启动spark streaming</li>
+</ul>
+<pre><code>spark-submit --class cn.edu.nju.spark.FlumePushWordCount --master local[2] --packages org.apache.spark:spark-streaming-flume_2.11:2.2.0 /home/thpffcj/lib/SparkTrain-1.0.jar thpffcj 41414
+</code></pre><ul>
+<li>启动Flume</li>
+</ul>
+<pre><code>flume-ng agent \
+--name simple-agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/flume_push_streaming.conf \
+-Dflume.root.logger=INFO,console &amp;
+</code></pre><ul>
+<li>使用telnet连接44444端口发送消息</li>
+<li>查看spark streaming</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515825190000 ms
+-------------------------------------------
+(d,2)
+(a,9)
+</code></pre><ul>
+<li>期间插曲：使用telnet一直连接不上44444端口，网上大多说关闭防火墙之类的，最后发现Flume配置文件写错了，没有绑定44444端口，可以使用netstat查看端口情况，底下是修改后成功后的netstat，上面给出的配置文件是修改过后正确的</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ netstat -ln
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
+tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+tcp6       0      0 :::111                  :::*                    LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+tcp6       0      0 ::1:631                 :::*                    LISTEN     
+tcp6       0      0 ::1:25                  :::*                    LISTEN     
+tcp6       0      0 192.168.92.130:44444    :::*                    LISTEN 
+</code></pre><ul>
+<li>同时也让我知道telnet不是随便去请求一个接口，是请求一个正在运行的接口</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-实战二：Pull-based-Approach-using-a-Custom-Sink"><a href="#2-实战二：Pull-based-Approach-using-a-Custom-Sink" class="headerlink" title="2. 实战二：Pull-based Approach using a Custom Sink"></a>2. 实战二：Pull-based Approach using a Custom Sink</h2><ul>
+<li>Instead of Flume pushing data directly to Spark Streaming, this approach runs a custom Flume sink that allows the following.<ul>
+<li>Flume pushes data into the sink, and the data stays buffered.</li>
+<li>Spark Streaming uses a reliable Flume receiver and transactions to pull data from the sink. Transactions succeed only after data is received and replicated by Spark Streaming.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Flume-Agent配置开发"><a href="#1-Flume-Agent配置开发" class="headerlink" title="1. Flume Agent配置开发"></a>1. Flume Agent配置开发</h3><pre><code>[thpffcj@thpffcj conf]$ cat flume_pull_streaming.conf 
+# name the components on this agent
+simple-agent.sources = netcat-source
+simple-agent.sinks = spark-sink
+simple-agent.channels = memory-channel
+
+# Describe/configure the source
+simple-agent.sources.netcat-source.type = netcat
+simple-agent.sources.netcat-source.bind = thpffcj
+simple-agent.sources.netcat-source.port = 44444
+
+# Describe the sink
+simple-agent.sinks.spark-sink.type = org.apache.spark.streaming.flume.sink.SparkSink
+simple-agent.sinks.spark-sink.hostname = thpffcj
+simple-agent.sinks.spark-sink.port = 41414
+
+# Use a channel which buffers events in memory
+simple-agent.channels.memory-channel.type = memory
+
+# Bind the source and sink to the channel
+simple-agent.sources.netcat-source.channels = memory-channel
+simple-agent.sinks.spark-sink.channel = memory-channel
+</code></pre><h3 id="2-Spark-Streaming应用开发"><a href="#2-Spark-Streaming应用开发" class="headerlink" title="2. Spark Streaming应用开发"></a>2. Spark Streaming应用开发</h3><ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-streaming-flume-sink_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+    &lt;version&gt;3.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写spark streaming代码</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.flume.FlumeUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * Spark Streaming整合Flume的第二种方式
+  */
+object FlumePullWordCount {
+
+  def main(args: Array[String]): Unit = {
+
+    if(args.length != 2) {
+      System.err.println(&quot;Usage: FlumePullWordCount &lt;hostname&gt; &lt;port&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(hostname, port) = args
+
+    val sparkConf = new SparkConf().setMaster(&quot;local[2]&quot;).setAppName(&quot;FlumePullWordCount&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    val flumeStream = FlumeUtils.createPollingStream(ssc, hostname, port.toInt)
+
+    flumeStream.map(x=&gt; new String(x.event.getBody.array()).trim)
+      .flatMap(_.split(&quot; &quot;)).map((_,1)).reduceByKey(_+_).print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>先启动Flume</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ flume-ng agent \
+&gt; --name simple-agent \
+&gt; --conf $FLUME_HOME/conf \
+&gt; --conf-file $FLUME_HOME/conf/flume_pull_streaming.conf \
+&gt; -Dflume.root.logger=INFO,console &amp;
+</code></pre><ul>
+<li>启动telnet</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ telnet thpffcj 44444
+Trying 192.168.92.130...
+Connected to thpffcj.
+Escape character is &apos;^]&apos;.
+</code></pre><ul>
+<li>先使用IDEA进行本地测试，在edit configurations里可以传递参数，传递192.168.92.130 41414</li>
+<li>使用telnet发送消息可以在idea控制台上看到输出</li>
+</ul>
+<pre><code>a a a b b c
+OK
+
+-------------------------------------------
+Time: 1515828585000 ms
+-------------------------------------------
+(b,2)
+(a,3)
+(c,1)
+</code></pre><ul>
+<li>打包去服务器运行，要将一句话注释，因为我们通过spark-commit传参数</li>
+</ul>
+<pre><code>val sparkConf = new SparkConf().setMaster(&quot;local[2]&quot;) //.setAppName(&quot;FlumePullWordCount&quot;)
+</code></pre><ul>
+<li>把上一个包删掉，换成这次新打的包，然后提交</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ flume-ng agent \
+&gt; --name simple-agent \
+&gt; --conf $FLUME_HOME/conf \
+&gt; --conf-file $FLUME_HOME/conf/flume_pull_streaming.conf \
+&gt; -Dflume.root.logger=INFO,console &amp;
+
+[thpffcj@thpffcj ~]$ spark-submit \
+&gt; --class cn.edu.nju.spark.FlumePullWordCount \
+&gt; --master local[2] \
+&gt; --packages org.apache.spark:spark-streaming-flume_2.11:2.2.0 \
+&gt; /home/thpffcj/lib/SparkTrain-1.0.jar \
+&gt; thpffcj 41414
+</code></pre><ul>
+<li>telnet输入一点东西，在spark streaming控制台查看</li>
+</ul>
+<pre><code>a a a a
+OK
+b b
+OK
+c
+OK
+
+
+-------------------------------------------
+Time: 1515829440000 ms
+-------------------------------------------
+(b,2)
+(a,4)
+(c,1)
+</code></pre><ul>
+<li>到此为止，这两种整合方式就都完成了，第二种方式工作之中用的更多，相当于flume把数据采集过来先丢到一个sink里面，然后spark streaming再到那个sink里面去拿数据，这种方式就更可靠</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" style="float: left;">
+        ← Spark Streaming整合Kafka
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/">
+        Spark Streaming入门 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

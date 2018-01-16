@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark Streaming项目实战 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-17T00:20:23.000Z" itemprop="datePublished">
+          2018-01-17
+      </time>
+    
+</span>
+                <h1>Spark Streaming项目实战</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>在经过了一系列前置学习后，我们终于具备了完成我们业务的能力，这篇博客就来记录一下使用python自动生成日志，Flume自动收集日志对接kafka，最后Spark Streaming获取数据进行计算给出结果的实际业务流程。</p>
+<hr>
+<h2 id="1-需求说明"><a href="#1-需求说明" class="headerlink" title="1. 需求说明"></a>1. 需求说明</h2><h3 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h3><ul>
+<li>今天到现在为止实战课程的访问量</li>
+<li>今天到现在为止从搜索引擎引流过来的实战课程的访问量</li>
+</ul>
+<h3 id="2-互联网访问日志概述"><a href="#2-互联网访问日志概述" class="headerlink" title="2. 互联网访问日志概述"></a>2. 互联网访问日志概述</h3><ul>
+<li>为什么要记录用户访问行为日志<ul>
+<li>网站页面的访问量</li>
+<li>网站的黏性</li>
+<li>推荐</li>
+</ul>
+</li>
+<li>用户行为日志内容<ul>
+<li>访问者IP地址</li>
+<li>访问者账号</li>
+<li>访问时间和区域</li>
+<li>访问者所使用的客户端</li>
+<li>模块 app ID</li>
+<li>跳转的链接地址</li>
+</ul>
+</li>
+<li>用户行为日志分析的意义<ul>
+<li>网站的眼睛</li>
+<li>网站的神经</li>
+<li>网站的大脑</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-功能开发及本地运行"><a href="#2-功能开发及本地运行" class="headerlink" title="2. 功能开发及本地运行"></a>2. 功能开发及本地运行</h2><h3 id="1-使用Python脚本实时产生数据"><a href="#1-使用Python脚本实时产生数据" class="headerlink" title="1. 使用Python脚本实时产生数据"></a>1. 使用Python脚本实时产生数据</h3><ul>
+<li>Python实时日志产生器开发</li>
+<li>使用python写一个随机生成url和ip的方法</li>
+</ul>
+<pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import random
+
+url_path = [
+    &quot;class/112.html&quot;,
+    &quot;class/128.html&quot;,
+    &quot;class/145.html&quot;,
+    &quot;class/146.html&quot;,
+    &quot;class/130.html&quot;,
+    &quot;learn/821&quot;,
+    &quot;course/list&quot;
+]
+
+ip_slices = [132, 156, 124, 10, 29, 143, 187, 30, 46, 55, 63, 72, 98, 168]
+
+
+def sample_url():
+    return random.sample(url_path, 1)[0]
+
+
+def sample_ip():
+    slice = random.sample(ip_slices, 4)
+    return &quot;.&quot;.join([str(item) for item in slice])
+
+
+def generate_log(count = 10):
+    while count &gt;= 1:
+        query_log = &quot;{url}\t{ip}&quot;.format(url=sample_url(), ip=sample_ip())
+        print(query_log)
+        count = count - 1
+
+
+if __name__ == &apos;__main__&apos;:
+    generate_log()
+</code></pre><ul>
+<li>因为我们有一个需求是让我们统计从搜索引擎搜索过来的量，我们还需要把数据造起来，在用户访问日志里有一个reffer-http表示从哪个页面跳转过来的，我们也定义一组</li>
+</ul>
+<pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import random
+
+url_path = [
+    &quot;class/112.html&quot;,
+    &quot;class/128.html&quot;,
+    &quot;class/145.html&quot;,
+    &quot;class/146.html&quot;,
+    &quot;class/130.html&quot;,
+    &quot;learn/821&quot;,
+    &quot;course/list&quot;
+]
+
+ip_slices = [132, 156, 124, 10, 29, 143, 187, 30, 46, 55, 63, 72, 98, 168]
+
+http_referers = [
+    &quot;http://www.baidu.com/s?wd={query}&quot;,
+    &quot;http://www.sogou.com/?web={query}&quot;,
+    &quot;http://cn.bing.com/search?q={query}&quot;,
+    &quot;https://search.yahoo.com/search?p={query}&quot;,
+]
+
+search_keyword = [
+    &quot;Spark SQL实战&quot;,
+    &quot;Hadoop基础&quot;,
+    &quot;Storm实战&quot;,
+    &quot;Spark Streaming实战&quot;,
+    &quot;大数据面试&quot;
+]
+
+status_code = [&quot;200&quot;, &quot;404&quot;, &quot;500&quot;]
+
+def sample_url():
+    return random.sample(url_path, 1)[0]
+
+
+def sample_ip():
+    slice = random.sample(ip_slices, 4)
+    return &quot;.&quot;.join([str(item) for item in slice])
+
+
+def sample_referrer():
+    if random.uniform(0, 1) &gt; 0.2:
+        return &quot;-&quot;
+
+    refer_str = random.sample(http_referers, 1)
+    query_str = random.sample(search_keyword, 1)
+    return refer_str[0].format(query=query_str[0])
+
+
+def sample_status_code():
+    return random.sample(status_code, 1)[0]
+
+
+def generate_log(count = 10):
+    while count &gt;= 1:
+        query_log = &quot;{url}\t{ip}\t{refer}\t{status_code}&quot;.format(
+            url=sample_url(), ip=sample_ip(), refer=sample_referrer(), status_code=sample_status_code())
+        print(query_log)
+        count = count - 1
+
+
+if __name__ == &apos;__main__&apos;:
+    generate_log()
+</code></pre><ul>
+<li>前面我们已经生成了url，ip地址，refer以及状态码，我们还有时间没有拿到，我们编写时间生成代码</li>
+</ul>
+<pre><code>import time
+
+def generate_log(count = 10):
+    time_str = time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime())
+    while count &gt;= 1:
+        query_log = &quot;{local_time}\t{url}\t{ip}\t{refer}\t{status_code}&quot;.format(
+            local_time= time_str, url=sample_url(), ip=sample_ip(), refer=sample_referrer(), status_code=sample_status_code())
+        print(query_log)
+        count = count - 1
+</code></pre><ul>
+<li>我们现在log全部打在控制台上，没什么用，我们应该要把它放到一个文件里面去</li>
+</ul>
+<p>def generate_log(count=10):<br>    time_str = time.strftime(“%Y-%m-%d %H:%M:%S”, time.localtime())</p>
+<pre><code>f = open(&quot;/home/thpffcj/data/project/logs/access.log&quot;, &quot;w+&quot;)
+
+while count &gt;= 1:
+    query_log = &quot;{ip}\t{local_time}\t\&quot;GET /{url} HTTP/1.1\&quot;\t{status_code}\t{refer}&quot;.format(
+        ip=sample_ip(), local_time= time_str, url=sample_url(),  status_code=sample_status_code(), refer=sample_referrer())
+    print(query_log)
+
+    f.write(query_log + &quot;\n&quot;)
+
+    count = count - 1
+</code></pre><ul>
+<li>然后把脚本拷贝到虚拟机服务器上</li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ ls
+generate_log.py  logs
+</code></pre><ul>
+<li>执行脚本</li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ python generate_log.py 
+46.29.124.143    2018-01-15 08:53:15    &quot;GET /class/128.html HTTP/1.1&quot;    500    -
+168.72.30.98    2018-01-15 08:53:15    &quot;GET /course/list HTTP/1.1&quot;    500    -
+55.98.46.29    2018-01-15 08:53:15    &quot;GET /class/130.html HTTP/1.1&quot;    200    -
+98.143.124.63    2018-01-15 08:53:15    &quot;GET /course/list HTTP/1.1&quot;    200    -
+29.168.46.187    2018-01-15 08:53:15    &quot;GET /class/146.html HTTP/1.1&quot;    200    -
+63.187.168.10    2018-01-15 08:53:15    &quot;GET /course/list HTTP/1.1&quot;    500    -
+10.30.46.29    2018-01-15 08:53:15    &quot;GET /course/list HTTP/1.1&quot;    200    -
+72.46.156.132    2018-01-15 08:53:15    &quot;GET /learn/821 HTTP/1.1&quot;    500    http://www.baidu.com/s?wd=Spark Streaming实战
+55.72.30.132    2018-01-15 08:53:15    &quot;GET /class/130.html HTTP/1.1&quot;    500    -
+46.72.98.10    2018-01-15 08:53:15    &quot;GET /learn/821 HTTP/1.1&quot;    404    -
+</code></pre><ul>
+<li>修改一下参数，传递100，每次生成100条记录</li>
+<li>我们现在的做法是要手工执行才能产生日志，这时候我们要借助一个工具crontab定时执行<ul>
+<li>每一分钟执行一次的crontab表达式：<em>/1 </em> <em> </em> *</li>
+</ul>
+</li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ cat log_generator.sh 
+python /home/thpffcj/data/project/generate_log.py
+[thpffcj@thpffcj project]$ chmod u+x log_generator.sh 
+[thpffcj@thpffcj project]$ ./log_generator.sh 
+</code></pre><ul>
+<li>把我们的sh配置到crontab里面，使用crontab -e，然后把<em>/1 </em> <em> </em> * /home/thpffcj/data/project/log_generator.sh拷贝到里面</li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ crontab -e
+no crontab for thpffcj - using an empty one
+crontab: installing new crontab
+</code></pre><ul>
+<li>这样我们就1分钟产生一批日志，就模拟了实时数据处理</li>
+</ul>
+<h3 id="2-使用Flume实时收集日志信息"><a href="#2-使用Flume实时收集日志信息" class="headerlink" title="2. 使用Flume实时收集日志信息"></a>2. 使用Flume实时收集日志信息</h3><ul>
+<li>对接python日志产生器输出的日志到Flume</li>
+<li>编写streaming_project.conf<ul>
+<li>选型：access.log =&gt; 控制台输出</li>
+<li>exec memory logger</li>
+</ul>
+</li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ cat streaming_project.conf 
+exec-memory-logger.sources = exec-source
+exec-memory-logger.sinks = logger-sink
+exec-memory-logger.channels = memory-channel
+
+exec-memory-logger.sources.exec-source.type = exec
+exec-memory-logger.sources.exec-source.command = tail -F /home/thpffcj/data/project/logs/access.log
+exec-memory-logger.sources.exec-source.shell = /bin/sh -c
+
+exec-memory-logger.channels.memory-channel.type = memory
+
+exec-memory-logger.sinks.logger-sink.type = logger
+
+exec-memory-logger.sources.exec-source.channels = memory-channel
+exec-memory-logger.sinks.logger-sink.channel = memory-channel
+</code></pre><ul>
+<li>启动flume agent</li>
+</ul>
+<pre><code>flume-ng agent \
+--name exec-memory-logger \
+--conf $FLUME_HOME/conf \
+--conf-file /home/thpffcj/data/project/streaming_project.conf \
+-Dflume.root.logger=INFO,console
+</code></pre><ul>
+<li>如果我们能在flume控制台每分钟看到输出一批日志，说明已经调通了，期间修改无数次配置文件，真的要非常仔细</li>
+</ul>
+<h3 id="3-对接实时日志数据到Kafka并输出到控制台测试"><a href="#3-对接实时日志数据到Kafka并输出到控制台测试" class="headerlink" title="3. 对接实时日志数据到Kafka并输出到控制台测试"></a>3. 对接实时日志数据到Kafka并输出到控制台测试</h3><ul>
+<li>日志 =&gt; Flume =&gt; Kafka</li>
+<li>启动zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+[thpffcj@thpffcj ~]$ jps
+10305 Jps
+10247 QuorumPeerMain
+</code></pre><ul>
+<li>启动Kafka Server</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-server-start.sh -daemon /home/thpffcj/app/kafka_2.11-0.9.0.0/config/server.properties 
+
+[thpffcj@thpffcj ~]$ jps
+10418 Jps
+10247 QuorumPeerMain
+10363 Kafka
+</code></pre><ul>
+<li>修改flume配置文件，使得flume sink数据到kafka，新建streaming_project2.conf，kafka使用的topic是我们前几篇博客用过的，就不新建了 </li>
+</ul>
+<pre><code>[thpffcj@thpffcj project]$ cat streaming_project2.conf 
+exec-memory-kafka.sources = exec-source
+exec-memory-kafka.sinks = kafka-sink
+exec-memory-kafka.channels = memory-channel
+
+exec-memory-kafka.sources.exec-source.type = exec
+exec-memory-kafka.sources.exec-source.command = tail -F /home/thpffcj/data/project/logs/access.log
+exec-memory-kafka.sources.exec-source.shell = /bin/sh -c
+
+exec-memory-kafka.channels.memory-channel.type = memory
+
+exec-memory-kafka.sinks.kafka-sink.type = org.apache.flume.sink.kafka.KafkaSink
+exec-memory-kafka.sinks.kafka-sink.brokerList = thpffcj:9092
+exec-memory-kafka.sinks.kafka-sink.topic = streamingtopic
+exec-memory-kafka.sinks.kafka-sink.batchSize = 20
+exec-memory-kafka.sinks.kafka-sink.requireAcks = 1
+
+exec-memory-kafka.sources.exec-source.channels = memory-channel
+exec-memory-kafka.sinks.kafka-sink.channel = memory-channel
+</code></pre><ul>
+<li>启动控制台的消费者，直接输出日志</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-consumer.sh --zookeeper thpffcj:2181 --topic streamingtopic
+</code></pre><ul>
+<li>启动flume</li>
+</ul>
+<pre><code>flume-ng agent \
+--name exec-memory-kafka \
+--conf $FLUME_HOME/conf \
+--conf-file /home/thpffcj/data/project/streaming_project2.conf \
+-Dflume.root.logger=INFO,console
+</code></pre><ul>
+<li>我们可以看见kafka控制台看见日志输出，flume就相当于生产者，把拿到的日志信息sink到了kafka</li>
+</ul>
+<h3 id="4-Spark-Streaming对接Kafka的数据进行消费"><a href="#4-Spark-Streaming对接Kafka的数据进行消费" class="headerlink" title="4. Spark Streaming对接Kafka的数据进行消费"></a>4. Spark Streaming对接Kafka的数据进行消费</h3><ul>
+<li>先测试能否接收到数据</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 使用Spark Streaming处理Kafka过来的数据
+  */
+object ImoocStatStreamingApp {
+
+  def main(args: Array[String]): Unit = {
+
+    if (args.length != 4) {
+      println(&quot;Usage: ImoocStatStreamingApp &lt;zkQuorum&gt; &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(zkQuorum, groupId, topics, numThreads) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;ImoocStatStreamingApp&quot;).setMaster(&quot;local[5]&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(60))
+
+    val topicMap = topics.split(&quot;,&quot;).map((_, numThreads.toInt)).toMap
+
+    val messages = KafkaUtils.createStream(ssc, zkQuorum, groupId, topicMap)
+
+    // 测试步骤一：测试数据接收
+    messages.map(_._2).count().print
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>启动IDEA，并传入参数192.168.92.130:2181 test streamingtopic 1</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515982860000 ms
+-------------------------------------------
+100
+</code></pre><h3 id="5-使用Spark-Streaming完成数据清洗操作"><a href="#5-使用Spark-Streaming完成数据清洗操作" class="headerlink" title="5. 使用Spark Streaming完成数据清洗操作"></a>5. 使用Spark Streaming完成数据清洗操作</h3><ul>
+<li>按照需求对实时产生的点击数据流进行数据清洗：从原始日志中取出需要的字段</li>
+<li>当期日志格式：<ul>
+<li><blockquote>
+<p>187.143.124.156    2018-01-15 10:19:06    “GET /class/146.html HTTP/1.1”    500    <a href="http://www.sogou.com/?web=Spark" target="_blank" rel="external">http://www.sogou.com/?web=Spark</a> Streaming实战</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>首先我们需要把时间-去除</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.utils
+
+import java.util.Date
+
+import org.apache.commons.lang3.time.FastDateFormat
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 日期时间工具类
+  */
+object DateUtils {
+
+  val YYYYMMDDHHMMSS_FORMAT = FastDateFormat.getInstance(&quot;yyyy-MM-dd HH:mm:ss&quot;)
+  val TARGE_FORMAT = FastDateFormat.getInstance(&quot;yyyyMMddHHmmss&quot;)
+
+
+  def getTime(time: String) = {
+    YYYYMMDDHHMMSS_FORMAT.parse(time).getTime
+  }
+
+  def parseToMinute(time :String) = {
+    TARGE_FORMAT.format(new Date(getTime(time)))
+  }
+
+  def main(args: Array[String]): Unit = {
+
+    println(parseToMinute(&quot;2017-10-22 14:46:01&quot;))
+  }
+}
+</code></pre><ul>
+<li>编写一个清洗过后数据的实体类</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.domain
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 清洗后的日志信息
+  * @param ip  日志访问的ip地址
+  * @param time  日志访问的时间
+  * @param courseId  日志访问的实战课程编号
+  * @param statusCode 日志访问的状态码
+  * @param referrer  日志访问的referrer
+  */
+case class ClickLog(ip:String, time:String, courseId:Int, statusCode:Int, referrer:String)
+</code></pre><ul>
+<li>课程编号我们是需要class后面的编号，非class开头不需要</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.spark
+
+import cn.edu.nju.spark.project.domain.ClickLog
+import cn.edu.nju.spark.project.utils.DateUtils
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 使用Spark Streaming处理Kafka过来的数据
+  */
+object ImoocStatStreamingApp {
+
+  def main(args: Array[String]): Unit = {
+
+    if (args.length != 4) {
+      println(&quot;Usage: ImoocStatStreamingApp &lt;zkQuorum&gt; &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(zkQuorum, groupId, topics, numThreads) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;ImoocStatStreamingApp&quot;).setMaster(&quot;local[5]&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(60))
+
+    val topicMap = topics.split(&quot;,&quot;).map((_, numThreads.toInt)).toMap
+
+    val messages = KafkaUtils.createStream(ssc, zkQuorum, groupId, topicMap)
+
+    // 测试步骤一：测试数据接收
+    // messages.map(_._2).count().print
+
+    // 测试步骤二：数据清洗
+    val logs = messages.map(_._2)
+    val cleanData = logs.map(line =&gt; {
+      val infos = line.split(&quot;\t&quot;)
+
+      // infos(2) = &quot;GET /class/130.html HTTP/1.1&quot;
+      // url = /class/130.html
+      val url = infos(2).split(&quot; &quot;)(1)
+      var courseId = 0
+
+      // 把实战课程的课程编号拿到了
+      if (url.startsWith(&quot;/class&quot;)) {
+        val courseIdHTML = url.split(&quot;/&quot;)(2)
+        courseId = courseIdHTML.substring(0, courseIdHTML.lastIndexOf(&quot;.&quot;)).toInt
+      }
+
+      ClickLog(infos(0), DateUtils.parseToMinute(infos(1)), courseId, infos(3).toInt, infos(4))
+    }).filter(clicklog =&gt; clicklog.courseId != 0)
+
+    cleanData.print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>数据清洗结果类似如下</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515984540000 ms
+-------------------------------------------
+ClickLog(143.124.46.55,20180115104701,145,404,http://www.baidu.com/s?wd=Spark Streaming实战)
+ClickLog(30.29.46.156,20180115104701,145,404,-)
+ClickLog(55.143.124.72,20180115104701,112,500,-)
+ClickLog(98.187.46.30,20180115104701,146,200,-)
+ClickLog(143.98.156.124,20180115104701,145,500,-)
+ClickLog(168.30.143.124,20180115104701,145,200,http://www.sogou.com/?web=大数据面试)
+ClickLog(29.55.124.156,20180115104701,112,404,-)
+ClickLog(63.98.55.124,20180115104802,130,404,http://www.baidu.com/s?wd=Spark Streaming实战)
+ClickLog(63.55.132.168,20180115104802,128,200,-)
+ClickLog(55.72.132.168,20180115104802,112,500,-)
+</code></pre><ul>
+<li>到数据清洗完为止，日志只包含了实战课程的日志</li>
+</ul>
+<h3 id="6-存储结果技术选型分析"><a href="#6-存储结果技术选型分析" class="headerlink" title="6. 存储结果技术选型分析"></a>6. 存储结果技术选型分析</h3><ul>
+<li>功能一：今天到现在为止 实战课程 的访问量</li>
+<li>使用数据库来存储我们的统计结果<ul>
+<li>Spark Streaming把统计结果写入到数据库里</li>
+<li>可视化前端根据 yyyyMMdd courseid 把数据库里面的统计结果展示出来</li>
+</ul>
+</li>
+<li>选择什么数据库作为统计结果的存储呢？<ul>
+<li>RDBMS：MySQL，Oracle</li>
+<li>NoSQL：HBase，Redis<ul>
+<li>HBase：一个API就能搞定，非常方便</li>
+<li>20180115 + 1 =&gt; click_count + 下一个批次的统计结果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>启动Hadoop</strong></li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-dfs.sh 
+
+[thpffcj@thpffcj sbin]$ jps
+17377 NameNode
+17827 Jps
+10247 QuorumPeerMain
+17705 SecondaryNameNode
+17514 DataNode
+10363 Kafka
+</code></pre><ul>
+<li><strong>启动HBase</strong></li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./start-hbase.sh 
+
+[thpffcj@thpffcj bin]$ jps
+18016 HMaster
+17377 NameNode
+18163 HRegionServer
+10247 QuorumPeerMain
+18264 Jps
+17705 SecondaryNameNode
+17514 DataNode
+10363 Kafka
+</code></pre><ul>
+<li>HBase表设计</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./hbase shell
+
+hbase(main):002:0&gt; create &apos;imooc_course_clickcount&apos;, &apos;info&apos;
+0 row(s) in 1.4030 seconds
+
+=&gt; Hbase::Table - imooc_course_clickcount
+
+hbase(main):003:0&gt; list
+TABLE                                                                        
+imooc_course_clickcount                                                      
+1 row(s) in 0.0300 seconds
+
+=&gt; [&quot;imooc_course_clickcount&quot;]
+</code></pre><ul>
+<li>RowKey设计：day_course</li>
+</ul>
+<h3 id="7-数据库访问DAO层方法定义"><a href="#7-数据库访问DAO层方法定义" class="headerlink" title="7. 数据库访问DAO层方法定义"></a>7. 数据库访问DAO层方法定义</h3><ul>
+<li>如何使用Scala来操作HBase</li>
+<li>首先设计实体类</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.domain
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 实战课程点击数实体类
+  * @param day_course  对应的就是HBase中的rowkey，20171111_1
+  * @param click_count 对应的20171111_1的访问总数
+  */
+case class CourseClickCount(day_course:String, click_count:Long)
+</code></pre><ul>
+<li>开发一个工具类进行HBase操作</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.utils;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.util.Bytes;
+
+import java.io.IOException;
+
+/**
+ * Created by Thpffcj on 2018/1/15.
+ * HBase操作工具类：Java工具类建议采用单例模式封装
+ */
+public class HBaseUtils {
+
+    HBaseAdmin admin = null;
+    Configuration configuration = null;
+
+    /**
+     * 私有改造方法
+     */
+    private HBaseUtils(){
+        configuration = new Configuration();
+        configuration.set(&quot;hbase.zookeeper.quorum&quot;, &quot;192.168.92.130:2181&quot;);
+        configuration.set(&quot;hbase.rootdir&quot;, &quot;hdfs://192.168.92.130:8020/hbase&quot;);
+
+        try {
+            admin = new HBaseAdmin(configuration);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static HBaseUtils instance = null;
+
+    public  static synchronized HBaseUtils getInstance() {
+        if(null == instance) {
+            instance = new HBaseUtils();
+        }
+        return instance;
+    }
+
+
+    /**
+     * 根据表名获取到HTable实例
+     */
+    public HTable getTable(String tableName) {
+
+        HTable table = null;
+
+        try {
+            table = new HTable(configuration, tableName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return table;
+    }
+
+    /**
+     * 添加一条记录到HBase表
+     * @param tableName HBase表名
+     * @param rowkey  HBase表的rowkey
+     * @param cf HBase表的columnfamily
+     * @param column HBase表的列
+     * @param value  写入HBase表的值
+     */
+    public void put(String tableName, String rowkey, String cf, String column, String value) {
+        HTable table = getTable(tableName);
+
+        Put put = new Put(Bytes.toBytes(rowkey));
+        put.add(Bytes.toBytes(cf), Bytes.toBytes(column), Bytes.toBytes(value));
+
+        try {
+            table.put(put);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+
+//        HTable table = HBaseUtils.getInstance().getTable(&quot;imooc_course_clickcount&quot;);
+//        System.out.println(table.getName().getNameAsString());
+
+        String tableName = &quot;imooc_course_clickcount&quot; ;
+        String rowkey = &quot;20171111_88&quot;;
+        String cf = &quot;info&quot; ;
+        String column = &quot;click_count&quot;;
+        String value = &quot;2&quot;;
+        HBaseUtils.getInstance().put(tableName, rowkey, cf, column, value);
+    }
+}
+</code></pre><ul>
+<li>配置的内容是哪里的呢，我们当时在将HBase安装的时候修改过配置文件</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cat hbase-site.xml 
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+&lt;property&gt;
+    &lt;name&gt;hbase.rootdir&lt;/name&gt;
+    &lt;value&gt;hdfs://thpffcj:8020/hbase&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;
+    &lt;value&gt;true&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;
+    &lt;value&gt;thpffcj:2181&lt;/value&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><ul>
+<li>运行测试，在hbase查看</li>
+</ul>
+<pre><code>hbase(main):007:0&gt; scan &apos;imooc_course_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+ 20171111_88         column=info:click_count, timestamp=1515993313562, value=
+                     2                                                       
+1 row(s) in 0.2670 seconds
+</code></pre><ul>
+<li>期间出现过一个问题，就是代码卡住，不报错看起来也没执行，上网查了很久发现有一个情况和我类似：或许是我的hosts配置有问题，导致程序解析主机名出现错误，一直重新连接尝试。简单来说就是hosts文件中配置的主机名和真实主机名不一致，并且还加入了额外的hosts配置信息干扰到了正确解析主机名。因为我运行IDEA程序的工作机没有配置任何额外的hosts，连接ZooKeeper时直接使用的IP地址，但是HBase Client 底层在进行操作时可能引入了主机名反向连接，作为完全干净的工作机当然找不到对应的服务器，就不断地在后台重试导致生成了上述的日志。当我把出现问题的两个hosts记录加入到工作机后，问题解决。</li>
+<li><p>上面一大段话就是说在我的windows的hosts里也加上一句192.168.92.130 thpffcj，因为是机房的电脑，我一直都只在虚拟机有这么一条映射，所有虚拟机里的地址都是些thpffcj，而程序里都写的是192.168.92.130，现在windows加上映射后，其实程序里也可以直接写thpffcj</p>
+</li>
+<li><p>写完工具类，我们就来实现保存和查找方法</p>
+</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.dao
+
+import cn.edu.nju.spark.project.domain.CourseClickCount
+import cn.edu.nju.spark.project.utils.HBaseUtils
+import org.apache.hadoop.hbase.client.Get
+import org.apache.hadoop.hbase.util.Bytes
+
+import scala.collection.mutable.ListBuffer
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 实战课程点击数-数据访问层
+  */
+object CourseClickCountDAO {
+
+  val tableName = &quot;imooc_course_clickcount&quot;
+  val cf = &quot;info&quot;
+  val qualifer = &quot;click_count&quot;
+
+  /**
+    * 保存数据到HBase
+    * @param list  CourseClickCount集合
+    */
+  def save(list: ListBuffer[CourseClickCount]): Unit = {
+
+    val table = HBaseUtils.getInstance().getTable(tableName)
+
+    for(ele &lt;- list) {
+      table.incrementColumnValue(Bytes.toBytes(ele.day_course),
+        Bytes.toBytes(cf),
+        Bytes.toBytes(qualifer),
+        ele.click_count)
+    }
+  }
+
+  /**
+    * 根据rowkey查询值
+    */
+  def count(day_course: String): Long = {
+    val table = HBaseUtils.getInstance().getTable(tableName)
+
+    val get = new Get(Bytes.toBytes(day_course))
+    val value = table.get(get).getValue(cf.getBytes, qualifer.getBytes)
+
+    if(value == null) {
+      0L
+    }else{
+      Bytes.toLong(value)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+
+
+    val list = new ListBuffer[CourseClickCount]
+    list.append(CourseClickCount(&quot;20171111_8&quot;,8))
+    list.append(CourseClickCount(&quot;20171111_9&quot;,9))
+    list.append(CourseClickCount(&quot;20171111_1&quot;,100))
+
+    save(list)
+
+    println(count(&quot;20171111_8&quot;) + &quot; : &quot; + count(&quot;20171111_9&quot;)+ &quot; : &quot; + count(&quot;20171111_1&quot;))
+  }
+}
+</code></pre><h3 id="8-将Spark-Streaming的处理结果写入到HBase中"><a href="#8-将Spark-Streaming的处理结果写入到HBase中" class="headerlink" title="8. 将Spark Streaming的处理结果写入到HBase中"></a>8. 将Spark Streaming的处理结果写入到HBase中</h3><pre><code>package cn.edu.nju.spark.project.spark
+
+import cn.edu.nju.spark.project.dao.CourseClickCountDAO
+import cn.edu.nju.spark.project.domain.{ClickLog, CourseClickCount}
+import cn.edu.nju.spark.project.utils.DateUtils
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+import scala.collection.mutable.ListBuffer
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 使用Spark Streaming处理Kafka过来的数据
+  */
+object ImoocStatStreamingApp {
+
+  def main(args: Array[String]): Unit = {
+
+    if (args.length != 4) {
+      println(&quot;Usage: ImoocStatStreamingApp &lt;zkQuorum&gt; &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(zkQuorum, groupId, topics, numThreads) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;ImoocStatStreamingApp&quot;).setMaster(&quot;local[5]&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(60))
+
+    val topicMap = topics.split(&quot;,&quot;).map((_, numThreads.toInt)).toMap
+
+    val messages = KafkaUtils.createStream(ssc, zkQuorum, groupId, topicMap)
+
+    // 测试步骤一：测试数据接收
+    // messages.map(_._2).count().print
+
+    // 测试步骤二：数据清洗
+    val logs = messages.map(_._2)
+    val cleanData = logs.map(line =&gt; {
+      val infos = line.split(&quot;\t&quot;)
+
+      // infos(2) = &quot;GET /class/130.html HTTP/1.1&quot;
+      // url = /class/130.html
+      val url = infos(2).split(&quot; &quot;)(1)
+      var courseId = 0
+
+      // 把实战课程的课程编号拿到了
+      if (url.startsWith(&quot;/class&quot;)) {
+        val courseIdHTML = url.split(&quot;/&quot;)(2)
+        courseId = courseIdHTML.substring(0, courseIdHTML.lastIndexOf(&quot;.&quot;)).toInt
+      }
+
+      ClickLog(infos(0), DateUtils.parseToMinute(infos(1)), courseId, infos(3).toInt, infos(4))
+    }).filter(clicklog =&gt; clicklog.courseId != 0)
+
+    //    cleanData.print()
+
+    // 测试步骤三：统计今天到现在为止实战课程的访问量
+
+    cleanData.map(x =&gt; {
+
+      // HBase rowkey设计： 20171111_88
+      (x.time.substring(0, 8) + &quot;_&quot; + x.courseId, 1)
+    }).reduceByKey(_ + _).foreachRDD(rdd =&gt; {
+      rdd.foreachPartition(partitionRecords =&gt; {
+        val list = new ListBuffer[CourseClickCount]
+
+        partitionRecords.foreach(pair =&gt; {
+          list.append(CourseClickCount(pair._1, pair._2))
+        })
+
+        CourseClickCountDAO.save(list)
+      })
+    })
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>清空hbase数据</li>
+</ul>
+<pre><code>hbase(main):010:0&gt; scan &apos;imooc_course_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+0 row(s) in 0.5320 seconds
+</code></pre><ul>
+<li>启动IDEA，然后去hbase查看情况，发现已经成功把清洗的数据存进去了</li>
+</ul>
+<pre><code>hbase(main):011:0&gt; scan &apos;imooc_course_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+ 20180115_112        column=info:click_count, timestamp=1515994937057, value=
+                     \x00\x00\x00\x00\x00\x00\x00/                           
+ 20180115_128        column=info:click_count, timestamp=1515994937357, value=
+                     \x00\x00\x00\x00\x00\x00\x002                           
+ 20180115_130        column=info:click_count, timestamp=1515994938509, value=
+                     \x00\x00\x00\x00\x00\x00\x00\x1F                        
+ 20180115_145        column=info:click_count, timestamp=1515994933876, value=
+                     \x00\x00\x00\x00\x00\x00\x00%                           
+ 20180115_146        column=info:click_count, timestamp=1515994934744, value=
+                     \x00\x00\x00\x00\x00\x00\x00)                           
+5 row(s) in 0.4900 seconds
+</code></pre><h3 id="9-功能二需求分析及HBase设计，HBase数据访问层开发"><a href="#9-功能二需求分析及HBase设计，HBase数据访问层开发" class="headerlink" title="9. 功能二需求分析及HBase设计，HBase数据访问层开发"></a>9. 功能二需求分析及HBase设计，HBase数据访问层开发</h3><ul>
+<li>功能：统计今天到现在为止从搜索引擎引流过来的实战课程的访问量</li>
+<li>HBase表设计</li>
+</ul>
+<pre><code>hbase(main):001:0&gt; create &apos;imooc_course_search_clickcount&apos;, &apos;info&apos;
+0 row(s) in 3.0940 seconds
+
+=&gt; Hbase::Table - imooc_course_search_clickcount
+</code></pre><ul>
+<li>rowkey设计：<ul>
+<li>20180115 + search + 1</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>创建实体类</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.domain
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 从搜索引擎过来的实战课程点击数实体类
+  * @param day_search_course
+  * @param click_count
+  */
+case class CourseSearchClickCount(day_search_course:String, click_count:Long)
+</code></pre><ul>
+<li>实现dao层代码，其实和上面很类似</li>
+</ul>
+<pre><code>package cn.edu.nju.spark.project.dao
+
+import cn.edu.nju.spark.project.domain.CourseSearchClickCount
+import cn.edu.nju.spark.project.utils.HBaseUtils
+import org.apache.hadoop.hbase.client.Get
+import org.apache.hadoop.hbase.util.Bytes
+
+import scala.collection.mutable.ListBuffer
+
+/**
+  * Created by Thpffcj on 2018/1/15.
+  * 从搜索引擎过来的实战课程点击数-数据访问层
+  */
+object CourseSearchClickCountDAO {
+
+  val tableName = &quot;imooc_course_search_clickcount&quot;
+  val cf = &quot;info&quot;
+  val qualifer = &quot;click_count&quot;
+
+  /**
+    * 保存数据到HBase
+    *
+    * @param list  CourseSearchClickCount集合
+    */
+  def save(list: ListBuffer[CourseSearchClickCount]): Unit = {
+
+    val table = HBaseUtils.getInstance().getTable(tableName)
+
+    for(ele &lt;- list) {
+      table.incrementColumnValue(Bytes.toBytes(ele.day_search_course),
+        Bytes.toBytes(cf),
+        Bytes.toBytes(qualifer),
+        ele.click_count)
+    }
+
+  }
+
+  /**
+    * 根据rowkey查询值
+    */
+  def count(day_search_course: String):Long = {
+    val table = HBaseUtils.getInstance().getTable(tableName)
+
+    val get = new Get(Bytes.toBytes(day_search_course))
+    val value = table.get(get).getValue(cf.getBytes, qualifer.getBytes)
+
+    if(value == null) {
+      0L
+    }else{
+      Bytes.toLong(value)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+
+    val list = new ListBuffer[CourseSearchClickCount]
+    list.append(CourseSearchClickCount(&quot;20171111_www.baidu.com_8&quot;,8))
+    list.append(CourseSearchClickCount(&quot;20171111_cn.bing.com_9&quot;,9))
+
+    save(list)
+
+    println(count(&quot;20171111_www.baidu.com_8&quot;) + &quot; : &quot; + count(&quot;20171111_cn.bing.com_9&quot;))
+  }
+}
+</code></pre><ul>
+<li>下面我们要做的就是在streaming代码里把第二个需求的统计结果写到hbase里面去</li>
+</ul>
+<pre><code>// 测试步骤四：统计从搜索引擎过来的今天到现在为止实战课程的访问量
+
+cleanData.map(x =&gt; {
+
+  // https://www.sogou.com/web?query=Spark SQL实战
+  val referrer = x.referrer.replaceAll(&quot;//&quot;, &quot;/&quot;)
+  val splits = referrer.split(&quot;/&quot;)
+  var host = &quot;&quot;
+  if(splits.length &gt; 2) {
+    host = splits(1)
+  }
+
+  (host, x.courseId, x.time)
+}).filter(_._1 != &quot;&quot;).map(x =&gt; {
+  (x._3.substring(0,8) + &quot;_&quot; + x._1 + &quot;_&quot; + x._2 , 1)
+}).reduceByKey(_ + _).foreachRDD(rdd =&gt; {
+  rdd.foreachPartition(partitionRecords =&gt; {
+    val list = new ListBuffer[CourseSearchClickCount]
+
+    partitionRecords.foreach(pair =&gt; {
+      list.append(CourseSearchClickCount(pair._1, pair._2))
+    })
+
+    CourseSearchClickCountDAO.save(list)
+  })
+})
+</code></pre><ul>
+<li>执行代码，查看hbase里是否存储成功</li>
+</ul>
+<pre><code>hbase(main):006:0&gt; scan &apos;imooc_course_search_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+ 20171111_cn.bing.co column=info:click_count, timestamp=1515997092396, value=
+ m_9                 \x00\x00\x00\x00\x00\x00\x00\x09                        
+ 20171111_www.baidu. column=info:click_count, timestamp=1515997092387, value=
+ com_8               \x00\x00\x00\x00\x00\x00\x00\x08                        
+2 row(s) in 0.0590 seconds
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-生成环境使用"><a href="#3-生成环境使用" class="headerlink" title="3. 生成环境使用"></a>3. 生成环境使用</h2><h3 id="1-编译打包"><a href="#1-编译打包" class="headerlink" title="1. 编译打包"></a>1. 编译打包</h3><ul>
+<li>和前面一样，有一个地方我们需要注释掉</li>
+</ul>
+<pre><code>val sparkConf = new SparkConf().setAppName(&quot;ImoocStatStreamingApp&quot;) //.setMaster(&quot;local[5]&quot;)
+</code></pre><ul>
+<li>打包上传服务器</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ ls
+hadoop-1.0-SNAPSHOT.jar                        SparkTrain-1.0.jar
+hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar
+</code></pre><h3 id="2-运行"><a href="#2-运行" class="headerlink" title="2. 运行"></a>2. 运行</h3><ul>
+<li>这次的提交命令比以前多了一些参数，都是为了解决由于报缺少jar包导致的错误，可以和前面几节博客对照思考</li>
+</ul>
+<pre><code>spark-submit --master local[5] \
+--jars $(echo /home/thpffcj/app/hbase-1.2.0-cdh5.7.0/lib/*.jar | tr &apos; &apos; &apos;,&apos;) \
+--class cn.edu.nju.spark.project.spark.ImoocStatStreamingApp \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+/home/thpffcj/lib/SparkTrain-1.0.jar \
+192.168.92.130:2181 test streamingtopic 1
+</code></pre><ul>
+<li>提交作业时注意事项：<ul>
+<li>–packages 的使用</li>
+<li>–jars 的使用</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>我们发现数据库多了很多记录，说明我们服务器也跑通了</li>
+</ul>
+<pre><code>hbase(main):007:0&gt; scan &apos;imooc_course_search_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+ 20171111_cn.bing.co column=info:click_count, timestamp=1515997092396, value=
+ m_9                 \x00\x00\x00\x00\x00\x00\x00\x09                        
+ 20171111_www.baidu. column=info:click_count, timestamp=1515997092387, value=
+ com_8               \x00\x00\x00\x00\x00\x00\x00\x08                        
+ 20180115_cn.bing.co column=info:click_count, timestamp=1515999125747, value=
+ m_112               \x00\x00\x00\x00\x00\x00\x00\x19                        
+ 20180115_cn.bing.co column=info:click_count, timestamp=1515999125884, value=
+ m_128               \x00\x00\x00\x00\x00\x00\x00\x1F                        
+ 20180115_cn.bing.co column=info:click_count, timestamp=1515999125780, value=
+ m_130               \x00\x00\x00\x00\x00\x00\x00\x1E                        
+ 20180115_cn.bing.co column=info:click_count, timestamp=1515999125747, value=
+ m_145               \x00\x00\x00\x00\x00\x00\x00\x19                        
+ ...
+</code></pre><ul>
+<li>到这里就算整合完毕所有框架并解决了业务需求</li>
+<li>好机器真的很重要</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" style="float: left;">
+        ← 可视化实战
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/">
+        Spark Streaming整合Flume&Kafka打造通用流处理基础 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

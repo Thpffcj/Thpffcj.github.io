@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark Streaming整合Flume&amp;Kafka打造通用流处理基础 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-16T02:26:57.000Z" itemprop="datePublished">
+          2018-01-16
+      </time>
+    
+</span>
+                <h1>Spark Streaming整合Flume&Kafka打造通用流处理基础</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>学习了Spark Streaming整合Flume和Spark Streaming整合Kafka之后，我们就要学习搭建项目所需环境了，使用Flume收集日志信息，然后输送到Kafka，最后由Spark Streaming从Kafka中获取数据进行计算。在具体开始业务之前，我们先体会一下环境搭建。</p>
+<hr>
+<ul>
+<li>在我们进行整体开发前，我们先用一张图了解一下业务流程</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%9A%E7%94%A8%E6%B5%81%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<hr>
+<h2 id="1-整合日志输出到Flume"><a href="#1-整合日志输出到Flume" class="headerlink" title="1. 整合日志输出到Flume"></a>1. 整合日志输出到Flume</h2><h3 id="1-Log4j日志输出"><a href="#1-Log4j日志输出" class="headerlink" title="1. Log4j日志输出"></a>1. Log4j日志输出</h3><ul>
+<li>我们选择log4j产生日志</li>
+</ul>
+<pre><code>import org.apache.log4j.Logger;
+
+/**
+ * Created by Thpffcj on 2018/1/14.
+ * 模拟日志产生
+ */
+public class LoggerGenerator {
+
+    private static Logger logger = Logger.getLogger(LoggerGenerator.class.getName());
+
+    public static void main(String[] args) throws Exception{
+
+        int index = 0;
+        while(true) {
+            Thread.sleep(1000);
+            logger.info(&quot;value : &quot; + index++);
+        }
+    }
+}
+</code></pre><ul>
+<li>因为主要是学习流程，我们使用了无意义的死循环来生成日志信息</li>
+</ul>
+<pre><code>18/01/14 10:48:52 INFO LoggerGenerator: value : 0
+18/01/14 10:48:53 INFO LoggerGenerator: value : 1
+18/01/14 10:48:54 INFO LoggerGenerator: value : 2
+18/01/14 10:48:55 INFO LoggerGenerator: value : 3
+18/01/14 10:48:56 INFO LoggerGenerator: value : 4
+18/01/14 10:48:57 INFO LoggerGenerator: value : 5
+18/01/14 10:48:58 INFO LoggerGenerator: value : 6
+18/01/14 10:48:59 INFO LoggerGenerator: value : 7
+</code></pre><ul>
+<li>上面是生成日志的格式，我们想自定义一下日志记录的格式，新建一个log4j.properties</li>
+</ul>
+<pre><code>log4j.rootLogger=INFO,stdout
+
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.target = System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c] [%p] - %m%n
+</code></pre><ul>
+<li>现在的日志格式</li>
+</ul>
+<pre><code>2018-01-14 10:51:25,807 [main] [LoggerGenerator] [INFO] - value : 0
+2018-01-14 10:51:26,808 [main] [LoggerGenerator] [INFO] - value : 1
+2018-01-14 10:51:27,809 [main] [LoggerGenerator] [INFO] - value : 2
+2018-01-14 10:51:28,809 [main] [LoggerGenerator] [INFO] - value : 3
+2018-01-14 10:51:29,810 [main] [LoggerGenerator] [INFO] - value : 4
+2018-01-14 10:51:30,810 [main] [LoggerGenerator] [INFO] - value : 5
+2018-01-14 10:51:31,811 [main] [LoggerGenerator] [INFO] - value : 6
+2018-01-14 10:51:32,811 [main] [LoggerGenerator] [INFO] - value : 7
+2018-01-14 10:51:33,811 [main] [LoggerGenerator] [INFO] - value : 8
+</code></pre><h3 id="2-使用Flume采集Log4j产生的日志"><a href="#2-使用Flume采集Log4j产生的日志" class="headerlink" title="2. 使用Flume采集Log4j产生的日志"></a>2. 使用Flume采集Log4j产生的日志</h3><ul>
+<li>使用Flume的关键就是写出Agent的配置文件</li>
+<li>我们新建streaming.conf，目前是将收集到日志输出的控制台，方便调试</li>
+</ul>
+<pre><code>agent1.sources=avro-source
+agent1.channels=logger-channel
+agent1.sinks=log-sink
+
+# define source
+agent1.sources.avro-source.type=avro
+agent1.sources.avro-source.bind=thpffcj
+agent1.sources.avro-source.port=41414
+
+# define channel
+agent1.channels.logger-channel.type=memory
+
+# define sink
+agent1.sinks.log-sink.type=logger
+
+agent1.sources.avro-source.channels=logger-channel
+agent1.sinks.log-sink.channel=logger-channel
+</code></pre><ul>
+<li>拷贝到conf文件夹</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ ls
+avro-memory-kafka.conf          flume-env.sh
+avro-memory-logger.conf         flume-env.sh.template
+example.conf                    flume_pull_streaming.conf
+exec-memory-avro.conf           flume_push_streaming.conf
+exec-memory-logger.conf         log4j.properties
+flume-conf.properties.template  streaming.conf
+flume-env.ps1.template
+</code></pre><ul>
+<li>启动flume</li>
+</ul>
+<pre><code>flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+</code></pre><ul>
+<li>发现可以启动成功</li>
+</ul>
+<pre><code>2018-01-14 11:05:20,130 (lifecycleSupervisor-1-1) [INFO - org.apache.flume.instrumentation.MonitoredCounterGroup.start(MonitoredCounterGroup.java:96)] Component type: SOURCE, name: avro-source started
+2018-01-14 11:05:20,133 (lifecycleSupervisor-1-1) [INFO - org.apache.flume.source.AvroSource.start(AvroSource.java:253)] Avro source avro-source started.
+</code></pre><ul>
+<li>接下来就是flume和log4j对接了，在flume官网上找到Log4j Appender<ul>
+<li>Appends Log4j events to a flume agent’s avro source. A client using this appender must have the flume-ng-sdk in the classpath (eg, flume-ng-sdk-1.8.0.jar). Required properties are in bold.<ul>
+<li>Hostname – The hostname on which a remote Flume agent is running with an avro source.</li>
+<li>Port – The port at which the remote Flume agent’s avro source is listening.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>在log4j文件中加入官方示例</li>
+</ul>
+<pre><code>log4j.rootLogger=INFO,stdout,flume
+
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.target = System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c] [%p] - %m%n
+
+log4j.appender.flume = org.apache.flume.clients.log4jappender.Log4jAppender
+log4j.appender.flume.Hostname = 192.168.92.130
+log4j.appender.flume.Port = 41414
+log4j.appender.flume.UnsafeMode = true
+</code></pre><ul>
+<li>再次运行提示我找不到Log4jAppender类，那就添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.flume.flume-ng-clients&lt;/groupId&gt;
+    &lt;artifactId&gt;flume-ng-log4jappender&lt;/artifactId&gt;
+    &lt;version&gt;1.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li><strong>再次运行项目，在虚拟机flume控制台观察，第一次又没有发现任何输出，经过上次的教训，这次我首先怀疑配置文件写的有问题，仔细看了一遍，发现有个.写成了-，还有最后的channel写成了channels，但启动都没有问题，如果看日志的能力不强可能很难发现，所有编写flume的配置文件时一定要仔细</strong></li>
+<li>上面给出的配置文件已经是修改过的，正常运行后在flume控制台应该可以看见日志</li>
+</ul>
+<pre><code>2018-01-14 11:27:37,844 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900450540, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 30                      value : 0 }
+2018-01-14 11:27:37,845 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900451654, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 31                      value : 1 }
+2018-01-14 11:27:37,901 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900452660, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 32                      value : 2 }
+2018-01-14 11:27:38,908 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900453665, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 33                      value : 3 }
+2018-01-14 11:27:39,911 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900454668, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 34                      value : 4 }
+2018-01-14 11:27:40,917 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900455674, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 35                      value : 5 }
+2018-01-14 11:27:41,924 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900456681, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 36                      value : 6 }
+2018-01-14 11:27:42,929 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900457686, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 37                      value : 7 }
+2018-01-14 11:27:43,951 (SinkRunner-PollingRunner-DefaultSinkProcessor) [INFO - org.apache.flume.sink.LoggerSink.process(LoggerSink.java:94)] Event: { headers:{flume.client.log4j.timestamp=1515900458693, flume.client.log4j.logger.name=LoggerGenerator, flume.client.log4j.log.level=20000, flume.client.log4j.message.encoding=UTF8} body: 76 61 6C 75 65 20 3A 20 38                      value : 8 }
+</code></pre><ul>
+<li>目前我们就完成了flume收集log4j产生的日志</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-整合Flume到Kafka"><a href="#2-整合Flume到Kafka" class="headerlink" title="2. 整合Flume到Kafka"></a>2. 整合Flume到Kafka</h2><ul>
+<li>使用kafak，先启动zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+[thpffcj@thpffcj ~]$ jps
+3720 QuorumPeerMain
+3741 Jps
+</code></pre><ul>
+<li>启动kafka</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-server-start.sh -daemon /home/thpffcj/app/kafka_2.11-0.9.0.0/config/server.properties
+
+[thpffcj@thpffcj ~]$ jps
+3780 Kafka
+3720 QuorumPeerMain
+3820 Jps
+</code></pre><ul>
+<li>创建一个topic并查看已有的topic</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-topics.sh --create --zookeeper thpffcj:2181 --replication-factor 1 --partitions 1 --topic streamingtopic
+Created topic &quot;streamingtopic&quot;.
+
+[thpffcj@thpffcj ~]$ kafka-topics.sh --list --zookeeper thpffcj:2181hello_topic - marked for deletion
+kafka-topic
+kafka_streaming_topic
+kafka_topic
+my-replicated-topic
+streamingtopic
+</code></pre><ul>
+<li>创建flume配置文件streaming2.conf，使用KafkaSink</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cat streaming2.conf 
+gent1.sources=avro-source
+agent1.channels=logger-channel
+agent1.sinks=kafka-sink
+
+# define source
+agent1.sources.avro-source.type=avro
+agent1.sources.avro-source.bind=thpffcj
+agent1.sources.avro-source.port=41414
+
+# define channel
+agent1.channels.logger-channel.type=memory
+
+# define sink
+agent1.sinks.kafka-sink.type=org.apache.flume.sink.kafka.KafkaSink
+agent1.sinks.kafka-sink.topic = streamingtopic
+agent1.sinks.kafka-sink.brokerList = thpffcj:9092
+agent1.sinks.kafka-sink.requiredAcks = 1
+agent1.sinks.kafka-sink.batchSize = 20
+
+agent1.sources.avro-source.channels=logger-channel
+agent1.sinks.kafka-sink.channel=logger-channel
+</code></pre><ul>
+<li>启动flume</li>
+</ul>
+<pre><code>flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming2.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+</code></pre><ul>
+<li>启动成功</li>
+</ul>
+<pre><code>2018-01-14 12:37:42,888 (lifecycleSupervisor-1-1) [INFO - org.apache.flume.instrumentation.MonitoredCounterGroup.register(MonitoredCounterGroup.java:120)] Monitored counter group for type: SINK, name: kafka-sink: Successfully registered new MBean.
+2018-01-14 12:37:42,888 (lifecycleSupervisor-1-1) [INFO - org.apache.flume.instrumentation.MonitoredCounterGroup.start(MonitoredCounterGroup.java:96)] Component type: SINK, name: kafka-sink started
+</code></pre><ul>
+<li>相当于flume的数据流到了kafka的生产者，所以我们需要启动一个kafka消费者进行消费</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-consumer.sh --zookeeper thpffcj:2181 --topic streamingtopic
+</code></pre><ul>
+<li>我们现在启动IDEA日志产生模拟器，观察kafka端，发现接收到了消息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-consumer.sh --zookeeper thpffcj:2181 --topic streamingtopic
+
+value : 0
+value : 1
+value : 2
+value : 3
+value : 4
+value : 5
+value : 6
+value : 7
+value : 8
+value : 9
+value : 10
+value : 11
+value : 12
+value : 13
+value : 14
+value : 15
+value : 16
+value : 17
+value : 18
+value : 19
+value : 20
+</code></pre><ul>
+<li>目前我们就完成了使用flume收集log4j产生的日志，并通过kafkasink输出到kafka队列里去</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-整合Kafka到Spark-Streaming"><a href="#3-整合Kafka到Spark-Streaming" class="headerlink" title="3. 整合Kafka到Spark Streaming"></a>3. 整合Kafka到Spark Streaming</h2><h3 id="1-Spark-Streaming处理kafka数据"><a href="#1-Spark-Streaming处理kafka数据" class="headerlink" title="1. Spark Streaming处理kafka数据"></a>1. Spark Streaming处理kafka数据</h3><ul>
+<li>接下来我们就要使用Spark Streaming计算kafka里面的数据了</li>
+<li>编写Spark Streaming处理类，其实和以前都一样</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/14.
+  */
+object KafkaStreamingApp {
+
+  def main(args: Array[String]): Unit = {
+
+    if(args.length != 4) {
+      System.err.println(&quot;Usage: KafkaStreamingApp &lt;zkQuorum&gt; &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;&quot;)
+    }
+
+    val Array(zkQuorum, group, topics, numThreads) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;KafkaStreamingApp&quot;)
+      .setMaster(&quot;local[2]&quot;)
+
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    val topicMap = topics.split(&quot;,&quot;).map((_, numThreads.toInt)).toMap
+
+    val messages = KafkaUtils.createStream(ssc, zkQuorum, group,topicMap)
+
+    messages.map(_._2).count().print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>我们传入四个参数192.168.92.130:2181 test streamingtopic 1</li>
+<li>观察控制台输出</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515905935000 ms
+-------------------------------------------
+20
+</code></pre><ul>
+<li>每批次统计20条是因为我们前面flume配置文件里设置batchSize = 20，20条数据才会到kafka</li>
+</ul>
+<h3 id="2-总结"><a href="#2-总结" class="headerlink" title="2. 总结"></a>2. 总结</h3><ul>
+<li>我们现在是在本地进行测试的，在IEDA中运行LoggerGenerator，然后使用Flume，Kafka，以及Spark Streaming进行处理操作</li>
+<li>在生产上：<ul>
+<li>打包jar：执行LoggerGenerator类</li>
+<li>Flume，Kafka和我们的测试是一样的</li>
+<li>Spark Streaming的代码也是需要打成jar包，然后使用spark-submit的方式进行提交到环境上执行，可以根据实际情况选择运行模式：local/yarn/standalone/mesos</li>
+</ul>
+</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" style="float: left;">
+        ← Spark Streaming项目实战
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/">
+        Spark Streaming整合Kafka →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

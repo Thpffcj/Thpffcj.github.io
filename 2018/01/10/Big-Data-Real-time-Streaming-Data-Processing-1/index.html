@@ -181,7 +181,23 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-实时流处理产生背景"><a href="#1-实时流处理产生背景" class="headerlink" title="1. 实时流处理产生背景"></a>1. 实时流处理产生背景</h2><h3 id="1-业务现状分析"><a href="#1-业务现状分析" class="headerlink" title="1. 业务现状分析"></a>1. 业务现状分析</h3><ul>
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>前一段时间系统了解了一下Hadoop，主要是用来做离线数据处理的，想着趁热打铁，利用放假前这段时间再来了解实时流处理，有很多成熟技术来做实时流处理，storm应该是最火的流处理框架了，不过我选择了了解Spark Streaming，一方面找到了这方面资料，另一方对大数据方面了解很少，主要还是通过一个框架来了解一下完整的工作链，所以选择了这个技术体系。</p>
+<hr>
+<h2 id="1-实时流处理产生背景"><a href="#1-实时流处理产生背景" class="headerlink" title="1. 实时流处理产生背景"></a>1. 实时流处理产生背景</h2><h3 id="1-业务现状分析"><a href="#1-业务现状分析" class="headerlink" title="1. 业务现状分析"></a>1. 业务现状分析</h3><ul>
 <li>需求：统计主站每个(指定)课程访问的客户端，地域信息分布情况</li>
 <li>实现步骤：<ul>
 <li>课程编号，ip信息，useragent</li>
@@ -275,13 +291,260 @@
 </ul>
 </li>
 </ul>
+<p><br></p>
+<hr>
+<h2 id="3-实战环境搭建"><a href="#3-实战环境搭建" class="headerlink" title="3. 实战环境搭建"></a>3. 实战环境搭建</h2><ul>
+<li>下面是一个整体的安装需求，不过可能有一些东西在上一阶段学习Hadoop的时候已经安装过了，可能就不会记录很细，没安装过的还是会记录安装过程</li>
+<li>可以先看后两篇关于Flume和学习和Kafka的学习后再来环境搭建，毕竟大数据这一块接触不多，工具和框架比较多</li>
+</ul>
+<h3 id="1-JDK安装"><a href="#1-JDK安装" class="headerlink" title="1. JDK安装"></a>1. JDK安装</h3><h3 id="2-Scala安装"><a href="#2-Scala安装" class="headerlink" title="2. Scala安装"></a>2. Scala安装</h3><ul>
+<li>下载</li>
+<li>解压</li>
+<li>配置系统环境变量</li>
+<li>检查是否安装成功</li>
+</ul>
+<pre><code>export SCALA_HOME=/home/thpffcj/app/scala-2.11.8
+export PATH=$SCALA_HOME/bin:$PATH
+</code></pre><h3 id="3-Maven安装"><a href="#3-Maven安装" class="headerlink" title="3. Maven安装"></a>3. Maven安装</h3><ul>
+<li>下载</li>
+<li>解压</li>
+<li>配置系统环境变量</li>
+<li>检查是否安装成功</li>
+</ul>
+<pre><code>export MAVEN_HOME=/home/thpffcj/app/apache-maven-3.5.2
+export PATH=$MAVEN_HOME/bin:$PATH
 
+
+[thpffcj@thpffcj ~]$ mvn -v
+Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T15:58:13+08:00)
+Maven home: /home/thpffcj/app/apache-maven-3.5.2
+Java version: 1.8.0_151, vendor: Oracle Corporation
+Java home: /home/thpffcj/app/jdk1.8.0_151/jre
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: &quot;linux&quot;, version: &quot;3.10.0-514.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;
+</code></pre><ul>
+<li>修改jar包下载位置</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ ls
+logging  settings.xml  toolchains.xml
+[thpffcj@thpffcj conf]$ vi settings.xml 
+
+&lt;localRepository&gt;/home/thpffcj/maven_repository&lt;/localRepository&gt;
+</code></pre><h3 id="4-Hadoop安装"><a href="#4-Hadoop安装" class="headerlink" title="4. Hadoop安装"></a>4. Hadoop安装</h3><ul>
+<li>Hadoop安装详细过程在前面学习Hadoop的博客完整记录了</li>
+<li>下载</li>
+<li>解压</li>
+<li>配置系统环境变量</li>
+<li>检查是否安装成功</li>
+</ul>
+<h3 id="5-ZooKeeper安装"><a href="#5-ZooKeeper安装" class="headerlink" title="5. ZooKeeper安装"></a>5. ZooKeeper安装</h3><h3 id="6-Hbase安装"><a href="#6-Hbase安装" class="headerlink" title="6. Hbase安装"></a>6. Hbase安装</h3><ul>
+<li>下载</li>
+<li>解压</li>
+</ul>
+<pre><code>[thpffcj@thpffcj software]$ ls
+apache-maven-3.5.2-bin.tar.gz   scala-2.11.8.tgz
+flume-ng-1.6.0-cdh5.7.0.tar.gz  spark-2.2.0.tgz
+hbase-1.2.0-cdh5.7.0.tar.gz     zookeeper-3.4.5-cdh5.7.0.tar.gz
+kafka_2.11-0.9.0.0.tgz
+[thpffcj@thpffcj software]$ tar -zxvf hbase-1.2.0-cdh5.7.0.tar.gz -C ~/app/
+</code></pre><ul>
+<li>配置系统环境变量</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hbase-1.2.0-cdh5.7.0]$ vi ~/.bash_profile 
+
+export HBASE_HOME=/home/thpffcj/app/hbase-1.2.0-cdh5.7.0
+export PATH=$HBASE_HOME/bin:$PATH
+
+[thpffcj@thpffcj hbase-1.2.0-cdh5.7.0]$ source ~/.bash_profile 
+</code></pre><ul>
+<li>修改配置文件</li>
+<li>修改hbase-env.sh</li>
+</ul>
+<pre><code># The java implementation to use.  Java 1.7+ required.
+# export JAVA_HOME=/usr/java/jdk1.6.0/
+export JAVA_HOME=/home/thpffcj/app/jdk1.8.0_151
+
+# Tell HBase whether it should manage it&apos;s own instance of Zookeeper or not.
+export HBASE_MANAGES_ZK=false
+</code></pre><ul>
+<li>修改hbase-site.xml</li>
+</ul>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;hbase.rootdir&lt;/name&gt;
+    &lt;value&gt;hdfs://thpffcj:8020/hbase&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;
+    &lt;value&gt;true&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;
+    &lt;value&gt;thpffcj:2181&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><ul>
+<li>修改regionservers</li>
+</ul>
+<pre><code>thpffcj
+</code></pre><ul>
+<li>检查是否安装成功，首要需要启动zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+[thpffcj@thpffcj conf]$ start-hbase.sh 
+starting master, logging to /home/thpffcj/app/hbase-1.2.0-cdh5.7.0/logs/hbase-thpffcj-master-thpffcj.out
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=128m; support was removed in 8.0
+thpffcj: starting regionserver, logging to /home/thpffcj/app/hbase-1.2.0-cdh5.7.0/bin/../logs/hbase-thpffcj-regionserver-thpffcj.out
+thpffcj: Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+thpffcj: Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=128m; support was removed in 8.0
+
+[thpffcj@thpffcj conf]$ jps
+4416 HRegionServer
+4118 QuorumPeerMain
+4505 Jps
+4270 HMaster
+</code></pre><h3 id="7-Spark安装"><a href="#7-Spark安装" class="headerlink" title="7. Spark安装"></a>7. Spark安装</h3><ul>
+<li>下载源码并解压</li>
+</ul>
+<pre><code>[thpffcj@thpffcj spark-2.2.0]$ ls
+appveyor.yml     data      licenses     README.md
+assembly         dev       mllib        repl
+bin              docs      mllib-local  resource-managers
+build            examples  NOTICE       sbin
+common           external  pom.xml      scalastyle-config.xml
+conf             graphx    project      sql
+CONTRIBUTING.md  launcher  python       streaming
+core             LICENSE   R            tools
+</code></pre><ul>
+<li>我们可以使用Spark源码目录中的dev下的make-distribution.sh脚本，官方提供的编译命令如下：<ul>
+<li>./dev/make-distribution.sh –name custom-spark –tgz -Psparkr -Phadoop-2.4 -Phive -Phive-thriftserver -Pmesos -Pyarn</li>
+<li>参数说明：<ul>
+<li>–name：指定编译完成后Spark安装包的名字</li>
+<li>–tgz：以tgz的方式进行压缩</li>
+<li>-Psparkr：编译出来的Spark支持R语言</li>
+<li>-Phadoop-2.4：以hadoop-2.4的profile进行编译，具体的profile可以看出源码根目录中的pom.xml中查看</li>
+<li>-Phive和-Phive-thriftserver：编译出来的Spark支持对Hive的操作</li>
+<li>-Pmesos：编译出来的Spark支持运行在Mesos上</li>
+<li>-Pyarn：编译出来的Spark支持运行在YARN上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>我们使用的Hadoop版本是2.6.0-cdh5.7.0，并且我们需要将Spark运行在YARN上、支持对Hive的操作，那么我们的Spark源码编译脚本就是：</li>
+<li>./dev/make-distribution.sh –name 2.6.0-cdh5.7.0 –tgz -Pyarn -Phadoop-2.6 -Phive -Phive-thriftserver -Dhadoop.version=2.6.0-cdh5.7.0</li>
+<li>可能需要下载很多东西，时间略长，不过最后阶段报了错误，找到不到包</li>
+</ul>
+<pre><code>[ERROR] Failed to execute goal on project spark-launcher_2.11: Could not resolve dependencies for project org.apache.spark:spark-launcher_2.11:jar:2.2.0: Failure to find org.apache.hadoop:hadoop-client:jar:2.6.0-cdh5.7.0 in https://repo1.maven.org/maven2 was cached in the local repository, resolution will not be reattempted until the update interval of central has elapsed or updates are forced -&gt; [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn &lt;goals&gt; -rf :spark-launcher_2.11
+</code></pre><ul>
+<li>这是因为默认的是apache的仓库，但是我们hadoop的版本写的是CDH，这时要将CDH的仓库配进来，打开spark目录下的pom.xml文件，将CDH的仓库配进去</li>
+</ul>
+<pre><code>&lt;repository&gt;
+    &lt;id&gt;cloudera&lt;/id&gt;
+    &lt;name&gt;cloudera Repository&lt;/name&gt;
+    &lt;url&gt;https://repository.cloudera.com/artifactory/cloudera-repos&lt;/url&gt;
+&lt;/repository&gt;
+</code></pre><ul>
+<li>接续执行./dev/make-distribution.sh –name 2.6.0-cdh5.7.0 –tgz -Pyarn -Phadoop-2.6 -Phive -Phive-thriftserver -Dhadoop.version=2.6.0-cdh5.7.0</li>
+<li>又等待了很长时间，在spark根目录我们得到spark-2.2.0-bin-2.6.0-cdh5.7.0.tgz，解压，添加环境变量</li>
+</ul>
+<pre><code>[thpffcj@thpffcj software]$ tar -zxvf spark-2.2.0-bin-2.6.0-cdh5.7.0.tgz -C ~/app/
+
+[thpffcj@thpffcj spark-2.2.0-bin-2.6.0-cdh5.7.0]$ vi ~/.bash_profile 
+
+export SPARK_HOME=/home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0
+export PATH=$SPARK_HOME/bin:$PATH
+
+[thpffcj@thpffcj spark-2.2.0-bin-2.6.0-cdh5.7.0]$ source ~/.bash_profile 
+</code></pre><ul>
+<li>用local模式启动spark</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-shell --master local[2]
+</code></pre><h3 id="8-IDEA-Maven-Spark-Streaming"><a href="#8-IDEA-Maven-Spark-Streaming" class="headerlink" title="8. IDEA+Maven+Spark Streaming"></a>8. IDEA+Maven+Spark Streaming</h3><ul>
+<li>主要就是添加很多依赖</li>
+</ul>
+<pre><code>&lt;properties&gt;
+    &lt;scala.version&gt;2.11.8&lt;/scala.version&gt;
+    &lt;kafka.version&gt;0.9.0.0&lt;/kafka.version&gt;
+    &lt;spark.version&gt;2.2.0&lt;/spark.version&gt;
+    &lt;hadoop.version&gt;2.6.0-cdh5.7.0&lt;/hadoop.version&gt;
+    &lt;hbase.version&gt;1.2.0-cdh5.7.0&lt;/hbase.version&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+
+&lt;!--添加cloudera的repository--&gt;
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;cloudera&lt;/id&gt;
+        &lt;url&gt;https://repository.cloudera.com/artifactory/cloudera-repos&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;
+        &lt;artifactId&gt;scala-library&lt;/artifactId&gt;
+        &lt;version&gt;${scala.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- Kafka 依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+        &lt;artifactId&gt;kafka_2.11&lt;/artifactId&gt;
+        &lt;version&gt;${kafka.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- Hadoop 依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
+        &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;
+        &lt;version&gt;${hadoop.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- HBase 依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;
+        &lt;artifactId&gt;hbase-client&lt;/artifactId&gt;
+        &lt;version&gt;${hbase.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;
+        &lt;artifactId&gt;hbase-server&lt;/artifactId&gt;
+        &lt;version&gt;${hbase.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- Spark Streaming 依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+        &lt;artifactId&gt;spark-streaming_2.11&lt;/artifactId&gt;
+        &lt;version&gt;${spark.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-2/" style="float: left;">
+    <a class="pull-left" href="/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" style="float: left;">
         ← 分布式日志收集框架Flume
     </a>
     

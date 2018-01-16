@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>可视化实战 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-18T10:16:20.000Z" itemprop="datePublished">
+          2018-01-18
+      </time>
+    
+</span>
+                <h1>可视化实战</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>其实在上一篇博客我们就已经完成了整个业务流程，但是我们获得的结果不能只存在数据库，还需要必要的展示给业务经理等不太了解技术的管理人员直观的展示，所以我们就需要将数据可视化。作为系统学习Spark Streaming的最后一篇博客，我们使用百度提供的echarts来将我们计算的结果用图表展示出来。</p>
+<hr>
+<h2 id="1-数据可视化"><a href="#1-数据可视化" class="headerlink" title="1. 数据可视化"></a>1. 数据可视化</h2><h3 id="1-为什么需要可视化"><a href="#1-为什么需要可视化" class="headerlink" title="1. 为什么需要可视化"></a>1. 为什么需要可视化</h3><ul>
+<li>Data visualization的技术在国外正如火如荼的发展, 比如Tableau,Domo他们旨在为公司提供更好的数据分析服务,让公司做出更好的决策(Business Intelligence). 在国内也不少公司正在向这一方向的服务发展。</li>
+<li>什么是可视化(visualization)：<ul>
+<li>简单的说我们可以把可视化理解成是一个：将抽象的科学或者商业数据.用图像表示出来.帮助理解数据的意义的过程。它通常会在进行数据分析(data analysis)的过程中大量的使用。</li>
+</ul>
+</li>
+<li>为什么要进行数据可视化<ul>
+<li>我们利用视觉获取的信息量，远远比别的感官要多的多</li>
+<li>它能够帮助分析的人对数据有更全面的认识。</li>
+<li>人类大脑在记忆能力的限制。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Spring-Boot构建Web项目"><a href="#2-Spring-Boot构建Web项目" class="headerlink" title="2. Spring Boot构建Web项目"></a>2. Spring Boot构建Web项目</h3><ul>
+<li>使用IDEA基本是傻瓜式创建Spring Boot项目，然后我们随便写个类测试一下环境是否搭建成功</li>
+</ul>
+<pre><code>package cn.edu.nju.spark;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Created by Thpffcj on 2018/1/15.
+ * 这是我们的第一个Boot应用
+ */
+@RestController
+public class HelloBoot {
+
+    @RequestMapping(value = &quot;/hello&quot;, method = RequestMethod.GET)
+    public String sayHello() {
+
+        return &quot;Hello World Spring Boot...&quot;;
+    }
+}
+</code></pre><ul>
+<li>输入<a href="http://localhost:8080/hello，我们应该可以看到Hello" target="_blank" rel="external">http://localhost:8080/hello，我们应该可以看到Hello</a> World Spring Boot… </li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Echarts可视化"><a href="#2-Echarts可视化" class="headerlink" title="2. Echarts可视化"></a>2. Echarts可视化</h2><h3 id="1-使用Echarts构建静态数据可视化"><a href="#1-使用Echarts构建静态数据可视化" class="headerlink" title="1. 使用Echarts构建静态数据可视化"></a>1. 使用Echarts构建静态数据可视化</h3><ul>
+<li>官网下载echarts，我放在了resources/static/js目录下</li>
+<li>在templates下新建一个test.html，并把官方实例拷贝进来</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;/&gt;
+    &lt;title&gt;test&lt;/title&gt;
+
+    &lt;!-- 引入 ECharts 文件 --&gt;
+    &lt;script src=&quot;js/echarts.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
+&lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;position: absolute; top:50%; left: 50%; margin-top: -200px;margin-left: -300px&quot;&gt;&lt;/div&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(&apos;main&apos;));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: &apos;ECharts 入门示例&apos;
+        },
+        tooltip: {},
+        legend: {
+            data:[&apos;销量&apos;]
+        },
+        xAxis: {
+            data: [&quot;衬衫&quot;,&quot;羊毛衫&quot;,&quot;雪纺衫&quot;,&quot;裤子&quot;,&quot;高跟鞋&quot;,&quot;袜子&quot;]
+        },
+        yAxis: {},
+        series: [{
+            name: &apos;销量&apos;,
+            type: &apos;bar&apos;,
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>在pom下添加一个依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>在刚才的HelloBoot类中添加一个方法请求这个页面</li>
+</ul>
+<pre><code>@RequestMapping(value = &quot;/first&quot;, method = RequestMethod.GET)
+public ModelAndView firstDemo() {
+    return new ModelAndView(&quot;test&quot;);
+}
+</code></pre><ul>
+<li>访问<a href="http://localhost:8080/first应该可以看到我们的示例" target="_blank" rel="external">http://localhost:8080/first应该可以看到我们的示例</a></li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Echarts%E5%85%A5%E9%97%A8%E7%A4%BA%E4%BE%8B.png" alt=""></p>
+<ul>
+<li>我们还想做一个饼图，去官网拷贝一个饼图，并添加静态数据展示</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;/&gt;
+    &lt;title&gt;imooc_stat&lt;/title&gt;
+
+    &lt;!-- 引入 ECharts 文件 --&gt;
+    &lt;script src=&quot;js/echarts.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
+&lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;position: absolute; top:50%; left: 50%; margin-top: -200px;margin-left: -300px&quot;&gt;&lt;/div&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(&apos;main&apos;));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title : {
+            text: &apos;慕课网实战课程实时访问量统计&apos;,
+            subtext: &apos;实战课程访问次数&apos;,
+            x:&apos;center&apos;
+        },
+        tooltip : {
+            trigger: &apos;item&apos;,
+            formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
+        },
+        legend: {
+            orient: &apos;vertical&apos;,
+            left: &apos;left&apos;,
+            data: [&apos;Spark SQL项目实战&apos;,&apos;Hadoop入门&apos;,&apos;Spark Streaming项目实战&apos;,&apos;大数据面试题&apos;,&apos;Storm项目实战&apos;]
+        },
+        series : [
+            {
+                name: &apos;访问次数&apos;,
+                type: &apos;pie&apos;,
+                radius : &apos;55%&apos;,
+                center: [&apos;50%&apos;, &apos;60%&apos;],
+                data:[
+                    {value:3350, name:&apos;Spark SQL项目实战&apos;},
+                    {value:3100, name:&apos;Hadoop入门&apos;},
+                    {value:2340, name:&apos;Spark Streaming项目实战&apos;},
+                    {value:1350, name:&apos;大数据面试题&apos;},
+                    {value:15480, name:&apos;Storm项目实战&apos;}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: &apos;rgba(0, 0, 0, 0.5)&apos;
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>添加路由</li>
+</ul>
+<pre><code>@RequestMapping(value = &quot;/course_clickcount&quot;, method = RequestMethod.GET)
+public ModelAndView courseClickCountStat() {
+    return new ModelAndView(&quot;demo&quot;);
+}
+</code></pre><ul>
+<li>访问<a href="http://localhost:8080/course_clickcount查看效果" target="_blank" rel="external">http://localhost:8080/course_clickcount查看效果</a></li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%85%95%E8%AF%BE%E7%BD%91%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B%E5%AE%9E%E6%96%BD%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E9%9D%99%E6%80%81.png" alt=""></p>
+<ul>
+<li>目前为止我们就完成了静态构建数据并展示</li>
+</ul>
+<h3 id="2-使用Echarts构建动态数据可视化"><a href="#2-使用Echarts构建动态数据可视化" class="headerlink" title="2. 使用Echarts构建动态数据可视化"></a>2. 使用Echarts构建动态数据可视化</h3><ul>
+<li>现在我们要做的事情应该是把我们从Hbase获得的数据加载上来展示</li>
+<li>添加Hbase依赖</li>
+</ul>
+<pre><code>&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;cloudera&lt;/id&gt;
+        &lt;url&gt;https://repository.cloudera.com/artifactory/cloudera-repos/&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;
+    &lt;artifactId&gt;hbase-client&lt;/artifactId&gt;
+    &lt;version&gt;1.2.0-cdh5.7.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>把我们上一篇博客写的HBaseUtils拷贝过来</li>
+</ul>
+<pre><code>package cn.edu.nju.utils;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.util.Bytes;
+
+import java.io.IOException;
+
+/**
+ * Created by Thpffcj on 2018/1/15.
+ * HBase操作工具类：Java工具类建议采用单例模式封装
+ */
+public class HBaseUtils {
+
+    HBaseAdmin admin = null;
+    Configuration configuration = null;
+
+    /**
+     * 私有改造方法
+     */
+    private HBaseUtils(){
+        configuration = new Configuration();
+        configuration.set(&quot;hbase.zookeeper.quorum&quot;, &quot;192.168.92.130:2181&quot;);
+        configuration.set(&quot;hbase.rootdir&quot;, &quot;hdfs://192.168.92.130:8020/hbase&quot;);
+
+        try {
+            admin = new HBaseAdmin(configuration);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static HBaseUtils instance = null;
+
+    public  static synchronized HBaseUtils getInstance() {
+        if(null == instance) {
+            instance = new HBaseUtils();
+        }
+        return instance;
+    }
+
+
+    /**
+     * 根据表名获取到HTable实例
+     */
+    public HTable getTable(String tableName) {
+
+        HTable table = null;
+
+        try {
+            table = new HTable(configuration, tableName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return table;
+    }
+</code></pre><ul>
+<li>我们看一下数据存储格式，启动hbase之前需要启动zookeeper和hadoop</li>
+</ul>
+<pre><code>hbase(main):002:0&gt; scan &apos;imooc_course_clickcount&apos;
+ROW                  COLUMN+CELL                                             
+ 20180115_112        column=info:click_count, timestamp=1515999125290, value=
+                     \x00\x00\x00\x00\x00\x00\x02D                           
+ 20180115_128        column=info:click_count, timestamp=1515999125321, value=
+                     \x00\x00\x00\x00\x00\x00\x02/                           
+ 20180115_130        column=info:click_count, timestamp=1515999125341, value=
+                     \x00\x00\x00\x00\x00\x00\x02\x1E                        
+ 20180115_145        column=info:click_count, timestamp=1515999125288, value=
+                     \x00\x00\x00\x00\x00\x00\x026                           
+ 20180115_146        column=info:click_count, timestamp=1515999125278, value=
+                     \x00\x00\x00\x00\x00\x00\x02C                           
+5 row(s) in 0.2800 seconds
+</code></pre><ul>
+<li>在HBaseUtils工具类里添加我们需要的方法</li>
+</ul>
+<pre><code>/**
+ * 根据表名和输入条件获取HBase的记录数
+ */
+public Map&lt;String, Long&gt; query(String tableName, String condition) throws Exception {
+
+    Map&lt;String, Long&gt; map = new HashMap&lt;&gt;();
+
+    HTable table = getTable(tableName);
+    String cf = &quot;info&quot;;
+    String qualifier = &quot;click_count&quot;;
+
+    Scan scan = new Scan();
+
+    Filter filter = new PrefixFilter(Bytes.toBytes(condition));
+    scan.setFilter(filter);
+
+    ResultScanner rs = table.getScanner(scan);
+    for(Result result : rs) {
+        String row = Bytes.toString(result.getRow());
+        long clickCount = Bytes.toLong(result.getValue(cf.getBytes(), qualifier.getBytes()));
+        map.put(row, clickCount);
+    }
+
+    return  map;
+}
+
+public static void main(String[] args) throws Exception {
+    Map&lt;String, Long&gt; map = HBaseUtils.getInstance().query(&quot;imooc_course_clickcount&quot; , &quot;20180115&quot;);
+
+    for(Map.Entry&lt;String, Long&gt; entry: map.entrySet()) {
+        System.out.println(entry.getKey() + &quot; : &quot; + entry.getValue());
+    }
+}
+</code></pre><ul>
+<li>也能正确获得结果</li>
+</ul>
+<pre><code>20180115_130 : 542
+20180115_112 : 580
+20180115_145 : 566
+20180115_146 : 579
+20180115_128 : 559
+</code></pre><ul>
+<li>现在我们查出来entry的key是天加上课程编号，和网页展示格式不太符合</li>
+<li>我们先定一个bean</li>
+</ul>
+<pre><code>package cn.edu.nju.domain;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by Thpffcj on 2018/1/15.
+ * 实战课程访问数量实体类
+ */
+@Component
+public class CourseClickCount {
+
+    private String name;
+    private long value;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getValue() {
+        return value;
+    }
+
+    public void setValue(long value) {
+        this.value = value;
+    }
+}
+</code></pre><ul>
+<li>在dao层添加一个根据日期获得所需bean格式的方法</li>
+</ul>
+<pre><code>@Component
+public class CourseClickCountDAO {
+
+    /**
+     * 根据天查询
+     */
+    public List&lt;CourseClickCount&gt; query(String day) throws Exception {
+
+        List&lt;CourseClickCount&gt; list = new ArrayList&lt;&gt;();
+
+        // 去HBase表中根据day获取实战课程对应的访问量
+        Map&lt;String, Long&gt; map = HBaseUtils.getInstance().query(&quot;imooc_course_clickcount&quot;, day);
+
+        for(Map.Entry&lt;String, Long&gt; entry: map.entrySet()) {
+            CourseClickCount model = new CourseClickCount();
+            model.setName(entry.getKey());
+            model.setValue(entry.getValue());
+
+            list.add(model);
+        }
+
+        return list;
+    }
+
+    public static void main(String[] args) throws Exception{
+        CourseClickCountDAO dao = new CourseClickCountDAO();
+        List&lt;CourseClickCount&gt; list = dao.query(&quot;20180115&quot;);
+        for(CourseClickCount model : list) {
+            System.out.println(model.getName() + &quot; : &quot; + model.getValue());
+        }
+    }
+}
+</code></pre><ul>
+<li>理论上我们课程名应该是从数据库根据课程编号查询的，我们主要关注点不在这，就直接用一个map硬编码了</li>
+<li>我们要使用json，首先还需要引入依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;net.sf.json-lib&lt;/groupId&gt;
+    &lt;artifactId&gt;json-lib&lt;/artifactId&gt;
+    &lt;version&gt;2.4&lt;/version&gt;
+    &lt;classifier&gt;jdk15&lt;/classifier&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>实现web层</li>
+</ul>
+<pre><code>package cn.edu.nju.spark;
+
+/**
+ * Created by Thpffcj on 2018/1/15.
+ * web层
+ */
+@Component
+public class ImoocStatApp {
+
+    private static Map&lt;String, String&gt; courses = new HashMap&lt;&gt;();
+    static {
+        courses.put(&quot;112&quot;,&quot;Spark SQL慕课网日志分析&quot;);
+        courses.put(&quot;128&quot;,&quot;10小时入门大数据&quot;);
+        courses.put(&quot;145&quot;,&quot;深度学习之神经网络核心原理与算法&quot;);
+        courses.put(&quot;146&quot;,&quot;强大的Node.js在Web开发的应用&quot;);
+        courses.put(&quot;131&quot;,&quot;Vue+Django实战&quot;);
+        courses.put(&quot;130&quot;,&quot;Web前端性能优化&quot;);
+    }
+
+    @Autowired
+    CourseClickCountDAO courseClickCountDAO;
+
+    @RequestMapping(value = &quot;/course_clickcount_dynamic&quot;, method = RequestMethod.GET)
+    public ModelAndView courseClickCount() throws Exception {
+
+        ModelAndView view = new ModelAndView(&quot;index&quot;);
+
+        List&lt;CourseClickCount&gt; list = courseClickCountDAO.query(&quot;20180115&quot;);
+        for(CourseClickCount model : list) {
+            model.setName(courses.get(model.getName().substring(9)));
+        }
+        JSONArray json = JSONArray.fromObject(list);
+
+        view.addObject(&quot;data_json&quot;, json);
+
+        return view;
+    }
+}
+</code></pre><ul>
+<li>使用Ajax来获取数据，这里我们发现其实不需要ModelAndView，ModelAndView需要返回一个新的页面，我们只需要异步获取数据就好了</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/1/15.
+ * web层
+ */
+@RestController
+public class ImoocStatApp {
+
+    private static Map&lt;String, String&gt; courses = new HashMap&lt;&gt;();
+    static {
+        courses.put(&quot;112&quot;,&quot;Spark SQL慕课网日志分析&quot;);
+        courses.put(&quot;128&quot;,&quot;10小时入门大数据&quot;);
+        courses.put(&quot;145&quot;,&quot;深度学习之神经网络核心原理与算法&quot;);
+        courses.put(&quot;146&quot;,&quot;强大的Node.js在Web开发的应用&quot;);
+        courses.put(&quot;131&quot;,&quot;Vue+Django实战&quot;);
+        courses.put(&quot;130&quot;,&quot;Web前端性能优化&quot;);
+    }
+
+    @Autowired
+    CourseClickCountDAO courseClickCountDAO;
+
+//    @RequestMapping(value = &quot;/course_clickcount_dynamic&quot;, method = RequestMethod.GET)
+//    public ModelAndView courseClickCount() throws Exception {
+//
+//        ModelAndView view = new ModelAndView(&quot;index&quot;);
+//
+//        List&lt;CourseClickCount&gt; list = courseClickCountDAO.query(&quot;20180115&quot;);
+//        for(CourseClickCount model : list) {
+//            model.setName(courses.get(model.getName().substring(9)));
+//        }
+//        JSONArray json = JSONArray.fromObject(list);
+//
+//        view.addObject(&quot;data_json&quot;, json);
+//
+//        return view;
+//    }
+
+    @RequestMapping(value = &quot;/course_clickcount_dynamic&quot;, method = RequestMethod.POST)
+    @ResponseBody
+    public List&lt;CourseClickCount&gt; courseClickCount() throws Exception {
+
+        List&lt;CourseClickCount&gt; list = courseClickCountDAO.query(&quot;20180115&quot;);
+        for(CourseClickCount model : list) {
+            model.setName(courses.get(model.getName().substring(9)));
+        }
+
+        return list;
+    }
+
+    @RequestMapping(value = &quot;/echarts&quot;, method = RequestMethod.GET)
+    public ModelAndView echarts(){
+        return new ModelAndView(&quot;echarts&quot;);
+    }
+}
+</code></pre><ul>
+<li>然后我们编写页面，使用ajax局部刷新展示数据</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;/&gt;
+    &lt;title&gt;慕课网实战课程实时访问量统计&lt;/title&gt;
+
+    &lt;!-- 引入 ECharts 文件 --&gt;
+    &lt;script src=&quot;js/echarts.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;!-- 引入 jQuery 文件 --&gt;
+    &lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
+&lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;position: absolute; top:50%; left: 50%; margin-top: -200px;margin-left: -300px&quot;&gt;&lt;/div&gt;
+
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(&apos;main&apos;));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title : {
+            text: &apos;慕课网实战课程实时访问量统计&apos;,
+            subtext: &apos;实战课程访问次数&apos;,
+            x:&apos;center&apos;
+        },
+        tooltip : {
+            trigger: &apos;item&apos;,
+            formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
+        },
+        legend: {
+            orient: &apos;vertical&apos;,
+            left: &apos;left&apos;
+        },
+        series : [
+            {
+                name: &apos;访问次数&apos;,
+                type: &apos;pie&apos;,
+                radius : &apos;55%&apos;,
+                center: [&apos;50%&apos;, &apos;60%&apos;],
+                data: (function(){ //&lt;![CDATA[
+                    var datas = [];
+                    $.ajax({
+                        type: &quot;POST&quot;,
+                        url: &quot;/course_clickcount_dynamic&quot;,
+                        dataType: &apos;json&apos;,
+                        async: false,
+                        success: function(result) {
+                            for(var i=0; i&lt;result.length; i++) {
+                                datas.push({&quot;value&quot;:result[i].value, &quot;name&quot;:result[i].name})
+                            }
+                        }
+                    });
+                    return datas;
+                    //]]&gt;
+                })(),
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: &apos;rgba(0, 0, 0, 0.5)&apos;
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>访问<a href="http://localhost:8080/echarts获取数据" target="_blank" rel="external">http://localhost:8080/echarts获取数据</a></li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%85%95%E8%AF%BE%E7%BD%91%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B%E5%AE%9E%E6%97%B6%E8%AE%BF%E9%97%AE%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%A8%E6%80%81.png" alt=""></p>
+<ul>
+<li>Spring Boot整合Echarts动态获取HBase的数据<ul>
+<li>动态的传递进去当天的时间<ul>
+<li>在代码中写死</li>
+<li>在页面中放一个时间插件(jQuery插件)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自动刷新展示图<ul>
+<li>每隔多久发送一个请求去刷新当前的数据供展示</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>上面完成的所有工作都是在IDEA上做的，生产环境肯定不是这样做的，我们需要把项目打个包在服务器上运行</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ pwd
+/home/thpffcj/lib
+[thpffcj@thpffcj lib]$ ls
+DataVisualization-0.0.1.jar  hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar
+hadoop-1.0-SNAPSHOT.jar      SparkTrain-1.0.jar
+</code></pre><ul>
+<li>启动jar包</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ java -jar DataVisualization-0.0.1.jar 
+</code></pre><ul>
+<li>访问<a href="http://192.168.92.130:8080/echarts也可以获得我们上面本地的效果，现在我们就把项目在服务器上启动了" target="_blank" rel="external">http://192.168.92.130:8080/echarts也可以获得我们上面本地的效果，现在我们就把项目在服务器上启动了</a></li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-阿里云DataV数据可视化"><a href="#3-阿里云DataV数据可视化" class="headerlink" title="3. 阿里云DataV数据可视化"></a>3. 阿里云DataV数据可视化</h2><ul>
+<li><a href="https://data.aliyun.com/visual/datav?spm=5176.8142029.388261.397.22449968ZeghYD" target="_blank" rel="external">DataV数据可视化</a></li>
+<li>DataV旨让更多的人看到数据可视化的魅力，帮助非专业的工程师通过图形化的界面轻松搭建专业水准的可视化应用，满足您会议展览、业务监控、风险预警、地理信息分析等多种业务的展示需求。</li>
+<li>不过都是收费的，因为只是学习就根据学习视频了解一下。</li>
+</ul>
+<ul>
+<li>DataV功能说明：<ul>
+<li>点击量分省排名/运行商访问占比：通过IP就能解析到省份，城市，运营商</li>
+<li>浏览器访问占比/操作系统占比：userAgent</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/datav.png" alt=""></p>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/2b2643ce941b" target="_blank" rel="external">为什么我们要数据的可视化</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/">
+        Spark Streaming项目实战 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

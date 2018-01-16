@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark Streaming整合Kafka | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-01-15T09:27:43.000Z" itemprop="datePublished">
+          2018-01-15
+      </time>
+    
+</span>
+                <h1>Spark Streaming整合Kafka</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<ul>
+<li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+</ul>
+</li>
+</ul>
+<p>了解了Spark Streaming整合Flume后我们来学习Spark Streaming整合Kafka。官方也提供了Receiver和Direct两种整合方法。</p>
+<hr>
+<h2 id="1-实战一：Receiver-based"><a href="#1-实战一：Receiver-based" class="headerlink" title="1. 实战一：Receiver-based"></a>1. 实战一：Receiver-based</h2><h3 id="1-Spark-Streaming整合Kafka的版本选择"><a href="#1-Spark-Streaming整合Kafka的版本选择" class="headerlink" title="1. Spark Streaming整合Kafka的版本选择"></a>1. Spark Streaming整合Kafka的版本选择</h3><ul>
+<li><p>Apache Kafka is publish-subscribe messaging rethought as a distributed, partitioned, replicated commit log service.</p>
+</li>
+<li><p>The Kafka project introduced a new consumer api between versions 0.8 and 0.10, so there are 2 separate corresponding Spark Streaming packages available. Please choose the correct package for your brokers and desired features; note that the 0.8 integration is compatible with later 0.9 and 0.10 brokers, but the 0.10 integration is not compatible with earlier brokers.</p>
+</li>
+<li>我们使用的是Kafka0.9.0.0，所以我们在官方文档应该选择第一个介绍</li>
+<li><strong><a href="http://spark.apache.org/docs/2.2.0/streaming-kafka-0-8-integration.html" target="_blank" rel="external">Spark Streaming + Kafka Integration Guide (Kafka broker version 0.8.2.1 or higher)</a></strong></li>
+</ul>
+<h3 id="2-Approach-1-Receiver-based-Approach"><a href="#2-Approach-1-Receiver-based-Approach" class="headerlink" title="2. Approach 1: Receiver-based Approach"></a>2. Approach 1: Receiver-based Approach</h3><ul>
+<li>This approach uses a Receiver to receive the data.</li>
+<li>The Receiver is implemented using the Kafka high-level consumer API.</li>
+<li>As with all receivers, the data received from Kafka through a Receiver is stored in Spark executors, and then jobs launched by Spark Streaming processes the data.</li>
+<li>However, under default configuration, this approach can lose data under failures. To ensure zero-data loss, you have to additionally enable Write Ahead Logs in Spark Streaming (introduced in Spark 1.2).</li>
+</ul>
+<ul>
+<li><strong>使用：In the streaming application code, import KafkaUtils and create an input DStream as follows.</strong></li>
+</ul>
+<pre><code>import org.apache.spark.streaming.kafka._
+
+val kafkaStream = KafkaUtils.createStream(streamingContext,
+ [ZK quorum], [consumer group id], [per-topic number of Kafka partitions to consume])
+</code></pre><ul>
+<li>Points to remember:<ul>
+<li>Topic partitions in Kafka does not correlate to partitions of RDDs generated in Spark Streaming.</li>
+<li>Multiple Kafka input DStreams can be created with different groups and topics for parallel receiving of data using multiple receivers.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>部署：</strong></li>
+</ul>
+<pre><code>./bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 ...
+</code></pre><h3 id="3-Kafka测试"><a href="#3-Kafka测试" class="headerlink" title="3. Kafka测试"></a>3. Kafka测试</h3><ul>
+<li>启动zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+[thpffcj@thpffcj ~]$ jps
+3729 Jps
+3691 QuorumPeerMain
+</code></pre><ul>
+<li>启动Kafka</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-server-start.sh -daemon /home/thpffcj/app/kafka_2.11-0.9.0.0/config/server.properties 
+
+[thpffcj@thpffcj ~]$ jps
+3779 Kafka
+3799 Jps
+3691 QuorumPeerMain
+</code></pre><ul>
+<li>创建topic</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-topics.sh --create --zookeeper thpffcj:2181 --replication-factor 1 --partitions 1 --topic kafka_streaming_topic
+WARNING: Due to limitations in metric names, topics with a period (&apos;.&apos;) or underscore (&apos;_&apos;) could collide. To avoid issues it is best to use either, but not both.
+Created topic &quot;kafka_streaming_topic&quot;.
+
+[thpffcj@thpffcj ~]$ kafka-topics.sh --list --zookeeper thpffcj:2181
+hello_topic - marked for deletion
+kafka-topic
+kafka_streaming_topic
+kafka_topic
+my-replicated-topic
+</code></pre><ul>
+<li>通过控制台测试本topic是否能够正常的生产和消费信息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-producer.sh --broker-list thpffcj:9092 --topic kafka_streaming_topic
+
+[thpffcj@thpffcj ~]$ kafka-console-consumer.sh --zookeeper thpffcj:2181 --topic kafka_streaming_topic
+</code></pre><ul>
+<li>从生产者发送消息，去消费者发现正常接收到了消息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-producer.sh --broker-list thpffcj:9092 --topic kafka_streaming_topic
+
+spark
+kafka
+
+[thpffcj@thpffcj ~]$ kafka-console-consumer.sh --zookeeper thpffcj:2181 --topic kafka_streaming_topic
+
+spark
+kafka
+</code></pre><h3 id="4-Spark-Streaming应用开发"><a href="#4-Spark-Streaming应用开发" class="headerlink" title="4. Spark Streaming应用开发"></a>4. Spark Streaming应用开发</h3><ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-streaming-kafka-0-8_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写逻辑</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * Spark Streaming对接Kafka的方式一
+  */
+object KafkaReceiverWordCount {
+
+  def main(args: Array[String]): Unit = {
+
+    if(args.length != 4) {
+      System.err.println(&quot;Usage: KafkaReceiverWordCount &lt;zkQuorum&gt; &lt;group&gt; &lt;topics&gt; &lt;numThreads&gt;&quot;)
+    }
+
+    val Array(zkQuorum, group, topics, numThreads) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;KafkaReceiverWordCount&quot;).setMaster(&quot;local[2]&quot;)
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    val topicMap = topics.split(&quot;,&quot;).map((_, numThreads.toInt)).toMap
+
+    val messages = KafkaUtils.createStream(ssc, zkQuorum, group, topicMap)
+
+    messages.map(_._2).flatMap(_.split(&quot; &quot;)).map((_,1)).reduceByKey(_+_).print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>在IDEA里启动项目，并传参数192.168.92.130:2181 test kafka_streaming_topic 1</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515844750000 ms
+-------------------------------------------
+</code></pre><ul>
+<li>我们在producer里输入一点东西</li>
+</ul>
+<pre><code>a a a d d b b b c
+</code></pre><ul>
+<li>在IDEA控制台发现接收到了消息</li>
+</ul>
+<pre><code>-------------------------------------------
+Time: 1515844800000 ms
+-------------------------------------------
+(d,2)
+(b,3)
+(a,3)
+(c,1)
+</code></pre><h3 id="5-服务器环境联调及Streaming-UI"><a href="#5-服务器环境联调及Streaming-UI" class="headerlink" title="5. 服务器环境联调及Streaming UI"></a>5. 服务器环境联调及Streaming UI</h3><ul>
+<li>上生产环境，和Flume一样，我们要把sparkConf后部分注释掉</li>
+</ul>
+<pre><code>val sparkConf = new SparkConf() //.setAppName(&quot;KafkaReceiverWordCount&quot;).setMaster(&quot;local[2]&quot;)
+</code></pre><ul>
+<li>打包</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ pwd
+/home/thpffcj/lib
+[thpffcj@thpffcj lib]$ ls
+hadoop-1.0-SNAPSHOT.jar                        SparkTrain-1.0.jar
+hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar
+</code></pre><ul>
+<li>启动spark</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ spark-submit \
+&gt; --class cn.edu.nju.spark.KafkaReceiverWordCount \
+&gt; --master local[2] \
+&gt; --name KafkaReceiverWordCount \
+&gt; --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+&gt; /home/thpffcj/lib/SparkTrain-1.0.jar thpffcj:2181 test kafka_streaming_topic 1
+</code></pre><ul>
+<li>发送消息，从spark控制台查看，其实本地测试过了，我们这样同样的测试一般不会有问题</li>
+</ul>
+<pre><code>a a a d d b b b c
+
+-------------------------------------------
+Time: 1515846260000 ms
+-------------------------------------------
+(d,2)
+(b,3)
+(a,3)
+(c,1)
+</code></pre><ul>
+<li>我们也可以去 192.168.92.130:4040 访问Spark的UI</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-实战二：Direct-Approach-No-Receivers"><a href="#2-实战二：Direct-Approach-No-Receivers" class="headerlink" title="2. 实战二：Direct Approach(No Receivers)"></a>2. 实战二：Direct Approach(No Receivers)</h2><ul>
+<li>This new receiver-less “direct” approach has been introduced in Spark 1.3 to ensure stronger end-to-end guarantees. Instead of using receivers to receive data, this approach periodically queries Kafka for the latest offsets in each topic+partition, and accordingly defines the offset ranges to process in each batch. </li>
+<li><p>When the jobs to process the data are launched, Kafka’s simple consumer API is used to read the defined ranges of offsets from Kafka (similar to read files from a file system). </p>
+</li>
+<li><p>This approach has the following advantages over the receiver-based approach (i.e. Approach 1).</p>
+<ul>
+<li>Simplified Parallelism</li>
+<li>Efficiency</li>
+<li>Exactly-once semantics</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Note that one disadvantage of this approach is that it does not update offsets in Zookeeper, hence Zookeeper-based Kafka monitoring tools will not show progress. However, you can access the offsets processed by this approach in each batch and update Zookeeper yourself </li>
+</ul>
+<h3 id="1-Spark-Streaming应用开发及本地环境测试"><a href="#1-Spark-Streaming应用开发及本地环境测试" class="headerlink" title="1. Spark Streaming应用开发及本地环境测试"></a>1. Spark Streaming应用开发及本地环境测试</h3><ul>
+<li>代码编写，其实github上有官方代码，我这里只是自己编写一下熟悉流程</li>
+</ul>
+<pre><code>package cn.edu.nju.spark
+
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import kafka.serializer.StringDecoder
+
+/**
+  * Created by Thpffcj on 2018/1/13.
+  * Spark Streaming对接Kafka的方式二
+  */
+object KafkaDirectWordCount {
+
+  def main(args: Array[String]): Unit = {
+
+    if(args.length != 2) {
+      System.err.println(&quot;Usage: KafkaDirectWordCount &lt;brokers&gt; &lt;topics&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(brokers, topics) = args
+
+    val sparkConf = new SparkConf().setAppName(&quot;KafkaReceiverWordCount&quot;).setMaster(&quot;local[2]&quot;)
+
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    val topicsSet = topics.split(&quot;,&quot;).toSet
+    val kafkaParams = Map[String, String](&quot;metadata.broker.list&quot;-&gt; brokers)
+
+    val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
+      ssc, kafkaParams, topicsSet
+    )
+
+    messages.map(_._2).flatMap(_.split(&quot; &quot;)).map((_,1)).reduceByKey(_+_).print()
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+</code></pre><ul>
+<li>在IDEA里启动项目，192.168.92.130:9092 kafka_streaming_topic</li>
+<li>等到第二个批次启动，我们打开producer测一下</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ kafka-console-producer.sh --broker-list thpffcj:9092 --topic kafka_streaming_topic
+a a a b b c d d
+
+
+-------------------------------------------
+Time: 1515895805000 ms
+-------------------------------------------
+(d,2)
+(b,2)
+(a,3)
+(c,1)
+</code></pre><h3 id="2-服务器环境联调"><a href="#2-服务器环境联调" class="headerlink" title="2. 服务器环境联调"></a>2. 服务器环境联调</h3><ul>
+<li>注释name和master</li>
+</ul>
+<pre><code>val sparkConf = new SparkConf() //.setAppName(&quot;KafkaDirectWordCount&quot;).setMaster(&quot;local[2]&quot;)
+</code></pre><ul>
+<li>编译打包复制到服务器上</li>
+<li>提交的话和上面一致</li>
+</ul>
+<pre><code>spark-submit \
+--class cn.edu.nju.spark.KafkaDirectWordCount \
+--master local[2] \
+--name KafkaDirectWordCount \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+/home/thpffcj/lib/SparkTrain-1.0.jar thpffcj:9092 kafka_streaming_topic
+</code></pre><ul>
+<li>等到streaming启动，在producer端进行输入</li>
+</ul>
+<pre><code>a a a b b c d d
+a a a b b c d d
+a a a b b c d d
+
+-------------------------------------------
+Time: 1515896180000 ms
+-------------------------------------------
+(d,6)
+(b,6)
+(a,9)
+(c,3)
+</code></pre><h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h3><ul>
+<li>主要就是试验了spark streaming和kafka对接的两种方式，第一种是直接create一个stream，第二种是createDirectStream</li>
+<li>他们传递的参数是不一样的，在工作环境中大多数用第二种方法</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" style="float: left;">
+        ← Spark Streaming整合Flume&Kafka打造通用流处理基础
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/">
+        Spark Streaming整合Flume →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
