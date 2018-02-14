@@ -202,37 +202,39 @@
 </li>
 <li>确认系统网络，能ping通说明没有问题</li>
 </ul>
-<pre><code>[Thpffcj@localhost ~]$ ping www.baidu.com
+<pre><code>[thpffcj@thpffcj ~]$$ ping www.baidu.com
 </code></pre><ul>
 <li>确认yum可用，有对应信息说明yum源可用</li>
 </ul>
-<pre><code>[Thpffcj@localhost ~]$ yum list | grep gcc
+<pre><code>[thpffcj@thpffcj ~]$ yum list | grep gcc
 </code></pre><ul>
 <li>确认关闭iptables规则，-L查看，-F关闭</li>
 </ul>
-<pre><code>[root@localhost Thpffcj]# iptables -L
-[root@localhost Thpffcj]# iptables -F
-[root@localhost Thpffcj]# iptables -t nat -F
+<pre><code>[root@thpffcj thpffcj]# iptables -L
+[root@thpffcj thpffcj]# iptables -F
+[root@thpffcj thpffcj]# iptables -t nat -F
 </code></pre><ul>
 <li>确认停用selinux</li>
 </ul>
-<pre><code>[root@localhost Thpffcj]# getenforce
-[root@localhost Thpffcj]# setenforce 0
+<pre><code>[root@thpffcj thpffcj]# getenforce
+[root@thpffcj thpffcj]# setenforce 0
 </code></pre><ul>
 <li>安装基础依赖</li>
 </ul>
-<pre><code>[root@localhost Thpffcj]# yum -y install gcc-c++ autoconf pcre pcre-devel make automake
+<pre><code>[root@thpffcj thpffcj]# yum -y install gcc-c++ autoconf pcre pcre-devel make automake
 
-[root@localhost Thpffcj]# yum -y install wget httpd-tools vim
+[root@thpffcj thpffcj]# yum -y install wget httpd-tools vim
 </code></pre><ul>
 <li>初始化系统目录</li>
 </ul>
-<pre><code>[root@localhost Thpffcj]# cd /opt/
-[root@localhost opt]# mkdir app
-[root@localhost opt]# mkdir backup
-[root@localhost opt]# mkdir download
-[root@localhost opt]# mkdir logs
-[root@localhost opt]# mkdir work
+<pre><code>[thpffcj@thpffcj ~]$ pwd
+/home/thpffcj
+
+[thpffcj@thpffcj ~]$ mkdir app
+[thpffcj@thpffcj ~]$ mkdir backup
+[thpffcj@thpffcj ~]$ mkdir download
+[thpffcj@thpffcj ~]$ mkdir logs
+[thpffcj@thpffcj ~]$ mkdir work
 </code></pre><p><br></p>
 <hr>
 <h2 id="2-Nginx简述"><a href="#2-Nginx简述" class="headerlink" title="2. Nginx简述"></a>2. Nginx简述</h2><p><strong>Nginx是一个开源且高性能，可靠的HTTP中间件，代理服务</strong></p>
@@ -277,7 +279,7 @@
 <h3 id="2-Nginx安装"><a href="#2-Nginx安装" class="headerlink" title="2. Nginx安装"></a>2. Nginx安装</h3><ul>
 <li>在机器的yum源上新建一个nginx.repo</li>
 </ul>
-<pre><code>[root@localhost yum.repos.d]# vim /etc/yum.repos.d/nginx.repo
+<pre><code>[root@thpffcj yum.repos.d]# vim /etc/yum.repos.d/nginx.repo
 </code></pre><ul>
 <li>将我们在官网上复制的yum信息拷贝到文件中</li>
 </ul>
@@ -289,11 +291,11 @@ enabled=1
 </code></pre><ul>
 <li>快速安装</li>
 </ul>
-<pre><code>[root@localhost nginx]# yum install nginx
+<pre><code>[root@thpffcj nginx]# yum install nginx
 </code></pre><h3 id="3-基本参数使用"><a href="#3-基本参数使用" class="headerlink" title="3. 基本参数使用"></a>3. 基本参数使用</h3><ul>
 <li>列出安装服务的安装目录和配置文件等信息</li>
 </ul>
-<pre><code>[root@localhost nginx]# rpm -ql nginx
+<pre><code>[root@thpffcj nginx]# rpm -ql nginx
 </code></pre><p><strong>1. 安装目录讲解</strong></p>
 <ul>
 <li>路径：/etc/logrotate.d/nginx </li>
@@ -438,20 +440,20 @@ enabled=1
 <h3 id="4-Nginx的目录和配置语法"><a href="#4-Nginx的目录和配置语法" class="headerlink" title="4. Nginx的目录和配置语法"></a>4. Nginx的目录和配置语法</h3><ul>
 <li>进入nginx主目录看一下conf里的一些配置</li>
 </ul>
-<pre><code>[root@localhost Thpffcj]# cd /etc/nginx/
-[root@localhost nginx]# ls
+<pre><code>[root@thpffcj thpffcj]# cd /etc/nginx/
+[root@thpffcj nginx]# ls
 conf.d          koi-utf  mime.types  nginx.conf   uwsgi_params
 fastcgi_params  koi-win  modules     scgi_params  win-utf
 </code></pre><ul>
 <li>查看自己主机ip</li>
 </ul>
-<pre><code>[root@localhost nginx]# ip a
+<pre><code>[root@thpffcj nginx]# ip a
 </code></pre><ul>
 <li>启动nginx和重启nginx</li>
 </ul>
-<pre><code>[root@localhost nginx]# systemctl start nginx
+<pre><code>[root@thpffcj nginx]# systemctl start nginx
 
-[root@localhost nginx]# systemctl restart nginx.service
+[root@thpffcj nginx]# systemctl restart nginx.service
 </code></pre><h3 id="5-主要配置学习"><a href="#5-主要配置学习" class="headerlink" title="5. 主要配置学习"></a>5. 主要配置学习</h3><p><strong>1. HTTP请求</strong></p>
 <ul>
 <li>request - 包括请求行，请求头部，请求数据</li>
@@ -460,11 +462,11 @@ fastcgi_params  koi-win  modules     scgi_params  win-utf
 <li><p>模拟请求</p>
 </li>
 </ul>
-<pre><code>[root@localhost nginx]# curl https://www.imooc.com
+<pre><code>[root@thpffcj nginx]# curl https://www.imooc.com
 </code></pre><ul>
 <li>我们可以使用-v来展现请求的信息内容，并重定向到一个空设备上，我们可以看见request和response的相关信息</li>
 </ul>
-<pre><code>[root@localhost nginx]# curl -v https://www.imooc.com &gt; /dev/null
+<pre><code>[root@thpffcj nginx]# curl -v https://www.imooc.com &gt; /dev/null
 
 &gt; GET / HTTP/1.1
 &gt; User-Agent: curl/7.29.0
@@ -487,13 +489,13 @@ fastcgi_params  koi-win  modules     scgi_params  win-utf
 <li><p>我们看一下nginx的log配置</p>
 </li>
 </ul>
-<pre><code>[root@localhost nginx]# vi /etc/nginx/nginx.conf 
+<pre><code>[root@thpffcj nginx]# vi /etc/nginx/nginx.conf 
 
 error_log  /var/log/nginx/error.log warn;
 </code></pre><ul>
 <li>最后的warn是错误日志的级别，我们可以根据自己的需要进行调整，我们目前还没有错误日志</li>
 </ul>
-<pre><code>[root@localhost nginx]# tail -f /var/log/nginx/error.log 
+<pre><code>[root@thpffcj nginx]# tail -f /var/log/nginx/error.log 
 </code></pre><ul>
 <li>access_log后面也是存放路径，main是nginx的log_format的名字，表示以main的格式要求记录到access_log里面</li>
 </ul>
@@ -523,19 +525,19 @@ access_log  /var/log/nginx/access.log  main;
 </code></pre><ul>
 <li>检查配置语法是否正确</li>
 </ul>
-<pre><code>[root@localhost nginx]# nginx -t -c nginx.conf 
+<pre><code>[root@thpffcj nginx]# nginx -t -c nginx.conf 
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 </code></pre><ul>
 <li>重启nginx服务器</li>
 </ul>
-<pre><code>[root@localhost nginx]# nginx -s reload -c nginx.conf
+<pre><code>[root@thpffcj nginx]# nginx -s reload -c nginx.conf
 </code></pre><ul>
 <li>然后我们请求本机，并查看access.log</li>
 </ul>
-<pre><code>[root@localhost nginx]# curl http://127.0.0.1
+<pre><code>[root@thpffcj nginx]# curl http://127.0.0.1
 
-[root@localhost nginx]# tail -f /var/log/nginx/access.log
+[root@thpffcj nginx]# tail -f /var/log/nginx/access.log
 curl/7.29.0127.0.0.1 - - [27/Dec/2017:20:16:42 +0800] &quot;GET / HTTP/1.1&quot; 404 169 &quot;-&quot; &quot;curl/7.29.0&quot; &quot;-&quot;
 </code></pre><p><strong>4. Nginx默认log-format</strong></p>
 <pre><code>log_format main &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
@@ -559,7 +561,7 @@ curl/7.29.0127.0.0.1 - - [27/Dec/2017:20:16:42 +0800] &quot;GET / HTTP/1.1&quot;
 <li><p>使用nginx -V可以看到编译的模块</p>
 </li>
 </ul>
-<pre><code>[root@localhost nginx]# nginx -V
+<pre><code>[root@thpffcj nginx]# nginx -V
 
 --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module
 </code></pre><p><strong>安装编译参数讲解</strong></p>
@@ -584,7 +586,7 @@ Context: server, location
 </code></pre><ul>
 <li>我们添加配置一个location</li>
 </ul>
-<pre><code>[root@localhost conf.d]# vi /etc/nginx/conf.d/default.conf 
+<pre><code>[root@thpffcj conf.d]# vi /etc/nginx/conf.d/default.conf 
 
 location /mystatus {
     stub_status;
@@ -592,9 +594,9 @@ location /mystatus {
 </code></pre><ul>
 <li>配置完以后我们检查语法，重载服务</li>
 </ul>
-<pre><code>[root@localhost conf.d]# nginx -t -c /etc/nginx/nginx.conf
+<pre><code>[root@thpffcj conf.d]# nginx -t -c /etc/nginx/nginx.conf
 
-[root@localhost conf.d]# nginx -s reload -c /etc/nginx/nginx.conf
+[root@thpffcj conf.d]# nginx -s reload -c /etc/nginx/nginx.conf
 </code></pre><ul>
 <li>访问192.168.242.129/mystatus，可以看到显示的相关文字信息(192.168.242.129是我本机IP)</li>
 </ul>
@@ -659,7 +661,7 @@ Context: server, location
 </code></pre><ul>
 <li>我们先复制一份默认配置到backup目录下</li>
 </ul>
-<pre><code>[root@localhost conf.d]# cp ./default.conf /opt/backup/default.conf
+<pre><code>[root@thpffcj conf.d]# cp ./default.conf /opt/backup/default.conf
 </code></pre><ul>
 <li>sub_filter是替换字符串，我们在code下网页中输出Thpffcj，我们替换成THPFFCJ</li>
 </ul>
@@ -671,7 +673,7 @@ Context: server, location
 </code></pre><ul>
 <li>重启服务器并输入192.168.242.129/test.html发现显示的是THPFFCJ，如果发现没有替换，可能需要清理一下浏览器缓存</li>
 </ul>
-<pre><code>[root@localhost conf.d]# systemctl reload nginx
+<pre><code>[root@thpffcj conf.d]# systemctl reload nginx
 </code></pre><ul>
 <li>sub_fileter_once是匹配第一个还是所有的字符串，这样就替换所有的Thpffcj</li>
 </ul>
@@ -751,11 +753,11 @@ location / {
 </code></pre><ul>
 <li>重新加载配置文件，然后我们借助一个压力测试工具ab，-n表示发起的请求数，-c是同时并发的请求</li>
 </ul>
-<pre><code>[Thpffcj@localhost ~]$ ab -n 20 -c 20 http://192.168.242.129/index.html
+<pre><code>[Thpffcj@thpffcj ~]$ ab -n 20 -c 20 http://192.168.242.129/index.html
 </code></pre><ul>
 <li>打开我们的error.log，会发现很多limiting request打到日志里去了</li>
 </ul>
-<pre><code>[root@localhost nginx]# tail -f /var/log/nginx/error.log
+<pre><code>[root@thpffcj nginx]# tail -f /var/log/nginx/error.log
 
 2017/12/13 19:24:58 [error] 5180#5180: *61 limiting requests, excess: 3.985 by zone &quot;req_zone&quot;, client: 192.168.242.129, server: localhost, request: &quot;GET /index.html HTTP/1.0&quot;, host: &quot;192.168.242.129&quot;
 2017/12/13 19:24:58 [error] 5180#5180: *62 limiting requests, excess: 3.985 by zone &quot;req_zone&quot;, client: 192.168.242.129, server: localhost, request: &quot;GET /index.html HTTP/1.0&quot;, host: &quot;192.168.242.129&quot;
@@ -778,7 +780,7 @@ Context: http, server, location, limit_except
 </code></pre><ul>
 <li>我们演示一下access_module，我们从现在开始，每次演示使用一个新的配置文件(注意保存默认配置到某个目录以便出错无法解决恢复默认配置)</li>
 </ul>
-<pre><code>[root@localhost conf.d]# mv default.conf access_mod.conf
+<pre><code>[root@thpffcj conf.d]# mv default.conf access_mod.conf
 </code></pre><ul>
 <li><p>首先我们需要查询自己的ip(不是服务器的ip，是指电脑出口的ip)，我们可以通过 <a href="http://www.ip138.com/" target="_blank" rel="external">http://www.ip138.com/</a> 查询</p>
 </li>
@@ -819,16 +821,16 @@ Context: server, location, limit_except
 </code></pre><ul>
 <li>使用htpasswd生成存密码文件</li>
 </ul>
-<pre><code>[root@localhost nginx]# htpasswd -c ./auth_conf Thpffcj
+<pre><code>[root@thpffcj nginx]# htpasswd -c ./auth_conf Thpffcj
 New password: 
 Re-type new password: 
 Adding password for user Thpffcj
 
-[root@localhost nginx]# ls
+[root@thpffcj nginx]# ls
 auth_conf  fastcgi_params  koi-win     modules     scgi_params   win-utf
 conf.d     koi-utf         mime.types  nginx.conf  uwsgi_params
 
-[root@localhost nginx]# more auth_conf 
+[root@thpffcj nginx]# more auth_conf 
 Thpffcj:$apr1$EW1JG4oO$oNhLW7TuNqzNxm1Ni0n7.0
 </code></pre><ul>
 <li>修改配置文件</li>

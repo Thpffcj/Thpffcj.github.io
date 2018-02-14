@@ -306,7 +306,7 @@ shakespeare.txt
 </li>
 <li><p>相比gzip算法对文本的压缩效率最高</p>
 </li>
-<li><p>搞了好久都没有搞定，大多数博客也都是这样配置的，目前配置压缩无法看见大小有变化</p>
+<li><p>搞了好久都没有搞定，大多数博客也都是这样配置的，目前配置压缩无法看见大小有变化，以后对nginx深入了解了再来考虑这个问题。</p>
 </li>
 </ul>
 <h3 id="5-浏览器缓存"><a href="#5-浏览器缓存" class="headerlink" title="5. 浏览器缓存"></a>5. 浏览器缓存</h3><ul>
@@ -393,8 +393,29 @@ Context: http, server, location, if in location
 </code></pre><ul>
 <li>浏览器端设置是否允许跨站访问会看response中Access-Control-Allow-Origin这个头信息，如果服务端允许跨站访问，那么浏览器就允许跨站访问，如果没有配置，浏览器默认阻止</li>
 </ul>
-<h3 id="7-防盗链"><a href="#7-防盗链" class="headerlink" title="7. 防盗链"></a>7. 防盗链</h3><p><strong>目的：防止资源被盗用</strong></p>
-<h2 id="4-动态缓存"><a href="#4-动态缓存" class="headerlink" title="4. 动态缓存"></a>4. 动态缓存</h2>
+<h3 id="7-防盗链"><a href="#7-防盗链" class="headerlink" title="7. 防盗链"></a>7. 防盗链</h3><p><strong>1. 目的：防止资源被盗用</strong></p>
+<p><strong>2. 防盗链设置思路</strong></p>
+<ul>
+<li>首要方式：区别哪些请求是非正常的用户请求</li>
+</ul>
+<p><strong>3. 基于http_refer防盗链设置模块</strong></p>
+<pre><code>Syntax: valid_referers none | blocked | server_names | string ...;
+Default: -
+Context: server, location
+</code></pre><ul>
+<li>我们首先在code目录下写一个网页</li>
+</ul>
+<pre><code>[thpffcj@thpffcj code]$ ls
+doc  images  test_refer.html
+[thpffcj@thpffcj code]$ cat test_refer.html 
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8 /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;img src = &quot;http://192.168.241.128/github.jpg&quot; /&gt;
+&lt;/body&gt;
+</code></pre><h2 id="2-代理服务"><a href="#2-代理服务" class="headerlink" title="2. 代理服务"></a>2. 代理服务</h2><h2 id="3-负载均衡调度器SLB"><a href="#3-负载均衡调度器SLB" class="headerlink" title="3. 负载均衡调度器SLB"></a>3. 负载均衡调度器SLB</h2><h2 id="4-动态缓存"><a href="#4-动态缓存" class="headerlink" title="4. 动态缓存"></a>4. 动态缓存</h2>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
