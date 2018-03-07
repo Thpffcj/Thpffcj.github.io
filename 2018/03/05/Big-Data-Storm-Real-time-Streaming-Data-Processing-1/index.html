@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>【置顶】 博客目录 | Thpffcj的树洞</title>
+  <title>初识实时流处理Storm | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,77 +172,196 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-12-31T16:00:00.000Z" itemprop="datePublished">
-          2019-01-01
+      <time datetime="2018-03-05T14:20:47.000Z" itemprop="datePublished">
+          2018-03-05
       </time>
     
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
 </span>
-                <h1>【置顶】 博客目录</h1>
+                <h1>初识实时流处理Storm</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>随着博客越来越多，这里手动放一个置顶目录来方便自己查找复习一些记录的知识。</p>
-<h2 id="LeetCode-学习心得"><a href="#LeetCode-学习心得" class="headerlink" title="LeetCode 学习心得"></a>LeetCode 学习心得</h2><ul>
-<li><p><a href="http://www.thpffcj.com/2017/10/08/LeetCode-Using-Array/" target="_blank" rel="external">LeetCode 算法面试分类解法 Using-Array</a></p>
+      		<h2 id="1-Storm入门"><a href="#1-Storm入门" class="headerlink" title="1. Storm入门"></a>1. Storm入门</h2><h3 id="1-Storm是什么"><a href="#1-Storm是什么" class="headerlink" title="1. Storm是什么"></a>1. Storm是什么</h3><ul>
+<li>老规矩，先看官网  <strong><a href="http://storm.apache.org/" target="_blank" rel="external">Apache Storm</a></strong></li>
+<li>Why use Storm?<ul>
+<li>Apache Storm is a free and open source distributed realtime computation system.<ul>
+<li>免费</li>
+<li>开源</li>
+<li>分布式</li>
+<li>实时计算系统</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/08/LeetCode-Using-Hash-Table/" target="_blank" rel="external">LeetCode 算法面试分类解法 Using-Hash-Table</a></p>
+<li>Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing.<ul>
+<li>unbounded：无界</li>
+<li>bounded：Hadoop/Spark SQL 离线(input … output)</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/09/LeetCode-Stack-and-Queue/" target="_blank" rel="external">LeetCode 算法面试分类解法 Stack-and-Queue</a></p>
+<li>Storm has many use cases: <ul>
+<li>realtime analytics</li>
+<li>online machine learning</li>
+<li>continuous computation</li>
+<li>distributed RPC, ETL, and more.</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/09/LeetCode-About-Linked-List/" target="_blank" rel="external">LeetCode 算法面试分类解法 About-Linked-List</a></p>
+<li>Storm is fast: a benchmark clocked it at over a million tuples processed per second per node. </li>
+<li>It is scalable, fault-tolerant, guarantees your data will be processed, and is easy to set up and operate.<ul>
+<li>对于大数据框架必须都要能够容错</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/10/LeetCode-Binary-Tree-and-Recursion/" target="_blank" rel="external">LeetCode 算法面试分类解法 Binary-Tree-and-Recursion</a></p>
+<li>Storm integrates with the queueing and database technologies you already use.</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/11/LeetCode-Recurion-and-Backstracking/" target="_blank" rel="external">LeetCode 算法面试分类解法 Recurion-and-Backstracking</a></p>
+<li>Storm能实现高频数据和大规模数据的实时处理</li>
+</ul>
+<h3 id="2-Storm发展历史"><a href="#2-Storm发展历史" class="headerlink" title="2. Storm发展历史"></a>2. Storm发展历史</h3><ul>
+<li>Storm产生于BackType(被Twitter收购)公司</li>
+<li>需求：大数据的实时处理</li>
+<li>自己来实现实时系统，要考虑的因素<ul>
+<li>健壮性</li>
+<li>扩展性/分布式</li>
+<li>如何使得数据不丢失，不重复</li>
+<li>高性能，低延时</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/11/LeetCode-Dynamic-Programming/" target="_blank" rel="external">LeetCode 算法面试分类解法 Dynamic-Programming</a></p>
+<li>Storm开源<ul>
+<li>2011.9</li>
+<li>之后贡献给Apache</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/12/LeetCode-Greedy-Algorithms/" target="_blank" rel="external">LeetCode 算法面试分类解法 Greedy-Algorithms</a></p>
+<li>Strom技术网站<ul>
+<li><strong><a href="http://storm.apache.org/" target="_blank" rel="external">官网</a></strong></li>
+<li><strong><a href="https://github.com/apache/storm" target="_blank" rel="external">Github地址</a></strong></li>
+<li><strong><a href="https://en.wikipedia.org/wiki/Storm_(event_processor&#41;" target="_blank" rel="external">wiki</a></strong></li>
+</ul>
 </li>
 </ul>
-<h2 id="源码学习"><a href="#源码学习" class="headerlink" title="源码学习"></a>源码学习</h2><ul>
-<li><p><a href="http://www.thpffcj.com/2017/09/30/String-Source-Code/" target="_blank" rel="external">Java 源码学习系列1——String</a></p>
+<h3 id="3-Storm对比Hadoop"><a href="#3-Storm对比Hadoop" class="headerlink" title="3. Storm对比Hadoop"></a>3. Storm对比Hadoop</h3><ul>
+<li>数据源/处理领域</li>
+<li>处理过程<ul>
+<li>Hadoop：Map Reduce</li>
+<li>Storm：Spout Bolt</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/02/Integer-Source-Code/" target="_blank" rel="external">Java 源码学习系列2——Integer</a></p>
+<li>进程是否结束</li>
+<li>处理速度</li>
+<li>适用场景</li>
+</ul>
+<h3 id="4-Storm对比Spark-Streaming"><a href="#4-Storm对比Spark-Streaming" class="headerlink" title="4. Storm对比Spark Streaming"></a>4. Storm对比Spark Streaming</h3><ul>
+<li>为什么还需要学习Spark Streaming：Spark Streaming是建立在Spark上的计算模型，Spark可以处理很多不同场景的数据，一栈式解决各种问题，各框架之间数据便于传输使用</li>
+</ul>
+<h3 id="5-Storm优势"><a href="#5-Storm优势" class="headerlink" title="5. Storm优势"></a>5. Storm优势</h3><ul>
+<li>编程模型(降低研发成本)</li>
+<li>扩展性</li>
+<li>可靠性</li>
+<li>容错性</li>
+<li>多语言</li>
+</ul>
+<h3 id="6-Storm应用现状与发展趋势"><a href="#6-Storm应用现状与发展趋势" class="headerlink" title="6. Storm应用现状与发展趋势"></a>6. Storm应用现状与发展趋势</h3><ul>
+<li>社区的发展，活跃度</li>
+<li>企业的需求</li>
+<li>大数据相关的大会</li>
+<li>互联网 JStorm</li>
+</ul>
+<h3 id="7-Storm应用案例"><a href="#7-Storm应用案例" class="headerlink" title="7. Storm应用案例"></a>7. Storm应用案例</h3><ul>
+<li>Storm在电商行业的应用<ul>
+<li>一淘-实时分析系统 <ul>
+<li>实时分析用户的属性，并反馈给搜索引擎 </li>
+<li>最初，用户属性分析是通过每天在云梯上定时运行的MR job来完成的。为了满足实时性的要求，希望能够实时分析用户的行为日志，将最新的用户属性反馈给搜索引擎，能够为用户展现最贴近其当前需求的结果。</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/03/ArrayList-Source-Code/" target="_blank" rel="external">Java 源码学习系列3——ArrayList</a></p>
+<li>携程-网站性能监控<ul>
+<li>实时分析系统监控携程网的网站性能 </li>
+<li>利用HTML5提供的performance标准获得可用的指标，并记录日志。Storm集群实时分析日志和入库。使用DRPC聚合成报表，通过历史数据对比等判断规则，触发预警事件。</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/04/LinkedList-Source-Code/" target="_blank" rel="external">Java 源码学习系列4——LinkedList</a></p>
-</li>
-<li><p><a href="http://www.thpffcj.com/2017/10/05/HashMap-Source-Code/" target="_blank" rel="external">Java 源码学习系列5——HashMap</a></p>
-</li>
-<li><p><a href="http://www.thpffcj.com/2017/10/06/LinkedHashMap-Source-Code/" target="_blank" rel="external">Java 源码学习系列6——LinkedHashMap</a></p>
-</li>
-<li><p><a href="http://www.thpffcj.com/2017/10/07/HashSet-Source-Code/" target="_blank" rel="external">Java 源码学习系列7——HashSet</a></p>
-</li>
-<li><p><a href="http://www.thpffcj.com/2017/10/13/Junit-1/" target="_blank" rel="external">Junit 源码学习(一)</a></p>
+<li>阿里妈妈-用户画像 <ul>
+<li>实时计算用户的兴趣数据 </li>
+<li>为了更加精准投放广告，阿里妈妈后台计算引擎需要维护每个用户的兴趣点（理想状态是，你对什么感兴趣，就向你投放哪类广告）。用户兴趣主要基于用户的历史行为、用户的实时查询、用户的实时点击、用户的地理信息而得，其中实时查询、实时点击等用户行为都是实时数据。考虑到系统的实时性，阿里妈妈使用Storm维护用户兴趣数据，并在此基础上进行受众定向的广告投放。</li>
+</ul>
 </li>
 </ul>
-<h2 id="练习小项目"><a href="#练习小项目" class="headerlink" title="练习小项目"></a>练习小项目</h2><ul>
-<li><p><a href="http://www.thpffcj.com/2017/07/02/Quantour/" target="_blank" rel="external">Maven整合的Web项目</a></p>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/07/02/Idea-Web/" target="_blank" rel="external">Idea_Web</a></p>
-</li>
-<li><p><a href="http://www.thpffcj.com/2017/09/23/Seckill/" target="_blank" rel="external">Seckill</a></p>
+<li>Storm在电信行业的应用<ul>
+<li><a href="http://xueshu.baidu.com/s?wd=paperuri:(55150218f7be2ac4f9c63a24d4b6aee4&#41;&amp;filter=sc_long_sign&amp;sc_ks_para=q%3D%E5%9F%BA%E4%BA%8EStorm%E7%9A%84%E8%AF%88%E9%AA%97%E7%94%B5%E8%AF%9D%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0&amp;tn=SE_baiduxueshu_c1gjeupa&amp;ie=utf-8&amp;sc_us=5513608621497438949" target="_blank" rel="external">基于Storm的诈骗电话分析系统的设计与实现</a></li>
+</ul>
 </li>
 </ul>
-<h2 id="大数据入门"><a href="#大数据入门" class="headerlink" title="大数据入门"></a>大数据入门</h2><h2 id="杂记"><a href="#杂记" class="headerlink" title="杂记"></a>杂记</h2><ul>
-<li><p><a href="http://www.thpffcj.com/2017/07/01/build-a-blog/" target="_blank" rel="external">使用hexo+github搭建个人博客教程</a></p>
+<p><br></p>
+<hr>
+<h2 id="2-Storm核心概念"><a href="#2-Storm核心概念" class="headerlink" title="2.  Storm核心概念"></a>2.  Storm核心概念</h2><h3 id="1-初识Storm核心概念"><a href="#1-初识Storm核心概念" class="headerlink" title="1. 初识Storm核心概念"></a>1. 初识Storm核心概念</h3><ul>
+<li>Topologies：拓扑，将整个流程串起来</li>
+<li>Streams：流，数据流，水流</li>
+<li>Spouts：产生数据/水的东西</li>
+<li>Bolts：处理数据/水的东西  水壶/水桶</li>
+<li>Tuple：数据/水</li>
+</ul>
+<h3 id="2-Storm核心概念理解记忆"><a href="#2-Storm核心概念理解记忆" class="headerlink" title="2. Storm核心概念理解记忆"></a>2. Storm核心概念理解记忆</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Storm%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5.png" alt=""></p>
+<ul>
+<li>Storm核心概念总结<ul>
+<li>Topology：计算拓扑，由spout和bolt组成的</li>
+<li>Stream：消息流，抽象概念，没有边界的tuple构成</li>
+<li>Tuple：消息/数据，传递的基本单元</li>
+<li>Spout：消息流的源头，Topology的消息生产者</li>
+<li>Bolt：消息处理单元，可以做过滤，聚合，查询/写数据库的操作</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/07/29/%E8%8F%9C%E9%B8%9F%E7%A8%8B%E5%BA%8F%E5%91%98%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" target="_blank" rel="external">菜鸟程序员学习之路</a></p>
+</ul>
+<h3 id="3-Storm核心概念官方介绍"><a href="#3-Storm核心概念官方介绍" class="headerlink" title="3. Storm核心概念官方介绍"></a>3. Storm核心概念官方介绍</h3><ul>
+<li>Topologies<ul>
+<li>The logic for a realtime application is packaged into a Storm topology. A Storm topology is analogous to a MapReduce job. </li>
+<li>One key difference is that a MapReduce job eventually finishes, whereas a topology runs forever (or until you kill it, of course). </li>
+<li>A topology is a graph of spouts and bolts that are connected with stream groupings. </li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/09/15/Google-Interview/" target="_blank" rel="external">Google Interview</a></p>
+<li>Streams<ul>
+<li>The stream is the core abstraction in Storm. </li>
+<li>A stream is an unbounded sequence of tuples that is processed and created in parallel in a distributed fashion. </li>
+<li>Streams are defined with a schema that names the fields in the stream’s tuples.</li>
+<li>By default, tuples can contain integers, longs, shorts, bytes, strings, doubles, floats, booleans, and byte arrays. You can also define your own serializers so that custom types can be used natively within tuples.</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/09/27/Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" target="_blank" rel="external">Java开发手册</a></p>
+<li>Spouts<ul>
+<li>A spout is a source of streams in a topology. </li>
+<li>Generally spouts will read tuples from an external source and emit them into the topology (e.g. a Kestrel queue or the Twitter API). </li>
+<li>Spouts can either be reliable or unreliable. </li>
+<li>A reliable spout is capable of replaying a tuple if it failed to be processed by Storm, whereas an unreliable spout forgets about the tuple as soon as it is emitted.</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/09/28/Design-Patterns/" target="_blank" rel="external">Design Patterns</a></p>
+<li>Bolts<ul>
+<li>All processing in topologies is done in bolts. </li>
+<li>Bolts can do anything from filtering, functions, aggregations, joins, talking to databases, and more.</li>
+<li>Bolts can do simple stream transformations. Doing complex stream transformations often requires multiple steps and thus multiple bolts. </li>
+<li>Bolts can emit more than one stream. </li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/10/23/DatabaseCourse/" target="_blank" rel="external">数据库复习</a></p>
+<li>Stream groupings<ul>
+<li>Part of defining a topology is specifying for each bolt which streams it should receive as input. </li>
+<li>A stream grouping defines how that stream should be partitioned among the bolt’s tasks.</li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/11/15/WebCourse/" target="_blank" rel="external">Web复习</a></p>
+<li>Reliability<ul>
+<li>Storm guarantees that every spout tuple will be fully processed by the topology. </li>
+</ul>
 </li>
-<li><p><a href="http://www.thpffcj.com/2017/11/25/Object-oriented-software-construction/" target="_blank" rel="external">面向对象软件构造</a></p>
+<li>Tasks<ul>
+<li>Each spout or bolt executes as many tasks across the cluster.   </li>
+</ul>
 </li>
+<li>Workers<ul>
+<li>Topologies execute across one or more worker processes. </li>
+<li>Each worker process is a physical JVM and executes a subset of all the tasks for the topology.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-图画理解Storm核心概念"><a href="#4-图画理解Storm核心概念" class="headerlink" title="4. 图画理解Storm核心概念"></a>4. 图画理解Storm核心概念</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Storm%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt=""></p>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://blog.csdn.net/zlfing/article/details/77919371" target="_blank" rel="external">07-storm</a></li>
 </ul>
 
             <div class="clearfix"></div>
@@ -250,9 +369,13 @@
         </div>
         <nav class="pagination" role="pagination">
     
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
     
-    <a class="pull-right" href="/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/">
-        初识实时流处理Storm →
+    
+    <a class="pull-right" href="/2018/03/01/Python-Machine-Learning-2/">
+        线性回归法 →
     </a>
     
 </nav>
