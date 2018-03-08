@@ -176,6 +176,11 @@
           2018-01-17
       </time>
     
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
 </span>
                 <h1>Spark Streaming项目实战</h1>
             </div>
@@ -350,17 +355,19 @@ def generate_log(count = 10):
 </code></pre><ul>
 <li>我们现在log全部打在控制台上，没什么用，我们应该要把它放到一个文件里面去</li>
 </ul>
-<p>def generate_log(count=10):<br>    time_str = time.strftime(“%Y-%m-%d %H:%M:%S”, time.localtime())</p>
-<pre><code>f = open(&quot;/home/thpffcj/data/project/logs/access.log&quot;, &quot;w+&quot;)
+<pre><code>def generate_log(count=10):
+    time_str = time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime())
 
-while count &gt;= 1:
-    query_log = &quot;{ip}\t{local_time}\t\&quot;GET /{url} HTTP/1.1\&quot;\t{status_code}\t{refer}&quot;.format(
-        ip=sample_ip(), local_time= time_str, url=sample_url(),  status_code=sample_status_code(), refer=sample_referrer())
-    print(query_log)
+    f = open(&quot;/home/thpffcj/data/project/logs/access.log&quot;, &quot;w+&quot;)
 
-    f.write(query_log + &quot;\n&quot;)
+    while count &gt;= 1:
+        query_log = &quot;{ip}\t{local_time}\t\&quot;GET /{url} HTTP/1.1\&quot;\t{status_code}\t{refer}&quot;.format(
+            ip=sample_ip(), local_time= time_str, url=sample_url(),  status_code=sample_status_code(), refer=sample_referrer())
+        print(query_log)
 
-    count = count - 1
+        f.write(query_log + &quot;\n&quot;)
+
+        count = count - 1
 </code></pre><ul>
 <li>然后把脚本拷贝到虚拟机服务器上</li>
 </ul>
@@ -1241,8 +1248,8 @@ ROW                  COLUMN+CELL
     </a>
     
     
-    <a class="pull-right" href="/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/">
-        Spark Streaming整合Flume&Kafka打造通用流处理基础 →
+    <a class="pull-right" href="/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-2/">
+         →
     </a>
     
 </nav>
