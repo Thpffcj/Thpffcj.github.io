@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>代理模式 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-14T01:43:13.000Z" itemprop="datePublished">
+          2018-03-14
+      </time>
+    
+</span>
+                <h1>代理模式</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-代理模式基本概念及分类"><a href="#1-代理模式基本概念及分类" class="headerlink" title="1. 代理模式基本概念及分类"></a>1. 代理模式基本概念及分类</h2><ul>
+<li>为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li>代理对象起到中介作用，可去掉功能服务或增加额外的服务。</li>
+</ul>
+<h3 id="1-了解代理模式开发中应用场景"><a href="#1-了解代理模式开发中应用场景" class="headerlink" title="1. 了解代理模式开发中应用场景"></a>1. 了解代理模式开发中应用场景</h3><ul>
+<li>远程代理<ul>
+<li>为不同地理的对象，提供局域网代表对象。</li>
+</ul>
+</li>
+<li>虚拟代理<ul>
+<li>根据需要将资源消耗很大的对象进行延迟，真正需要的时候进行创建。</li>
+</ul>
+</li>
+<li>保护代理<ul>
+<li>控制用户的访问权限。</li>
+</ul>
+</li>
+<li>智能引用代理<ul>
+<li>提供对目标对象额外服务。</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-掌握代理模式实现方式"><a href="#2-掌握代理模式实现方式" class="headerlink" title="2. 掌握代理模式实现方式"></a>2. 掌握代理模式实现方式</h2><p>两种实现方式：静态代理，动态代理</p>
+<h3 id="1-静态代理"><a href="#1-静态代理" class="headerlink" title="1. 静态代理"></a>1. 静态代理</h3><ul>
+<li>静态代理：代理和被代理对象在代理之前是确定的。他们都实现相同的接口或者继承相同的抽象类。</li>
+</ul>
+<p>我们通过一个例子来看一下，我们有一辆车，有一个行驶的方法，我们用代理来记录行驶的时间。</p>
+<ul>
+<li>创建行驶接口</li>
+</ul>
+<pre><code>package proxy;
+
+public interface Moveable {
+    void move();
+}
+</code></pre><ul>
+<li>创建车实体类</li>
+</ul>
+<pre><code>package proxy;
+
+import java.util.Random;
+
+public class Car implements Moveable {
+
+    @Override
+    public void move() {
+        //实现开车
+        try {
+            Thread.sleep(new Random().nextInt(1000));
+            System.out.println(&quot;汽车行驶中....&quot;);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><ul>
+<li>我们可以使用继承方式和聚合方式两种方法来实现静态代理，继承方式会随着代理需求的增加使代理类无限膨胀，我们这里使用聚合的方式实现代理</li>
+<li>代理类和被代理类实现相同的接口</li>
+</ul>
+<pre><code>package proxy;
+
+public class CarTimeProxy implements Moveable {
+
+    public CarTimeProxy(Moveable m) {
+        super();
+        this.m = m;
+    }
+
+    private Moveable m;
+
+    @Override
+    public void move() {
+        long starttime = System.currentTimeMillis();
+        System.out.println(&quot;汽车开始行驶....&quot;);
+        m.move();
+        long endtime = System.currentTimeMillis();
+        System.out.println(&quot;汽车结束行驶....  汽车行驶时间：&quot; 
+                + (endtime - starttime) + &quot;毫秒！&quot;);
+    }
+}
+</code></pre><ul>
+<li>现在我们时间上的代理是对car的代理，假如来了一个火车，也需要实现时间上的代理，我们还需要再写一个TrainTimeProxy，我们有没有方法只实现一个代理类呢</li>
+</ul>
+<h3 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2. 动态代理"></a>2. 动态代理</h3><p><strong>JDK动态代理</strong></p>
+<ul>
+<li>动态代理其实就是在代理类和被代理类之间加入了InvocationHandler事务处理器</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.png" alt=""></p>
+<ul>
+<li>Java动态代理类位于java.lang.reflect包下，一般主要涉及到一下两个类：<ul>
+<li>Interface InvocationHandler：该接口中仅定义了一个方法<ul>
+<li>public object invoke(Object obj, Method, method, Object[] args)</li>
+<li>在实际使用时，第一个参数obj一般是指代理类，method是指被代理的方法，args为该方法的参数数组。这个抽象方法在代理类中动态实现。</li>
+</ul>
+</li>
+<li>Proxy：该类即为动态代理类<ul>
+<li>static Object newProxyInstance(ClassLoader loader, Class[] interfaces, InvocationHandler h)：返回代理类的一个实例，返回后的代理类可以当做被代理类使用(可使用被代理类的在接口中声明过的方法)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>package jdkproxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+
+public class TimeHandler implements InvocationHandler {
+
+    public TimeHandler(Object target) {
+        super();
+        this.target = target;
+    }
+
+    private Object target;
+
+    /*
+     * 参数：
+     * proxy  被代理对象
+     * method  被代理对象的方法
+     * args 方法的参数
+     * 
+     * 返回值：
+     * Object  方法的返回值
+     * */
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+        long starttime = System.currentTimeMillis();
+        System.out.println(&quot;汽车开始行驶....&quot;);
+        method.invoke(target);
+        long endtime = System.currentTimeMillis();
+        System.out.println(&quot;汽车结束行驶....  汽车行驶时间：&quot; 
+                + (endtime - starttime) + &quot;毫秒！&quot;);
+        return null;
+    }
+}
+</code></pre><ul>
+<li>编写测试类</li>
+</ul>
+<pre><code>package jdkproxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+
+import proxy.Car;
+import proxy.Moveable;
+
+public class Test {
+
+    /**
+     * JDK动态代理测试类
+     */
+    public static void main(String[] args) {
+        Car car = new Car();
+        InvocationHandler h = new TimeHandler(car);
+        Class&lt;?&gt; cls = car.getClass();
+        /**
+         * loader  类加载器
+         * interfaces  实现接口
+         * h InvocationHandler
+         *
+         * 动态代理实现思路
+         * 实现功能：通过Proxy的newProxyinstance返回代理对象
+         * 1 声明一段源码(动态产生代理)
+         * 2 编译源码(JDK Compiler API),产生新的类(代理类
+         * 3 将这个类load到内存当中,产生一个新的对象(代理对象)
+         * 4 return 代理对象
+         */
+        Moveable m = (Moveable)Proxy.newProxyInstance(cls.getClassLoader(),
+                                                cls.getInterfaces(), h);
+        m.move();
+    }
+}
+</code></pre><ul>
+<li>运行测试查看效果</li>
+</ul>
+<pre><code>汽车开始行驶....
+汽车行驶中....
+汽车结束行驶....  汽车行驶时间：450毫秒！
+</code></pre><ul>
+<li>所谓Dynamic Proxy是这样一种class:<ul>
+<li>他是在运行时生成的class</li>
+<li>该class需要实现一组interface</li>
+<li>使用动态代理类时，必须实现InvocationHandler接口</li>
+</ul>
+</li>
+</ul>
+<p><strong>动态代理实现步骤</strong></p>
+<ul>
+<li>创建一个实现接口InvocationHandler的类，他必须实现invoke方法</li>
+<li>创建被代理的类及接口</li>
+<li>调用Proxy的静态方法，创建一个代理类<ul>
+<li>newProxyInstance(ClassLoader loader, Class[] interfaces, InvocationHandler h)</li>
+</ul>
+</li>
+<li>通过代理调用方法</li>
+</ul>
+<h2 id="3-理解JDK动态代理实现"><a href="#3-理解JDK动态代理实现" class="headerlink" title="3. 理解JDK动态代理实现"></a>3. 理解JDK动态代理实现</h2>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/03/12/BinarySearchTree/">
+        二分搜索树 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

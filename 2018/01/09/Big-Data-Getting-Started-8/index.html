@@ -287,7 +287,7 @@ hadoop-2.6.0-cdh5.7.0.tar.gz
 </ul>
 <pre><code>export MAVEN_HOME=/home/thpffcj/app/apache-maven-3.5.2
 export PATH=$MAVEN_HOME/bin:$PATH
-</code></pre><h3 id="6-Spark环境搭建及wordcount案例实现"><a href="#6-Spark环境搭建及wordcount案例实现" class="headerlink" title="6. Spark环境搭建及wordcount案例实现"></a>6. Spark环境搭建及wordcount案例实现</h3><ul>
+</code></pre><h3 id="6-Spark环境搭建及WordCount案例实现"><a href="#6-Spark环境搭建及WordCount案例实现" class="headerlink" title="6. Spark环境搭建及WordCount案例实现"></a>6. Spark环境搭建及WordCount案例实现</h3><ul>
 <li>官网下载spark代码自己编译 <a href="http://spark.apache.org/docs/2.1.0/building-spark.html" target="_blank" rel="external">Building Spark</a></li>
 <li>我是选择官网提供编译好的</li>
 </ul>
@@ -338,7 +338,9 @@ res4: Array[(String, Int)] = Array((mapreduce,1), (welcome,1), (hadoop,3), (hdfs
 </ul>
 <pre><code>scala&gt; sc.textFile(&quot;file:///home/thpffcj/data/hello.txt&quot;).flatMap(line =&gt; line.split(&quot; &quot;)).map(word =&gt; (word, 1)).reduceByKey(_ + _).collect
 res6: Array[(String, Int)] = Array((mapreduce,1), (welcome,1), (hadoop,3), (hdfs,2))
-</code></pre><h2 id="2-分布式计算框架Flink"><a href="#2-分布式计算框架Flink" class="headerlink" title="2. 分布式计算框架Flink"></a>2. 分布式计算框架Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><ul>
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-分布式计算框架Flink"><a href="#2-分布式计算框架Flink" class="headerlink" title="2. 分布式计算框架Flink"></a>2. 分布式计算框架Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><ul>
 <li>一样的套路，官网：<a href="http://flink.apache.org/" target="_blank" rel="external">Flink</a></li>
 <li>Apache Flink is an open-source stream processing framework for distributed, high-performing, always-available, and accurate data streaming applications.</li>
 <li>Continuous Processing for Unbounded Datasets<ul>

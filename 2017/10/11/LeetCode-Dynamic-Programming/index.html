@@ -309,8 +309,9 @@ int main() {
 
     return 0;
 }
-</code></pre><p>我们先解决小数据量解决问题，之后层层递推来解决更大数据量的问题，通常这个过程就叫做动态规划。这个时间和记忆化搜索的时间复杂度是相当的，不过动态规划没有递归的调用，不需要额外调用和栈空间。</p>
+</code></pre><p>我们先解决小数据量的问题，之后层层递推来解决更大数据量的问题，通常这个过程就叫做动态规划。这个时间和记忆化搜索的时间复杂度是相当的，不过动态规划没有递归的调用，不需要额外调用和栈空间。</p>
 <p>动态规划：将原问题拆解成若干子问题，同时保存子问题的答案，使得每个子问题只求解一次，最终获得原问题的答案。</p>
+<hr>
 <h2 id="70-Climbing-Stairs"><a href="#70-Climbing-Stairs" class="headerlink" title="70. Climbing Stairs"></a>70. Climbing Stairs</h2><pre><code>/**
  * You are climbing a stair case. It takes n steps to reach to the top.
  * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
@@ -375,13 +376,14 @@ public:
         return memo[n];
     }
 };
-</code></pre><h2 id="343-Integer-Break"><a href="#343-Integer-Break" class="headerlink" title="343. Integer Break"></a>343. Integer Break</h2><pre><code>/**
+</code></pre><hr>
+<h2 id="343-Integer-Break"><a href="#343-Integer-Break" class="headerlink" title="343. Integer Break"></a>343. Integer Break</h2><pre><code>/**
  * Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers.
  * Return the maximum product you can get.
  * For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4).
  * Note: You may assume that n is not less than 2 and not larger than 58.
  */
-</code></pre><p>对于一个问题如果没有问题时，我们可以先考虑暴力解法。话句话说，我们使用什么样的方式，才能把正整数n的所有分割枚举出来，我们无法知道有几重循环，通常我们需要使用递归的手段。<br>暴力解法：回溯遍历将一个数做分割的所有可能性。O(2^n)</p>
+</code></pre><p>对于一个问题如果没有思路时，我们可以先考虑暴力解法。话句话说，我们使用什么样的方式，才能把正整数n的所有分割枚举出来，我们无法知道有几重循环，通常我们需要使用递归的手段。<br>暴力解法：回溯遍历将一个数做分割的所有可能性。O(2^n)</p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Integer%20Break.png" alt=""></p>
 <p>之所以递归树存在，是因为它有最优子结构<br>通过求子问题的最优解，可以获得原问题的最优解。</p>
 <pre><code>/**
@@ -491,7 +493,8 @@ public:
 
     }
 };
-</code></pre><h2 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h2><pre><code>/**
+</code></pre><hr>
+<h2 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h2><pre><code>/**
  * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only
  * constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically
  * contact the police if two adjacent houses were broken into on the same night.
@@ -643,7 +646,8 @@ public:
         return memo[n-1];
     }
 };
-</code></pre><h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0-1 背包问题"></a>0-1 背包问题</h2><p>有一个背包，他的容量为C(Capacity)。现在有n中不同的物品，编号为0…n-1，其中每一件物品的重量为w(i)，价值为v(i)。问可以向这个背包中盛放哪些物品，使得在不超过背包容量的基础上，物品的总价值最大。</p>
+</code></pre><hr>
+<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0-1 背包问题"></a>0-1 背包问题</h2><p>有一个背包，他的容量为C(Capacity)。现在有n中不同的物品，编号为0…n-1，其中每一件物品的重量为w(i)，价值为v(i)。问可以向这个背包中盛放哪些物品，使得在不超过背包容量的基础上，物品的总价值最大。</p>
 <p>这类组合问题，我们都可以使用递归来完成。只是我们在其中能不能找到重叠子问题，最优子结构进而转化成记忆化搜索或动态规划来解决。</p>
 <p>对于这个问题，我们有两个约束条件<br>首先我们要在n个物品里选，第二点他的容量要小于等于一个给定的数值C。</p>
 <p>F(n,C)考虑将n个物品放进容量为C的背包，使得价值最大。<br>F(i,C) = max{F(i-1, C), v(i) + F(i-1, C-w(i))}</p>
@@ -740,6 +744,7 @@ public:
     }
 };
 </code></pre><p>注意这个问题使用了两个变量来定义状态。</p>
+<hr>
 <h2 id="0-1-背包问题优化"><a href="#0-1-背包问题优化" class="headerlink" title="0-1 背包问题优化"></a>0-1 背包问题优化</h2><p>上面的0-1背包问题的时间复杂度：O(n<em>C),空间复杂度：O(n</em>C)。</p>
 <p>我们分析一下状态转移方程：F(i,C) = max{F(i-1, C), v(i) + F(i-1, C-w(i))}<br>第i行元素只依赖于第i-1行元素。理论上，只需要保持两行元素。空间复杂度：O(2*C)=O(C)。</p>
 <p>我们使用两行轮流使用完成背包问题。</p>
@@ -809,7 +814,8 @@ public:
         return memo[C];
     }
 };
-</code></pre><h2 id="416-Partition-Equal-Subset-Sum"><a href="#416-Partition-Equal-Subset-Sum" class="headerlink" title="416. Partition Equal Subset Sum"></a>416. Partition Equal Subset Sum</h2><pre><code>/**
+</code></pre><hr>
+<h2 id="416-Partition-Equal-Subset-Sum"><a href="#416-Partition-Equal-Subset-Sum" class="headerlink" title="416. Partition Equal Subset Sum"></a>416. Partition Equal Subset Sum</h2><pre><code>/**
  * Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets such that
  * the sum of elements in both subsets is equal.
  * Note:
@@ -922,7 +928,8 @@ public:
         return memo[C];
     }
 };
-</code></pre><h2 id="300-Longest-Increasing-Subsequence"><a href="#300-Longest-Increasing-Subsequence" class="headerlink" title="300. Longest Increasing Subsequence"></a>300. Longest Increasing Subsequence</h2><pre><code>/**
+</code></pre><hr>
+<h2 id="300-Longest-Increasing-Subsequence"><a href="#300-Longest-Increasing-Subsequence" class="headerlink" title="300. Longest Increasing Subsequence"></a>300. Longest Increasing Subsequence</h2><pre><code>/**
  * Given an unsorted array of integers, find the length of longest increasing subsequence.
  * For example,
  * Given [10, 9, 2, 5, 3, 7, 101, 18],
@@ -932,7 +939,7 @@ public:
  */
 </code></pre><p>暴力解法：选择所有的子序列进行判断。O((2^n)*n)</p>
 <p>LIS(i)表示以第i个数字为结尾的最长上升子序列的长度。<br>LIS(i)表示[0…i]的范围内，选择数字nums[i]可以获得的最长上升子序列的长度。</p>
-<p>LIS(i) = max(1+LIS(j) if nums[i]&gt;nums[j]) (j&lt;i)</p>
+<p><strong>LIS(i) = max(1+LIS(j) if nums[i]&gt;nums[j]) (j&lt;i)</strong></p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Increasing%20Subsequence.png" alt=""></p>
 <p>使用递归加记忆化搜索：</p>
 <pre><code>/**
@@ -1000,7 +1007,7 @@ public:
         }
 
         // memo[i] 表示以 nums[i] 为结尾的最长上升子序列的长度
-        vector&lt;int &gt;memo( nums.size() , 1 );
+        vector&lt;int&gt;memo( nums.size() , 1 );
         for ( int i = 1; i &lt; nums.size(); i++ ) {
             for ( int j = 0; j &lt; i; j++ ) {
                 if ( nums[j] &lt; nums[i] ) {
@@ -1016,7 +1023,8 @@ public:
         return res;
     }
 };
-</code></pre><h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给出两个字符串S1，S2，求这两个字符串的最长公共子序列的长度。</p>
+</code></pre><hr>
+<h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给出两个字符串S1，S2，求这两个字符串的最长公共子序列的长度。</p>
 <p>LCS(m,n)表示S1[0…m]和S2[0…n]的最长公共子序列的长度。</p>
 <p>S1[m] == S2[n]：<br>LCS(m,n) = 1 + LCS(m-1, n-1)<br>S1[m] != S2[n]：<br>LCS(m,n) = max( LCS(m-1, n), LCS(m, n-1) )</p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Common%20Subsequence.png" alt=""></p>

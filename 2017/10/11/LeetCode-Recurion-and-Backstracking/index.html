@@ -182,6 +182,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<p>在计算机问题中，大量的问题都需要使用递归算法，上一篇博客我们介绍了一下二叉树中的递归问题。现在我们来看递归算法中非常经典的思想回溯法，这样的算法思想通常都应用在一类问题上，这类问题叫做树型问题，这类问题他本身没有定义在一颗二叉树中，但我们具体分析这个问题时就会发现解决这个问题的思路本质是一颗树的形状。</p>
+<hr>
 <h2 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17. Letter Combinations of a Phone Number"></a>17. Letter Combinations of a Phone Number</h2><pre><code>/**
  *Given a digit string, return all possible letter combinations that the number could represent.
  * A mapping of digit to letters (just like on the telephone buttons) is given below.
@@ -254,7 +255,8 @@ public:
         return res;
     }
 };
-</code></pre><p>递归调用的一个重要特征-要返回。回溯法师暴力解法的一个主要实现手段。</p>
+</code></pre><p>递归调用的一个重要特征-要返回。回溯法是暴力解法的一个主要实现手段。</p>
+<hr>
 <h2 id="46-Permutations"><a href="#46-Permutations" class="headerlink" title="46. Permutations"></a>46. Permutations</h2><pre><code>/**
  * Given a collection of distinct numbers, return all possible permutations.
  * For example,
@@ -268,7 +270,7 @@ public:
   [3,2,1]
 ]
  */
-</code></pre><p>回溯算法能处理一类重要的问题是排列问题，如果我们要用1,2,3进行排列，我们可以先抽出一个元素，比如我们现在抽出1，那么我们下面要做的事就是使用2,3两个元素构造排列。我们有需要抽出一个元素，如果我们抽出2，我们剩下唯一的元素就是3，我们通过这个路径获得排列123，用23排列如果选3，那么就剩下2我们得到排列132。相应的我们考虑最开始选择2或者选择3。</p>
+</code></pre><p>回溯算法能处理一类重要的问题是排列问题，如果我们要用1,2,3进行排列，我们可以先抽出一个元素，比如我们现在抽出1，那么我们下面要做的事就是使用2,3两个元素构造排列。我们又需要抽出一个元素，如果我们抽出2，我们剩下唯一的元素就是3，我们通过这个路径获得排列123，用23排列如果选3，那么就剩下2我们得到排列132。相应的我们考虑最开始选择2或者选择3。</p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Permutations.png" alt=""></p>
 <p>这也是一个树形问题<br>Perms(nums[0…n-1]) = {取出一个数字} + Perms(nums[{0…n-1} - 这个数字])</p>
 <pre><code>/**
@@ -337,6 +339,7 @@ public:
     }
 };
 </code></pre><p>回溯的意思就是要回去，递归函数自动保证了回去，但是我们设置的其他变量如果有必要的话也必须要回到原位。</p>
+<hr>
 <h2 id="77-Combinations"><a href="#77-Combinations" class="headerlink" title="77. Combinations"></a>77. Combinations</h2><p>上面我们用回溯法解决了排列问题，现在我们来解决组合问题。</p>
 <pre><code>/**
  * Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
@@ -443,7 +446,8 @@ public:
         return res;
     }
 };
-</code></pre><h2 id="79-Word-Search"><a href="#79-Word-Search" class="headerlink" title="79. Word Search"></a>79. Word Search</h2><p>二维平面使用回溯法</p>
+</code></pre><hr>
+<h2 id="79-Word-Search"><a href="#79-Word-Search" class="headerlink" title="79. Word Search"></a>79. Word Search</h2><p>二维平面使用回溯法</p>
 <pre><code>/**
  * Given a 2D board and a word, find if the word exists in the grid.
  * The word can be constructed from letters of sequentially adjacent cell, where &quot;adjacent&quot; cells are those horizontally
@@ -526,7 +530,8 @@ public:
         return false;
     }
 };
-</code></pre><h2 id="200-Number-of-Islands"><a href="#200-Number-of-Islands" class="headerlink" title="200. Number of Islands"></a>200. Number of Islands</h2><p>floodfill算法，一类经典问题</p>
+</code></pre><hr>
+<h2 id="200-Number-of-Islands"><a href="#200-Number-of-Islands" class="headerlink" title="200. Number of Islands"></a>200. Number of Islands</h2><p>floodfill算法，一类经典问题</p>
 <pre><code>/**
  * Given a 2d grid map of &apos;1&apos;s (land) and &apos;0&apos;s (water), count the number of islands. An island is surrounded by water and is formed
  * by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
@@ -604,6 +609,7 @@ public:
     }
 };
 </code></pre><p>在这里，我们似乎没有看见回溯的过程，也就是说我们不需要找到一个位置让visited[x][y]为false,这是因为我们的目的就是要把和最初我们运行的(i,j)这个点相连接的岛屿全部标记上，而不是在其中找到某一个特定的序列或者一个具体的值，所以我们只标记true,不会把它倒着标记成false。所以对于这个问题是否叫做回溯法，这是一个见仁见智的问题。在搜索的过程中一定会回去，这是递归的特性。但它没有对信息进行重置。不过它的解题思路是经典的floodfill。</p>
+<hr>
 <h2 id="51-N-Queens"><a href="#51-N-Queens" class="headerlink" title="51. N-Queens"></a>51. N-Queens</h2><p>回溯法师经典人工智能的基础</p>
 <pre><code>/**
  *The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.

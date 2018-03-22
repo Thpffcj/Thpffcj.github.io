@@ -201,7 +201,7 @@
 <p>通过上一篇博客对Hadoop的概念介绍，我们接下来首先了解一下Hadoop核心组件之分布式文件系统HDFS。</p>
 <hr>
 <h2 id="1-分布式文件系统HDFS"><a href="#1-分布式文件系统HDFS" class="headerlink" title="1. 分布式文件系统HDFS"></a>1. 分布式文件系统HDFS</h2><h3 id="1-什么是HDFS"><a href="#1-什么是HDFS" class="headerlink" title="1. 什么是HDFS"></a>1. 什么是HDFS</h3><ul>
-<li>Hadoop实现了一个分布式文件系统(Hadoop Distrubuted System)，简称HDFS</li>
+<li>Hadoop实现了一个分布式文件系统(Hadoop Distrubuted File System)，简称HDFS</li>
 <li>源自于Google的GFS论文</li>
 <li>发表于2003年，HDFS是GFS的克隆版</li>
 </ul>
@@ -214,7 +214,7 @@
 <li>Streaming Data Access</li>
 <li>Large Data Sets</li>
 <li>Simple Coherency Model</li>
-<li>“Moving Computation is Cheaper than Moving Data”</li>
+<li>Moving Computation is Cheaper than Moving Data</li>
 <li>Portability Across Heterogeneous Hardware and Software Platforms</li>
 </ul>
 </li>
@@ -231,7 +231,7 @@
 </ul>
 <p><strong>4. DN：</strong></p>
 <ul>
-<li>存储用户的文件对应的数据块(Block)</li>
+<li>存储用户文件对应的数据块(Block)</li>
 <li>要定期向NN发送心跳信息，汇报本身及其所有的block信息，健康状况</li>
 </ul>
 <p><strong>5. A typical deployment has a dedicated machine that runs only the NameNode software. Each of the other machines in the cluster runs one instance of the DataNode software.The architecture does not preclude running multiple DataNodes on the same machine but in a real deployment that is rarely the case.</strong></p>
@@ -601,14 +601,6 @@ public class HDFSApp {
     FileSystem fileSystem = null;
     Configuration configuration = null;
 
-    /**
-     * 创建HDFS目录
-     */
-    @Test
-    public void mkdir() throws Exception {
-        fileSystem.mkdirs(new Path(&quot;/hdfsapi/test&quot;));
-    }
-
     @Before
     public void setUp() throws Exception {
         System.out.println(&quot;HDFSApp.setUp&quot;);
@@ -621,6 +613,14 @@ public class HDFSApp {
         configuration = null;
         fileSystem = null;
         System.out.println(&quot;HDFSApp.tearDown&quot;);
+    }
+
+    /**
+     * 创建HDFS目录
+     */
+    @Test
+    public void mkdir() throws Exception {
+        fileSystem.mkdirs(new Path(&quot;/hdfsapi/test&quot;));
     }
 }
 </code></pre><ul>

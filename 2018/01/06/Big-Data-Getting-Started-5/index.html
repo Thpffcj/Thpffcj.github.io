@@ -220,11 +220,10 @@ hadoop hdfs mapreduce
 hadoop hdfs
 </code></pre><ul>
 <li>需求：求wordcount<ul>
-<li>分而治之：A MapReduce job usually splits the input data-set into independent chunks which are processed by the map tasks in a completely parallel manner. The framework sorts the outputs of the maps, which are then input to the reduce tasks. Typically both the input and the output of the job are stored in a file-system. The framework takes care of scheduling tasks, monitoring them and re-executes the failed tasks.</li>
+<li>分而治之：A MapReduce job usually splits the input data-set into independent chunks which are processed by the map tasks in a completely parallel manner. The framework sorts the outputs of the maps, which are then input to the reduce tasks. Typically both the input and the output of the job are stored in a file-system. The framework takes care of scheduling tasks, monitoring them and re-executes the failed tasks.<br><img src="http://oseihavwm.bkt.clouddn.com/MapRudece%20wordcount.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/MapRudece%20wordcount.png" alt=""></p>
 <h3 id="2-MapReduce编程模型之Map和Reduce阶段"><a href="#2-MapReduce编程模型之Map和Reduce阶段" class="headerlink" title="2. MapReduce编程模型之Map和Reduce阶段"></a>2. MapReduce编程模型之Map和Reduce阶段</h3><ul>
 <li>将作业拆分成Map阶段和Reudce阶段</li>
 <li>Map阶段：Map Tasks</li>

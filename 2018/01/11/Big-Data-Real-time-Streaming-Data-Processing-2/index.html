@@ -203,7 +203,7 @@
 <p>在了解了实时流处理的基本流程，我们这篇博客主要就要来学习分布式日志收集框架Flume，了解一下为什么会出现Flume，Flume核心组件以及他的基本配置。</p>
 <hr>
 <h2 id="1-Flume概述"><a href="#1-Flume概述" class="headerlink" title="1. Flume概述"></a>1. Flume概述</h2><h3 id="1-业务现状分析"><a href="#1-业务现状分析" class="headerlink" title="1. 业务现状分析"></a>1. 业务现状分析</h3><ul>
-<li>WwbServer/ApplicationServer分散在各个机器上</li>
+<li>WebServer/ApplicationServer分散在各个机器上</li>
 <li>想使用大数据平台Hadoop进行统计分析</li>
 <li>日志如何收集到Hadoop平台上</li>
 <li>解决方案<ul>
@@ -222,7 +222,7 @@
 </ul>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Flume%E6%9E%B6%E6%9E%84.png" alt=""></p>
 <ul>
-<li>Flume是有Apache提供的分布式，高可靠，高可用的服务，用于分布式的海量日志的高效收集，聚合，移动系统</li>
+<li>Flume是由Apache提供的分布式，高可靠，高可用的服务，用于分布式的海量日志的高效收集，聚合，移动系统</li>
 <li>设计目标<ul>
 <li>可靠性</li>
 <li>扩展性</li>
@@ -260,16 +260,16 @@
 <p><br></p>
 <hr>
 <h2 id="2-Flume实战"><a href="#2-Flume实战" class="headerlink" title="2. Flume实战"></a>2. Flume实战</h2><h3 id="1-Flume环境部署"><a href="#1-Flume环境部署" class="headerlink" title="1. Flume环境部署"></a>1. Flume环境部署</h3><ul>
-<li><p>前置条件：</p>
-<ul>
+<li>前置条件：<ul>
 <li>Java Runtime Environment - Java 1.8 or later</li>
 <li>Memory - Sufficient memory for configurations used by sources, channels or sinks</li>
 <li>Disk Space - Sufficient disk space for configurations used by channels or sinks</li>
 <li>Directory Permissions - Read/Write permissions for directories used by agent</li>
 </ul>
 </li>
-<li><p>安装jdk(学习Hadoop时安装过了)</p>
+</ul>
 <ul>
+<li>安装jdk(学习Hadoop时安装过了)<ul>
 <li>下载</li>
 <li>解压到~/app</li>
 <li>将java配置系统环境变量中</li>

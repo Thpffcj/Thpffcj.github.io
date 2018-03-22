@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>面向Web的计算复习 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-11-15T11:32:35.000Z" itemprop="datePublished">
+          2017-11-15
+      </time>
+    
+    
+    | 
+    <a href='/tags/杂记/'>杂记</a>
+    
+    
+</span>
+                <h1>面向Web的计算复习</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1. 基础知识"></a>1. 基础知识</h2><h3 id="1-Internet-amp-amp-Web"><a href="#1-Internet-amp-amp-Web" class="headerlink" title="1. Internet &amp;&amp; Web"></a>1. Internet &amp;&amp; Web</h3><ul>
+<li>Internet:是在一个通信网络中连接的计算机的大规模集合，通过装置连接起来，相互之间可以通信。</li>
+<li>World Wide Web（Web）：是一组软件和协议的集合，Internet中绝大部分甚至全部计算机都安装了这些软件和协议，用户通过Web来使用Internet。Web中的信息单元包括：页面，文档和资源。包括Web服务器，Web客户机或浏览器。<ul>
+<li>特点：<ul>
+<li>图形化，易于导航（页面之间相互连接）</li>
+<li>与平台无关</li>
+<li>分布式</li>
+<li>动态</li>
+<li>交互</li>
+</ul>
+</li>
+<li>Web客户机程序:   浏览器——获取和显示服务器端传回的文档</li>
+<li>Web传输协议： 最常用的HTTP</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-TCP-IP-传输控制协议"><a href="#2-TCP-IP-传输控制协议" class="headerlink" title="2. TCP/IP:传输控制协议"></a>2. TCP/IP:传输控制协议</h3><ul>
+<li>1982年成为计算机网络连接的标准协议，它允许某台计算机中的程序通过Internet直接和另一台计算机中的程序进行通讯。</li>
+<li>TCP/IP由四个层次组成：网络接口层、网络层、传输层、应用层。</li>
+<li>OSI（Open System Interconnect）是传统的开放式系统互连参考模型，是一种通信协议的7层抽象的参考模型，其中每一层执行某一特定任务。该模型的目的是使各种硬件在相同的层次上相互通信。这7层是：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</li>
+</ul>
+<h3 id="3-Lamp-linux-apache-mysql-php"><a href="#3-Lamp-linux-apache-mysql-php" class="headerlink" title="3. Lamp:linux-apache-mysql-php"></a>3. Lamp:linux-apache-mysql-php</h3><ul>
+<li>Linux+Apache+Mysql+Perl/PHP/Python一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。随着开源潮流的蓬勃发展，开放源代码的LAMP已经与J2EE和.Net商业软件形成三足鼎立之势，并且该软件开发的项目在软件方面的投资成本较低，因此受到整个IT界的关注。从网站的流量上来说，70%以上的访问流量是LAMP来提供的，LAMP是最强大的网站解决方案。</li>
+</ul>
+<h3 id="4-IP"><a href="#4-IP" class="headerlink" title="4. IP"></a>4. IP</h3><ul>
+<li>IP是英文Internet Protocol（网络之间互连的协议）的缩写，中文简称为“网协”，也就是为计算机网络相互连接进行通信而设计的协议，用来唯一标识Internet中的节点。</li>
+<li>IP地址具有唯一性，根据用户性质的不同，可以分为5类。<ul>
+<li>A类保留给政府机构 1.0.0.1—126.255.255.254</li>
+<li>B类分配给中等规模的公司：128.0.0.1—191.255.255.254</li>
+<li>C类分配给任何需要的人：192.0.0.1—223.255.255.254</li>
+<li>D类用于组播，E类用于实验，各类可容纳的地址数目不同。224.0.0.1—239.255.255.254</li>
+<li>E类地址，用于实验：240.0.0.1—255.255.255.254</li>
+</ul>
+</li>
+<li>IP地址是一个唯一的32位数字。IPV6 128位。</li>
+</ul>
+<h3 id="5-DNS"><a href="#5-DNS" class="headerlink" title="5. DNS"></a>5. DNS</h3><ul>
+<li>定义：DNS（Domain Name Server）是一个分布式数据库，本地负责控制整个分布式数据库的部分段，每一段中的数据通过客户/服务器模式在整个网络上均可存取。负责将域名转化为IP地址。</li>
+<li>DNS数据库结构：倒立的树状结构，根用“”空字符串表示，每隔一节点就是一个域，每个域可以划分为多个子域，叶节点代表主机。每个域分别由不同的组织进行管理。每个组织都可以将它的域再分成一定数量的子域并将这些子域委托给其他组织进行管理，域既包括主机又能包括它的子域。域名被用做DNS 数据库中的索引，域包含所有域名在该域的主机。</li>
+<li>它是由解析器和域名服务器组成的。<ul>
+<li>域名服务器：是指保存有该网络中所有主机的域名和对应IP地址，并具有将域名转换为IP地址功能的服务器。</li>
+<li>域名解析：将域名解析为对应的IP地址的过程。</li>
+</ul>
+</li>
+<li>工作原理：<br>1．客户机将域名查询请求发送到本地DNS服务器，服务器在本地数据库中查找客户机要求的映射。<br>2．如果不能在本地找到客户机查询的信息，将客户机请求发送到根域名服务器。根域名服务器负责解析客户机请求的根域部分，它将包含下一级域名信息的服务器的地址返回给客户机的DNS服务器。<br>3．客户机的DNS服务器利用根域名服务器解析的地址访问下一级DNS服务器，得到维护再下一级域名的DNS服务器的地址。<br>4．按照上述方法递归地逐级接近查找目标，最后在维护目标域名的DNS服务器上找到相应的IP地址信息。<br>5．客户机的本地DNS服务器将查询结果返回客户机。<br>6．客户机利用从本地DNS服务器查询得到的IP地址访问目标主机。</li>
+</ul>
+<h3 id="6-Web服务器"><a href="#6-Web服务器" class="headerlink" title="6. Web服务器"></a>6. Web服务器</h3><ul>
+<li>定义：Web服务器是可以向发出请求的浏览器提供文档的程序。是一种被动程序，只有当Internet上运行的其他计算机中得浏览器发出请求时服务器才响应。</li>
+<li>工作原理：<ul>
+<li>Web浏览器通过向服务器发送URL来启动与服务器之间的通讯，一个URL可以指定：<ul>
+<li>存储在服务器中得某个数据文件的地址，该文件会发送给客户机。</li>
+<li>客户机要求执行的位于服务器中得某个程序，程序执行结果返回客户机。</li>
+</ul>
+</li>
+<li>Web服务器：监控主机的通信端口，通过该端口接收HTTP命令，运行该命令指定的操作。HTTP命令包含一个URL，其中包含主机名称。</li>
+<li>Web服务文档结构：<ul>
+<li>文档根目录：存储服务器能直接访问的为客户机提供的web文档。</li>
+<li>服务器根目录：存储服务器端程序和软件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常用：Apache：当前最广泛的web服务器，开源免费，通过配置文件（http.conf）进行控制。</li>
+</ul>
+<h3 id="7-URI-URL-URN"><a href="#7-URI-URL-URN" class="headerlink" title="7. URI,URL,URN"></a>7. URI,URL,URN</h3><ul>
+<li>URI<ul>
+<li>Web上可用的每种资源 - HTML文档、图像、视频片段、程序等 - 由一个通用资源标志符（Uniform Resource Identifier, 简称”URI”）进行定位。</li>
+<li>以某种统一的（标准化的）方式标识资源的简单字符串。</li>
+<li>组成：存放资源的主机名，片段标识符，相对URI。</li>
+</ul>
+</li>
+<li>URL<ul>
+<li>统一资源定位符（Uniform Resource Location）。</li>
+<li>URL是Internet上用来描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上，特别是著名的Mosaic。采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。</li>
+<li>格式：scheme：object-address 协议，主机地址或IP，端口号，资源具体地址。<ul>
+<li>Scheme：协议 http，ftp，telnet，mailto等</li>
+<li>Object-address：//完全限定域名/文档路径</li>
+</ul>
+</li>
+<li>路径：目录名称和文件名称组成的一组序列，通过“/”分隔，不能有空格，分号，冒号，&amp;符号。可以使完整路径或部分路径。</li>
+</ul>
+</li>
+<li>URN<ul>
+<li>统一资源名称（Uniform Resource Name）</li>
+<li>关系：URL,URN是URI的子集。Web上地址的基本形式是URI,它代表统一资源标识符。有两种形式：<ul>
+<li>URL：目前URI的最普遍形式就是无处不在的URL或统一资源定位器。</li>
+<li>URN：URL的一种更新形式，统一资源名称(URN, Uniform Resource Name)不依赖于位置，并且有可能减少失效连接的个数。但是其流行还需假以时日，因为它需要更精密软件的支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-万维网联盟"><a href="#8-万维网联盟" class="headerlink" title="8. 万维网联盟"></a>8. 万维网联盟</h3><ul>
+<li>万维网联盟（World Wide Web Consortium，W3C）<br>万维网联盟是国际著名的标准化组织。1994年成立后，至今已发布近百项相关万维网的标准，对万维网发展做出了杰出的贡献。</li>
+</ul>
+<h3 id="9-Web-Server-基本原理"><a href="#9-Web-Server-基本原理" class="headerlink" title="9. Web Server 基本原理"></a>9. Web Server 基本原理</h3><p><strong>1. Service Provider采用WSDL描述服务。</strong></p>
+<p><strong>2. Service Provider 采用UDDI将服务的描述文件发布到UDDI服务器（Register server）。</strong></p>
+<p><strong>3. Service Requestor在UDDI服务器上查询并 获取WSDL文件。</strong></p>
+<p><strong>4. Service requestor将请求绑定到SOAP，并访问相应的服务</strong></p>
+<p><strong>5. 实现一个完整的Web服务包括以下步骤：</strong></p>
+<ul>
+<li>Web服务提供者设计实现Web服务，并将调试正确后的Web服务通过Web服务中介者发布，并在UDDI注册中心注册。 （发布）</li>
+<li>Web服务请求者向Web服务中介者请求特定的服务，中介者根据请求查询UDDI注册中心，为请求者寻找满足请求的服务。 （发现）</li>
+<li>Web服务中介者向Web服务请求者返回满足条件的Web服务描述信息，该描述信息用WSDL写成，各种支持Web服务的机器都能阅读。（发现）</li>
+<li>利用从Web服务中介者返回的描述信息生成相应的SOAP消息，发送给Web服务提供者，以实现Web服务的调用。（绑定）</li>
+<li>Web服务提供者按SOAP消息执行相应的Web服务，并将服务结果返回给Web服务请求者。（绑定）</li>
+</ul>
+<h3 id="10-网络机器人"><a href="#10-网络机器人" class="headerlink" title="10. 网络机器人"></a>10. 网络机器人</h3><p><strong>1. 传统爬虫</strong></p>
+<ul>
+<li>传统爬虫从一个或若干初始网页的URL开始，获得初始网页上的URL，在抓取网页的过程中，不断从当前页面上抽取新的URL放入队列,直到满足系统的一定停止条件。</li>
+</ul>
+<p><strong>2. 聚焦爬虫</strong></p>
+<ul>
+<li>聚焦爬虫是一个自动下载网页的程序，它根据既定的抓取目标，有选择的访问万维网上的网页与相关的链接，获取所需要的信息。与通用爬虫(general?purpose web crawler)不同，聚焦爬虫并不追求大的覆盖，而将目标定为抓取与某一特定主题内容相关的网页，为面向主题的用户查询准备数据资源。</li>
+<li>工作流程：聚焦爬虫的工作流程较为复杂，需要根据一定的网页分析算法过滤与主题无关的链接，保留有用的链接并将其放入等待抓取的URL队列。然后，它将根据一定的搜索策略从队列中选择下一步要抓取的网页URL，并重复上述过程，直到达到系统的某一条件时停止。另外，所有被爬虫抓取的网页将会被系统存贮，进行一定的分析、过滤，并建立索引，以便之后的查询和检索，对于聚焦爬虫来说，这一过程所得到的分析结果还可能对以后的抓取过程给出反馈和指导。</li>
+<li>解决问题：<ul>
+<li>对抓取目标的描述或定义：决定网页分析算法与URL搜索策略如何制订的基础。</li>
+<li>对网页或数据的分析与过滤。</li>
+<li>对URL的搜索策略：网页分析算法和候选URL排序算法是决定搜索引擎所提供的服务形式和爬虫网页抓取行为的关键所在。</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-Web-1-0-2-0-3-0"><a href="#11-Web-1-0-2-0-3-0" class="headerlink" title="11. Web 1.0, 2.0, 3.0"></a>11. Web 1.0, 2.0, 3.0</h3><p>Web X.0并不是一个具体的事物，而是一个阶段，是促成这个阶段的各种技术和相关的产品服务的一个称呼。</p>
+<ul>
+<li>Web1.0<ul>
+<li>是以编辑为特征，网站提供给用户的内容是网站编辑进行编辑处理后提供的，用户阅读网站提供的内容。这个过程是网站到用户的单向行为，Web1.0时代的代表站点为新浪，搜狐，网易三大门户。主要是静态网页。</li>
+<li>主要是指互联网一开始就有的那些运营模式，例如：信息发布网站，门户网站等。特点是：信息由网站的运行维护者发布，用户一般只能查看和评论。</li>
+<li>网络资源从信息生产者到信息客户的单向流程。</li>
+</ul>
+</li>
+<li>Web2.0<ul>
+<li>则是以加强了网站与用户之间的互动，网站内容基于用户提供，网站的诸多功能也由用户参与建设，实现了网站与用户双向的交流与参与,Web2.0不同于Web1.0的最大之处在于它的交互性。这个时期的典型代表有：博客中国、亿友交友、联络家等。</li>
+<li>注重积用户之力来创造内容，网站的运行维护者只是提供一个平台，而主要内容是用户来创造，用户是主角，网站不再是主角。</li>
+<li>所有人是网络资源的生产者和信息客户。</li>
+</ul>
+</li>
+<li>Web3.0<ul>
+<li>随着网络基础设施的建设和信息技术的深入发展，互联网会更深层次的进入到人们的日常生活。Web3.0是以主动性（Initiative）、数字最大化（max-Digitalizative）、多维化（multi-dimension）等为特征的，以服务为内容的第三代互联网系统。</li>
+<li>web 3.0最明显的特征就是主动性，即强调网站对用户需求的主动提取，并加以分析处理，然后给出用户所需要的资源。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-HTTP"><a href="#2-HTTP" class="headerlink" title="2. HTTP"></a>2. HTTP</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><p><strong>1. Web页面是对象构成，web对象通过URL定位</strong></p>
+<p><strong>2. hypertext transport protocol</strong></p>
+<p><strong>3. HTTP定义</strong></p>
+<ul>
+<li>一种详细规定了浏览器和万维网服务器之间互相通信的规则，通过因特网传送万维网文档的数据传送协议</li>
+</ul>
+<p><strong>4. 特点</strong></p>
+<ul>
+<li>支持客户/服务器模式。</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。 </li>
+<li>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。 </li>
+<li>无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。 </li>
+<li>无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</li>
+<li>应用层协议,基于TCP/IP协议。</li>
+</ul>
+<h3 id="2-HTTP请求"><a href="#2-HTTP请求" class="headerlink" title="2. HTTP请求"></a>2. HTTP请求</h3><p><strong>1. 通用格式：</strong></p>
+<ul>
+<li>HTTP方法 URL当中的域名部分 HTTP版本 头部字段 空行 消息主体</li>
+</ul>
+<p><strong>2. 请求方法</strong></p>
+<ul>
+<li>OPTIONS 返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送’*’的请求来测试服务器的功能性。　</li>
+<li>HEAD : retrieve meta-information about the URI 返回指定文档的头部信息。</li>
+<li>GET：返回指定的文档内容。</li>
+<li>POST：提交数据进行处理，数据被包含在请求体中，POST请求会导致新资源的建立或已有资源的修改。常用于发送表单，或发送请求执行某个程序处理表单。</li>
+<li>PUT：向指定资源位置上传其最新内容。　</li>
+<li>DELETE：请求服务器删除Request-URI所标识的资源。　 </li>
+<li>TRACE：回显服务器收到的请求，主要用于测试或诊断。　</li>
+</ul>
+<h3 id="3-HTTP响应"><a href="#3-HTTP响应" class="headerlink" title="3. HTTP响应"></a>3. HTTP响应</h3><p><strong>1. 通用格式</strong></p>
+<ul>
+<li>状态行</li>
+<li>响应头部字段</li>
+<li>空行</li>
+<li>响应主体</li>
+</ul>
+<p><strong>2. 返回的状态码</strong></p>
+<ul>
+<li>1xx Informational</li>
+<li>2xx Success</li>
+<li>3xx Redirection</li>
+<li>4xx Client Error </li>
+<li>5xx Server Error</li>
+</ul>
+<h3 id="4-HTTP连接"><a href="#4-HTTP连接" class="headerlink" title="4. HTTP连接"></a>4. HTTP连接</h3><p><strong>1. 非持续连接——HTTP1.0</strong></p>
+<ul>
+<li>在使用HTTP/1.0的情况下，如果打开一个包含一个HTML文件和10个内联图象对象的网页时，HTTP就要建立11次TCP连接才能把文件从服务机传送到客户机。使用一次TCP连接传送一个对象的效率比较低，这体现在下列几个方面：<ol>
+<li>每次TCP连接必需要建立和断开。客户机和服务机建立一次连接需要执行三向沟通连接法(three-way handshake)，服务机在对象递送之后要断开TCP连接。在建立和断开连接时要占用CPU的资源。如果使用一次连接代替11次连接的话，占用客户机和服务机的CPU时间可大大减少。</li>
+<li>对每次连接，客户机和服务机都必须分配发送和接收缓存。这就意味着要影响客户机和服务机的存储器资源，这同样要占用CPU的时间。</li>
+<li>对由大数量对象组成的文件，TCP的低速启动算法(slow start-up algorithm)会限制服务机向客户机传送对象的速度。使用HTTP/1.1之后，大多数对象都可以尽最大的速率传送。<br>非持久连接每个对象的发送和接收都会有一个HTTP延迟，共有两个HTTP延迟。 </li>
+</ol>
+</li>
+</ul>
+<p><strong>2. 持续连接</strong></p>
+<ul>
+<li>以一个接一个紧挨着发出各持久连接：http1.1版本中：当发送请求并响应之后，服务器和客户端浏览器之间依然保持连接，文件中的所有对象都可在相同的TCP连接上传送。<ol>
+<li>不带流水线 without pipelineing<br>那么客户只在收到前一个请求的响应后才发出新的请求。这种情况下，web页面所引用的每个对象(上例中的10个图像)都经历1个RTT的延迟，用于请求和接收该对象。与非持久连接2个RTT的延迟相比，不带流水线的持久连接已有所改善。<br>缺点：服务器送出一个对象后开始等待下一个请求，而这个新请求却不能马上到达。这段时间服务器资源便闲置了。</li>
+<li>带流水线——HTTP1.1<br>HTTP/1.1的默认模式使用带流水线的持久连接。HTTP/1.1也允许在客户机接收到服务机的消息响应之前发送多个消息请求，这叫做流水线式请求(pipelined request)。<ul>
+<li>可以连续发送请求和响应对象。HTTP客户每碰到一个引用就立即发出一个请求，HTTP客户可以一个接一个紧挨着发出各个引用对象的请求。服务器收到这些请求后，也可以一个接一个紧挨着发出各个对象。如果所有的请求和响应都是紧挨着发送的，那么所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)。</li>
+<li>带流水线的持久连接中服务器空等请求的时间比较少。</li>
+<li>降低缓启动延迟。与非持久连接相比，持久连接(不论是否带流水线)除降低了1个RTT的响应延迟外，缓启动延迟也比较小。其原因在于既然各个对象使用同一个TCP连接，服务器发出第一个对象后就不必再以一开始的缓慢速率发送后续对象。相反，服务器可以按照第一个对象发送完毕时的速率开始发送下一个对象。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-HTTPS"><a href="#5-HTTPS" class="headerlink" title="5. HTTPS"></a>5. HTTPS</h3><p><strong>1. 定义</strong></p>
+<ul>
+<li>它是由Netscape开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果。HTTPS实际上应用了Netscape的安全套接字层（SSL）作为HTTP应用层的子层。（HTTPS使用端口443，而不是像HTTP那样使用端口80来和TCP/IP进行通信。）SSL使用40 位关键字作为RC4流加密算法，这对于商业信息的加密是合适的。HTTPS和SSL支持使用X.509数字认证，如果需要的话用户可以确认发送者是谁。<br>也就是说它的主要作用可以分为两种：一种是建立一个信息安全通道，来保证数据传输的安全；另一种就是确认网站的真实性。</li>
+</ul>
+<p><strong>2. HTTPS和HTTP的区别</strong></p>
+<ul>
+<li>https协议需要到ca申请证书，一般免费证书很少，需要交费。</li>
+<li>http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议。</li>
+<li>http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</li>
+</ul>
+<p><strong>3. HTTPS解决的问题</strong></p>
+<ul>
+<li>信任主机问题<ul>
+<li>采用https的服务器必须从CA （Certificate Authority）申请一个用于证明服务器用途类型的证书。该证书只有用于对应的服务器的时候，客户端才信任此主机。</li>
+</ul>
+</li>
+<li>通讯过程中的数据泄密和篡改<ul>
+<li>一般意义上的https，就是服务器有一个证书。</li>
+<li>少许对客户端有要求的情况下，会要求客户端也必须有一个证书。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-HTML-XHTML"><a href="#4-HTML-XHTML" class="headerlink" title="4. HTML/XHTML"></a>4. HTML/XHTML</h2><h3 id="1-HTML"><a href="#1-HTML" class="headerlink" title="1. HTML"></a>1. HTML</h3><p><strong>1. 超文本标记语言，即HTML（Hypertext Markup Language），是用于描述网页文档的一种标记语言。</strong></p>
+<ul>
+<li>HTML是一种规范，一种标准，它通过标记符号来标记要显示的网页中的各个部分。</li>
+<li>HTML之所以称为超文本标记语言，是因为文本中包含了所谓“超级链接”点——URL指针,可以点击浏览其他网页。</li>
+</ul>
+<p><strong>2. 版本</strong></p>
+<ul>
+<li>超文本标记语言（第一版）——在1993年6月作为互联网工程工作小组（IETF）工作草案发布（并非标准）</li>
+<li>HTML 2.0——1995年11月作为RFC 1866发布，在RFC 2854于2000年6月发布之后被宣布已经过时</li>
+<li>HTML 3.2——1996年1月14日，W3C推荐标准</li>
+<li>HTML 4.0——1997年12月18日，W3C推荐标准</li>
+<li>HTML 4.01（微小改进）——1999年12月24日，W3C推荐标准</li>
+</ul>
+<p><strong>3. 特点</strong></p>
+<ul>
+<li>简易性，HTML版本升级采用超集方式，从而更加灵活方便。</li>
+<li>可扩展性，HTML语言的广泛应用带来了加强功能，增加标识符等要求，HTML采取子类元素的方式，为系统扩展带来保证。</li>
+<li>平台无关性。虽然PC机大行其道，但使用MAC等其他机器的大有人在，HTML可以使用在广泛的平台上，这也是WWW盛行的另一个原因。</li>
+</ul>
+<p><strong>4. 结构</strong></p>
+<ul>
+<li>超文本标记语言标准的HTML文件都具有一个基本的整体结构，即HTML文件的开头与结尾标志和HTML的头部与实体2大部分。有3个双标记符用于页面整体结构的确认。<pre><code>&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+</ul>
+<h3 id="2-XHTML"><a href="#2-XHTML" class="headerlink" title="2. XHTML"></a>2. XHTML</h3><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+<li>XHTML是The Extensible HyperText Markup Language(可扩展超文本标识语言)的缩写。HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的标记语言，看起来与HTML有些相象，只有一些小的但重要的区别，XHTML就是一个扮演着类似HTML的角色的XML，所以，本质上说，XHTML是一个过渡技术，结合了部分XML的强大功能及大多数HTML的简单特性。</li>
+<li>2000年底，国际W3C组织(World Wide Web Consortium)组织公布发行了XHTML 1.0版本。XHTML 1.0是一种在HTML 4.0基础上优化和改进的的新语言，目的是基于XML应用。XHTML是一种增强了的HTML,XHTML 是更严谨更纯净的 HTML 版本。它的可扩展性和灵活性将适应未来网络应用更多的需求。XML虽然数据转换能力强大，完全可以替代HTML，但面对成千上万已有的基于HTML语言设计的网站，直接采用XML还为时过早。因此，在HTML4.0的基础上，用XML的规则对其进行扩展，得到了XHTML。所以，建立XHTML的目的就是实现HTML向XML的过渡。目前国际上在网站设计中推崇的WEB标准就是基于XHTML的应用（即通常所说的CSS+DIV）。</li>
+<li>跟CSS（Cascading Style Sheets，层叠式样式表）结合后，XHTML能发挥真正的威力；这使实现样式跟内容的分离的同时，又能有机地组合网页代码，在另外的单独文件中，还可以混合各种XML应用，比如MathML、SVG。</li>
+</ul>
+<h3 id="2-XHTML与HTML"><a href="#2-XHTML与HTML" class="headerlink" title="2. XHTML与HTML"></a>2. XHTML与HTML</h3><ul>
+<li>Html<br>语法比较松散，写起来比较容易，但是兼容性不好</li>
+<li>XHTML<ol>
+<li>所有的标记都必须要有一个相应的结束标记</li>
+<li>所有标签的元素和属性的名字都必须使用小写</li>
+<li>所有的XML标记都必须合理嵌套</li>
+<li>所有的属性必须用引号””括起来</li>
+<li>把所有&lt;和&amp;特殊符号用编码表示<ul>
+<li>任何小于号（&lt;），不是标签的一部分，都必须被编码为&amp; l t ;</li>
+<li>任何大于号（&gt;），不是标签的一部分，都必须被编码为&amp; g t ;</li>
+<li>任何与号（&amp;），不是实体的一部分的，都必须被编码为&amp; a m p;</li>
+<li>注：以上字符之间无空格。</li>
+</ul>
+</li>
+<li>给所有属性赋一个值</li>
+<li>不要在注释内容中使“–”</li>
+<li>图片必须有说明文字—alt说明</li>
+</ol>
+</li>
+</ul>
+<h2 id="5-HTML5"><a href="#5-HTML5" class="headerlink" title="5. HTML5"></a>5. HTML5</h2><h3 id="1-无插件范式，新功能"><a href="#1-无插件范式，新功能" class="headerlink" title="1. 无插件范式，新功能"></a>1. 无插件范式，新功能</h3><ul>
+<li>Html5加入了语义化标签</li>
+<li>离线存储</li>
+<li>支持多种设备访问</li>
+<li>数据连通，改善前后数据交互（websocket技术减少了header traffic，不需要轮询，全双工）</li>
+<li>多媒体支持标签</li>
+<li>增加了3d图形和特效</li>
+<li>性能与集成</li>
+<li>支持css3</li>
+<li>无插件范式</li>
+</ul>
+<h3 id="2-与HTML4的区别"><a href="#2-与HTML4的区别" class="headerlink" title="2. 与HTML4的区别"></a>2. 与HTML4的区别</h3><p><strong>1. 简化的语法</strong></p>
+<ul>
+<li>HTML5添加了许多新的语法特征，其中包括&lt;video&gt;,&lt;audio&gt;和&lt;canvas&gt;元素，同时整合了SVG内容。这些元素是为了更容易的在网页中添加和处理多媒体和图片内容而添加的。其他新的元素包括&lt;section&gt;,&lt;article&gt;,&lt;header&gt;和&lt;nav&gt;是为了丰富文档的数据内容。新的属性的添加也是为了同样的目的。同时也有一些属性和元素被移除掉了。一些元素，像&lt;a&gt;,&lt;cite&gt;和&lt;menu&gt;被修改，重新定义或标准化了。</li>
+</ul>
+<p><strong>2. &lt;canvas&gt; 标记取代Flash</strong></p>
+<ul>
+<li>Canvas元素是HTML5的一部分，允许脚本动态渲染位图像。Canvas由一个可绘制地区HTML代码中的属性定义决定高度和宽度。javaScript代码可以访问该地区，通过一套完整的绘图功能类似于其他通用二维API，从而使动态生成图形。其一些可能的用途，包括使用Canvas构造图形，动画，游戏和图片。</li>
+</ul>
+<p><strong>3. 新的&lt;header&gt;和&lt;footer&gt;标记</strong></p>
+<ul>
+<li>使用新标记替换掉&lt;div&gt;标记是HTML5在语义方面的主要成就。&lt;div&gt;在HTML4里广泛使用，但是它所表达的语义太弱，在声明网页组织结构里不同的区块任务面前它毫无用武之地。新的HTML5标记 – 例如 &lt;article&gt;,&lt;aside&gt;,&lt;nav&gt;,&lt;figure&gt;,&lt;header&gt;,&lt;footer&gt; – 会更有用和更方便，这些标记能够让你指明网页不同区域的用途，清楚的显示网站的结构。SEO搜索引擎更易优化。</li>
+</ul>
+<p><strong>4. 新的 &lt;section&gt; 和&lt;article&gt; 标记</strong></p>
+<ul>
+<li>HTML5中引入的新的 &lt;section&gt; 和 &lt;article&gt; 标记可以让开发人员更好的标注页面上的这些区域。在同一个页面中可以使用多个&lt;footer&gt;元素，即可以用作页面整体的页脚，也可以作为一个内容区块的结尾，例如，我们可以将&lt;footer&gt;直接写在&lt;section&gt;或是&lt;article&gt;中。</li>
+</ul>
+<p><strong>5. 新的 &lt;menu&gt; 和&lt;figure&gt; 标记</strong></p>
+<ul>
+<li>新的&lt;menu&gt;标记可以被用作普通的菜单，也可以用在工具条和右键菜单上，虽然这些东西在页面上并不常用。类似的，新的 &lt;figure&gt; 标记是一种更专业的管理页面上文字和图像的方式。当然，你可以用样式表来控制文字和图像，但使用HTML5内置的这个标记更适合。</li>
+</ul>
+<p><strong>6. 新的 &lt;audio&gt; 和 &lt;video&gt; 标记</strong></p>
+<ul>
+<li>新的&amp;ltaudio&gt; 和 &amp;ltvideo&gt; 标记可能是HTML5中增加的最有用处的两个东西了。正如标记名称，它们是用来嵌入音频和视频文件的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;audio autoplay=&quot;autoplay&quot; controls=&quot;controls&quot;&gt;</div><div class="line">    &lt;source src=&quot;music.ogg&quot;</div><div class="line">    &lt;source src=&quot;music.mp3&quot; /&gt;</div><div class="line">&lt;/audio&gt;</div></pre></td></tr></table></figure>
+<p><strong>7. 全新的表单设计</strong></p>
+<p><strong>8.不再使用 &lt;b&gt; 和 &lt;font&gt; 标记，将内容和展示分离</strong></p>
+<p><strong>9. 不再使用 &lt;frame&gt;, &lt;center&gt;, &lt;big&gt; 标记</strong></p>
+<h2 id="6-CSS"><a href="#6-CSS" class="headerlink" title="6. CSS"></a>6. CSS</h2><h3 id="1-几种方式"><a href="#1-几种方式" class="headerlink" title="1. 几种方式"></a>1. 几种方式</h3><p><strong>1. 内联样式</strong><br>内联样式是直接在html标签上定义该标签的css样式，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><strong>2. 内部样式</strong><br>内部样式是写在html文件中，且包含在&lt;style&gt;&lt;/style&gt;代码中，style写在head里面如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    div&#123;width:100px;height:100px;&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;div&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><strong>3. 外部样式</strong><br>外部样式是通过在html中引用外部css文件来控制样式，如：html文件中写入引用语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link href=&quot;css文件路径&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot; /&gt;</div></pre></td></tr></table></figure>
+<h3 id="2-css盒模型"><a href="#2-css盒模型" class="headerlink" title="2. css盒模型"></a>2. css盒模型</h3><p><img src="http://oseihavwm.bkt.clouddn.com/CSS%E7%9B%92%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<h3 id="3-优先级顺序和继承关系"><a href="#3-优先级顺序和继承关系" class="headerlink" title="3. 优先级顺序和继承关系"></a>3. 优先级顺序和继承关系</h3><ul>
+<li>层叠优先级是：<ul>
+<li>浏览器缺省 &lt; 外部样式表 &lt; 内部样式表 &lt; 内联样式</li>
+<li>其中样式表又有：类选择器 &lt; 类派生选择器 &lt; ID选择器 &lt; ID派生选择器</li>
+<li>有!impotent声明的优先级高于一切</li>
+</ul>
+</li>
+<li>CSS 样式表继承指的是特定的CSS属性向下传递到子孙元素。</li>
+</ul>
+<h3 id="4-响应式网页设计，主要手段"><a href="#4-响应式网页设计，主要手段" class="headerlink" title="4. 响应式网页设计，主要手段"></a>4. 响应式网页设计，主要手段</h3><p>响应式网站设计由三个关键组成部分：</p>
+<ol>
+<li>media query</li>
+<li>流动网络</li>
+<li>灵活缩放的图片</li>
+</ol>
+<ul>
+<li>基于RWD而设计的网站利用CSS3 media queries 规则来自动适应不同访问设备的屏幕尺寸和显示要求。</li>
+<li>流动网络采用页面元素大小的相对单位(百分比/EM)，而非传统设计使用的绝对单位(像素/点数)，以确定页面各组成元素的大小。</li>
+<li>最后，图片大小也是采用相对单位而灵活缩放，不至于在小屏幕的移动设备上超出显示区域。</li>
+</ul>
+<h2 id="7-JavaScript"><a href="#7-JavaScript" class="headerlink" title="7. JavaScript"></a>7. JavaScript</h2><h3 id="1-优缺点"><a href="#1-优缺点" class="headerlink" title="1. 优缺点"></a>1. 优缺点</h3><p><strong>1. 优点</strong></p>
+<ul>
+<li>使用JavaScript就可以在客户端进行数据验证</li>
+<li>JavaScript可以方便操纵各种浏览器的对象</li>
+<li>可以使用JavaScript来控制浏览器的外观，状态甚至运行方式</li>
+<li>可以根据用户的需要”定制”浏览器，从而使网页更加友好</li>
+<li>JavaScript可以使多种任务仅在用户端就可以完成而不需要网络和服务器的参与，从而支持分布式的运算和处理</li>
+</ul>
+<p><strong>2. 缺点</strong></p>
+<ul>
+<li>JavaScript简单性</li>
+<li>解释执行</li>
+<li>基于对象，一个变量可以赋不同类型的值，弱类型，会产生很多难以查到的错误基本语法</li>
+</ul>
+<h3 id="2-First-class-functions"><a href="#2-First-class-functions" class="headerlink" title="2. First-class functions"></a>2. First-class functions</h3><ul>
+<li>JS里面的function是基础的变量类型之一，可以作为参数或返回值，可以赋给变量，可以做闭包。</li>
+<li>Firstclass function 以 functions 来构造对象</li>
+<li>Function 对象是JavaScript里面的固有对象，所有的函数实际上都是一个Function对象</li>
+</ul>
+<h3 id="3-事件驱动编程"><a href="#3-事件驱动编程" class="headerlink" title="3. 事件驱动编程"></a>3. 事件驱动编程</h3><ul>
+<li><p>JavaScript是基于对象(object-based)的语言。这与Java不同,Java是面向对象的语言。而基于对象的基本特征，就是采用事件驱动(event-driven)。它是在用形界面的环境下，使得一切输入变化简单化。通常鼠标或热键的动作我们称之为事件(Event)，而由鼠标或热键引发的一连串程序的动作，称之为事件驱动(Event Driver)。而对事件进行处理程序或函数，我们称之为事件处理程序(Event Handler)。</p>
+</li>
+<li><p>在JavaScript中对象事件的处理通常由函数(Function)担任。其基本格式与函数全部一样，可以将前面所介绍的所有函数作为事件处理程序。<br>格式如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Function 事件处理名(参数表)&#123;</div><div class="line">    事件处理语句集;</div><div class="line">    ……</div><div class="line">&#125;</div><div class="line"></div><div class="line">1. 单击事件onClick：button，radio，reset button，submit</div><div class="line">2. onChange改变事件</div><div class="line">3. 选中事件onSelect</div><div class="line">4. 获得焦点事件onFocus</div><div class="line">5. 失去焦点onBlur</div><div class="line">6. 载入文件onLoad</div><div class="line">7. 卸载文件onUnload：当Web页面退出时引发onUnload事件，并可更新Cookie的状态。</div></pre></td></tr></table></figure>
+<ul>
+<li><p>事务注册的方法</p>
+<ul>
+<li><p>inline:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;somewhere.html&quot; onClick=&quot;myFunction()&quot;&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>traditional</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.onclick=myFunction;</div></pre></td></tr></table></figure>
+</li>
+<li><p>DOM 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.addEventListener(&quot;click&quot;,myFunction);</div></pre></td></tr></table></figure>
+</li>
+<li><p>IE:(evil enough!)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.attachEvent(&apos;onclick&apos;,myFunction);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Prototype…and so on:(prefered)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Event.observe(&apos;target&apos;,&apos;click&apos;,myFunction);</div><div class="line">document.observe(&apos;dom:loaded&apos;myFunction);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-面向对象"><a href="#4-面向对象" class="headerlink" title="4. 面向对象"></a>4. 面向对象</h3><p><strong>1. 用JavaScript实现类</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function myClass()</div><div class="line">&#123;</div><div class="line">    //此处相当于构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 如何获得一个类的实例</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var obj1 = new myClass();</div></pre></td></tr></table></figure>
+<p><strong>3. 对象的成员的引用</strong><br>在JavaScript中引用一个类的属性或方法的方法有以下三种。</p>
+<ul>
+<li>点号操作符:这是一种最普遍的引用方式，就不累赘。即如下形式：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名.属性名;</div><div class="line">对象名.方法名;</div></pre></td></tr></table></figure>
+<ul>
+<li>方括号引用:JavaScript中允许用方括号引用对象的成员。如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名[&quot;属性名&quot;];</div><div class="line">对象名[&quot;方法名&quot;];</div></pre></td></tr></table></figure>
+<ul>
+<li>这里方括号内是代表属性或方法名的字符串，不一定是字符串常量。也可以使用变量。这样就可以使用变量传递属性或方法名。为编程带来了方便。在某些情况下，代码中不能确定要调用那个属性或方法时，就可以采用这种方式。否则，如果使用点号操作符，还需要使用条件判断来调用属性或方法。</li>
+<li>另外，使用方括号引用的属性和方法名还可以以数字开头，或者出现空格，而使用点号引用的属性和方法名则遵循标示符的规则。但一般不提倡使用非标示符的命名方法。</li>
+</ul>
+<p><strong>4. 匿名函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function()&#123;  </div><div class="line">    //这里忽略jQuery所有实现  </div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<ul>
+<li>匿名函数就是没有实际名字的函数。<br>例如我们在设定一个DOM元素事件处理函数的时候，我们通常都不会为他们定名字，而是赋予它的对应事件引用一个匿名函数。</li>
+<li>对匿名函数的调用其实还有一种做法，也就是我们看到的jQuery片段——使用()将匿名函数括起来，然后后面再加一对小括号（包含参数列表）。</li>
+</ul>
+<p><strong>5. 作用域，闭包</strong></p>
+<ul>
+<li>闭包的作用：<ul>
+<li>读取函数内部的变量</li>
+<li>让这些变量的值始终保持在内存中</li>
+</ul>
+</li>
+<li>闭包的应用场景<ul>
+<li>实现私有成员</li>
+<li>保护命名空间</li>
+<li>避免污染全局变量</li>
+<li>变量需要长期驻留在内存</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-DOM"><a href="#8-DOM" class="headerlink" title="8. DOM"></a>8. DOM</h2><h3 id="1-XHTML-XML-与DOM树"><a href="#1-XHTML-XML-与DOM树" class="headerlink" title="1. XHTML/XML 与DOM树"></a>1. XHTML/XML 与DOM树</h3><ul>
+<li><p>DOM 是 W3C（万维网联盟） 的推荐标准。DOM 定义了访问诸如 XML 和 XHTML 文档的标准。</p>
+</li>
+<li><p>DOM的全称是Document Object Model，也即文档对象模型。在应用程序中，基于DOM的XML分析器将一个XML文档转换成一个对象模型的集合（通常称DOM树），应用程序正是通过对这个对象模型的操作，来实现对XML文档数据的操作。通过DOM接口，应用程序可以在任何时候访问XML文档中的任何一部分数据，因此，这种利用DOM接口的机制也被称作随机访问机制。</p>
+</li>
+<li>DOM接口提供了一种通过分层对象模型来访问XML文档信息的方式，这些分层对象模型依据XML的文档结构形成了一棵节点树。无论XML文档中所描述的是什么类型的信息，即便是制表数据、项目列表或一个文档，利用DOM所生成的模型都是节点树的形式。也就是说，DOM强制使用树模型来访问XML文档中的信息。由于XML本质上就是一种分层结构，所以这种描述方法是相当有效的。</li>
+</ul>
+<h3 id="2-DOMO-DOM2事件流（捕获、目标和冒泡）"><a href="#2-DOMO-DOM2事件流（捕获、目标和冒泡）" class="headerlink" title="2. DOMO DOM2事件流（捕获、目标和冒泡）"></a>2. DOMO DOM2事件流（捕获、目标和冒泡）</h3><p><strong>1. 事件流</strong></p>
+<ul>
+<li>事件冒泡(IE事件流)<br>事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深的那个节点）接受，然后逐级向上传播到较为不具体的节点（文档）。</li>
+<li>事件捕获(Netscape事件流)<br>不太具体的节点更早收到事件，而具体的节点最后收到节点。</li>
+<li>DOM事件流<br>“DOM2级事件”规定的事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。<br>DOM2：捕获阶段不含实际目标，不涉及事件目标，只为截获事件提供机会。</li>
+</ul>
+<h3 id="3-观察者模式"><a href="#3-观察者模式" class="headerlink" title="3. 观察者模式"></a>3. 观察者模式</h3><ul>
+<li>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者，使它们能够自动更新自己。</li>
+</ul>
+<h2 id="9-XML"><a href="#9-XML" class="headerlink" title="9. XML"></a>9. XML</h2><h3 id="1-优点"><a href="#1-优点" class="headerlink" title="1. 优点"></a>1. 优点</h3><p><strong>1. 具有良好的格式</strong><br>标记一定要拥有结尾标记，如&lt;name&gt;coolsun&lt;/name&gt;</p>
+<p><strong>2. 具有验证机制</strong><br>XML的标记是程序员自己定义的，标记的定义和使用是否符合语法，需要验证。XML有两种验证方法：一种是DTD（Document Type Definition），即文档类型定义，DTD是一个专门的文件，用来定义和校验XML文档中的标记；另一种是XML Schema，用XML语法描述，它比DTD更优越，多个Schema可以复合使用XML名称空间，可以详细定义元素的内容及属性值的数据类型。</p>
+<p><strong>3. 灵活的WEB应用</strong><br>在XML中，数据和显示格式是分离设计的，HTML提供显示的内容，而XML描述数据本身。</p>
+<p><strong>4. 丰富的显示样式</strong><br>XML数据定义打印、显示排版信息主要有3种方法：用CSS定义打印和显示排版信息；用XSLT转换到HTML进行显示和打印；用XSLT转换成XSL的FO（Formatter Object）进行显示和打印</p>
+<p><strong>5. XML是电子数据交换（EDI）的格式</strong><br>XML是为互联网的数据交换而设计，它不仅仅是SGML定义的用于描述的文档，而且在电子商务等各个领域使用数据交换成为可能。</p>
+<p><strong>6. 便捷的数据处理</strong><br>XML可以很方便地与数据库中的表进行相互转换。XML使计算机能够很简易地读取和存储资料，并确保数据结构精确。</p>
+<p><strong>7. 面向对象的特性</strong><br>XML是信息的对象化语言。DTD和Schema是界面和类（Interface和Class），XML是对象实例（Object），XSL是方法和实现（Method和Implement）。XML-Data解决了XML类的继承问题。</p>
+<p><strong>8. 开放的标准</strong><br>XML基于的标准是为Web进行过优化的。由于XML彻底把标识的概念同显示分开了，处理者能够在结构化的数据中嵌套程序化的描述以表明如何显示数据。XML是信息的高层封装与运输的标准。</p>
+<p><strong>9. 选择性更新</strong><br>通过XML，数据可以在选择的局部小范围内更新。每当一部分数据变化后，不需要重发整个结构化的数据。</p>
+<p><strong>10. XML是一个技术大家族</strong><br>XML是一套完整的方案，有一系列相关技术，包括文件数据验证、显示输出、文件转换、文档对象和连接等。</p>
+<h3 id="2-缺点"><a href="#2-缺点" class="headerlink" title="2. 缺点"></a>2. 缺点</h3><p><strong>1. 树状存储</strong><br>虽然搜索效率极高，但是插入和修改比较困难。</p>
+<p><strong>2. 大数据量低效率</strong><br>XML的文本表现手法、标记的符号化会导致XML数据比二进制表现数据量增加，尤其当数据量很大的时候，效率就成为很大的问题。</p>
+<p><strong>3. 管理功能不完善</strong><br>XML文档做为数据提供着使用，没有数据库系统那样完善的管理功能。</p>
+<p><strong>4. 通信难</strong><br>由于XML是元置标语言，任何人、公司和组织都可以利用它定义新的标准，这些标准间的通信就成了巨大的问题。</p>
+<h3 id="3-应用"><a href="#3-应用" class="headerlink" title="3. 应用"></a>3. 应用</h3><ul>
+<li>XML 简化数据传输</li>
+<li>XML 把数据从 HTML 分离</li>
+<li>XML 简化数据共享</li>
+<li>XML 简化平台的变更</li>
+<li>XML 使您的数据更有用</li>
+<li>XML 用于创建新的 Internet 语言（XHTML是基于xml开发的标准）</li>
+</ul>
+<h2 id="10-AJAX"><a href="#10-AJAX" class="headerlink" title="10. AJAX"></a>10. AJAX</h2><h3 id="1-同步，异步通讯"><a href="#1-同步，异步通讯" class="headerlink" title="1. 同步，异步通讯"></a>1. 同步，异步通讯</h3><h3 id="2-Ajax请求"><a href="#2-Ajax请求" class="headerlink" title="2. Ajax请求"></a>2. Ajax请求</h3><ul>
+<li>AJAX 指异步 JavaScript 及 XML(Asynchronous JavaScript And XML)<br>Ajax的核心是JavaScript对象XmlHttpRequest。该对象在Internet Explorer 5中首次引入，它是一种支持异步请求的技术。简而言之，XmlHttpRequest使您可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。</li>
+</ul>
+<h3 id="3-Ajax优缺点"><a href="#3-Ajax优缺点" class="headerlink" title="3. Ajax优缺点"></a>3. Ajax优缺点</h3><p><strong>1. 优点</strong></p>
+<ul>
+<li>AJAX 不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的 Web 应用程序的技术。</li>
+<li>通过 AJAX，您的 JavaScript 可使用 JavaScript 的 XMLHttpRequest 对象来直接与服务器进行通信。通过这个对象，您的 JavaScript 可在不重载页面的情况与 Web 服务器交换数据。</li>
+<li>AJAX 在浏览器与 Web 服务器之间使用异步数据传输（HTTP 请求），这样就可使网页从服务器请求少量的信息，而不是整个页面。</li>
+<li>AJAX 可使因特网应用程序更小、更快，更友好。</li>
+<li>AJAX 是一种独立于 Web 服务器软件的浏览器技术。</li>
+<li>最大优点：更迅捷的响应速度，就是能在不更新整个页面的前提下维护数据。这使得Web应用程序更为迅捷地回应用户动作，并避免了在网络上发送那些没有改变过的信息。</li>
+</ul>
+<p><strong>2. 缺点</strong></p>
+<ul>
+<li>对应用Ajax最主要的批评就是，它可能破坏浏览器后退按钮的正常行为。</li>
+<li>使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中。</li>
+<li>网络延迟——即用户发出请求到服务器发出响应之间的间隔——需要慎重考虑。</li>
+<li>一些手持设备（如手机、PDA等）现在还不能很好的支持Ajax。</li>
+<li>用JavaScript作的Ajax引擎，JavaScript的兼容性和DeBug都是让人头痛的事。</li>
+<li>Ajax的无刷新重载，由于页面的变化没有刷新重载那么明显，所以容易给用户带来困扰――用户不太清楚现在的数据是新的还是已经更新过的；现有的解决有：在相关位置提示、数据更新的区域设计得比较明显、数据更新后给用户提示等。</li>
+<li>对串流媒体的支持没有FLASH、Java Applet好。</li>
+</ul>
+<h3 id="4-XSS"><a href="#4-XSS" class="headerlink" title="4. XSS"></a>4. XSS</h3><ul>
+<li>XSS又叫CSS (Cross Site Script) ，跨站脚本攻击。它指的是恶意攻击者往Web页面里插入恶意脚本代码，当用户浏览该页之时，嵌入其中Web里面的脚本代码会被执行，从而达到恶意攻击用户的特殊目的。XSS属于被动式的攻击，因为其被动且不好利用，所以许多人常忽略其危害性。<br>XSS攻击分成两类，一类是来自内部的攻击，主要指的是利用程序自身的漏洞，构造跨站语句，如:dvbbs的showerror.asp存在的跨站漏洞。<br>另一类则是来自外部的攻击，主要指的自己构造XSS跨站漏洞网页或者寻找非目标机以外的有跨站漏洞的网页。如当我们要渗透一个站点，我们自己构造一个有跨站漏洞的网页，然后构造跨站语句，通过结合其它技术，如社会工程学等，欺骗目标服务器的管理员打开。<br>攻击Yahoo Mail 的Yamanner 蠕虫是一个著名的XSS 攻击实例。</li>
+</ul>
+<h2 id="11-优化"><a href="#11-优化" class="headerlink" title="11. 优化"></a>11. 优化</h2><h3 id="1-基准测试"><a href="#1-基准测试" class="headerlink" title="1. 基准测试"></a>1. 基准测试</h3><ul>
+<li>常用工具：Apache Bench，Siege, http_load</li>
+<li>影响因素：<ul>
+<li>Geographical location 地理位置</li>
+<li>Network issues  网络问题</li>
+<li>Response size   响应大小</li>
+<li>Code processing 编码处理</li>
+<li>Browser behavior  浏览器行为</li>
+<li>Web server configuration web服务器配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-优化思路，技术"><a href="#2-优化思路，技术" class="headerlink" title="2. 优化思路，技术"></a>2. 优化思路，技术</h3><p><strong>1. 浏览器</strong></p>
+<ul>
+<li>文件感知优化：尽早分派各种文档，并尽快使页面处于交互状态。</li>
+<li>思考式优化：浏览器不断学习用户导航模式来推测优化。</li>
+<li>使用的四种方法<ol>
+<li>资源预取（和优先级）</li>
+<li>DNS预解析</li>
+<li>TCP预连接</li>
+<li>网页预渲染</li>
+</ol>
+</li>
+</ul>
+<p><strong>2. CSS Optimization Rules</strong></p>
+<ul>
+<li>Place the CSS styles at the top of the HTML document</li>
+<li>Avoid certain CSS expressions</li>
+<li>Minify the CSS files</li>
+</ul>
+<p><strong>3. Image Optimization Rules</strong></p>
+<ul>
+<li>Use desired image sizes instead of resizing within HTML using width and height attributes</li>
+<li>Create sprites像素图 when possible</li>
+</ul>
+<p><strong>4. JavaScript Optimization</strong></p>
+<ul>
+<li>Place JavaScript at the bottom of the HTML</li>
+<li>Minify JavaScript</li>
+<li>Make JavaScript external</li>
+</ul>
+<p><strong>5. Server Optimization</strong></p>
+<ul>
+<li>Whether the server utilizes Gzip/bzip2 compression</li>
+<li>Whether DNS lookups are reduced</li>
+<li>Whether ETags are implemented</li>
+</ul>
+<p><strong>6. Optimize HTML</strong></p>
+<ul>
+<li>Standards compliant</li>
+<li>Remove whitespace</li>
+<li>Simple structures</li>
+<li>Browser compatibility</li>
+<li>Mobile compatibility</li>
+<li>Note:Web Standards</li>
+</ul>
+<p><strong>7. Use Text Instead of Images</strong></p>
+<ul>
+<li>Use CSS and HTML</li>
+<li>Avoid images for headers</li>
+<li>Text is always better for SEO</li>
+<li>Text will always render faster</li>
+<li>Balance good design with great performance</li>
+</ul>
+<p><strong>8. Cache Your Output</strong></p>
+<ul>
+<li>Minimize Server processing</li>
+<li>Server caching for dynamic content</li>
+<li>Browser caching for static resources</li>
+<li>cache Ajax requests</li>
+</ul>
+<p><strong>9. Avoid Bad Request</strong></p>
+<ul>
+<li>Check for 404 errors</li>
+<li>Avoid redirects on resources</li>
+<li>Monitor server errors</li>
+</ul>
+<p><strong>10. PHP Optimization Rules</strong></p>
+<ul>
+<li>PHP Code Optimization<ul>
+<li>Always declare your static</li>
+<li>Use Class Constants<ul>
+<li>Parsed at compile time, no execution everhead</li>
+<li>Faster lookups due to a smaller hash</li>
+<li>“Namespacing” &amp; shorter hash names</li>
+<li>Cleaner code speeds up debugging</li>
+</ul>
+</li>
+<li>Calculating loop length in advance</li>
+<li>Using a foreach loop instead of either a while or for loop</li>
+<li>Using fread() for small file data access and file_get_contents for large files</li>
+</ul>
+</li>
+<li>Opcode Caching<ul>
+<li>Alternative PHP Cache (APC)</li>
+<li>XCache</li>
+<li>Variable Caching: The value of implementing variable caching</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-名词解释"><a href="#12-名词解释" class="headerlink" title="12. 名词解释"></a>12. 名词解释</h2><ul>
+<li>HTTP<br>超文本传输协议(HyperText Transfer Protocol)。是互联网应用最为广泛的一种网络协议，所有WWW的文件都必须遵守这个标准。</li>
+<li>XML<br>可扩展标记语言(Extensible Markup Language)。标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。</li>
+<li>rest<br>表述性状态传递(Representational State Transfer)。是一种针对网络应用的设计和开发方式，可以降低开发的复杂性，提高系统的可伸缩性。</li>
+<li>Ajax<br>异步JacaScript和XML(Asynchronous JavaScript And XML)。是指一种创建交互式网页应用的网页开发技术。通过在后台与服务器进行少量数据交换，Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+<li>ria<br>丰富互联网程序(Rich Internet Applications)。具有高度互动性，丰富用户体验以及功能强大的客户端。</li>
+<li>svg<br>可缩放矢量图形(Scalable Vector Graphics)。是基于可扩展标记语言(标准通用标记语言的子集)，用于描述二维矢量图的一种图形格式。</li>
+<li>xss<br>跨站脚本攻击(Cross Site Scripting)。为不和层叠样式表(Cascading Style Sheets)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意heml代码。当用户浏览该页时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的目的。</li>
+<li>wsdl<br>网络服务描述语言(Web Services Description Language)。是Web Service的描述语言，它包含一系列描述某个Web Service的定义。</li>
+<li>mashup<br>糅合mashup。是当今网络上新出现的一种网络现象，将两种以上使用公共或者私有数据库的Web应用，加在一起，形成一个整合应用。</li>
+<li>SOP<br>同源协议(Same-Origin-Policy)。现在的网络浏览器的安全模式是根据SOP，并对网络应用提供了一些基础的保护功能。一般一个网址通常由protocol，domain，port三个部分组成，而根据SOP协议，如果一个网址只要至少一个部分不符合，便不能进入到先前进入的非同源网址。</li>
+<li>WWW<br>环球信息网(World Wide Web)。中文名字为”万维网”，常简称为Web。分为Web客户端和Web服务器程序。 </li>
+<li>IP<br>网络之间互连的协议(Internet Protocol)。也就是为计算机网络相互连接进行通信而设计的协议。在因特网中，它是能使连接到网上的所有计算机网络实现相互通信的一套原则，规定了计算机在因特网上进行通信应当遵守的规则。</li>
+<li>DNS<br>域名系统(Domain Name System)。因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的使用互联网。而不用记住能够被机器直接读取的IP字符串。通过主机名，最终得到该主机名对应的IP地址过程叫做域名解析(或主机名解析)。DNS协议运行在UDP协议之上，使用端口53。</li>
+<li>URL<br>统一资源定位符(Uniform Resource Locator)。是互联网上标准资源的地址。互联网上的每一个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</li>
+<li>URI<br>统一资源标识符(Uniform Resource Identifier)。是一个用于标识某一互联网资源名称的字符串。该种标识允许用户对任何(包括本地和互联网)的资源通过特定的协议进行交互操作。URI由包括确定的语法和相关协定的方案所定义。</li>
+<li>URN<br>统一资源名称(Uniform Resource Name)。唯一标识一个实体的标识符，但是不能给出实体的位置。系统可以先在本地寻找一个实体，在它试着在Web上找到该实体之前。它也允许Web的位置改变，然而这个实体却还是能够被找到。</li>
+<li>HTML<br>超文本标记语言(HyperText Markup Language)。标准通用标记语言下的一个应用。”超文本”就是指页面内可以包含图片，链接，甚至音乐，程序等非文字元素。超文本标记语言的结构包括”头”部分和”主体”部分，其中头部提供关于网页的信息，主体部分提供网页的具体内容。</li>
+<li>XHTML<br>可扩展超文本标记语言(Extensible HyperText Markup Language)。是一种置标语言，表达方式与超文本标记语言类似，不过语法上更加严格。从继承关系上讲，HTML是一种基于标准通用置标语言的应用，是一种非常灵活的置标语言，而XHTML则基于可扩展标记语言，可扩展标记语言是标准通用置标语言的一个子集。</li>
+<li>DOCTYPE<br>DOCTYPE标签是一种标准通用标记语言的文档类型声明，它的目的是要告诉标准通用标记语言解析器，它应该使用什么样的文档类型定义(DTD)来解析文档。</li>
+<li>SEO<br>搜索引擎优化(Search Engine optimization)。SEO是指通过对网站内部调整优化及站外优化，使网站满足搜索引擎收录排名需求，在搜索引擎中关键词排名提高，从而把精准用户带到网站，获得免费流量，产生直接销售或品牌推广。</li>
+<li>CSS<br>层叠样式表(Cascading Style Sheets)。层叠样式表是一种用来表现HTML(标准通用标记语言的一个应用)或XML(标准通用标记语言的一个子集)等文件样式的计算机语言。</li>
+<li>DOM<br>文档对象模型(Document Object Model)。是W3C组织推荐的处理可扩展标志语言的标准编程接口。</li>
+<li>MVC<br>模型视图控制器(Model View Controller)。是一种软件设计典范，用一种业务逻辑，数据，界面分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重复编写业务逻辑。</li>
+<li>TCP<br>传输控制协议(Transmission Control Protocol)。是一种面向连接的，可靠的，基于字节流的传输层通信协议。</li>
+<li>APC<br>可选PHP缓存(Alternative PHP Cache)。是一种对PHP有效的开放源高速缓冲存储器工具，可用于缓存和优化Web服务器上的PHP代码，改善服务器性能。</li>
+<li>CDN<br>内容分发网络(Content Delivery Network)。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈环节，使内容传输的更快，更稳定。</li>
+<li>JSON<br>JavaScript对象表示法(JavaScript Object Notation)。是一种轻量级的数据交换格式。它基于ECMAScript的一个子集。JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯(包括C，C++，C#，Java，Python等)。这些特性使JSON成为理想的数据交换语言。易与人阅读和编写，同时也易于机器解析和生成(一般用于提升网络传输速率)。</li>
+<li>RPC<br>远程过程调用协议(Remote Procedure Call Protocol)。他是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。</li>
+<li>SOA<br>面向服务的体系结构(Service-Oriented Architecture)。是一个组件模型，它将引用程序的不同功能单元(称为服务)通过这些服务之间定义良好的接口和契约联系起来。</li>
+<li>WSDL<br>网络服务描述语言(Web Service Description Language)。是Web Service的描述语言，它包括一系列描述某个Web Service的定义。</li>
+<li>UDDI<br>统一描述，发现和集成协议(Universal Description Discovery and Integration)。是一种目录服务，企业可以使用它对Web Service进行注册和搜索。</li>
+<li>SOAP<br>简单对象访问协议(Simple Object Access Protocol)。是交换数据的一种协议规范，是一种轻量的，简单的，基于XML(标准通用标记语言下的一个子类)的协议，它被设计成在WEB上交换结构化的和固化的信息。</li>
+<li>API<br>应用编程接口(Application Programming Interface)。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。</li>
+</ul>
+<h2 id="13-一些问题"><a href="#13-一些问题" class="headerlink" title="13. 一些问题"></a>13. 一些问题</h2><h3 id="1-为什么不建议table布局"><a href="#1-为什么不建议table布局" class="headerlink" title="1. 为什么不建议table布局"></a>1. 为什么不建议table布局</h3><ul>
+<li>Table要比其他html标记占更多的字节</li>
+<li>Table会阻挡浏览器渲染引擎的渲染顺序</li>
+<li>Table里显示图片时需要你把单个，有逻辑性的图片切成多个图</li>
+<li>在某些浏览器中Table里的文字的拷贝会出现问题</li>
+<li>Table会影响其内部的某些布局属性的生效(比如&lt;td&gt;里的元素的height:100%)</li>
+<li>一旦学会了CSS知识，你会发现使用Table做页面布局会变得更麻烦</li>
+<li>Table对于页面布局者来说，从语义上看是不正确的</li>
+<li>Table代码会让阅读者抓狂</li>
+<li>Table一旦设计完成就变成死的，很难通过CSS让它展现新的面貌</li>
+</ul>
+<h3 id="2-表单验证是什么，有哪几种方式并比较"><a href="#2-表单验证是什么，有哪几种方式并比较" class="headerlink" title="2. 表单验证是什么，有哪几种方式并比较"></a>2. 表单验证是什么，有哪几种方式并比较</h3><ul>
+<li>Form标签中增加onsubmit=check()</li>
+<li>Input type=button按钮中onclick=”submitForm()”</li>
+<li>Input type=submit 中 onclick=return check()</li>
+</ul>
+<h3 id="3-bigpipe的原理和优缺点"><a href="#3-bigpipe的原理和优缺点" class="headerlink" title="3. bigpipe的原理和优缺点"></a>3. bigpipe的原理和优缺点</h3><p>要利用该Web服务器和浏览器之间的并行性，BigPipe首先分解网页成多个可调用的Pagelets。正如流水线微处理器划分一个指令的生命周期为(“取指令”,”指令解码”,”执行”,”写回寄存器”等)多个阶段，BigPipe的页面生成过程分为以下几个阶段：</p>
+<ol>
+<li>请求解析：Web服务器解析和完整性检查HTTP请求。</li>
+<li>数据获取：Web服务器从存储层获取数据。</li>
+<li>标记生成：Web服务器生成响应的HTML标记。</li>
+<li>网络传输：响应从Web服务器传送到浏览器。</li>
+<li>CSS的下载：浏览器下载网页的CSS请求。</li>
+<li>DOM树结构和CSS样式：浏览器构造DOM文档树，然后应用它的CSS规则。</li>
+<li>JavaScript下载：浏览器下载网页中JavaScript引用的资源。</li>
+<li>JavaScript执行：浏览器的网页执行JavaScript代码。</li>
+</ol>
+<ul>
+<li>前三个阶段执行，由Web服务器，最后四个阶段是由浏览器执行。每个Pagelet必须经过所有这些阶段顺序，但BigPipe在不同的阶段使几个Pagelets同时执行。</li>
+<li>在BigPipe，一个用户请求的生命周期是这样的：在浏览器发送一个HTTP请求到Web服务器。收到HTTP请求，并在上面进行一些全面的检查，网站服务器立即发回一个未关闭的HTML文件，其中包括一个HTML 标签和标签的开始标签。标签包括BigPipe的JavaScript库来解析Pagelet以后收到的答复。在标签，有一个模板，它指定了页面的逻辑结构和Pagelets占位符。</li>
+<li>在客户端收到Pagelet通过“onPageletArrive”发出的指令后，BigPipe的JavaScript库将首先下载它的CSS资源，在CSS资源被下载完成后，BigPipe将在Pagelet的标记HTML显示它的innerHTML。多个Pagelets的CSS可在同一时间下载，它们可以根据其各自CSS的下载完成情况来确认显示顺序。在BigPipe中，JavaScript资源的优先级低于CSS和页面内容。因此，BigPipe不会在所有Pagelets显示出来之前下载任何Pagelet中的JavaScript。然后，所有Pagelets的JavaScript异步下载。最后Pagelet的JavaScript初始化代码根据其各自的下载完成情况来确定执行顺序。</li>
+<li>这种高度并行系统的最终结果是，多个Pagelets的不同执行阶段同时进行。例如，浏览器可以正在下载三个Pagelets CSS的资源，同时已经显示另一Pagelet内容，与此同时，服务器也在生成新的Pagelet。从用户的角度来看，页面是逐步呈现的。最开始的网页内容会更快的显示，这大大减少了用户的对页面延时的感知。</li>
+<li>优点：节约时间，用户体验好。</li>
+<li>缺点：一个pagelet阻塞，会导致后面的pagelet阻塞，影响效率。</li>
+</ul>
+<h3 id="4-HTML5"><a href="#4-HTML5" class="headerlink" title="4. HTML5"></a>4. HTML5</h3><ol>
+<li>HTML5加入了语义化标签</li>
+<li>离线存储</li>
+<li>有效支持多种设备访问，与操作系统集成的更监牢</li>
+<li>数据连接，改善前后数据交互，websocket技术减少了header traffic，不需要轮询，全双工</li>
+<li>多媒体支持标签</li>
+<li>增加了三维，图形和特效</li>
+<li>性能与集成</li>
+<li>支持CSS3</li>
+<li>无插件范式</li>
+</ol>
+<h3 id="5-Why-CSS"><a href="#5-Why-CSS" class="headerlink" title="5. Why CSS"></a>5. Why CSS</h3><ol>
+<li>使用了CSS的文档更加灵活，简洁</li>
+<li>基本格式工具</li>
+<li>方便管理多个文档</li>
+<li>使用类选择器可节省时间</li>
+<li>更多格式化的机会</li>
+</ol>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/11/25/Object-Oriented-Software-C onstruction/" style="float: left;">
+        ← 面向对象软件构造
+    </a>
+    
+    
+    <a class="pull-right" href="/2017/10/23/Database-Course/">
+        数据库开发技术复习 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

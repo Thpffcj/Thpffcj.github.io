@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>数据库系统复习 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-11T04:36:12.000Z" itemprop="datePublished">
+          2018-03-11
+      </time>
+    
+</span>
+                <h1>数据库系统复习</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-关系模型的基本概念与基本理论"><a href="#1-关系模型的基本概念与基本理论" class="headerlink" title="1. 关系模型的基本概念与基本理论"></a>1. 关系模型的基本概念与基本理论</h2><h3 id="1-数据库的基本概念"><a href="#1-数据库的基本概念" class="headerlink" title="1. 数据库的基本概念"></a>1. 数据库的基本概念</h3><ul>
+<li>数据库：为一个共同的目的而保存起来的所有数据的集合称为数据库。</li>
+<li>数据库管理系统(DBMS - database management system)：数据库管理系统是一套计算机程序，他把企业的数据以记录的形式在计算机中保存起来。</li>
+<li>数据模型(data model)：是一套描述如何将现实世界的数据在概念上用电子信息表示的定义，它还表示为用来操作这些数据的一类操作。Hierarchical DataModel/层次数据模型（树） → Network Data Model/网状数据模型（图） → Relational Model/关系模型（表） → Object-Relational Model/对象关系模型 （不受第一范式规则约束的关系模型、表中元素可以是集合）。</li>
+</ul>
+<h3 id="2-关系模型的基本概念"><a href="#2-关系模型的基本概念" class="headerlink" title="2. 关系模型的基本概念"></a>2. 关系模型的基本概念</h3><p><strong>数据结构：</strong></p>
+<ul>
+<li>表/关系(table/relation)：file of records。表是以行和列的形式组织起来的数据的集合(wiki)。</li>
+<li>列/属性(column/attribute)：field names of records。</li>
+<li>行/元组(row/tuple)：records of a file。</li>
+<li>表头/模式(table heading/schema)：列名的集合。</li>
+<li>域(domain)：可以被用作表的属性值的常数的集合。</li>
+</ul>
+<p><strong>约束规则(relationarule)：</strong></p>
+<ul>
+<li>Rule 1. 第一范式规则：在定义的表中，关系模型坚持不允许含有多值属性和含有内部结构的列。</li>
+<li>Rule 2. 只能基于内容取行规则：只可以通过行的内容，即每一行中所存在的属性值来检索列。</li>
+<li>Rule 3. 行唯一性原则：关系中的任何两个元组的值在同一时刻不能是完全相同的。</li>
+<li>Rule 4. 实体完整性规则：表T中的任意行在主键列的取值都不允许为空值。</li>
+</ul>
+<p><strong>其他：</strong></p>
+<ul>
+<li>超键(Superkey):表的任意两行数据在该列的集合上都有唯一的值。</li>
+<li>键(Key)：组成键的列集合中再也没有子集也是表的超键。</li>
+<li>候选键：关系的所有键。</li>
+<li>主键：被数据库设计者选择出来作为表中特定行的唯一性标识符的候选键。</li>
+<li>空值(null value)：未知的或尚未定义的值。（计算平均值时被剔除）</li>
+</ul>
+<h3 id="3-关系模型的基本理论-—-关系代数-relationaalgebra"><a href="#3-关系模型的基本理论-—-关系代数-relationaalgebra" class="headerlink" title="3. 关系模型的基本理论 — 关系代数(relationaalgebra)"></a>3. 关系模型的基本理论 — 关系代数(relationaalgebra)</h3><p><strong>关系代数中的运算</strong></p>
+<ul>
+<li>集合运算：R ∪ S , R ∩ S , R – S , R × S<ul>
+<li>兼容表：表头相同且属性的域相同。</li>
+<li>并(∪)，交(∩)、差(-)是针对行的操作。</li>
+<li>赋值(:=)是针对表的操作。</li>
+<li>乘(×)即对两个表的所有做作笛卡尔乘积。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>自然关系运算：投影，选择，连接，除<ul>
+<li>投影运算：R在Ai1, Ai2, … , Aik上的投影用R[Ai1, Ai2, … , Aik]表示，如CUSTOMER[name]。即把某几列从表中选出，重复的值会被合并。</li>
+<li>选择运算：S where C，C也可以是C and C’，C or C’或者not C。</li>
+<li>连接运算：R ∞ S，即选出属性重叠部分值相同的元组。没有共同属性时连接的结果与笛卡尔乘积相同。</li>
+<li>除运算：乘积的逆运算（每行除后取交集），用于处理“所有”问题。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>扩充运算：外连接，θ连接<ul>
+<li>外连接：R ∞0 S，即将两个表完全“并”起来，无对应值时补null。</li>
+<li>左外链接：R ∞L0 S，即保留左边未匹配的行，右边补null。</li>
+<li>右外链接：R ∞R0 S，即保留右边未匹配的行，左边补null。</li>
+<li>θ连接：θ可以是{&gt;, &lt;, &gt;=, &lt;=, =, &lt;&gt;}中的一个。表示为R ∞Ai θ Bj S，即两个表满足θ条件的连接。若Ai和Bj同名，则表示为R ∞R.Ai θ S.Bj S。</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-关系数据库语言SQL"><a href="#2-关系数据库语言SQL" class="headerlink" title="2. 关系数据库语言SQL"></a>2. 关系数据库语言SQL</h2><h3 id="1-数据访问命令的基本结构"><a href="#1-数据访问命令的基本结构" class="headerlink" title="1. 数据访问命令的基本结构"></a>1. 数据访问命令的基本结构</h3><pre><code>建立表，例：
+creat table customers (
+cid char(4) not null,
+cname varchar(13),
+city varchar(20),
+discnt real,
+primary key(cid));
+</code></pre><h3 id="2-基本的数据查询命令"><a href="#2-基本的数据查询命令" class="headerlink" title="2. 基本的数据查询命令"></a>2. 基本的数据查询命令</h3><p><strong>单表查询</strong></p>
+<pre><code>select distinct o.ordno, o.cid, o.aid, o.pid, o.qty*p.price-(c.discnt+a.percent)*(o.qty*p.price) as profit
+from custommers c, orders o, agents a, products p
+where c.cid = o.cid and o.aid = a.aid and p.pid = o.pid and a.city 
+=‘New York’;
+</code></pre><ul>
+<li>字符串用单引号。</li>
+<li>需删除select后的重复行时应使用distinct，保证重复行不被删除使用all ，select默认不删除重复行。</li>
+<li>as用于定义表的别名，可被省略。</li>
+<li>内层子查询能使用来自外层select语句的变量，反之则不然。</li>
+</ul>
+<p><strong>多表查询</strong></p>
+<pre><code>select city from customers
+union select city from agents;
+</code></pre><ul>
+<li>UNION运算符（逻辑并操作），自动删除重复行。</li>
+<li>在IN谓词、量化比较谓词以及EXISTS谓词所包含的子查询里，不能使用子查询的UNION形式。</li>
+<li>UNION ALL：大致同UNION，但允许出现重复行。</li>
+<li>INTERSECT运算符（逻辑交操作），自动删除重复行。</li>
+<li>INTERSECT ALL：大致同INTERSECT，但允许出现重复行。</li>
+<li>EXCEPT运算符（逻辑差操作），自动删除重复行。</li>
+<li>EXCEPT ALL：大致同EXCEPT，但允许出现重复行。</li>
+</ul>
+<h3 id="3-复杂的数据查询命令"><a href="#3-复杂的数据查询命令" class="headerlink" title="3. 复杂的数据查询命令"></a>3. 复杂的数据查询命令</h3><p><strong>统计查询</strong></p>
+<ul>
+<li>COUNT：参数可以是任何类型的列或表，计算行数。</li>
+<li>SUM：参数必须是数字类型的列或表，计算各行之和。</li>
+<li>AVG：参数必须是数字类型的列或表，计算各行的平均数。</li>
+<li>MAX：参数必须是数字或字符类型的列或表，计算各行中最大的值。</li>
+<li>MIN：参数必须是数字或字符类型的列或表，计算各行中最小的值。</li>
+<li>集合函数不能出现在where子句中，除非是在子查询的选择列表中。</li>
+<li>对空集使用统计查询时，COUNT()返回0，其它函数均返回NULL。</li>
+</ul>
+<p><strong>分组统计查询(GROUP BY)</strong></p>
+<pre><code>select aname, a.aid, pname, p.pid, sum(qty)
+from orders x, products p, agents a
+where x.pid = p.pid and x.aid = a.aid and x.cid in (‘c002’, ‘c003’)
+group by a.aid, a.aname, p.pid, p.pname;
+</code></pre><ul>
+<li>语句的执行顺序为：<ul>
+<li>对from语句中的表做笛卡尔乘积。</li>
+<li>删除不满足where子句的行。</li>
+<li>根据group by对剩余进行分组。</li>
+<li>求出选择列表中的表达式的值。</li>
+</ul>
+</li>
+</ul>
+<p><strong>分组选择统计查询(GROUP BY … HAVING)</strong></p>
+<pre><code>select pid, aid, sum(qty), as total
+from orders
+group by pid, aid
+having sum(qty) &gt; 1000;
+</code></pre><ul>
+<li>语句的执行顺序为：<ul>
+<li>对from语句中的表做笛卡尔乘积。</li>
+<li>根据group by对剩余进行分组。</li>
+<li>删除不满足having子句的行。</li>
+<li>求出选择列表中的表达式的值。</li>
+</ul>
+</li>
+</ul>
+<p><strong>多层嵌套的NOT EXISTS查询</strong></p>
+<p>o[cid, aid]÷(a where city=‘New York’)[aid]</p>
+<pre><code>SELECT c.cid
+FROM customers c
+WHERE NOT EXISTS (
+SELECT *
+FROM agents a
+WHERE a.city = ‘New York’ and NOT EXISTS (
+SELECT *
+FROM orders o
+WHERE o.cid = c.cid and o.aid = a.aid ) )
+</code></pre><ul>
+<li>被除数在里层，除数在外层。</li>
+<li>SQL不允许集合函数内部包含子查询，也不允许from子句包含子查询。</li>
+</ul>
+<h3 id="4-数据更新命令"><a href="#4-数据更新命令" class="headerlink" title="4. 数据更新命令"></a>4. 数据更新命令</h3><p><strong>元组的插入、修改、删除功能</strong></p>
+<ul>
+<li>INSERT语句<ul>
+<li>insert后列名可省略，表示表中所有列。</li>
+<li>insert后未指定的列缺省值为空值。</li>
+<li>insert into表名后的子查询不写在括号里面。</li>
+</ul>
+</li>
+</ul>
+<pre><code>INSERT INTO orders (ordno, month, cid, aid, pid)
+values (1107, ‘aug’, ‘c006’, ‘a04’, ‘p01’);
+
+INSERT INTO swcusts
+select *
+from customers
+where city in (‘Dallas’, ‘Austin’);
+</code></pre><ul>
+<li>UPDATE语句</li>
+</ul>
+<pre><code>UPDATE agents
+SET percent = 1.1 * percent
+WHERE city = ‘New York’;
+</code></pre><ul>
+<li>DELETE语句</li>
+</ul>
+<pre><code>DELETE FROM agents
+WHERE city = ‘New York’;
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-对象-关系SQL"><a href="#3-对象-关系SQL" class="headerlink" title="3. 对象-关系SQL"></a>3. 对象-关系SQL</h2><p><br></p>
+<hr>
+<h2 id="4-数据库的应用开发"><a href="#4-数据库的应用开发" class="headerlink" title="4. 数据库的应用开发"></a>4. 数据库的应用开发</h2><h3 id="1-ESQL：Embedded-SQL，嵌入式SQL。"><a href="#1-ESQL：Embedded-SQL，嵌入式SQL。" class="headerlink" title="1. ESQL：Embedded SQL，嵌入式SQL。"></a>1. ESQL：Embedded SQL，嵌入式SQL。</h3><p><br></p>
+<hr>
+<h2 id="5-数据库设计"><a href="#5-数据库设计" class="headerlink" title="5. 数据库设计"></a>5. 数据库设计</h2><p><br></p>
+<hr>
+<h2 id="6-数据定义"><a href="#6-数据定义" class="headerlink" title="6. 数据定义"></a>6. 数据定义</h2><p><br></p>
+<hr>
+<h2 id="7-事务管理"><a href="#7-事务管理" class="headerlink" title="7. 事务管理"></a>7. 事务管理</h2><p><strong>事务(transaction)</strong>：When an event occurs in the real world that changes the state of the enterprise, a program is executed to change the database state in a corresponding way. Such a program is called a transaction.</p>
+<h3 id="1-ACID特性"><a href="#1-ACID特性" class="headerlink" title="1. ACID特性"></a>1. ACID特性</h3><ul>
+<li>Atomicity(原子性)：事务包含的一组更新操作时原子不可分的，要么全部成功完成，要么全部失败，即使是在系统崩溃的时候。</li>
+<li>Consistency(一致性)：事务的成功完成将数据库从一个一致状态转变到另一个一致状态，它要求在事务并发执行的情况下事务的一致性仍然是满足的。</li>
+<li>Isolation(隔离性)：仅当两个事务不处于并发状态时，一个事务对另一个事务才有影响。又叫可串行性，即系统允许的任何交错操作调度等价于某个串行调度。</li>
+<li>Durability(持久性)：当事务发出提交语句后系统返回到程序逻辑时，它对数据所做的修改将是持久的，无论发生何种机器和系统故障。</li>
+</ul>
+<p><strong>事务的启动： </strong></p>
+<ul>
+<li>没有begin transaction这样的语句，事实上当系统处理进程中没有活动的事务，一个事务就可以开始。当事务进行中时任何更新对用户而言都是不可见的。</li>
+</ul>
+<p><strong>事务的结束：</strong></p>
+<ul>
+<li>Exec sql commit work; 事务已完成</li>
+<li>Exec sql rollback work ; 异常终止</li>
+</ul>
+<p><strong>串行调度(seriaschedule)</strong></p>
+<ul>
+<li>一个事务T的所有操作都是顺序执行的，不与其他任何事务交叉。</li>
+</ul>
+<p><strong>可串行化调度(Serializability Schedule)</strong></p>
+<ul>
+<li>如果一系列操作等价于一个串行调度，则说它使可串行化调度。</li>
+</ul>
+<p><strong>冲突(Conflict) </strong></p>
+<ul>
+<li>两个操作当且仅当满足下列条件时是冲突的：<ol>
+<li>两个操作的对象是相同。</li>
+<li>两个操作由不同的事务完成。</li>
+<li>其中至少有一个是写操作。</li>
+</ol>
+</li>
+</ul>
+<p><strong>可串行性定理：</strong></p>
+<ul>
+<li>个经历H存在等价的串行经历S(H)当且仅当对应的前趋图PG(H)中不存在环。</li>
+</ul>
+<h3 id="2-锁"><a href="#2-锁" class="headerlink" title="2. 锁"></a>2. 锁</h3><p><strong>锁的类型：</strong></p>
+<ul>
+<li>排他锁(eXclusive lock，简称X锁)，即写封锁(WL – Write Lock)。</li>
+<li>共享锁(Sharing lock，简称S锁)，即读封锁(RL – Read Lock)。</li>
+</ul>
+<p><strong>排他锁与共享锁的锁相容矩阵：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%94%81%E7%9B%B8%E5%AE%B9%E7%9F%A9%E9%98%B5.png" alt=""></p>
+<p><strong>两阶段封锁(Two-Phase Locking，2PL)</strong></p>
+<ol>
+<li>当事务Ti试图读取某个数据项时，即发出操作Ri(A)，调度器解释该操作并代表该操作第一次向该数据项加读锁RLi(A)。同样，当事务Ti试图对某个数据项进行写操作时，即发出操作Wi(A)，调度器代表该操作第一次向数据项加写锁，WLi(A)。</li>
+<li>在获得某个数据项的锁之前，调度器要求请求事务处于等待状态，直到该数据项上没有冲突锁存在为止。</li>
+<li>加锁有两个阶段：申请阶段，在该阶段事务获得所要求的锁；释放阶段，该阶段事务释放拥有的锁。调度器必须保证一旦释放阶段开始，不允许该事务再申请新的锁，也就是说不允许一个事务释放了某个锁之后又去申请别的锁。</li>
+</ol>
+<ul>
+<li>短期锁：读完或写完之后立即释放锁。</li>
+<li>长期锁：事务提交后再释放锁。</li>
+</ul>
+<p><strong>事务的隔离级别：</strong></p>
+<ul>
+<li>READUNCOMMITTED(未提交读)：不申请锁，不允许执行写操作。</li>
+<li>READCOMMITTED(提交读)：读之前申请共享性锁，读之后立即释放。</li>
+<li>READREPEATABLE(可重复读)：读之前申请共享性锁，事务结束再释放。</li>
+<li>SERIALIZABLE(可串行化)：并发事务以一种可串行化的调度策略实现其并发执行，以避免它们相互之间的干扰现象。</li>
+<li><strong>不管采用何种隔离级别，在事务‘写’数据对象A之前需要先申请对数据对象A的‘排它性’封锁(write-lock)，并将该封锁维持到当前事务的结束。</strong></li>
+</ul>
+<p><strong>隔离级别与封锁协议的关系</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt=""></p>
+<p><strong>多粒度封锁协议</strong></p>
+<ul>
+<li>按照封锁粒度的大小构造出一棵‘多粒度树’，以树中的每个结点作为封锁对象。<ol>
+<li>可以对‘多粒度树’中的每个结点独立加锁(显式封锁)。</li>
+<li>对一个结点加锁意味着该结点的所有后裔结点也被加以同样类型的锁(隐式封锁)。</li>
+</ol>
+</li>
+</ul>
+<p><strong>意向锁的锁相容性矩阵</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%84%8F%E5%90%91%E9%94%81%E7%9A%84%E9%94%81%E7%9B%B8%E5%AE%B9%E6%80%A7%E7%9F%A9%E9%98%B5.png" alt=""></p>
+<h3 id="3-日志"><a href="#3-日志" class="headerlink" title="3. 日志"></a>3. 日志</h3><p><strong>UNDO日志：</strong></p>
+<ul>
+<li>记载规则：<ul>
+<li>如果事务T修改数据库元素X，则更新日志<t,x,v>必须在X的新值写到磁盘前写到磁盘。</t,x,v></li>
+<li>如果事务T提交，则日志记录<commit t="">必须在事务T改变的所有DB元素已写到磁盘后再写到磁盘。</commit></li>
+</ul>
+</li>
+</ul>
+<p><strong>REDO日志：</strong></p>
+<ul>
+<li>记载规则：<ul>
+<li>在修改磁盘上的任何数据库元素X之前，要保证所有与X的这一修改有关的日志记录 (包括更新记录<t,x,v> 和提交记录 <commit t="">) 都必须出现在磁盘上。</commit></t,x,v></li>
+</ul>
+</li>
+</ul>
+<p><strong>UNDO/REDO日志：</strong></p>
+<ul>
+<li>记载规则：<ul>
+<li>在由于某个事务T所做的改变而修改磁盘上的数据库元素X之前，更新记录<t,x,v,w>必须出现在磁盘上。</t,x,v,w></li>
+<li>在每一条 <commit t=""> 后面必须紧跟一条Flush Log操作。</commit></li>
+</ul>
+</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/03/11/OperatingSystemCourse/" style="float: left;">
+        ← 操作系统
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/">
+        初识实时流处理Storm →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

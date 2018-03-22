@@ -181,10 +181,15 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>HashMap是JDK中Map的最常用的实现类。HashMap使用hash算法进行数据的存储和查询。<br>内部使用一个Entry表示键值对key-value。<br>用Entry的数组保存所有键值对, Entry通过链表的方式链接后续的节点(1.8后会根据链表长度决定是否转换成一棵树类似TreeMap来节省查询时间) Entry通过计算key的hash值来决定映射到具体的哪个数组（也叫Bucket)中。</p>
+      		<ul>
+<li>HashMap是JDK中Map的最常用的实现类。HashMap使用hash算法进行数据的存储和查询。</li>
+<li>内部使用一个Entry表示键值对key-value。</li>
+<li>用Entry的数组保存所有键值对, Entry通过链表的方式链接后续的节点(1.8后会根据链表长度决定是否转换成一棵树类似TreeMap来节省查询时间) Entry通过计算key的hash值来决定映射到具体的哪个数组（也叫Bucket)中。</li>
+</ul>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Hashmap.jpg" alt=""></p>
-<p>另外HashMap种还涉及到key-value的存储查询操作以及扩容操作。</p>
-<p>存储和查询依赖key的hashCode()和equals()方法，这也是EffectiveJava中推荐为每个类都override这两个方法的原因。</p>
+<p>另外HashMap中还涉及到key-value的存储查询操作以及扩容操作。</p>
+<p>存储和查询依赖key的hashCode()和equals()方法，这也是Effective Java中推荐为每个类都override这两个方法的原因。</p>
+<hr>
 <h2 id="1-HashMap-类的定义"><a href="#1-HashMap-类的定义" class="headerlink" title="1. HashMap 类的定义"></a>1. HashMap 类的定义</h2><ol>
 <li>HashMap有三种数据结构，数组，链表，红黑树。</li>
 <li>HashMap是非线程安全的</li>
@@ -195,7 +200,9 @@
 </ol>
 <pre><code>public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
     implements Map&lt;K,V&gt;, Cloneable, Serializable
-</code></pre><h2 id="2-HashMap-类的属性"><a href="#2-HashMap-类的属性" class="headerlink" title="2. HashMap 类的属性"></a>2. HashMap 类的属性</h2><pre><code>// 默认的初始容量（容量为HashMap中槽的数目）是16
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-HashMap-类的属性"><a href="#2-HashMap-类的属性" class="headerlink" title="2. HashMap 类的属性"></a>2. HashMap 类的属性</h2><pre><code>// 默认的初始容量（容量为HashMap中槽的数目）是16
 static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
 
 // 最大容量（必须是2的幂且小于2的30次方，传入容量过大将被这个值替换）
@@ -233,7 +240,9 @@ final float loadFactor;
 </code></pre><p>装载因子是哈希表在扩容之前能装多满的度量值。当哈希表中“键值对”的数量超过当前容量(capacity)和装载因子的乘积后，哈希表重新散列(也就是内部的数据结构重建了)，并且哈希表的容量大约变为原来的两倍。</p>
 <p>从上面的变量定义可以看出，默认的装载因子DEFAULT_LOAD_FACTOR 是0.75。这个值越大，空间利用率越高，但查询速度(包括get和put)操作会变慢。明白了装载因子之后，threshold也就能理解了，它其实等于容量*装载因子。</p>
 <p>这里我们要知道&lt;&lt;运算符的意义，表示移位操作，每次向左移动一位(相对于二进制来说)，表示乘以2，此处1&lt;<4表示00001中的1向左移动了4位，变成了10000，换算成十进制就是2^4=16，也就是hashmap的默认容量就是16。java中还有一些位操作符，比如类似的>&gt;(右移)，还有&gt;&gt;&gt;(无符号右移)等，也是需要我们掌握的。这些位操作符的计算速度很快，我们在平时的工作中可以使用它们来提升我们系统的性能。</4表示00001中的1向左移动了4位，变成了10000，换算成十进制就是2^4=16，也就是hashmap的默认容量就是16。java中还有一些位操作符，比如类似的></p>
-<p>Node节点的数据结构:</p>
+<ul>
+<li>Node节点的数据结构:</li>
+</ul>
 <pre><code>/**
  * Basic hash bin node, used for most entries.  (See below for
  * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
@@ -280,7 +289,9 @@ static class Node&lt;K,V&gt; implements Entry&lt;K,V&gt; {
         return false;
     }
 }
-</code></pre><p>树节点数据结构:</p>
+</code></pre><ul>
+<li>树节点数据结构:</li>
+</ul>
 <pre><code>/**
  * Entry for Tree bins. Extends LinkedHashMap.Entry (which in turn
  * extends Node) so can be used as extension of either regular or
@@ -349,7 +360,7 @@ final void putMapEntries(Map&lt;? extends K, ? extends V&gt; m, boolean evict) {
         }
     }
 }
-</code></pre><p>构造器有好几个，最终都会调用上面的这个。它接受两个参数，一个是初始容量，还有一个是装载因子。刚开始先判断值合不合法，有问题的话会抛出异常。</p>
+</code></pre><p>构造器有好几个，最终都会调用下面的这个。它接受两个参数，一个是初始容量，还有一个是装载因子。刚开始先判断值合不合法，有问题的话会抛出异常。</p>
 <pre><code>public HashMap(int initialCapacity, float loadFactor) {
     if (initialCapacity &lt; 0)
         throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +

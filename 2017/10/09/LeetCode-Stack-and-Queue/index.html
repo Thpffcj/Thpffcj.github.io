@@ -182,6 +182,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们在这篇博客主要介绍一下栈和队列这两种基础数据结构的使用。</p>
+<hr>
 <h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><pre><code>/**
  * Given a string containing just the characters &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos;, determine if the input string is valid.
  * The brackets must close in the correct order, &quot;()&quot; and &quot;()[]{}&quot; are all valid but &quot;(]&quot; and &quot;([)]&quot; are not.
@@ -237,6 +238,7 @@ public:
     }
 };
 </code></pre><p>栈顶元素反应了在嵌套的层次关系中，最近的需要匹配的元素。</p>
+<hr>
 <h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a>144. Binary Tree Preorder Traversal</h2><p>其实栈和递归之间的关系相当密切。</p>
 <pre><code>/**
  * Given a binary tree, return the preorder traversal of its nodes&apos; values.
@@ -345,7 +347,8 @@ public:
         return res;
     }
 };
-</code></pre><h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><p>其实对于队列Queue来说，它主要处理的算法问题就是广度优先遍历(树：层序遍历，图：无权图的最短路径)</p>
+</code></pre><hr>
+<h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><p>其实对于队列Queue来说，它主要处理的算法问题就是广度优先遍历(树：层序遍历，图：无权图的最短路径)</p>
 <pre><code>/**
  * Given a binary tree, return the level order traversal of its nodes&apos; values. (ie, from left to right, level by level).
  * For example:
@@ -416,7 +419,8 @@ public:
         return res;
     }
 };
-</code></pre><h2 id="279-Perfect-Squares"><a href="#279-Perfect-Squares" class="headerlink" title="279. Perfect Squares"></a>279. Perfect Squares</h2><p>当我们对图进行广度优先遍历的时候可以解决最短路径的问题。但其实很多算法问题，我们使用图的最短路径这一思路来解决，但是这个问题第一眼看上去却不像一个图论问题，在问题的描述中没有非常明确的告诉我们需要使用图来解决问题，在这种情况下我们需要对问题深入分析并建模。</p>
+</code></pre><hr>
+<h2 id="279-Perfect-Squares"><a href="#279-Perfect-Squares" class="headerlink" title="279. Perfect Squares"></a>279. Perfect Squares</h2><p>当我们对图进行广度优先遍历的时候可以解决最短路径的问题。但其实很多算法问题，我们使用图的最短路径这一思路来解决，但是这个问题第一眼看上去却不像一个图论问题，在问题的描述中没有非常明确的告诉我们需要使用图来解决问题，在这种情况下我们需要对问题深入分析并建模。</p>
 <pre><code>/**
  * Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
  * For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
@@ -512,7 +516,8 @@ public:
         throw invalid_argument(&quot;No Solution.&quot;);
     }
 };
-</code></pre><h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a>347. Top K Frequent Elements</h2><p>优先队列是一种特殊的队列，通常优先队列的底层实现是堆。对于堆得底层实现需要我们可以使用白板编程。</p>
+</code></pre><hr>
+<h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a>347. Top K Frequent Elements</h2><p>优先队列是一种特殊的队列，通常优先队列的底层实现是堆。对于堆得底层实现需要我们可以使用白板编程。</p>
 <pre><code>/**
  * Given a non-empty array of integers, return the k most frequent elements.
  * For example,
