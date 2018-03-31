@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Storm架构及部署 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-29T11:42:19.000Z" itemprop="datePublished">
+          2018-03-29
+      </time>
+    
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
+</span>
+                <h1>Storm架构及部署</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Storm架构"><a href="#1-Storm架构" class="headerlink" title="1. Storm架构"></a>1. Storm架构</h2><h3 id="1-Storm架构-1"><a href="#1-Storm架构-1" class="headerlink" title="1. Storm架构"></a>1. Storm架构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Storm%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<ul>
+<li>类似于Hadoop的架构，主从(Master/Slave)</li>
+<li>Nimbus：主<ul>
+<li>集群的主节点，负责任务(task)的指派和分发，资源的分配</li>
+</ul>
+</li>
+<li>Supervisor：从<ul>
+<li>可以启动多个Worker，具体个数可以通过配置来指定</li>
+<li>一个Topo可以运行在多个Worker之上，也可以通过配置来指定</li>
+<li>集群的从节点(负责干活的)，负责执行任务的具体部分</li>
+<li>启动和停止自己管理的Worker进程</li>
+</ul>
+</li>
+<li>无状态，在他们上面的信息(元数据会存储在ZK中)</li>
+<li>Worker：运行具体组件逻辑(Spout/Bolt)的进程</li>
+<li>task：<ul>
+<li>Spout和Bolt</li>
+<li>Worker中每一个Spout和Bolt的线程称为一个task</li>
+</ul>
+</li>
+<li>executor：Spout和Bolt可能会共享一个线程</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Storm%E6%9E%B6%E6%9E%84%E6%BC%94%E7%A4%BA.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-单机版环境部署"><a href="#2-单机版环境部署" class="headerlink" title="2. 单机版环境部署"></a>2. 单机版环境部署</h2><h3 id="1-前置条件"><a href="#1-前置条件" class="headerlink" title="1. 前置条件"></a>1. 前置条件</h3><ul>
+<li>Set up a Zookeeper cluster</li>
+<li>Install dependencies on Nimbus and worker machines<ul>
+<li>Java 7+ (Apache Storm 1.x is tested through travis ci against both java 7 and java 8 JDKs)</li>
+<li>Python 2.6.6 (Python 3.x should work too, but is not tested as part of our CI enviornment)</li>
+</ul>
+</li>
+<li>Download and extract a Storm release to Nimbus and worker machines</li>
+<li>Fill in mandatory configurations into storm.yaml</li>
+<li>Launch daemons under supervision using “storm” script and a supervisor of your choice</li>
+</ul>
+<pre><code>[thpffcj@thpffcj software]$ tar -zxvf apache-storm-1.1.2.tar.gz -C ~/app/
+</code></pre><ul>
+<li>添加系统环境变量</li>
+</ul>
+<pre><code>[thpffcj@thpffcj apache-storm-1.1.2]$ vi ~/.bash_profile 
+
+export STORM_HOME=/home/thpffcj/app/apache-storm-1.1.2
+export PATH=$STORM_HOME/bin:$PATH
+
+[thpffcj@thpffcj apache-storm-1.1.2]$ source ~/.bash_profile 
+</code></pre><h3 id="2-配置启动"><a href="#2-配置启动" class="headerlink" title="2. 配置启动"></a>2. 配置启动</h3><ul>
+<li>到bin目录下，可以看到storm启动脚本，有人会说不会用怎么办，其实我们不加任何参数，storm就会告诉我们命令</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ storm
+Commands:
+    activate
+    blobstore
+    classpath
+    deactivate
+    dev-zookeeper
+    drpc
+    get-errors
+    heartbeats
+    help
+    jar
+    kill
+    kill_workers
+    list
+    localconfvalue
+    logviewer
+    monitor
+    nimbus
+    node-health-check
+    pacemaker
+    rebalance
+    remoteconfvalue
+    repl
+    set_log_level
+    shell
+    sql
+    supervisor
+    ui
+    upload-credentials
+    version
+
+Help: 
+    help 
+    help &lt;command&gt;
+
+Documentation for the storm client can be found at http://storm.apache.org/documentation/Command-line-client.html
+
+Configs can be overridden using one or more -c flags, e.g. &quot;storm list -c nimbus.host=nimbus.mycompany.com&quot;
+</code></pre><ul>
+<li>dev-zookeeper：启动ZK<ul>
+<li>storm dev-zookeeper：前台启动</li>
+<li>nohup sh storm dev-zookeeper &amp;：后台启动</li>
+</ul>
+</li>
+<li>nimbus：启动主节点</li>
+<li>supervisor：启动从节点</li>
+<li>ui：启动UI界面</li>
+<li>logviewer：启动日志查看服务</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ storm dev-zookeeper
+[thpffcj@thpffcj ~]$ jps -l
+4167 org.apache.storm.command.dev_zookeeper
+4271 sun.tools.jps.Jps
+
+[thpffcj@thpffcj bin]$ nohup sh storm nimbus &amp;
+[thpffcj@thpffcj bin]$ jps
+4950 Jps
+4827 nimbus
+4701 dev_zookeeper
+
+[thpffcj@thpffcj bin]$ nohup sh storm ui &amp;
+[thpffcj@thpffcj bin]$ jps -l
+4994 org.apache.storm.ui.core
+5301 sun.tools.jps.Jps
+4827 org.apache.storm.daemon.nimbus
+4701 org.apache.storm.command.dev_zookeeper
+
+[thpffcj@thpffcj bin]$ nohup sh storm supervisor &amp;
+[thpffcj@thpffcj bin]$ jps
+4994 core
+5448 Jps
+5337 Supervisor
+4827 nimbus
+4701 dev_zookeeper
+</code></pre><ul>
+<li>打开了ui我们就可以访问<a href="http://192.168.92.130:8080查看ui界面" target="_blank" rel="external">http://192.168.92.130:8080查看ui界面</a></li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ nohup sh storm logviewer &amp;
+[thpffcj@thpffcj bin]$ jps
+5488 logviewer
+4994 core
+5337 Supervisor
+4827 nimbus
+5580 Jps
+4701 dev_zookeeper
+</code></pre><ul>
+<li>启动了logviewer我们就可以在刚才的界面上点击查看日志</li>
+<li>我们回到storm主目录发现生成了logs目录</li>
+</ul>
+<pre><code>[thpffcj@thpffcj apache-storm-1.1.2]$ cd logs
+[thpffcj@thpffcj logs]$ ls
+access-logviewer.log      access-web-supervisor.log  supervisor.log
+access-nimbus.log         access-web-ui.log          supervisor.log.metrics
+access-supervisor.log     logviewer.log              ui.log
+access-ui.log             logviewer.log.metrics      ui.log.metrics
+access-web-logviewer.log  nimbus.log
+access-web-nimbus.log     nimbus.log.metrics
+</code></pre><p><strong>注意事项</strong></p>
+<ul>
+<li>为什么是4个slot</li>
+<li>为什么有两个nimbus</li>
+</ul>
+<h3 id="3-改写Storm作业并提交到Storm单节点集群运行"><a href="#3-改写Storm作业并提交到Storm单节点集群运行" class="headerlink" title="3. 改写Storm作业并提交到Storm单节点集群运行"></a>3. 改写Storm作业并提交到Storm单节点集群运行</h3><ul>
+<li>Running topologies on a production cluster is similar to running in Local mode. Here are the steps:<ul>
+<li>Define the topology (Use TopologyBuilder if defining using Java)</li>
+<li>Use StormSubmitter to submit the topology to the cluster. StormSubmitter takes as input the name of the topology, a configuration for the topology, and the topology itself. </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>修改前面本地代码并打包</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/3/30.
+ * 使用Storm实现积累求和的操作
+ */
+public class ClusterSumStormTopology {
+
+    /**
+     * Spout需要继承BaseRichSpout
+     * 数据源需要产生数据并发射
+     */
+    public static class DataSourceSpout extends BaseRichSpout {
+
+        private SpoutOutputCollector collector;
+
+        /**
+         * 初始化方法，只会被调用一次
+         *
+         * @param conf      配置参数
+         * @param context   上下文
+         * @param collector 数据发射器
+         */
+        public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+            this.collector = collector;
+        }
+
+        int number = 0;
+
+        /**
+         * 会产生数据，在生产上肯定是从消息队列中获取数据
+         * &lt;p&gt;
+         * 这个方法是一个死循环，会一直不停的执行
+         */
+        public void nextTuple() {
+            this.collector.emit(new Values(++number));
+
+            System.out.println(&quot;Spout: &quot; + number);
+
+            // 防止数据产生太快
+            Utils.sleep(1000);
+
+        }
+
+        /**
+         * 声明输出字段
+         *
+         * @param declarer
+         */
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;num&quot;));
+        }
+    }
+
+
+    /**
+     * 数据的累积求和Bolt：接收数据并处理
+     */
+    public static class SumBolt extends BaseRichBolt {
+
+        /**
+         * 初始化方法，会被执行一次
+         *
+         * @param stormConf
+         * @param context
+         * @param collector
+         */
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+
+        }
+
+        int sum = 0;
+
+        /**
+         * 其实也是一个死循环，职责：获取Spout发送过来的数据
+         *
+         * @param input
+         */
+        public void execute(Tuple input) {
+
+            // Bolt中获取值可以根据index获取，也可以根据上一个环节中定义的field的名称获取(建议使用该方式)
+            Integer value = input.getIntegerByField(&quot;num&quot;);
+            sum += value;
+
+            System.out.println(&quot;Bolt: sum = [&quot; + sum + &quot;]&quot;);
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        // TopologyBuilder根据Spout和Bolt来构建出Topology
+        // Storm中任何一个作业都是通过Topology的方式进行提交的
+        // Topology中需要指定Spout和Bolt的执行顺序
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SumBolt&quot;, new SumBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+
+        // 代码提交到Storm集群上运行
+        String topoName = ClusterSumStormTopology.class.getSimpleName();
+        try {
+            StormSubmitter.submitTopology(topoName, new Config(), builder.createTopology());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><ul>
+<li>拷贝到虚拟机上</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ ls
+DataVisualization-0.0.1.jar                    SparkTrain-1.0.jar
+hadoop-1.0-SNAPSHOT.jar                        storm-1.0.jar
+hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar
+</code></pre><ul>
+<li>Storm如何运行我们自己开发的应用功能程序呢<ul>
+<li><strong><a href="http://storm.apache.org/releases/1.1.2/Command-line-client.html" target="_blank" rel="external">Command Line Client</a></strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>启动项目</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ storm jar /home/thpffcj/lib/storm-1.0.jar cn.edu.nju.ClusterSumStormTopology
+...
+1792 [main] INFO  o.a.s.StormSubmitter - Finished submitting topology: ClusterSumStormTopology
+</code></pre><ul>
+<li>我们到UI界面查看情况</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Storm%20UI.png" alt=""></p>
+<ul>
+<li>我们看到有一个worker，三个executor，页面就看到一个spout和一个bolt那么还有一个去哪了？</li>
+<li>如何修改将跑在本地的storm app改成运行在集群上的<ul>
+<li>StormSubmitter.submitTopology(topoName, new Config(), builder.createTopology());</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Storm常用命令介绍"><a href="#4-Storm常用命令介绍" class="headerlink" title="4. Storm常用命令介绍"></a>4. Storm常用命令介绍</h3><p><strong>list</strong></p>
+<ul>
+<li>Syntax: storm list</li>
+<li>List the running topologies and their statuses.</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ storm list
+...
+2763 [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : thpffcj:6627
+Topology_name        Status     Num_tasks  Num_workers  Uptime_secs
+-------------------------------------------------------------------
+ClusterSumStormTopology ACTIVE     3          1            692       
+</code></pre><p><strong>kill</strong></p>
+<ul>
+<li>Syntax: storm kill topology-name [-w wait-time-secs]</li>
+<li>Kills the topology with the name topology-name. Storm will first deactivate the topology’s spouts for the duration of the topology’s message timeout to allow all messages currently being processed to finish processing. Storm will then shutdown the workers and clean up their state. You can override the length of time Storm waits between deactivation and shutdown with the -w flag.</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ storm kill ClusterSumStormTopology
+...
+2642 [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : thpffcj:6627
+2762 [main] INFO  o.a.s.c.kill-topology - Killed topology: ClusterSumStormTopology
+</code></pre><ul>
+<li><strong>以上操作都可以通过Web UI完成</strong></li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-集群版环境部署"><a href="#3-集群版环境部署" class="headerlink" title="3. 集群版环境部署"></a>3. 集群版环境部署</h2><p>因为资源有限，以下记录都没有进行实战</p>
+<h3 id="1-部署规划"><a href="#1-部署规划" class="headerlink" title="1. 部署规划"></a>1. 部署规划</h3><ul>
+<li>三台机器<ul>
+<li>hadoop000 192.168.199.102</li>
+<li>hadoop001 192.168.199.247</li>
+<li>hadoop002 192.168.199.138</li>
+</ul>
+</li>
+<li>需要配置/etc/hosts指明每台机器的host映射</li>
+</ul>
+<p><strong>部署</strong></p>
+<ul>
+<li>hadoop000：zk nimbus supervisor</li>
+<li>hadoop001：zk supervisor</li>
+<li>hadoop002：zk supervisor</li>
+</ul>
+<h3 id="2-软件包分发和jdk部署"><a href="#2-软件包分发和jdk部署" class="headerlink" title="2. 软件包分发和jdk部署"></a>2. 软件包分发和jdk部署</h3><ul>
+<li>在另外两台机器上安装jdk</li>
+<li>配置环境变量</li>
+</ul>
+<h3 id="3-ZooKeeper分布式环境部署"><a href="#3-ZooKeeper分布式环境部署" class="headerlink" title="3. ZooKeeper分布式环境部署"></a>3. ZooKeeper分布式环境部署</h3><ul>
+<li>ZK分布式环境的安装</li>
+</ul>
+<pre><code>server.1=hadoop000:2888:3888
+server.2=hadoop001:2888:3888
+server.3=hadoop002:2888:3888
+</code></pre><ul>
+<li>hadoop000的dataDir目录下创建文件myid：1，对应上面的server.1</li>
+<li>hadoop001的dataDir目录下创建文件myid：2</li>
+<li>hadoop002的dataDir目录下创建文件myid：3</li>
+</ul>
+<p><strong>在每台机器上启动zk./zkServer.sh start</strong></p>
+<ul>
+<li>在每个节点上查看当前机器zk的状态：zkServer.sh status</li>
+</ul>
+<h3 id="4-Storm集群部署及启动"><a href="#4-Storm集群部署及启动" class="headerlink" title="4. Storm集群部署及启动"></a>4. Storm集群部署及启动</h3><ul>
+<li>修改storm.yaml文件</li>
+</ul>
+<pre><code>########### These MUST be filled in for a storm configuration
+storm.zookeeper.servers:
+    - &quot;hadoop000&quot;
+    - &quot;hadoop001&quot;
+    - &quot;hadoop002&quot;
+
+storm.local.dir: &quot;/home/hadoop/app/tmp/storm&quot;
+
+supervisor.slot.ports:
+    - 6700
+    - 6701
+    - 6702
+    - 6703
+</code></pre><ul>
+<li>将配置文件分发到另外两个机器</li>
+</ul>
+<p><strong>启动</strong></p>
+<ul>
+<li>根据上面规划，在hadoop000启动nimbus,ui</li>
+<li>在主节点和从节点上启动supervisor</li>
+<li>启动日志服务logviewer</li>
+<li>启动完所有的进程后使用jps查看是否正常启动</li>
+</ul>
+<h3 id="5-提交Storm作业到集群中运行和Storm目录树"><a href="#5-提交Storm作业到集群中运行和Storm目录树" class="headerlink" title="5. 提交Storm作业到集群中运行和Storm目录树"></a>5. 提交Storm作业到集群中运行和Storm目录树</h3><ul>
+<li>提交命令和单机执行一样</li>
+<li>目录树(正在使用的节点)：<ul>
+<li>storm.local.dir<ul>
+<li>numbus/inbox:…jar 正在运行的jar</li>
+<li>supervisor/stormdist</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/03/23/Huawei-Cloud-Computing/">
+        云计算 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Java 面试常考考点 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-03-18T01:22:49.000Z" itemprop="datePublished">
+          2018-03-18
+      </time>
+    
+</span>
+                <h1>Java 面试常考考点</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>题目基本全部来自<strong><a href="https://www.nowcoder.com/" target="_blank" rel="external">牛客网</a></strong>，不过这里只是总结一些自己感兴趣的问题。</p>
+<p><strong>什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？</strong></p>
+<ul>
+<li>Java虚拟机是一个可以执行Java字节码的虚拟机进程。Java源文件被编译成能被Java虚拟机执行的字节码文件。</li>
+<li>Java被设计成允许应用程序可以运行在任意的平台，而不需要程序员为每一个平台单独重写或者是重新编译。Java虚拟机让这个变为可能，因为它知道底层硬件平台的指令长度和其他特性。</li>
+</ul>
+<p><strong>JDK和JRE的区别是什么？</strong></p>
+<ul>
+<li>Java运行时环境(JRE)。它包括Java虚拟机、Java核心类库和支持文件。它不包含开发工具（JDK）–编译器、调试器和其他工具。</li>
+<li>Java开发工具包(JDK)是完整的Java软件开发包，包含了JRE，编译器和其他的工具(比如：JavaDoc，Java调试器)，可以让开发者开发、编译、执行Java应用程序。</li>
+</ul>
+<p><strong>”static”关键字是什么意思？Java中是否可以覆盖(override)一个private或者是static的方法？</strong></p>
+<ul>
+<li>“static”关键字表明一个成员变量或者是成员方法可以在没有所属的类的实例变量的情况下被访问。</li>
+<li>Java中static方法不能被覆盖，因为方法覆盖是基于运行时动态绑定的，而static方法是编译时静态绑定的。static方法跟类的任何实例都不相关，所以概念上不适用。</li>
+<li>java中也不可以覆盖private的方法，因为private修饰的变量和方法只能在当前类中使用，如果是其他的类继承当前类是不能访问到private变量或方法的，当然也不能覆盖。</li>
+</ul>
+<p><strong>是否可以在static环境中访问非static变量？</strong></p>
+<ul>
+<li>static变量在Java中是属于类的，它在所有的实例中的值是一样的。当类被Java虚拟机载入的时候，会对static变量进行初始化。如果你的代码尝试不用实例来访问非static的变量，编译器会报错，因为这些变量还没有被创建出来，还没有跟任何实例关联上。</li>
+</ul>
+<p><strong>Java支持的数据类型有哪些？什么是自动拆装箱？</strong></p>
+<ul>
+<li>Java语言支持的8种基本数据类型是：<ul>
+<li>byte</li>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>boolean</li>
+<li>char</li>
+</ul>
+</li>
+<li>自动装箱是Java编译器在基本数据类型和对应的对象包装类型之间做的一个转化。比如：把int转化成Integer，double转化成Double，等等。反之就是自动拆箱。</li>
+<li>Java支持的数据类型包括两种：一种是基本数据类型，包含byte,char,short,boolean,int,long,float,double;另一种是引用类型：如String等，其实是对象的引用，JVM中虚拟栈中存的是对象的地址，创建的对象实质在堆中，通过地址来找到堆中的对象的过程，即为引用类型。自动装箱就是Java编译器在基本数据类型和对应的对象包装类型间的转化，即int转化为Integer,自动拆箱是Integer调用其方法将其转化为int的过程。</li>
+</ul>
+<p><strong>Java中的方法覆盖(Overriding)和方法重载(Overloading)是什么意思？</strong></p>
+<ul>
+<li>Java中的方法重载发生在同一个类里面两个或者是多个方法的方法名相同但是参数不同的情况。与此相对，方法覆盖是说子类重新定义了父类的方法。方法覆盖必须有相同的方法名，参数列表和返回类型。覆盖者可能不会限制它所覆盖的方法的访问。</li>
+</ul>
+<p><strong>Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？</strong></p>
+<ul>
+<li>当新对象被创建的时候，构造方法会被调用。每一个类都有构造方法。在程序员没有给类提供构造方法的情况下，Java编译器会为这个类创建一个默认的构造方法。</li>
+<li>Java中构造方法重载和方法重载很相似。可以为一个类创建多个构造方法。每一个构造方法必须有它自己唯一的参数列表。</li>
+<li>Java不支持像C++中那样的复制构造方法，这个不同点是因为如果你不自己写构造方法的情况下，Java不会创建默认的复制构造方法。</li>
+</ul>
+<p><strong>Java支持多继承么？</strong></p>
+<ul>
+<li>Java中类不支持多继承，只支持单继承（即一个类只有一个父类）。 但是java中的接口支持多继承，，即一个子接口可以有多个父接口。（接口的作用是用来扩展对象的功能，一个子接口继承多个父接口，说明子接口扩展了多个功能，当类实现接口时，类就扩展了相应的功能）。</li>
+</ul>
+<p><strong>接口和抽象类的区别是什么？</strong></p>
+<ul>
+<li>Java提供和支持创建抽象类和接口。它们的实现有共同点，不同点在于：<ul>
+<li>接口中所有的方法隐含的都是抽象的。而抽象类则可以同时包含抽象和非抽象的方法。</li>
+<li>类可以实现很多个接口，但是只能继承一个抽象类。</li>
+<li>类可以不实现抽象类和接口声明的所有方法，当然，在这种情况下，类也必须得声明成是抽象的。</li>
+<li>抽象类可以在不提供接口方法实现的情况下实现接口。</li>
+<li>Java接口中声明的变量默认都是final的。抽象类可以包含非final的变量。</li>
+<li>Java接口中的成员函数默认是public的。抽象类的成员函数可以是private，protected或者是public。</li>
+<li>接口是绝对抽象的，不可以被实例化。抽象类也不可以被实例化，但是，如果它包含main方法的话是可以被调用的。</li>
+</ul>
+</li>
+</ul>
+<p><strong>什么是值传递和引用传递？</strong></p>
+<ul>
+<li>值传递是对基本型变量而言的,传递的是该变量的一个副本,改变副本不影响原变量。</li>
+<li>引用传递一般是对于对象型变量而言的,传递的是该对象地址的一个副本, 并不是原对象本身。</li>
+<li>一般认为,java内的传递都是值传递. java中实例对象的传递是引用传递。</li>
+</ul>
+<p><strong>进程和线程的区别是什么？</strong></p>
+<ul>
+<li>进程是执行着的应用程序，而线程是进程内部的一个执行序列。一个进程可以有多个线程。线程又叫做轻量级进程。</li>
+<li>线程的划分小于进程，线程隶属于某个进程。 进程是程序的一种动态形式，是CPU、内存等资源占用的基本单位，而线程是不能占有这些资源的。 进程之间相互独立，通信比较困难，而线程之间共享一块内存区域，通信比较方便。 进程在执行的过程中，包含比较固定的入口，执行顺序，出口，而线程的这些过程会被应用程序所控制。</li>
+</ul>
+<p><strong>创建线程有几种不同的方式？</strong></p>
+<ul>
+<li>有4种方式可以用来创建线程：<ul>
+<li>继承Thread类</li>
+<li>实现Runnable接口</li>
+<li>应用程序可以使用Executor框架来创建线程池</li>
+<li>还有一种方式是实现Callable接口</li>
+</ul>
+</li>
+<li>实现Runnable接口这种方式更受欢迎，因为这不需要继承Thread类。在应用设计中已经继承了别的对象的情况下，这需要多继承（而Java不支持多继承），只能实现接口。同时，线程池也是非常高效的，很容易实现和使用。</li>
+</ul>
+<hr>
+<p><strong>同步方法和同步代码块的区别是什么？</strong></p>
+<ul>
+<li>区别：<ul>
+<li>同步方法默认用this或者当前类class对象作为锁。</li>
+<li>同步代码块可以选择以什么来加锁，比同步方法要更细颗粒度，我们可以选择只同步会发生同步问题的部分代码而不是整个方法。</li>
+<li>同步方法使用关键字 synchronized修饰方法，而同步代码块主要是修饰需要进行同步的代码，用synchronized(object){代码内容}进行修饰。</li>
+</ul>
+</li>
+</ul>
+<p><strong>在监视器(Monitor)内部，是如何做线程同步的？程序应该做哪种级别的同步？</strong></p>
+<ul>
+<li>监视器和锁在Java虚拟机中是一块使用的。监视器监视一块同步代码块，确保一次只有一个线程执行同步代码块。每一个监视器都和一个对象引用相关联。线程在获取锁之前不允许执行同步代码。</li>
+</ul>
+<p><strong>什么是死锁(deadlock)？</strong></p>
+<ul>
+<li>所谓死锁是指多个进程因竞争资源而造成的一种僵局（互相等待），若无外力作用，这些进程都将无法向前推进。死锁产生的4个必要条件：<ul>
+<li>互斥条件：进程要求对所分配的资源（如打印机）进行排他性控制，即在一段时间内某 资源仅为一个进程所占有。此时若有其他进程请求该资源，则请求进程只能等待。</li>
+<li>不剥夺条件：进程所获得的资源在未使用完毕之前，不能被其他进程强行夺走，即只能 由获得该资源的进程自己来释放（只能是主动释放)。</li>
+<li>请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源 已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</li>
+<li>循环等待条件：存在一种进程资源的循环等待链，链中每一个进程已获得的资源同时被 链中下一个进程所请求。</li>
+</ul>
+</li>
+</ul>
+<p><strong>如何确保N个线程可以访问N个资源同时又不导致死锁？</strong></p>
+<ul>
+<li>使用多线程的时候，一种非常简单的避免死锁的方式就是：指定获取锁的顺序，并强制线程按照指定的顺序获取锁。因此，如果所有的线程都是以同样的顺序加锁和释放锁，就不会出现死锁了。</li>
+</ul>
+<p><strong>Java集合类框架的基本接口有哪些？</strong></p>
+<ul>
+<li>集合类接口指定了一组叫做元素的对象。集合类接口的每一种具体的实现类都可以选择以它自己的方式对元素进行保存和排序。有的集合类允许重复的键，有些不允许。</li>
+<li>Java集合类提供了一套设计良好的支持对一组对象进行操作的接口和类。Java集合类里面最基本的接口有：<ul>
+<li>Collection：代表一组对象，每一个对象都是它的子元素。</li>
+<li>Set：不包含重复元素的Collection。</li>
+<li>List：有顺序的collection，并且可以包含重复元素。</li>
+<li>Map：可以把键(key)映射到值(value)的对象，键不能重复。</li>
+</ul>
+</li>
+</ul>
+<p><strong>为什么集合类没有实现Cloneable和Serializable接口？</strong></p>
+<ul>
+<li>克隆(cloning)或者是序列化(serialization)的语义和含义是跟具体的实现相关的。因此，应该由集合类的具体实现来决定如何被克隆或者是序列化。</li>
+</ul>
+<hr>
+<hr>
+<p><strong>什么是迭代器(Iterator)？</strong></p>
+<ul>
+<li>Iterator接口提供了很多对集合元素进行迭代的方法。每一个集合类都包含了可以返回迭代器实例的迭代方法。迭代器可以在迭代的过程中删除底层集合的元素,但是不可以直接调用集合的remove(Object Obj)删除，可以通过迭代器的remove()方法删除。</li>
+</ul>
+<p><strong>Iterator和ListIterator的区别是什么？</strong></p>
+<ul>
+<li>下面列出了他们的区别：<ul>
+<li>Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。</li>
+<li>Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。</li>
+<li>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</li>
+</ul>
+</li>
+</ul>
+<p><strong>快速失败(fail-fast)和安全失败(fail-safe)的区别是什么？</strong></p>
+<ul>
+<li>Iterator的安全失败是基于对底层集合做拷贝，因此，它不受源集合上修改的影响。java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下面的所有的类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全失败的迭代器永远不会抛出这样的异常。</li>
+</ul>
+<p><strong>Java中的HashMap的工作原理是什么？</strong></p>
+<ul>
+<li>Java中的HashMap是以键值对(key-value)的形式存储元素的。HashMap需要一个hash函数，它使用hashCode()和equals()方法来向集合/从集合添加和检索元素。当调用put()方法的时候，HashMap会计算key的hash值，然后把键值对存储在集合中合适的索引上。如果key已经存在了，value会被更新成新值。HashMap的一些重要的特性是它的容量(capacity)，负载因子(load factor)和扩容极限(threshold resizing)。</li>
+</ul>
+<p><strong>hashCode()和equals()方法的重要性体现在什么地方？</strong></p>
+<ul>
+<li>Java中的HashMap使用hashCode()和equals()方法来确定键值对的索引，当根据键获取值的时候也会用到这两个方法。如果没有正确的实现这两个方法，两个不同的键可能会有相同的hash值，因此，可能会被集合认为是相等的。而且，这两个方法也用来发现重复元素。所以这两个方法的实现对HashMap的精确性和正确性是至关重要的。</li>
+</ul>
+<p><strong>HashMap和Hashtable有什么区别？</strong></p>
+<ul>
+<li>HashMap和Hashtable都实现了Map接口，因此很多特性非常相似。但是，他们有以下不同点：<ul>
+<li>HashMap允许键和值是null，而Hashtable不允许键或者值是null。</li>
+<li>Hashtable是同步的，而HashMap不是。因此，HashMap更适合于单线程环境，而Hashtable适合于多线程环境。</li>
+<li>HashMap提供了可供应用迭代的键的集合，因此，HashMap是快速失败的。另一方面，Hashtable提供了对键的列举(Enumeration)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？</strong></p>
+<ul>
+<li>Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。</li>
+<li>Array大小是固定的，ArrayList的大小是动态变化的。</li>
+<li>ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。<br>对于基本类型数据，集合使用自动装箱来减少编码工作量。但是，当处理固定大小的基本数据类型的时候，这种方式相对比较慢。</li>
+</ul>
+<p><strong>ArrayList和LinkedList有什么区别？</strong></p>
+<ul>
+<li>ArrayList和LinkedList都实现了List接口，他们有以下的不同点：<ul>
+<li>ArrayList是基于索引的数据接口，它的底层是数组。它可以以O(1)时间复杂度对元素进行随机访问。与此对应，LinkedList是以元素列表的形式存储它的数据，每一个元素都和它的前一个和后一个元素链接在一起，在这种情况下，查找某个元素的时间复杂度是O(n)。</li>
+<li>相对于ArrayList，LinkedList的插入，添加，删除操作速度更快，因为当元素被添加到集合任意位置的时候，不需要像数组那样重新计算大小或者是更新索引。</li>
+<li>LinkedList比ArrayList更占内存，因为LinkedList为每一个节点存储了两个引用，一个指向前一个元素，一个指向下一个元素。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Comparable和Comparator接口是干什么的？列出它们的区别。</strong></p>
+<ul>
+<li>Java提供了只包含一个compareTo()方法的Comparable接口。这个方法可以个给两个对象排序。具体来说，它返回负数，0，正数来表明已经存在的对象小于，等于，大于输入对象。</li>
+<li>Java提供了包含compare()和equals()两个方法的Comparator接口。compare()方法用来给两个输入参数排序，返回负数，0，正数表明第一个参数是小于，等于，大于第二个参数。equals()方法需要一个对象作为参数，它用来决定输入参数是否和comparator相等。只有当输入参数也是一个comparator并且输入参数和当前comparator的排序结果是相同的时候，这个方法才返回true。</li>
+</ul>
+<p><strong>什么是Java优先级队列(Priority Queue)？</strong></p>
+<ul>
+<li>PriorityQueue是一个基于优先级堆的无界队列，它的元素是按照自然顺序(natural order)排序的。在创建的时候，我们可以给它提供一个负责给元素排序的比较器。PriorityQueue不允许null值，因为他们没有自然顺序，或者说他们没有任何的相关联的比较器。最后，PriorityQueue不是线程安全的，入队和出队的时间复杂度是O(log(n))。</li>
+</ul>
+<p><strong>Enumeration接口和Iterator接口的区别有哪些？</strong></p>
+<ul>
+<li>Enumeration速度是Iterator的2倍，同时占用更少的内存。但是，Iterator远远比Enumeration安全，因为其他线程不能够修改正在被iterator遍历的集合里面的对象。同时，Iterator允许调用者删除底层集合里面的元素，这对Enumeration来说是不可能的。</li>
+</ul>
+<p><strong>HashSet和TreeSet有什么区别？</strong></p>
+<ul>
+<li>HashSet是由一个hash表来实现的，因此，它的元素是无序的。add()，remove()，contains()方法的时间复杂度是O(1)。</li>
+<li>TreeSet是由一个树形的结构来实现的，它里面的元素是有序的。因此，add()，remove()，contains()方法的时间复杂度是O(logn)。</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<p><strong>给一个超过100G大小的log file, log中存着IP地址, 设计算法找到出现次数最多的IP地址？<br>与上题条件相同，如何找到top K的IP？如何直接用Linux系统命令实现？</strong></p>
+<ul>
+<li>Hash分桶法： <ul>
+<li>将100G文件分成1000份，将每个IP地址映射到相应文件中：file_id = hash(ip) % 1000 </li>
+<li>在每个文件中分别求出最高频的IP，再合并 Hash分桶法 </li>
+<li>使用Hash分桶法把数据分发到不同文件 </li>
+<li>各个文件分别统计top K </li>
+<li>最后Top K汇总 </li>
+</ul>
+</li>
+<li>Linux命令，假设top 10：sort log_file | uniq -c | sort -nr k1,1 | head -10</li>
+</ul>
+<p><strong>给定100亿个整数，设计算法找到只出现一次的整数</strong></p>
+<ul>
+<li>Hash分桶法，将100亿个整数映射到不同的区间，在每个区间中分别找只出现一次的整数。</li>
+</ul>
+<p><strong>给两个文件，分别有100亿个整数，我们只有1G内存，如何找到两个文件交集</strong></p>
+<ul>
+<li>关键点：扫描每个整数是否出现过，如何节省内存？使用bitmap。</li>
+</ul>
+<p><strong>1个文件有100亿个int，1G内存，设计算法找到出现次数不超过2次的所有整数?</strong></p>
+<ul>
+<li>Bitmap扩展：⽤用2个bit表⽰示状态，0未出现过，1出现过1次，2出现了2次或以上</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/03/18/Big-Data-Storm-Real-time-Streaming-Data-Processing-2/" style="float: left;">
+        ← Storm编程
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/03/14/Proxy-Mode/">
+        代理模式(未完) →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
