@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Linux程序设计 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-03T00:58:30.000Z" itemprop="datePublished">
+          2018-04-03
+      </time>
+    
+</span>
+                <h1>Linux程序设计</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Linux-Basics"><a href="#1-Linux-Basics" class="headerlink" title="1. Linux Basics"></a>1. Linux Basics</h2><h3 id="1-文件系统-File-System"><a href="#1-文件系统-File-System" class="headerlink" title="1. 文件系统(File System)"></a>1. 文件系统(File System)</h3><ul>
+<li>操作系统中负责存取和管理文件的部分</li>
+<li>一个文件及其某些属性的集合。它为这些文件的序列号(file serial numbers)提供了一个名称空间</li>
+<li>类型<ul>
+<li>VFS，虚拟文件系统，与以下的磁盘文件系统(即文件的分区格式不同)，为底层的文件系统提供了统一的抽象</li>
+<li>EXT2、EXT3、FAT32</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Boot-Loader"><a href="#2-Boot-Loader" class="headerlink" title="2. Boot Loader"></a>2. Boot Loader</h3><ul>
+<li>Boot Loader 加载和启动 Linux 系统内核。Linux 下的 Boot Loader 为 GRUB</li>
+</ul>
+<h3 id="3-虚拟终端-Vitural-Terminal"><a href="#3-虚拟终端-Vitural-Terminal" class="headerlink" title="3. 虚拟终端(Vitural Terminal)"></a>3. 虚拟终端(Vitural Terminal)</h3><ul>
+<li>Linux 下有 6 个虚拟终端 VT1-6</li>
+</ul>
+<h3 id="4-命令提示"><a href="#4-命令提示" class="headerlink" title="4. 命令提示"></a>4. 命令提示</h3><ul>
+<li>可以自行配置</li>
+<li>$：普通用户</li>
+<li>#：Root 用户</li>
+</ul>
+<h3 id="5-文件和目录"><a href="#5-文件和目录" class="headerlink" title="5. 文件和目录"></a>5. 文件和目录</h3><ul>
+<li>文件：<ul>
+<li>文件是一系列数据的集合</li>
+<li>文件结构：字节流、记录序列(Record Sequence)、记录树(Record Tree)。Linux下为字节流</li>
+<li>文件类型：<ul>
+<li>(-)普通文件：纯文本文档、二进制文件、数据格式文件等</li>
+<li>(c)字符设备文件：与设备进行交互的文件。Linux 中所有的设备都被抽象为了对应的文件。字符设备是按字符读取</li>
+<li>(b)块设备文件：同字符设备文件，但是是按块读取</li>
+<li>(p)数据输送文件(FIFO，pipe)。他主要的目的在解决多个程序同时存取一个文件所造成的错误问题</li>
+<li>(s)socket 文件。我们可以启动一个程序来监听客户端的要求，而客户端就可以通过这个 socket 来进行数据的沟通。如启动 Mysql 服务会创建一个对应的 socket 文件。一般在/var/run 目录中</li>
+<li>(l)符号链接</li>
+<li>(d)目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>目录结构</p>
+<ul>
+<li>Linux 中所有的目录均包含在一个统一的、虚拟的统一文件系统(Unified File System)中</li>
+<li>物理设备被挂载到对应挂载点，抽象为一个文件。没有类似于 C:/的驱动盘符</li>
+<li>根目录下文件夹的作用：<br><img src="http://oseihavwm.bkt.clouddn.com/%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt=""></li>
+</ul>
+</li>
+<li><p>/bin</p>
+<ul>
+<li>必要的命令二进制文件</li>
+<li>包含了会被系统管理者和用户使用的命令，但是需要在没有任何文件系统挂载时使用。也可能会在脚本文件中间接使用</li>
+</ul>
+</li>
+<li>/boot<ul>
+<li>Boot Loader 相关的静态文件</li>
+<li>包含了所有需要在加载阶段使用的文件(不含一些不需要在启动阶段用到的配置文件)。保存了所有内核在执行用户态程序之前用到的数据</li>
+</ul>
+</li>
+<li>/dev<ul>
+<li>设备文件。是一些特殊或设备的文件</li>
+</ul>
+</li>
+<li>/etc<ul>
+<li>主机相关的系统配置。主要包含了配置文件</li>
+</ul>
+</li>
+<li>/lib<ul>
+<li>必要的共享二进制文件或内核模块。比如在/bin 或/sbin 里需要用到的库</li>
+</ul>
+</li>
+<li>/media<ul>
+<li>可删除 media 的挂载点。如软盘等</li>
+</ul>
+</li>
+<li>/mnt<ul>
+<li>临时文件系统的挂载点</li>
+</ul>
+</li>
+<li>/opt<ul>
+<li>额外的应用软件包安装目录</li>
+</ul>
+</li>
+<li>/sbin<ul>
+<li>必要的系统二进制文件</li>
+</ul>
+</li>
+<li>/srv<ul>
+<li>系统提供的有关服务的数据</li>
+</ul>
+</li>
+<li>/tem<ul>
+<li>临时文件</li>
+</ul>
+</li>
+<li>/usr<ul>
+<li>第二级层次树。/usr 是共享的、只读的数据。大型的软件包不应该使用/usr 下的层次</li>
+</ul>
+</li>
+<li>/var<ul>
+<li>可变数据</li>
+</ul>
+</li>
+</ul>
+<p><strong>可选的目录</strong></p>
+<ul>
+<li>/home <ul>
+<li>用户 home 目录</li>
+</ul>
+</li>
+<li>/lib<qual> <ul>
+<li>必要共享二进制文件的可选格式</li>
+</ul>
+</qual></li>
+<li>/root ROOT<ul>
+<li>用户的 HOME 目录</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-文件权限"><a href="#6-文件权限" class="headerlink" title="6. 文件权限"></a>6. 文件权限</h3><ul>
+<li>文件权限分为三个层次：用户、组、其他用户</li>
+<li>三个类型：读、写、执行</li>
+<li>更改权限：参见 chmod</li>
+</ul>
+<h3 id="7-进程"><a href="#7-进程" class="headerlink" title="7. 进程"></a>7. 进程</h3><ul>
+<li>进程是一个正在执行的程序实例。由执行程序、它的当前值、状态信息以及通过操作系统管理此进程执行情况的资源组成</li>
+</ul>
+<h3 id="8-UNIX结构"><a href="#8-UNIX结构" class="headerlink" title="8. UNIX结构"></a>8. UNIX结构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/UNIX%20%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h3 id="9-重定向"><a href="#9-重定向" class="headerlink" title="9. 重定向"></a>9. 重定向</h3><ul>
+<li>标准输入、标准输出、标准错误<ul>
+<li>对应的文件描述符：0, 1, 2</li>
+<li>C 语言变量：stdin, stdout, stderr</li>
+</ul>
+</li>
+<li>&lt; &gt; &gt;&gt; &gt;!<ul>
+<li><blockquote>
+<p>输出重定向到一个文件或设备覆盖原来的文件</p>
+</blockquote>
+</li>
+<li>! 输出重定向到一个文件或设备强制覆盖原来的文件</li>
+<li><blockquote>
+<blockquote>
+<p>输出重定向到一个文件或设备追加原来的文件</p>
+</blockquote>
+</blockquote>
+</li>
+<li>&lt; 输入重定向到一个程序</li>
+</ul>
+</li>
+<li>ls - al &gt; list.txt<ul>
+<li>将显示的结果输出到 list.txt 文件中，若该文件以存在则覆盖</li>
+</ul>
+</li>
+<li>ls -al &gt;&gt; list.txt<ul>
+<li>将显示的结果输出到 list.txt 文件中，若该文件以存在则追加</li>
+</ul>
+</li>
+<li>ls –al 1&gt; list.txt 2&gt; list.err<ul>
+<li>将显示的数据，正确的输出到 list.txt 错误的数据输出到 list.err</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-管道"><a href="#10-管道" class="headerlink" title="10. 管道"></a>10. 管道</h3><ul>
+<li>一个进程的输出作为另一个进程的输入</li>
+<li>使用 |</li>
+<li>例子<ul>
+<li>ls | wc –l</li>
+<li>ls –lF | grep ^d</li>
+<li>ar t /usr/lib/libc.a | grep printf | pr -4 –t</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-环境变量"><a href="#11-环境变量" class="headerlink" title="11. 环境变量"></a>11. 环境变量</h3><ul>
+<li>操作环境的参数</li>
+<li>查看和设置环境变量：<ul>
+<li>echo 显示环境变量 echo $PATH</li>
+<li>env 显示系统所有的环境变量</li>
+<li>set 显示本地定义的 shell 变量</li>
+<li>export 设置新的环境变量 export HELLO=”hello”</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-常见环境变量"><a href="#12-常见环境变量" class="headerlink" title="12. 常见环境变量"></a>12. 常见环境变量</h3><ul>
+<li>HOME 用于保存注册目录的完全路径名</li>
+<li>PATH 用于保存用冒号分隔的目录路径名，Shell 将按 PATH 变量中给出的顺序搜索这些目录，找到的第一个与命令名称一致的可执行文件将被执行</li>
+<li>TERM 终端的类型</li>
+<li>UID 当前用户的识别字，取值是由数位构成的字串</li>
+<li>PWD 当前工作目录的绝对路径名，该变量的取值随 cd 命令的使用而变化</li>
+<li>PS1 主提示符，在特权用户下，默认的主提示符是#，在普通用户下，默认的主提示符是$</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Shell-Programming"><a href="#2-Shell-Programming" class="headerlink" title="2. Shell Programming"></a>2. Shell Programming</h2><h3 id="1-执行脚本文件"><a href="#1-执行脚本文件" class="headerlink" title="1. 执行脚本文件"></a>1. 执行脚本文件</h3><ul>
+<li>$sh script_file</li>
+<li>chmod +x script_file(增加可执行权限) ./script_file</li>
+<li>source script_file ./script_file</li>
+<li>区别：前两种方法中，shell会创建一个子shell进程来执行脚本，第三种是shell自己执行脚本，没有创建子进程执行</li>
+</ul>
+<h3 id="2-用户变量"><a href="#2-用户变量" class="headerlink" title="2. 用户变量"></a>2. 用户变量</h3><ul>
+<li>用户在 shell 脚本里定义的变量</li>
+<li>赋值：<ul>
+<li>var=value(注意不能有任何空格)</li>
+</ul>
+</li>
+<li>使用:<ul>
+<li>$var 或 ${var}</li>
+</ul>
+</li>
+<li>删除<ul>
+<li>unset var(不能加$)</li>
+</ul>
+</li>
+<li>read 命令<ul>
+<li>使用 read 从标准输入中读取一行数据</li>
+<li>read name</li>
+<li>可以使用提示</li>
+<li>read –p “Enter your name:” name</li>
+<li>更多内容参照命令 read</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-引号的使用"><a href="#3-引号的使用" class="headerlink" title="3. 引号的使用"></a>3. 引号的使用</h3><ul>
+<li>单引号内所有的字符都是其字面意思</li>
+<li>双引号内，除了$，`(弯弯上面的)和\外，所有字符保持本身含义</li>
+</ul>
+<h3 id="4-参数变量和内部变量"><a href="#4-参数变量和内部变量" class="headerlink" title="4. 参数变量和内部变量"></a>4. 参数变量和内部变量</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F%E5%92%8C%E5%86%85%E9%83%A8%E5%8F%98%E9%87%8F.png" alt=""></p>
+<h3 id="5-条件测试"><a href="#5-条件测试" class="headerlink" title="5. 条件测试"></a>5. 条件测试</h3><ul>
+<li>test expression 或 [ expression ] (注意 expression 前后需要有空格)或((expression))，但是(())里只能使用 C 风格的比较(&lt; &lt;= &gt; &gt;= !=)(无法使用-eq 等比较命令)</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-System-Programming"><a href="#3-System-Programming" class="headerlink" title="3. System Programming"></a>3. System Programming</h2><h3 id="1-gcc"><a href="#1-gcc" class="headerlink" title="1. gcc"></a>1. gcc</h3><p><strong>可用于编译(gcc -c)，链接(gcc -o)</strong></p>
+<ul>
+<li>Usage：<ul>
+<li>gcc [options] [filename]</li>
+</ul>
+</li>
+<li>Basic options：<ul>
+<li>-E：只对源程序进行预处理(调用cpp预处理器)</li>
+<li>-S：只对源程序进行预处理，编译</li>
+<li>-c：执行预处理，编译，汇编而不链接</li>
+<li>-o output_file：指定输出文件名</li>
+<li>-g：产生调试工具必须的符号信息</li>
+<li>-O/On：在程序编译，链接过程中进行优化处理</li>
+<li>Wall：显示所有的警告信息</li>
+<li>Idir：执行额外的头文件搜索路径</li>
+<li>Ldir：指定额外的库文件搜索路径</li>
+<li>Iname：链接时搜索指定的库文件</li>
+<li>DMACRO[=DEFN]：定义MACRO宏</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-make-命令"><a href="#2-make-命令" class="headerlink" title="2. make 命令"></a>2. make 命令</h3><ul>
+<li>makefile 带来的好处就是——“自动化编译”，一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。</li>
+</ul>
+<h3 id="3-编译连接过程"><a href="#3-编译连接过程" class="headerlink" title="3. 编译连接过程"></a>3. 编译连接过程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<h3 id="4-虚拟文件系统-VFS"><a href="#4-虚拟文件系统-VFS" class="headerlink" title="4. 虚拟文件系统(VFS)"></a>4. 虚拟文件系统(VFS)</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.png" alt=""></p>
+<ul>
+<li>VFS Model<ul>
+<li>只存在与内存之中</li>
+<li>分为 4 个部分：超级块(Super block)、索引节点对象(i-node Object)、文件对象(File Object)、目录项对象(Dentry Object)</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-软连接-符号链接-、硬链接"><a href="#5-软连接-符号链接-、硬链接" class="headerlink" title="5. 软连接(符号链接)、硬链接"></a>5. 软连接(符号链接)、硬链接</h3><ul>
+<li>Hard link<ul>
+<li>不同的文件名对应同一个inode</li>
+<li>不能跨越文件系统</li>
+<li>对应系统调用link</li>
+</ul>
+</li>
+<li>Sysbolic link<ul>
+<li>存储被链接文件的文件名(inode)实现链接</li>
+<li>可跨越文件系统</li>
+<li>对应系统调用symlink</li>
+</ul>
+</li>
+<li>软连接类似于windows下的快捷方式，删除原文件后(原文件也没有任何硬链接文件)软链接不可用。</li>
+<li>硬链接创建 ln[原文件名] [连接文件名]</li>
+<li>软链接创建 ln -s [原文件名] [连接文件名]</li>
+</ul>
+<h3 id="6-系统调用与库函数"><a href="#6-系统调用与库函数" class="headerlink" title="6. 系统调用与库函数"></a>6. 系统调用与库函数</h3><ul>
+<li>都以 C 函数的形式出现</li>
+<li>系统调用：<ul>
+<li>Linux 内核的对外接口</li>
+<li>用户程序和内核之间唯一的接口</li>
+<li>提供最小接口</li>
+<li>需要切换到内核进行相关操作</li>
+<li>编译运行速度快</li>
+</ul>
+</li>
+<li>库函数：<ul>
+<li>依赖于系统调用</li>
+<li>提供复杂的功能</li>
+<li>可移植性好</li>
+<li>如：标准 I/O 库。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-基础-I-O-系统调用"><a href="#7-基础-I-O-系统调用" class="headerlink" title="7. 基础 I/O 系统调用"></a>7. 基础 I/O 系统调用</h3><p><strong>文件描述符</strong></p>
+<ul>
+<li>int fd</li>
+<li>一个非负整数<ul>
+<li>标准输入(STDIN_FILENO)</li>
+<li>标准输出(STDOUT_FILENO)</li>
+<li>标准错误(STDERR_FILENO)</li>
+<li>对应的文件描述符依次为 0, 1, 2</li>
+</ul>
+</li>
+</ul>
+<p><strong>open/create</strong></p>
+<ul>
+<li>作用：打开或创建一个文件，并获得对应文件的文件描述符</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt; 
+#include &lt;sys/stat.h&gt; 
+#include &lt;fcntl.h&gt; 
+int open(const char *pathname, int flags);
+int open(const char *pathname, int flags, mode_t mode); 
+int creat(const char *pathname, mode_t mode);
+(Return: a new file descriptor if success; -1 if failure)
+</code></pre><ul>
+<li>参数<ul>
+<li>pathname：文件名</li>
+<li>flags：文件打开模式，表示以什么方式打开，可以是 O_RDONLY、O_WRONLY、O_RDWR，依次表示只读、只写、读写中的一个。以上 3 个模式可以和一些附加模式做按位或（|）运算，添加其他的模式。如：<ul>
+<li>O_APPEND：以追加模式打开</li>
+<li>O_TRUNC：若文件存在，则长度被截为 0，属性不变。(覆盖模式)</li>
+<li>O_CREAT：如果文件不存在，则创建它</li>
+<li>O_EXCL：同 O_CREAT 一起使用，使得当文件存在的时候会出现错误</li>
+<li>O_NONBLOCK：对于设备文件，以 O_NONBLOCK 方式打开可以做非阻塞 I/O(Nonblock I/O)</li>
+<li>创建一个文件等价于用 O_CREAT|O_WRONLY|O_TRUNC 模式打开文件</li>
+</ul>
+</li>
+<li>mode：当创建一个文件时指定文件的权限。值为一个无符号整数，低 9 位确定权限(同 chmod 里使用的值)</li>
+</ul>
+</li>
+</ul>
+<p><strong>close</strong></p>
+<ul>
+<li>作用：关闭文件描述符，释放文件资源</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+int close(int fd);
+(Return: 0 if success; -1 if failure)
+</code></pre><ul>
+<li>参数<ul>
+<li>fd：需要关闭的文件描述符</li>
+</ul>
+</li>
+</ul>
+<p><strong>read/write</strong></p>
+<ul>
+<li>作用：根据指定文件描述符的文件读取/写入文件内容</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+ssize_t read(int fd, void *buf, size_t count);
+(返回值: 读到的字节数，若已到文件尾为0，若出错为-1)
+
+#include &lt;unistd.h&gt;
+ssize_t write(int fd, const void *buf, size_t count);
+(返回值: 若成功为已写的字节数，若出错为-1)
+</code></pre><ul>
+<li>参数<ul>
+<li>fd：对应的文件描述符</li>
+<li>buf：待读取/写入文件的缓冲区</li>
+<li>count：读取/写入文件的字节数</li>
+</ul>
+</li>
+<li>使用</li>
+</ul>
+<pre><code>while ((n = read(STDIN_FILENO, buf, BUFSIZE)) &gt; 0)
+    if (write(STDOUT_FILENO, buf, n) != n)
+        err_sys(“write‏error”);
+if (n&lt;0)
+    err_sys(“read‏error”);
+</code></pre><p><strong>lseek</strong></p>
+<ul>
+<li>作用：设置读写文件的偏移</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+off_t lseek(int fildes, off_t offset, int whence);
+(Return: the resulting offset location if success; -1 if failure)
+</code></pre><ul>
+<li>参数<ul>
+<li>fildes：对应的文件描述符</li>
+<li>offset：偏移量</li>
+<li>whence：偏移的方式，有 3 个取值<ul>
+<li>SEEK_SET：偏移到 offset 位置处(相对文件头)</li>
+<li>SEEK_CUR：偏移到当前位置+offset 位置处</li>
+<li>SEEK_END：偏移到文件尾+offset 位置处</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>返回当前的偏移量<ul>
+<li>off_t currpos;</li>
+<li>currpos = lseek(fd, 0, SEEK_CUR);</li>
+</ul>
+</li>
+<li>返回文件大小<ul>
+<li>off_t currpos;</li>
+<li>currpos = lseek(fd, 0, SEEK_END);</li>
+</ul>
+</li>
+<li>拓展文件，主要使用场景是先扩展一个文件空间，然后再填充内部的内容(如一些下载工具)<ul>
+<li>off_t file_size = 1024*8;</li>
+<li>lseek(fd,file_size-1,SEEK_END)</li>
+<li>write(fd,”0”,1);</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>dup/dup2</strong></p>
+<ul>
+<li>作用：复制文件描述符。dup 产生一个相同的文件描述符指向同一个文件；dup2复制一个旧的文件描述符到新的文件描述符，使得新的文件描述符与旧的文件描述符完全一样，过程主要是先关闭新的文件描述符对应的文件，然后进行复制</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+(Return: the new file descriptor if success; -1 if failure)
+</code></pre><ul>
+<li>参数<ul>
+<li>oldfd:旧的文件描述符</li>
+<li>newfd：新的文件描述符(目标文件描述符)</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>通常用于重定向，与 STDERR_FILENO、STDIN_FILENO、STDOUT_FILENO 结合使用</li>
+</ul>
+</li>
+</ul>
+<pre><code>fd2=dup(STDOUT_FILENO);//保存标准输出
+fd = open(filename, O_WRONLY|O_CREAT, fd_mode); //打开文件
+dup2(fd, STDOUT_FILENO); //把输出重定向到 fd 标识的文件
+close(fd);
+</code></pre><p><strong>fcntl</strong></p>
+<ul>
+<li>作用：操作一个文件描述符，改变一个已经打开的文件的属性</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+int fcntl(int fd, int cmd);
+int fcntl(int fd, int cmd, long arg);
+int fcntl(int fd, int cmd, struct flock *lock);
+(返回值: 若成功则依赖于cmd，若出错为-1)
+</code></pre><ul>
+<li>参数：<ul>
+<li>fd：对应的文件描述符</li>
+<li>cmd：具体的操作，fcntl 进行的操作依赖于 cmd。有以下取值<ul>
+<li>F_DUPFD:复制文件描述符，返回新的文件描述符</li>
+<li>F_GETFD/F_SETFD:获取/设置文件描述符标志(目前就只有 close-on-exec 标记)。这个标志的目的是解决 fork 子进程执行其他任务(使用exec、excel 等命令)导致了父进程的文件描述符被复制到子进程中(实际子进程不需要)，使得对应文件描述符无法被之后需要的进程获取。设置了这个标记后可以使得子进程在执行 exce 等命令时释放对应的文件描述符资源</li>
+<li>F_GETFL/F_SETFL:获得/设置文件状态标志(open/creat 中的 flags 参数)，目前只能更改 O_APPEND , O_ASYNC, O_DIRECT, O_NOATIME, O_NONBLOCK</li>
+<li>F_GETOWN/F_SETOWN: 管理 I/O 可用相关的信号。获得或设置当前文件描述符会接受 SIGIO 和 SIGURG 信号的进程或进程组编号</li>
+<li><strong>F_GETLK/F_SETLK/F_SETLKW: 获得/设置文件锁，设置为 F_GETLK 时需要传入 flock<em>指针用于存放最后的锁信息。S_SETLK 需要传入 flock</em>指针表示需要改变的锁的内容，如果不能被设置，则立即返回 EAGAIN。S_SETLKW 同 S_SETLK，但是在锁无法设置时会阻塞等待任务完成</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>说明：文件锁分为记录锁(按记录加锁)，劝告锁(检查，加锁由应程序自身控制，不会强制应用程序不准访问)，强制锁(检查，加锁由内核控制，影响 open、read、write)，共享锁(可读)，排他锁(读写均不可)</strong></li>
+<li>相关结构体</li>
+</ul>
+<pre><code>struct flock{
+    ...
+    short l_type; /* Type of lock: F_RDLCK, F_WRLCK, F_UNLCK */
+    short l_whence; /* How to interpret l_start: SEEK_SET, SEEK_CUR, 
+    SEEK_END */
+    off_t l_start; /* Starting offset for lock */
+    off_t l_len; /* Number of bytes to lock */
+    pid_t l_pid; /* PID of process blocking our lock (F_GETLK only) */
+    ...
+}
+</code></pre><h3 id="8-标准-I-O-库"><a href="#8-标准-I-O-库" class="headerlink" title="8. 标准 I/O 库"></a>8. 标准 I/O 库</h3><p><br></p>
+<hr>
+<h2 id="4-Kernel-Driver"><a href="#4-Kernel-Driver" class="headerlink" title="4. Kernel Driver"></a>4. Kernel Driver</h2><h3 id="1-内核简介"><a href="#1-内核简介" class="headerlink" title="1. 内核简介"></a>1. 内核简介</h3><p><strong>什么是内核</strong></p>
+<ul>
+<li>操作系统是一系列程序的集合，其中最重要的部分构成了内核</li>
+<li>单内核/微内核<ul>
+<li>单内核是一个很大的进程，内部可以分为若干模块，运行时是一个独立的二进制文件，模块间通讯通过直接调用函数实现</li>
+<li>微内核中大部分内核作为独立的进程在特权下运行，通过消息传递进行通讯</li>
+</ul>
+</li>
+<li>Linux内核的能力<ul>
+<li>内存管理，文件系统，进程管理，多线程支持，抢占式，多处理支持</li>
+</ul>
+</li>
+<li>Linux内核区别于其他UNIX商业内核的优点<ul>
+<li>单内核，模块支持</li>
+<li>免费/开源</li>
+<li>支持多种CPU，硬件支持能力非常强大</li>
+<li>Linux开发者都是非常出色的程序员</li>
+<li>通过学习Linux内核的源码可以了解现代操作系统的实现原理</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-内核结构"><a href="#2-内核结构" class="headerlink" title="2. 内核结构"></a>2. 内核结构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%85%E6%A0%B8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png" alt=""></p>
+<h3 id="3-Linux-内核模块与应用程序区别"><a href="#3-Linux-内核模块与应用程序区别" class="headerlink" title="3. Linux 内核模块与应用程序区别"></a>3. Linux 内核模块与应用程序区别</h3><ul>
+<li>C语言程序<ul>
+<li>运行：用户空间</li>
+<li>入口：main()</li>
+<li>出口：无</li>
+<li>运行：直接运行</li>
+<li>调试：gdb</li>
+</ul>
+</li>
+<li>Linux内核模块<ul>
+<li>运行：内核空间</li>
+<li>入口：module_init()指定</li>
+<li>出口：module_exit()指定</li>
+<li>运行：insmod</li>
+<li>调试：kdbug,kdb,kgdb等</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-开发驱动的注意事项"><a href="#4-开发驱动的注意事项" class="headerlink" title="4. 开发驱动的注意事项"></a>4. 开发驱动的注意事项</h3><ul>
+<li>不能使用 C 库来开发驱动程序</li>
+<li>没有内存保护机制</li>
+<li>小内核栈</li>
+<li>并发上的考虑</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/05/Service-Computing-and-SOA-Development/" style="float: left;">
+        ← 服务计算与SOA开发
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/">
+        分组策略与可靠性 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

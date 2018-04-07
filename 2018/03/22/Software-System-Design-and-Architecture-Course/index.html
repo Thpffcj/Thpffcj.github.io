@@ -181,23 +181,228 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-什么是软件架构？"><a href="#1-什么是软件架构？" class="headerlink" title="1. 什么是软件架构？"></a>1. 什么是软件架构？</h3><ul>
+      		<h2 id="0-复习"><a href="#0-复习" class="headerlink" title="0. 复习"></a>0. 复习</h2><h3 id="1-Outline"><a href="#1-Outline" class="headerlink" title="1. Outline"></a>1. Outline</h3><ul>
+<li>Software Architecture</li>
+<li>Quality Attributes</li>
+<li>Designing Software Architecture </li>
+<li>Documenting Software Architecture</li>
+<li>Evaluating Software Architecture</li>
+<li>Software Product Lines</li>
+<li>Describing Architecture</li>
+<li>Software Design Practices</li>
+</ul>
+<h3 id="2-Software-Architecture"><a href="#2-Software-Architecture" class="headerlink" title="2. Software Architecture"></a>2. Software Architecture</h3><p><strong>Software Architecture in General</strong></p>
+<ul>
+<li>What is software architecture?<ul>
+<li>Structure, Elements, Relationships, Design</li>
+</ul>
+</li>
+<li>What does a software architect do?</li>
+<li>Where do architectures come from?<ul>
+<li>NFRs, ASRs, Quality Requirements; Stakeholders, Organisations, Technical Environments…</li>
+</ul>
+</li>
+<li>Architecture Views<ul>
+<li>Logical view, Process view, Physical view, Development view + Use case scenarios…</li>
+</ul>
+</li>
+<li>Architectural activities and process</li>
+<li>Software architecture knowledge areas</li>
+</ul>
+<p><strong>Architecture Process</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Architecture%20Process.png" alt=""></p>
+<h3 id="3-Quality-Attributes"><a href="#3-Quality-Attributes" class="headerlink" title="3. Quality Attributes"></a>3. Quality Attributes</h3><ul>
+<li>Software Requirements<ul>
+<li>Functional requirements</li>
+<li>Quality requirements (NFRs)</li>
+<li>Constraints</li>
+</ul>
+</li>
+<li>Quality Attributes<ul>
+<li>Modeling quality attribute scenarios: Source, Stimulus, Artefact, Environment, Response, Measure</li>
+<li>Availability, Interoperability, Modiﬁability, Performance, Security, Testability, Usability, X-ability…</li>
+<li>Tactics for quality attributes</li>
+</ul>
+</li>
+<li>Architecturally Signiﬁcant Requirements<ul>
+<li>How to gather and identify ASRs: Requirements, Interviews, Business goals, Utility tree</li>
+</ul>
+</li>
+</ul>
+<p><strong>Architecture Patterns</strong></p>
+<ul>
+<li>Architecture Patterns<ul>
+<li>Context, Problem, Solution: elements + relations + constraints</li>
+</ul>
+</li>
+<li>Module Patterns<ul>
+<li>Layered pattern</li>
+</ul>
+</li>
+<li>Component-Connector Patterns<ul>
+<li>Broker pattern</li>
+<li>Model-view-controller pattern</li>
+<li>Pipe-and-ﬁlter pattern</li>
+<li>Client-server pattern</li>
+<li>Peer-to-peer pattern</li>
+<li>Service-oriented pattern</li>
+<li>Publish-subscribe pattern</li>
+<li>Share-data pattern </li>
+</ul>
+</li>
+<li>Allocation Patterns<ul>
+<li>Map-reduce pattern, Multi-tier pattern</li>
+</ul>
+</li>
+<li>Patterns vs. Tactics</li>
+</ul>
+<h3 id="4-Designing-Architecture"><a href="#4-Designing-Architecture" class="headerlink" title="4. Designing Architecture"></a>4. Designing Architecture</h3><ul>
+<li>General Design Strategy<ul>
+<li>Abstraction</li>
+<li>Decomposition</li>
+<li>Divide &amp; conquer</li>
+<li>Generation and test</li>
+<li>Iteration</li>
+<li>Reuse</li>
+</ul>
+</li>
+<li>Attribute-Driven Design (ADD)<ul>
+<li>Choose a part to design</li>
+<li>Marshal all ASRs for that part</li>
+<li>Create and test a design for that part</li>
+<li>Inputs to and outputs of ADD</li>
+<li>8-step process: <ul>
+<li>conﬁrm requirements</li>
+<li>choose an element to decompose</li>
+<li>identify ASRs</li>
+<li>choose a design satisfying ASRs </li>
+<li>instantiate elements &amp; allocate responsibilities</li>
+<li>deﬁne interface</li>
+<li>verify &amp; reﬁne requirements</li>
+<li>repeat step 2-7 until all ASRs satisﬁed</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-Documenting-Architecture"><a href="#5-Documenting-Architecture" class="headerlink" title="5. Documenting Architecture"></a>5. Documenting Architecture</h3><ul>
+<li>Views and Beyond<ul>
+<li>Views:<ul>
+<li>Styles (viewpoints), patterns and views</li>
+<li>Structural views: module views, component-and-connector views, allocation views</li>
+<li>Quality views</li>
+</ul>
+</li>
+<li>Documenting views: <ul>
+<li>build stakeholder/view table</li>
+<li>combine views</li>
+<li>prioritise &amp; stage</li>
+</ul>
+</li>
+<li>Beyond views: documentation info &amp; architecture info (mapping between views)</li>
+<li>Documentation package: views + beyond</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Evaluating-Architecture"><a href="#6-Evaluating-Architecture" class="headerlink" title="6. Evaluating Architecture"></a>6. Evaluating Architecture</h3><ul>
+<li>ATAM: Architecture Tradeoff Analysis Method<ul>
+<li>Stakeholders involved in ATAM</li>
+<li>Inputs to and outputs of ATAM</li>
+<li>Phase 0: Partnership &amp; preparation</li>
+<li>Phase 1: Evaluation - 1<ul>
+<li>present ATAM</li>
+<li>present business drivers</li>
+<li>present architecture</li>
+<li>identify architectural approaches</li>
+<li>generate utility tree</li>
+<li>analyse architectural approaches</li>
+</ul>
+</li>
+<li>Phase 2: Evaluation - 2<ul>
+<li>present ATAM &amp; results</li>
+<li>brainstorm &amp; prioritize</li>
+<li>analyse architectural approaches</li>
+<li>present results</li>
+</ul>
+</li>
+<li>Phase 3: Follow-up</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-Software-Product-Lines"><a href="#7-Software-Product-Lines" class="headerlink" title="7. Software Product Lines"></a>7. Software Product Lines</h3><ul>
+<li>Software Product Lines (Engineering)<ul>
+<li>Product = core assets + custom assets</li>
+<li>Reusability and Modiﬁability</li>
+</ul>
+</li>
+<li>Product Line Architecture<ul>
+<li>Reuse: ﬁnd, understand, and use (invoke)</li>
+<li>Variation: forms of variation <em> software entity varied </em> binding time</li>
+<li>Architecture: variation points</li>
+</ul>
+</li>
+<li>SPL Practice Areas and Patterns<ul>
+<li>29 practice areas and 22 patterns</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-Software-Design-Practices"><a href="#8-Software-Design-Practices" class="headerlink" title="8. Software Design Practices"></a>8. Software Design Practices</h3><ul>
+<li>Design Strategies<ul>
+<li>Transformation step, Elaboration step; (de-)compositional, organisational, template-based</li>
+</ul>
+</li>
+<li>Incremental Design<ul>
+<li>RAD, SDSM: Feasibility study, Business study, Functional model, Design &amp; build, Implementation</li>
+</ul>
+</li>
+<li>Structured Systems Analysis and Structured Design (SSA/SD)<ul>
+<li>(initial &gt; hierarchy) DFD, Transaction analysis, Transform analysis, Structure chart</li>
+</ul>
+</li>
+<li>Jackson Structured Programming</li>
+<li>Jackson System Development<ul>
+<li>(Entity-)Structure diagram, Data-ﬂow stream, State-vector; Modeling, Network, Implementation</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-什么是软件架构？"><a href="#1-什么是软件架构？" class="headerlink" title="1. 什么是软件架构？"></a>1. 什么是软件架构？</h3><ul>
 <li>SEI(Software Engineering Institute)：是整个程序或计算系统的结构(Structure)，包含了程序的元素(Software Elements)和那些外部能看见的元素属性(Properties)和元素之间的关系(Relationship)</li>
 <li>IEEE：一个系统的基本组织，包含了了它的所有组件(Components)、组件之间的关系、环境以及指导该系统的设计(Design)和演化(Evolution)的原则(Principle)</li>
+<li>元素：组件，连接件</li>
+<li>关系：静态关系，动态关系</li>
 </ul>
-<h3 id="2-软件架构做什什么？"><a href="#2-软件架构做什什么？" class="headerlink" title="2. 软件架构做什什么？"></a>2. 软件架构做什什么？</h3><p><strong>架构定义了结构</strong></p>
+<h3 id="2-软件架构做什么？"><a href="#2-软件架构做什么？" class="headerlink" title="2. 软件架构做什么？"></a>2. 软件架构做什么？</h3><p><strong>架构定义了结构</strong></p>
 <ul>
-<li>架构将系统分解成组件、模块或子系统</li>
-<li>结构定义了组件接口、组件间的交流和依赖、组件的职责</li>
+<li>架构将系统分解成组件，模块或子系统</li>
+<li>结构定义了组件接口<ul>
+<li>组件能干什么，对外提供的功能</li>
+</ul>
+</li>
+<li>组件间的交流和依赖<ul>
+<li>组件之间如何通信</li>
+</ul>
+</li>
+<li>组件的职责<ul>
+<li>精确描述组件具体做什么</li>
+</ul>
+</li>
 </ul>
 <p><strong>架构说明组件的交流</strong></p>
 <ul>
-<li>数据的传递机制，如函数调用、远程方法调⽤用、异步消息</li>
-<li>控制流，如组件间的消息流</li>
+<li>数据的传递机制：如函数调用，远程方法调⽤用，异步消息</li>
+<li>控制流：如组件间的消息流(串行的，并行/平行，同步的)</li>
 </ul>
 <p><strong>架构传递非功能性需求(NFRs)</strong></p>
 <ul>
-<li>包括了技术约束，商务约束和质量量属性</li>
+<li>非功能需求描述系统工作的好坏程度</li>
+<li>非功能需求包括：<ul>
+<li>技术约束</li>
+<li>业务约束</li>
+<li>质量属性</li>
+</ul>
+</li>
 </ul>
 <p><strong>架构是一种抽象</strong></p>
 <ul>
@@ -210,7 +415,7 @@
 </ul>
 <p><strong>架构 vs.设计</strong></p>
 <ul>
-<li>架构是设计过程的⼀部分：所有的架构都是软件设计，但并不是所有的设计都是软件架构架构提供了设计的抽象视图，隐藏了设计的复杂和实现</li>
+<li>架构是设计过程的一部分：所有的架构都是软件设计，但并不是所有的设计都是软件架构架构提供了设计的抽象视图，隐藏了设计的复杂和实现</li>
 </ul>
 <h3 id="3-如何进行设计？-通用的设计策略-Design-Strategy"><a href="#3-如何进行设计？-通用的设计策略-Design-Strategy" class="headerlink" title="3. 如何进行设计？/通用的设计策略 Design Strategy"></a>3. 如何进行设计？/通用的设计策略 Design Strategy</h3><ul>
 <li>分解</li>
@@ -234,27 +439,23 @@
 <li>仔细检查可行性</li>
 <li>形成一个使用的架构设想并制成蓝图</li>
 <li>审查结构并确保与计划一致</li>
-<li>引导设计中的变化、危机和歧义</li>
+<li>引导设计中的变化，危机和歧义</li>
 </ul>
 <p><strong>架构从哪来？come from/影响架构决定的因素、架构的依据</strong></p>
 <ul>
-<li>不仅仅局限于需求</li>
-<li>可能是商业和技术决定的集合</li>
-<li>经常受以下因素影响：(涉⾜实际)<ul>
-<li>系统利益相关者</li>
-<li>开发组织</li>
-<li>架构师</li>
-<li>技术环境</li>
-</ul>
-</li>
+<li>需求(功能、非功能、约束)</li>
+<li>涉众(管理人员，市场人员，终端用户，维护人员等)</li>
+<li>开发组织(开发团队，开发过程)</li>
+<li>架构师的知识和经验</li>
+<li>技术环境(软件工程最佳实践，工具)</li>
 </ul>
 <p><strong>架构的视图(4+1 View Model)Logical/Process/Physical/Development View + Architecture use cases</strong></p>
 <ul>
-<li>逻辑视图：定义必要的元素和它们之间的关系</li>
-<li>过程视图：描述元素之间的交流依赖</li>
+<li>逻辑视图：描述架构中至关重要的架构元素和他们之间的关系</li>
+<li>过程视图(进程视图)：描述元素之间的交流依赖</li>
 <li>物理视图：主要的进程和组件是怎么映射到硬件</li>
 <li>开发视图：捕捉软件组件的内部组织</li>
-<li>用例：+1，架构需求，不止与一个视图有关</li>
+<li>架构用例：+1，架构需求，与多个视图相关</li>
 </ul>
 <p><strong>如何选择用什么视图？</strong></p>
 <ul>
@@ -273,6 +474,29 @@
 <li>实现架构</li>
 <li>确保与架构一致</li>
 </ul>
+<p><strong>关键活动</strong></p>
+<ul>
+<li>识别ASRs<ul>
+<li>输入：from 涉众</li>
+<li>输出：划分了优先级的质量属性场景</li>
+</ul>
+</li>
+<li>架构设计<ul>
+<li>输入：划分了优先级的质量属性场景，功能需求，约束，模式和战术</li>
+<li>输出：设计结果，一系列早期视图</li>
+</ul>
+</li>
+<li>编档<ul>
+<li>输入：早期架构设计视图，涉众</li>
+<li>输出：视图和文档描述相结合的架构文档</li>
+</ul>
+</li>
+<li>架构评估<ul>
+<li>输入：架构文档，涉众，质量属性场景</li>
+<li>输出：对架构的修改，体现在架构文档中</li>
+</ul>
+</li>
+</ul>
 <p><strong>架构过程 process</strong></p>
 <ul>
 <li>发现架构重要需求</li>
@@ -288,21 +512,73 @@
 <li>架构合成</li>
 <li>架构维护</li>
 </ul>
+<p><strong>架构知识领域</strong></p>
+<ul>
+<li>架构设计一般概念<ul>
+<li>一般设计概念，软件生命周期，设计过程</li>
+</ul>
+</li>
+<li>关键技术<ul>
+<li>并发，事件处理，分布式，异常处理，交互式系统，持久化等</li>
+</ul>
+</li>
+<li>软件结构和架构<ul>
+<li>架构结构和视角</li>
+<li>架构风格和模式(宏观架构)</li>
+<li>设计模式(微观架构)</li>
+<li>复用：框架，生产线</li>
+</ul>
+</li>
+<li>软件设计的质量分析和评估<ul>
+<li>质量属性</li>
+<li>质量分析和评估方法(ATAM,静态分析和动态分析，模拟和原型）</li>
+</ul>
+</li>
+<li>架构描述语言<ul>
+<li>UML等</li>
+</ul>
+</li>
+</ul>
 <p><br></p>
 <hr>
-<h2 id="2-Quality-Attributes"><a href="#2-Quality-Attributes" class="headerlink" title="2. Quality Attributes"></a>2. Quality Attributes</h2><h3 id="1-软件需求"><a href="#1-软件需求" class="headerlink" title="1. 软件需求"></a>1. 软件需求</h3><p><strong>功能需求 Functional requirements</strong></p>
+<h2 id="2-Quality-Attributes"><a href="#2-Quality-Attributes" class="headerlink" title="2. Quality Attributes"></a>2. Quality Attributes</h2><h3 id="1-软件需求"><a href="#1-软件需求" class="headerlink" title="1. 软件需求"></a>1. 软件需求</h3><p><strong>架构的角色</strong></p>
+<ul>
+<li>架构是一种早期的设计制品。展示了设计决定如何满足需求。展示的是最难改变的架构决定，因此也是最小心的考虑</li>
+<li>架构是产品线工程的关键制品。标准化地生成一个相似的产品族比生产一群独立的产品有着更低的成本和风险</li>
+<li>架构一般是其他人为系统工作时考察的第一个设计制品</li>
+<li>架构为维护和修改提供了参考的框架</li>
+</ul>
+<p><strong>架构为什么重要？</strong></p>
+<ul>
+<li>软件架构提供了一种交流工具。发现冲突的关注点并进行协商。与用户协商需求，告知客户进展成本等，实现管理决定和工作分配</li>
+<li>软件架构体现了最早的设计决定。它限制着开发者和系统的具体实现。体现着项目开发和维护的组织结构</li>
+<li>架构促进或阻碍质量属性的满足</li>
+<li>架构影响质量但不能提供保证，因为质量有很多影响因素</li>
+<li>架构可以引起关于可能发生的变化讨论</li>
+<li>架构是可以传播和复用的抽象</li>
+<li>架构是一组产品共性的基础。(整个产品线使用同一个架构)</li>
+<li>系统可以使用架构通过开发一组独立的组件来构建系统</li>
+</ul>
+<p><strong>功能需求 Functional requirements</strong></p>
 <ul>
 <li>描述了如何给利益相关者产生价值</li>
-<li>描述了系统的行为和职责</li>
+<li>描述了系统的行为和职责<ul>
+<li>功能是系统的一种完成被期望的任务的能力</li>
+<li>功能需求可以由任意可能的架构实现</li>
+<li>功能需求与架构是相对独立的</li>
+</ul>
+</li>
 </ul>
 <p><strong>质量需求 Quality requirements</strong></p>
 <ul>
 <li>是系统在功能需求之上需要提供的整个系统需要的特征</li>
 <li>用于检验功能需求和整个产品的质量</li>
+<li>质量属性会约束功能与多种架构之间的映射</li>
 </ul>
 <p><strong>约束 Constraints</strong></p>
 <ul>
 <li>是一个零自由度的设计决定</li>
+<li>是预先存在的设计决定</li>
 </ul>
 <p><strong>设计决定design decisions的七种类型</strong></p>
 <ul>
@@ -316,11 +592,15 @@
 </ul>
 <p><strong>战术 Tactics</strong></p>
 <ul>
-<li>是一个设计决定，架构是设计决定集合</li>
+<li>战术是影响质量属性响应控制的设计决策</li>
+<li>模式或风格是通过应用战术来提供承诺的好处的</li>
+<li>一系列战术以某种方式打包成为策略</li>
 </ul>
 <h3 id="2-质量属性"><a href="#2-质量属性" class="headerlink" title="2. 质量属性"></a>2. 质量属性</h3><p><strong>质量属性/架构属性</strong></p>
 <ul>
-<li>软件开发各个阶段传递出的需求</li>
+<li>质量属性：非功能需求/架构需求</li>
+<li>软件开发各个阶段传递出的需求，是不能在满足了功能需求之后再满足它们的</li>
+<li>业务目标决定了系统必须达到的质量</li>
 </ul>
 <p><strong>类型</strong></p>
 <ul>
@@ -342,8 +622,9 @@
 </li>
 </ul>
 <p><strong>Modeling quality attribute scenarios</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Modeling%20quality%20attribute%20scenarios.png" alt=""></p>
 <ul>
-<li>刺激源，Source of Stimulus：⽣成刺激的实体(⼈、系统或其它刺激器)</li>
+<li>刺激源，Source of Stimulus：生成刺激的实体(人，系统或其它刺激器)</li>
 <li>刺激，Stimulus：是某事物，当其到达系统后需要对其加以考虑</li>
 <li>环境，Environment：刺激发生时的各种条件</li>
 <li>制品，Artifact：可能是整个系统，或系统的一部分</li>
@@ -358,6 +639,10 @@
 <li>error：failure和fault之间的状态</li>
 </ul>
 </li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%AF%E7%94%A8%E6%80%A7%E5%9C%BA%E6%99%AF.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%AF%E7%94%A8%E6%80%A7%E6%88%98%E6%9C%AF.png" alt=""></p>
+<ul>
 <li>Interoperability：互操作性。描述多个系统通过接口交换信息的属性，包括交换和正确推断信息。</li>
 <li>Modifiability：可修改性。用于评估一个更改所消耗的时间和金钱。</li>
 <li>Performance：性能。关于时间和软件系统满足时间需求的能力。响应时间=处理时间和等待时间</li>
@@ -366,7 +651,7 @@
 <li>Usability：易用性。用户去完成一个特定任务的容易性程度和系统所提供的用户支持的种类</li>
 <li>X-ability：可变性、可移植性、可伸缩性、可部署性、可复用性…</li>
 <li>Mobility 移动性，解决平台之间的移动和支持(⼤小、显示器类型、带宽、电池等)</li>
-<li>Safety 安全性，与security相⽐，不是有意为之，关注自身安全，防止偶然可能造成破坏的对象。</li>
+<li>Safety 安全性，与security相比，不是有意为之，关注自身安全，防止偶然可能造成破坏的对象。</li>
 <li>Development Distributability：支持分布式软件开发</li>
 <li>Variability：可变性，特殊的可修改性。</li>
 <li>Portability：易于做改变，用于另⼀种平台</li>
@@ -375,101 +660,405 @@
 </ul>
 <h3 id="3-ASRs"><a href="#3-ASRs" class="headerlink" title="3. ASRs"></a>3. ASRs</h3><p><strong>架构重要需求 (ASRs，Architecturally Significant Requirements)</strong></p>
 <ul>
-<li>更难更重要、对系统有更重大影响的质量属性需求:重要且非功能</li>
+<li>ASR是对架构产生深远影响的需求，是否有这样的需求可能会使架构完全不同</li>
 </ul>
 <p><strong>如何获得 ASRs：</strong></p>
 <ul>
-<li>需求文档</li>
-<li>访谈利益相关人员(涉众)</li>
-<li>理解业务目标</li>
-<li>效用树</li>
+<li>需求文档<ul>
+<li>MosCow风格的描述，或用户故事都能帮助确定质量属性</li>
+</ul>
+</li>
+<li>访谈利益相关人员(涉众)<ul>
+<li>QAW介绍</li>
+<li>业务任务展示</li>
+<li>架构计划展示</li>
+<li>识别架构驱动因素(全局需求，业务驱动，约束，质量属性)</li>
+<li>头脑风暴产生场景</li>
+<li>场景合并(合并相似的)</li>
+<li>场景优先级排序</li>
+<li>场景提取，获得优先级高的一组</li>
+</ul>
+</li>
+<li>通过理解业务目标获取ASR</li>
+<li>使用效用树获得ASR</li>
 </ul>
 <p><br></p>
 <hr>
-<h2 id="Patterns"><a href="#Patterns" class="headerlink" title="Patterns"></a>Patterns</h2><h3 id="1-架构模式-Architecture-Patterns"><a href="#1-架构模式-Architecture-Patterns" class="headerlink" title="1. 架构模式 Architecture Patterns"></a>1. 架构模式 Architecture Patterns</h3><ul>
+<h2 id="3-Patterns"><a href="#3-Patterns" class="headerlink" title="3. Patterns"></a>3. Patterns</h2><h3 id="1-架构模式-Architecture-Patterns"><a href="#1-架构模式-Architecture-Patterns" class="headerlink" title="1. 架构模式 Architecture Patterns"></a>1. 架构模式 Architecture Patterns</h3><ul>
 <li>是一种适用于反复出现的设计问题的设计决策的集合</li>
 <li>是在不断尝试中找到的</li>
 <li>可以重用</li>
 <li>描述一种架构的类别</li>
+<li>架构模式与DSSA相似，但是应用于更低层级，范围更窄</li>
 </ul>
-<p><strong>包含了：</strong></p>
+<p><strong>DSSA(Domain-Specific Software Architecture)</strong></p>
 <ul>
-<li>上下⽂：现实生活中反复出现的、导致这个问题的情况</li>
+<li>是对软件组件的装配</li>
+<li>特定于特定类型的任务(domain)</li>
+<li>在该领域的有效使用时普遍的</li>
+<li>由标准的结构组成，可以有效构造成功的应用</li>
+<li>优势：    <ul>
+<li>是一种优秀的最大化复用知识的方法</li>
+<li>是一种使用先验的开发方法进行新的架构设计的方式</li>
+</ul>
+</li>
+</ul>
+<p><strong>架构模式：</strong></p>
+<ul>
+<li>是一组打包了的设计决定，实践中经常被使用</li>
+<li>其特性被了解，因此允许复用</li>
+<li>描述了一类架构</li>
+<li>架构模式建立了上下文，问题，解决方案之间的关系<ul>
+<li>上下文：现实生活中反复出现的、导致这个问题的情况</li>
 <li>问题：给定上下文中出现的问题</li>
 <li>解决方案：元素+关系+约束</li>
 </ul>
+</li>
+</ul>
 <p><strong>模块模式 Module Patterns</strong></p>
 <ul>
-<li>分层模式（Layered Pattern）</li>
+<li>分层模式（Layered Pattern）<ul>
+<li>概述：定义了一系列层，层是由一组模块组成，提供内聚的服务。层与层之间的使用关系是严格有向的</li>
+<li>元素：层，是一种模块。层的描述应该定义包含了哪些模块，以及所提供的内聚的服务的特征</li>
+<li>关系：使用关系。需要定义使用关系(依然是严格的高层调用底层)</li>
+<li>约束:<ul>
+<li>每一个软件元素必须分配到某一层</li>
+<li>至少两层</li>
+<li>调用关系只能是单向的</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>层的增加会增加成本和系统复杂度</li>
+<li>分层会给性能带来负面影响</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p><strong>连接件模式（Component-Connector Patterns）</strong></p>
 <ul>
-<li>代理模式(Broker Pattern)</li>
-<li>MVC 模式(Model-View-Controller Pattern)</li>
-<li>管道过滤器模式(Pipe-and-Filter Pattern)</li>
-<li>客户端服务器模式(Client-Server Pattern)</li>
-<li>点对点模式(Peer-to-Peer Pattern)</li>
-<li>面向服务的模式(Service-Oriented Pattern)</li>
-<li>发布订阅模式(Publish-Subscribe Pattern)</li>
-<li>共享数据模式(Shared-Data Pattern)</li>
+<li>代理模式(Broker Pattern)<ul>
+<li>概述：代理者是运行时组件，做为客户端和服务器端的中介</li>
+<li>元素：<ul>
+<li>客户端，服务请求者</li>
+<li>服务器，服务提供者</li>
+<li>代理者，一个中间组件，定位合适的服务器来满足客户端请求，转发请求给服务器，结果返回给客户端</li>
+<li>客户端代理，一个中间组件，负责与broker的实际通信，包括打包，发送，解包数据</li>
+<li>服务器代理，一个中间组件，负责与broker的实际通信，包括打包，发送，解包数据</li>
+</ul>
+</li>
+<li>关系：关联关系，client(可选client-side proxy) – broker – (可选server-side proxy)server</li>
+<li>缺点：代理者增加了一层，因此会增加客户端与服务器之间通信的延迟，可能会成为通信瓶颈。代理者单点失效。代理者带来前期的复杂度。代理者可能成为攻击对象。代理者难以测试(行为不确定性增加)</li>
+</ul>
+</li>
+<li>MVC 模式(Model-View-Controller Pattern)<ul>
+<li>概述：MVC将系统功能分为三个组件：模型，视图，控制器，控制器做为模型和视图的中介</li>
+<li>元素：<ul>
+<li>模型，应用的数据和状态的表示，包括应用逻辑</li>
+<li>视图，用户接口组件，展示模型，给用户提供输入方式</li>
+<li>控制器，管理模型和视图的互操作，将用户的行为转化为对模型的改变，或对视图的改变</li>
+</ul>
+</li>
+<li>关系：通知关系，连接三者的实例，通知相关元素的状态变化</li>
+<li>约束：三种元素至少有各有一个实例。模型组件不能直接调用控制器</li>
+<li>缺点：<ul>
+<li>用户接口简单的情况下，带来的复杂度是不值得的</li>
+<li>不一定能很好地适用一些用户接口工具</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>管道过滤器模式(Pipe-and-Filter Pattern)<ul>
+<li>概述：数据从系统外部输入到输出的过程中，经过一系列由管道连接的过滤器的变化处理</li>
+<li>元素：<ul>
+<li>过滤器，是一种转化数据的组件，过滤器之间可以并行处理，过滤器可以增量地转化数据，重要的特性包括数据处理速度，输入输出数据格式，和具体转化的执行</li>
+<li>管道，将数据从过滤器的输出端口传递给另一个过滤器的输入端口的连接件，管道有单一的接收数据的源，和单一的数据输出目标，管道不会修改数据，关键的特性包括缓冲大小，交互协议，传输速率，数据格式</li>
+</ul>
+</li>
+<li>关系：关联关系。过滤器的输出连接管道的输入，以及反过来</li>
+<li>约束：<ul>
+<li>管道连接过来重启的输出端口和输入都端口</li>
+<li>连接的过滤器必须传输相同类型的数据</li>
+<li>特化的模式可能会将组件之间约束成为无环图或线性序列</li>
+<li>其他的特化可能会给组件接口定义确定的名字，如UNIX过滤器的stdin,stdout,stderr端口</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>不适合交互式系统</li>
+<li>有大量独立的过滤器会增加大量的计算开销</li>
+<li>不适合长时间的计算任务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端服务器模式(Client-Server Pattern)<ul>
+<li>概述：客户端发起与服务器的交互，根据需要调用服务等待返回请求结果</li>
+<li>元素：<ul>
+<li>客户端：调用服务器服务的组件，客户端知道他们需要的服务的端口</li>
+<li>服务器：给客户端提供服务的组件，服务器有提供服务的端口。重要的指标包括服务器端口的类型信息（连接数），性能指标</li>
+<li>请求/响应连接件：使用请求响应协议实现的连接件，客户端使用他来调用服务器的服务。重要的指标包括调用时本地的还是远程的，数据是否加密</li>
+</ul>
+</li>
+<li>关系：关联关系。客户端与服务器关联</li>
+<li>约束：<ul>
+<li>客户端通过请求响应连接器与服务器连接</li>
+<li>服务器组件可以是其他服务器组建的客户端</li>
+<li>特化的模式可能会约束：给定端口的连接数，服务器间的关系</li>
+<li>组件可能会被安排为多层，他们是相关功能的组合或分享计算环境</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>服务器会成为性能瓶颈</li>
+<li>服务器会单点失效</li>
+<li>在哪里放置功能的决定是复杂的，且系统构建后很难改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>点对点模式(Peer-to-Peer Pattern)<ul>
+<li>概述：计算由多个节点合作完成，各个节点之间要通过网络相互提供服务和相互调用</li>
+<li>元素：    <ul>
+<li>点(peer)：网络节点上独立的组件，特殊的点可以提供路由，索引和点查找的功能</li>
+<li>请求响应连接件：用于连接网络上的点，查找其他点，调用服务；有时不需要响应</li>
+</ul>
+</li>
+<li>关系：点之间通过请求响应连接件连接。关联可能在运行时改变</li>
+<li>约束：<ul>
+<li>允许关联的点数量</li>
+<li>搜索点时的跳数限制</li>
+<li>点之间如何知道</li>
+<li>一些P2P网络组织委员星型结构，点至于超级点连接</li>
+</ul>
+</li>
+<li>缺点：安全性，数据一致性，数据/服务的可用性，备援，恢复都变得复杂小的点对点系统可能无法实现质量目标，如性能和可用性</li>
+</ul>
+</li>
+<li>面向服务的模式(Service-Oriented Pattern)<ul>
+<li>概述：计算由一组相互合作的组件提供，他们在网络上提供服务</li>
+<li>元素：<ul>
+<li>组件：服务提供者，通过公开的接口提供服务。关注点与实现技术相关，包括性能，认证，约束，可用性，成本</li>
+<li>服务消费者：通过中间件调用服务的组件。消费者也可能同时是提供者</li>
+<li>ESB：中介元素，有在服务之间路由，消息转换的功能</li>
+<li>服务注册：提供者使用它注册服务，消费者使用它查找服务</li>
+<li>SOAP连接件：使用SOA协议在web服务之间同步通信</li>
+<li>REST连接件：基于HTTP的基本的请求响应操作</li>
+</ul>
+</li>
+<li>关系：不同类型的组件关联通过各自的连接件</li>
+<li>约束：服务消费者与提供者连接，但也可能是中介组件</li>
+<li>缺点：<ul>
+<li>基于SOA的系统构建复杂</li>
+<li>中间件会带来性能开销</li>
+<li>服务会成为性能瓶颈，特别是无法提供性能保证</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>发布订阅模式(Publish-Subscribe Pattern)<ul>
+<li>概述：组件发布和订阅事件，当组件发布事件后，基础连接件将事件分发到所有注册的订阅者</li>
+<li>元素：<ul>
+<li>组件至少有一个发布或订阅端口。关注点包括发布和订阅的是哪个事件，事件的粒度</li>
+<li>连接件，有为希望发布和订阅时间的组件提供的通知和监听的接口</li>
+</ul>
+</li>
+<li>关系：关联关系，通过预先定义好哪些组件发布事件，哪些组件订阅事件，将组件与发布订阅连接器连接起来</li>
+<li>约束：<ul>
+<li>所有的组件连接到一个事件分发器上，它可能被视为总线连接器，或是一个组件。发布端口连接通知接口，订阅端口连接监听接口</li>
+<li>可能还会约束什么组件能监听什么事件，能否监听自己的事件，以及系统中能够存在多少发布者和订阅者</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>增加了通信延迟，对伸缩性造成负面影响，对消息传递时间的预测带来负面影响</li>
+<li>缺乏对消息顺序的控制，消息是不受保护的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>共享数据模式(Shared-Data Pattern)<ul>
+<li>概述：数据存取器（data accessors）通过共享的数据商店(data store)通信。控制可能是由存取器或数据商店初始化。数据持久化是通过数据商店实现</li>
+<li>元素：<ul>
+<li>共享数据商店，关注数据存储，性能特性，数据分布，允许连接到数据存取器的数量</li>
+<li>数据存取组件</li>
+<li>数据读写连接件，重要的选择是它是否是事务型的，以及读写语言，协议等</li>
+</ul>
+</li>
+<li>关系：关联关系，决定了哪些数据存取器连接到哪些数据商店</li>
+<li>约束：数据存取器与数据商店的互操作</li>
+<li>缺点：    <ul>
+<li>数据商店可能成为新更能瓶颈</li>
+<li>数据商店单点失效</li>
+<li>数据的生产者和消费者可能耦合紧密</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p><strong>分配模式（Allocation Patterns）</strong></p>
 <ul>
-<li>映射-归约模式(Map-Reduce Pattern)</li>
-<li>多层模式(Multi-Tier Pattern)</li>
+<li>映射-归约模式(Map-Reduce Pattern)<ul>
+<li>概述：map-reduce模式提供了一个分析大规模分布式数据集合的框架，在一组处理器上平行处理。并行性保证了低延迟和高可用。Map是提取和转化阶段，reduce是装载结果阶段</li>
+<li>元素：<ul>
+<li>Map 是一种部署在多处理器上的多个实例的功能</li>
+<li>Reduce是一种可能部署在多个处理器也可能部署在单个处理器上的执行装载阶段的实例</li>
+<li>基础设施，负责部署map和reduce实例的框架，在他们之间引导数据，检测和恢复错误</li>
+</ul>
+</li>
+<li>关系：部署关系。Map 和 reduce实例与处理器之间。实例化，监控，控制是基础设施和map reduce 实例之间的关系</li>
+<li>约束：<ul>
+<li>分析的数据必须在一组文件上</li>
+<li>Map功能是无状态的，相互不通信的</li>
+<li>唯一的通信是，map实例与reduce实例之间通过键值对的形式将数据从map发往reduce</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>数据集太小时，map-reduce的开销是不合理的</li>
+<li>如果数据不能分为小的子集，并行的优势就没有了</li>
+<li>需要多reduce的操作是复杂的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多层模式(Multi-Tier Pattern)<ul>
+<li>概述：计算结构由多个逻辑划分的组件团体组成。每一个团体就是一个层(tier)。将组件组合为一个基于多个标准，组件类型，共享计算环境，或相同的运行时目的</li>
+<li>元素：层，是软件组件的逻辑组合。层可能是由普遍的计算平台组成，这些平台也是模式的元素</li>
+<li>关系：<ul>
+<li>部分关系，层与组成层的组件</li>
+<li>通信关系，层和层包含的组件之间如何互操作</li>
+<li>分配关系，层映射到计算平台</li>
+</ul>
+</li>
+<li>约束：某个组件一定属于某个层</li>
+<li>缺点：前期成本高，复杂度高</li>
+<li>与layered pattern的区别<ul>
+<li>Layer是实际存在的清晰的，有层次关系的组织</li>
+<li>Tier 不是在物理上实际存在的，是一种逻辑上的，概念上的组合，没有明确的层次关系</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="2-模式-vs-战术（Patterns-vs-Tactics）"><a href="#2-模式-vs-战术（Patterns-vs-Tactics）" class="headerlink" title="2. 模式 vs. 战术（Patterns vs. Tactics）"></a>2. 模式 vs. 战术（Patterns vs. Tactics）</h3><ul>
-<li>战术比模式简单</li>
+<li>战术比模式简单，使用单个结构或机制来实现单个架构的能力</li>
 <li>战术是一种设计决策，而模式是一组设计决策的集合</li>
 <li>都是架构师的基础工具</li>
 <li>战术是设计的建筑基石</li>
-<li>大多模式包含几个不同的战术。例如分层模式包含增加内聚，降低依赖的战术</li>
+<li>大多模式包含几个不同的战术。例如分层模式包含增加内聚，降低依赖的战术。都是为了满足相同的目的，提供不同的质量属性</li>
 <li>大多数模式也会包含其他模式</li>
 </ul>
 <p><br></p>
 <hr>
-<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><ul>
-<li>设计活动的目的在于产生适应约束并达到系统质量和业务目标的设计</li>
-<li>结束：考虑ASR，当恰恰满足它时，或者考虑budget，当没有更多时间来完善设计时</li>
+<h2 id="4-Design"><a href="#4-Design" class="headerlink" title="4. Design"></a>4. Design</h2><h3 id="1-设计策略"><a href="#1-设计策略" class="headerlink" title="1. 设计策略"></a>1. 设计策略</h3><ul>
+<li>分解：<ul>
+<li>质量属性集进行拆分，并分配给分解了的不同元素上</li>
+<li>在分解时要考虑约束，让分解满足约束</li>
+<li>设计决定的目标：生成一个满足约束，实现质量和业务目标的设计</li>
 </ul>
-<h3 id="1-ADD（Attribute-Driven-Design）属性驱动设计方法"><a href="#1-ADD（Attribute-Driven-Design）属性驱动设计方法" class="headerlink" title="1. ADD（Attribute-Driven Design）属性驱动设计方法"></a>1. ADD（Attribute-Driven Design）属性驱动设计方法</h3><ul>
+</li>
+<li>迭代：<ul>
+<li>设计是一个多次迭代的过程，每次选择一个分解的模块进行进一步细分，直到满足了所有ASRs</li>
+</ul>
+</li>
+<li>为了ASRs设计<ul>
+<li>选择ASR意味着对需求划分优先级</li>
+</ul>
+</li>
+<li>生成和测试<ul>
+<li>将具体的设计看作是设计假设，当前设计中的错误将在下一个设计假设中被修正，正确的部分会在下一个设计假设中被保留</li>
+<li>最初的假设：存在的系统，框架(部分设计)，模式/战术，设计检查表</li>
+<li>应用的测试方法：分析技术，设计检查表</li>
+<li>下一个假设的产生：直到满足了所有ASR或没有时间，精力，成本时。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ADD（Attribute-Driven-Design）属性驱动设计方法"><a href="#2-ADD（Attribute-Driven-Design）属性驱动设计方法" class="headerlink" title="2. ADD（Attribute-Driven Design）属性驱动设计方法"></a>2. ADD（Attribute-Driven Design）属性驱动设计方法</h3><ul>
 <li>输入：功能需求、质量属性、约束</li>
-<li>输出：软件元素、角色(相关职责的集合)、元素职责、元素属性、两个元素之间的关系</li>
+<li>输出：<ul>
+<li>软件元素：一个计算或开发制品，满足多个角色和职责并定义了特点，这些元素相互联系组成系统的架构</li>
+<li>角色：相关职责的集合</li>
+<li>元素职责</li>
+<li>元素属性</li>
+<li>两个元素之间的关系：定义了两个软件元素如何相互联系或互操作</li>
+</ul>
+</li>
 </ul>
 <p><strong>步骤</strong></p>
 <ul>
-<li>确认需求</li>
-<li>选择一个系统元素分解</li>
-<li>为该元素确认架构必要需求<ul>
-<li>H, M, L 的⼆维数组：(对利益相关者的重要性，对架构实现的影响)即(Importance，Difficulty)</li>
+<li>Step1：确定有足够的需求(输入)<ul>
+<li>涉众根据业务目标为需求划分优先级</li>
+<li>将质量属性表示为场景</li>
 </ul>
 </li>
-<li>选择一个符合架构必要需求的设计理念<ul>
-<li>确认设计关注点</li>
-<li>为次要关注点列出不同的模式和策略</li>
-<li>选择合适的模式和策略</li>
-<li>决定架构必要需求和模式策略之间的关系</li>
-<li>得到架构视图</li>
-<li>评估并解决不一致问题</li>
+<li>Step2：选择一个系统的元素来分解<ul>
+<li>如果是第一次迭代，则选择整个系统进行本次分解，将所有需求都被分配给系统</li>
+<li>如果系统已经根据需求被分解，则选择其中一个元素</li>
 </ul>
 </li>
-<li>列出架构元素并分配职责</li>
-<li>定义元素接口</li>
-<li>确认需求、为元素构造约束</li>
-<li>重复以上步骤直到所有架构必要需求都被满足</li>
+<li>Step3：为选择的元素定义ASRs<ul>
+<li>H, M, L 的二维数组：(对利益相关者的重要性，对架构实现的影响)即(Importance，Difficulty)</li>
+<li>第一个表示：这条需求对涉众的重要程度</li>
+<li>第二个表示：这条需求对架构的影响有多大</li>
 </ul>
-<h2 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h2><h3 id="1-文档内容"><a href="#1-文档内容" class="headerlink" title="1. 文档内容"></a>1. 文档内容</h3><p><strong>文档的好处(为什么)：</strong></p>
+</li>
+<li>Step4：选择一个符合架构必要需求的设计理念<ul>
+<li>确认设计关注点<ul>
+<li>如何满足ASRs</li>
+</ul>
+</li>
+<li>为次要关注点列出不同的模式和策略<ul>
+<li>需要为选择的模式选定度量值，估计度量值的取值</li>
+</ul>
+</li>
+<li>选择合适的模式和策略<ul>
+<li>根据他们对ASRs的优缺点进行选择</li>
+</ul>
+</li>
+<li>决定架构必要需求和模式策略之间的关系(确定模式/战术与ASRs之间的关系)</li>
+<li>得到架构视图<ul>
+<li>为选择的模式生成不同的视图</li>
+</ul>
+</li>
+<li>评估并解决不一致问题<ul>
+<li>评估那些针对质量驱动的设计，是否有没有考虑的质量驱动，评估可选模式或应用附加战术，评估与其他元素相抵触的当前元素设计，解决不一致问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Step5：列出架构元素并分配职责(实例化架构元素并分配职责)<ul>
+<li>将父元素的职责在子元素中进行分配,分析和文档化设计决定</li>
+</ul>
+</li>
+<li>Step6：定义元素接口<ul>
+<li>接口描述了元素需要什么和提供什么的假设</li>
+</ul>
+</li>
+<li>Step7：确认需求，为元素构造约束<ul>
+<li>核实父元素的所有需求都被分配给了子元素</li>
+<li>将子元素的职责转化为单独的元素的功能需求</li>
+</ul>
+</li>
+<li>Step8：重复以上步骤直到所有架构必要需求都被满足</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="5-Document"><a href="#5-Document" class="headerlink" title="5. Document"></a>5. Document</h2><h3 id="1-文档内容"><a href="#1-文档内容" class="headerlink" title="1. 文档内容"></a>1. 文档内容</h3><p><strong>文档的好处(为什么)：</strong></p>
 <ul>
 <li>更好地交流设计决策</li>
-<li>帮助理解决策</li>
-<li>更新设计者的思维</li>
+<li>帮助理解和评价决策</li>
+<li>使设计者重新回忆起确定的设计决定</li>
 <li>锻炼设计架构的能⼒</li>
 <li>支持地理分布的团队</li>
 </ul>
+<p><strong>使用的活动</strong></p>
+<ul>
+<li>架构设计分析(形式化，非形式化)</li>
+<li>分工</li>
+<li>部署后的维护</li>
+<li>架构文档为维护和修改设计决定提供了框架</li>
+</ul>
 <p><strong>不足(挑战)：</strong></p>
 <ul>
-<li>没有标准化</li>
-<li>对于大型系统十分耗时</li>
+<li>没有广泛接受的标准或架构文档化方法</li>
+<li>为大型系统编档花费大量时间</li>
 <li>对视图的数量和本质没有达到共识</li>
 <li>缺乏一整套标记语言和工具来全面描述架构所做的所有决定</li>
 <li>易受ddl的不良影响</li>
@@ -481,9 +1070,15 @@
 <li>测试场景</li>
 <li>设计的系统和周围环境的关系</li>
 </ul>
+<p><strong>影响编档内容的因素：</strong></p>
+<ul>
+<li>架构文档化的复杂程度</li>
+<li>应用的寿命长短</li>
+<li>涉众如何使用架构文档</li>
+</ul>
 <p><strong>架构文档需要遵守的7条规则：</strong></p>
 <ul>
-<li>从读者⻆度书写文档</li>
+<li>从读者角度书写文档</li>
 <li>避免不必要的重复</li>
 <li>避免歧义</li>
 <li>标准化组织 (Beyond)</li>
@@ -495,7 +1090,12 @@
 <ul>
 <li>Style：关注组件和组件之间的交互和职责限制。更关注架构方法，不包含具体的上下文和问题。</li>
 <li>Pattern：体现软件系统基本的结构组织模式。关注上下文和问题，以及如何解决。</li>
-<li>View：是系统中特定类型的元素及其关系的表示。不同的视图⽀持不同的目标和用户，强调不同的系统元素和关系，同时在不同程度上表示不同的质量属性。</li>
+<li>View：<ul>
+<li>是系统中特定类型的元素及其关系的表示。</li>
+<li>不同的视图⽀持不同的目标和用户，强调不同的系统元素和关系</li>
+<li>不同的视图在不同程度上表示不同的质量属性。</li>
+</ul>
+</li>
 <li>注意：style pattern 和 view 的类型都是一样的：module/component-connector/allocation</li>
 </ul>
 <h3 id="3-几种views"><a href="#3-几种views" class="headerlink" title="3. 几种views"></a>3. 几种views</h3><p><strong>结构视图 Structural Views：描述系统结构</strong></p>
@@ -503,19 +1103,53 @@
 <li>Module style —&gt; Module Views 模块视图：强调静态<ul>
 <li>模块视图：模块是一些列提供内聚职责的实现单元的集合</li>
 <li>分解视图、使⽤视图、泛化视图、分层视图、切面视图、数据模型视图 “分示泛层切术”</li>
+<li>元素：模块是一个实现单元，包括一组内聚的职责</li>
 <li>关系：从属、依赖、衍生</li>
-<li>用途：代码的建设蓝图、变化—影响分析、计划增量开发</li>
+<li>约束：不同模块视图可能使用不同的拓扑约束，如模块间的可见性</li>
+<li>用途：<ul>
+<li>代码的建设蓝图</li>
+<li>变化—影响分析</li>
+<li>计划增量开发</li>
+<li>在代码层次上讨论系统的功能</li>
+<li>支持构造的分工，项目管理</li>
+<li>展示系统需要管理的架构信息</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>C&amp;C Views 连接件视图：强调动态<ul>
 <li>连接件视图：attachemnt由连接器的端点和组件的端口之间的连接表示</li>
-<li>Pipe—and—filter view、Client—server view、Peer—to—peer view、Service—oriented<br>view、Publish—subscribe view、Shared—data view</li>
-<li>⽤途：展示系统是如何运行的、指导运行时元素结构和行为的开发、帮助分析运行时系统的质量属性</li>
+<li>元素：<ul>
+<li>组件：主要的运行单元和数据存储，组件使用端口通过连接器交互。</li>
+<li>连接器：组件间交互的渠道。(可能有多个接口)</li>
+</ul>
+</li>
+<li>关系：关联。组件端口与连接器接口相连。(可能有多个端口，”内部子架构”)</li>
+<li>约束：组件只能和连接件连接。连接件只能和组件连接。连接只能通过匹配的端口和接口，连接件不能单独出现，必须连在组件上</li>
+<li>Pipe—and—filter view,Client—server view,Peer—to—peer view,Service—oriented view,Publish—subscribe view,Shared—data view</li>
+<li>用途：<ul>
+<li>展示系统是如何运行的</li>
+<li>指导运行时元素结构和行为的开发</li>
+<li>帮助分析运行时系统的质量属性</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Allocation Views 分配视图：周围环境<ul>
-<li>分配视图：描述software element 和 environmental element之间的映射</li>
-<li>部署视图、安装视图、实现视图、工作分配视图、其它分配视图</li>
+<li>分配视图：描述software element 和 environmental element之间的映射。一般是为了比较软件元素的需求特性和环境元素提供的特性来决定分配是否成功。分配视图可以是静态或动态视图</li>
+<li>部署视图，安装视图，实现视图，工作分配视图，其它分配视图</li>
+<li>元素：<ul>
+<li>软件元素，对环境有需求属性</li>
+<li>环境元素，给软件元素提供属性</li>
+</ul>
+</li>
+<li>关系：分配，软件元素与环境元素映射</li>
+<li>用途：<ul>
+<li>展示性能，可用性，安全性(security)和安全性(safety)</li>
+<li>展示分布式开发和工作分配</li>
+<li>展示系统安装的形式和机制</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -553,7 +1187,7 @@
 </ul>
 <p><strong>在view中会有哪些问题？</strong></p>
 <ul>
-<li>没有很好的定义接⼝</li>
+<li>没有很好的定义接口</li>
 <li>没有很好的理解职责</li>
 <li>overloading the view</li>
 <li>just drawing the picture</li>
@@ -561,27 +1195,50 @@
 </ul>
 <p><br></p>
 <hr>
-<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><h3 id="1-评估"><a href="#1-评估" class="headerlink" title="1. 评估"></a>1. 评估</h3><p><strong>为什么要评估？</strong></p>
+<h2 id="6-Evaluation"><a href="#6-Evaluation" class="headerlink" title="6. Evaluation"></a>6. Evaluation</h2><h3 id="1-评估"><a href="#1-评估" class="headerlink" title="1. 评估"></a>1. 评估</h3><p><strong>为什么要评估？</strong></p>
 <ul>
-<li>大型项目经常迟交和超⽀</li>
+<li>大型项目经常迟交和超⽀由于设计缺陷不能正常工作，依赖的现成组件不能像预期那样工作)</li>
 <li>项目进行过程中有时候要重新设计</li>
 <li>能够帮助尽早发现问题，尽早发现的解决成本是很低的</li>
 <li>传播架构设计的最佳实践</li>
 <li>提供优秀项目技术管理</li>
+</ul>
+<p><strong>什么时候去评估？</strong></p>
+<ul>
+<li>总的来说：越早发现问题越好<ul>
+<li>升级更新时：评估变化带来的影响</li>
+<li>设计时：验证架构设计是否满足需求</li>
+<li>构造时：架构是否正确构造，构造的是否好</li>
+</ul>
+</li>
+<li>为什么要尽早评估？<ul>
+<li>有时间修正。</li>
+<li>修正错误决定的成本不高。</li>
+<li>是一种很有效的质量保障和降低风险的活动。</li>
+<li>也是一种好的商业活动。</li>
+</ul>
+</li>
 </ul>
 <p><strong>如何评估？</strong></p>
 <ul>
 <li>发现风险点</li>
 <li>识别出错误的架构选择</li>
 <li>保证解决了质量属性</li>
-<li>⻛险 risks：对所需质量属性有消极影响的架构决定</li>
-<li>敏感点 sensitivity points：对于特定质量属性敏感的架构决定(⼩改动、造成很⼤影响)</li>
+<li>架构评估方法都是基于场景的(质量属性场景)</li>
+<li>场景与架构组件们映射，评估架构是否满足质量属性</li>
+<li>风险 risks：对所需质量属性有消极影响的架构决定</li>
+<li>敏感点 sensitivity points：对于特定质量属性敏感的架构决定(小改动、造成很⼤影响)</li>
 <li>权衡点 tradeoffs：影响多个质量属性的架构决定</li>
 </ul>
 <h3 id="2-体系结构权衡分析方法-ATAM"><a href="#2-体系结构权衡分析方法-ATAM" class="headerlink" title="2. 体系结构权衡分析方法 ATAM"></a>2. 体系结构权衡分析方法 ATAM</h3><p><strong>体系结构权衡分析方法 ATAM，Architecture Tradeoff Analysis Method</strong></p>
+<ul>
+<li>重点在于：通过理解架构设计方案来分析架构</li>
+</ul>
 <p><strong>ATAM的涉众：</strong></p>
 <ul>
-<li>设计者(设计中)、伙伴(架构师向评论家展示)、外界⼈⼠</li>
+<li>设计者(设计中)</li>
+<li>伙伴(架构师向评论家展示)</li>
+<li>外界人士</li>
 </ul>
 <p><strong>ATAM过程：</strong></p>
 <ul>
@@ -593,26 +1250,79 @@
 </li>
 <li>Phase 1：评估(1)<ul>
 <li>参与者：评估小组和项目设计决策者(肯定包括了项目经理和架构师)</li>
-<li>输出：架构简要展示、业务目标、质量属性和相关场景、效用树、风险和非风险点、敏感点、权衡点</li>
+<li>输出：<ul>
+<li>架构简要展示</li>
+<li>业务目标</li>
+<li>质量属性和相关场景</li>
+<li>效用树</li>
+<li>风险和非风险点，敏感点，权衡点</li>
+</ul>
+</li>
 <li>步骤<ul>
 <li>Step 1：介绍ATAM方法(评估⼩组组⻓)</li>
-<li>Step 2：介绍商业动机(项⽬经理或系统客户)</li>
-<li>Step 3：介绍架构(⾸席结构师)</li>
-<li>Step 4：识别使⽤的架构方法(评估小组）</li>
-<li>Step 5：⽣成质量属性效用树(评估小组和项目设计决策者)：决定性的一步</li>
-<li>Step 6：分析架构⽅法(评估⼩组)：确保方法是正确的。获得风险点、非风险点、敏感点和权衡点列表</li>
+<li>Step 2：介绍商业动机(项⽬经理或系统客户)<ul>
+<li>最主要的功能需求</li>
+<li>技术，管理，经济，政策约束</li>
+<li>业务目标和上下文</li>
+<li>主要涉众是谁</li>
+<li>架构驱动因素(主要的质量属性)</li>
+</ul>
+</li>
+<li>Step 3：介绍架构(⾸席结构师)<ul>
+<li>技术约束，如os，硬件，中间件等</li>
+<li>需要交互的其他系统</li>
+<li>用于满足质量属性的架构方案</li>
+</ul>
+</li>
+<li>Step 4：识别使⽤的架构方法(评估小组)<ul>
+<li>了解架构文档</li>
+<li>了解模式战术</li>
+<li>了解架构设计方案(风格，模式，战术)全部列出来</li>
+</ul>
+</li>
+<li>Step 5：生成质量属性效用树(评估小组和项目设计决策者)<ul>
+<li>决定性的一步</li>
+<li>评估团队和设计团队对最重要的质量属性目标进行识别，提取，划分优先级</li>
+<li>质量属性效用树将质量需求表述的十分详细</li>
+<li>效用树：质量属性 – 关注点 – 量化的具体场景</li>
+</ul>
+</li>
+<li>Step 6：分析架构⽅法(评估⼩组)：确保方法是正确的。获得风险点、非风险点、敏感点和权衡点列表<ul>
+<li>目标：让评估团队信服，当前的架构方案实例可以满足质量属性</li>
+<li>检查：评估团队选择最高级别的场景(from utility tree)，对于每一个，让架构师讲解如何支持</li>
+<li>文档化：评估团队记录相关的架构决定，通过讨论识别出风险，非风险，敏感点和权衡点</li>
+<li>分析目的：抽取重要的架构信息，在架构决定与质量属性之间建立联系</li>
+<li>结果：质量属性场景 – 关键架构决定及原因 – 一系列风险，非风险，敏感点，权衡点</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Phase 2：评估(2)<ul>
-<li>参与者：评估小组 、项目设计决策者和架构涉众</li>
-<li>输出：从涉众群体获得的一个优先级场景列表、风险主题和商业动机</li>
+<li>参与者：评估小组，项目设计决策者和架构涉众</li>
+<li>输出：<ul>
+<li>从涉众群体获得的一个优先级场景列表</li>
+<li>风险主题和商业动机</li>
+<li>每个涉众关心的业务目标</li>
+</ul>
+</li>
 <li>步骤<ul>
 <li>Step 1：介绍ATAM方法和之前的结果(评估小组组长)重复以确保涉众也知道方法并回顾分享之前2~6步的结果</li>
-<li>Step 7：头脑风暴、场景划分优先级(评估小组问涉众)与质量属性效用树进行比对</li>
+<li>Step 7：头脑风暴，场景划分优先级(评估小组问涉众)与质量属性效用树进行比对<ul>
+<li>目的：理解涉众关心的方面</li>
+<li>步骤1：涉众头脑风暴，找出对他们有意义的场景</li>
+<li>步骤2：涉众划分优先级，根据关注点合并场景</li>
+<li>结果：得到一组划分了优先级的场景，与上一阶段的效用树比较。如果差别很大，那么增加的场景可能成为风险</li>
+</ul>
+</li>
 <li>Step 8：分析架构方法(评估小组、架构师)使用新产生的优先级靠前的场景、架构师解释与之相关的架构决定</li>
-<li>Step 9：展示结果(评估小组)</li>
+<li>Step 9：展示结果(评估小组)<ul>
+<li>评估团队根据共同的concern或系统缺陷将风险合并为风险主题</li>
+<li>将风险主题与业务目标(step2)关联</li>
+<li>评估结果向涉众展示：架构方案文档，场景和优先级(头脑风暴)，效用树，风险，非风险文档，敏感点、权衡点，风险主题与业务目标的关联</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -634,6 +1344,99 @@
 <li>架构决定与质量需求之间的映射</li>
 <li>敏感点、权衡点</li>
 <li>最终评估报告</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="7-Software-Product-Lines-1"><a href="#7-Software-Product-Lines-1" class="headerlink" title="7. Software Product Lines"></a>7. Software Product Lines</h2><h3 id="1-软件产品线概念"><a href="#1-软件产品线概念" class="headerlink" title="1. 软件产品线概念"></a>1. 软件产品线概念</h3><p><strong>什么是产品线？</strong></p>
+<ul>
+<li>产品 = 核心资产 + 客户(产品)资产</li>
+<li>许多相关产品的集合，他们复用同一组核心资产</li>
+<li>软件产品线是一组软件密集系统，他们共享一个共同的，受管理的，满足某个特定市场领域或任务的特征集合。他们都是基于一个共同的核心资产集有计划地开发的</li>
+<li>其中，核心资产和扩展的系统都是预先计划好的</li>
+</ul>
+<p><strong>Core Assets</strong></p>
+<ul>
+<li>在软件产品线中被⼤量产品复用</li>
+<li>提供领域内的知识和经验，满足领域需求</li>
+<li>实现软件产品线范围中的需求</li>
+<li>提供大量variation points以适应不同特性</li>
+</ul>
+<p><strong>Custom Assets</strong></p>
+<ul>
+<li>关于特定的产品</li>
+<li>集成产品所需的core assets</li>
+<li>满足用户特定的需求</li>
+<li>实现软件产品线范围外的需求</li>
+</ul>
+<p><strong>与产品线不同的情况</strong></p>
+<ul>
+<li>单个产品的不同版本<ul>
+<li>SPL一般是一组同步或说平行的不同产品</li>
+</ul>
+</li>
+<li>偶然的小范围的复用<ul>
+<li>SPL是有计划的，有策略的大范围复用</li>
+</ul>
+</li>
+<li>复用形式的单个产品开发<ul>
+<li>SPL是系统性的变化。不是简单的复制</li>
+</ul>
+</li>
+<li>基于组件的开发<ul>
+<li>SPL架构可能会使用基于组件的开发，但是SPL同时还关注变化，不同的产品，生产计划</li>
+</ul>
+</li>
+<li>可重配置的架构<ul>
+<li>SPL架构可能是重配置的架构，但是SPL是一系列产品，不是单个产品的不同配置。个人理解：核心资产是可配置的，但SPL不仅是核心资产，而是一系列不同的产品</li>
+</ul>
+</li>
+<li>仅仅是技术标准(如公司的”平台”)<ul>
+<li>SPL架构可能是使用了一种技术的平台或标准。但SPL不仅限于此</li>
+</ul>
+</li>
+</ul>
+<p><strong>为什么要使用产品线开发？</strong></p>
+<ul>
+<li>规模经济<ul>
+<li>复用核心资产的成本，尤其是设计，编码和单元测试。</li>
+</ul>
+</li>
+<li>简单<ul>
+<li>更容易看到产品资产中哪些是业务的核心</li>
+<li>更容易看到产品之间的不同</li>
+<li>更容易用新的核心资产升级不同的客户产品</li>
+</ul>
+</li>
+<li>将项目工作变成产品特征<ul>
+<li>将客户资产从产品中独立出来，在其他产品中做为核心资产复用。</li>
+</ul>
+</li>
+<li>提高产品质量<ul>
+<li>核心资产修复bug的工作只需要做一次</li>
+<li>核心资产修复bug的工作可以在不同产品中共享</li>
+<li>不同产品有不同的使用核心资产的模式，从而暴露出不同的bug，进一步提升质量</li>
+</ul>
+</li>
+<li>更多地时间去关注市场<ul>
+<li>新产品不需要重复开发核心资产</li>
+<li>像搭积木一样实现产品和组件的构造</li>
+</ul>
+</li>
+</ul>
+<p><strong>Reuse &amp; Variation</strong></p>
+<ul>
+<li>复用：<ul>
+<li>找到要复用的资产，理解它，调用它</li>
+<li>“大概能够复用”的代码通常是完全不能用的</li>
+</ul>
+</li>
+<li>变化：<ul>
+<li>为了最大化复用，让代码变的可修改</li>
+<li>变化点是大规模复用的关键</li>
+<li>软件可变化包括功能的变化或非功能属性的变化</li>
+<li>现在为了支持变化而设计是困难且昂贵的，但是在之后想要支持变化将困难且昂贵得多</li>
+</ul>
+</li>
 </ul>
 
             <div class="clearfix"></div>

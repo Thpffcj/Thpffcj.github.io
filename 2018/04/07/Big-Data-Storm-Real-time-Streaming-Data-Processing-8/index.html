@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Storm整合其他大数据框架的使用 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-07T09:53:21.000Z" itemprop="datePublished">
+          2018-04-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
+</span>
+                <h1>Storm整合其他大数据框架的使用</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Redis"><a href="#1-Redis" class="headerlink" title="1. Redis"></a>1. Redis</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+<li>Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs and geospatial indexes with radius queries. Redis has built-in replication, Lua scripting, LRU eviction, transactions and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster.</li>
+</ul>
+<p><strong>For normal Bolt</strong></p>
+<ul>
+<li>Storm-redis provides basic Bolt implementations, RedisLookupBolt and RedisStoreBolt, and RedisFilterBolt.</li>
+<li>As name represents its usage, RedisLookupBolt retrieves value from Redis using key, and RedisStoreBolt stores key / value to Redis, and RedisFilterBolt filters out tuple which key or field doesn’t exist on Redis.</li>
+</ul>
+<p><strong>实例演示</strong></p>
+<ul>
+<li>解压</li>
+</ul>
+<pre><code>[thpffcj@thpffcj software]$ tar -zxvf redis-4.0.9.tar.gz -C ~/app/
+</code></pre><ul>
+<li>编译</li>
+</ul>
+<pre><code>[thpffcj@thpffcj redis-4.0.9]$ make
+</code></pre><ul>
+<li>启动</li>
+</ul>
+<pre><code>[thpffcj@thpffcj redis-4.0.9]$ src/redis-server
+</code></pre><ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.storm&lt;/groupId&gt;
+    &lt;artifactId&gt;storm-redis&lt;/artifactId&gt;
+    &lt;version&gt;${storm.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>现在我们进行代码编写，其实主要逻辑就是以前写的本地词频统计，新增加的关于redis存储代码也基本全部来自官网，最好的学习方法就是看官网</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/7.
+ * 使用Storm完成词频统计功能
+ */
+public class LocalWordCountRedisStormTopology {
+
+    public static class DataSourceSpout extends BaseRichSpout {
+
+        private SpoutOutputCollector collector;
+
+        public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+            this.collector = collector;
+        }
+
+        public static final String[] words = new String[]{&quot;apple&quot;, &quot;orange&quot;, &quot;pineapple&quot;, &quot;banana&quot;, &quot;watermelon&quot;};
+
+        public void nextTuple() {
+            Random random = new Random();
+            String word = words[random.nextInt(words.length)];
+
+            this.collector.emit(new Values(word));
+            System.out.println(&quot;emit: &quot; + word);
+
+            Utils.sleep(1000);
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;line&quot;));
+        }
+    }
+
+    /**
+     * 对数据进行分割
+     */
+    public static class SplitBolt extends BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        /**
+         * 业务逻辑：
+         */
+        public void execute(Tuple input) {
+            String word = input.getStringByField(&quot;line&quot;);
+            this.collector.emit(new Values(word));
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;));
+        }
+    }
+
+    /**
+     * 词频汇总Bolt
+     */
+    public static class CountBolt extends  BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        Map&lt;String,Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+        /**
+         * 业务逻辑：
+         * 1 获取每个单词
+         * 2 对所有单词进行汇总
+         * 3 输出
+         */
+        public void execute(Tuple input) {
+            // 1）获取每个单词
+            String word = input.getStringByField(&quot;word&quot;);
+            Integer count = map.get(word);
+            if(count == null) {
+                count = 0;
+            }
+
+            count ++;
+
+            // 2）对所有单词进行汇总
+            map.put(word, count);
+
+            this.collector.emit(new Values(word, map.get(word)));
+
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;, &quot;count&quot;));
+        }
+    }
+
+    public static class WordCountStoreMapper implements RedisStoreMapper {
+
+        private RedisDataTypeDescription description;
+        private final String hashKey = &quot;wordCount&quot;;
+
+        public WordCountStoreMapper() {
+            description = new RedisDataTypeDescription(
+                    RedisDataTypeDescription.RedisDataType.HASH, hashKey);
+        }
+
+        @Override
+        public RedisDataTypeDescription getDataTypeDescription() {
+            return description;
+        }
+
+        @Override
+        public String getKeyFromTuple(ITuple tuple) {
+            return tuple.getStringByField(&quot;word&quot;);
+        }
+
+        @Override
+        public String getValueFromTuple(ITuple tuple) {
+            return tuple.getIntegerByField(&quot;count&quot;) + &quot;&quot;;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // 通过TopologyBuilder根据Spout和Bolt构建Topology
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+        builder.setBolt(&quot;CountBolt&quot;, new CountBolt()).shuffleGrouping(&quot;SplitBolt&quot;);
+
+        JedisPoolConfig poolConfig = new JedisPoolConfig.Builder()
+                .setHost(&quot;192.168.92.130&quot;).setPort(6379).build();
+        RedisStoreMapper storeMapper = new WordCountStoreMapper();
+        RedisStoreBolt storeBolt = new RedisStoreBolt(poolConfig, storeMapper);
+
+        builder.setBolt(&quot;RedisStoreBolt&quot;, storeBolt).shuffleGrouping(&quot;CountBolt&quot;);
+
+        // 创建本地集群
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology(&quot;LocalWordCountRedisStormTopology&quot;, new Config(), builder.createTopology());
+    }
+}
+</code></pre><ul>
+<li>查看控制台输出</li>
+</ul>
+<pre><code>emit: apple
+27478 [Thread-22-CountBolt-executor[1 1]] INFO  o.a.s.d.executor - Preparing bolt CountBolt:(1)
+27478 [Thread-22-CountBolt-executor[1 1]] INFO  o.a.s.d.executor - Prepared bolt CountBolt:(1)
+27479 [Thread-20-RedisStoreBolt-executor[3 3]] INFO  o.a.s.d.executor - Preparing bolt RedisStoreBolt:(3)
+27502 [Thread-20-RedisStoreBolt-executor[3 3]] INFO  o.a.s.d.executor - Prepared bolt RedisStoreBolt:(3)
+emit: banana
+emit: banana
+emit: pineapple
+emit: pineapple
+emit: orange
+emit: pineapple
+</code></pre><ul>
+<li>到虚拟机上查看结果</li>
+</ul>
+<pre><code>127.0.0.1:6379&gt; hgetall wordCount
+1) &quot;apple&quot;
+2) &quot;1&quot;
+3) &quot;banana&quot;
+4) &quot;2&quot;
+5) &quot;pineapple&quot;
+6) &quot;3&quot;
+7) &quot;orange&quot;
+8) &quot;1&quot;
+</code></pre><h2 id="2-JDBC"><a href="#2-JDBC" class="headerlink" title="2. JDBC"></a>2. JDBC</h2><p><strong><a href="http://storm.apache.org/releases/1.1.2/storm-jdbc.html" target="_blank" rel="external">Storm JDBC Integration</a></strong></p>
+<ul>
+<li><p>Storm/Trident integration for JDBC. This package includes the core bolts and trident states that allows a storm topology to either insert storm tuples in a database table or to execute select queries against a database and enrich tuples in a storm topology.</p>
+</li>
+<li><p>添加依赖</p>
+</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.storm&lt;/groupId&gt;
+    &lt;artifactId&gt;storm-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;${storm.version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.38&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>ConnectionProvider<ul>
+<li>An interface that should be implemented by different connection pooling mechanism </li>
+</ul>
+</li>
+<li>JdbcMapper<ul>
+<li>The main API for inserting data in a table using JDBC is the org.apache.storm.jdbc.mapper.JdbcMapper interface</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * Basic bolt for writing to any Database table.
+ * &lt;p/&gt;
+ * Note: Each JdbcInsertBolt defined in a topology is tied to a specific table.
+ */
+public class JdbcInsertBolt extends AbstractJdbcBolt {
+</code></pre><ul>
+<li>编程实战</li>
+<li>创建数据库</li>
+</ul>
+<pre><code>create table wc(
+word varchar (20),
+word_count int
+);
+</code></pre><ul>
+<li>编写代码</li>
+</ul>
+<pre><code>public class LocalWordCountJDBCStormTopology {
+
+    public static class DataSourceSpout extends BaseRichSpout {
+
+        private SpoutOutputCollector collector;
+
+        public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+            this.collector = collector;
+        }
+
+        public static final String[] words = new String[]{&quot;apple&quot;, &quot;orange&quot;, &quot;pineapple&quot;, &quot;banana&quot;, &quot;watermelon&quot;};
+
+        public void nextTuple() {
+            Random random = new Random();
+            String word = words[random.nextInt(words.length)];
+
+            this.collector.emit(new Values(word));
+            System.out.println(&quot;emit: &quot; + word);
+
+            Utils.sleep(1000);
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;line&quot;));
+        }
+    }
+
+    /**
+     * 对数据进行分割
+     */
+    public static class SplitBolt extends BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        /**
+         * 业务逻辑：
+         */
+        public void execute(Tuple input) {
+            String word = input.getStringByField(&quot;line&quot;);
+            this.collector.emit(new Values(word));
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;));
+        }
+    }
+
+    /**
+     * 词频汇总Bolt
+     */
+    public static class CountBolt extends  BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        Map&lt;String,Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+        /**
+         * 业务逻辑：
+         * 1 获取每个单词
+         * 2 对所有单词进行汇总
+         * 3 输出
+         */
+        public void execute(Tuple input) {
+            // 1）获取每个单词
+            String word = input.getStringByField(&quot;word&quot;);
+            Integer count = map.get(word);
+            if(count == null) {
+                count = 0;
+            }
+
+            count ++;
+
+            // 2）对所有单词进行汇总
+            map.put(word, count);
+
+            this.collector.emit(new Values(word, map.get(word)));
+
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;, &quot;word_count&quot;));
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // 通过TopologyBuilder根据Spout和Bolt构建Topology
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+        builder.setBolt(&quot;CountBolt&quot;, new CountBolt()).shuffleGrouping(&quot;SplitBolt&quot;);
+
+        Map hikariConfigMap = Maps.newHashMap();
+        hikariConfigMap.put(&quot;dataSourceClassName&quot;,&quot;com.mysql.jdbc.jdbc2.optional.MysqlDataSource&quot;);
+        hikariConfigMap.put(&quot;dataSource.url&quot;, &quot;jdbc:mysql://localhost/storm&quot;);
+        hikariConfigMap.put(&quot;dataSource.user&quot;,&quot;root&quot;);
+        hikariConfigMap.put(&quot;dataSource.password&quot;,&quot;000000&quot;);
+        ConnectionProvider connectionProvider = new HikariCPConnectionProvider(hikariConfigMap);
+
+        String tableName = &quot;wc&quot;;
+        JdbcMapper simpleJdbcMapper = new SimpleJdbcMapper(tableName, connectionProvider);
+
+        JdbcInsertBolt userPersistanceBolt = new JdbcInsertBolt(connectionProvider, simpleJdbcMapper)
+                .withTableName(tableName)
+                .withQueryTimeoutSecs(30);
+
+        builder.setBolt(&quot;JdbcInsertBolt&quot;, userPersistanceBolt).shuffleGrouping(&quot;CountBolt&quot;);
+
+        // 创建本地集群
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology(&quot;LocalWordCountJDBCStormTopology&quot;, new Config(), builder.createTopology());
+    }
+}
+</code></pre><ul>
+<li>不过我们执行代码可以发现，每一个我们都调用的是save方法，所以数据库会有很多相同的word</li>
+</ul>
+<h3 id="3-HDFS"><a href="#3-HDFS" class="headerlink" title="3. HDFS"></a>3. HDFS</h3><p><strong><a href="Storm HDFS Integration">Storm HDFS Integration</a></strong></p>
+<ul>
+<li>继续直接参考官网例子</li>
+<li>The following example will write pipe(“|”)-delimited files to the HDFS path hdfs://localhost:54310/foo. After every 1,000 tuples it will sync filesystem, making that data visible to other HDFS clients. It will rotate files when they reach 5 megabytes in size.</li>
+</ul>
+<pre><code>// use &quot;|&quot; instead of &quot;,&quot; for field delimiter
+RecordFormat format = new DelimitedRecordFormat()
+        .withFieldDelimiter(&quot;|&quot;);
+
+// sync the filesystem after every 1k tuples
+SyncPolicy syncPolicy = new CountSyncPolicy(1000);
+
+// rotate files when they reach 5MB
+FileRotationPolicy rotationPolicy = new FileSizeRotationPolicy(5.0f, Units.MB);
+
+FileNameFormat fileNameFormat = new DefaultFileNameFormat()
+        .withPath(&quot;/foo/&quot;);
+
+HdfsBolt bolt = new HdfsBolt()
+        .withFsUrl(&quot;hdfs://localhost:54310&quot;)
+        .withFileNameFormat(fileNameFormat)
+        .withRecordFormat(format)
+        .withRotationPolicy(rotationPolicy)
+        .withSyncPolicy(syncPolicy);
+</code></pre><ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.storm&lt;/groupId&gt;
+    &lt;artifactId&gt;storm-hdfs&lt;/artifactId&gt;
+    &lt;version&gt;${storm.version}&lt;/version&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
+            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
+            &lt;artifactId&gt;hadoop-auth&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写代码</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/7.
+ * 使用Storm完成词频统计功能
+ */
+public class LocalWordCountHDFSStormTopology {
+
+    public static class DataSourceSpout extends BaseRichSpout {
+
+        private SpoutOutputCollector collector;
+
+        public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+            this.collector = collector;
+        }
+
+        public static final String[] words = new String[]{&quot;apple&quot;, &quot;orange&quot;, &quot;pineapple&quot;, &quot;banana&quot;, &quot;watermelon&quot;};
+
+        public void nextTuple() {
+            Random random = new Random();
+            String word = words[random.nextInt(words.length)];
+
+            this.collector.emit(new Values(word));
+            System.out.println(&quot;emit: &quot; + word);
+
+            Utils.sleep(200);
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;line&quot;));
+        }
+    }
+
+    /**
+     * 对数据进行分割
+     */
+    public static class SplitBolt extends BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        /**
+         * 业务逻辑：
+         */
+        public void execute(Tuple input) {
+            String word = input.getStringByField(&quot;line&quot;);
+            this.collector.emit(new Values(word));
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;));
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // 通过TopologyBuilder根据Spout和Bolt构建Topology
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+
+        // use &quot;|&quot; instead of &quot;,&quot; for field delimiter
+        RecordFormat format = new DelimitedRecordFormat()
+                .withFieldDelimiter(&quot;|&quot;);
+
+        // sync the filesystem after every 100 tuples
+        SyncPolicy syncPolicy = new CountSyncPolicy(100);
+
+        // rotate files when they reach 5MB
+        FileRotationPolicy rotationPolicy = new FileSizeRotationPolicy(5.0f, FileSizeRotationPolicy.Units.MB);
+
+        FileNameFormat fileNameFormat = new DefaultFileNameFormat()
+                .withPath(&quot;/foo/&quot;);
+
+        HdfsBolt bolt = new HdfsBolt()
+                .withFsUrl(&quot;hdfs://192.168.92.130:8020&quot;)
+                .withFileNameFormat(fileNameFormat)
+                .withRecordFormat(format)
+                .withRotationPolicy(rotationPolicy)
+                .withSyncPolicy(syncPolicy);
+
+        builder.setBolt(&quot;HdfsBolt&quot;, bolt).shuffleGrouping(&quot;SplitBolt&quot;);
+
+        // 创建本地集群
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology(&quot;LocalWordCountHDFSStormTopology&quot;, new Config(), builder.createTopology());
+    }
+}
+</code></pre><ul>
+<li>创建foo目录并赋予权限</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./hadoop fs -mkdir /foo
+18/04/07 17:15:50 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[thpffcj@thpffcj bin]$ ./hadoop fs -ls /
+18/04/07 17:16:11 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 3 items
+drwxr-xr-x   - thpffcj supergroup          0 2018-04-07 17:15 /foo
+drwxr-xr-x   - thpffcj supergroup          0 2018-01-16 10:27 /hbase
+-rw-r--r--   1 thpffcj supergroup         49 2018-01-11 20:32 /hello.txt
+[thpffcj@thpffcj bin]$ ./hadoop fs -chmod 777 /foo
+18/04/07 17:16:58 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+</code></pre><ul>
+<li>运行代码等100条之后</li>
+</ul>
+<pre><code>...
+emit: apple
+emit: banana
+40924 [Thread-18-HdfsBolt-executor[2 2]] INFO  o.a.s.h.c.HDFSWriter - Attempting to sync all data to filesystem
+emit: banana
+emit: orange
+...
+</code></pre><ul>
+<li>到虚拟机上查看情况</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./hadoop fs -ls /foo
+18/04/07 17:21:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   3 Administrator supergroup        616 2018-04-07 17:20 /foo/HdfsBolt-2-0-1523092808466.txt
+</code></pre><ul>
+<li>里面就是我们发送的数据了</li>
+</ul>
+<h3 id="4-HBase"><a href="#4-HBase" class="headerlink" title="4. HBase"></a>4. HBase</h3><p><strong><a href="http://storm.apache.org/releases/1.1.2/storm-hbase.html" target="_blank" rel="external">Storm HBase Integration</a></strong></p>
+<ul>
+<li>The main API for interacting with HBase is the org.apache.storm.hbase.bolt.mapper.HBaseMapper interface</li>
+</ul>
+<pre><code>/**
+ * Maps a &lt;code&gt;org.apache.storm.tuple.Tuple&lt;/code&gt; object
+ * to a row in an HBase table.
+ */
+public interface HBaseMapper extends Serializable {
+
+    /**
+     * Given a tuple, return the HBase rowkey.
+     *
+     * @param tuple
+     * @return
+     */
+    byte[] rowKey(Tuple tuple);
+
+    /**
+     * Given a tuple, return a list of HBase columns to insert.
+     *
+     * @param tuple
+     * @return
+     */
+    ColumnList columns(Tuple tuple);
+
+}
+</code></pre><ul>
+<li>To use the HBaseBolt, construct it with the name of the table to write to, an a HBaseMapper implementation:</li>
+</ul>
+<pre><code>/**
+ * Basic bolt for writing to HBase.
+ *
+ * Note: Each HBaseBolt defined in a topology is tied to a specific table.
+ *
+ */
+public class HBaseBolt  extends AbstractHBaseBolt {
+</code></pre><ul>
+<li>修改hbase-env.sh</li>
+</ul>
+<pre><code># export JAVA_HOME=/usr/java/jdk1.6.0/
+export JAVA_HOME=/home/thpffcj/app/jdk1.8.0_151
+
+# Tell HBase whether it should manage it&apos;s own instance of Zookeeper or not.
+export HBASE_MANAGES_ZK=false
+</code></pre><ul>
+<li>修改hbase-site.xml</li>
+</ul>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;hbase.rootdir&lt;/name&gt;
+        &lt;value&gt;hdfs://thpffcj:8020/hbase&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;
+        &lt;value&gt;true&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;
+        &lt;value&gt;thpffcj:2181&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><ul>
+<li>启动hbase之前需要启动hadoop和zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-dfs.sh
+[thpffcj@thpffcj bin]$ ./zkServer.sh start
+
+[thpffcj@thpffcj bin]$ jps
+4624 SecondaryNameNode
+4305 NameNode
+4785 Jps
+4444 DataNode
+4765 QuorumPeerMain
+</code></pre><ul>
+<li>启动hbase</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./start-hbase.sh 
+starting master, logging to /home/thpffcj/app/hbase-1.2.0-cdh5.7.0/logs/hbase-thpffcj-master-thpffcj.out
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=128m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=128m; support was removed in 8.0
+thpffcj: starting regionserver, logging to /home/thpffcj/app/hbase-1.2.0-cdh5.7.0/bin/../logs/hbase-thpffcj-regionserver-thpffcj.out
+[thpffcj@thpffcj bin]$ jps
+4624 SecondaryNameNode
+4305 NameNode
+5303 Jps
+4984 HMaster
+5145 HRegionServer
+4444 DataNode
+4765 QuorumPeerMain
+</code></pre><ul>
+<li>创建一张表</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./hbase shell
+
+hbase(main):001:0&gt; create &apos;wc&apos;,&apos;cf&apos;
+0 row(s) in 1.7810 seconds
+
+=&gt; Hbase::Table - wc
+hbase(main):002:0&gt; list
+TABLE                                                                                  
+imooc_course_clickcount                                                                
+imooc_course_search_clickcount                                                         
+wc                                                                                     
+3 row(s) in 0.0760 seconds
+
+=&gt; [&quot;imooc_course_clickcount&quot;, &quot;imooc_course_search_clickcount&quot;, &quot;wc&quot;]
+</code></pre><ul>
+<li>添加依赖，注意解决jar包冲突</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;
+    &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;
+    &lt;version&gt;${hadoop.version}&lt;/version&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+            &lt;artifactId&gt;guava&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.storm&lt;/groupId&gt;
+    &lt;artifactId&gt;storm-hbase&lt;/artifactId&gt;
+    &lt;version&gt;${storm.version}&lt;/version&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+            &lt;artifactId&gt;guava&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+    &lt;version&gt;16.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写业务逻辑代码</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/7.
+ * 使用Storm完成词频统计功能
+ */
+public class LocalWordCountHBaseStormTopology {
+
+    public static class DataSourceSpout extends BaseRichSpout {
+
+        private SpoutOutputCollector collector;
+
+        public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+            this.collector = collector;
+        }
+
+        public static final String[] words = new String[]{&quot;apple&quot;, &quot;orange&quot;, &quot;pineapple&quot;, &quot;banana&quot;, &quot;watermelon&quot;};
+
+        public void nextTuple() {
+            Random random = new Random();
+            String word = words[random.nextInt(words.length)];
+
+            this.collector.emit(new Values(word));
+            System.out.println(&quot;emit: &quot; + word);
+
+            Utils.sleep(1000);
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;line&quot;));
+        }
+    }
+
+    /**
+     * 对数据进行分割
+     */
+    public static class SplitBolt extends BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        /**
+         * 业务逻辑：
+         */
+        public void execute(Tuple input) {
+            String word = input.getStringByField(&quot;line&quot;);
+            this.collector.emit(new Values(word));
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;));
+        }
+    }
+
+    /**
+     * 词频汇总Bolt
+     */
+    public static class CountBolt extends  BaseRichBolt {
+
+        private OutputCollector collector;
+
+        public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
+            this.collector = collector;
+        }
+
+        Map&lt;String,Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+        /**
+         * 业务逻辑：
+         * 1 获取每个单词
+         * 2 对所有单词进行汇总
+         * 3 输出
+         */
+        public void execute(Tuple input) {
+            // 1）获取每个单词
+            String word = input.getStringByField(&quot;word&quot;);
+            Integer count = map.get(word);
+            if(count == null) {
+                count = 0;
+            }
+
+            count ++;
+
+            // 2）对所有单词进行汇总
+            map.put(word, count);
+
+            this.collector.emit(new Values(word, map.get(word)));
+
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+            declarer.declare(new Fields(&quot;word&quot;, &quot;count&quot;));
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Config config = new Config();
+        Map&lt;String, Object&gt; hbaseConf = new HashMap&lt;String, Object&gt;();
+        hbaseConf.put(&quot;hbase.rootdir&quot;, &quot;hdfs://192.168.92.130:8020/hbase&quot;);
+        hbaseConf.put(&quot;hbase.zookeeper.quorum&quot;, &quot;192.168.92.130:2181&quot;);
+        config.put(&quot;hbase.conf&quot;, hbaseConf);
+
+        // 通过TopologyBuilder根据Spout和Bolt构建Topology
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+        builder.setBolt(&quot;CountBolt&quot;, new CountBolt()).shuffleGrouping(&quot;SplitBolt&quot;);
+
+        SimpleHBaseMapper mapper = new SimpleHBaseMapper()
+                .withRowKeyField(&quot;word&quot;)
+                .withColumnFields(new Fields(&quot;word&quot;))
+                .withCounterFields(new Fields(&quot;count&quot;))
+                .withColumnFamily(&quot;cf&quot;);
+
+        HBaseBolt hBaseBolt = new HBaseBolt(&quot;wc&quot;, mapper)
+                .withConfigKey(&quot;hbase.conf&quot;);
+
+        builder.setBolt(&quot;HBaseBolt&quot;, hBaseBolt).shuffleGrouping(&quot;CountBolt&quot;);
+
+        // 创建本地集群
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology(&quot;LocalWordCountHBaseStormTopology&quot;, config, builder.createTopology());
+    }
+}
+</code></pre><ul>
+<li>运行代码到hbase查看</li>
+</ul>
+<pre><code>hbase(main):003:0&gt; scan &apos;wc&apos;
+ROW                    COLUMN+CELL                                                     
+ apple                 column=cf:count, timestamp=1523098780786, value=\x00\x00\x00\x00
+                       \x00\x00\x00\x03                                                
+ apple                 column=cf:word, timestamp=1523098780782, value=apple            
+ banana                column=cf:count, timestamp=1523098784785, value=\x00\x00\x00\x00
+                       \x00\x00\x00\x0A                                                
+ banana                column=cf:word, timestamp=1523098784783, value=banana           
+ orange                column=cf:count, timestamp=1523098788798, value=\x00\x00\x00\x00
+                       \x00\x00\x00\x0F                                                
+ orange                column=cf:word, timestamp=1523098788791, value=orange           
+ pineapple             column=cf:count, timestamp=1523098787788, value=\x00\x00\x00\x00
+                       \x00\x00\x00\x15                                                
+ pineapple             column=cf:word, timestamp=1523098787786, value=pineapple        
+ watermelon            column=cf:count, timestamp=1523098786787, value=\x00\x00\x00\x00
+                       \x00\x00\x00\x06                                                
+ watermelon            column=cf:word, timestamp=1523098786785, value=watermelon       
+5 row(s) in 0.2270 seconds
+</code></pre><ul>
+<li>发现rowkey就是我们的word，对应两列word和count</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/06/Big-Data-Storm-Real-time-Streaming-Data-Processing-7/">
+        DRPC →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
