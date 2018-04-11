@@ -186,7 +186,23 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-分组策略概述"><a href="#1-分组策略概述" class="headerlink" title="1. 分组策略概述"></a>1. 分组策略概述</h2><p><strong>A stream grouping defines how that stream should be partitioned among the blolt’s tasks</strong></p>
+      		<ul>
+<li>下面是这段时间系统了解Storm的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理Storm</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/18/Big-Data-Storm-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">Storm编程</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/21/Big-Data-Storm-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">Storm周边框架使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Storm架构及部署</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">并行度</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">分组策略与可靠性</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/06/Big-Data-Storm-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">DRPC</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Storm整合其他大数据框架的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">Storm综合项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>知道了并行度这个概念之后，我们再来了解一下Storm的分组策略。之后我们看一下Storm对于可靠性的保证，一个大数据处理框架如果不能容错那么他就没有实用价值。</p>
+<hr>
+<h2 id="1-分组策略概述"><a href="#1-分组策略概述" class="headerlink" title="1. 分组策略概述"></a>1. 分组策略概述</h2><p><strong>A stream grouping defines how that stream should be partitioned among the blolt’s tasks</strong></p>
 <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
 <li>Stream groupings<ul>
 <li>Part of defining a topology is specifying for each bolt which streams it should receive as input. A stream grouping defines how that stream should be partitioned among the bolt’s tasks.</li>

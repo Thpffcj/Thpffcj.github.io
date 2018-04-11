@@ -253,6 +253,57 @@ Lee
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Storm综合项目实战</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-09T01:43:19.000Z" itemprop="datePublished">
+          2018-04-09
+      </time>
+    
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
+
+
+
+历经漫长的学习，积攒了足够的知识，我们终于迎来的Storm的实战项目。学习框架只有理论是不够的，这篇博客我们就来记录一下通过所学，使用Storm和周边框架解决一个实际生活中遇到的问题。
+
+1. 项目概述1
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/">Storm整合其他大数据框架的使用</a></h3>
                     <span>
                         <span class="post-meta">
@@ -271,8 +322,21 @@ Lee
                 <div class="col-md-8">
                     <p>
                       
-                        1. Redis1. 概述
-Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
+
+
+
+Storm只是一个大数据处理框架，如果我们想要完成一个项目，只有Storm是不够的。现在，我们来了解一下Strom和一些常用工具的整合，不过能配合的工具是在太多了，我们这里抛砖引玉介绍一些常用的整合，如果
                       
                     </p>
                     
@@ -307,9 +371,23 @@ Redis is an open source (BSD licensed), in-memory data structure store, used as 
                 <div class="col-md-8">
                     <p>
                       
-                        1. RPC1. 概述
-RPC（Remote Procedure Call）—远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。
-RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
+
+
+
+这篇博客我们来看一个新概念DRPC。DRPC其实不能算是Storm本身的一个特性，它是通过组合Storm的原语Spout,Bolt,Topology而成的一种模式(pattern)。
+
+1. RPC1. 
                       
                     </p>
                     
@@ -340,7 +418,7 @@ RPC采用客户机/服务器模式。请求程序就是一个客户机，而服�
                     <p>
                       
                         1. 概述1. 企业应用
-企业应用为企业提供业务逻辑，它是分布式的、有事务处理的部分、便携式的，且在安全，性能和可靠性上有优势。与 web 应用的最大区别在于企业应用的数据量更大，因此所使用的技术也不一样。
+企业应用为企业提供业务逻辑，它是分布式的，有事务处理的部分，便携式的，且在安全，性能和可靠性上有优势。与 web 应用的最大区别在于企业应用的数据量更大，因此所使用的技术也不一样。
 
 2. J2EE的应用模型
 Java EE 平台使用分布式多层应用模型来开发企业应用。
@@ -426,17 +504,16 @@ From Business View
                 <div class="col-md-8">
                     <p>
                       
-                        1. Linux Basics1. 文件系统(File System)
+                        1. Linux Basics
+是一种在GNU通用公共许可证下开发的开源的类Unix操作系统。
+第一版作者：Linus Torvalds
+
+1. 文件系统(File System)
 操作系统中负责存取和管理文件的部分
 一个文件及其某些属性的集合。它为这些文件的序列号(file serial numbers)提供了一个名称空间
 类型
 VFS，虚拟文件系统，与以下的磁盘文件系统(即文件的分区格式不同)，为底层的文件系统提供了统一的抽象
-EXT2、EXT3、FAT32
-
-
-
-2. Boot Loader
-Boot Loader 加载和启动 Linux
+EX
                       
                     </p>
                     
@@ -471,10 +548,23 @@ Boot Loader 加载和启动 Linux
                 <div class="col-md-8">
                     <p>
                       
-                        1. 分组策略概述A stream grouping defines how that stream should be partitioned among the blolt’s tasks
-1. 概述
-Stream groupings
-Part of defining a topology is specifying for each bolt which streams it should receive as input. A 
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
+
+
+
+知道了并行度这个概念之后，我们再来了解一下Storm的分组策略。之后我们看一下Storm对于可靠性的保证，一个大数据处理框架如果不能容错那么他就没有实用价值。
+
+1. 分组策略概述A stream gro
                       
                     </p>
                     
@@ -509,17 +599,21 @@ Part of defining a topology is specifying for each bolt which streams it should 
                 <div class="col-md-8">
                     <p>
                       
-                        1. 并行度1. 概述
-Storm distinguishes between the following three main entities that are used to actually run a topology in a Storm cluster:
-Worker processes
-Executors (threads)
-Tasks
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
 
 
 
-
-
-A worker process executes a subset of
+通过前面的学习，我们已经基本掌握了Storm的基本使用，不过在进行Storm项目实战之前，我们再来看一下概念。这篇博客主要学习了并行度这个概念，使用”并行度”来说明在 Storm 拓扑中既可以配置 exe
                       
                     </p>
                     
@@ -554,82 +648,28 @@ A worker process executes a subset of
                 <div class="col-md-8">
                     <p>
                       
-                        1. Storm架构1. Storm架构
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
 
-类似于Hadoop的架构，主从(Master/Slave)
-Nimbus：主
-集群的主节点，负责任务(task)的指派和分发，资源的分配
 
 
-Supervisor：从
-可以启动多个Worker，具体个数可以通过配置来指定
-一个Topo可以运行在多个Worker之上，也可以通过配置来指定
-集群的从节点(负责干活的)，负责执行任务的具体部分
-启动和停止自己管理的Worker进程
+了解了周边框架之后，我们来学习Storm的架构和单机部署。前面我们只是在IDEA里学习了编程，现在我们准备在虚拟机上部署环境，将前面的程序放到Storm单节点运行。
 
-
-无状态，在他们
+1. Storm架构1. Storm
                       
                     </p>
                     
                     <p class="pull-right readMore">
                         <a href="/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/03/23/Huawei-Cloud-Computing/">云计算</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-03-23T15:02:14.000Z" itemprop="datePublished">
-          2018-03-23
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 云计算基础概念1. 云计算的概念云计算产生背景
-
-云计算驱动力
-技术驱动
-需求驱动
-商业模式转变
-
-
-IT复杂
-传统数据中心资源分散，利用率低
-平均业务恢复时间长
-工程师手工分配资源
-传统数据中心IT设备需要
-
-
-商业迟缓
-大数据处理能力差，不能有效提升商业嗅觉
-资源需求无法弹性适配
-不能有效支撑企业全生命周期
-多DC分散管理协同性差，商业注意力难以集中
-
-
-
-云计算概念
-
-商业视角：云计算 = 信息电厂
-计算和存储：从局域网向互
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/03/23/Huawei-Cloud-Computing/">Read More...</a>
                     </p>
                     
                 </div>

@@ -181,19 +181,29 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-Linux-Basics"><a href="#1-Linux-Basics" class="headerlink" title="1. Linux Basics"></a>1. Linux Basics</h2><h3 id="1-文件系统-File-System"><a href="#1-文件系统-File-System" class="headerlink" title="1. 文件系统(File System)"></a>1. 文件系统(File System)</h3><ul>
+      		<h2 id="1-Linux-Basics"><a href="#1-Linux-Basics" class="headerlink" title="1. Linux Basics"></a>1. Linux Basics</h2><ul>
+<li>是一种在GNU通用公共许可证下开发的开源的类Unix操作系统。</li>
+<li>第一版作者：Linus Torvalds</li>
+</ul>
+<h3 id="1-文件系统-File-System"><a href="#1-文件系统-File-System" class="headerlink" title="1. 文件系统(File System)"></a>1. 文件系统(File System)</h3><ul>
 <li>操作系统中负责存取和管理文件的部分</li>
 <li>一个文件及其某些属性的集合。它为这些文件的序列号(file serial numbers)提供了一个名称空间</li>
 <li>类型<ul>
 <li>VFS，虚拟文件系统，与以下的磁盘文件系统(即文件的分区格式不同)，为底层的文件系统提供了统一的抽象</li>
-<li>EXT2、EXT3、FAT32</li>
+<li>EXT2，EXT3，FAT32</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-Boot-Loader"><a href="#2-Boot-Loader" class="headerlink" title="2. Boot Loader"></a>2. Boot Loader</h3><ul>
-<li>Boot Loader 加载和启动 Linux 系统内核。Linux 下的 Boot Loader 为 GRUB</li>
+<h3 id="2-Linux启动"><a href="#2-Linux启动" class="headerlink" title="2. Linux启动"></a>2. Linux启动</h3><ul>
+<li>开电源</li>
+<li>BIOS：检查内存，检查物理设备，加载MBR并执行</li>
+<li>Boot Loader：加载压缩过的内核到内存(LILO,GRUB)</li>
+<li>Linux Kernel：内核自己解压，启动</li>
+<li>Init：初始化进程，加载配置文件，设置运行级别</li>
+<li>System Ready</li>
 </ul>
 <h3 id="3-虚拟终端-Vitural-Terminal"><a href="#3-虚拟终端-Vitural-Terminal" class="headerlink" title="3. 虚拟终端(Vitural Terminal)"></a>3. 虚拟终端(Vitural Terminal)</h3><ul>
+<li>控制台模拟的几个虚拟终端，每一个终端可以被看做是独立的，与console直接相连</li>
 <li>Linux 下有 6 个虚拟终端 VT1-6</li>
 </ul>
 <h3 id="4-命令提示"><a href="#4-命令提示" class="headerlink" title="4. 命令提示"></a>4. 命令提示</h3><ul>
@@ -204,9 +214,9 @@
 <h3 id="5-文件和目录"><a href="#5-文件和目录" class="headerlink" title="5. 文件和目录"></a>5. 文件和目录</h3><ul>
 <li>文件：<ul>
 <li>文件是一系列数据的集合</li>
-<li>文件结构：字节流、记录序列(Record Sequence)、记录树(Record Tree)。Linux下为字节流</li>
+<li>文件结构：字节流，记录序列(Record Sequence)，记录树(Record Tree)。Linux下为字节流</li>
 <li>文件类型：<ul>
-<li>(-)普通文件：纯文本文档、二进制文件、数据格式文件等</li>
+<li>(-)普通文件：纯文本文档，二进制文件，数据格式文件等</li>
 <li>(c)字符设备文件：与设备进行交互的文件。Linux 中所有的设备都被抽象为了对应的文件。字符设备是按字符读取</li>
 <li>(b)块设备文件：同字符设备文件，但是是按块读取</li>
 <li>(p)数据输送文件(FIFO，pipe)。他主要的目的在解决多个程序同时存取一个文件所造成的错误问题</li>
@@ -217,15 +227,15 @@
 </li>
 </ul>
 </li>
-<li><p>目录结构</p>
-<ul>
-<li>Linux 中所有的目录均包含在一个统一的、虚拟的统一文件系统(Unified File System)中</li>
+<li>目录结构<ul>
+<li>Linux 中所有的目录均包含在一个统一的，虚拟的统一文件系统(Unified File System)中</li>
 <li>物理设备被挂载到对应挂载点，抽象为一个文件。没有类似于 C:/的驱动盘符</li>
 <li>根目录下文件夹的作用：<br><img src="http://oseihavwm.bkt.clouddn.com/%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt=""></li>
 </ul>
 </li>
-<li><p>/bin</p>
+</ul>
 <ul>
+<li>/bin<ul>
 <li>必要的命令二进制文件</li>
 <li>包含了会被系统管理者和用户使用的命令，但是需要在没有任何文件系统挂载时使用。也可能会在脚本文件中间接使用</li>
 </ul>
@@ -296,32 +306,39 @@
 </li>
 </ul>
 <h3 id="6-文件权限"><a href="#6-文件权限" class="headerlink" title="6. 文件权限"></a>6. 文件权限</h3><ul>
-<li>文件权限分为三个层次：用户、组、其他用户</li>
-<li>三个类型：读、写、执行</li>
+<li>文件权限帮助保护文件，防止被其他用户访问或修改</li>
+<li>文件权限分为三个层次：用户，组，其他用户</li>
+<li>三个类型：读，写，执行</li>
 <li>更改权限：参见 chmod</li>
 </ul>
 <h3 id="7-进程"><a href="#7-进程" class="headerlink" title="7. 进程"></a>7. 进程</h3><ul>
-<li>进程是一个正在执行的程序实例。由执行程序、它的当前值、状态信息以及通过操作系统管理此进程执行情况的资源组成</li>
+<li>进程是一个正在执行的程序实例。由执行程序、它的当前值，状态信息以及通过操作系统管理此进程执行情况的资源组成</li>
+<li>进程的启动和停止<ul>
+<li>所有进程都是由其他进程启动的。除了Init(pid = 1)是kernel自己启动的</li>
+<li>进程的终止有两个原因：进程自己终止。进程收到了其他进程的信号而终止</li>
+</ul>
+</li>
+<li>相关命令<ul>
+<li>Ps：报告进程状态</li>
+<li>Pstree：展示进程树</li>
+<li>Jobs, fg, bg, <ctrl+z>：任务控制</ctrl+z></li>
+<li>Kill：杀进程</li>
+<li>Nohup：运行一个指令，忽略挂起信号</li>
+<li>Top：展示top CPU进程</li>
+</ul>
+</li>
 </ul>
 <h3 id="8-UNIX结构"><a href="#8-UNIX结构" class="headerlink" title="8. UNIX结构"></a>8. UNIX结构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/UNIX%20%E7%BB%93%E6%9E%84.png" alt=""></p>
 <h3 id="9-重定向"><a href="#9-重定向" class="headerlink" title="9. 重定向"></a>9. 重定向</h3><ul>
-<li>标准输入、标准输出、标准错误<ul>
+<li>标准输入，标准输出，标准错误<ul>
 <li>对应的文件描述符：0, 1, 2</li>
 <li>C 语言变量：stdin, stdout, stderr</li>
 </ul>
 </li>
 <li>&lt; &gt; &gt;&gt; &gt;!<ul>
-<li><blockquote>
-<p>输出重定向到一个文件或设备覆盖原来的文件</p>
-</blockquote>
-</li>
+<li>> 输出重定向到一个文件或设备覆盖原来的文件</li>
 <li>! 输出重定向到一个文件或设备强制覆盖原来的文件</li>
-<li><blockquote>
-<blockquote>
-<p>输出重定向到一个文件或设备追加原来的文件</p>
-</blockquote>
-</blockquote>
-</li>
+<li>>&gt; 输出重定向到一个文件或设备追加原来的文件</li>
 <li>&lt; 输入重定向到一个程序</li>
 </ul>
 </li>
@@ -349,7 +366,6 @@
 </li>
 </ul>
 <h3 id="11-环境变量"><a href="#11-环境变量" class="headerlink" title="11. 环境变量"></a>11. 环境变量</h3><ul>
-<li>操作环境的参数</li>
 <li>查看和设置环境变量：<ul>
 <li>echo 显示环境变量 echo $PATH</li>
 <li>env 显示系统所有的环境变量</li>
@@ -398,12 +414,41 @@
 </li>
 </ul>
 <h3 id="3-引号的使用"><a href="#3-引号的使用" class="headerlink" title="3. 引号的使用"></a>3. 引号的使用</h3><ul>
-<li>单引号内所有的字符都是其字面意思</li>
-<li>双引号内，除了$，`(弯弯上面的)和\外，所有字符保持本身含义</li>
+<li>单引号：所有字符保持字符本身的意思，不会被bash解释</li>
+<li>双引号：bash解释$，反引号，\，其余字符保持字符原本意思不被解释</li>
+<li>反引号：命令替换，和$(命令)是一样的，var=反引号ls，将反引号里面的内容当做命令来执行</li>
 </ul>
 <h3 id="4-参数变量和内部变量"><a href="#4-参数变量和内部变量" class="headerlink" title="4. 参数变量和内部变量"></a>4. 参数变量和内部变量</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F%E5%92%8C%E5%86%85%E9%83%A8%E5%8F%98%E9%87%8F.png" alt=""></p>
-<h3 id="5-条件测试"><a href="#5-条件测试" class="headerlink" title="5. 条件测试"></a>5. 条件测试</h3><ul>
+<h3 id="5-语句"><a href="#5-语句" class="headerlink" title="5. 语句"></a>5. 语句</h3><p><strong>条件测试</strong></p>
+<ul>
 <li>test expression 或 [ expression ] (注意 expression 前后需要有空格)或((expression))，但是(())里只能使用 C 风格的比较(&lt; &lt;= &gt; &gt;= !=)(无法使用-eq 等比较命令)</li>
+</ul>
+<p><strong>条件语句</strong></p>
+<ul>
+<li>If语句，case语句</li>
+</ul>
+<p><strong>重复语句</strong></p>
+<ul>
+<li>For,while,until,select</li>
+</ul>
+<p><strong>命令表，语句块</strong></p>
+<ul>
+<li>命令表：多个命令敲进一行连接起来。分号连接，AND连接&amp;&amp;，OR连接||</li>
+<li>语句块：<ul>
+<li>{statement1 Statement2 …}</li>
+</ul>
+</li>
+</ul>
+<p><strong>函数</strong></p>
+<ul>
+<li>Funcname(){statements}</li>
+<li>Attention:<ul>
+<li>函数定义的()没有实际作用，不用定义形参，参数用$1,$2</li>
+<li>局部变量要加local否则会成为全局变量；</li>
+<li>函数调用 funname parem1 param2</li>
+<li>返回值 return</li>
+</ul>
+</li>
 </ul>
 <p><br></p>
 <hr>
@@ -429,18 +474,31 @@
 </li>
 </ul>
 <h3 id="2-make-命令"><a href="#2-make-命令" class="headerlink" title="2. make 命令"></a>2. make 命令</h3><ul>
-<li>makefile 带来的好处就是——“自动化编译”，一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。</li>
+<li>makefile 带来的好处就是——“自动化编译”，一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率</li>
+<li>Make命令根据makefile对程序进行管理和维护，make判断被维护文件的时序关系，只编译被修改过的文件</li>
+<li>Makefile执行次序：找makefile，查看第一个target，如果需要重新构建target就检查依赖的文件，依赖的目标或.o文件也不存在，找.o的依赖然后构建.o以此类推。然后再回来生成target</li>
 </ul>
 <h3 id="3-编译连接过程"><a href="#3-编译连接过程" class="headerlink" title="3. 编译连接过程"></a>3. 编译连接过程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<ul>
+<li>静态库与动态库<ul>
+<li>静态库在链接时会进入可执行文件</li>
+<li>动态库不会在链接时进入可执行文件，在执行时动态查找库文件</li>
+</ul>
+</li>
+</ul>
 <h3 id="4-虚拟文件系统-VFS"><a href="#4-虚拟文件系统-VFS" class="headerlink" title="4. 虚拟文件系统(VFS)"></a>4. 虚拟文件系统(VFS)</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.png" alt=""></p>
 <ul>
 <li>VFS Model<ul>
 <li>只存在与内存之中</li>
-<li>分为 4 个部分：超级块(Super block)、索引节点对象(i-node Object)、文件对象(File Object)、目录项对象(Dentry Object)</li>
+<li>分为 4 个部分：超级块(Super block)，索引节点对象(i-node Object)，文件对象(File Object)，目录项对象(Dentry Object)</li>
 </ul>
 </li>
+<li>Super block：用于存储文件系统的控制信息的数据结构。描述文件系统的状态，文件系统类型，大小，区块数，索引节点数等，存放于磁盘的特定扇区中</li>
+<li>Inode object：索引节点对象存储了文件的相关信息，代表了存储设备上的一个实际的物理文件</li>
+<li>File object：已经打开的文件在内存中的表示，由open系统调用创建，close撤销</li>
+<li>Dentry object：一个路径的各个组成部分，不管是目录还是普通的文件，都是一个目录项对象。如，在路径/home/source/test.c中，目录 /, home, source和文件 test.c都对应一个目录项对象。不同于前面的两个对象，目录项对象没有对应的磁盘数据结构，VFS在遍 历路径名的过程中现场将它们逐个地解析成目录项对象</li>
 </ul>
-<h3 id="5-软连接-符号链接-、硬链接"><a href="#5-软连接-符号链接-、硬链接" class="headerlink" title="5. 软连接(符号链接)、硬链接"></a>5. 软连接(符号链接)、硬链接</h3><ul>
+<h3 id="5-软连接-符号链接-，硬链接"><a href="#5-软连接-符号链接-，硬链接" class="headerlink" title="5. 软连接(符号链接)，硬链接"></a>5. 软连接(符号链接)，硬链接</h3><ul>
 <li>Hard link<ul>
 <li>不同的文件名对应同一个inode</li>
 <li>不能跨越文件系统</li>
@@ -477,6 +535,7 @@
 </ul>
 <h3 id="7-基础-I-O-系统调用"><a href="#7-基础-I-O-系统调用" class="headerlink" title="7. 基础 I/O 系统调用"></a>7. 基础 I/O 系统调用</h3><p><strong>文件描述符</strong></p>
 <ul>
+<li>文件描述符：每个进程在启动的时候会有一个文件描述符表(类似数组)，存储着指向文件对象的指针</li>
 <li>int fd</li>
 <li>一个非负整数<ul>
 <li>标准输入(STDIN_FILENO)</li>
@@ -597,7 +656,7 @@ off_t lseek(int fildes, off_t offset, int whence);
 </ul>
 <p><strong>dup/dup2</strong></p>
 <ul>
-<li>作用：复制文件描述符。dup 产生一个相同的文件描述符指向同一个文件；dup2复制一个旧的文件描述符到新的文件描述符，使得新的文件描述符与旧的文件描述符完全一样，过程主要是先关闭新的文件描述符对应的文件，然后进行复制</li>
+<li>作用：复制文件描述符。dup 产生一个相同的文件描述符指向同一个文件。dup2复制一个旧的文件描述符到新的文件描述符，使得新的文件描述符与旧的文件描述符完全一样，过程主要是先关闭新的文件描述符对应的文件，然后进行复制</li>
 <li>原型</li>
 </ul>
 <pre><code>#include &lt;unistd.h&gt;
@@ -656,7 +715,371 @@ int fcntl(int fd, int cmd, struct flock *lock);
     pid_t l_pid; /* PID of process blocking our lock (F_GETLK only) */
     ...
 }
-</code></pre><h3 id="8-标准-I-O-库"><a href="#8-标准-I-O-库" class="headerlink" title="8. 标准 I/O 库"></a>8. 标准 I/O 库</h3><p><br></p>
+</code></pre><h3 id="8-标准-I-O-库"><a href="#8-标准-I-O-库" class="headerlink" title="8. 标准 I/O 库"></a>8. 标准 I/O 库</h3><ul>
+<li>使用 FILE * 指向文件流(类似于 fd 的作用)。预定义 3 个指针：标准输入(stdin)，标准输出(stdout)，标准错误(stderr)</li>
+<li>3 种缓冲<ul>
+<li>块缓冲(全缓冲,full buffered,block buffered)</li>
+<li>行缓冲(line buffered)</li>
+<li>无缓冲(unbuffered)</li>
+</ul>
+</li>
+</ul>
+<p><strong>setbuf/setvbuf</strong></p>
+<ul>
+<li>作用：设置文件缓冲区</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+void setbuf(FILE *stream, char *buf);
+int setvbuf(FILE *stream, char *buf, int mode, size_t size);
+</code></pre><ul>
+<li>参数：<ul>
+<li>stream：文件指针</li>
+<li>buf：对应的缓冲区</li>
+<li>mode：缓冲区类型，_IOFBF(满缓冲)_IOLBF(行缓冲)_IONBF(无缓冲)</li>
+<li>size：缓冲区内的字节数</li>
+</ul>
+</li>
+</ul>
+<p><strong>fopen/fclose</strong></p>
+<ul>
+<li>作用：打开/关闭一个文件流</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+FILE *fopen(const char *filename, const char *mode);
+int fclose(FILE *stream);
+</code></pre><ul>
+<li>参数：<ul>
+<li>filename：文件名</li>
+<li>mode：打开的模式<ul>
+<li>“r”：只读方式打开</li>
+<li>“w”：以覆盖方式写</li>
+<li>“a”：以追加方式写</li>
+<li>“r+”：以读写方式打开</li>
+<li>“w+”：以读写方式打开，文件不存在则创建；覆盖方式写</li>
+<li>“a+”：以读写方式打开，文件不存在则创建；追加方式写</li>
+</ul>
+</li>
+<li>stream：需要关闭的文件流</li>
+</ul>
+</li>
+</ul>
+<p><strong>getc/fgetc/getchar</strong></p>
+<ul>
+<li>作用：从文件中读取下一个字符，若到文件尾或出错，则返回 EOF</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int getc(FILE *fp);
+int fgetc(FILE *fp);
+int getchar(void);
+(Result: Reads the next character from a stream and returns it as an unsigned char cast to an int, or EOF on end of file or error.)
+</code></pre><p><strong>putc/fputc/putchar</strong></p>
+<ul>
+<li>作用：写入一个字符</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int putc(int c, FILE *fp);
+int fputc(int c, FILE *fp);
+int putchar(int c);
+(Return: the character if success; -1 if failure)
+</code></pre><p><strong>fgets/gets</strong></p>
+<ul>
+<li>作用：读取一行字符串。fgets 最多读取 size-1 个字符，并将其保存在 s 指向的缓冲区中，遇到文件尾或换行符停止。在缓冲区的最后添加了’\0’字符。</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+char *fgets(char *s, int size, FILE *stream);
+char *gets(char *s); //not recommended
+</code></pre><ul>
+<li>参数：<ul>
+<li>s：缓冲区指针</li>
+<li>size：大小</li>
+<li>stream：文件流</li>
+</ul>
+</li>
+</ul>
+<p><strong>fputs/puts</strong></p>
+<ul>
+<li>作用：批量写入字符，写入字符串。</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int fputs(const char *s, FILE *stream);
+int puts(const char *s);
+</code></pre><ul>
+<li>I/O 效率问题<ul>
+<li>使用缓冲可以减少读取文件的时间。在缓冲区较小的时候，增加缓冲区大小可以显著减小读取时间，因为这时候上下文切换(切换内核/用户态)次数过多，是主要影响读取时间的因素。当缓冲区大小到一定大小时，读取时间几乎不变，这是因为上下文切换已经不是主要影响因素，而主要耗时的操作在数据的读取的固定时间上。</li>
+</ul>
+</li>
+</ul>
+<p><strong>fread/fwrite</strong></p>
+<ul>
+<li>作用：读取，写入文件</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+size fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+(Return: the number of a items successfully read or written.)
+</code></pre><ul>
+<li>参数：<ul>
+<li>ptr：缓冲区指针</li>
+<li>size：一次读取/写入的字节数</li>
+<li>nmemb：读取/写入的字节数</li>
+<li>stream：文件流</li>
+</ul>
+</li>
+<li>使用：</li>
+</ul>
+<pre><code>// Read/write a binary array:
+float data[10];
+if ( fwrite(&amp;data[2], sizeof(float), 4, fp) != 4 )
+    err_sys(“fwrite‏error”);
+
+// Read/write a structure
+struct {
+    short count; long total; char name[NAMESIZE];
+}item;
+if ( fwrite(&amp;item, sizeof(item), 1, fp) != 1)
+    err_sys(“fwrite‏error”);
+</code></pre><p><strong>scanf/fsacnf/sscanf</strong></p>
+<ul>
+<li>作用：格式化输入</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int scanf(const char *format, ...);
+int fscanf(FILE *stream, const char *format, ...);
+int sscanf(const char *str, const char *format, ...);
+</code></pre><p><strong>printf/fprintf/sprintf</strong></p>
+<ul>
+<li>作用：格式化输出</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int printf(const char *format, ...);
+int fprintf(FILE *stream, const char *format, ...);
+int sprintf(char *str, const char *format, ...);
+</code></pre><p><strong>fseek/ftell/rewind fgetpos/fsetpos</strong></p>
+<ul>
+<li>作用：重新设置流位置(fseek 类似 lseek)</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+// whence = 0：文件首向尾 1：不跳 2：文件末尾往前跳
+int fseek(FILE *stream, long int offset, int whence);
+// 返回文件末尾到开头的字节数
+long ftell(FILE *stream);
+// 把当前位置跳到开头
+void rewind(FILE *stream);
+
+#include &lt;stdio.h&gt;
+int fgetpos(FILE *fp, fpos_t *pos);
+int fsetpos(FILE *fp, const fpos_t *pos);
+</code></pre><ul>
+<li>相关结构体</li>
+</ul>
+<p><strong>fflush</strong></p>
+<ul>
+<li>作用：刷新文件流，把流里的数据立刻写入文件</li>
+<li>原型</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+int fflush(FILE *stream);
+</code></pre><p><strong>fileno/fdopen</strong></p>
+<ul>
+<li>作用：进行底层文件描述符与文件流之间的操作</li>
+<li>原型：</li>
+</ul>
+<pre><code>// 确定流使用的底层文件描述符
+#include &lt;stdio.h&gt;
+int fileno(FILE *fp);
+// 根据已打开的文件描述符创建一个流
+#include &lt;stdio.h&gt;
+FILE *fdopen(int fildes, const char *mode);
+</code></pre><ul>
+<li>参数：<ul>
+<li>mode 参见 fopen</li>
+</ul>
+</li>
+</ul>
+<p><strong>tmpnam/tmpfile</strong></p>
+<ul>
+<li>作用：进行临时文件的操作，生成一个临时文件名或者临时文件</li>
+<li>原型：</li>
+</ul>
+<pre><code>// Create a name for a temporary file
+#include &lt;stdio.h&gt;
+char *tmpnam(char *s);
+(返回值: 指向唯一路径名的指针)
+// Create a temporary file
+#include &lt;stdio.h&gt;
+FILE *tmpfile(void);
+(返回值: 若成功为文件指针，若出错为NULL)
+</code></pre><p><strong>stat/fstat/lstat</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/stat.png" alt=""></p>
+<ul>
+<li>st_mode 里保存了文件的类型、权限等信息。低 9 位保存权限信息，每一位依次为用户的读、写、执行，用户组的读、写、执行，其他用户的读、写、执行。[9:11]位依次为 sticky，SGID，SUID，[12:17]保存了文件的类型</li>
+</ul>
+<p><strong>access</strong></p>
+<ul>
+<li>作用：按实际用户 ID 和实际组 ID 测试文件的存取权限</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+int access(const char *pathname, int mode);
+(Return: 0 if success; -1 if failure)
+</code></pre><ul>
+<li>参数：<ul>
+<li>pathname：文件路径</li>
+<li>mode：取值为 R_OK, W_OK, X_OK, F_OK 依次为测试读取、写入、执行权限和文件是否存在</li>
+</ul>
+</li>
+</ul>
+<p><strong>chmod/fchmod</strong></p>
+<ul>
+<li>作用：更改一个文件的权限</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+int chmod(const char *path, mode_t mode);
+int fchmod(int fildes, mode_t mode);
+(Return: 0 if success; -1 if failure)
+</code></pre><ul>
+<li>参数：<ul>
+<li>mode：与 st_mode 中的低九位相同(普遍的权限格式)</li>
+</ul>
+</li>
+</ul>
+<p><strong>chown/fchown/lchown</strong></p>
+<ul>
+<li>作用：改变一个文件的所有者</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+int chown(const char *path, uid_t owner, gid_t group);
+int fchown(int fd, uid_t owner, gid_t group);
+int lchown(const char *path, uid_t owner, gid_t group);
+(Return: 0 if success; -1 if failure)
+</code></pre><p><strong>umask</strong></p>
+<ul>
+<li>作用：为进程设置文件存取权限屏蔽字，并返回以前的值</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+mode_t umask(mode_t mask);
+</code></pre><ul>
+<li>参数：<ul>
+<li>mask，对应的 mask 值(进程默认为 022，八进制)</li>
+</ul>
+</li>
+<li>说明：<ul>
+<li>mask 值是一个进程的文件保护机制，可以用来控制文件的权限，系统默认的为八进制 022。文件的最终权限是设定的 mode 值与 mask 值的取反后做按位与的结果</li>
+<li>actual_mode = mode &amp; ~mask 如初始权限为 rw-rw-rw- 0666，mask 值为—w–w- 022，计算后 actual_mode 为 rw-r–r– 0644，可以认为 mask 的值对应的权限为不能提供为用户的权限</li>
+</ul>
+</li>
+</ul>
+<p><strong>link/unlink</strong></p>
+<ul>
+<li>作用：创建/删除一个文件的（硬）链接</li>
+<li>原型：</li>
+</ul>
+<pre><code>// Create a new link to (make a new name for) a file.
+#include &lt;unistd.h&gt;
+int link(const char *oldpath, const char *newpath);
+(Return: 0 if success; -1 if failure)
+// Delete a name and possibly the file it refers to.
+#include &lt;unistd.h&gt;
+int unlink(const char *pathname);
+(Return: 0 if success; -1 if failure)
+</code></pre><p><strong>symlink/readlink</strong></p>
+<ul>
+<li>作用：创建/读取符号链接的值</li>
+<li>原型：</li>
+</ul>
+<pre><code>// Create a symbolic link (named newpath which  contains‏the‏sting‏“oldpath”)
+#include &lt;unistd.h&gt;
+int symlink(const char *oldpath, const char *newpath);
+(Return: 0 if success; -1 if failure)
+// Read value of a symbolic link
+#include &lt;unistd.h&gt;
+int readlink(const char *path, char *buf, size_t bufsiz);
+(Return: the count of characters placed in the buffer if success; -1 if failure)
+</code></pre><p><strong>mkdir/rmdir</strong></p>
+<ul>
+<li>作用：创建/删除空目录</li>
+<li>原型：</li>
+</ul>
+<pre><code>// 创建一个空目录
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/types.h&gt;
+int mkdir(const char *pathname, mode_t mode);
+(Return: 0 if success; -1 if failure)
+// 删除一个空目录
+#include &lt;unistd.h&gt;
+int rmdir(const char *pathname);
+(Return: 0 if success; -1 if failure)
+</code></pre><p><strong>chdir/fchdir</strong></p>
+<ul>
+<li>作用：改变当前的工作目录</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+int chdir(const char *path);
+int fchdir(int fd);
+(Return: 0 if success; -1 if failure)
+</code></pre><ul>
+<li>说明：当前工作目录是进程的属性，所以该函数只影响调用 chdir 的进程本身</li>
+</ul>
+<p><strong>getcwd</strong></p>
+<ul>
+<li>作用：获得当前工作目录的绝对路径</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+char *getcwd(char *buf, size_t size);
+(返回值: 若成功则为buf，若出错则为NULL)
+</code></pre><p><strong>opendir/closedir/readdir/telldir/seekdir</strong></p>
+<ul>
+<li>作用：目录的打开，关闭，读，定位</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;dirent.h&gt;
+DIR *opendir(const char *name);
+int closedir(DIR *dir);
+struct dirent *readdir(DIR *dir);
+off_t telldir(DIR *dir);
+void seekdir(DIR *dir, off_t offset);
+</code></pre><p><strong>lockf</strong></p>
+<ul>
+<li>作用：对文件进行加/释放锁</li>
+<li>原型：</li>
+</ul>
+<pre><code>#include &lt;sys/file.h&gt;
+int lockf(int fd, int cmd, off_t len);
+</code></pre><ul>
+<li>参数：<ul>
+<li>fd：对应的文件描述符</li>
+<li>cmd：指定的操作类型，取值为以下<ul>
+<li>F_LOCK：给文件加互斥锁，若文件以被加锁，则会一直阻塞到锁被释放</li>
+<li>F_TLOCK：同 F_LOCK，但若文件已被加锁，不会阻塞，而回返回错误</li>
+<li>F_ULOCK：解锁</li>
+<li>F_TEST：测试文件是否被上锁，若文件没被上锁则返回 0，否则返回-1</li>
+</ul>
+</li>
+<li>len：为从文件当前位置的起始要锁住的长度</li>
+</ul>
+</li>
+<li>说明：lockf 是 fcntl 的一个库层次上的封装，但是不支持共享锁</li>
+</ul>
+<p><br></p>
 <hr>
 <h2 id="4-Kernel-Driver"><a href="#4-Kernel-Driver" class="headerlink" title="4. Kernel Driver"></a>4. Kernel Driver</h2><h3 id="1-内核简介"><a href="#1-内核简介" class="headerlink" title="1. 内核简介"></a>1. 内核简介</h3><p><strong>什么是内核</strong></p>
 <ul>
@@ -704,7 +1127,110 @@ int fcntl(int fd, int cmd, struct flock *lock);
 <li>小内核栈</li>
 <li>并发上的考虑</li>
 </ul>
-
+<p><br></p>
+<hr>
+<h2 id="5-试卷"><a href="#5-试卷" class="headerlink" title="5. 试卷"></a>5. 试卷</h2><h3 id="1-Linux中文件描述符和文件指针FILE-的区别是什么？"><a href="#1-Linux中文件描述符和文件指针FILE-的区别是什么？" class="headerlink" title="1. Linux中文件描述符和文件指针FILE *的区别是什么？"></a>1. Linux中文件描述符和文件指针FILE *的区别是什么？</h3><ul>
+<li>文件描述符：在linux系统中打开文件就会获得文件描述符，它是个很小的正整数。每个进程在PCB(Process Control Block)中保存着一份文件描述符表，文件描述符就是这个表的索引，每个表项都有一个指向已打开文件的指针。</li>
+<li>文件指针：C语言中使用文件指针做为I/O的句柄。文件指针指向进程用户区中的一个被称为FILE结构的数据结构。FILE结构包括一个缓冲区和一个文件描述符。而文件描述符是文件描述符表的一个索引，因此从某种意义上说文件指针就是句柄的句柄(在Windows系统上，文件描述符被称作文件句柄)。</li>
+</ul>
+<h3 id="2-什么是操作系统内核？内核的主要功能是什么？"><a href="#2-什么是操作系统内核？内核的主要功能是什么？" class="headerlink" title="2. 什么是操作系统内核？内核的主要功能是什么？"></a>2. 什么是操作系统内核？内核的主要功能是什么？</h3><ul>
+<li>操作系统是一系列程序的集合，其中最重要的部分构成了内核</li>
+<li>单内核/微内核<ul>
+<li>单内核是一个很大的进程，内部可以分为若干模块，运行时是一个独立的二进制文件，模块间通讯通过直接调用函数实现</li>
+<li>微内核中大部分内核作为独立的进程在特权下运行，通过消息传递进行通讯</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-比较软链接和硬链接的不同之处-至少三点-，写出shell和应用程序中创建软硬链接的命令。"><a href="#3-比较软链接和硬链接的不同之处-至少三点-，写出shell和应用程序中创建软硬链接的命令。" class="headerlink" title="3. 比较软链接和硬链接的不同之处(至少三点)，写出shell和应用程序中创建软硬链接的命令。"></a>3. 比较软链接和硬链接的不同之处(至少三点)，写出shell和应用程序中创建软硬链接的命令。</h3><ul>
+<li>硬链接：<ul>
+<li>不同的文件名对应同一个inode</li>
+<li>不能跨越文件系统</li>
+<li>对应系统调用link</li>
+</ul>
+</li>
+<li>软链接：<ul>
+<li>存储被链接文件的文件名(而不是inode)实现链接</li>
+<li>可跨越文件系统</li>
+<li>对应系统调用symlink</li>
+</ul>
+</li>
+<li>shell: <ul>
+<li>ln –s [文件名] [文件名] 创建软连接</li>
+<li>ls [文件名] [文件名] 创建硬链接</li>
+</ul>
+</li>
+<li>应用程序：</li>
+</ul>
+<pre><code>创建硬链接：
+#include &lt;unistd.h&gt;
+int link(const char *oldpath, const char *newpath);
+(Return: 0 if success; -1 if failure)
+创建软链接：
+#include &lt;unistd.h&gt;
+int symlink(const char *oldpath, const char *newpath);
+(Return: 0 if success; -1 if failure)
+</code></pre><h3 id="4-比较字符设备和块设备的区别，并举实例。"><a href="#4-比较字符设备和块设备的区别，并举实例。" class="headerlink" title="4. 比较字符设备和块设备的区别，并举实例。"></a>4. 比较字符设备和块设备的区别，并举实例。</h3><ul>
+<li>字符设备：提供连续的数据流，应用程序可以顺序读取，通常不支持随机存取。相反，此类设备支持按字节/字符来读写数据。举例来说，调制解调器是典型的字符设备。</li>
+<li>块设备： 应用程序可以随机访问设备数据，程序可自行确定读取数据的位置。硬盘是典型的块设备，应用程序可以寻址磁盘上的任何位置，并由此读取数据。此外，数据的读写只能以块(通常是512B)的倍数进行。与字符设备不同，块设备并不支持基于字符的寻址。</li>
+</ul>
+<h3 id="5-重定向是Linux中的重要机制。试分析其使用方法，应用实例，并简述实现机制。（15分）分析其用途，使用方法，典型案例，并简要描述其实现机制。"><a href="#5-重定向是Linux中的重要机制。试分析其使用方法，应用实例，并简述实现机制。（15分）分析其用途，使用方法，典型案例，并简要描述其实现机制。" class="headerlink" title="5. 重定向是Linux中的重要机制。试分析其使用方法，应用实例，并简述实现机制。（15分）分析其用途，使用方法，典型案例，并简要描述其实现机制。"></a>5. 重定向是Linux中的重要机制。试分析其使用方法，应用实例，并简述实现机制。（15分）分析其用途，使用方法，典型案例，并简要描述其实现机制。</h3><ul>
+<li>使用方法：linux中可使用shell的重定向符号</li>
+</ul>
+<pre><code>&gt;为输出重定向
+&lt;为输入重定向
+</code></pre><ul>
+<li>使用方法：<ul>
+<li>输出重定向: echo “linux”&gt;1.txt  //标准输出流重定向到1.txt</li>
+<li>输入重定向：cat&lt;1.txt        //标准输入流重定向到1.txt</li>
+</ul>
+</li>
+<li>实现机制：<ul>
+<li>主要通过使用dup2系统调用通过明确指定目标描述符来把一个文件描述符复制为另外一个</li>
+</ul>
+</li>
+<li>举个例子：</li>
+</ul>
+<pre><code>int fd=-1;
+char buffer[100];
+int len=0;
+fd=open(&quot;4.txt&quot;,O_CREAT|O_RDWR);
+dup2(fd,STDOUT_FILENO);
+printf(&quot;hello world&quot;);
+close(fd);
+</code></pre><ul>
+<li>该段代码实现了标准输出的重定向，printf的打印的hello world写入4.txt文件</li>
+</ul>
+<h3 id="6-使用C的库函数，编写一个函数void-bindiff-char-file1-char-file2-char-fileo-，将文件从file1、file2对应的路径中读取并逐字节比对，将相同的字节输出到fileo对应的文件中。"><a href="#6-使用C的库函数，编写一个函数void-bindiff-char-file1-char-file2-char-fileo-，将文件从file1、file2对应的路径中读取并逐字节比对，将相同的字节输出到fileo对应的文件中。" class="headerlink" title="6. 使用C的库函数，编写一个函数void bindiff(char file1,char file2,char *fileo)，将文件从file1、file2对应的路径中读取并逐字节比对，将相同的字节输出到fileo对应的文件中。"></a>6. 使用C的库函数，编写一个函数void bindiff(char <em>file1,char </em>file2,char *fileo)，将文件从file1、file2对应的路径中读取并逐字节比对，将相同的字节输出到fileo对应的文件中。</h3><pre><code>#include&lt;stdio.h&gt;
+void bindiff(char *file1, char *file2, char *fileo);
+int main()
+{
+    bindiff(&quot;1.txt&quot;,&quot;2.txt&quot;,&quot;3.txt&quot;);
+}
+void bindiff(char *file1, char *file2, char *fileo)
+{
+    FILE * fp1 = 0,*fp2=0,*fpo=0;
+    char ch1,  ch2;
+    fp1 = fopen(file1,&quot;r&quot;);
+    fp2 = fopen(file2,&quot;r&quot;);
+    fpo = fopen(fileo, &quot;w&quot;);
+    while (1)
+    {
+        ch1 = (char)fgetc(fp1);
+        ch2 = (char)fgetc(fp2);
+        if (feof(fp1) || feof(fp2))
+        {
+            break;
+        }
+        if (ch1 == ch2)
+        {
+            fputc(ch2,fpo);
+        }
+    }
+    fclose(fp1);
+    fclose(fp2);
+    fclose(fpo);
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

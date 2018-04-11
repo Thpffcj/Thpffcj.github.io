@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>软件系统设计与体系结构(未完) | Thpffcj的树洞</title>
+  <title>软件系统设计与体系结构 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,7 +177,7 @@
       </time>
     
 </span>
-                <h1>软件系统设计与体系结构(未完)</h1>
+                <h1>软件系统设计与体系结构</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -369,7 +369,7 @@
 <hr>
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-什么是软件架构？"><a href="#1-什么是软件架构？" class="headerlink" title="1. 什么是软件架构？"></a>1. 什么是软件架构？</h3><ul>
 <li>SEI(Software Engineering Institute)：是整个程序或计算系统的结构(Structure)，包含了程序的元素(Software Elements)和那些外部能看见的元素属性(Properties)和元素之间的关系(Relationship)</li>
-<li>IEEE：一个系统的基本组织，包含了了它的所有组件(Components)、组件之间的关系、环境以及指导该系统的设计(Design)和演化(Evolution)的原则(Principle)</li>
+<li>IEEE：一个系统的基本组织，包含了它的所有组件(Components)，组件之间的关系，环境以及指导该系统的设计(Design)和演化(Evolution)的原则(Principle)</li>
 <li>元素：组件，连接件</li>
 <li>关系：静态关系，动态关系</li>
 </ul>
@@ -415,7 +415,8 @@
 </ul>
 <p><strong>架构 vs.设计</strong></p>
 <ul>
-<li>架构是设计过程的一部分：所有的架构都是软件设计，但并不是所有的设计都是软件架构架构提供了设计的抽象视图，隐藏了设计的复杂和实现</li>
+<li>架构是设计过程的一部分：所有的架构都是软件设计，但并不是所有的设计都是软件架构</li>
+<li>架构提供了设计的抽象视图，隐藏了设计的复杂和实现</li>
 </ul>
 <h3 id="3-如何进行设计？-通用的设计策略-Design-Strategy"><a href="#3-如何进行设计？-通用的设计策略-Design-Strategy" class="headerlink" title="3. 如何进行设计？/通用的设计策略 Design Strategy"></a>3. 如何进行设计？/通用的设计策略 Design Strategy</h3><ul>
 <li>分解</li>
@@ -430,8 +431,7 @@
 <li>减少组件之间的依赖</li>
 <li>为组件设计一组高内聚的职责</li>
 <li>分离中间件和任何COTS基础设施上的依赖</li>
-<li>通过分解结构化、层次化组件</li>
-<li>减少组件之间的调用</li>
+<li>通过分解结构化，层次化组件减少组件之间的调用</li>
 </ul>
 <h3 id="4-软件架构"><a href="#4-软件架构" class="headerlink" title="4. 软件架构"></a>4. 软件架构</h3><p><strong>软件架构师做什么？</strong></p>
 <ul>
@@ -827,7 +827,6 @@
 <li>允许关联的点数量</li>
 <li>搜索点时的跳数限制</li>
 <li>点之间如何知道</li>
-<li>一些P2P网络组织委员星型结构，点至于超级点连接</li>
 </ul>
 </li>
 <li>缺点：安全性，数据一致性，数据/服务的可用性，备援，恢复都变得复杂小的点对点系统可能无法实现质量目标，如性能和可用性</li>
@@ -1099,6 +1098,12 @@
 <li>注意：style pattern 和 view 的类型都是一样的：module/component-connector/allocation</li>
 </ul>
 <h3 id="3-几种views"><a href="#3-几种views" class="headerlink" title="3. 几种views"></a>3. 几种views</h3><p><strong>结构视图 Structural Views：描述系统结构</strong></p>
+<ul>
+<li>一个视图代表了系统的一组元素和元素之间的关系，不是所有的元素，只是一些特定的类型</li>
+<li>视图帮助我们将系统元素(entity)分解为感兴趣和可管理的系统表示</li>
+<li>不同的视图支持不同的目标和用户，体现不同的系统元素和关系</li>
+<li>不同的视图在不同程度上展示不同的质量属性</li>
+</ul>
 <ul>
 <li>Module style —&gt; Module Views 模块视图：强调静态<ul>
 <li>模块视图：模块是一些列提供内聚职责的实现单元的集合</li>
@@ -1437,6 +1442,254 @@
 <li>现在为了支持变化而设计是困难且昂贵的，但是在之后想要支持变化将困难且昂贵得多</li>
 </ul>
 </li>
+</ul>
+<h3 id="2-产品线架构"><a href="#2-产品线架构" class="headerlink" title="2. 产品线架构"></a>2. 产品线架构</h3><p><strong>产品线范围</strong></p>
+<ul>
+<li>产品线范围是对组成产品线的产品们的描述，或是对产品线能够包括的产品们的描述</li>
+<li>公司关注某一个特定的领域，是一组相关但有不同的市场。需要为不同的客户开发不同的客户产品。而产品线范围就是所关注的领域的一个限制</li>
+<li>支持多少变化<ul>
+<li>是一个商业决定，需要在变化与复用之间权衡。</li>
+</ul>
+</li>
+<li>更多的市场意味着更大的收益<ul>
+<li>变化点同时为了当下和将来的机会</li>
+</ul>
+</li>
+<li>最小化设计成本&amp;支持变化<ul>
+<li>支持的范围越大，成本越高，复杂度越高</li>
+</ul>
+</li>
+<li>产品线范围能够随时间发展<ul>
+<li>更晚地变更范围可能会造成更多的成本</li>
+</ul>
+</li>
+</ul>
+<p><strong>产品线架构</strong></p>
+<ul>
+<li>PLA：Product Line Architecture</li>
+<li>支持哪些变化由SPL范围决定<ul>
+<li>生产线范围代表了产品的范围和功能的范围</li>
+<li>生产线架构决定如何实现这些变化点</li>
+</ul>
+</li>
+<li>SPL是以架构基础进行重用的<ul>
+<li>以经济可行的方式来管理变化的复杂度</li>
+<li>为大范围重用和变化定义合适的抽象层次</li>
+</ul>
+</li>
+<li>PLA可以被认为是为SPL的核心资产<ul>
+<li>或说PLA是核心资产的架构视图或框架是SPL最重要的部分</li>
+</ul>
+</li>
+<li>PLA定义了共同的功能和变化的功能</li>
+<li>PLA定义和支持变化点<ul>
+<li>列举所有允许的变化</li>
+<li>确定变化的架构接口</li>
+<li>确定实例化变化点的机制</li>
+</ul>
+</li>
+<li>评估PLA<ul>
+<li>可以使用一般的评估方法</li>
+<li>特定于SPL的要求：<ul>
+<li>对复用的需求进行评估</li>
+<li>虽然是单独的核心资产但是不同的产品可能有不同的质量需求</li>
+</ul>
+</li>
+<li>例：可复用性的场景，可修改性的场景</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="8-参考试卷"><a href="#8-参考试卷" class="headerlink" title="8. 参考试卷"></a>8. 参考试卷</h2><ul>
+<li><strong>Where do software architecture come from? List five possible sources of software architure.</strong><ul>
+<li>软件架构从哪里来？ 列出五种可能的软件架构来源。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>需求(功能，非功能，约束)</li>
+<li>涉众(管理人员，市场人员，终端用户，维护人员等)</li>
+<li>开发组织(开发团队，开发过程)</li>
+<li>架构师的知识和经验</li>
+<li>技术环境(软件工程最佳实践，工具) </li>
+</ul>
+<ul>
+<li><strong>What distinguishes an architecture for a software product line from an architecture for a simple product?</strong><ul>
+<li>软件产品线的体系结构与简单产品的体系结构有何区别？</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>软件产品线是指具有一组可管理的公共特性的软件密集性系统的合集，这些系统满足特定的市场需求或任务需求，并且按预定义的方式从一个公共的核心资产集开发得到</li>
+<li>首先，与单个产品架构相比，产品线中的产品分为custom assets 和 core assets 两部分</li>
+<li>所以它们的主要不同在于关注点转移：从单独的产品到产品线的项目</li>
+<li>暗示了一个策略：从特定的项目开发到特定业务领域产品的愿景。产品线关注产品的特征，而单个产品架构更关注项目本身</li>
+<li>此外，产品线具有可重用和可变性两大特征。</li>
+<li>产品线中的重用与单个产品架构中代码的重用相比，还包括了需求，业务等，几乎已经是开发者想要的了，而不用像单个产品架构中那样复制之后再修改</li>
+<li>产品线架构还拥有可变性的特点，在单个产品架构定义正常功能之外，还定义了可改变的功能，可以识别并支持variation points</li>
+</ul>
+<ul>
+<li><strong>How to model quality attribute scenarios? Graphically model two quality attributes in “stimulus-response” format: availbility and performance.</strong><ul>
+<li>如何建模质量属性场景？ 以”刺激 - 响应”格式图形化建模两种质量属性：可用性和性能。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>描述质量属性：质量属性场景被用于定义质量属性。<ul>
+<li>一般场景：是系统无关的，用于指导描述质量属性需求。</li>
+<li>具体场景：是特定于系统的。用于指导描述特定系统的质量属性需求。是一般场景的实例化。</li>
+<li>要想让一般场景对特定系统有用，就必须用一般场景生成特定于系统的具体场景。</li>
+</ul>
+</li>
+<li>场景组成部分：源，刺激，制品，环境，响应，响应度量</li>
+</ul>
+<ul>
+<li><strong>Describe relationships between architecture patterns and tactics. List four tactics names and describe their usage.</strong><ul>
+<li>描述架构模式和策略之间的关系。 列出四个战术名称并描述其用法。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>关系<ul>
+<li>战术比模式简单，使用单个结构或机制来实现单个架构的能力</li>
+<li>模式由多个设计决定打包组合而成</li>
+<li>模式和战术一起组成了架构师的工具箱</li>
+<li>战术是构成架构模式的砖瓦</li>
+<li>大多数模式包含多个不同的战术：满足相同的目的，提供不同的质量属性</li>
+</ul>
+</li>
+<li>四个战术：<ul>
+<li>Heartbeat： 双方可以知道对方失效或者是已经宕机了，这时每个运行正常的主机就会接管运行在对方主机上的资源或者是服务，继续为用户提供服务。提高可用性。各节点之间需要互相通信告知自己的情况，可能会因为处理资源和网络资源的消耗造成性能下降。</li>
+<li>Split Module：将系统分成很多模块可以降低耦合性，当功能需要变更时可以降低修改范围，提高可修改性。在系统较小的情况下，按功能分成很多模块可能模块之间的调用性能损失就会比较明显，降低性能。</li>
+<li>increase resources：增加更多的资源(比如更快的处理器，更多的内存，更快的网络)就可以减少因资源不够产生竞争造成的性能问题。增加资源可能需要做更多的资源管理，在一定程度上降低可修改性。</li>
+<li>detect intrusion：以防御恶意访问消耗资源等情况，增加系统可用性。提高系统的安全性。检测就需要消耗额外的资源，提高安全性的同时可能会降低性能。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Briefly describe the general activitites involved in a software architecture process.</strong><ul>
+<li>简要描述软件体系结构过程中涉及的一般活动。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>识别ASRs<ul>
+<li>输入：from 涉众</li>
+<li>输出：划分了优先级的质量属性场景</li>
+</ul>
+</li>
+<li>架构设计<ul>
+<li>输入：划分了优先级的质量属性场景，功能需求，约束，模式和战术</li>
+<li>输出：设计结果，一系列早期视图</li>
+</ul>
+</li>
+<li>编档<ul>
+<li>输入：早期架构设计视图，涉众</li>
+<li>输出：视图和文档描述相结合的架构文档</li>
+</ul>
+</li>
+<li>架构评估<ul>
+<li>输入：架构文档，涉众，质量属性场景</li>
+<li>输出：对架构的修改，体现在架构文档中</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Mapping, and list 4 views for each style. (sa07, p.9)</strong><ul>
+<li>映射并列出每个样式的4个视图。(sa07，第9页)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Module style：<ul>
+<li>分解视图</li>
+<li>使用视图</li>
+<li>概括视图</li>
+<li>分层视图</li>
+<li>切面视图</li>
+<li>数据模型视图</li>
+</ul>
+</li>
+<li>C&amp;C style：<ul>
+<li>管道过滤器视图</li>
+<li>CS视图</li>
+<li>点对点视图</li>
+<li>SOA视图</li>
+<li>订阅发布视图</li>
+<li>共享数据视图</li>
+</ul>
+</li>
+<li>Allocation style：<ul>
+<li>部署视图</li>
+<li>安装视图</li>
+<li>实现视图</li>
+<li>工作分配视图</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Explain the context, benifits and limitations of Broker Architecture Pattern.</strong><ul>
+<li>解释代理体系结构模式的上下文，优点和局限性。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Why should a software architecture be documented using different views? Give the name and purposes of 4 example views.</strong><ul>
+<li>为什么应该使用不同的视图来记录软件架构？ 给出4个示例视图的名称和用途。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>View：是系统中特定类型的元素及其关系的表示。不同的视图⽀持不同的⽬标和⽤户，强调不同的系统元素和关系，同时在不同程度上表示不同的质量属性</li>
+<li>逻辑视图：描述架构中至关重要的架构元素和他们之间的关系</li>
+<li>过程视图(进程视图)：描述元素之间的交流依赖</li>
+<li>物理视图：主要的进程和组件是怎么映射到硬件</li>
+<li>开发视图：捕捉软件组件的内部组织</li>
+<li>架构用例：+1，架构需求，与多个视图相关</li>
+<li>Module Views 模块视图<ul>
+<li>代码的建设蓝图</li>
+<li>变化—影响分析</li>
+<li>计划增量开发</li>
+<li>在代码层次上讨论系统的功能</li>
+<li>支持构造的分工，项目管理</li>
+<li>展示系统需要管理的架构信息</li>
+</ul>
+</li>
+<li>C&amp;C Views 连接件视图<ul>
+<li>展示系统是如何运行的</li>
+<li>指导运行时元素结构和行为的开发</li>
+<li>帮助分析运行时系统的质量属性</li>
+</ul>
+</li>
+<li>Allocation Views 分配视图<ul>
+<li>展示性能，可用性，安全性(security)和安全性(safety)</li>
+<li>展示分布式开发和工作分配</li>
+<li>展示系统安装的形式和机制</li>
+</ul>
+</li>
+<li>质量视图 Quality Views</li>
+</ul>
+<ul>
+<li><strong>Briefly describe the fundmental principles of SOA and discuss the impact of SOA on quality attributes like interoperability, scalibility and security.</strong><ul>
+<li>简要描述SOA的基本原理，并讨论SOA对质量属性(如互操作性，可伸缩性和安全性)的影响。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Describe outputs generated from each phase of ATAM process.</strong><ul>
+<li>描述从ATAM过程的每个阶段产生的输出。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Why SPL and MDA have high reusability? Compare and discuss their commonality and differences.</strong><ul>
+<li>为什么SPL和MDA具有很高的可重用性？ 比较和讨论它们的共性和差异。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>MDA(Model Driven Architecture)：模型驱动架构</li>
 </ul>
 
             <div class="clearfix"></div>

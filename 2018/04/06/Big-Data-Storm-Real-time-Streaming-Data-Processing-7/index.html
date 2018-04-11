@@ -186,7 +186,23 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-RPC"><a href="#1-RPC" class="headerlink" title="1. RPC"></a>1. RPC</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+      		<ul>
+<li>下面是这段时间系统了解Storm的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理Storm</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/18/Big-Data-Storm-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">Storm编程</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/21/Big-Data-Storm-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">Storm周边框架使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Storm架构及部署</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">并行度</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">分组策略与可靠性</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/06/Big-Data-Storm-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">DRPC</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Storm整合其他大数据框架的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">Storm综合项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>这篇博客我们来看一个新概念DRPC。DRPC其实不能算是Storm本身的一个特性，它是通过组合Storm的原语Spout,Bolt,Topology而成的一种模式(pattern)。</p>
+<hr>
+<h2 id="1-RPC"><a href="#1-RPC" class="headerlink" title="1. RPC"></a>1. RPC</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
 <li>RPC（Remote Procedure Call）—远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。</li>
 <li>RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复信息，然后等待下一个调用信息，最后，客户端调用进程接收答复信息，获得进程结果，然后调用执行继续进行。</li>
 </ul>

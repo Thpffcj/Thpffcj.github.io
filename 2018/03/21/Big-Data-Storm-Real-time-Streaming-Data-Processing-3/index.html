@@ -187,6 +187,22 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<ul>
+<li>下面是这段时间系统了解Storm的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理Storm</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/18/Big-Data-Storm-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">Storm编程</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/21/Big-Data-Storm-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">Storm周边框架使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Storm架构及部署</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">并行度</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">分组策略与可靠性</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/06/Big-Data-Storm-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">DRPC</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Storm整合其他大数据框架的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">Storm综合项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>学习完简单Storm编程之后，我们来了解一下周边框架的使用，其实大多数框架我们都在Spark Streaming中学过，当时数据采集我们使用了Flume，为了学习，这次我们使用一个新的框架Logstash收集数据。这篇博客主要就来学习Logstash和Logstash和kafka的整合。</p>
+<hr>
+<ul>
 <li>Storm周边框架<ul>
 <li>ZooKeeper</li>
 <li>Logstash</li>
@@ -599,11 +615,11 @@ Pipeline main started
 </ul>
 <pre><code>[thpffcj@thpffcj logstash-2.4.1]$ echo &quot;logstash&quot; &gt;&gt; logstash.txt 
 </code></pre><ul>
-<li><p>可以在kafka消费者看到消息</p>
-<p>  {“message”:”logstash”,”@version”:”1”,”@timestamp”:”2018-03-29T10:07:11.491Z”,”path”:”/home/thpffcj/app/logstash-2.4.1/logstash.txt”,”host”:”thpffcj”}</p>
-</li>
-<li><p>现在为止，我们的整条流程就打通了</p>
-</li>
+<li>可以在kafka消费者看到消息</li>
+</ul>
+<pre><code>{&quot;message&quot;:&quot;logstash&quot;,&quot;@version&quot;:&quot;1&quot;,&quot;@timestamp&quot;:&quot;2018-03-29T10:07:11.491Z&quot;,&quot;path&quot;:&quot;/home/thpffcj/app/logstash-2.4.1/logstash.txt&quot;,&quot;host&quot;:&quot;thpffcj&quot;}
+</code></pre><ul>
+<li>现在为止，我们的整条流程就打通了</li>
 </ul>
 
             <div class="clearfix"></div>

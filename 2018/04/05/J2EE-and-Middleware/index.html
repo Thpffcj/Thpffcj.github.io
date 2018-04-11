@@ -182,7 +182,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><h3 id="1-企业应用"><a href="#1-企业应用" class="headerlink" title="1. 企业应用"></a>1. 企业应用</h3><ul>
-<li>企业应用为企业提供业务逻辑，它是分布式的、有事务处理的部分、便携式的，且在安全，性能和可靠性上有优势。与 web 应用的最大区别在于企业应用的数据量更大，因此所使用的技术也不一样。</li>
+<li>企业应用为企业提供业务逻辑，它是分布式的，有事务处理的部分，便携式的，且在安全，性能和可靠性上有优势。与 web 应用的最大区别在于企业应用的数据量更大，因此所使用的技术也不一样。</li>
 </ul>
 <h3 id="2-J2EE的应用模型"><a href="#2-J2EE的应用模型" class="headerlink" title="2. J2EE的应用模型"></a>2. J2EE的应用模型</h3><ul>
 <li>Java EE 平台使用分布式多层应用模型来开发企业应用。</li>
@@ -190,28 +190,489 @@
 </ul>
 <h3 id="3-使用分布式的多层应用模型构件，多层分哪些层？每层上分别运行着哪些组件？"><a href="#3-使用分布式的多层应用模型构件，多层分哪些层？每层上分别运行着哪些组件？" class="headerlink" title="3. 使用分布式的多层应用模型构件，多层分哪些层？每层上分别运行着哪些组件？"></a>3. 使用分布式的多层应用模型构件，多层分哪些层？每层上分别运行着哪些组件？</h3><p><strong>J2EE 可以分为 4 层:</strong></p>
 <ul>
-<li>客户层：运行在客户端机器上的客户端组件——应用客户端和 applets</li>
-<li>Web 层：运行在 J2EE 服务器上的 Web 层组件——Java Servlet, JavaServer Faces, and JavaServer Pages (JSP) (might include a JavaBeans component to manage the user input and send that input to enterprise beans running in the business tier for processing)</li>
-<li>业务层：运行在 j2EE 服务器上的业务逻辑层组件 - Enterprise JavaBeans (EJB)</li>
+<li>客户层：运行在客户端机器上的客户端组件 - 应用客户端和 applets</li>
+<li>Web 层：运行在 J2EE 服务器上的 Web 层组件 — Java Servlet, JavaServer Faces, and JavaServer Pages (JSP) (might include a JavaBeans component to manage the user input and send that input to enterprise beans running in the business tier for processing)</li>
+<li>业务层：运行在 J2EE 服务器上的业务逻辑层组件 - Enterprise JavaBeans (EJB)</li>
 <li>企业信息系统层：运行在EIS服务器上的企业信息系统层软件 — enterprise infrastructure systems</li>
 </ul>
-<h3 id="4-Java-组件和标准-java-类的区别"><a href="#4-Java-组件和标准-java-类的区别" class="headerlink" title="4. Java 组件和标准 java 类的区别"></a>4. Java 组件和标准 java 类的区别</h3><ul>
+<h3 id="4-Java-组件和标准-Java-类的区别"><a href="#4-Java-组件和标准-Java-类的区别" class="headerlink" title="4. Java 组件和标准 Java 类的区别"></a>4. Java 组件和标准 Java 类的区别</h3><ul>
 <li>JavaEE 组件<ul>
-<li>采用 java 语言编写，像 java 类一样编译，将相关类和文件打包成的独立的功能单元，可以和其他组件交互，可以集成部署到服务器当中运行，JAVAEE 应用是由组件构成。</li>
+<li>采用 Java 语言编写，像 Java 类一样编译，将相关类和文件打包成的独立的功能单元，可以和其他组件交互，可以集成部署到服务器当中运行，JAVAEE 应用是由组件构成。</li>
 </ul>
 </li>
-<li>和 java 类的区别<ul>
-<li>组件按照 javaEE 的规范被编译成 javaEE 应用</li>
+<li>和 Java 类的区别<ul>
+<li>组件按照 JavaEE 的规范被编译成 javaEE 应用</li>
 <li>可以发布部署到服务器中运行</li>
 <li>可以提供安全，事务管理，JNDI 寻址，远程连接，生命周期管理，数据库连接操作等功能</li>
-<li>普通 java 类按 j2se 的编译规范编译为.class 文件，不能发布部署到服务器（容器）中运行</li>
+<li>普通 Java 类按 J2SE 的编译规范编译为.class 文件，不能发布部署到服务器(容器)中运行</li>
 </ul>
 </li>
 </ul>
 <h3 id="5-两类客户端"><a href="#5-两类客户端" class="headerlink" title="5. 两类客户端"></a>5. 两类客户端</h3><ul>
 <li>客户端分为：Web 客户端，应用程序客户端</li>
-<li>Web 客户端组件：动态网页(html,xml)，浏览器</li>
-<li>应用客户端组件：GUI(swing)，AWT(abstract window toolkit)</li>
+<li>Web 客户端组件：动态网页(html,xml)，浏览器<ul>
+<li>动态Web页包含各种类型的标记语言</li>
+<li>Web客户端有时被称为瘦客户机</li>
+<li>从网络层接收到的网页可以包含一个嵌入式程序</li>
+</ul>
+</li>
+<li>应用客户端组件：GUI(swing)，AWT(abstract window toolkit)<ul>
+<li>为用户提供了处理需要一个比通过标记语言更丰富的用户界面来处理任务的方法</li>
+<li>通常有一个由Swing或AWT API实现的图形用户界面</li>
+<li>应用程序客户端直接访问运行在业务层的企业Bean</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Java-EE应用由各种各不同组件构成，都有哪些组件？"><a href="#6-Java-EE应用由各种各不同组件构成，都有哪些组件？" class="headerlink" title="6. Java EE应用由各种各不同组件构成，都有哪些组件？"></a>6. Java EE应用由各种各不同组件构成，都有哪些组件？</h3><ul>
+<li>J2EE Clients<ul>
+<li>Web Client</li>
+<li>Applets</li>
+<li>Application Client</li>
+<li>JavaBean组件</li>
+</ul>
+</li>
+<li>Web Component<ul>
+<li>Servlet</li>
+<li>Web page</li>
+</ul>
+</li>
+<li>Business Component<ul>
+<li>EJB</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-容器的概念"><a href="#7-容器的概念" class="headerlink" title="7. 容器的概念"></a>7. 容器的概念</h3><ul>
+<li>容器是组件与底层平台功能间的接口。在Web组件，企业bean或应用程序客户端运行之前，必须将其装配至Java EE模块，并部署至其容器中</li>
+</ul>
+<h3 id="8-Java-EE应用服务器是以容器的形式提供服务，容器分哪些类型？分别提供了哪些服务？"><a href="#8-Java-EE应用服务器是以容器的形式提供服务，容器分哪些类型？分别提供了哪些服务？" class="headerlink" title="8. Java EE应用服务器是以容器的形式提供服务，容器分哪些类型？分别提供了哪些服务？"></a>8. Java EE应用服务器是以容器的形式提供服务，容器分哪些类型？分别提供了哪些服务？</h3><ul>
+<li>EJB container：管理J2EE程序的执行</li>
+<li>Web container：管理网页，servlet和部分EJB程序的执行</li>
+<li>Application Client container：管理客户端组件应用的执行</li>
+<li>Applets container：管理applets的执行</li>
+</ul>
+<h3 id="9-J2EE可配置和不可配置服务"><a href="#9-J2EE可配置和不可配置服务" class="headerlink" title="9. J2EE可配置和不可配置服务"></a>9. J2EE可配置和不可配置服务</h3><ul>
+<li>在运行Web组件，企业Bean或者J2EE应用程序客户端之前，你必须将它们装配到一个J2EE应用程序中，并部署它们到容器中</li>
+<li>装配的过程包括为J2EE应用程序的每个组件和J2EE应用程序本身设置容器的配置信息</li>
+<li>这些配置信息定制J2EE服务器支持的底层服务，包括安全，事务管理，目录接口(JNDI)查找和远程连接等。下面使这些服务的精简描述：<ul>
+<li>J2EE安全模型让你配置Web组件或者企业Bean以使系统资源只被授权用户访问</li>
+<li>J2EE事务模型让你指定属于同一个事务的多个方法以使这些方法作为一个原子操作被执行</li>
+<li>JNDI查找服务为企业应用中的多种命名和目录服务提供统一接口使应用程序组件可以统一访问这些命名和目录服务</li>
+<li>J2EE远程连接模型管理客户端和企业Bean之间的底层通信。企业Bean被创建后，客户端调用它的方法就像在本地虚拟机中的调用一样</li>
+</ul>
+</li>
+<li>容器也管理着很多不可配置的服务，如企业Bean和Servlet的生命周期，数据库连接池，数据持久化机制和J2EE平台API的访问权等等</li>
+</ul>
+<h3 id="10-J2EE可以打包成哪三种文件"><a href="#10-J2EE可以打包成哪三种文件" class="headerlink" title="10. J2EE可以打包成哪三种文件"></a>10. J2EE可以打包成哪三种文件</h3><ul>
+<li>Java Archive (JAR) file</li>
+<li>Web Archive (WAR) file</li>
+<li>Enterprise Archive (EAR) file</li>
+</ul>
+<h3 id="11-什么是部署描述文件"><a href="#11-什么是部署描述文件" class="headerlink" title="11. 什么是部署描述文件"></a>11. 什么是部署描述文件</h3><ul>
+<li>Web容器使用部署描述文件(Deployment Descriptor)初始化Web应用程序的组件。Web容器在启动时读取该文件，对应用程序配置，所以有时也将该文件称为配置文件</li>
+</ul>
+<h3 id="12-EAR-文件的四类模块及其内容？"><a href="#12-EAR-文件的四类模块及其内容？" class="headerlink" title="12. EAR 文件的四类模块及其内容？"></a>12. EAR 文件的四类模块及其内容？</h3><ul>
+<li>web模块：*.war，包括servlet类文件，JSP页面文件，支持类文件，GIF和html文件，XML配置文件</li>
+<li>ejb模块：*.jar，包括ejb文件，ejb配置文件</li>
+<li>application client模块：*.jar，包括相关类文件，程序客户端配置文件</li>
+<li>resource adapter模块：*.rar，包括所有的java接口，类，本地库和文档和资源适配描述文件</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Servlet-Web开发基础"><a href="#2-Servlet-Web开发基础" class="headerlink" title="2. Servlet Web开发基础"></a>2. Servlet Web开发基础</h2><h3 id="1-什么是Web应用，哪两种类型？"><a href="#1-什么是Web应用，哪两种类型？" class="headerlink" title="1. 什么是Web应用，哪两种类型？"></a>1. 什么是Web应用，哪两种类型？</h3><ul>
+<li>Web应用是Web应用服务器的动态拓展，有面向服务的和面向表现的两种类型</li>
+</ul>
+<h3 id="2-一个JavaWeb应用的请求处理流程"><a href="#2-一个JavaWeb应用的请求处理流程" class="headerlink" title="2. 一个JavaWeb应用的请求处理流程"></a>2. 一个JavaWeb应用的请求处理流程</h3><ul>
+<li>客户端向Web服务器发送一个HTTP请求</li>
+<li>实现了Java Servlet和JavaServer Pages技术的服务器将请求转换为一个HTTPServletRequest对象</li>
+<li>这个对象被投递到一个Web组件，这个组件可以与JavaBeans 组件或者一个数据库相互协作生成一个动态内容</li>
+<li>这个组件可以生成一个HTTPServletResponse或者将这个请求转交给其他Web组件</li>
+<li>Web组件最终生成一个HttpServletResponse对象</li>
+<li>Web服务器将这个对象转换成HTTP应答消息返回给客户端</li>
+</ul>
+<h3 id="3-部署到web容器，容器提供了哪些服务，可以通过哪两种法式进行配置？"><a href="#3-部署到web容器，容器提供了哪些服务，可以通过哪两种法式进行配置？" class="headerlink" title="3. 部署到web容器，容器提供了哪些服务，可以通过哪两种法式进行配置？"></a>3. 部署到web容器，容器提供了哪些服务，可以通过哪两种法式进行配置？</h3><ul>
+<li>request dispatching(请求分发), security(安全), concurrency(并发), and lifecycle management(生命周期管理)</li>
+<li>Web容器同时也为Web组件提供了获取命名，事务，邮件(naming, transactions, and email)的API的方式</li>
+<li>可以通过Java EE annotations和部署配置文件两种方式进行配置</li>
+</ul>
+<h3 id="4-一个Web应用会包括哪些内容？"><a href="#4-一个Web应用会包括哪些内容？" class="headerlink" title="4. 一个Web应用会包括哪些内容？"></a>4. 一个Web应用会包括哪些内容？</h3><ul>
+<li>Web组件</li>
+<li>Web资源</li>
+<li>帮助类库(Helper classes and libraries)</li>
+<li>服务器端实用工具类(utility classes，例如database beans，shopping carts等)</li>
+</ul>
+<h3 id="5-开发web应用的步骤"><a href="#5-开发web应用的步骤" class="headerlink" title="5. 开发web应用的步骤"></a>5. 开发web应用的步骤</h3><ul>
+<li>开发Web组件代码</li>
+<li>如果需要的话，开发Web应用的部署描述(deployment descriptor)</li>
+<li>编译Web应用组件和被组件引用的辅助类库</li>
+<li>(可选)将应用打包成可部署的单元(deployable unit)</li>
+<li>将应用部署为Web容器</li>
+<li>为Web应用连接一个URL地址</li>
+</ul>
+<h3 id="6-什么是web资源"><a href="#6-什么是web资源" class="headerlink" title="6. 什么是web资源"></a>6. 什么是web资源</h3><ul>
+<li>包含Web部件和静态网页内容的文件如图像的Web模块被称为网络资源</li>
+</ul>
+<h3 id="7-Web模块的目录结构"><a href="#7-Web模块的目录结构" class="headerlink" title="7. Web模块的目录结构"></a>7. Web模块的目录结构</h3><ul>
+<li>根目录document root<ul>
+<li>存放HTML，XHTML页面，客户端类和文档，静态资源例如图片等的目录</li>
+</ul>
+</li>
+<li>WEB-INF目录<ul>
+<li>已经编译的class服务器端的类文件夹(servlets, enterprise bean class files, utility classes, and JavaBeans components)</li>
+<li>tags标签文件夹</li>
+<li>lib引用类库文件夹</li>
+<li>配置类文件(例如web.xml，ejb-jar.xml)</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-Servlet-生命周期"><a href="#8-Servlet-生命周期" class="headerlink" title="8. Servlet 生命周期"></a>8. Servlet 生命周期</h3><ul>
+<li>Servlet的生命周期由servlet所部属的容器控制</li>
+<li>当一个客户端请求发送到服务器时，容器开始执行以下步骤：<ul>
+<li>如果servlet实例不存在Web容器会：载入servlet类 、创建一个servlet的实例、调用init方法初始化这个实例</li>
+<li>然后调用service的方法，传递request和response对象</li>
+<li>如果容器需要移除这个servlet，那么他就会通过调用servlet的destroy方法来释放这个servlet</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-Http请求，URL组成部分包括哪些元素？"><a href="#9-Http请求，URL组成部分包括哪些元素？" class="headerlink" title="9. Http请求，URL组成部分包括哪些元素？"></a>9. Http请求，URL组成部分包括哪些元素？</h3><ul>
+<li>采用请求响应模型，request(从客户端到服务器端)，response(从服务器端到客户端)</li>
+<li>Request包括：<ul>
+<li>request方法(包括GET，HEAD，POST，PUT，DELETE，OPTIONS，TRACE)</li>
+<li>requestURL(一个字符串，由它来导向一个web组件，或者是一个静态的对象，例如html页面或者是图片文件什么的</li>
+</ul>
+</li>
+<li>Response包括：<ul>
+<li>result code(例如404（表示请求资源不可用)，401(请求需要HTTP认证)，500(服务器内部错误导致无法完成请求)，503(服务器超载导致无法完成请求)</li>
+<li>header fields</li>
+<li>body</li>
+</ul>
+</li>
+<li>URL组成：<ul>
+<li><a href="http://[host]:[port][request" target="_blank" rel="external">http://[host]:[port][request</a> path]?[query string] 请求路径由以下元素组成：</li>
+<li>上下文路径：向前的斜线/和servlet的Web应用的上下文根的拼接</li>
+<li>servlet路径：与激活该请求的组件别名相应的路径部分，由向前的斜线/开始</li>
+<li>路径信息：请求路径的部分，不是上下文路径或者servlet路径的部分</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-URL和URI的区别"><a href="#10-URL和URI的区别" class="headerlink" title="10. URL和URI的区别"></a>10. URL和URI的区别</h3><ul>
+<li>URL是一种具体的URI，它不仅唯一标识资源，而且还提供了定位该资源的信息。URI是一种语义上的抽象概念，可以是绝对的，也可以是相对的，而URL则必须提供足够的信息来定位，所以，是绝对的</li>
+</ul>
+<h3 id="11-如何处理Servlet的线程安全问题？"><a href="#11-如何处理Servlet的线程安全问题？" class="headerlink" title="11. 如何处理Servlet的线程安全问题？"></a>11. 如何处理Servlet的线程安全问题？</h3><ul>
+<li>Servlet默认是多线程的，Server创建一个实例，用它处理并发请求</li>
+<li>实例变量是在堆中分配的，不是线程安全的</li>
+<li>request，response是线程安全的</li>
+<li>局部变量是在栈中分配的，是线程安全的(局部变量可以作为参数传递)</li>
+<li>解决方法：可以编写线程安全的类，或者通过synchronize等方式同步对共享数据的操作，或者让servlet实现SigleThreadModel接口</li>
+</ul>
+<h3 id="12-Tomcat的组件结构，以及如何处理请求"><a href="#12-Tomcat的组件结构，以及如何处理请求" class="headerlink" title="12. Tomcat的组件结构，以及如何处理请求"></a>12. Tomcat的组件结构，以及如何处理请求</h3><p><strong>组件结构</strong></p>
+<ul>
+<li>Server：代表一个服务器</li>
+<li>Connector：在某一个指定端口监听用户请求，并且将获得的请求交给engine来处理</li>
+<li>Engine：将获得的请求匹配到某个虚拟主机上，并且把请求交给该host来处理</li>
+<li>Host：代表虚拟主机，每一个都和某个网络域名相匹配，每一个都可部署多个web应用</li>
+<li>Context：对应一个 Web 应用(由一些 Servlet，HTML，Java 类，JSP 页面和一些其他的资源组成，在创建时根据在获得 <tomcat_home>\conf\web.xml 和 <webapp_home>/WEB-INF/web.xml 载入 Servlet 类。在请求时查询映射表找到被请求Servlet类并且执行以获得请求回应)</webapp_home></tomcat_home></li>
+</ul>
+<p><strong>请求处理流程：例如(<a href="http://localhost:8080/HelloWorld" target="_blank" rel="external">http://localhost:8080/HelloWorld</a>)</strong></p>
+<ul>
+<li>请求被发送到本机端口8080，被Java HTTP Connector获得</li>
+<li>Connector将该请求交给它所在的Service的Engine来处理并等待Engine的回应</li>
+<li>Engine获得请求，匹配所有的虚拟主机</li>
+<li>Engine匹配到名为localhost的主机</li>
+<li>Localhost主机获得请求，匹配所拥有的所有Context</li>
+<li>Localhost主机匹配到路径为/HelloWorld的Context</li>
+<li>路径为/HelloWorld的Context获得请求，在映射表中寻找对应的Servlet</li>
+<li>Context匹配URLPATTERN为/的Servlet</li>
+<li>构造HttpServletRequest对象和HttpServletResponse对象，作为参考调用该Servlet的Service方法</li>
+<li>Context把执行完后的HttpServletResponse返回给localhost主机</li>
+<li>Host把HttpServletResponse对象返回给Engine</li>
+<li>Engine把HttpServletResponse对象返回给Connector</li>
+<li>Connector把HttpServletResponse对象返回给客户Browser</li>
+</ul>
+<h3 id="13-Web会话-—-Cookie机制"><a href="#13-Web会话-—-Cookie机制" class="headerlink" title="13. Web会话 — Cookie机制"></a>13. Web会话 — Cookie机制</h3><ul>
+<li>当用户第一次访问站点创建一个新的会话对象(Httpsession)， Server分配一个唯一的会话标识号(sessionID)</li>
+<li>Server创建一个暂时的HTTP Cookie</li>
+<li>客户浏览器发送包含Cookie的请求</li>
+<li>根据客户机浏览器发送的sessionID信息(cookie)，Server找到相应的HttpSession对象，跟踪会话</li>
+<li>在会话超时间隔期间，如果没有接收到新的请求， Server将删除此会话对象</li>
+</ul>
+<h3 id="14-Web会话-—-URL重写"><a href="#14-Web会话-—-URL重写" class="headerlink" title="14. Web会话 — URL重写"></a>14. Web会话 — URL重写</h3><ul>
+<li>当用户第一次访问站点创建一个新的会话对象(Httpsession)， Server分配一个唯一的会话标识号(sessionID)</li>
+<li>Server将sessionID放在返回给客户端的URL中</li>
+<li>客户浏览器发送的请求将包含sessionID</li>
+<li>根据包含请求的sessionID信息(URL)，Server找到相应的HttpSession对象，跟踪会话</li>
+<li>在会话超时间隔期间，如果没有接收到新的请求， Server将删除此会话对象</li>
+</ul>
+<h3 id="15-Session和Cookie-使用场景分别是什么"><a href="#15-Session和Cookie-使用场景分别是什么" class="headerlink" title="15. Session和Cookie 使用场景分别是什么"></a>15. Session和Cookie 使用场景分别是什么</h3><ul>
+<li>Cookie：<ul>
+<li>跟踪会话，也可以独立于Http会话使用cookie</li>
+<li>长期”记住用户信息”</li>
+<li>存储在本地计算机硬盘上</li>
+</ul>
+</li>
+<li>Session：<ul>
+<li>保存在服务器端内存中</li>
+<li>使用机制不同</li>
+</ul>
+</li>
+</ul>
+<h3 id="16-Web组件可以共享信息，方式？其中一种是作用域对象属性，有四种，哪四种"><a href="#16-Web组件可以共享信息，方式？其中一种是作用域对象属性，有四种，哪四种" class="headerlink" title="16. Web组件可以共享信息，方式？其中一种是作用域对象属性，有四种，哪四种"></a>16. Web组件可以共享信息，方式？其中一种是作用域对象属性，有四种，哪四种</h3><ul>
+<li>信息共享方式：<ul>
+<li>通过使用私有的帮助对象(helper objects)，比如：JavaBeans components</li>
+<li>通过共享公共作用域的对象属性(objects that are attributes of a public scope)</li>
+<li>可以使用数据库</li>
+<li>可以调用其它网络资源</li>
+</ul>
+</li>
+<li>作用域对象<ul>
+<li>WebContent</li>
+<li>Session</li>
+<li>Request</li>
+<li>Page</li>
+</ul>
+</li>
+</ul>
+<h3 id="17-并发访问，什么情况出现并发访问共享资源"><a href="#17-并发访问，什么情况出现并发访问共享资源" class="headerlink" title="17. 并发访问，什么情况出现并发访问共享资源"></a>17. 并发访问，什么情况出现并发访问共享资源</h3><ul>
+<li>在一个多线程的服务器中，有可能会并发访问共享资源，包含以下场景：<ul>
+<li>多个Web组件访问Web Context中的某个对象</li>
+<li>多个Web组件访问Session中的某个对象</li>
+<li>一个Web组件中的多个线程访问实例变量(实现SingleThreadModel接口)</li>
+</ul>
+</li>
+<li>除了对象的属性，共享资源包括内存数据(如实例，类变量)以及外部资源(文件，数据库连接，网络连接)</li>
+</ul>
+<h3 id="18-什么是过滤器，和其他web组件的区别，它的应用场景"><a href="#18-什么是过滤器，和其他web组件的区别，它的应用场景" class="headerlink" title="18. 什么是过滤器，和其他web组件的区别，它的应用场景"></a>18. 什么是过滤器，和其他web组件的区别，它的应用场景</h3><ul>
+<li>过滤器是一个可以改变请求或响应的标题或者内容的对象</li>
+<li>过滤器和其他web组件不同的地方在于，过滤器通常不需要自己创建一个响应，相反，他们提供可以依附于各种类型的网络资源的功能</li>
+<li>应用场景：<ul>
+<li>改善代码重用，在不修改servlet代码的情况下想servlet添加功能(如身份验证)</li>
+<li>用于跨多个servlet执行一些功能，创建可重复使用的功能</li>
+<li>在servlet处理请求之前截获请求</li>
+</ul>
+</li>
+<li>具体使用场景：<ul>
+<li>代码重用，应用安全策略，日志，为特定目标浏览器传输XML输出，图像转换和加密，动态压缩输出</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-什么是监听器，应用场景？"><a href="#19-什么是监听器，应用场景？" class="headerlink" title="19. 什么是监听器，应用场景？"></a>19. 什么是监听器，应用场景？</h3><ul>
+<li>监听器是当生命周期时间发生时自己事件会被触发的对象</li>
+<li>应用场景：<ul>
+<li>监听系统关闭或者是开启</li>
+<li>监听用户访问次数</li>
+<li>监听用户是否登录</li>
+<li>监听session是否改变等</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-JSP"><a href="#3-JSP" class="headerlink" title="3. JSP"></a>3. JSP</h2><h3 id="1-JSP和servlet的区别"><a href="#1-JSP和servlet的区别" class="headerlink" title="1. JSP和servlet的区别"></a>1. JSP和servlet的区别</h3><ul>
+<li>servlet是jsp的基础，jsp提供了所有servlet可以实现的动态功能，并且还提供一种更加自然的静态内容的创建方法</li>
+</ul>
+<h3 id="2-JSP生命周期"><a href="#2-JSP生命周期" class="headerlink" title="2. JSP生命周期"></a>2. JSP生命周期</h3><ul>
+<li>JSP页面以Servlet的形式提供请求服务，所以，JSP的生命周期和许多JSP功能都是由Servlet技术决定的(特别是动态的方面)<ul>
+<li>请求被映射到JSP页面</li>
+<li>服务器端为JSP页面查找已有的实现类，如果没有找到则创建新的JSP页面的实现类，然后把这个类载入JVM。在实现类装在完成后，JVM将创建这个类的一个实例</li>
+<li>初始化：初始化JSP页面对象</li>
+<li>处理请求</li>
+<li>生命周期终止：服务器不再把客户端的请求发给JSP。在所有的请求处理完之后会释放掉这个类的所有实例。这种情况一般发生在服务器关闭的时候或者是服务器要保存资源，检测到有JSP文件更新等</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-在JSP页面的翻译阶段，要去处理构建动态内容的JSP元素，是如何处理这些元素的？-指令，脚本，动作-include-forward-在翻译是如何处理？定制标签如何处理？"><a href="#3-在JSP页面的翻译阶段，要去处理构建动态内容的JSP元素，是如何处理这些元素的？-指令，脚本，动作-include-forward-在翻译是如何处理？定制标签如何处理？" class="headerlink" title="3. 在JSP页面的翻译阶段，要去处理构建动态内容的JSP元素，是如何处理这些元素的？(指令，脚本，动作(include,forward)在翻译是如何处理？定制标签如何处理？)"></a>3. 在JSP页面的翻译阶段，要去处理构建动态内容的JSP元素，是如何处理这些元素的？(指令，脚本，动作(include,forward)在翻译是如何处理？定制标签如何处理？)</h3><ul>
+<li>静态数据转化为代码</li>
+<li>JSP元素按以下方式进行处理<ul>
+<li>指令元素是用来控制Web容器转换和执行JSP页面</li>
+<li>脚本元素插入到JSP页面的servlet类</li>
+<li>表达式语言作为参数传递来调用JSP表达式解释器</li>
+<li>jsp:[set|get]Property被转换成方法来调用JavaBeans组件</li>
+<li>jsp:[include|forward] 被转换成Java Servlet API的调用</li>
+<li>jsp:plugin被转换成浏览器的特定标记来激活一个applet</li>
+<li>自定义标签调用标记处理程序实现自定义标签调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-脚本元素中创建和使用对象的方法有哪些？这些对象在翻译时如何进行处理？"><a href="#4-脚本元素中创建和使用对象的方法有哪些？这些对象在翻译时如何进行处理？" class="headerlink" title="4. 脚本元素中创建和使用对象的方法有哪些？这些对象在翻译时如何进行处理？"></a>4. 脚本元素中创建和使用对象的方法有哪些？这些对象在翻译时如何进行处理？</h3><ul>
+<li>三种创建和使用脚本元素对象的方法： <ul>
+<li>类实例和类变量：在声明中创建，在脚本和表达式中被使用</li>
+<li>局部变量：在脚本和表达式中被创建和使用</li>
+<li>作用域对象的属性：在脚本和表达式中被创建和使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-动作和指令的异同"><a href="#5-动作和指令的异同" class="headerlink" title="5. 动作和指令的异同"></a>5. 动作和指令的异同</h3><ul>
+<li>Include动作和Include指令的区别<ul>
+<li>include指令：包括其他页面，编译时把其他页面的内容加进来，比include动作快</li>
+<li>include标准动作：使用RequestDispatcher，运行时把其他页面的内容加进来(包括到输出流中)</li>
+</ul>
+</li>
+<li>Forward动作和Redirect动作的区别<ul>
+<li>forward标准动作：使用RequestDispatcher，JSP的转发功能是在服务器本身上实现的</li>
+<li>HTTP重定向(response.sendRedirect(myNewURL))：发送的请求信息又回送给客户机，让客户机再转发到另一个资源上，新的URL出现在Web浏览器中，需要在服务器和客户机之间增加一次通信</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-JSP中常用的隐式对象"><a href="#6-JSP中常用的隐式对象" class="headerlink" title="6. JSP中常用的隐式对象"></a>6. JSP中常用的隐式对象</h3><ul>
+<li>隐式对象被Web容器创建，包含关于某一个特定请求，页面，会话或应用的信息</li>
+<li>Out对象：<ul>
+<li>做PrintWriter对象能做的一切事情</li>
+<li>调用print()/println()方法，把信息回送给客户端浏览器</li>
+<li>作用域是当前页面(page)</li>
+<li>每个JSP页面有一个out对象的实例</li>
+<li>缺省采用缓存，可以使用page指令调整其大小</li>
+</ul>
+</li>
+<li>Request对象：使用request对象得到请求信息中的参数</li>
+<li>Response对象：使用response对象发送重定向，修改HTTP头，指定URL重写</li>
+<li>Session对象：javax.servlet.http.HttpSession的实例</li>
+<li>Application对象：从web.xml获取初始化参数、访问RequestDispatcher</li>
+<li>PageContext对象：对页面作用域的属性的访问</li>
+</ul>
+<h3 id="7-JSP动作的作用是改善脚本、摆脱Java代码，有哪些常用动作？"><a href="#7-JSP动作的作用是改善脚本、摆脱Java代码，有哪些常用动作？" class="headerlink" title="7. JSP动作的作用是改善脚本、摆脱Java代码，有哪些常用动作？"></a>7. JSP动作的作用是改善脚本、摆脱Java代码，有哪些常用动作？</h3><ul>
+<li>&lt;jsp:include&gt;：使用RequestDispatcher，运行时把其他页面的内容加进来(包括到输出流中)</li>
+<li>&lt;jsp:forward&gt;：使用RequestDispatcher，JSP的转发功能是在服务器本身上实现的</li>
+<li>&lt;jsp:plugin&gt;：在JSP页面中包含applet或者javabeans组件</li>
+<li>&lt;jsp:useBean&gt;：JSP容器将自动的创建相应的JavaBean的实例，处理JavaBean的清理事项</li>
+<li>&lt;jsp:setProperty&gt;：设置JavaBean组件的属性值</li>
+<li>&lt;jsp:getProperty&gt;：获取JavaBean组件的属性值</li>
+</ul>
+<h3 id="8-JavaBean组件的设计规范"><a href="#8-JavaBean组件的设计规范" class="headerlink" title="8. JavaBean组件的设计规范"></a>8. JavaBean组件的设计规范</h3><ul>
+<li>一个JavaBean组件属性分如下几种：read/write, read-only, or write-only</li>
+<li>简单，也就是说它只包含一个数值或一个索引</li>
+<li>访问方法简单，运用遵循如下约束的public方法 <ul>
+<li>对每一个可读的属性，具有方法：PropertyClass getProperty() { … }</li>
+<li>对每一个可写的属性，具有方法：setProperty(PropertyClass pc) { … }</li>
+</ul>
+</li>
+<li>JavaBean还需要有一个无参构造函数</li>
+</ul>
+<h3 id="9-定制标签有哪些，作用，使用场景"><a href="#9-定制标签有哪些，作用，使用场景" class="headerlink" title="9. 定制标签有哪些，作用，使用场景"></a>9. 定制标签有哪些，作用，使用场景</h3><ul>
+<li>定制标签：<ul>
+<li>在标签库中声明自定义的标签：<prefix:tag attr1="value" ...="" attrn="value"></prefix:tag></li>
+<li>在Web应用中实现这个标签库，使其可用</li>
+</ul>
+</li>
+<li>作用<ul>
+<li>在简单的JSP标签后面隐藏复杂的功能</li>
+<li>在一定程度上实现了模块化</li>
+</ul>
+</li>
+<li>使用场景：<ul>
+<li>将复杂的功能封装在HTML风格的标签中：处理格式化任务，访问外部资源</li>
+<li>JSP程序员把程序的基本功能用自定义的标签库来实现，美工人员使用这些标签，专注于数据的表达</li>
+</ul>
+</li>
+<li>属性：<ul>
+<li>Prefix, tagdir, uri</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-use-bean动作执行过程"><a href="#10-use-bean动作执行过程" class="headerlink" title="10. use bean动作执行过程"></a>10. use bean动作执行过程</h3><ul>
+<li>尝试在Scope属性指定的作用域使用你指定的名称(id属性值)定位Bean对象</li>
+<li>使用你指定的名称(id属性值)定义一个引用类型变量</li>
+<li>假如找到Bean对象，将其引用给步骤２定义的变量。假如你指定类型(type属性)，赋予该Bean对象该类型</li>
+<li>假如没找到，则实例化一个新的Bean对象，并将其引用给步骤２定义的变量。假如该类名(由beanName属性指定的类名)代表的是一个序列化模板(serialized template)，该Bean对象由java.beans.Beans.instantiate初始化</li>
+<li>假如<jsp:usebean>此次是实例化Bean对象而不是定位Bean对象，且它有体标记(body tags)或元素(位于<jsp:usebean>和</jsp:usebean>之间的内容，则执行该体标记</jsp:usebean></li>
+</ul>
+<h3 id="11-JSP有四种作用域对象，分别是什么？"><a href="#11-JSP有四种作用域对象，分别是什么？" class="headerlink" title="11. JSP有四种作用域对象，分别是什么？"></a>11. JSP有四种作用域对象，分别是什么？</h3><ul>
+<li>页面域(page scope)</li>
+<li>请求域(request scope)</li>
+<li>会话域(session scope)</li>
+<li>应用域(application scope)</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><h3 id="1-JDBC-API-的两方面内容"><a href="#1-JDBC-API-的两方面内容" class="headerlink" title="1. JDBC API 的两方面内容"></a>1. JDBC API 的两方面内容</h3><ul>
+<li>通过企业 Bean 来使用JDBC API</li>
+<li>通过 Servlet 或者 JSP 页面用JDBC API直接连接数据库</li>
+</ul>
+<h3 id="2-两种建立数据库连接的方式？"><a href="#2-两种建立数据库连接的方式？" class="headerlink" title="2. 两种建立数据库连接的方式？"></a>2. 两种建立数据库连接的方式？</h3><ul>
+<li>DriverManager机制(JDBC)：<ul>
+<li>API：java.sql核心API</li>
+<li>DriverManager机制的弊端：<ul>
+<li>是一个同步的类，一次只有一个线程可以运行</li>
+<li>与数据库相关的连接信息都包含在类中，如果用户更换另一台计算机作数据库服务器，就需要重新修改URL变量，重新编译，部署</li>
+<li>用户的用户名，口令也包含在类中，丧失了安全性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DataSource机制(JNDI)：<ul>
+<li>API：javax.sql可扩展API</li>
+<li>连接方式：连接池</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-事务：哪几种Java事务类型？"><a href="#3-事务：哪几种Java事务类型？" class="headerlink" title="3. 事务：哪几种Java事务类型？"></a>3. 事务：哪几种Java事务类型？</h3><ul>
+<li>事物：保证一系列数据库操作能够准确的完成，除非事务中的所有操作都成功，否则事务就不会完成</li>
+<li>事务的4个特性(ACID)：Atomicity(原子性)，Consistency(一致性)，Isolation(隔离性)，Durability(持久性)</li>
+<li>Java事物类型：<ul>
+<li>JDBC事务</li>
+<li>JTA(Java Transaction API)事务</li>
+<li>容器事务</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-MVC六步控制流程"><a href="#4-MVC六步控制流程" class="headerlink" title="4. MVC六步控制流程"></a>4. MVC六步控制流程</h3><ul>
+<li>客户端发出请求</li>
+<li>Servlet获得客户端请求</li>
+<li>Servlet决定哪些程序元素是处理特定请求所需要的</li>
+<li>JavaBeans或者EJBs为Servlet执行业务逻辑操作并封装结果</li>
+<li>Servlet选择一个显示模版来将结果反馈给客户端</li>
+<li>JSP在通过JavaBeans获得结果内容后生成一个特定的响应</li>
+</ul>
+<h3 id="5-EJB中什么是企业bean，有哪两种"><a href="#5-EJB中什么是企业bean，有哪两种" class="headerlink" title="5. EJB中什么是企业bean，有哪两种"></a>5. EJB中什么是企业bean，有哪两种</h3><ul>
+<li>企业bean是用Java编程语言编写的一种服务器端组件用于封装应用程序的业务逻辑</li>
+<li>Session Bean：<ul>
+<li>为客户端执行某个任务，也有可能实现一个Web服务，封装业务逻辑，可以被本地的或者远程的客户端以及网络服务客户端的页面(web service client views)</li>
+<li>Session Bean封装了实现的复杂度，但Session Bean不是持久的</li>
+</ul>
+</li>
+<li>Message-driven Bean：<ul>
+<li>为一个特定的事件充当监听(如Java Message Service API)允许Java EE异步处理信息，可以处理JMS消息或者其他类型的消息</li>
+<li>消息可以由任何的Java EE组件发送(应用客户端，其他EJB，Web组件)，或者由JMS应用以及不使用Java EE技术的系统</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-会话Bean的三种类型"><a href="#6-会话Bean的三种类型" class="headerlink" title="6. 会话Bean的三种类型"></a>6. 会话Bean的三种类型</h3><ul>
+<li>Stateful(状态bean)<ul>
+<li>有状态的会话 bean在方法调用时可保持对话状态，譬如客户的网上购物车。客户开始网上购物时，可以从数据库中检索客户的详细信息。客户往购物车里面添加商品或者从里面删除商品、下订单等时调用的其他方法也可以使用这些详细信息。不过，有状态的会话bean是暂时性的，因为出现会话终止，系统崩溃或者网络故障后，状态不复存在。客户端请求有状态的会话bean实例时，就为该客户端分配一个有状态的实例，并为该客户端保持该组件的状态。要指定容器在某个方法完成后删除有状态的会话bean实例，只要为该方法添加注释@Remove</li>
+</ul>
+</li>
+<li>stateless(无状态bean)<ul>
+<li>无状态的会话 bean没有内部状态。它们不跟踪记录从一个方法调用传递到另一个方法调用的信息。因此，每次调用无状态的业务方法都独立于前一次调用，譬如计算税款或者运费。用某个应税值调用计算税款的方法时，对税款值进行计算并返回给调用方法，而不必保存调用者的内部状态供以后调用。因为这些bean并不保持状态，所以容器对它们进行管理就很简单。客户端请求无状态的bean实例时，可以从容器保持的无状态的会话bean 实例池当中接收一个实例。另外，因为无状态的会话 bean可以共享，所以容器可保持数量较少的实例为许多客户端提供服务。想指定Java Bean作为无状态的会话bean加以部署及管理，只需要为该bean添加注释@Stateless</li>
+</ul>
+</li>
+<li>singleton(单例bean)<ul>
+<li>在应用的生命周期中，只会被实例化一次，可以被所有客户共享，并发访问，可以实现为 web 服务端点</li>
+<li>使用场景：应用的初始化工作。关闭时的清理工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-客户可以以两种方式获得对企业Bean的引用-访问企业Bean-，哪两种？"><a href="#7-客户可以以两种方式获得对企业Bean的引用-访问企业Bean-，哪两种？" class="headerlink" title="7. 客户可以以两种方式获得对企业Bean的引用(访问企业Bean)，哪两种？"></a>7. 客户可以以两种方式获得对企业Bean的引用(访问企业Bean)，哪两种？</h3><ul>
+<li>依赖注入</li>
+<li>JNDI lookup</li>
+<li>JNDI和依赖注入的操作方向不一样，JDNI是我们自己去找Bean，而依赖注入是由容器将我们需要的Bean注入推送给我们</li>
+</ul>
+<h3 id="8-消息服务JMS-Java-Message-Service"><a href="#8-消息服务JMS-Java-Message-Service" class="headerlink" title="8. 消息服务JMS(Java Message Service)"></a>8. 消息服务JMS(Java Message Service)</h3><p><strong>什么是JMS</strong></p>
+<ul>
+<li>一个使用可靠的、异步的、松耦合的联通方式允许应用创建，发送，接收和读取信息的API</li>
+<li>JMS定义了一个通用的接口和相关语义集合，它可以允许使用Java语言编写的程序与其他可以发送消息的实现进行通信</li>
+</ul>
+<h3 id="9-消息服务JMS两种消息域"><a href="#9-消息服务JMS两种消息域" class="headerlink" title="9. 消息服务JMS两种消息域"></a>9. 消息服务JMS两种消息域</h3><ul>
+<li>点对点(PTP)：<ul>
+<li>JMS把每一个消息传递给一个消息消费者(Message Consumer)</li>
+<li>点对点消息处理方式：<ul>
+<li>按照发送的顺序把消息写入并保存到队列中</li>
+<li>消息消费者处理队列中的消息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>发布/订阅(pub/sub)：<ul>
+<li>把消息发送给一个主题(Topic)，每个主题有多个订阅者，由JMS把消息的副本传递给主题的每个订阅者</li>
+</ul>
+</li>
 </ul>
 
             <div class="clearfix"></div>

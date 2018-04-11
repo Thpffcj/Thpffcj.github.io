@@ -186,7 +186,23 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-并行度"><a href="#1-并行度" class="headerlink" title="1. 并行度"></a>1. 并行度</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+      		<ul>
+<li>下面是这段时间系统了解Storm的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2018/03/05/Big-Data-Storm-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理Storm</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/18/Big-Data-Storm-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">Storm编程</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/21/Big-Data-Storm-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">Storm周边框架使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Storm架构及部署</a></li>
+<li><a href="http://www.thpffcj.com/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">并行度</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">分组策略与可靠性</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/06/Big-Data-Storm-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">DRPC</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Storm整合其他大数据框架的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">Storm综合项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>通过前面的学习，我们已经基本掌握了Storm的基本使用，不过在进行Storm项目实战之前，我们再来看一下概念。这篇博客主要学习了并行度这个概念，使用”并行度”来说明在 Storm 拓扑中既可以配置 executor 的数量，也可以配置 worker 和 task 的数量，这是关于Storm调优的关键知识。</p>
+<hr>
+<h2 id="1-并行度"><a href="#1-并行度" class="headerlink" title="1. 并行度"></a>1. 并行度</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
 <li>Storm distinguishes between the following three main entities that are used to actually run a topology in a Storm cluster:<ul>
 <li>Worker processes</li>
 <li>Executors (threads)</li>
