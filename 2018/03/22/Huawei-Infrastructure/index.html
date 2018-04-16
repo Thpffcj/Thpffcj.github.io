@@ -523,6 +523,316 @@
 <ul>
 <li>at：安排一个任务在未来执行，必须先启用atd进程</li>
 </ul>
+<p><br></p>
+<hr>
+<h2 id="2-存储基础原理"><a href="#2-存储基础原理" class="headerlink" title="2. 存储基础原理"></a>2. 存储基础原理</h2><h3 id="1-什么是存储"><a href="#1-什么是存储" class="headerlink" title="1. 什么是存储"></a>1. 什么是存储</h3><p><strong>数据的特点</strong></p>
+<ul>
+<li>高价值</li>
+<li>高增长</li>
+<li>多样化</li>
+</ul>
+<p><strong>广义的存储</strong></p>
+<ul>
+<li>硬件存储系统</li>
+<li>存储软件</li>
+<li>存储网络</li>
+<li>存储解决方案</li>
+</ul>
+<h3 id="2-存储发展历程"><a href="#2-存储发展历程" class="headerlink" title="2. 存储发展历程"></a>2. 存储发展历程</h3><p><strong>存储发展历程的两个推动力</strong></p>
+<ul>
+<li>业务需求</li>
+<li>技术提升</li>
+</ul>
+<p><strong>DAS存储形态 - JBOD</strong></p>
+<ul>
+<li>数据管控管理 + 存储</li>
+</ul>
+<p><strong>DAS存储形态 - 智能化</strong></p>
+<p><strong>SAN和NAS存储</strong></p>
+<ul>
+<li>SAN：服务器存储数据，首先要在服务器用文件系统来格式化<ul>
+<li>存储：结构化数据</li>
+<li>用于：数据库场景</li>
+</ul>
+</li>
+<li>NAS存储：把服务器的文件系统放在了存储里<ul>
+<li>存储：非结构化数据</li>
+<li>用于：关键办公文档共享，共享文件服务器</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-存储与应用环境"><a href="#3-存储与应用环境" class="headerlink" title="3. 存储与应用环境"></a>3. 存储与应用环境</h3><ul>
+<li>存储介质发展<ul>
+<li>打孔纸，磁带，软盘，光盘，硬盘，固态硬盘</li>
+</ul>
+</li>
+<li>存储体系<ul>
+<li>DAS，SAN，NAS</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-云数据中心基础原理"><a href="#3-云数据中心基础原理" class="headerlink" title="3. 云数据中心基础原理"></a>3. 云数据中心基础原理</h2><h3 id="1-云数据中心代替传统数据中心"><a href="#1-云数据中心代替传统数据中心" class="headerlink" title="1. 云数据中心代替传统数据中心"></a>1. 云数据中心代替传统数据中心</h3><h3 id="2-传统数据中心的组成"><a href="#2-传统数据中心的组成" class="headerlink" title="2. 传统数据中心的组成"></a>2. 传统数据中心的组成</h3><ul>
+<li>一套集中对外提供信息服务的IT设施 - 基础设施层<ul>
+<li>服务器，存储，网络 </li>
+</ul>
+</li>
+<li>保证IT设施稳定运行的环境设施 - 机房配套层<ul>
+<li>数据通信连接，环境的控制设备</li>
+</ul>
+</li>
+<li>应用软件层</li>
+<li>平台软件层</li>
+</ul>
+<h3 id="3-云数据中心的组成"><a href="#3-云数据中心的组成" class="headerlink" title="3. 云数据中心的组成"></a>3. 云数据中心的组成</h3><p><strong>云数据中心提供IT服务</strong></p>
+<ul>
+<li>计算服务</li>
+<li>存储服务</li>
+<li>网络服务</li>
+<li>数据库服务</li>
+<li>管理服务</li>
+</ul>
+<p><strong>云数据中心水平扩展能力含义</strong></p>
+<ul>
+<li>技术上的平滑扩展 </li>
+<li>水平扩展设备低成本</li>
+<li>资源的弹性使用</li>
+</ul>
+<p><strong>云数据中心水平扩展模式特点</strong></p>
+<ul>
+<li>资源共享</li>
+<li>弹性</li>
+<li>高效</li>
+<li>低成本</li>
+<li>高可靠</li>
+</ul>
+<p><strong>云数据中心核心 - 云操作系统</strong></p>
+<ul>
+<li>传统数据中心 + 云OS = 云数据中心</li>
+<li>云数据中心建设模式<ul>
+<li>云基础设施为所有业务提供IT支撑</li>
+<li>多业务共部署成为常态</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-云数据中心与传统数据中心区别"><a href="#4-云数据中心与传统数据中心区别" class="headerlink" title="4. 云数据中心与传统数据中心区别"></a>4. 云数据中心与传统数据中心区别</h3><ul>
+<li>传统数据中心<ul>
+<li>面对应用软件提供设备</li>
+<li>烟囱试架构</li>
+</ul>
+</li>
+<li>云数据中心<ul>
+<li>提供IT服务</li>
+<li>共享服务式架构</li>
+</ul>
+</li>
+<li>传统DC业务价值较低<ul>
+<li>资源闲置，利用率低于10%</li>
+<li>大量购买新机器，建设周期长达半年</li>
+</ul>
+</li>
+<li>云DC业务价值高<ul>
+<li>闲置资源共享</li>
+<li>资源获取：分钟级</li>
+<li>资源利用率翻倍：灵活调度</li>
+</ul>
+</li>
+</ul>
+<p><strong>云DC的几大特点</strong></p>
+<ul>
+<li>资源供给速度：几个月提升到分钟级</li>
+<li>使用效率：10%提升到60%</li>
+<li>扩容模式：垂直扩容到水平扩容</li>
+<li>成本：小型X86化</li>
+<li>维护效率：提升了三倍以上</li>
+</ul>
+<p><strong>云DC重点关注的问题</strong></p>
+<ul>
+<li>降低成本：云数据中心的高效建设问题</li>
+<li>提升效率：云数据中心的高效管理问题</li>
+<li>缩短上线时间：云数据中心的敏捷使用问题</li>
+</ul>
+<h3 id="5-云数据中心建设与演进路线"><a href="#5-云数据中心建设与演进路线" class="headerlink" title="5. 云数据中心建设与演进路线"></a>5. 云数据中心建设与演进路线</h3><ul>
+<li>选好标准</li>
+<li>统一架构</li>
+<li>制定演进路线</li>
+</ul>
+<p><strong>云DC演进方式一：全局规划</strong></p>
+<ul>
+<li>通过DC整合进行全局规划，分步实施<ul>
+<li>建立云DC核心样板店，确定云服务标准</li>
+<li>建立云DC企业级统一调度平台</li>
+<li>向周边复制云DC，强化网络自动化，实现多DC互联互通</li>
+<li>业务云化搬迁到云DC上</li>
+<li>持续优化经营</li>
+</ul>
+</li>
+</ul>
+<p><strong>云DC演进方式二</strong></p>
+<ul>
+<li>通过建设融合资源池，以点带面逐步渗透<ul>
+<li>建立一个资源池</li>
+<li>业务/平台云水平化</li>
+<li>多个资源池互联，形成混合云</li>
+<li>云的数据中心架构</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-管理好云数据中心"><a href="#6-管理好云数据中心" class="headerlink" title="6. 管理好云数据中心"></a>6. 管理好云数据中心</h3><p><strong>云数据中心效率提升也要靠管理</strong></p>
+<p><br></p>
+<hr>
+<h2 id="4-Vmwarev虚拟化概念原理"><a href="#4-Vmwarev虚拟化概念原理" class="headerlink" title="4. Vmwarev虚拟化概念原理"></a>4. Vmwarev虚拟化概念原理</h2><h3 id="1-服务器虚拟化介绍"><a href="#1-服务器虚拟化介绍" class="headerlink" title="1. 服务器虚拟化介绍"></a>1. 服务器虚拟化介绍</h3><p><strong>物理架构存在的问题</strong></p>
+<ul>
+<li>难以移动和复制</li>
+<li>受制于一定的硬件组件</li>
+<li>生命周期短</li>
+<li>服务器资源利用率低</li>
+</ul>
+<p><strong>虚拟基础架构</strong></p>
+<ul>
+<li>虚拟机</li>
+<li>虚拟化层</li>
+<li>物理主机</li>
+</ul>
+<h3 id="2-VMware组件介绍"><a href="#2-VMware组件介绍" class="headerlink" title="2. VMware组件介绍"></a>2. VMware组件介绍</h3><p><strong>VMware组件 - ESXi</strong></p>
+<ul>
+<li>虚拟主机，虚拟化层</li>
+<li>协调物理计算机资源</li>
+<li>管理虚拟机</li>
+<li>管理配置vSwitch</li>
+<li>管理虚拟存储资源</li>
+</ul>
+<p><strong>VMare虚拟数据中心</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/VMware%E8%99%9A%E6%8B%9F%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83.png" alt=""></p>
+<p><strong>VMware组件 - vCenter</strong></p>
+<ul>
+<li>提供集中管理接口</li>
+<li>实现虚拟化高级功能</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="6-网络基础原理"><a href="#6-网络基础原理" class="headerlink" title="6. 网络基础原理"></a>6. 网络基础原理</h2><h3 id="1-IP路由技术描述"><a href="#1-IP路由技术描述" class="headerlink" title="1. IP路由技术描述"></a>1. IP路由技术描述</h3><p><strong>IP路由基础知识</strong></p>
+<ul>
+<li>路由表：<ul>
+<li>协议类型</li>
+<li>Preference值</li>
+<li>Cost值</li>
+<li>出接口</li>
+<li>下一跳地址</li>
+<li>目的地址</li>
+</ul>
+</li>
+</ul>
+<p><strong>路由协议概述</strong></p>
+<ul>
+<li>按作用范围分类：<ul>
+<li>IGP(内部网关协议)：<ul>
+<li>OSPF</li>
+<li>ISIS</li>
+<li>RIP</li>
+</ul>
+</li>
+<li>EGP(外部网关协议)：<ul>
+<li>BGP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按路由协议算法分类：<ul>
+<li>距离矢量算法路由协议：<ul>
+<li>BGP</li>
+<li>RIP</li>
+</ul>
+</li>
+<li>链路状态算法路由协议：  <ul>
+<li>OSPF</li>
+<li>ISIS</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-IPv6技术描述"><a href="#2-IPv6技术描述" class="headerlink" title="2. IPv6技术描述"></a>2. IPv6技术描述</h3><p><strong>为什么要从IPv4升级到IPv6</strong></p>
+<ul>
+<li>IPv4地址不够用了</li>
+</ul>
+<p><strong>IPv6的地址结构和地址分类</strong></p>
+<ul>
+<li>IPv6地址(128位) = 前缀(64位) + 接口标识(64位)<ul>
+<li>前缀：相当于IPv4地址中的网络ID</li>
+<li>接口标识：相当于IPv4地址中的主机ID</li>
+<li>本地链路地址</li>
+<li>全球单播地址</li>
+</ul>
+</li>
+<li>首选格式：用十六进制标识，4个数字一组，中间用”:”隔开<ul>
+<li>2001:0410:0000:0001:0000:0000:0000:45ff/64</li>
+</ul>
+</li>
+<li>压缩格式：若以零开头可以省略，连续全零的组可用”::”表示，一个地址中::只能出现一次<ul>
+<li>2001:410:0:1::45ff/64</li>
+</ul>
+</li>
+<li>分类：<ul>
+<li>单播地址：标识一个接口，目的为单播地址的报文会被送到被标识的接口<ul>
+<li>未指定地址</li>
+<li>回环地址</li>
+<li>全球单播地址</li>
+<li>内嵌IPv4地址的IPv6地址</li>
+<li>链路本地地址</li>
+</ul>
+</li>
+<li>组播：标识多个接口，目的为组播地址的报文会被送到被标识的所有接口</li>
+<li>任意播：标识多个接口，目的为任意播地址的报文会被送到最近的一个被标识接口，最近节点是由路由协议来定义的</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-VLAN技术描述"><a href="#3-VLAN技术描述" class="headerlink" title="3. VLAN技术描述"></a>3. VLAN技术描述</h3><p><strong>VLAN技术产生的背景</strong></p>
+<p><strong>VLAN标签的产生方法</strong></p>
+<p><strong>VLAN标签的应用规则</strong></p>
+<p><br></p>
+<hr>
+<h2 id="7-大数据"><a href="#7-大数据" class="headerlink" title="7. 大数据"></a>7. 大数据</h2><h3 id="1-大数据概述"><a href="#1-大数据概述" class="headerlink" title="1. 大数据概述"></a>1. 大数据概述</h3><ul>
+<li>大数据：指无法在可承受的时间内用软硬件进行捕捉，管理和处理的数据集合，需要新处理模式才能使该数据集合成为具有更强的决策力，洞察力和流程优化等能力的海量，多样化的信息资产</li>
+</ul>
+<p><strong>大数据的价值</strong></p>
+<ul>
+<li>海量数据存储</li>
+<li>盘活归档数据</li>
+<li>潜力分析</li>
+<li>高清制播</li>
+</ul>
+<p><strong>大数据的特征</strong></p>
+<ul>
+<li>大数据4V<ul>
+<li>Volume：存储大，计算量大</li>
+<li>Variety：来源多，格式多</li>
+<li>Velocity：生成速度快，处理速度要求快</li>
+<li>Value：浪里淘沙却又弥足珍贵</li>
+</ul>
+</li>
+</ul>
+<p><strong>大数据带来的挑战</strong></p>
+<ul>
+<li>传统网络架构不适应”大数据时代”<ul>
+<li>从垂直访问到水平访问</li>
+</ul>
+</li>
+<li>数据中心将面临巨大压力<ul>
+<li>同时访问子系统压力大</li>
+</ul>
+</li>
+<li>数据仓库架构不适应高速反应的要求<ul>
+<li>非结构化数据无法处理</li>
+</ul>
+</li>
+</ul>
+<p><strong>大数据与云计算之间的关系</strong></p>
+<ul>
+<li>大数据是需求，云计算是解决之道</li>
+<li>云计算之平台，大数据是应用</li>
+</ul>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

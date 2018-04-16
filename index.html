@@ -228,20 +228,159 @@ Web复习
 
 面向对象软件构造
 
+软件系统设计与体系结构
+
+Linux程序设计
+
+J2EE与中间件
+
 
 LeetCode 学习心得
 LeetCode 算法面试分类解法 Using-Array
 
 LeetCode 算法面试分类解法 Using-Hash-Table
 
-LeetCode 算法面试分类解法 Stack-and-Queue
-
-Lee
+Leet
                       
                     </p>
                     
                     <p class="pull-right readMore">
                         <a href="/2019/01/01/置顶目录/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/15/Big-Data-Interview/">大数据面试</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-15T12:53:48.000Z" itemprop="datePublished">
+          2018-04-15
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        在2.5亿个整数中找出不重复的整数，注，内存不足以容纳这2.5亿个整数。
+方案1：采用2-Bitmap(每个数分配2bit，00表示不存在，01表示出现一次，10表示多次，11无意义)进行，共需内存2^32*2bit=1GB内存，还可以接受。然后扫描这2.5亿个整数，查看Bitmap中相对应位，如果是00变01，01变10，10保持不变。所描完事后，查看bitmap，把对应位是01的整数输出即可。
+方案2：也可采用与第1题类似的方法，进
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/15/Big-Data-Interview/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Big-Data-SparkSQL/">Big Data SparkSQL</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T03:38:10.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Big-Data-SparkSQL/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Java-Concurrent-Programming/">Java 并发编程</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T01:39:17.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 基本概念1. 并发基本概念
+并发：同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时”存在”的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行
+高并发(High Concurrency)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求
+
+并发：多个线
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Java-Concurrent-Programming/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">逻辑回归</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T01:15:08.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 什么是逻辑回归逻辑回归(Logistic Regression)：解决分类问题
+
+回归问题怎么解决分类问题
+将样本的特征和样本发生的概率联系起来，概率是一个数
+
+
+逻辑回归既可以看作是回归算法，也可以看作是分类算法
+通常作为分类算法用，只可以解决二分类问题
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">Read More...</a>
                     </p>
                     
                 </div>
@@ -480,196 +619,6 @@ From Business View
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/05/Service-Computing-and-SOA-Development/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/03/Linux-Programming/">Linux程序设计</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-03T00:58:30.000Z" itemprop="datePublished">
-          2018-04-03
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. Linux Basics
-是一种在GNU通用公共许可证下开发的开源的类Unix操作系统。
-第一版作者：Linus Torvalds
-
-1. 文件系统(File System)
-操作系统中负责存取和管理文件的部分
-一个文件及其某些属性的集合。它为这些文件的序列号(file serial numbers)提供了一个名称空间
-类型
-VFS，虚拟文件系统，与以下的磁盘文件系统(即文件的分区格式不同)，为底层的文件系统提供了统一的抽象
-EX
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/03/Linux-Programming/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/">分组策略与可靠性</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-02T10:18:42.000Z" itemprop="datePublished">
-          2018-04-02
-      </time>
-    
-    
-    | 
-    <a href='/tags/大数据/'>大数据</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Storm的一些记录
-初识实时流处理Storm
-Storm编程
-Storm周边框架使用
-Storm架构及部署
-并行度
-分组策略与可靠性
-DRPC
-Storm整合其他大数据框架的使用
-Storm综合项目实战
-
-
-
-知道了并行度这个概念之后，我们再来了解一下Storm的分组策略。之后我们看一下Storm对于可靠性的保证，一个大数据处理框架如果不能容错那么他就没有实用价值。
-
-1. 分组策略概述A stream gro
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/02/Big-Data-Storm-Real-time-Streaming-Data-Processing-6/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/">并行度</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-03-31T10:18:42.000Z" itemprop="datePublished">
-          2018-03-31
-      </time>
-    
-    
-    | 
-    <a href='/tags/大数据/'>大数据</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Storm的一些记录
-初识实时流处理Storm
-Storm编程
-Storm周边框架使用
-Storm架构及部署
-并行度
-分组策略与可靠性
-DRPC
-Storm整合其他大数据框架的使用
-Storm综合项目实战
-
-
-
-通过前面的学习，我们已经基本掌握了Storm的基本使用，不过在进行Storm项目实战之前，我们再来看一下概念。这篇博客主要学习了并行度这个概念，使用”并行度”来说明在 Storm 拓扑中既可以配置 exe
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/03/31/Big-Data-Storm-Real-time-Streaming-Data-Processing-5/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/">Storm架构及部署</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-03-29T11:42:19.000Z" itemprop="datePublished">
-          2018-03-29
-      </time>
-    
-    
-    | 
-    <a href='/tags/大数据/'>大数据</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Storm的一些记录
-初识实时流处理Storm
-Storm编程
-Storm周边框架使用
-Storm架构及部署
-并行度
-分组策略与可靠性
-DRPC
-Storm整合其他大数据框架的使用
-Storm综合项目实战
-
-
-
-了解了周边框架之后，我们来学习Storm的架构和单机部署。前面我们只是在IDEA里学习了编程，现在我们准备在虚拟机上部署环境，将前面的程序放到Storm单节点运行。
-
-1. Storm架构1. Storm
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/03/29/Big-Data-Storm-Real-time-Streaming-Data-Processing-4/">Read More...</a>
                     </p>
                     
                 </div>

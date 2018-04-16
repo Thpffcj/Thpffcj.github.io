@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Java 并发编程 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-14T01:39:17.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                <h1>Java 并发编程</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><h3 id="1-并发基本概念"><a href="#1-并发基本概念" class="headerlink" title="1. 并发基本概念"></a>1. 并发基本概念</h3><ul>
+<li>并发：同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时”存在”的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行</li>
+<li>高并发(High Concurrency)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求</li>
+</ul>
+<p><strong>并发：多个线程操作相同的资源，保证线程安全，合理使用资源</strong></p>
+<p><strong>高并发：服务能同时处理很多请求，提高程序性能</strong></p>
+<h3 id="2-并发基础"><a href="#2-并发基础" class="headerlink" title="2. 并发基础"></a>2. 并发基础</h3><p><strong>CPU多级缓存</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98.jpg" alt=""></p>
+<ul>
+<li>为什么需要CPU cache：CPU的频率太快了，快到主存跟不上，这样在处理器时钟周期内，CPU常常需要等待主存，浪费资源。所以cache的出现，是为了缓解CPU和内存之间速度的不匹配问题(结构：CPU -&gt; cache -&gt; memory)</li>
+</ul>
+<p><strong>CPU cache有什么意义</strong></p>
+<ul>
+<li>时间局部性：如果某个数据被访问，那么在不久的将来它很可能被再次访问</li>
+<li>空间局部性：如果某个数据被访问，那么与它相邻的数据很快也可能被访问</li>
+</ul>
+<p><strong>CPU多级缓存 - 缓存一致性(MESI)</strong></p>
+<ul>
+<li>用于保证多个CPU cache之间缓存共享数据的一致</li>
+<li>M: 被修改(Modified)<ul>
+<li>该缓存行只被缓存在该CPU的缓存中，并且是被修改过的(dirty)，即与主存中的数据不一致，该缓存行中的内存需要在未来的某个时间点(允许其它CPU读取请主存中相应内存之前)写回(write back)主存。当被写回主存之后，该缓存行的状态会变成独享(exclusive)状态。</li>
+</ul>
+</li>
+<li>E: 独享的(Exclusive)<ul>
+<li>该缓存行只被缓存在该CPU的缓存中，它是未被修改过的(clean)，与主存中数据一致。该状态可以在任何时刻当有其它CPU读取该内存时变成共享状态(shared)。同样地，当CPU修改该缓存行中内容时，该状态可以变成Modified状态。</li>
+</ul>
+</li>
+<li>S：共享的(Shared)<ul>
+<li>该状态意味着该缓存行可能被多个CPU缓存，并且各个缓存中的数据与主存数据一致(clean)，当有一个CPU修改该缓存行中，其它CPU中该缓存行可以被作废(变成无效状态(Invalid))。</li>
+</ul>
+</li>
+<li>I: 无效的(Invalid)<ul>
+<li>该缓存是无效的(可能有其它CPU修改了该缓存行)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>CPU多级缓存 - 乱序执行优化</strong></p>
+<ul>
+<li>处理器为提高运算速度而做出违背代码原有顺序的优化</li>
+</ul>
+<h3 id="3-Java内存模型-Java-Memory-Model"><a href="#3-Java内存模型-Java-Memory-Model" class="headerlink" title="3. Java内存模型(Java Memory Model)"></a>3. Java内存模型(Java Memory Model)</h3><ul>
+<li>JMM决定一个线程对共享变量的写入何时对另一个线程可见。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.jpg" alt=""></p>
+<ul>
+<li>一个本地变量如果是原始类型，那么它会被完全存储到栈区。</li>
+<li>一个本地变量也有可能是一个对象的引用，这种情况下，这个本地引用会被存储到栈中，但是对象本身仍然存储在堆区。</li>
+<li>对于一个对象的成员方法，这些方法中包含本地变量，仍需要存储在栈区，即使它们所属的对象在堆区。 </li>
+<li>对于一个对象的成员变量，不管它是原始类型还是包装类型，都会被存储到堆区。</li>
+<li>Static类型的变量以及类本身相关信息都会随着类本身存储在堆区。</li>
+<li>堆中的对象可以被多线程共享。如果一个线程获得一个对象的应用，它便可访问这个对象的成员变量。如果两个线程同时调用了同一个对象的同一个方法，那么这两个线程便可同时访问这个对象的成员变量，但是对于本地变量，每个线程都会拷贝一份到自己的线程栈中。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%A1%AC%E4%BB%B6%E5%86%85%E5%AD%98%E6%9E%B6%E6%9E%84.jpg" alt=""></p>
+<ul>
+<li>现代计算机一般都有2个以上CPU，而且每个CPU还有可能包含多个核心。因此，如果我们的应用是多线程的话，这些线程可能会在各个CPU核心中并行运行。</li>
+<li>在CPU内部有一组CPU寄存器，也就是CPU的储存器。CPU操作寄存器的速度要比操作计算机主存快的多。在主存和CPU寄存器之间还存在一个CPU缓存，CPU操作CPU缓存的速度快于主存但慢于CPU寄存器。某些CPU可能有多个缓存层(一级缓存和二级缓存)。计算机的主存也称作RAM，所有的CPU都能够访问主存，而且主存比上面提到的缓存和寄存器大很多。</li>
+<li>当一个CPU需要访问主存时，会先读取一部分主存数据到CPU缓存，进而在读取CPU缓存到寄存器。当CPU需要写数据到主存时，同样会先flush寄存器到CPU缓存，然后再在某些节点把缓存数据flush到主存。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%92%8C%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%E4%B9%8B%E9%97%B4%E7%9A%84%E6%A1%A5%E6%8E%A5.jpg" alt=""></p>
+<ul>
+<li>Java内存模型和硬件内存架构并不一致。硬件内存架构中并没有区分栈和堆，从硬件上看，不管是栈还是堆，大部分数据都会存到主存中，当然一部分栈和堆的数据也有可能会存到CPU寄存器中，如下图所示，Java内存模型和计算机硬件内存架构是一个交叉关系。</li>
+</ul>
+<p><strong>Java内存模型抽象结构</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%8A%BD%E8%B1%A1%E7%BB%93%E6%9E%84.jpg" alt=""></p>
+<ul>
+<li>线程之间的共享变量存储在主内存(main memory)中，每个线程都有一个私有的本地内存(local memory)，本地内存中存储了该线程以读/写共享变量的副本。本地内存是JMM的一个抽象概念，并不真实存在。它涵盖了缓存，写缓冲区，寄存器以及其他的硬件和编译器优化。</li>
+</ul>
+<h3 id="3-Java内存模型-同步八种操作"><a href="#3-Java内存模型-同步八种操作" class="headerlink" title="3. Java内存模型 - 同步八种操作"></a>3. Java内存模型 - 同步八种操作</h3><ul>
+<li>lock(锁定)：作用于主内存的变量，把一个变量标识为一条线程独占状态</li>
+<li>unlock(解锁)：作用于主内存的变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</li>
+<li>read(读取)：作用于主内存的变量，把一个变量值从主内存传输到线程的工作内存中，以便随后的load动作使用</li>
+<li>load(载入)：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中</li>
+<li>use(使用)：作用于工作内存的变量，把工作内存中的一个变量传递给执行引擎</li>
+<li>assign(赋值)：作用于工作内存的变量，它把一个从执行引擎接收到的值赋值给工作内存的变量</li>
+<li>store(存储)：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write的操作</li>
+<li>write(写入)：作用于主内存的变量，它把store操作从工作内存中的一个变量的值传送到主内存的变量中</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%20-%20%E5%90%8C%E6%AD%A5%E5%85%AB%E7%A7%8D%E6%93%8D%E4%BD%9C.jpg" alt=""></p>
+<p><strong>使用规则</strong></p>
+<ul>
+<li>read和load，store和write必须成对出现，即工作内存或主内存必须将已经从另一方读取到的值写入自己所持有的变量，不允许拒绝。</li>
+<li>工作内存最后一次assign必须同步回主内存，而工作内存同步回主内存的变量也必须执行过assign操作。</li>
+<li>工作内存不可以使用未初始化的变量，即use之前必须要有load，store之前必须要有load和assign。</li>
+<li>一个变量只能由一个线程lock，也只能由这个线程unlock，线程可以多次lock，对应的解锁需要同样次数的unlock。</li>
+<li>不允许unlock未被lock过的变量，且unlock操作必须在store和write之后。</li>
+</ul>
+<h3 id="4-并发的优势与风险"><a href="#4-并发的优势与风险" class="headerlink" title="4. 并发的优势与风险"></a>4. 并发的优势与风险</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%B9%B6%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%A3%8E%E9%99%A9.jpg" alt=""></p>
+<h3 id="5-并发编程与线程安全"><a href="#5-并发编程与线程安全" class="headerlink" title="5. 并发编程与线程安全"></a>5. 并发编程与线程安全</h3><ul>
+<li>我们首先定义几个注解标识以后的类，并无实际作用</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/14.
+ * 线程安全的类或者写法
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface ThreadSafe {
+
+    String value() default &quot;&quot;;
+}
+
+/**
+ * Created by Thpffcj on 2018/4/14.
+ * 线程不安全的类或者写法
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface NotThreadSafe {
+
+    String value() default &quot;&quot;;
+}
+
+/**
+ * Created by Thpffcj on 2018/4/14.
+ * 推荐的类或者写法
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Recommend {
+
+    String value() default &quot;&quot;;
+}
+
+/**
+ * Created by Thpffcj on 2018/4/14.
+ * 不推荐的类或者写法
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface NotRecommend {
+
+    String value() default &quot;&quot;;
+}
+</code></pre><h3 id="6-并发模拟"><a href="#6-并发模拟" class="headerlink" title="6. 并发模拟"></a>6. 并发模拟</h3><ul>
+<li>Postman：Http请求模拟工具</li>
+<li>Apache Bench(AB)：Apache附带的工具，测试网站性能</li>
+<li>JMeter：Apache组织开发的压力测试工具</li>
+<li>代码：Semaphore，CountDownLatch等</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-线程安全性"><a href="#2-线程安全性" class="headerlink" title="2. 线程安全性"></a>2. 线程安全性</h2><ul>
+<li>定义：当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些进程将如何交替执行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么就称这个类是线程安全的<ul>
+<li>原子性：提供了互斥访问，同一时刻只能有一个线程来对它进行操作</li>
+<li>可见性：一个线程对主内存的修改可以及时的被其他线程观察到</li>
+<li>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序的存在，该观察结果一般杂乱无序</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-原子性"><a href="#1-原子性" class="headerlink" title="1. 原子性"></a>1. 原子性</h3><p><strong>原子性 - Atomic包</strong></p>
+<h3 id="2-可见性"><a href="#2-可见性" class="headerlink" title="2. 可见性"></a>2. 可见性</h3><h3 id="3-有序性"><a href="#3-有序性" class="headerlink" title="3. 有序性"></a>3. 有序性</h3><hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/suifeng3051/article/details/52611310" target="_blank" rel="external">全面理解Java内存模型</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/14/Big-Data-SparkSQL/" style="float: left;">
+        ← Big Data SparkSQL
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">
+        逻辑回归 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
