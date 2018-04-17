@@ -323,6 +323,52 @@
 <li>独立</li>
 </ul>
 <p><strong>虚拟化应用举例 - 热迁移</strong></p>
+<h3 id="4-复习"><a href="#4-复习" class="headerlink" title="4. 复习"></a>4. 复习</h3><p><strong>云计算数据中心解决方案端到端总体分层架构</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%BA%91%E8%AE%A1%E7%AE%97%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%80%BB%E4%BD%93%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>云计算架构关键技术</strong></p>
+<ul>
+<li>超大规模资源调度算法</li>
+<li>异构集成技术</li>
+<li>应用无关的可靠性保障技术</li>
+<li>单VM及多VM的弹性伸缩技术</li>
+<li>计算近端IO性能加速技术</li>
+<li>网络虚拟化技术</li>
+<li>应用管理自动化技术 </li>
+</ul>
+<p><strong>云计算核心架构竞争力衡量维度</strong></p>
+<ul>
+<li>低TCO</li>
+<li>弹性伸缩</li>
+<li>高性能</li>
+<li>领先的用户体验</li>
+<li>高安全</li>
+<li>高可靠</li>
+</ul>
+<p><strong>测试</strong></p>
+<ul>
+<li>软件即服务（SaaS）的云计算，更有利于服务质量的改善，相比于其他的服务模式，可以更快速地从故障中恢复业务的正常运行。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>下列哪一种服务模式的云计算，可以为未来的业务扩展、功能扩展等提供最大的可扩展余地？<ul>
+<li>IaaS</li>
+</ul>
+</li>
+<li>下列哪一种技术是云计算基础架构的基石？<ul>
+<li>虚拟化</li>
+</ul>
+</li>
+<li>IaaS是下列哪一种服务模式的简称？<ul>
+<li>基础设施即服务</li>
+</ul>
+</li>
+<li>下列选项中，亚马逊AWS提供了哪些类型的云服务？<ul>
+<li>IaaS</li>
+<li>PaaS</li>
+<li>SaaS</li>
+</ul>
+</li>
+</ul>
 <p><br></p>
 <hr>
 <h2 id="2-OpenStack基础原理"><a href="#2-OpenStack基础原理" class="headerlink" title="2. OpenStack基础原理"></a>2. OpenStack基础原理</h2><h3 id="1-OpenStack起源"><a href="#1-OpenStack起源" class="headerlink" title="1. OpenStack起源"></a>1. OpenStack起源</h3><p><strong>OpenStack项目起源</strong></p>
@@ -705,6 +751,65 @@
 </ul>
 <p><strong>Heat架构</strong></p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/Heat%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<h3 id="11-复习"><a href="#11-复习" class="headerlink" title="11. 复习"></a>11. 复习</h3><p><strong>Openstack是目前最主流的开源云操作系统内核 </strong></p>
+<ul>
+<li>资源抽象</li>
+<li>资源分配与负载调度</li>
+<li>应用生命周期管理</li>
+<li>系统运维</li>
+<li>人机交互</li>
+</ul>
+<p><strong>OpenStack的三大组件</strong></p>
+<ul>
+<li>三大组件<ul>
+<li>计算</li>
+<li>网络</li>
+<li>存储 </li>
+</ul>
+</li>
+<li>共享服务<ul>
+<li>AAA</li>
+<li>数据库</li>
+<li>测量</li>
+<li>业务发放</li>
+</ul>
+</li>
+</ul>
+<p><strong>OpenStack由一组离散的服务组成</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/OpenStack%E7%94%B1%E4%B8%80%E7%BB%84%E7%A6%BB%E6%95%A3%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BB%84%E6%88%90.png" alt=""></p>
+<p><strong>OpenStack的架构设计</strong></p>
+<ul>
+<li>伸缩性和弹性是主要目标；任何会约束目标的特性都是可选的</li>
+<li>一切都应该是异步的，如果不能异步，那么参考第2条进行设计</li>
+<li>所有必选服务部件必须是可以水平扩展的</li>
+<li>总是使用Shared Nothing的架构或者Sharding技术(切分技术)，如果做不到Shared Nothing或者Sharding，那么参考第2条进行设计</li>
+<li>一切都应是分布式，特别是处理逻辑</li>
+<li>接受最终的一致性，尽可能的贯彻这一原则</li>
+<li>测试一切，所有递交的代码都应测试。</li>
+</ul>
+<p><strong>测验</strong></p>
+<ul>
+<li>Openstack组件中下列哪一项可以以云盘的存储方式对外提供服务？<ul>
+<li>swift</li>
+</ul>
+</li>
+<li>Openstack的开源项目最早是由rackspace公司和NASA提供的，该两家机构提供项目对应正确的是下列哪一项？<ul>
+<li>swift和nova</li>
+</ul>
+</li>
+<li>下列关于Nova组件各个功能模块的描述哪一项是错误的？<ul>
+<li>nova-scheduler直接访问数据库从而决定将实例分配到具体的计算节点上</li>
+</ul>
+</li>
+<li>下列关于虚拟机实例管理中网络配置的描述，哪些是错误的？ <ul>
+<li>指定租户内，普通<em>member</em>角色下用户可以创建外网网络并指定外网的网段地址</li>
+</ul>
+</li>
+<li>下列关于创建虚拟机实例时指定镜像位置的描述错误的有哪些？<ul>
+<li>通过–copy-from指定一个NFS或SMB的共享路径</li>
+</ul>
+</li>
+</ul>
 <p><br></p>
 <hr>
 <h2 id="3-Docker基础原理"><a href="#3-Docker基础原理" class="headerlink" title="3. Docker基础原理"></a>3. Docker基础原理</h2><h3 id="1-Docker发展历程"><a href="#1-Docker发展历程" class="headerlink" title="1. Docker发展历程"></a>1. Docker发展历程</h3><ul>
@@ -943,6 +1048,153 @@
 </ul>
 <p><strong>应用案例：京东618</strong></p>
 <p><strong>应用案例：天猫双十一</strong></p>
+<h3 id="7-复习"><a href="#7-复习" class="headerlink" title="7. 复习"></a>7. 复习</h3><p><strong>测试</strong></p>
+<ul>
+<li>Docker容器本质上是宿主机上的进程，宿主机只能是硬件服务器。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>在Docker中，关于容器的描述中不正确的哪项？<ul>
+<li>Docker容器比较适合运行多个进程</li>
+</ul>
+</li>
+<li>下列关于Docker的namespace特征特性描述中哪一项是不正确的？<ul>
+<li>namespace不允许每个container拥有独立的hostname和domain name</li>
+</ul>
+</li>
+<li>下列哪个不是Docker引擎的组件？<ul>
+<li>Docker registries</li>
+</ul>
+</li>
+<li>Docker 作为成功的容器解决方案，具有下列哪些特性？<ul>
+<li>跨平台</li>
+<li>可移植</li>
+<li>简单易用</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="4-微服务基础概念"><a href="#4-微服务基础概念" class="headerlink" title="4. 微服务基础概念"></a>4. 微服务基础概念</h2><h3 id="1-从单体架构到微服务架构的演进"><a href="#1-从单体架构到微服务架构的演进" class="headerlink" title="1. 从单体架构到微服务架构的演进"></a>1. 从单体架构到微服务架构的演进</h3><ul>
+<li>Monolithic单体式架构指的是尽管是模块化逻辑，但是最终还是会打包并部署为一个单一应用<ul>
+<li>Monolithic单体式架构的优缺点很鲜明</li>
+</ul>
+</li>
+<li>单体式架构面临的挑战<ul>
+<li>维护成本</li>
+<li>缺陷修复成本</li>
+<li>系统扩展成本</li>
+</ul>
+</li>
+<li>微服务架构模式倡导的做法<ul>
+<li>提倡将Monolithic单体式架构因共用划分为一系列小的服务，服务之间相互协调，相互配合，为用户提供服务</li>
+<li>优点：包括每个服务足够内聚，代码容易理解，开发效率高</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-基于Docker的微服务应用架构设计"><a href="#2-基于Docker的微服务应用架构设计" class="headerlink" title="2. 基于Docker的微服务应用架构设计"></a>2. 基于Docker的微服务应用架构设计</h3><p><strong>微服务架构设计需要遵循的模式</strong></p>
+<ul>
+<li>比较知名的”12-Factor”<ul>
+<li>提供了相应的方法论</li>
+<li>将差异降到最低</li>
+</ul>
+</li>
+<li>基准代码：<ul>
+<li>基准代码和应用之间总是保持一一对应的关系：一旦有多个基准代码，就不能称为一个应用，而是一个分布式系统</li>
+<li>多个应用共享一份基准代码是有悖于12-Factor原则</li>
+</ul>
+</li>
+<li>依赖关系：<ul>
+<li>应用程序不会隐式依赖系统级的类库，他一定通过依赖清单，确切的声明所有依赖项</li>
+<li>此外，在运行过程中通过依赖隔离工具来确保程序不会调用系统中存在但清单中未声明的依赖项</li>
+</ul>
+</li>
+<li>配置：<ul>
+<li>环境变量可以非常方便地在不同的部署间做修改，却不动一行代码</li>
+<li>与配置文件不同，不小心把它们签入代码库的概率微乎其微</li>
+<li>与一些传统的解决配置问题的机制(比如Java的属性配置文件)相比，环境变量与语言和系统无关 </li>
+</ul>
+</li>
+<li>12-Factor应用不会区别对待本地或第三方服务。对应用程序而言，两种都是附加资源</li>
+<li>12-Factor应用的支持任意部署。如，可以在不进行任何代码改动的情况下，将本地MySQL数据库换成第三方服务</li>
+</ul>
+<h3 id="3-基于容器的微服务架构剖析"><a href="#3-基于容器的微服务架构剖析" class="headerlink" title="3. 基于容器的微服务架构剖析"></a>3. 基于容器的微服务架构剖析</h3><p><strong>Docker本质</strong></p>
+<ul>
+<li>Docker比VM虚拟机更加轻量</li>
+</ul>
+<p><strong>Docker流行起来的因素</strong></p>
+<ul>
+<li>每个Docker里面装一个服务或应用，一个服务器上可以运行多个Docker</li>
+</ul>
+<p><strong>集群分布你的微服务</strong></p>
+<ul>
+<li>每个Docker中运行一个微服务</li>
+</ul>
+<p><strong>Docker对传统PaaS平台的挑战</strong></p>
+<ul>
+<li>Docker是一种崭新的PaaS微平台</li>
+</ul>
+<p><strong>Docker的安全性</strong></p>
+<ul>
+<li>Docker利用容器将资源进行有效隔离</li>
+</ul>
+<h3 id="4-微服务架构设计模式"><a href="#4-微服务架构设计模式" class="headerlink" title="4. 微服务架构设计模式"></a>4. 微服务架构设计模式</h3><p><strong>客户端如何访问这些服务</strong></p>
+<ul>
+<li>后台有N个服务，前台就需要记住管理N个服务，一个服务下线/更新/升级，前台就要重新部署，这明显不服和拆分的理念</li>
+<li>API Gateway</li>
+</ul>
+<p><strong>服务之间如何通信</strong></p>
+<ul>
+<li>服务间通信是IPC(inter process communication)，已经有很多成熟的方案</li>
+</ul>
+<p><strong>这么多服务，怎么找</strong></p>
+<ul>
+<li>基本都是通过zookeeper等类似技术做服务注册信息的分布式管理</li>
+</ul>
+<p><strong>服务挂了怎么办</strong></p>
+<ul>
+<li>重试机制/限流/负载均衡/降级(本地缓存)</li>
+</ul>
+<h3 id="5-微服务云架构管理"><a href="#5-微服务云架构管理" class="headerlink" title="5. 微服务云架构管理"></a>5. 微服务云架构管理</h3><p><strong>微服务简化</strong></p>
+<ul>
+<li>基于容器技术的云服务将极大的简化容器化微服务创建，集成，部署，运维的整个流程，从而推动微服务在云端的大规模实践</li>
+</ul>
+<p><strong>微服务集成</strong></p>
+<ul>
+<li>用户可以自由组合，复用数以万计的容器化微服务，向搭积木一样轻松集成应用</li>
+</ul>
+<p><strong>微服务部署</strong></p>
+<ul>
+<li>容器云平台容器为应用发布的载体，用户不必指定传统部署方式中繁琐的步骤，只需提供容器镜像和简单的容器配置，平台会将整个部署流程自动化</li>
+</ul>
+<p><strong>微服务运维</strong></p>
+<ul>
+<li>容器云平台完全屏蔽底层云主机和基础架构运维，让用户专注于应用</li>
+<li>通过容器编排，自动修复，自动扩展，监控日志等高级应用生命周期服务，实现容器化微服务的智能托管</li>
+</ul>
+<h3 id="6-复习"><a href="#6-复习" class="headerlink" title="6. 复习"></a>6. 复习</h3><p><strong>测试</strong></p>
+<ul>
+<li>应用想要做到持续部署就必须缩小本地与线上差异。开发人员应该反对在不同环境间使用不同的后端服务，即使适配器已经可以几乎消除使用上的差异。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>微服务架构每个服务都有自己的数据库，而不像传统架构下多个服务共享一个数据库。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>微服务被定义为特定背景下，为了开发出速度更快、更有弹性且用户体验更佳的应用而采用的自动化系统，下列哪一种场景环境不适合微服务？<ul>
+<li>必须理解其他部件运作原理</li>
+</ul>
+</li>
+<li>单体式应用的特点不包括下列哪一项？<ul>
+<li>每一个单体式应用的模块都是微型六角形应用，都有自己的业务逻辑和适配器。</li>
+</ul>
+</li>
+<li>关于微服务12要素中的“Dependences依赖”，下列哪一项理解是不正确的？<ul>
+<li>这一做法应用到生产和开发环境时可以不一致。</li>
+</ul>
+</li>
+</ul>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

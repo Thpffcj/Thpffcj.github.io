@@ -465,11 +465,18 @@ public class WordCountApp {
 <pre><code>[root@localhost lib]# ls
 hadoop-1.0-SNAPSHOT.jar
 </code></pre><ul>
-<li><p>先看一下输入文件有没有</p>
-<p>  [root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -ls /<br>  18/01/06 14:49:33 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>  Found 5 items<br>  -rw-r–r–   1 root supergroup  311585484 2018-01-03 19:10 /hadoop-2.6.0-cdh5.7.0.tar.gz<br>  drwxr-xr-x   - root supergroup          0 2018-01-04 13:47 /hdfsapi<br>  -rw-r–r–   1 root supergroup         49 2018-01-03 15:39 /hello.txt<br>  drwx——   - root supergroup          0 2018-01-05 19:32 /tmp<br>  drwxr-xr-x   - root supergroup          0 2018-01-05 19:32 /user</p>
-</li>
-<li><p>运行jar包</p>
-</li>
+<li>先看一下输入文件有没有</li>
+</ul>
+<pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop fs -ls /
+18/01/06 14:49:33 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 5 items
+-rw-r--r--   1 root supergroup  311585484 2018-01-03 19:10 /hadoop-2.6.0-cdh5.7.0.tar.gz
+drwxr-xr-x   - root supergroup          0 2018-01-04 13:47 /hdfsapi
+-rw-r--r--   1 root supergroup         49 2018-01-03 15:39 /hello.txt
+drwx------   - root supergroup          0 2018-01-05 19:32 /tmp
+drwxr-xr-x   - root supergroup          0 2018-01-05 19:32 /user
+</code></pre><ul>
+<li>运行jar包</li>
 </ul>
 <pre><code>[root@localhost hadoop-2.6.0-cdh5.7.0]# hadoop jar /home/thpffcj/lib/hadoop-1.0-SNAPSHOT.jar cn.edu.nju.hadoop.mapreduce.WordCountApp hdfs://192.168.92.130:8020/hello.txt hdfs://192.168.92.130:8020/output/wc
 </code></pre><ul>
