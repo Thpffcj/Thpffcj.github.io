@@ -257,6 +257,38 @@ Leet
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/04/15/Big-Data-Interview/">大数据面试</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-15T12:53:48.000Z" itemprop="datePublished">
+          2018-04-15
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 给定a、b两个文件，各存放50亿个url，每个url各占64字节，内存限制是4G，让你找出a、b文件共同的url?
+假如每个url大小为10bytes，那么可以估计每个文件的大小为50G×64=320G，远远大于内存限制的4G，所以不可能将其完全加载到内存中处理，可以采用分治的思想来解决。
+Step1：遍历文件a，对每个url求取hash(url)%1000，然后根据所取得的值将url分别存储到1000个小文件(记为a0,a1,…
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/15/Big-Data-Interview/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Storm综合项目实战</a></h3>
                     <span>
                         <span class="post-meta">
@@ -434,56 +466,6 @@ Java EE 平台使用分布式多层应用模型来开发企业应用。
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/05/J2EE-and-Middleware/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/05/Service-Computing-and-SOA-Development/">服务计算与SOA开发</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-05T00:42:29.000Z" itemprop="datePublished">
-          2018-04-05
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 概述
-1. SOA
-支持全面的服务计算范例的基础性的架构模型
-SOA是一种商业和技术结合的方法，应用程序依赖于可用的服务来促进业务流程
-服务是一个独立的可重用的软件组件，它由服务提供者提供，被服务请求者消费
-
-
-2. SOA的好处
-From IT View
-松耦合，消除假依赖 - 复用
-语言，平台和厂商中立
-消除时间依赖
-消除访问地址依赖
-消除访问协议依赖
-
-
-服务间接寻址 - 灵活
-
-
-From Business View
-保护
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/05/Service-Computing-and-SOA-Development/">Read More...</a>
                     </p>
                     
                 </div>

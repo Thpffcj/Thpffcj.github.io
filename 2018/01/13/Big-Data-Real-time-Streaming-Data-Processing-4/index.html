@@ -406,7 +406,7 @@ def this(conf: SparkConf, batchDuration: Duration) = {
 </ul>
 <p><br></p>
 <hr>
-<h2 id="3-Spark-Streaming进阶"><a href="#3-Spark-Streaming进阶" class="headerlink" title="3. Spark Streaming进阶"></a>3. Spark Streaming进阶</h2><h3 id="1-带状态的算子：UpdateStateByKet"><a href="#1-带状态的算子：UpdateStateByKet" class="headerlink" title="1. 带状态的算子：UpdateStateByKet"></a>1. 带状态的算子：UpdateStateByKet</h3><ul>
+<h2 id="3-Spark-Streaming进阶"><a href="#3-Spark-Streaming进阶" class="headerlink" title="3. Spark Streaming进阶"></a>3. Spark Streaming进阶</h2><h3 id="1-带状态的算子：UpdateStateByKey"><a href="#1-带状态的算子：UpdateStateByKey" class="headerlink" title="1. 带状态的算子：UpdateStateByKey"></a>1. 带状态的算子：UpdateStateByKey</h3><ul>
 <li>The updateStateByKey operation allows you to maintain arbitrary state while continuously updating it with new information. To use this, you will have to do two steps.<ul>
 <li>Define the state - The state can be an arbitrary data type.</li>
 <li>Define the state update function - Specify with a function how to update the state using the previous state and the new values from an input stream.</li>

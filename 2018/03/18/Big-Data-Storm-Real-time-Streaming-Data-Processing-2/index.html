@@ -382,7 +382,7 @@ public interface IBolt extends Serializable {
 }
 </code></pre><ul>
 <li>职责：接收tuple数据，并进行相应的处理(filtering/joining/..)</li>
-<li>hole住tuple再处理</li>
+<li>hold住tuple再处理</li>
 <li>IBolt会在一个运行的机器上创建，使用Java序列化它，然后提交到主节点(nimbus)上去执行，nimbus会启动worker来反序列化，调用prepare方法，然后才开始进行tuple处理</li>
 </ul>
 <p><strong>核心方法</strong></p>
@@ -573,8 +573,6 @@ public class LocalSumStormTopology {
         builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
         builder.setBolt(&quot;SumBolt&quot;, new SumBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
 
-
-
         // 创建一个本地Storm集群：本地模式运行，不需要搭建Storm集群
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology(&quot;LocalSumStormTopology&quot;, new Config(),
@@ -748,28 +746,80 @@ public class LocalWordCountStormTopology {
             map.put(word, count);
 
             // 3）输出
-            System.out.println(&quot;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">                Set&lt;Map.Entry&lt;String,Integer&gt;&gt; entrySet = map.entrySet();</div><div class="line">                for(Map.Entry&lt;String,Integer&gt; entry : entrySet) &#123;</div><div class="line">                    System.out.println(entry);</div><div class="line">                &#125;</div><div class="line">    </div><div class="line">            &#125;</div><div class="line">    </div><div class="line">            public void declareOutputFields(OutputFieldsDeclarer declarer) &#123;</div><div class="line">    </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">- Topology提交功能实现及测试</div><div class="line"></div><div class="line"></div><div class="line">    public class LocalWordCountStormTopology &#123;</div><div class="line">    </div><div class="line">        ...</div><div class="line">    </div><div class="line">        public static void main(String[] args) &#123;</div><div class="line">    </div><div class="line">            // 通过TopologyBuilder根据Spout和Bolt构建Topology</div><div class="line">            TopologyBuilder builder = new TopologyBuilder();</div><div class="line">            builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());</div><div class="line">            builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);</div><div class="line">            builder.setBolt(&quot;CountBolt&quot;, new CountBolt()).shuffleGrouping(&quot;SplitBolt&quot;);</div><div class="line">    </div><div class="line">            // 创建本地集群</div><div class="line">            LocalCluster cluster = new LocalCluster();</div><div class="line">            cluster.submitTopology(&quot;LocalWordCountStormTopology&quot;, new Config(), builder.createTopology());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">- 查看结果</div></pre></td></tr></table></figure>
+            System.out.println(&quot;-----------------------&quot;);
+            Set&lt;Map.Entry&lt;String,Integer&gt;&gt; entrySet = map.entrySet();
+            for(Map.Entry&lt;String,Integer&gt; entry : entrySet) {
+                System.out.println(entry);
+            }
 
+        }
+
+        public void declareOutputFields(OutputFieldsDeclarer declarer) {
+
+        }
+    }
+}
+</code></pre><ul>
+<li>Topology提交功能实现及测试</li>
+</ul>
+<pre><code>public class LocalWordCountStormTopology {
+
+    ...
+
+    public static void main(String[] args) {
+
+        // 通过TopologyBuilder根据Spout和Bolt构建Topology
+        TopologyBuilder builder = new TopologyBuilder();
+        builder.setSpout(&quot;DataSourceSpout&quot;, new DataSourceSpout());
+        builder.setBolt(&quot;SplitBolt&quot;, new SplitBolt()).shuffleGrouping(&quot;DataSourceSpout&quot;);
+        builder.setBolt(&quot;CountBolt&quot;, new CountBolt()).shuffleGrouping(&quot;SplitBolt&quot;);
+
+        // 创建本地集群
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology(&quot;LocalWordCountStormTopology&quot;, new Config(), builder.createTopology());
+    }
+}
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>-----------------------
 a=1
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a=1</div><div class="line">b=1</div></pre></td></tr></table></figure>
-
+-----------------------
+a=1
+b=1
+-----------------------
 a=1
 b=1
 c=1
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a=1</div><div class="line">b=1</div><div class="line">c=1</div><div class="line">d=1</div></pre></td></tr></table></figure>
-
+-----------------------
+a=1
+b=1
+c=1
+d=1
+-----------------------
 a=2
 b=1
 c=1
 d=1
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a=2</div><div class="line">b=2</div><div class="line">c=1</div><div class="line">d=1</div><div class="line">11144 [Thread-24-__system-executor[-1 -1]] INFO  o.a.s.d.executor - Preparing bolt __system:(-1)</div></pre></td></tr></table></figure>
-
+-----------------------
+a=2
+b=2
+c=1
+d=1
+11144 [Thread-24-__system-executor[-1 -1]] INFO  o.a.s.d.executor - Preparing bolt __system:(-1)
+-----------------------
 a=2
 b=2
 c=2
 d=1
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a=2</div><div class="line">b=2</div><div class="line">c=2</div><div class="line">d=2</div><div class="line">11152 [Thread-24-__system-executor[-1 -1]] INFO  o.a.s.d.executor - Prepared bolt __system:(-1)</div><div class="line">11152 [Thread-26-__acker-executor[4 4]] INFO  o.a.s.d.executor - Preparing bolt __acker:(4)</div></pre></td></tr></table></figure>
-
+-----------------------
+a=2
+b=2
+c=2
+d=2
+11152 [Thread-24-__system-executor[-1 -1]] INFO  o.a.s.d.executor - Prepared bolt __system:(-1)
+11152 [Thread-26-__acker-executor[4 4]] INFO  o.a.s.d.executor - Preparing bolt __acker:(4)
+-----------------------
 a=2
 b=3
 c=2

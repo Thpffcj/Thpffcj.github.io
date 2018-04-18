@@ -443,17 +443,89 @@
 </li>
 </ul>
 <p><img src="http://oseihavwm.bkt.clouddn.com/LVM%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>LVM的优点</strong></p>
+<ul>
+<li>文件系统可以跨多个磁盘</li>
+<li>动态地扩展文件系统的大小</li>
+<li>增加新磁盘到LVM的存储池中</li>
+</ul>
+<p><strong>LVM的要点</strong></p>
+<ul>
+<li>按需分配文件系统的大小</li>
+<li>把不同的数据放在不同的卷组中</li>
+</ul>
+<p><strong>物理卷管理</strong></p>
+<ul>
+<li>pvcreate：将普通的分区加上pv属性</li>
+<li>pvremove：删除分区的pv属性</li>
+<li>pvscan, pvdisplay：查看pv的信息，pvdisplay更为详细</li>
+</ul>
+<p><strong>卷组管理</strong></p>
+<ul>
+<li>vgcreate:创建卷组</li>
+<li>vgscan：查看卷组的信息</li>
+<li>vgdisplay：查看卷组的详细参数</li>
+<li>vgreduce：缩小卷组，把物理卷从卷组中删除</li>
+<li>vgextend：扩展卷组，把某个物理卷添加到卷组中</li>
+<li>vgremove：删除卷组</li>
+</ul>
+<p><strong>逻辑卷管理</strong></p>
+<ul>
+<li>lvcreate：创建逻辑卷</li>
+<li>lvscan：查看逻辑卷的信息</li>
+<li>lvdisplay：查看逻辑卷的具体参数</li>
+<li>lvextend：增大逻辑卷大小</li>
+<li>lvreduce：减小逻辑卷大小</li>
+<li>lvremove：删除逻辑卷</li>
+</ul>
+<p><strong>管理文件系统空间</strong></p>
+<ul>
+<li>增大文件系统空间<ul>
+<li>先卸载逻辑卷</li>
+<li>然后通过vgextend, lvextend等命令增大lv的空间</li>
+<li>再使用resize2fs将逻辑卷容量增加</li>
+<li>最后将逻辑卷挂载到目录树</li>
+</ul>
+</li>
+<li>缩小文件系统空间<ul>
+<li>先卸载逻辑卷</li>
+<li>然后使用resize2fs将逻辑卷容量缩小</li>
+<li>再通过lvreduce等命令减小lv的空间</li>
+<li>最后将逻辑卷挂载到目录树</li>
+</ul>
+</li>
+</ul>
 <h3 id="10-Linux网络管理"><a href="#10-Linux网络管理" class="headerlink" title="10. Linux网络管理"></a>10. Linux网络管理</h3><p><strong>查询和配置网口</strong></p>
 <ul>
 <li>ifconfig：查看网口的配置<ul>
 <li>查看ip地址，广播地址和掩码等</li>
 </ul>
 </li>
-<li>修改网口的配置</li>
+<li>修改网口的配置<ul>
+<li>ifconfig 网口 [参数]</li>
+<li>/etc/sysconfig/network/ifcfg-[网口]</li>
+</ul>
+</li>
 </ul>
 <p><strong>查询和配置路由</strong></p>
+<ul>
+<li>route：查询本机路由表</li>
+<li>新增路由<ul>
+<li>route add [-net] [-host] [netmaskNm] [gw Gw] [[dev] if]</li>
+<li>/etc/sysconfig/netword/routes</li>
+</ul>
+</li>
+</ul>
 <p><strong>侦测网络</strong></p>
+<ul>
+<li>ping [参数] 目的地址：检查网络是否通畅或者网络连接速度</li>
+<li>traceroute &lt;地址 or 主机名&gt;：探测数据包从源到目的地经过的路由</li>
+</ul>
 <p><strong>配置常用网络服务</strong></p>
+<ul>
+<li>配置FTP服务</li>
+<li>配置Telnet服务</li>
+</ul>
 <h3 id="11-Linux进程和任务管理"><a href="#11-Linux进程和任务管理" class="headerlink" title="11. Linux进程和任务管理"></a>11. Linux进程和任务管理</h3><p><strong>进程管理</strong></p>
 <ul>
 <li>程序<ul>
@@ -523,7 +595,44 @@
 <ul>
 <li>at：安排一个任务在未来执行，必须先启用atd进程</li>
 </ul>
-<p><br></p>
+<h3 id="12-Linux系统监控"><a href="#12-Linux系统监控" class="headerlink" title="12. Linux系统监控"></a>12. Linux系统监控</h3><p><strong>监控系统是否正常启动</strong></p>
+<ul>
+<li>Kernel Ring Buffer</li>
+<li>dmesg | less</li>
+<li>/var/log/boot.msg</li>
+</ul>
+<p><strong>监控系统硬件信息</strong></p>
+<ul>
+<li>系统信息</li>
+<li>设备信息</li>
+<li>CPU 和 I/O 信息</li>
+<li>PCI信息</li>
+<li>硬盘信息</li>
+</ul>
+<ul>
+<li>cat /proc/…：系统硬件信息保存在/proc下的文件中</li>
+<li>hwinfo：显示所有硬件的相关信息</li>
+<li>fdisk：查看硬盘信息</li>
+<li>iostat：查询CPU和磁盘I/O的统计信息</li>
+<li>lspci：列出所有的PCI设备</li>
+</ul>
+<p><strong>监控系统和进程</strong></p>
+<ul>
+<li>ps：用来显示当前进程状态</li>
+<li>top：即时显示进程的动态</li>
+<li>uptime：查看系统已经开机的时间以及系统平均负载</li>
+<li>uname：查看系统版本相关信息</li>
+<li>netstat：显示与ip, TCP, UDP协议相关的统计数据，用于检验本机各端口的网络连接情况</li>
+</ul>
+<p><strong>监控用户登录信息</strong></p>
+<ul>
+<li>who：查看当前登录系统的用户</li>
+<li>w [参数] [用户]：查看当前登录的用户及用户当前的工作</li>
+<li>finger [参数] [用户]：查看用户详细信息</li>
+<li>last [参数]：查看曾经登陆过系统的用户</li>
+<li>lastlog [参数] [用户]：查看用户前一次登录的信息</li>
+</ul>
+<h3 id="13-复习"><a href="#13-复习" class="headerlink" title="13. 复习"></a>13. 复习</h3><p><br></p>
 <hr>
 <h2 id="2-存储基础原理"><a href="#2-存储基础原理" class="headerlink" title="2. 存储基础原理"></a>2. 存储基础原理</h2><h3 id="1-什么是存储"><a href="#1-什么是存储" class="headerlink" title="1. 什么是存储"></a>1. 什么是存储</h3><p><strong>数据的特点</strong></p>
 <ul>
@@ -570,6 +679,83 @@
 <li>DAS，SAN，NAS</li>
 </ul>
 </li>
+</ul>
+<h3 id="4-存储介质与接口介绍"><a href="#4-存储介质与接口介绍" class="headerlink" title="4. 存储介质与接口介绍"></a>4. 存储介质与接口介绍</h3><p><strong>硬盘机械结构</strong></p>
+<ul>
+<li>盘片</li>
+<li>主轴</li>
+<li>磁头驱动机构</li>
+<li>磁头组件</li>
+<li>接口</li>
+<li>控制电路</li>
+</ul>
+<p><strong>机械硬盘主要参数</strong></p>
+<ul>
+<li>磁盘容量</li>
+<li>转速</li>
+<li>缓存</li>
+<li>平均访问时间</li>
+<li>数据传输率</li>
+</ul>
+<p><strong>硬盘对外接口</strong></p>
+<ul>
+<li>ATA接口</li>
+<li>SCSI接口</li>
+<li>SATA接口</li>
+<li>SAS接口</li>
+<li>FC接口</li>
+</ul>
+<h3 id="5-RAID技术及应用"><a href="#5-RAID技术及应用" class="headerlink" title="5. RAID技术及应用"></a>5. RAID技术及应用</h3><ul>
+<li>RAID：Redundant Arrays of Independent Disks，独立冗余磁盘阵列，简称磁盘阵列</li>
+</ul>
+<p><strong>RAID实现方式</strong></p>
+<ul>
+<li>硬件RAID</li>
+<li>软件RAID</li>
+</ul>
+<p><strong>常见RAID级别</strong></p>
+<ul>
+<li>RAID 0：数据条带化，无校验</li>
+<li>RAID 1：数据镜像，无校验</li>
+<li>RAID 3：数据条带化读写，校验信息存放专用硬盘</li>
+<li>RAID 5：数据条带化读写，校验信息分布式存放</li>
+<li>RAID 6：带有两种校验的独立磁盘结构，采用两种奇偶校验方法</li>
+<li>RAID 10：将镜像和条带化组合的RAID级别，先进行RAID1镜像，然后再做RAID0</li>
+<li>RAID 50：主要应用在高性能RAID场景</li>
+</ul>
+<h3 id="6-存储阵列技术及应用"><a href="#6-存储阵列技术及应用" class="headerlink" title="6. 存储阵列技术及应用"></a>6. 存储阵列技术及应用</h3><ul>
+<li>控制框：控制框用于处理各种存储业务，并管理级联在控制框下面的硬盘框</li>
+<li>硬盘框：硬盘框主要用于容纳各种硬盘，为应用服务器提供充足存储资源</li>
+</ul>
+<p><strong>硬盘框组成</strong></p>
+<ul>
+<li>系统插槽</li>
+<li>电源模块</li>
+<li>风扇模块</li>
+<li>级联模块</li>
+<li>硬盘模块</li>
+</ul>
+<h3 id="7-SAN技术及应用"><a href="#7-SAN技术及应用" class="headerlink" title="7. SAN技术及应用"></a>7. SAN技术及应用</h3><p><strong>存储结构</strong></p>
+<ul>
+<li>直接连接存储 DAS</li>
+<li>网络连接存储 NAS</li>
+<li>存储区域网络 SAN</li>
+</ul>
+<p><strong>SAN存储</strong></p>
+<ul>
+<li>存储区域网络(Storage Area Networks)：是一个用在服务器和存储资源之间的，专用的，高性能的网络体系。SAN是独立与LAN的服务器后端存储专用网络。SAN采用可扩展的网络拓扑结构连接服务器和存储设备，每个存储设备不隶属于任何一台服务器，所有的存储设备都可以在全部的网络服务器之间作为对等资源共享<ul>
+<li>直连组网</li>
+<li>单交换组网</li>
+<li>双交换组网</li>
+</ul>
+</li>
+</ul>
+<p><strong>SAN组成部分</strong></p>
+<ul>
+<li>主机总线适配卡</li>
+<li>光纤线缆，IP线缆</li>
+<li>光纤交换机，以太网交换机</li>
+<li>存储阵列设备</li>
 </ul>
 <p><br></p>
 <hr>
@@ -712,6 +898,55 @@
 </ul>
 <p><br></p>
 <hr>
+<h2 id="5-数据库基础原理"><a href="#5-数据库基础原理" class="headerlink" title="5. 数据库基础原理"></a>5. 数据库基础原理</h2><h3 id="1-SELECT查询语句基础"><a href="#1-SELECT查询语句基础" class="headerlink" title="1. SELECT查询语句基础"></a>1. SELECT查询语句基础</h3><p><strong>Select语句能力</strong></p>
+<ul>
+<li>投影</li>
+<li>选择</li>
+<li>连接</li>
+</ul>
+<p><strong>算术表达式和运算符优先级</strong></p>
+<p><strong>NULL值</strong></p>
+<ul>
+<li>NULL值是不可用，且未分配的，未知并且不适用的值</li>
+</ul>
+<p><strong>列的别名</strong></p>
+<p><strong>级联操作</strong></p>
+<ul>
+<li>级联操作是将列或字符串和其他列串联，由两条竖线(||)表示</li>
+</ul>
+<p><strong>消除重复行</strong></p>
+<ul>
+<li>DISTINCT</li>
+</ul>
+<h3 id="2-查询数据的限制和排序"><a href="#2-查询数据的限制和排序" class="headerlink" title="2. 查询数据的限制和排序"></a>2. 查询数据的限制和排序</h3><h3 id="3-典型单行函数"><a href="#3-典型单行函数" class="headerlink" title="3. 典型单行函数"></a>3. 典型单行函数</h3><ul>
+<li>字符函数<ul>
+<li>LOWER</li>
+<li>UPPER</li>
+<li>INITCAP：单词首字母转大写</li>
+<li>CONCAT</li>
+<li>SUBSTR</li>
+<li>LENGTH</li>
+<li>INSTR：返回子字符串在字符串中的位置</li>
+</ul>
+</li>
+<li>常用数字函数<ul>
+<li>ROUND</li>
+<li>TRUNC</li>
+</ul>
+</li>
+<li>常用日期函数<ul>
+<li>SYSDATE：当前日期</li>
+</ul>
+</li>
+<li>常用转换函数<ul>
+<li>TO_NUMBER</li>
+<li>TO_DATE</li>
+<li>TO_CHAR</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
 <h2 id="6-网络基础原理"><a href="#6-网络基础原理" class="headerlink" title="6. 网络基础原理"></a>6. 网络基础原理</h2><h3 id="1-IP路由技术描述"><a href="#1-IP路由技术描述" class="headerlink" title="1. IP路由技术描述"></a>1. IP路由技术描述</h3><p><strong>IP路由基础知识</strong></p>
 <ul>
 <li>路由表：<ul>
@@ -767,11 +1002,11 @@
 </ul>
 </li>
 <li>首选格式：用十六进制标识，4个数字一组，中间用”:”隔开<ul>
-<li>2001:0410:0000:0001:0000:0000:0000:45ff/64</li>
+<li>2001 : 0410 : 0000 : 0001 : 0000 : 0000 : 0000 : 45ff/64</li>
 </ul>
 </li>
 <li>压缩格式：若以零开头可以省略，连续全零的组可用”::”表示，一个地址中::只能出现一次<ul>
-<li>2001:410:0:1::45ff/64</li>
+<li>2001 : 410 : 0 : 1 :: 45ff/64</li>
 </ul>
 </li>
 <li>分类：<ul>
@@ -818,6 +1053,19 @@
 <li>流行为</li>
 <li>流量策略</li>
 <li>策略应用</li>
+</ul>
+<h3 id="5-NAT技术描述"><a href="#5-NAT技术描述" class="headerlink" title="5. NAT技术描述"></a>5. NAT技术描述</h3><p><strong>IP地址分类</strong></p>
+<ul>
+<li>公网地址</li>
+<li>私网地址</li>
+</ul>
+<p><strong>NAT No-pat</strong></p>
+<ul>
+<li>NAT No-pat也可以称为”一对一地址转换”，在地址转换过程中，数据包的源IP地址由私网地址转换为公网地址，端口号不做转换</li>
+</ul>
+<p><strong>NAT session</strong></p>
+<ul>
+<li>NAT session是指在网络地址转换时，设备会对报文转换前的源IP地址以及端口号和转换以后的源IP地址以及端口号的对应关系做的记录</li>
 </ul>
 <p><br></p>
 <hr>
@@ -881,6 +1129,99 @@
 </li>
 <li>下列选项中，哪一项属于大数据的核心？<ul>
 <li>预测</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="8-模拟"><a href="#8-模拟" class="headerlink" title="8. 模拟"></a>8. 模拟</h2><ul>
+<li>数据中心为了节省成本、实现日益增多的业务，需要采用各种虚拟化技术。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>交换机划分了VLAN后，收到的广播报文如果携带VLAN信息，则该广播报文只在该VLAN内广播转发。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>一个DDL或DCL语句执行可以代表一个数据库事务的结束。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>弹性伸缩不是微服务应用本身的能力。<ul>
+<li>对</li>
+</ul>
+</li>
+<li>Kafka是Cloudera的开源日志系统，是分布式海量日志聚合系统。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>IaaS是把开发环境或运行平台作为一种服务交付给客户。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>在Linux中使用groupdel删除用户组时，所有归属于该组的用户也会自动被删除。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>NAS对于大量块类型的数据传输具有最优性能。<ul>
+<li>错</li>
+</ul>
+</li>
+<li>Nova组件架构中各个模块描述正确的是哪一项？<ul>
+<li>Nova-compute主要负责在计算节点上启动虚机实例</li>
+</ul>
+</li>
+<li>2017年5月，战胜世界排名第一的人类围棋选手，在网络围棋界声名大噪的机器人是？<ul>
+<li>AlphaGo</li>
+</ul>
+</li>
+<li>以下有关NAT的说法，错误的是哪一项？<ul>
+<li>NAPT方式不转换端口。</li>
+</ul>
+</li>
+<li>关于虚拟机、容器、服务的关系，以下哪项描述是不正确的？<ul>
+<li>在虚拟机上不可以部署服务</li>
+</ul>
+</li>
+<li>微服务12要素中的“Code Base基准代码”，哪项理解是正确的？<ul>
+<li>尽管每个应用只对应一份基准代码，但可以同时存在多份部署。</li>
+</ul>
+</li>
+<li>下列选项中，哪个选项是用于处理海量数据的并行编程模式和大规模数据集的并行运算的软件架构？<ul>
+<li>MapReduce</li>
+</ul>
+</li>
+<li>以下关于虚拟化的说法，错误的一项是？<ul>
+<li>vCPU个数=物理CPU个数*核数</li>
+</ul>
+</li>
+<li>在vi编辑器里，命令“dd“用来删除当前的以下哪项?<ul>
+<li>行</li>
+</ul>
+</li>
+<li>Hadoop系统中YARN资源管理可以为如下哪几个组件进行资源管理和调度？<ul>
+<li>MapReduce</li>
+<li>Storm</li>
+<li>Spark</li>
+</ul>
+</li>
+<li>下列描述中哪些对Docker镜像特性描述不正确？<ul>
+<li>docker镜像是一种非层级的文件系统。</li>
+<li>镜像是可读写模板 </li>
+<li>镜像只能自己编写</li>
+</ul>
+</li>
+<li>华为FusionStage平台微服务运行与治理框架中的关键技术有哪些？<ul>
+<li>多语言：支持多语言的原生接口</li>
+<li>高可靠：采用可隔离仓、熔断机制等技术，保障用户应用的高可靠性 </li>
+<li>可监控：采用跟踪链分析，可监控端到端服务调用链、各服务的调用频率、时延等各项指标 </li>
+<li>可扩展：提供可扩展框架，支持不断扩展微服务的能力</li>
+</ul>
+</li>
+<li>以下哪些命令能够停止httpd服务？<ul>
+<li>killall httpd</li>
+<li>./etc/init.d/httpd stop</li>
+<li>service httpd stop</li>
 </ul>
 </li>
 </ul>
