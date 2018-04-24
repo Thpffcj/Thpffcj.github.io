@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>基础架构(未完) | Thpffcj的树洞</title>
+  <title>基础架构 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -182,7 +182,7 @@
     
     
 </span>
-                <h1>基础架构(未完)</h1>
+                <h1>基础架构</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -632,7 +632,73 @@
 <li>last [参数]：查看曾经登陆过系统的用户</li>
 <li>lastlog [参数] [用户]：查看用户前一次登录的信息</li>
 </ul>
-<h3 id="13-复习"><a href="#13-复习" class="headerlink" title="13. 复习"></a>13. 复习</h3><p><br></p>
+<h3 id="13-复习"><a href="#13-复习" class="headerlink" title="13. 复习"></a>13. 复习</h3><p><strong>UID – 用户ID</strong></p>
+<ul>
+<li>UserID</li>
+<li>每个用户的唯一识别ID</li>
+<li>SuperUser : UID = 0</li>
+<li>SystemUser : UID = 1 – 499</li>
+<li>一般(常规)用户: UID = 500 - 60000 </li>
+</ul>
+<p><strong>GID – 组ID</strong></p>
+<ul>
+<li>GroupID</li>
+<li>每个组的唯一识别ID</li>
+<li>没有SuperGroup</li>
+<li>SystemGroup : GID = 0 - 499</li>
+<li>一般组: GID = 500 - 60000  </li>
+</ul>
+<p><strong>/etc/passwd</strong></p>
+<p><strong>/etc/shadow</strong> </p>
+<ul>
+<li>/etc/passwd 不安全</li>
+<li>/etc/shadow 支持 SHA-256 及 SHA-512 密码哈希</li>
+</ul>
+<p><strong>/etc/group</strong></p>
+<p><strong>管理本地用户</strong></p>
+<ul>
+<li>useradd 创建用户</li>
+<li>userdel 删除用户</li>
+<li>id：显示用户信息</li>
+<li>id username：显示username的用户信息</li>
+<li>passwd：设置密码</li>
+<li>passwd username：设置或更改用户密码   </li>
+</ul>
+<p><strong>程序执行的输入输出流</strong></p>
+<ul>
+<li>标准输入</li>
+<li>标准输出</li>
+<li>标准错误</li>
+</ul>
+<p><strong>程序执行的重定向运算符号</strong></p>
+<ul>
+<li>>：将STDOUT重定向到文件<ul>
+<li>文件内容会被覆盖</li>
+</ul>
+</li>
+<li>>&gt;：将STDOUT重定向到文件<ul>
+<li>文件内容会被添加</li>
+</ul>
+</li>
+<li>&lt;：重定向STDIN<ul>
+<li>将键盘输入改由读入文件提供</li>
+</ul>
+</li>
+</ul>
+<p><strong>管道使用</strong></p>
+<ul>
+<li>运算符管道</li>
+<li>命令行 T 管道</li>
+<li>比较管道与重定向</li>
+</ul>
+<p><strong>RPM软件包相依性</strong></p>
+<ul>
+<li>有些 RPM 软件包，不能单独安装，必须要先安装别的 RPM 软件包，才能安装，这种特征，称之为 RPM 软件包相依性</li>
+<li>并不是全部的 RPM 软件包，都有相依性的需求 </li>
+<li>rpm 命令安装时，不检查相依性问题</li>
+<li>yum 命令安装时，自动解决相依性问题 </li>
+</ul>
+<p><br></p>
 <hr>
 <h2 id="2-存储基础原理"><a href="#2-存储基础原理" class="headerlink" title="2. 存储基础原理"></a>2. 存储基础原理</h2><h3 id="1-什么是存储"><a href="#1-什么是存储" class="headerlink" title="1. 什么是存储"></a>1. 什么是存储</h3><p><strong>数据的特点</strong></p>
 <ul>
@@ -756,6 +822,74 @@
 <li>光纤线缆，IP线缆</li>
 <li>光纤交换机，以太网交换机</li>
 <li>存储阵列设备</li>
+</ul>
+<h3 id="8-NAS技术及应用"><a href="#8-NAS技术及应用" class="headerlink" title="8. NAS技术及应用"></a>8. NAS技术及应用</h3><ul>
+<li>NAS(Network Attached Storage：网络附属存储)按字面简单说就是连接在网络上，具备资料存储功能的装置，因此也称为“网络存储器”。它是一种专用数据存储服务器。它以数据为中心，将存储设备与服务器彻底分离，集中管理数据，从而释放带宽、提高性能、降低总拥有成本、保护投资。其成本远远低于使用服务器存储，而效率却远远高于后者。</li>
+<li>NAS引擎：提供文件系统，以及承载文件系统，各种前端协议的操作系统</li>
+<li>网络接口：提供用户交互的网络协议：NFS,CIFS</li>
+<li>存储：主要技术是RAID，SCSI，SAS，FC等</li>
+</ul>
+<p><strong>NAS文件系统IO与性能影响</strong></p>
+<ul>
+<li>主机</li>
+<li>网络</li>
+<li>NAS</li>
+</ul>
+<p><strong>SAN与NAS比较</strong></p>
+<ul>
+<li>SAN<ul>
+<li>速度：块</li>
+<li>成本：高</li>
+<li>客户端资源占用：无文件系统，占用客户端资源提供文件系统功能</li>
+<li>协议：FC,SCSI,iSCSI</li>
+<li>共享：需客户端安装专用共享文件系统，不易共享</li>
+<li>适用场景：告诉信息存储(如DB，企业数据等)</li>
+</ul>
+</li>
+<li>NAS<ul>
+<li>速度：慢</li>
+<li>成本：低</li>
+<li>客户端资源占用：有自己的文件系统，客户端资源占用少</li>
+<li>协议：CIFS,NFS,HTTP,FTP</li>
+<li>共享：自有文件系统能直接提供共享</li>
+<li>适用场景：偏重文件共享(如文件共享，视频等)</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-存储部署与运维管理"><a href="#9-存储部署与运维管理" class="headerlink" title="9. 存储部署与运维管理"></a>9. 存储部署与运维管理</h3><p><strong>存储初始化配置</strong></p>
+<p><strong>存储配置流程概述</strong></p>
+<ul>
+<li>开始</li>
+<li>创建存储空间<ul>
+<li>创建RAID</li>
+<li>创建热备盘</li>
+<li>创建LUN</li>
+</ul>
+</li>
+<li>分配存储空间<ul>
+<li>创建主机组</li>
+<li>创建主机</li>
+<li>添加映射</li>
+</ul>
+</li>
+<li>建立连接<ul>
+<li>FC<ul>
+<li>添加启动器</li>
+</ul>
+</li>
+<li>iSCSI<ul>
+<li>配置启动器</li>
+<li>添加启动器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用存储空间<ul>
+<li>格式化</li>
+<li>建立分区</li>
+</ul>
+</li>
+<li>结束</li>
 </ul>
 <p><br></p>
 <hr>
@@ -944,6 +1078,95 @@
 <li>TO_CHAR</li>
 </ul>
 </li>
+</ul>
+<h3 id="4-典型分组函数"><a href="#4-典型分组函数" class="headerlink" title="4. 典型分组函数"></a>4. 典型分组函数</h3><p><strong>常用分组函数</strong></p>
+<ul>
+<li>AVG(num)：赶回数字表达式中所有制的平均值</li>
+<li>Sum(num)：返回数字表达式或列总和</li>
+<li>Count(*)：返回表达式中值的个数</li>
+<li>Max(num)：返回表达式中最高值</li>
+<li>Min(num)：返回表达式中最低值</li>
+</ul>
+<p><strong>Group by子句</strong></p>
+<p><strong>Having子句</strong></p>
+<p><strong>Order by子句</strong></p>
+<p><strong>分组函数嵌套</strong></p>
+<h3 id="5-多表查询介绍"><a href="#5-多表查询介绍" class="headerlink" title="5. 多表查询介绍"></a>5. 多表查询介绍</h3><p><strong>多表连接的种类</strong></p>
+<ul>
+<li>自连接：一个表自己与自己建立连接称为自连接或自身连接</li>
+<li>等值连接</li>
+<li>外连接<ul>
+<li>左连接</li>
+<li>右连接</li>
+<li>全连接</li>
+</ul>
+</li>
+</ul>
+<p><strong>各种连接查询操作</strong></p>
+<h3 id="6-典型子查询介绍"><a href="#6-典型子查询介绍" class="headerlink" title="6. 典型子查询介绍"></a>6. 典型子查询介绍</h3><p><strong>子查询的种类</strong></p>
+<ul>
+<li>子查询其实就是指嵌入到其它语句中的select语句，也称其为嵌套查询</li>
+<li>单行子查询<ul>
+<li>比较运算符等</li>
+</ul>
+</li>
+<li>多行子查询<ul>
+<li>in</li>
+<li>any</li>
+<li>all</li>
+</ul>
+</li>
+<li>空值子查询</li>
+</ul>
+<p><strong>单行子查询和多行子查询</strong></p>
+<ul>
+<li>在查询时基于未知时应考虑使用子查询</li>
+<li>子查询必须包含在括号内</li>
+<li>将子查询放在比较运算符的右侧，以增强可读性</li>
+<li>对单行子查询使用单行运算符</li>
+<li>对多行子查询使用多行运算符</li>
+</ul>
+<h3 id="7-表结构操作语句"><a href="#7-表结构操作语句" class="headerlink" title="7. 表结构操作语句"></a>7. 表结构操作语句</h3><ul>
+<li>表是数据库存储数据的逻辑概念，表分为行和列</li>
+</ul>
+<p><strong>列约束和表约束</strong></p>
+<ul>
+<li>列级约束<ul>
+<li>非空</li>
+<li>唯一</li>
+<li>主键</li>
+<li>外键</li>
+<li>条件检查</li>
+</ul>
+</li>
+<li>表级约束<ul>
+<li>唯一</li>
+<li>主键</li>
+<li>外键</li>
+<li>条件检查</li>
+</ul>
+</li>
+</ul>
+<p><strong>表的相关操作</strong></p>
+<ul>
+<li>创建表</li>
+<li>增加和删除列</li>
+<li>修改表名</li>
+<li>修改列名</li>
+<li>删除表格</li>
+<li>查看表结构</li>
+</ul>
+<h3 id="8-典型数据操作语句"><a href="#8-典型数据操作语句" class="headerlink" title="8. 典型数据操作语句"></a>8. 典型数据操作语句</h3><p><strong>数据操作语言DML的定义和分类</strong></p>
+<p><strong>相关DML操作</strong></p>
+<ul>
+<li>insert</li>
+<li>update</li>
+<li>delete</li>
+</ul>
+<h3 id="9-典型事务操作语句"><a href="#9-典型事务操作语句" class="headerlink" title="9. 典型事务操作语句"></a>9. 典型事务操作语句</h3><p><strong>了解数据库事务概念</strong></p>
+<ul>
+<li>事务可以看做是对数据库的若干操作组成的一个单元</li>
+<li>这些操作要么都完成，要么都取消，从而保证数据满足一致性的要求</li>
 </ul>
 <p><br></p>
 <hr>

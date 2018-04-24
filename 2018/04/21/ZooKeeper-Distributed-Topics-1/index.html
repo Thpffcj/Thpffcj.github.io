@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>初识ZooKeeper | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-21T00:39:02.000Z" itemprop="datePublished">
+          2018-04-21
+      </time>
+    
+</span>
+                <h1>初识ZooKeeper</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Zookeeper简介"><a href="#1-Zookeeper简介" class="headerlink" title="1. Zookeeper简介"></a>1. Zookeeper简介</h2><h3 id="1-Zookeeper简介-1"><a href="#1-Zookeeper简介-1" class="headerlink" title="1. Zookeeper简介"></a>1. Zookeeper简介</h3><ul>
+<li>中间件，提供协调服务</li>
+<li>作用于分布式系统，发挥其优势，可以为大数据服务</li>
+<li>支持Java，提供Java和C语言的客户端API</li>
+</ul>
+<h3 id="2-什么是分布式系统"><a href="#2-什么是分布式系统" class="headerlink" title="2. 什么是分布式系统"></a>2. 什么是分布式系统</h3><ul>
+<li>很多台计算机组成一个整体，一个整体一致对外并且处理同一请求</li>
+<li>内部的每台计算机都可以相互通信(rest/rpc)</li>
+<li>客户端到服务端的一次请求到响应结束会历经多台计算机</li>
+</ul>
+<h3 id="3-ZK的相关特性"><a href="#3-ZK的相关特性" class="headerlink" title="3. ZK的相关特性"></a>3. ZK的相关特性</h3><ul>
+<li>一致性：数据一致性，数据按照顺序分批入库</li>
+<li>原子性：事务要么成功要么失败，不会局部化</li>
+<li>单一视图：客户端连接集群中的任一zk节点，数据都是一致的</li>
+<li>可靠性：每次对zk的操作状态都会保存在服务端</li>
+<li>实时性：客户端可以读取到zk服务端的最新数据</li>
+</ul>
+<h3 id="4-Zookeeper安装"><a href="#4-Zookeeper安装" class="headerlink" title="4. Zookeeper安装"></a>4. Zookeeper安装</h3><ul>
+<li>我们在前面学习大数据的相关框架都已经安装了，这里只是为了学习过程的完整性</li>
+</ul>
+<p><strong>JDK的安装</strong></p>
+<ul>
+<li>下载解压jdk</li>
+<li>配置环境变量</li>
+</ul>
+<p><strong>单机zookeeper安装</strong></p>
+<p><strong>zookeeper文件夹主要目录介绍</strong></p>
+<ul>
+<li>bin：主要的一些运行命令</li>
+<li>conf：存放配置文件，其中我们需要修改zoo.cfg</li>
+<li>contrib：附加的一些功能</li>
+<li>dist-maven：mvn编译后的目录</li>
+<li>docs：文档</li>
+<li>lib：需要依赖的jar包</li>
+<li>recipes：案例demo代码</li>
+<li>src：源码</li>
+</ul>
+<p><strong>zookeeper配置文件介绍，运行zk</strong></p>
+<ul>
+<li>tickTime：用于计算的时间单元。比如session超时：N * tickTime</li>
+<li>initLimit：用于集群，允许从节点连接并同步到master节点的初始化连接时间，以tickTime的倍数来表示</li>
+<li>syncLimit：用于集群，master主节点与从节点之间发送消息，请求和应答时间长度(心跳机制)</li>
+<li>dataDir：必须配置</li>
+<li>dataLogDir：日志目录，如果不配置会和dataDir公用</li>
+<li>clientPort：连接服务器的端口，默认2181</li>
+</ul>
+<ul>
+<li>复制并修改配置文件</li>
+</ul>
+<pre><code># the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# example sakes.
+dataDir=/home/thpffcj/app/tmp/zookeeper
+</code></pre><ul>
+<li>运行zk</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-Zookeeper基本特性"><a href="#2-Zookeeper基本特性" class="headerlink" title="2. Zookeeper基本特性"></a>2. Zookeeper基本特性</h2><h3 id="1-ZK数据模型介绍"><a href="#1-ZK数据模型介绍" class="headerlink" title="1. ZK数据模型介绍"></a>1. ZK数据模型介绍</h3><ul>
+<li>是一个树形结构，类似于前端开发中的tree.js组件</li>
+<li>zk的数据模型也可以理解为linux/unix的文件目录：/usr/local/…</li>
+<li>每一个节点都称之为znode，他可以有子节点，也可以有数据</li>
+<li>每个节点分为临时节点和永久节点，临时节点在客户端断开后消失</li>
+<li>每个zk节点都有各自的版本号，可以通过命令行来显示节点信息</li>
+<li>每当节点数据发生变化，那么该节点的版本号会累加(乐观锁)</li>
+<li>删除/修改过时节点，版本号不匹配则会报错</li>
+<li>每个zk节点存储的数据不宜过大，几K即可</li>
+<li>节点可以设置权限acl，可以通过权限来限制用户的访问</li>
+</ul>
+<h3 id="2-ZK数据模型基本操作"><a href="#2-ZK数据模型基本操作" class="headerlink" title="2. ZK数据模型基本操作"></a>2. ZK数据模型基本操作</h3><p><strong>客户端连接</strong></p>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+[thpffcj@thpffcj bin]$ ./zkCli.sh 
+[zk: localhost:2181(CONNECTED) 0] 
+</code></pre><p><strong>关闭客户端连接</strong></p>
+<ul>
+<li>Ctrl + C</li>
+</ul>
+<h3 id="3-ZK作用体现"><a href="#3-ZK作用体现" class="headerlink" title="3. ZK作用体现"></a>3. ZK作用体现</h3><ul>
+<li>master节点选举，主节点挂了以后，从节点就会接手工作，并且保证这个节点是唯一的，这也是所谓首脑模式，从而保证我们的集群是高可用的</li>
+<li>统一配置文件管理，即只需要部署一台服务器，则可以把相同的配置文件同步更新到其他所有服务器，此操作在云计算中用的特别多(假设修改了redis统一配置)</li>
+<li>发布与订阅，类似消息队列MQ(amq, rmq…)，dubbo，发布者把数据存在znode上，订阅者会读取这个数据</li>
+<li>提供了分布式锁，分布式环境中不同进程之间争夺资源，类似于多线程中的锁</li>
+<li>集群管理，集群中保证数据的强一致性</li>
+</ul>
+<h3 id="4-ZK常用命令行操作"><a href="#4-ZK常用命令行操作" class="headerlink" title="4. ZK常用命令行操作"></a>4. ZK常用命令行操作</h3><ul>
+<li>通过./zkCli.sh打开zk的客户端进行命令行后台</li>
+</ul>
+<p><strong>ls和ls2命令</strong></p>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /
+[controller_epoch, brokers, zookeeper, admin, isr_change_notification, consumers, config, hbase]
+[zk: localhost:2181(CONNECTED) 1] ls2 /
+[controller_epoch, brokers, zookeeper, admin, isr_change_notification, consumers, config, hbase]
+cZxid = 0x0
+ctime = Thu Jan 01 08:00:00 CST 1970
+mZxid = 0x0
+mtime = Thu Jan 01 08:00:00 CST 1970
+pZxid = 0x7d6
+cversion = 88
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 0
+numChildren = 8
+</code></pre><p><strong>get与stat命令</strong></p>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] stat /
+cZxid = 0x0
+ctime = Thu Jan 01 08:00:00 CST 1970
+mZxid = 0x0
+mtime = Thu Jan 01 08:00:00 CST 1970
+pZxid = 0x7d6
+cversion = 88
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 0
+numChildren = 8
+[zk: localhost:2181(CONNECTED) 3] get /
+
+cZxid = 0x0
+ctime = Thu Jan 01 08:00:00 CST 1970
+mZxid = 0x0
+mtime = Thu Jan 01 08:00:00 CST 1970
+pZxid = 0x7d6
+cversion = 88
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 0
+numChildren = 8
+</code></pre><ul>
+<li>字段含义：<ul>
+<li>cZxid：zk为这个节点分配的id</li>
+<li>ctime：create time</li>
+<li>mZxid：修改后zk分配的id</li>
+<li>mtime：修改的时间</li>
+<li>pZxid：子节点id</li>
+<li>cversion：子节点version</li>
+<li>dataVersion：当前节点数据版本号</li>
+<li>aclVersion：权限版本号</li>
+<li>dataLength：数据长度</li>
+<li>numChildren：子节点个数</li>
+</ul>
+</li>
+</ul>
+<p><strong>session的基本原理</strong></p>
+<ul>
+<li>客户端与服务端之间的连接存在会话</li>
+<li>每个会话都可以设置一个超时时间</li>
+<li>心跳结束，session则过期</li>
+<li>session过期，则临时节点znode会被抛弃</li>
+<li>心跳机制：客户端向服务端的ping包请求</li>
+</ul>
+<p><strong>create命令</strong></p>
+<pre><code>[zk: localhost:2181(CONNECTED) 4] create /thpffcj thpffcj-data
+Created /thpffcj
+[zk: localhost:2181(CONNECTED) 5] get /thpffcj
+thpffcj-data
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7da
+mtime = Sat Apr 21 14:12:19 CST 2018
+pZxid = 0x7da
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 12
+numChildren = 0
+</code></pre><ul>
+<li>现在创建的是持久化的节点，如果我们想要创建临时节点，怎么办呢</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] create -e /thpffcj/tmp thpffcj-data
+Created /thpffcj/tmp
+[zk: localhost:2181(CONNECTED) 2] get /thpffcj
+thpffcj-data
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7da
+mtime = Sat Apr 21 14:12:19 CST 2018
+pZxid = 0x7dd
+cversion = 1
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 12
+numChildren = 1
+</code></pre><ul>
+<li>我们可以看到子节点版本号变为1，同时子节点的ephemeralOwner不是0x0了<ul>
+<li>0x0代表持久节点  </li>
+</ul>
+</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 3] get /thpffcj/tmp
+thpffcj-data
+cZxid = 0x7dd
+ctime = Sun Apr 22 16:05:48 CST 2018
+mZxid = 0x7dd
+mtime = Sun Apr 22 16:05:48 CST 2018
+pZxid = 0x7dd
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x162ec6070190000
+dataLength = 12
+numChildren = 0
+</code></pre><ul>
+<li>-s参数可以创建顺序节点</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 4] create -s /thpffcj/sec seq
+Created /thpffcj/sec0000000001
+[zk: localhost:2181(CONNECTED) 5] create -s /thpffcj/sec seq
+Created /thpffcj/sec0000000002
+</code></pre><p><strong>set命令</strong></p>
+<pre><code>[zk: localhost:2181(CONNECTED) 6] get /thpffcj
+thpffcj-data
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7da
+mtime = Sat Apr 21 14:12:19 CST 2018
+pZxid = 0x7df
+cversion = 3
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 12
+numChildren = 3
+[zk: localhost:2181(CONNECTED) 7] set /thpffcj new-data
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7e0
+mtime = Sun Apr 22 16:15:06 CST 2018
+pZxid = 0x7df
+cversion = 3
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 3
+[zk: localhost:2181(CONNECTED) 8] get /thpffcj
+new-data
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7e0
+mtime = Sun Apr 22 16:15:06 CST 2018
+pZxid = 0x7df
+cversion = 3
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 3
+</code></pre><ul>
+<li>可以看到数据变化了，同时dataVersion变为了1</li>
+<li>在高并发的时候，可能有很多进程去set值，我们可以在set后面跟上版本号，只有版本号符合才可以操作成功</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 9] set /thpffcj 123 1
+cZxid = 0x7da
+ctime = Sat Apr 21 14:12:19 CST 2018
+mZxid = 0x7e1
+mtime = Sun Apr 22 16:17:34 CST 2018
+pZxid = 0x7df
+cversion = 3
+dataVersion = 2
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 3
+[zk: localhost:2181(CONNECTED) 10] set /thpffcj 123 1
+version No is not valid : /thpffcj
+</code></pre><p><strong>delete命令</strong></p>
+<pre><code>[zk: localhost:2181(CONNECTED) 16] ls /thpffcj
+[tmp, sec0000000001, sec0000000002] 
+[zk: localhost:2181(CONNECTED) 17] delete /thpffcj/sec0000000001
+[zk: localhost:2181(CONNECTED) 20] ls /thpffcj
+[tmp, sec0000000002]
+</code></pre><ul>
+<li>删除的时候也可以指定版本号，不匹配则无法删除</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 21] delete /thpffcj/sec0000000002 1
+version No is not valid : /thpffcj/sec0000000002
+[zk: localhost:2181(CONNECTED) 22] delete /thpffcj/sec0000000002 0
+[zk: localhost:2181(CONNECTED) 23] ls /thpffcj
+[tmp]
+</code></pre><ul>
+<li>我们在set和delete的时候，尽量还是要以版本号来做，这样就会有一个乐观锁的效果</li>
+</ul>
+<h3 id="5-Watcher机制"><a href="#5-Watcher机制" class="headerlink" title="5. Watcher机制"></a>5. Watcher机制</h3><p><strong>理解watcher机制</strong></p>
+<ul>
+<li>针对每个节点的操作，都会有一个监督者 -&gt; watcher</li>
+<li>当监控的某个对象(znode)发生了变化，则触发watcher事件</li>
+<li>zk中的watcher是一次性的，触发后立即销毁</li>
+<li>父节点，子节点增删改查都能够触发其watcher</li>
+<li>针对不同类型的操作，触发的watcher事件也不同:<ul>
+<li>(子)节点创建事件</li>
+<li>(子)节点删除事件</li>
+<li>(子)节点数据变化事件</li>
+</ul>
+</li>
+</ul>
+<p><strong>Watcher命令行学习</strong></p>
+<ul>
+<li>通过 get path [watch] 设置 watcher</li>
+<li>父节点增删改查操作触发watcher</li>
+<li>子节点增删改查操作触发watcher</li>
+</ul>
+<p><strong>Watcher事件类型</strong></p>
+<ul>
+<li>创建父节点触发：NodeCreated</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] delete /thpffcj
+[zk: localhost:2181(CONNECTED) 2] ls /
+[controller_epoch, brokers, zookeeper, admin, isr_change_notification, consumers, config, hbase]
+[zk: localhost:2181(CONNECTED) 3] stat /thpffcj watch
+Node does not exist: /thpffcj
+[zk: localhost:2181(CONNECTED) 4] create /thpffcj 123
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeCreated path:/thpffcj
+Created /thpffcj
+</code></pre><ul>
+<li>修改父节点数据触发：NodeDataChanged</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 5] get /thpffcj watch
+123
+cZxid = 0x7ec
+ctime = Mon Apr 23 08:52:11 CST 2018
+mZxid = 0x7ec
+mtime = Mon Apr 23 08:52:11 CST 2018
+pZxid = 0x7ec
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 6] set /thpffcj 456
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeDataChanged path:/thpffcj
+cZxid = 0x7ec
+ctime = Mon Apr 23 08:52:11 CST 2018
+mZxid = 0x7ed
+mtime = Mon Apr 23 08:54:24 CST 2018
+pZxid = 0x7ec
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+</code></pre><ul>
+<li>删除父节点触发：NodeDeleted</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 7] get /thpffcj watch
+456
+cZxid = 0x7ec
+ctime = Mon Apr 23 08:52:11 CST 2018
+mZxid = 0x7ed
+mtime = Mon Apr 23 08:54:24 CST 2018
+pZxid = 0x7ec
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 8] delete /thpffcj
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeDeleted path:/thpffcj
+</code></pre><ul>
+<li>ls 为父节点设置watcher，创建子节点触发：NodeChildrenChanged</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 14] ls /
+[controller_epoch, brokers, zookeeper, thpffcj, admin, isr_change_notification, consumers, config, hbase]
+[zk: localhost:2181(CONNECTED) 15] ls /thpffcj watch
+[]
+[zk: localhost:2181(CONNECTED) 16] create /thpffcj/abc 88
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/thpffcj
+Created /thpffcj/abc
+</code></pre><ul>
+<li>ls 为父节点设置watcher，删除子节点触发：NodeChildrenChanged</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 17] ls /thpffcj watch
+[abc]
+[zk: localhost:2181(CONNECTED) 18] delete /thpffcj/abc
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/thpffcj
+</code></pre><ul>
+<li>自节点新增和删除触发的都是NodeChildrenChanged事件，也就是子节点发生了变化</li>
+<li>ls 为父节点设置watcher，修改子节点不触发事件</li>
+<li>针对子节点修改，我们必修要把它当作父节点一样，才会触发watcher</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 19] create /thpffcj/abc 88
+Created /thpffcj/abc
+[zk: localhost:2181(CONNECTED) 20] get /thpffcj/abc watch
+88
+cZxid = 0x7f3
+ctime = Mon Apr 23 09:05:14 CST 2018
+mZxid = 0x7f3
+mtime = Mon Apr 23 09:05:14 CST 2018
+pZxid = 0x7f3
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 2
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 21] set /thpffcj/abc 99
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:NodeDataChanged path:/thpffcj/abc
+cZxid = 0x7f3
+ctime = Mon Apr 23 09:05:14 CST 2018
+mZxid = 0x7f4
+mtime = Mon Apr 23 09:06:57 CST 2018
+pZxid = 0x7f3
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 2
+numChildren = 0
+</code></pre><p><strong>watcher使用场景</strong></p>
+<ul>
+<li>统一资源配置<ul>
+<li>我们有一个zk的集群，由三台机器构成，每一个集群的节点值都是一致的，比如/thpffcj/sqlConfig，主机更新节点为新的配置信息，集群中机器触发各自的watcher操作，客户端接收到信息更新客户端的配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-ACL-access-control-lists-权限控制"><a href="#6-ACL-access-control-lists-权限控制" class="headerlink" title="6. ACL(access control lists)权限控制"></a>6. ACL(access control lists)权限控制</h3><ul>
+<li>针对节点可以设置相关读写等权限，目的为了保障数据安全性</li>
+<li>权限permissions可以指定不同的权限范围以及角色</li>
+</ul>
+<p><strong>ACL命令行</strong></p>
+<ul>
+<li>getAcl：获取某个节点的acl权限信息</li>
+<li>setAcl：设置某个节点的acl权限信息</li>
+<li>addauth：输入认证授权信息，注册时输入明文密码(登录)，但是在zk的系统里，密码是以加密的形式存在的</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /thpffcj
+[abc]
+[zk: localhost:2181(CONNECTED) 1] getAcl /thpffcj/abc
+&apos;world,&apos;anyone
+: cdrwa
+</code></pre><ul>
+<li>可以看到默认权限</li>
+<li>zk的acl通过[scheme : id : permissions]来构成权限列表<ul>
+<li>scheme：代表采用的某种权限机制<ul>
+<li>world：world下只有一个id，即只有一个用户，也就是anyone，那么组合的写法就是world : anyone : [permissions]</li>
+<li>auth：代表认证登录，需要注册用户有权限就可以，形式为auth : user : password : [permissions]</li>
+<li>digest：需要对密码加密才能访问，组合形式为digest : username : BASE64(SHA1(password)) : [permissions]<ul>
+<li>简而言之，auth和digest的区别就是，前者明文，后者密文</li>
+</ul>
+</li>
+<li>ip：当设置为ip指定的ip地址，此时限制ip进行访问，比如ip : 192.168.1.1 : [permissions]</li>
+<li>super：代表超级管理员，拥有所有的权限</li>
+</ul>
+</li>
+<li>id：代表允许访问的用户</li>
+<li>permissions：权限组合字符串<ul>
+<li>权限字符串缩写crdwa</li>
+<li>CREATE：创建子节点</li>
+<li>READ：获取节点/子节点</li>
+<li>WRITE：设置节点数据</li>
+<li>DELETE：删除子节点</li>
+<li>ADMIN：设置权限</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>ACL命令行学习</strong></p>
+<ul>
+<li>world : anyone : cdrwa</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 3] ls /thpffcj
+[]
+[zk: localhost:2181(CONNECTED) 4] create /thpffcj/abc aa
+Created /thpffcj/abc
+[zk: localhost:2181(CONNECTED) 5] getAcl /thpffcj/abc
+&apos;world,&apos;anyone
+: cdrwa
+[zk: localhost:2181(CONNECTED) 6] setAcl /thpffcj/abc world:anyone:crwa
+cZxid = 0x7fb
+ctime = Mon Apr 23 12:04:24 CST 2018
+mZxid = 0x7fb
+mtime = Mon Apr 23 12:04:24 CST 2018
+pZxid = 0x7fb
+cversion = 0
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 2
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 7] getAcl /thpffcj/abc
+&apos;world,&apos;anyone
+: crwa
+[zk: localhost:2181(CONNECTED) 8] create /thpffcj/abc/xyz 123
+Created /thpffcj/abc/xyz
+[zk: localhost:2181(CONNECTED) 9] delete /thpffcj/abc/xyz
+Authentication is not valid : /thpffcj/abc/xyz
+</code></pre><ul>
+<li>我们只留下a权限</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 14] setAcl /thpffcj/abc world:anyone:a
+cZxid = 0x7fb
+ctime = Mon Apr 23 12:04:24 CST 2018
+mZxid = 0x7fb
+mtime = Mon Apr 23 12:04:24 CST 2018
+pZxid = 0x801
+cversion = 2
+dataVersion = 0
+aclVersion = 3
+ephemeralOwner = 0x0
+dataLength = 2
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 15] get /thpffcj/abc
+Authentication is not valid : /thpffcj/abc
+[zk: localhost:2181(CONNECTED) 16] set /thpffcj/abc 123
+Authentication is not valid : /thpffcj/abc
+[zk: localhost:2181(CONNECTED) 17] setAcl /thpffcj/abc world:anyone:wa
+cZxid = 0x7fb
+ctime = Mon Apr 23 12:04:24 CST 2018
+mZxid = 0x7fb
+mtime = Mon Apr 23 12:04:24 CST 2018
+pZxid = 0x801
+cversion = 2
+dataVersion = 0
+aclVersion = 4
+ephemeralOwner = 0x0
+dataLength = 2
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 18] set /thpffcj/abc 123
+cZxid = 0x7fb
+ctime = Mon Apr 23 12:04:24 CST 2018
+mZxid = 0x805
+mtime = Mon Apr 23 12:11:27 CST 2018
+pZxid = 0x801
+cversion = 2
+dataVersion = 1
+aclVersion = 4
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+</code></pre><ul>
+<li>auth : user : pwd : cdrwa</li>
+<li>digest : user : BASE64(SHA1(pwd)) : cdrwa</li>
+<li>addauth digest user : pwd</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 22] ls /thpffcj
+[]
+[zk: localhost:2181(CONNECTED) 23] create /thpffcj/a a
+Created /thpffcj/a
+[zk: localhost:2181(CONNECTED) 24] getAcl /thpffcj/a
+&apos;world,&apos;anyone
+: cdrwa
+[zk: localhost:2181(CONNECTED) 25] setAcl /thpffcj/a auth:thpffcj:123456:cdrwa
+Acl is not valid : /thpffcj/a
+</code></pre><ul>
+<li>这是因为我们数据库里并没有这个用户，我们首先需要注册</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 26] addauth digest thpffcj:123456
+[zk: localhost:2181(CONNECTED) 27] setAcl /thpffcj/a auth:thpffcj:123456:cdrwa
+cZxid = 0x807
+ctime = Mon Apr 23 12:17:54 CST 2018
+mZxid = 0x807
+mtime = Mon Apr 23 12:17:54 CST 2018
+pZxid = 0x807
+cversion = 0
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 1
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 28] getAcl /thpffcj/a
+&apos;digest,&apos;thpffcj:k2dB8vEfQj7ZB+HjEWxpBhmf+KQ=
+: cdrwa
+</code></pre><ul>
+<li>使用digest我们首先要退出当前用户方便之后的测试</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /thpffcj
+[a]
+[zk: localhost:2181(CONNECTED) 1] create /thpffcj/b b
+Created /thpffcj/b
+[zk: localhost:2181(CONNECTED) 2] setAcl /thpffcj/b digest:thpffcj:k2dB8vEfQj7ZB+HjEWxpBhmf+KQ=:cdra
+cZxid = 0x80c
+ctime = Mon Apr 23 18:33:15 CST 2018
+mZxid = 0x80c
+mtime = Mon Apr 23 18:33:15 CST 2018
+pZxid = 0x80c
+cversion = 0
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 1
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 3] getAcl /thpffcj/b
+&apos;digest,&apos;thpffcj:k2dB8vEfQj7ZB+HjEWxpBhmf+KQ=
+: cdra
+</code></pre><ul>
+<li>获取相关数据</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 4] get /thpffcj/b
+Authentication is not valid : /thpffcj/b
+[zk: localhost:2181(CONNECTED) 5] addauth digest thpffcj:123456
+[zk: localhost:2181(CONNECTED) 6] get /thpffcj/b
+b
+cZxid = 0x80c
+ctime = Mon Apr 23 18:33:15 CST 2018
+mZxid = 0x80c
+mtime = Mon Apr 23 18:33:15 CST 2018
+pZxid = 0x80c
+cversion = 0
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 1
+numChildren = 0
+</code></pre><ul>
+<li>ip : 192.168.1.1 : cdrwa</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] create /thpffcj/d d
+Created /thpffcj/d
+[zk: localhost:2181(CONNECTED) 1] setAcl /thpffcj/d ip:114.212.242.15:cdrwa
+cZxid = 0x813
+ctime = Mon Apr 23 18:52:06 CST 2018
+mZxid = 0x813
+mtime = Mon Apr 23 18:52:06 CST 2018
+pZxid = 0x813
+cversion = 0
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 1
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 2] getAcl /thpffcj/d
+&apos;ip,&apos;114.212.242.15
+: cdrwa
+[zk: localhost:2181(CONNECTED) 3] get /thpffcj/d
+Authentication is not valid : /thpffcj/d
+</code></pre><ul>
+<li>这里的ip地址我设置了为windows的ip地址</li>
+</ul>
+<p><strong>Super</strong></p>
+<ul>
+<li>修改zkServer.sh增加super管理员</li>
+<li>重启zkServer.sh</li>
+</ul>
+<ul>
+<li>使用vi打开zkServer.sh，找到nohub，添加用户名和密码</li>
+</ul>
+<pre><code>case $1 in
+start)
+    echo  -n &quot;Starting zookeeper ... &quot;
+    if [ -f $ZOOPIDFILE ]; then
+      if kill -0 `cat $ZOOPIDFILE` &gt; /dev/null 2&gt;&amp;1; then
+         echo $command already running as process `cat $ZOOPIDFILE`.
+         exit 0
+      fi
+    fi
+    nohup $JAVA $ZOO_DATADIR_AUTOCREATE &quot;-Dzookeeper.log.dir=${ZOO_LOG_DIR}&quot; &quot;-Dzookeeper.DigestAuthenticationProvider.superDigest=thpffcj:k2dB8vEfQj7ZB+HjEWxpBhmf+KQ=&quot; \
+    &quot;-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}&quot; \
+</code></pre><ul>
+<li>重启</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh restart
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Stopping zookeeper ... STOPPED
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+</code></pre><ul>
+<li>测试超级管理员</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /thpffcj
+[a, b, c, d]
+[zk: localhost:2181(CONNECTED) 1] ls /thpffcj/d
+Authentication is not valid : /thpffcj/d
+[zk: localhost:2181(CONNECTED) 2] getAcl /thpffcj/d
+&apos;ip,&apos;114.212.242.15
+: cdrwa
+[zk: localhost:2181(CONNECTED) 3] addauth digest thpffcj:123456
+[zk: localhost:2181(CONNECTED) 4] ls /thpffcj/d
+[]
+</code></pre><p><strong>acl的常用使用场景</strong></p>
+<ul>
+<li>开发/测试环境分离，开发者无权操作测试库的节点，只能看</li>
+<li>生产环境上控制指定ip的服务可以访问相关节点，防止混乱</li>
+</ul>
+<h3 id="7-zk四字命令"><a href="#7-zk四字命令" class="headerlink" title="7. zk四字命令"></a>7. zk四字命令</h3><ul>
+<li>zk可以通过它自身提供的简写命令来和服务器进行交互</li>
+<li>需要使用到nc命令，安装：yum install nc</li>
+<li>echo [commond] | nc [ip] [port]</li>
+<li>[stat] 查看zk的状态信息，以及是否mode</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo stat | nc 192.168.92.130 2181
+Zookeeper version: 3.4.5-cdh5.7.0--1, built on 03/23/2016 18:31 GMT
+Clients:
+ /192.168.92.130:41802[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 0/0/7
+Received: 196
+Sent: 195
+Connections: 1
+Outstanding: 0
+Zxid: 0x818
+Mode: standalone
+Node count: 113
+</code></pre><ul>
+<li>[ruok] 查看当前zkServer是否启动，返回imok</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo ruok | nc 192.168.92.130 2181
+imok
+</code></pre><ul>
+<li>[dump] 列出未经处理的会话和临时节点</li>
+<li>先创建一个临时节点</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] create -e /thpffcj/tmp 123
+Created /thpffcj/tmp
+
+[thpffcj@thpffcj bin]$ echo dump | nc 192.168.92.130 2181
+SessionTracker dump:
+Session Sets (3):
+0 expire at Mon Apr 23 19:43:06 CST 2018:
+0 expire at Mon Apr 23 19:43:16 CST 2018:
+1 expire at Mon Apr 23 19:43:26 CST 2018:
+    0x162f22c45f10001
+ephemeral nodes dump:
+Sessions with Ephemerals (1):
+0x162f22c45f10001:
+    /thpffcj/tmp
+</code></pre><ul>
+<li>[conf] 查看服务器配置</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo conf | nc 192.168.92.130 2181
+clientPort=2181
+dataDir=/home/thpffcj/app/tmp/zookeeper/version-2
+dataLogDir=/home/thpffcj/app/tmp/zookeeper/version-2
+tickTime=2000
+maxClientCnxns=60
+minSessionTimeout=4000
+maxSessionTimeout=40000
+serverId=0
+</code></pre><ul>
+<li>[cons] 展示连接到服务器的客户端信息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo cons | nc 192.168.92.130 2181
+ /192.168.92.130:41816[0](queued=0,recved=1,sent=0)
+ /0:0:0:0:0:0:0:1:41624[1](queued=0,recved=275,sent=275,sid=0x162f22c45f10001,lop=PING,est=1524483670157,to=30000,lcxid=0x1,lzxid=0x81a,lresp=1524486406094,llat=1,minlat=0,avglat=0,maxlat=10)
+</code></pre><ul>
+<li>[envi] 环境变量</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo envi | nc 192.168.92.130 2181
+Environment:
+zookeeper.version=3.4.5-cdh5.7.0--1, built on 03/23/2016 18:31 GMT
+host.name=thpffcj
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+java.home=/home/thpffcj/app/jdk1.8.0_151/jre
+java.class.path=/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../build/classes:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../build/lib/*.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/zookeeper-3.4.5-cdh5.7.0.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/slf4j-log4j12-1.7.5.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/slf4j-api-1.7.5.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/netty-3.2.2.Final.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/log4j-1.2.16.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../share/zookeeper/jline-2.11.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../src/java/lib/*.jar:/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf:
+java.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+java.io.tmpdir=/tmp
+java.compiler=&lt;NA&gt;
+os.name=Linux
+os.arch=amd64
+os.version=3.10.0-514.el7.x86_64
+user.name=thpffcj
+user.home=/home/thpffcj
+user.dir=/home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin
+</code></pre><ul>
+<li>[mntr] 监控zk健康信息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo mntr | nc 192.168.92.130 2181
+zk_version    3.4.5-cdh5.7.0--1, built on 03/23/2016 18:31 GMT
+zk_avg_latency    0
+zk_max_latency    10
+zk_min_latency    0
+zk_packets_received    493
+zk_packets_sent    492
+zk_num_alive_connections    2
+zk_outstanding_requests    0
+zk_server_state    standalone
+zk_znode_count    114
+zk_watch_count    0
+zk_ephemerals_count    1
+zk_approximate_data_size    4685
+zk_open_file_descriptor_count    29
+zk_max_file_descriptor_count    4096
+</code></pre><ul>
+<li>[wchs] 展示watch的信息</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] get /thpffcj watch
+123
+cZxid = 0x7f0
+ctime = Mon Apr 23 09:00:57 CST 2018
+mZxid = 0x7f0
+mtime = Mon Apr 23 09:00:57 CST 2018
+pZxid = 0x81a
+cversion = 11
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 5
+
+[thpffcj@thpffcj bin]$ echo wchs | nc 192.168.92.130 2181
+1 connections watching 1 paths
+Total watches:1
+</code></pre><ul>
+<li>[wchc] 与 [wchp] session与watch 及 path与watch信息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ echo wchc | nc 192.168.92.130 2181
+0x162f22c45f10001
+    /thpffcj
+
+[thpffcj@thpffcj bin]$ echo wchp | nc 192.168.92.130 2181
+/thpffcj
+    0x162f22c45f10001
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-选举模式和ZooKeeper的集群安装"><a href="#3-选举模式和ZooKeeper的集群安装" class="headerlink" title="3. 选举模式和ZooKeeper的集群安装"></a>3. 选举模式和ZooKeeper的集群安装</h2><h3 id="1-集群的一些基本概念"><a href="#1-集群的一些基本概念" class="headerlink" title="1. 集群的一些基本概念"></a>1. 集群的一些基本概念</h3><ul>
+<li>zk集群，主从节点，心跳机制(选举模式)</li>
+</ul>
+<p><strong>ZK集群搭建注意点</strong></p>
+<ul>
+<li>配置数据文件 myid 1/2/3 对应 server.1/2/3</li>
+<li>通过 ./zkCli/sh -srever [ip] : [port] 检测集群是否配置成功</li>
+</ul>
+<h3 id="2-单机伪分布式安装zookeeper集群"><a href="#2-单机伪分布式安装zookeeper集群" class="headerlink" title="2. 单机伪分布式安装zookeeper集群"></a>2. 单机伪分布式安装zookeeper集群</h3><ul>
+<li>首先拷贝两份zookeeper</li>
+</ul>
+<pre><code>[thpffcj@thpffcj app]$ cp zookeeper-3.4.5-cdh5.7.0 zookeeper-3.4.5-cdh5.7.0-02 -rf
+[thpffcj@thpffcj app]$ cp zookeeper-3.4.5-cdh5.7.0 zookeeper-3.4.5-cdh5.7.0-03 -rf
+</code></pre><ul>
+<li>修改第一个zookeeper的配置文件zoo.cfg</li>
+</ul>
+<pre><code># the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# example sakes.
+dataDir=/home/thpffcj/app/tmp/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+
+server.1=192.168.92.130:2888:3888
+server.2=192.168.92.130:2889:3889
+server.3=192.168.92.130:2890:3890
+</code></pre><ul>
+<li>在dataDir下创建myid</li>
+</ul>
+<pre><code>[thpffcj@thpffcj zookeeper]$ cat myid
+1
+</code></pre><ul>
+<li>接下来修改第二个zk，注意修改dataDir和端口</li>
+</ul>
+<pre><code>dataDir=/home/thpffcj/app/tmp/zookeeper02
+# the port at which the clients will connect
+clientPort=2182
+
+server.1=192.168.92.130:2888:3888
+server.2=192.168.92.130:2889:3889
+server.3=192.168.92.130:2890:3890
+</code></pre><ul>
+<li>去相应dataDir创建myid</li>
+</ul>
+<pre><code>[thpffcj@thpffcj zookeeper02]$ cat myid 
+2
+</code></pre><ul>
+<li>同样步骤操作第三个节点</li>
+</ul>
+<pre><code>dataDir=/home/thpffcj/app/tmp/zookeeper03
+# the port at which the clients will connect
+clientPort=2183
+
+server.1=192.168.92.130:2888:3888
+server.2=192.168.92.130:2889:3889
+server.3=192.168.92.130:2890:3890
+
+[thpffcj@thpffcj zookeeper03]$ cat myid 
+3
+</code></pre><ul>
+<li>然后我们测试每一个节点是什么样的情况</li>
+<li>启动三个节点</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0-02/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0-03/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+</code></pre><ul>
+<li>启动一个客户端</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkCli.sh -server 192.168.92.130:2181
+
+[zk: 192.168.92.130:2181(CONNECTED) 0] ls /
+[controller_epoch, brokers, zookeeper, thpffcj, admin, isr_change_notification, consumers, config, hbase]
+</code></pre><ul>
+<li>我们创建一个节点，看数据是否会同步过去</li>
+</ul>
+<pre><code>[zk: 192.168.92.130:2181(CONNECTED) 1] create /data 123
+Created /data
+
+[thpffcj@thpffcj bin]$ ./zkCli.sh -server 192.168.92.130:2182
+
+[zk: 192.168.92.130:2182(CONNECTED) 0] ls /
+[controller_epoch, brokers, zookeeper, data, thpffcj, admin, isr_change_notification, consumers, config, hbase]
+[zk: 192.168.92.130:2182(CONNECTED) 1] get /data
+123
+cZxid = 0x100000003
+ctime = Tue Apr 24 09:28:21 CST 2018
+mZxid = 0x100000003
+mtime = Tue Apr 24 09:28:21 CST 2018
+pZxid = 0x100000003
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+</code></pre><ul>
+<li>可以看到在其他节点我们也可以看见数据</li>
+</ul>
+<h3 id="3-测试集群角色以及选举"><a href="#3-测试集群角色以及选举" class="headerlink" title="3. 测试集群角色以及选举"></a>3. 测试集群角色以及选举</h3><ul>
+<li>我们第一个节点是主节点</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh status
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Mode: leader
+</code></pre><ul>
+<li>我们关掉这个节点</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh stop
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Stopping zookeeper ... STOPPED
+</code></pre><ul>
+<li>我们发现第三个节点变为了主节点</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh status
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0-02/bin/../conf/zoo.cfg
+Mode: follower
+
+[thpffcj@thpffcj bin]$ ./zkServer.sh status
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0-03/bin/../conf/zoo.cfg
+Mode: leader
+</code></pre><ul>
+<li>重启第一个节点</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./zkServer.sh start
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+[thpffcj@thpffcj bin]$ ./zkServer.sh status
+JMX enabled by default
+Using config: /home/thpffcj/app/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Mode: follower
+</code></pre><ul>
+<li>到这里我们就基本了解了Zookeeper的基本知识</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/21/Docker-Kubernetes-k8s-1/" style="float: left;">
+        ← 初识微服务
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/21/ZooKeeper-Distributed-Topics/">
+        ZooKeeper Distributed Topics →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
