@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>线性回归法(未完) | Thpffcj的树洞</title>
+  <title>线性回归法 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,12 +177,12 @@
       </time>
     
 </span>
-                <h1>线性回归法(未完)</h1>
+                <h1>线性回归法</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<p>上一篇博客我们介绍了KNN算法，KNN算法主要用于解决分类问题，这篇博客将要介绍的线性回归算法主要解决回归问题。</p>
-<h2 id="1-简单线性回归"><a href="#1-简单线性回归" class="headerlink" title="1. 简单线性回归"></a>1. 简单线性回归</h2><ul>
+<h2 id="1-简单线性回归"><a href="#1-简单线性回归" class="headerlink" title="1. 简单线性回归"></a>1. 简单线性回归</h2><h3 id="1-线性回归算法"><a href="#1-线性回归算法" class="headerlink" title="1. 线性回归算法"></a>1. 线性回归算法</h3><ul>
 <li>线性回归算法<ul>
 <li>解决回归问题</li>
 <li>思想简单，容易实现</li>
@@ -201,6 +201,693 @@
 </ul>
 </li>
 <li>样本特征只有一个，称为：简单性性回归</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92.png" alt=""></p>
+<p><strong>一类机器学习算法的基本思路</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%80%E7%B1%BB%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF.png" alt=""></p>
+<ul>
+<li>近乎所有参数学习算法都是这样的套路</li>
+</ul>
+<h3 id="2-最小二乘法"><a href="#2-最小二乘法" class="headerlink" title="2. 最小二乘法"></a>2. 最小二乘法</h3><ul>
+<li>典型的最小二乘法问题：最小化误差的平方</li>
+<li>求函数极值最近本方法就是对各个未知数求导</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95.png" alt=""></p>
+<ul>
+<li>经过微积分运算，我们得到如下结果</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-编程实现"><a href="#2-编程实现" class="headerlink" title="2. 编程实现"></a>2. 编程实现</h2><h3 id="1-简单线性回归的实现"><a href="#1-简单线性回归的实现" class="headerlink" title="1. 简单线性回归的实现"></a>1. 简单线性回归的实现</h3><ul>
+<li>自己设计一个假数据</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.array([1., 2., 3., 4., 5.])
+y = np.array([1., 3., 2., 3., 5.])
+
+plt.scatter(x, y)
+plt.axis([0, 6, 0, 6])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%951.png" alt=""></p>
+<ul>
+<li>接下来我们实现上面推导出来的公式，先计算x和y的均值</li>
+</ul>
+<pre><code>x_mean = np.mean(x)
+y_mean = np.mean(y)
+</code></pre><ul>
+<li>我们写一个循环分别求出x的分子和分母</li>
+</ul>
+<pre><code>num = 0.0
+d = 0.0
+for x_i, y_i in zip(x, y):
+    num += (x_i - x_mean) * (y_i - y_mean)
+    d += (x_i - x_mean) ** 2
+</code></pre><ul>
+<li>这时我们就求出了a</li>
+</ul>
+<pre><code>a = num/d
+</code></pre><ul>
+<li>b也直接套求出来的式子</li>
+</ul>
+<pre><code>b = y_mean - a * x_mean
+</code></pre><ul>
+<li>这时我们就求出了回归方程</li>
+</ul>
+<pre><code>y_hat = a * x + b
+
+plt.scatter(x, y)
+plt.plot(x, y_hat, color=&apos;r&apos;)
+plt.axis([0, 6, 0, 6])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%952.png" alt=""></p>
+<ul>
+<li>如果新来一个值，我们就可以进行预测了</li>
+</ul>
+<pre><code>x_predict = 6
+y_predict = a * x_predict + b
+y_predict
+</code></pre><blockquote>
+<p>5.2000000000000002</p>
+</blockquote>
+<p><strong>接下来我们对上面的思想封装一个我们自己的算法</strong></p>
+<pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import numpy as np
+
+
+class SimpleLinearRegression1:
+
+    def __init__(self):
+        &quot;&quot;&quot;初始化Simple Linear Regression 模型&quot;&quot;&quot;
+        self.a_ = None
+        self.b_ = None
+
+    def fit(self, x_train, y_train):
+        &quot;&quot;&quot;根据训练数据集x_train,y_train训练Simple Linear Regression模型&quot;&quot;&quot;
+        assert x_train.ndim == 1, \
+            &quot;Simple Linear Regressor can only solve single feature training data.&quot;
+        assert len(x_train) == len(y_train), \
+            &quot;the size of x_train must be equal to the size of y_train&quot;
+
+        x_mean = np.mean(x_train)
+        y_mean = np.mean(y_train)
+
+        num = 0.0
+        d = 0.0
+        for x, y in zip(x_train, y_train):
+            num += (x - x_mean) * (y - y_mean)
+            d += (x - x_mean) ** 2
+
+        self.a_ = num / d
+        self.b_ = y_mean - self.a_ * x_mean
+
+        return self
+
+    def predict(self, x_predict):
+        &quot;&quot;&quot;给定待预测数据集x_predict，返回表示x_predict的结果向量&quot;&quot;&quot;
+        assert x_predict.ndim == 1, \
+            &quot;Simple Linear Regressor can only solve single feature training data.&quot;
+        assert self.a_ is not None and self.b_ is not None, \
+            &quot;must fit before predict!&quot;
+
+        return np.array([self._predict(x) for x in x_predict])
+
+    def _predict(self, x_single):
+        &quot;&quot;&quot;给定单个待预测数据x，返回x的预测结果值&quot;&quot;&quot;
+        return self.a_ * x_single + self.b_
+
+    def __repr__(self):
+        return &quot;SimpleLinearRegression1()&quot;
+</code></pre><ul>
+<li>我们来使用一下自己实现的算法</li>
+</ul>
+<pre><code>from playML.simpleLinearRegression import SimpleLinearRegression1
+
+reg1 = SimpleLinearRegression1()
+reg1.fit(x, y)
+reg1.predict(np.array([x_predict]))
+</code></pre><blockquote>
+<p>array([ 5.2])</p>
+</blockquote>
+<pre><code>reg1.a_
+</code></pre><blockquote>
+<p>0.80000000000000004</p>
+</blockquote>
+<pre><code>reg1.b_
+</code></pre><blockquote>
+<p>0.39999999999999947</p>
+</blockquote>
+<h3 id="2-向量化运算"><a href="#2-向量化运算" class="headerlink" title="2. 向量化运算"></a>2. 向量化运算</h3><ul>
+<li>我们上面的实现性能是比较低的，我们上面的算法是优化损失函数，使得损失函数达到最小值，通过最小二乘法得到了a和b</li>
+<li>我们上面使用了循环实现了a的计算，性能是比较低的</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%90%91%E9%87%8F%E5%8C%96%E8%BF%90%E7%AE%97.png" alt=""></p>
+<ul>
+<li>我们使用向量运算替代循环，优化算法</li>
+</ul>
+<pre><code>def fit(self, x_train, y_train):
+    &quot;&quot;&quot;根据训练数据集x_train,y_train训练Simple Linear Regression模型&quot;&quot;&quot;
+    assert x_train.ndim == 1, \
+        &quot;Simple Linear Regressor can only solve single feature training data.&quot;
+    assert len(x_train) == len(y_train), \
+        &quot;the size of x_train must be equal to the size of y_train&quot;
+
+    x_mean = np.mean(x_train)
+    y_mean = np.mean(y_train)
+
+    self.a_ = (x_train - x_mean).dot(y_train - y_mean) / (x_train - x_mean).dot(x_train - x_mean)
+    self.b_ = y_mean - self.a_ * x_mean
+
+    return self
+</code></pre><ul>
+<li>向量化实现的性能测试</li>
+</ul>
+<pre><code>from playML.simpleLinearRegression import SimpleLinearRegression2
+
+reg2 = SimpleLinearRegression2()
+reg2.fit(x, y)
+reg2.predict(np.array([x_predict]))
+
+m = 1000000
+big_x = np.random.random(size=m)
+big_y = big_x * 2 + 3 + np.random.normal(size=m)
+%timeit reg1.fit(big_x, big_y)
+%timeit reg2.fit(big_x, big_y)
+</code></pre><blockquote>
+<p>1 loop, best of 3: 1.43 s per loop<br>10 loops, best of 3: 28.9 ms per loop</p>
+</blockquote>
+<ul>
+<li><strong>可以看到性能差别还是很大的</strong></li>
+<li>看一下两种算法的结果是否相同</li>
+</ul>
+<pre><code>reg1.a_
+</code></pre><blockquote>
+<p>2.0023851984394612</p>
+</blockquote>
+<pre><code>reg1.b_
+</code></pre><blockquote>
+<p>2.9991740308514174</p>
+</blockquote>
+<pre><code>reg2.a_
+</code></pre><blockquote>
+<p>2.0023851984394314</p>
+</blockquote>
+<pre><code>reg2.b_
+</code></pre><blockquote>
+<p>2.9991740308514325</p>
+</blockquote>
+<h3 id="3-衡量线性回归法的指标-MSE-RMS-MAE"><a href="#3-衡量线性回归法的指标-MSE-RMS-MAE" class="headerlink" title="3. 衡量线性回归法的指标 MSE,RMS,MAE"></a>3. 衡量线性回归法的指标 MSE,RMS,MAE</h3><ul>
+<li>我们在分类算法中，可以把数据分为训练数据和测试数据，这样可以得到分类的准确度，来衡量训练出模型的好坏</li>
+<li><p>回归问题如何评价？</p>
+</li>
+<li><p>均方误差 MSE(Mean Squared Error)</p>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE.png" alt=""></p>
+<ul>
+<li>均方根误差 RMSE(Root Mean Squared Error)</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%9D%87%E6%96%B9%E6%A0%B9%E8%AF%AF%E5%B7%AE.png" alt=""></p>
+<ul>
+<li>平均绝对误差 MAE(Mean Absolute Error)</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%B9%B3%E5%9D%87%E7%BB%9D%E5%AF%B9%E8%AF%AF%E5%B7%AE.png" alt="">  </p>
+<ul>
+<li>下面我们具体编程实现一下</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+</code></pre><ul>
+<li>我们使用波士顿的房产数据</li>
+</ul>
+<pre><code>boston = datasets.load_boston()
+boston.keys()
+</code></pre><blockquote>
+<p>dict_keys([‘data’, ‘target’, ‘feature_names’, ‘DESCR’])</p>
+</blockquote>
+<pre><code>boston.feature_names
+</code></pre><blockquote>
+<p>array([‘CRIM’, ‘ZN’, ‘INDUS’, ‘CHAS’, ‘NOX’, ‘RM’, ‘AGE’, ‘DIS’, ‘RAD’,<br>       ‘TAX’, ‘PTRATIO’, ‘B’, ‘LSTAT’],<br>      dtype=’&lt;U7’)</p>
+</blockquote>
+<pre><code>x = boston.data[:,5] # 只使用房间数量这个特征
+x.shape
+</code></pre><blockquote>
+<p>(506,)</p>
+</blockquote>
+<pre><code>y = boston.target
+ y.shape
+</code></pre><blockquote>
+<p>(506,)</p>
+</blockquote>
+<ul>
+<li>我们先把数据绘制出来看看大概是什么样子的</li>
+</ul>
+<pre><code>plt.scatter(x, y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%953.png" alt=""></p>
+<ul>
+<li>我们可以看到最大值有很多奇怪的点，这可能是我们设置了上限等情况，我们现在需要把他们去掉</li>
+</ul>
+<pre><code>np.max(y)
+</code></pre><blockquote>
+<p>50.0</p>
+</blockquote>
+<pre><code>x = x[y &lt; 50.0]
+y = y[y &lt; 50.0]
+
+x.shape
+</code></pre><blockquote>
+<p>(490,)</p>
+</blockquote>
+<pre><code>y.shape
+</code></pre><blockquote>
+<p>(490,)</p>
+</blockquote>
+<pre><code>plt.scatter(x, y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%954.png" alt=""></p>
+<ul>
+<li>接下来我们就使用在学习kNN时自己封装的分割数据方法</li>
+</ul>
+<pre><code>from playML.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, seed=666)
+
+x_train.shape
+</code></pre><blockquote>
+<p>(392,)</p>
+</blockquote>
+<pre><code>y_train.shape
+</code></pre><blockquote>
+<p>(392,)</p>
+</blockquote>
+<pre><code>x_test.shape
+</code></pre><blockquote>
+<p>(98,)</p>
+</blockquote>
+<pre><code>y_test.shape
+</code></pre><blockquote>
+<p>(98,)</p>
+</blockquote>
+<ul>
+<li>测试线性回归法</li>
+</ul>
+<pre><code>from playML.simpleLinearRegression import SimpleLinearRegression2
+
+reg = SimpleLinearRegression()
+reg.fit(x_train, y_train)
+
+plt.scatter(x_train, y_train)
+plt.scatter(x_test, y_test, color=&quot;c&quot;)
+plt.plot(x_train, reg.predict(x_train), color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%955.png" alt=""></p>
+<ul>
+<li>接下来我们就可以使用模型进行预测</li>
+</ul>
+<pre><code>y_predict = reg.predict(x_test)
+</code></pre><ul>
+<li>MSE</li>
+</ul>
+<pre><code>mse_test = np.sum((y_predict - y_test)**2) / len(y_test)
+mse_test
+</code></pre><blockquote>
+<p>24.156602134387438</p>
+</blockquote>
+<ul>
+<li>RMSE</li>
+</ul>
+<pre><code>from math import sqrt
+
+rmse_test = sqrt(mse_test)
+rmse_test
+</code></pre><blockquote>
+<p>4.914936635846635</p>
+</blockquote>
+<ul>
+<li>MAE</li>
+</ul>
+<pre><code>mae_test = np.sum(np.absolute(y_predict - y_test))/len(y_test)
+mae_test
+</code></pre><blockquote>
+<p>3.5430974409463873</p>
+</blockquote>
+<ul>
+<li>和学kNN时一样，我们可以封装自己的评判方法</li>
+</ul>
+<pre><code>def mean_squared_error(y_true, y_predict):
+    &quot;&quot;&quot;计算y_true和y_predict之间的MSE&quot;&quot;&quot;
+    assert len(y_true) == len(y_predict), \
+        &quot;the size of y_true must be equal to the size of y_predict&quot;
+
+    return np.sum((y_true - y_predict)**2) / len(y_true)
+
+
+def root_mean_squared_error(y_true, y_predict):
+    &quot;&quot;&quot;计算y_true和y_predict之间的RMSE&quot;&quot;&quot;
+
+    return sqrt(mean_squared_error(y_true, y_predict))
+
+
+def mean_absolute_error(y_true, y_predict):
+    &quot;&quot;&quot;计算y_true和y_predict之间的RMSE&quot;&quot;&quot;
+
+    return np.sum(np.absolute(y_true - y_predict)) / len(y_true)
+</code></pre><ul>
+<li>使用我们自己的评测函数</li>
+</ul>
+<pre><code>from playML.metrics import mean_squared_error
+from playML.metrics import root_mean_squared_error
+from playML.metrics import mean_absolute_erro
+
+mean_squared_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>24.156602134387438</p>
+</blockquote>
+<pre><code>root_mean_squared_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>4.914936635846635</p>
+</blockquote>
+<pre><code>mean_absolute_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>3.5430974409463873</p>
+</blockquote>
+<ul>
+<li>最后我们来看看scikit-learn中的MSE和MAE</li>
+</ul>
+<pre><code>from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+
+mean_squared_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>24.156602134387438</p>
+</blockquote>
+<pre><code>mean_absolute_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>3.5430974409463873</p>
+</blockquote>
+<h3 id="4-最好的衡量线性回归法的指标-R-Squared"><a href="#4-最好的衡量线性回归法的指标-R-Squared" class="headerlink" title="4. 最好的衡量线性回归法的指标 R Squared"></a>4. 最好的衡量线性回归法的指标 R Squared</h3><p><img src="http://oseihavwm.bkt.clouddn.com/R%20Squared.png" alt=""></p>
+<ul>
+<li>分子：使用我们的模型预测产生的错误</li>
+<li>分母：使用平均值预测产生的错误</li>
+<li>最终结果其实就是我们的模型拟合住的数据的地方</li>
+<li>R^2 &lt;= 1</li>
+<li>R^2越大越好，当我们的预测模型不犯任何错误时，R^2得到最大值1</li>
+<li>当我们的模型等于基准模型时，R^2为0</li>
+<li>如果R^2&lt;0，说明我们学习到的模型还不如基准模型。此时，很有可能我们的数据不存在任何线性关系</li>
+</ul>
+<ul>
+<li>下面我们就具体编程实现</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+boston = datasets.load_boston()
+x = boston.data[:,5] # 只使用房间数量这个特征
+y = boston.target
+
+x = x[y &lt; 50.0]
+y = y[y &lt; 50.0]
+
+from playML.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, seed=666)
+
+from playML.simpleLinearRegression import SimpleLinearRegression2
+
+reg = SimpleLinearRegression2()
+reg.fit(x_train, y_train)
+
+y_predict = reg.predict(x_test)
+</code></pre><ul>
+<li>我们可以变形R^2，分子是MSE，分母是Var(y)</li>
+</ul>
+<pre><code>from playML.metrics import mean_squared_error
+
+1 - mean_squared_error(y_test, y_predict)/np.var(y_test)
+</code></pre><blockquote>
+<p>0.61293168039373225</p>
+</blockquote>
+<ul>
+<li>scikit-learn中的 r2_score</li>
+</ul>
+<pre><code>from sklearn.metrics import r2_score
+
+r2_score(y_test, y_predict)
+</code></pre><blockquote>
+<p>0.61293168039373236</p>
+</blockquote>
+<ul>
+<li><p><strong><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" rel="external">sklearn.linear_model.LinearRegression</a></strong></p>
+</li>
+<li><p>在我们的SimpleRegression中添加score</p>
+</li>
+</ul>
+<pre><code>from .metrics import r2_score
+
+class SimpleLinearRegression2:
+
+    def score(self, x_test, y_test):
+        &quot;&quot;&quot;根据测试数据集 x_test 和 y_test 确定当前模型的准确度&quot;&quot;&quot;
+
+        y_predict = self.predict(x_test)
+        return r2_score(y_test, y_predict)
+</code></pre><h3 id="5-多元线性回归和正规方程解"><a href="#5-多元线性回归和正规方程解" class="headerlink" title="5. 多元线性回归和正规方程解"></a>5. 多元线性回归和正规方程解</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92.png" alt=""></p>
+<ul>
+<li>将方程使用向量表示</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%921.png" alt=""></p>
+<ul>
+<li>多元线性回归的正规方程解</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E8%A7%A3.png" alt=""></p>
+<h3 id="6-实现多元线性回归"><a href="#6-实现多元线性回归" class="headerlink" title="6. 实现多元线性回归"></a>6. 实现多元线性回归</h3><pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import numpy as np
+from .metrics import r2_score
+
+
+class LinearRegression:
+
+    def __init__(self):
+        &quot;&quot;&quot;初始化Linear Regression模型&quot;&quot;&quot;
+        self.coef_ = None
+        self.intercept_ = None
+        self._theta = None
+
+    def fit_normal(self, X_train, y_train):
+        &quot;&quot;&quot;根据训练数据集X_train, y_train训练Linear Regression模型&quot;&quot;&quot;
+        assert X_train.shape[0] == y_train.shape[0], \
+            &quot;the size of X_train must be equal to the size of y_train&quot;
+
+        X_b = np.hstack([np.ones((len(X_train), 1)), X_train])
+        self._theta = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y_train)
+
+        self.intercept_ = self._theta[0]
+        self.coef_ = self._theta[1:]
+
+        return self
+
+    def predict(self, X_predict):
+        &quot;&quot;&quot;给定待预测数据集X_predict，返回表示X_predict的结果向量&quot;&quot;&quot;
+        assert self.intercept_ is not None and self.coef_ is not None, \
+            &quot;must fit before predict!&quot;
+        assert X_predict.shape[1] == len(self.coef_), \
+            &quot;the feature number of X_predict must be equal to X_train&quot;
+
+        X_b = np.hstack([np.ones((len(X_predict), 1)), X_predict])
+        return X_b.dot(self._theta)
+
+    def score(self, X_test, y_test):
+        &quot;&quot;&quot;根据测试数据集 X_test 和 y_test 确定当前模型的准确度&quot;&quot;&quot;
+
+        y_predict = self.predict(X_test)
+        return r2_score(y_test, y_predict)
+
+    def __repr__(self):
+        return &quot;LinearRegression()&quot;
+</code></pre><ul>
+<li>接下来我们试验一下自己写的多元回归，首先加载数据</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+boston = datasets.load_boston()
+
+X = boston.data
+y = boston.target
+
+X = X[y &lt; 50.0]
+y = y[y &lt; 50.0]
+
+from playML.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, seed=666)
+</code></pre><ul>
+<li>使用自己的LinearRegression</li>
+</ul>
+<pre><code>from playML.linearRegression import LinearRegression
+
+reg = LinearRegression()
+reg.fit_normal(X_train, y_train)
+</code></pre><ul>
+<li>查看系数</li>
+</ul>
+<pre><code>reg.coef_
+</code></pre><blockquote>
+<p>array([ -1.18919477e-01,   3.63991462e-02,  -3.56494193e-02,<br>         5.66737830e-02,  -1.16195486e+01,   3.42022185e+00,<br>        -2.31470282e-02,  -1.19509560e+00,   2.59339091e-01,<br>        -1.40112724e-02,  -8.36521175e-01,   7.92283639e-03,<br>        -3.81966137e-01])</p>
+</blockquote>
+<ul>
+<li>查看截距</li>
+</ul>
+<pre><code>reg.intercept_
+</code></pre><blockquote>
+<p>34.161435496245659</p>
+</blockquote>
+<ul>
+<li>查看R^2值，比简单线性回归提高了不少，说明特征更多的话，预测结果会是更好的</li>
+</ul>
+<pre><code>reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.8129802602658458</p>
+</blockquote>
+<h3 id="7-使用scikit-learn解决回归问题"><a href="#7-使用scikit-learn解决回归问题" class="headerlink" title="7. 使用scikit-learn解决回归问题"></a>7. 使用scikit-learn解决回归问题</h3><ul>
+<li>我们上面已经加载了数据，现在直接使用</li>
+</ul>
+<pre><code>from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)</p>
+</blockquote>
+<ul>
+<li>查看数据</li>
+</ul>
+<pre><code>lin_reg.coef_
+</code></pre><blockquote>
+<p>array([ -1.18919477e-01,   3.63991462e-02,  -3.56494193e-02,<br>         5.66737830e-02,  -1.16195486e+01,   3.42022185e+00,<br>        -2.31470282e-02,  -1.19509560e+00,   2.59339091e-01,<br>        -1.40112724e-02,  -8.36521175e-01,   7.92283639e-03,<br>        -3.81966137e-01])</p>
+</blockquote>
+<pre><code>lin_reg.intercept_
+</code></pre><blockquote>
+<p>34.161435496246924</p>
+</blockquote>
+<pre><code>lin_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.81298026026584758</p>
+</blockquote>
+<ul>
+<li><strong>使用kNN解决回归问题</strong></li>
+</ul>
+<pre><code>from sklearn.preprocessing import StandardScaler
+
+standardScaler = StandardScaler()
+standardScaler.fit(X_train, y_train)
+X_train_standard = standardScaler.transform(X_train)
+X_test_standard = standardScaler.transform(X_test)
+
+from sklearn.neighbors import KNeighborsRegressor
+
+knn_reg = KNeighborsRegressor()
+knn_reg.fit(X_train_standard, y_train)
+knn_reg.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>0.84664511530389497</p>
+</blockquote>
+<ul>
+<li>寻找最佳超参数</li>
+</ul>
+<pre><code>from sklearn.model_selection import GridSearchCV
+
+param_grid = [
+    {
+        &quot;weights&quot;: [&quot;uniform&quot;],
+        &quot;n_neighbors&quot;: [i for i in range(1, 11)]
+    },
+    {
+        &quot;weights&quot;: [&quot;distance&quot;],
+        &quot;n_neighbors&quot;: [i for i in range(1, 11)],
+        &quot;p&quot;: [i for i in range(1,6)]
+    }
+]
+
+knn_reg = KNeighborsRegressor()
+grid_search = GridSearchCV(knn_reg, param_grid, n_jobs=-1, verbose=1)
+grid_search.fit(X_train_standard, y_train)
+</code></pre><blockquote>
+<p>Fitting 3 folds for each of 60 candidates, totalling 180 fits<br>[Parallel(n_jobs=-1)]: Done 180 out of 180 | elapsed:    3.3s finished<br>GridSearchCV(cv=None, error_score=’raise’,<br>       estimator=KNeighborsRegressor(algorithm=’auto’, leaf_size=30, metric=’minkowski’,<br>          metric_params=None, n_jobs=1, n_neighbors=5, p=2,<br>          weights=’uniform’),<br>       fit_params={}, iid=True, n_jobs=-1,<br>       param_grid=[{‘weights’: [‘uniform’], ‘n_neighbors’: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}, {‘weights’: [‘distance’], ‘n_neighbors’: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ‘p’: [1, 2, 3, 4, 5]}],<br>       pre_dispatch=’2*n_jobs’, refit=True, return_train_score=True,<br>       scoring=None, verbose=1)</p>
+</blockquote>
+<pre><code>grid_search.best_params_
+</code></pre><blockquote>
+<p>{‘n_neighbors’: 5, ‘p’: 1, ‘weights’: ‘distance’}</p>
+</blockquote>
+<pre><code>grid_search.best_score_
+</code></pre><blockquote>
+<p>0.79917999890996905</p>
+</blockquote>
+<pre><code>grid_search.best_estimator_.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>0.88099665099417701</p>
+</blockquote>
+<h3 id="8-线性回归的可解性和更多思考"><a href="#8-线性回归的可解性和更多思考" class="headerlink" title="8. 线性回归的可解性和更多思考"></a>8. 线性回归的可解性和更多思考</h3><ul>
+<li>我们上面使用sklearn可以得到多元线性回归的系数，我们可以发现这些系数与实际情况也是相符的</li>
+</ul>
+<pre><code>lin_reg.coef_
+</code></pre><blockquote>
+<p>array([ -1.05574295e-01,   3.52748549e-02,  -4.35179251e-02,<br>         4.55405227e-01,  -1.24268073e+01,   3.75411229e+00,<br>        -2.36116881e-02,  -1.21088069e+00,   2.50740082e-01,<br>        -1.37702943e-02,  -8.38888137e-01,   7.93577159e-03,<br>        -3.50952134e-01])</p>
+</blockquote>
+<pre><code>np.argsort(lin_reg.coef_)
+</code></pre><blockquote>
+<p>array([ 4,  7, 10, 12,  0,  2,  6,  9, 11,  1,  8,  3,  5], dtype=int64)</p>
+</blockquote>
+<pre><code>boston.feature_names[np.argsort(lin_reg.coef_)]
+</code></pre><blockquote>
+<p>array([‘NOX’, ‘DIS’, ‘PTRATIO’, ‘LSTAT’, ‘CRIM’, ‘INDUS’, ‘AGE’, ‘TAX’,<br>       ‘B’, ‘ZN’, ‘RAD’, ‘CHAS’, ‘RM’],<br>      dtype=’&lt;U7’)</p>
+</blockquote>
+<pre><code>print(boston.DESCR)
+</code></pre><blockquote>
+<p>Boston House Prices dataset<br>…<br>:Attribute Information (in order):</p>
+<ul>
+<li>CRIM     per capita crime rate by town</li>
+<li>ZN       proportion of residential land zoned for lots over 25,000 sq.ft.</li>
+<li>INDUS    proportion of non-retail business acres per town</li>
+<li>CHAS     Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)</li>
+<li>NOX      nitric oxides concentration (parts per 10 million)</li>
+<li>RM       average number of rooms per dwelling</li>
+<li>AGE      proportion of owner-occupied units built prior to 1940</li>
+<li>DIS      weighted distances to five Boston employment centres</li>
+<li>RAD      index of accessibility to radial highways</li>
+<li>TAX      full-value property-tax rate per $10,000</li>
+<li>PTRATIO  pupil-teacher ratio by town</li>
+<li>B        1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town</li>
+<li>LSTAT    % lower status of the population</li>
+<li>MEDV     Median value of owner-occupied homes in $1000’s</li>
+</ul>
+</blockquote>
+<p><strong>线性回归算法总结</strong></p>
+<ul>
+<li>典型的参数学习<ul>
+<li>对比kNN：非参数学习</li>
+</ul>
+</li>
+<li>只能解决回归问题<ul>
+<li>虽然很多分类方法中，线性回归是基础(如逻辑回归)</li>
+<li>对比kNN：既可以解决分类问题，又可以解决回归问题</li>
+</ul>
+</li>
+<li>对数据有假设：线性<ul>
+<li>对比kNN：对数据没有假设</li>
+</ul>
+</li>
+<li>优点：对数据具有强解释性</li>
 </ul>
 
             <div class="clearfix"></div>

@@ -420,7 +420,49 @@
 <li>登录用户可以对课程进行CURD操作</li>
 </ul>
 <p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90.png" alt=""></p>
-<h3 id="3-Python开发信息服务"><a href="#3-Python开发信息服务" class="headerlink" title="3. Python开发信息服务"></a>3. Python开发信息服务</h3><h3 id="4-开发用户服务"><a href="#4-开发用户服务" class="headerlink" title="4. 开发用户服务"></a>4. 开发用户服务</h3><ul>
+<h3 id="2-Thirft安装和验证"><a href="#2-Thirft安装和验证" class="headerlink" title="2. Thirft安装和验证"></a>2. Thirft安装和验证</h3><ul>
+<li>我这里是windows直接下载exe文件就可以了</li>
+<li>编写.thrift文件</li>
+</ul>
+<pre><code>namespace java cn.edu.nju.thrift.demo
+namespace py thrift.demo
+
+service DemoService {
+    void sayHello(1:string name);
+}
+</code></pre><ul>
+<li>执行命令</li>
+</ul>
+<pre><code>D:\Thrift&gt;thrift --gen java demo.thrift
+</code></pre><ul>
+<li>我们在D:\Thrift\gen-java\cn\edu\nju\thrift\demo路径下看到DemoService了</li>
+<li>能生成文件就说明thrift已经安装好了</li>
+</ul>
+<h3 id="3-Python开发信息服务"><a href="#3-Python开发信息服务" class="headerlink" title="3. Python开发信息服务"></a>3. Python开发信息服务</h3><ul>
+<li>在IDEA新建一个Python模块</li>
+<li>编写thrift文件</li>
+</ul>
+<pre><code>namespace java cn.edu.nju.thrift.message
+namespace py message.api
+
+service MessageService {
+
+    bool sendMobileMessage(1:string mobile, 2:string message);
+
+    bool sendEmailMessage(1:string email, 2:string message);
+
+}
+</code></pre><ul>
+<li>编写shell生成代码</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+thrift --gen py -out ../ message.thrift
+
+thrift --gen java -out ../../message-thrift-service-api/src/main/java message.thrift
+</code></pre><ul>
+<li>下面我们就要做一个具体的服务</li>
+</ul>
+<h3 id="4-开发用户服务"><a href="#4-开发用户服务" class="headerlink" title="4. 开发用户服务"></a>4. 开发用户服务</h3><ul>
 <li>用户服务首先使用Java语言开发，对外提供了一些Thrift接口，还要依赖于下面的信息服务，后端拥有数据库</li>
 <li>首先我们需要设计接口，需要给别人提供什么样的服务</li>
 </ul>
@@ -430,13 +472,13 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2018/04/25/Java-Concurrent-Programming-2/" style="float: left;">
+        ← Java 并发编程 2
     </a>
     
     
-    <a class="pull-right" href="/2018/04/21/ZooKeeper-Distributed-Topics-1/">
-        初识ZooKeeper →
+    <a class="pull-right" href="/2018/04/21/ZooKeeper-Distributed-Topics/">
+        ZooKeeper Distributed Topics →
     </a>
     
 </nav>

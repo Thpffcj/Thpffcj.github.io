@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Java 并发编程 2 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-25T13:55:17.000Z" itemprop="datePublished">
+          2018-04-25
+      </time>
+    
+</span>
+                <h1>Java 并发编程 2</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-安全发布对象"><a href="#1-安全发布对象" class="headerlink" title="1. 安全发布对象"></a>1. 安全发布对象</h2><h3 id="1-发布与逸出"><a href="#1-发布与逸出" class="headerlink" title="1. 发布与逸出"></a>1. 发布与逸出</h3><ul>
+<li>发布对象：使一个对象能够被当前范围之外的代码所使用</li>
+<li>对象溢出：一种错误的发布，当一个对象还没有构造完成时，就使其他线程所见</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+@Slf4j
+@NotThreadSafe
+public class UnsafePublish {
+
+    private String[] states = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};
+
+    public String[] getStates() {
+        return states;
+    }
+
+    public static void main(String[] args) {
+        UnsafePublish unsafePublish = new UnsafePublish();
+        log.info(&quot;{}&quot;, Arrays.toString(unsafePublish.getStates()));
+
+        unsafePublish.getStates()[0] = &quot;d&quot;;
+        log.info(&quot;{}&quot;, Arrays.toString(unsafePublish.getStates()));
+    }
+}
+</code></pre><ul>
+<li>我们发现可以修改私有变量，这样发布对象其实是不安全的，造成类里面状态错误</li>
+<li>接下来我们来看对象溢出</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+@Slf4j
+@NotThreadSafe
+@NotRecommend
+public class Escape {
+
+    private int thisCanBeEscape = 0;
+
+    public Escape () {
+        new InnerClass();
+    }
+
+    private class InnerClass {
+
+        public InnerClass() {
+            log.info(&quot;{}&quot;, Escape.this.thisCanBeEscape);
+        }
+    }
+
+    public static void main(String[] args) {
+        new Escape();
+    }
+}
+</code></pre><h3 id="2-安全发布对象"><a href="#2-安全发布对象" class="headerlink" title="2. 安全发布对象"></a>2. 安全发布对象</h3><ul>
+<li>在静态初始化函数中初始化一个对象引用</li>
+<li>将对象的引用保存到volatile类型域或者AtomicReference对象中</li>
+<li>将对象的引用保存到某个正确构造对象的final类型域中</li>
+<li>将对象的引用保存到一个由锁保护的域中</li>
+</ul>
+<p><strong>通过单例来看安全发布对象</strong></p>
+<ul>
+<li>我们先来看线程不安全的写法</li>
+<li>懒汉模式</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 懒汉模式
+ * 单例实例在第一次使用时进行创建
+ */
+@NotThreadSafe
+public class SingletonExample1 {
+
+    // 私有构造函数
+    private SingletonExample1() {
+
+    }
+
+    // 单例对象
+    private static SingletonExample1 instance = null;
+
+    // 静态的工厂方法
+    public static SingletonExample1 getInstance() {
+        if (instance == null) {
+            instance = new SingletonExample1();
+        }
+        return instance;
+    }
+}
+</code></pre><ul>
+<li>饿汉模式，由于是在类装载的时候创建，所以能够保证是线程安全的</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 饿汉模式
+ * 单例实例在类装载时进行创建
+ */
+@ThreadSafe
+public class SingletonExample2 {
+
+    // 私有构造函数
+    private SingletonExample2() {
+
+    }
+
+    // 单例对象
+    private static SingletonExample2 instance = new SingletonExample2();
+
+    // 静态的工厂方法
+    public static SingletonExample2 getInstance() {
+        return instance;
+    }
+}
+</code></pre><ul>
+<li>饿汉模式不足：如果类初始化需要的操作比较多，就会在加载时特别慢</li>
+<li>饿汉模式是线程安全的，那么懒汉模式是否也可以做成是线程安全的呢，我们可以在方法上加上synchronized，获取实例的静态工厂方法里面的实现在同一时间内只允许一个线程访问</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 懒汉模式
+ * 单例实例在第一次使用时进行创建
+ */
+@ThreadSafe
+@NotRecommend
+public class SingletonExample3 {
+
+    // 私有构造函数
+    private SingletonExample3() {
+
+    }
+
+    // 单例对象
+    private static SingletonExample3 instance = null;
+
+    // 静态的工厂方法
+    public static synchronized SingletonExample3 getInstance() {
+        if (instance == null) {
+            instance = new SingletonExample3();
+        }
+        return instance;
+    }
+}
+</code></pre><ul>
+<li>但是这种方法我们并不推荐，在方法上加synchronized带来的性能开销使我们不希望的</li>
+<li>接下来我们尝试修改懒汉模式提供更好的写法</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 懒汉模式 -&gt; 双重同步锁单例模式
+ * 单例实例在第一次使用时进行创建
+ */
+@NotThreadSafe
+public class SingletonExample4 {
+
+    // 私有构造函数
+    private SingletonExample4() {
+
+    }
+
+    // 1、memory = allocate() 分配对象的内存空间
+    // 2、ctorInstance() 初始化对象
+    // 3、instance = memory 设置instance指向刚分配的内存
+
+    // JVM和cpu优化，发生了指令重排
+
+    // 1、memory = allocate() 分配对象的内存空间
+    // 3、instance = memory 设置instance指向刚分配的内存
+    // 2、ctorInstance() 初始化对象
+
+    // 单例对象
+    private static SingletonExample4 instance = null;
+
+    // 静态的工厂方法
+    public static SingletonExample4 getInstance() {
+        if (instance == null) { // 双重检测机制        // B
+            synchronized (SingletonExample4.class) { // 同步锁
+                if (instance == null) {
+                    instance = new SingletonExample4(); // A - 3
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre><ul>
+<li>但是这并不是线程安全的，当我们执行 instance = new SingletonExample4()的时候主要有三步指令<ul>
+<li>分配对象内存空间</li>
+<li>初始化对象</li>
+<li>设置instance指向刚分配的内存</li>
+</ul>
+</li>
+<li>当JVM和cpu优化，发生了指令重排，就可能不是线程安全的，那么我们如何解决呢</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 懒汉模式 -&gt; 双重同步锁单例模式
+ * 单例实例在第一次使用时进行创建
+ */
+@ThreadSafe
+public class SingletonExample5 {
+
+    // 私有构造函数
+    private SingletonExample5() {
+
+    }
+
+    // 1、memory = allocate() 分配对象的内存空间
+    // 2、ctorInstance() 初始化对象
+    // 3、instance = memory 设置instance指向刚分配的内存
+
+    // 单例对象 volatile + 双重检测机制 -&gt; 禁止指令重排
+    private volatile static SingletonExample5 instance = null;
+
+    // 静态的工厂方法
+    public static SingletonExample5 getInstance() {
+        if (instance == null) { // 双重检测机制        // B
+            synchronized (SingletonExample5.class) { // 同步锁
+                if (instance == null) {
+                    instance = new SingletonExample5(); // A - 3
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre><ul>
+<li>我们通过volatile就可以限制这段代码发生指令重排</li>
+<li>接下来我们再看一些饿汉模式，其实还有另一个种方法</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 饿汉模式
+ * 单例实例在类装载时进行创建
+ */
+@ThreadSafe
+public class SingletonExample6 {
+
+    // 私有构造函数
+    private SingletonExample6() {
+
+    }
+
+    // 单例对象
+    private static SingletonExample6 instance = null;
+
+    static {
+        instance = new SingletonExample6();
+    }
+
+    // 静态的工厂方法
+    public static SingletonExample6 getInstance() {
+        return instance;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getInstance().hashCode());
+        System.out.println(getInstance().hashCode());
+    }
+}
+</code></pre><ul>
+<li>我们可以通过静态块初始化，注意静态域和静态代码块的顺序</li>
+<li>关于单例实例的初始化我们介绍了懒汉模式和饿汉模式，还有其他方法么</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/25.
+ * 枚举模式：最安全
+ */
+@ThreadSafe
+@Recommend
+public class SingletonExample7 {
+
+    // 私有构造函数
+    private SingletonExample7() {
+
+    }
+
+    public static SingletonExample7 getInstance() {
+        return Singleton.INSTANCE.getInstance();
+    }
+
+    private enum Singleton {
+        INSTANCE;
+
+        private SingletonExample7 singleton;
+
+        // JVM保证这个方法绝对只调用一次
+        Singleton() {
+            singleton = new SingletonExample7();
+        }
+
+        public SingletonExample7 getInstance() {
+            return singleton;
+        }
+    }
+}
+</code></pre><ul>
+<li>它相比懒汉模式在安全性方面更能保证，相比饿汉模式他可以在实际调用的时候再做初始化，后续使用时可以直接取到它的值</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-线程安全策略"><a href="#2-线程安全策略" class="headerlink" title="2. 线程安全策略"></a>2. 线程安全策略</h2><h3 id="1-不可变对象"><a href="#1-不可变对象" class="headerlink" title="1. 不可变对象"></a>1. 不可变对象</h3><p><strong>不可变对象需要满足的条件</strong></p>
+<ul>
+<li>对象创建以后其状态就不能修改</li>
+<li>对象所有域都是final类型</li>
+<li>对象是正确创建的(在对象创建期间，this引用没有逸出)</li>
+</ul>
+<p><strong>final关键字：类，方法，变量</strong></p>
+<ul>
+<li>修饰类：不能被继承</li>
+<li>修饰方法：<ul>
+<li>锁定方法不被继承类修改</li>
+<li>效率</li>
+</ul>
+</li>
+<li>修饰变量：<ul>
+<li>基本数据类型变量</li>
+<li>引用类型变量：初始化后不能指向另外一个对象</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class ImmutableExample1 {
+
+    private final static Integer a = 1;
+    private final static String b = &quot;2&quot;;
+    private final static Map&lt;Integer, Integer&gt; map = Maps.newHashMap();
+
+    static {
+        map.put(1, 2);
+        map.put(3, 4);
+        map.put(5, 6);
+    }
+
+    public static void main(String[] args) {
+//        a = 2;
+//        b = &quot;3&quot;;
+//        map = Maps.newHashMap();
+        map.put(1, 3);
+        log.info(&quot;{}&quot;, map.get(1));
+    }
+
+    private void test(final int a) {
+//        a = 1;
+    }
+}
+</code></pre><ul>
+<li>Java里除了final，还有别的手段可以定义不可变对象<ul>
+<li>Collections.unmodifiableXXX</li>
+<li>Guava:ImmutableXXX</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class ImmutableExample2 {
+
+    private static Map&lt;Integer, Integer&gt; map = Maps.newHashMap();
+
+    static {
+        map.put(1, 2);
+        map.put(3, 4);
+        map.put(5, 6);
+        map = Collections.unmodifiableMap(map);
+    }
+
+    public static void main(String[] args) {
+        map.put(1, 3);
+        log.info(&quot;{}&quot;, map.get(1));
+    }
+}
+</code></pre><ul>
+<li>我们发现会抛出异常，不允许我们修改map</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@ThreadSafe
+public class ImmutableExample3 {
+
+    private final static ImmutableList&lt;Integer&gt; list = ImmutableList.of(1, 2, 3);
+
+    private final static ImmutableSet set = ImmutableSet.copyOf(list);
+
+    private final static ImmutableMap&lt;Integer, Integer&gt; map = ImmutableMap.of(1, 2, 3, 4);
+
+    private final static ImmutableMap&lt;Integer, Integer&gt; map2 = ImmutableMap.&lt;Integer, Integer&gt;builder()
+            .put(1, 2).put(3, 4).put(5, 6).build();
+
+
+    public static void main(String[] args) {
+        System.out.println(map2.get(3));
+    }
+}
+</code></pre><ul>
+<li>发现也不允许我们修改数据，这也是不可变对象</li>
+</ul>
+<h3 id="2-线程封闭"><a href="#2-线程封闭" class="headerlink" title="2. 线程封闭"></a>2. 线程封闭</h3><ul>
+<li>Ad-hoc 线程封闭：程序控制实现，最糟糕，忽略</li>
+<li>堆栈封闭：局部变量，无并发问题</li>
+<li>ThreadLocal 线程封闭：特别好的封闭方法</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+public class RequestHolder {
+
+    private final static ThreadLocal&lt;Long&gt; requestHolder = new ThreadLocal&lt;&gt;();
+
+    public static void add(Long id) {
+        requestHolder.set(id);
+    }
+
+    public static Long getId() {
+        return requestHolder.get();
+    }
+
+    public static void remove() {
+        requestHolder.remove();
+    }
+}
+</code></pre><ul>
+<li>我们这里单纯保存线程的id，这里getId我们容易理解，添加和移除改在什么时候做这个操作呢，add应该作用在请求进入后端服务器但是却没有实际处理的时候，我们调用这个方法把相关信息写进去，我们就会想到使用Filter，remove就需要在接口真正处理完之后进行处理，我们就会想到Interceptor</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+public class HttpFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        log.info(&quot;do filter, {}, {}&quot;, Thread.currentThread().getId(), request.getServletPath());
+        RequestHolder.add(Thread.currentThread().getId());
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+</code></pre><ul>
+<li>我们这里仅存入了线程id</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+public class HttpInterceptor extends HandlerInterceptorAdapter {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info(&quot;preHandle&quot;);
+        return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        RequestHolder.remove();
+        log.info(&quot;afterCompletion&quot;);
+        return;
+    }
+}
+</code></pre><ul>
+<li>我们需要去启动类配置Filter和Interceptor</li>
+</ul>
+<pre><code>@SpringBootApplication
+public class ConcurrencyApplication extends WebMvcConfigurerAdapter {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ConcurrencyApplication.class, args);
+    }
+
+    @Bean
+    public FilterRegistrationBean httpFilter() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(new HttpFilter());
+        registrationBean.addUrlPatterns(&quot;/threadLocal/*&quot;);
+        return registrationBean;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new HttpInterceptor()).addPathPatterns(&quot;/**&quot;);
+    }
+}
+</code></pre><ul>
+<li>接下来我们就要写接口来验证ThreadLocal的使用了</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Controller
+@RequestMapping(&quot;/threadLocal&quot;)
+public class ThreadLocalController {
+
+    @RequestMapping(&quot;/test&quot;)
+    @ResponseBody
+    public Long test() {
+        return RequestHolder.getId();
+    }
+}
+</code></pre><ul>
+<li>可以看到页面显示40，后台得到输出</li>
+</ul>
+<pre><code>2018-04-26 15:01:04.405  INFO 8656 --- [nio-8080-exec-1] cn.edu.nju.concurrency.HttpFilter        : do filter, 40, /threadLocal/test
+2018-04-26 15:01:04.582  INFO 8656 --- [nio-8080-exec-1] cn.edu.nju.concurrency.HttpInterceptor   : preHandle
+2018-04-26 15:01:04.861  INFO 8656 --- [nio-8080-exec-1] cn.edu.nju.concurrency.HttpInterceptor   : afterCompletion
+</code></pre><h3 id="3-线程不安全类与写法"><a href="#3-线程不安全类与写法" class="headerlink" title="3. 线程不安全类与写法"></a>3. 线程不安全类与写法</h3><p><strong>StringBuilder -&gt; StringBuffer</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class StringExample1 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    public static StringBuilder stringBuilder = new StringBuilder();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal ; i++) {
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update();
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, stringBuilder.length());
+    }
+
+    private static void update() {
+        stringBuilder.append(&quot;1&quot;);
+    }
+} 
+</code></pre><ul>
+<li>我们运行的结果并不是5000，因此StringBuilder是一个线程不安全的类，接下来我们看一下StringBuffer</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class StringExample2 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    public static StringBuffer stringBuffer = new StringBuffer();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal ; i++) {
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update();
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, stringBuffer.length());
+    }
+
+    private static void update() {
+        stringBuffer.append(&quot;1&quot;);
+    }
+}
+</code></pre><ul>
+<li>发现运行的结果都是5000，他是一个线程安全的类，为什么会这样呢，我们点进去发现StringBuffer的方法前是加了synchronized的关键字的，不过在性能上就会有损失</li>
+</ul>
+<p><strong>SimpleDateFormat -&gt; JodaTime</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class DateFormatExample1 {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal ; i++) {
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update();
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+    }
+
+    private static void update() {
+        try {
+            simpleDateFormat.parse(&quot;20180208&quot;);
+        } catch (Exception e) {
+            log.error(&quot;parse exception&quot;, e);
+        }
+    }
+}
+</code></pre><ul>
+<li>我们看到当并发执行时，我们出现了很多异常，因此这种写法是错误的</li>
+<li>我们可以使用前面学习的堆栈封闭的知识，使用一个局部变量来使用就好了</li>
+</ul>
+<pre><code>@Slf4j
+@ThreadSafe
+public class DateFormatExample2 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal ; i++) {
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update();
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+    }
+
+    private static void update() {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyyMMdd&quot;);
+            simpleDateFormat.parse(&quot;20180208&quot;);
+        } catch (Exception e) {
+            log.error(&quot;parse exception&quot;, e);
+        }
+    }
+}
+</code></pre><ul>
+<li>这回执行就没有异常了，接下来我们介绍一个线程安全的时间转化类</li>
+<li>引入依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;joda-time&lt;/groupId&gt;
+    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+    &lt;version&gt;2.9&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写代码</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class DateFormatExample3 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(&quot;yyyyMMdd&quot;);
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+    }
+
+    private static void update(int i) {
+        log.info(&quot;{}, {}&quot;, i, DateTime.parse(&quot;20180208&quot;, dateTimeFormatter).toDate());
+    }
+}
+</code></pre><ul>
+<li>实际做项目的时候我们更建议使用JodaTime</li>
+</ul>
+<p><strong>ArrayList, HashSet, HashMap 等 Collections</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class ArrayListExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, list.size());
+    }
+
+    private static void update(int i) {
+        list.add(i);
+    }
+}
+</code></pre><ul>
+<li>可以看到结果也并不是5000</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class HashSetExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, set.size());
+    }
+
+    private static void update(int i) {
+        set.add(i);
+    }
+}
+</code></pre><ul>
+<li>set的size也不是5000，最后我们看一下hashmap</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@NotThreadSafe
+public class HashMapExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, map.size());
+    }
+
+    private static void update(int i) {
+        map.put(i, i);
+    }
+}
+</code></pre><ul>
+<li>结果同样不是5000，说明HashMap在多线程下也是线程不安全的</li>
+</ul>
+<p><strong>先检查再执行是不安全的</strong></p>
+<h3 id="4-同步容器"><a href="#4-同步容器" class="headerlink" title="4. 同步容器"></a>4. 同步容器</h3><p><strong>ArrayList -&gt; Vector, Stack</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class VectorExample1 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static List&lt;Integer&gt; list = new Vector&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, list.size());
+    }
+
+    private static void update(int i) {
+        list.add(i);
+    }
+}
+</code></pre><ul>
+<li>返回的结果是5000没问题，但同步容器不一定就是线程安全的</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@NotThreadSafe
+public class VectorExample2 {
+
+    private static Vector&lt;Integer&gt; vector = new Vector&lt;&gt;();
+
+    public static void main(String[] args) {
+
+        while (true) {
+
+            for (int i = 0; i &lt; 10; i++) {
+                vector.add(i);
+            }
+
+            Thread thread1 = new Thread() {
+                public void run() {
+                    for (int i = 0; i &lt; vector.size(); i++) {
+                        vector.remove(i);
+                    }
+                }
+            };
+
+            Thread thread2 = new Thread() {
+                public void run() {
+                    for (int i = 0; i &lt; vector.size(); i++) {
+                        vector.get(i);
+                    }
+                }
+            };
+            thread1.start();
+            thread2.start();
+        }
+    }
+}
+</code></pre><ul>
+<li>我们运行这段代码，发现出现很多异常，这是因为可能我们的get方法判断完size之后，进行了remove操作，就会触发数组越界异常，为了保证安全我们必须在方法调用段做一些额外的同步措施</li>
+<li>在使用同步容器时并不是所有场景都能做到线程安全</li>
+</ul>
+<p><strong>HashMap -&gt; HashTable(key, value不能为空)</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class HashTableExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Map&lt;Integer, Integer&gt; map = new Hashtable&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, map.size());
+    }
+
+    private static void update(int i) {
+        map.put(i, i);
+    }
+}
+</code></pre><ul>
+<li>结果是5000，是线程安全的</li>
+</ul>
+<p><strong>Collections.synchronizedXXX(List, Set, Map)</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+@Slf4j
+@ThreadSafe
+public class CollectionsExample1 {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static List&lt;Integer&gt; list = Collections.synchronizedList(Lists.newArrayList());
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, list.size());
+    }
+
+    private static void update(int i) {
+        list.add(i);
+    }
+}
+</code></pre><ul>
+<li>是我们的预期结果5000</li>
+<li>剩下两个我们不列出详细代码</li>
+</ul>
+<pre><code>private static Set&lt;Integer&gt; set = Collections.synchronizedSet(Sets.newHashSet());
+
+private static Map&lt;Integer, Integer&gt; map = Collections.synchronizedMap(new HashMap&lt;&gt;());
+</code></pre><ul>
+<li>接下来我们演示几个使用集合容易出错的场景</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+public class VectorExample3 {
+
+    // java.util.ConcurrentModificationException
+    private static void test1(Vector&lt;Integer&gt; v1) { // foreach
+        for(Integer i : v1) {
+            if (i.equals(3)) {
+                v1.remove(i);
+            }
+        }
+    }
+
+    // java.util.ConcurrentModificationException
+    private static void test2(Vector&lt;Integer&gt; v1) { // iterator
+        Iterator&lt;Integer&gt; iterator = v1.iterator();
+        while (iterator.hasNext()) {
+            Integer i = iterator.next();
+            if (i.equals(3)) {
+                v1.remove(i);
+            }
+        }
+    }
+
+    // success
+    private static void test3(Vector&lt;Integer&gt; v1) { // for
+        for (int i = 0; i &lt; v1.size(); i++) {
+            if (v1.get(i).equals(3)) {
+                v1.remove(i);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Vector&lt;Integer&gt; vector = new Vector&lt;&gt;();
+        vector.add(1);
+        vector.add(2);
+        vector.add(3);
+        test1(vector);
+    }
+}
+</code></pre><ul>
+<li>我们发现只有test3成功了，当我们在foreach和迭代器的过程中尽量不要在操作过程中做remove相关的更新操作，可以先做标记，再做更新</li>
+</ul>
+<h3 id="5-并发容器及安全共享策略总结"><a href="#5-并发容器及安全共享策略总结" class="headerlink" title="5. 并发容器及安全共享策略总结"></a>5. 并发容器及安全共享策略总结</h3><p><strong>并发容器 J.U.C</strong></p>
+<p><strong>ArrayList -&gt; CopyOnWriteArrayList</strong></p>
+<ul>
+<li>读写分离</li>
+<li>最终一致性</li>
+<li>使用时另外开辟空间</li>
+<li>写操作时需要加锁</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+@Slf4j
+@ThreadSafe
+public class CopyOnWriteArrayListExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static List&lt;Integer&gt; list = new CopyOnWriteArrayList&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, list.size());
+    }
+
+    private static void update(int i) {
+        list.add(i);
+    }
+}
+</code></pre><ul>
+<li>结果是5000，它是线程安全的</li>
+</ul>
+<pre><code>/**
+ * Appends the specified element to the end of this list.
+ *
+ * @param e element to be appended to this list
+ * @return {@code true} (as specified by {@link Collection#add})
+ */
+public boolean add(E e) {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        Object[] elements = getArray();
+        int len = elements.length;
+        Object[] newElements = Arrays.copyOf(elements, len + 1);
+        newElements[len] = e;
+        setArray(newElements);
+        return true;
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre><ul>
+<li>我们可以通过add操作明白为什么是线程安全的</li>
+</ul>
+<p><strong>HashSet, TreeSet -&gt; CopyOnWriteArraySet ConcurrentSkipListSet</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+@Slf4j
+@ThreadSafe
+public class CopyOnWriteArraySetExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Set&lt;Integer&gt; set = new CopyOnWriteArraySet&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, set.size());
+    }
+
+    private static void update(int i) {
+        set.add(i);
+    }
+}
+</code></pre><ul>
+<li>ConcurrentSkipListSet可以在多线程保证线程安全，不过对于批量操作比如addAll等还需要自己手动保证线程安全</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+@Slf4j
+@ThreadSafe
+public class ConcurrentSkipListSetExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Set&lt;Integer&gt; set = new ConcurrentSkipListSet&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, set.size());
+    }
+
+    private static void update(int i) {
+        set.add(i);
+    }
+}
+</code></pre><p><strong>HashMap, TreeMap -&gt; ConcurrentHashMap ConcurrentSkipListMap</strong></p>
+<ul>
+<li>ConcurrentHashMap不允许空值</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+@Slf4j
+@ThreadSafe
+public class ConcurrentHashMapExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Map&lt;Integer, Integer&gt; map = new ConcurrentHashMap&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, map.size());
+    }
+
+    private static void update(int i) {
+        map.put(i, i);
+    }
+}
+</code></pre><ul>
+<li>ConcurrentSkipListMap是TreeMap的线程安全版本，是使用跳表实现的</li>
+<li>ConcurrentSkipListMap的key是有序的，支持更高的并发</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+@Slf4j
+@ThreadSafe
+public class ConcurrentSkipListMapExample {
+
+    // 请求总数
+    public static int clientTotal = 5000;
+
+    // 同时并发执行的线程数
+    public static int threadTotal = 200;
+
+    private static Map&lt;Integer, Integer&gt; map = new ConcurrentSkipListMap&lt;&gt;();
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final Semaphore semaphore = new Semaphore(threadTotal);
+        final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
+        for (int i = 0; i &lt; clientTotal; i++) {
+            final int count = i;
+            executorService.execute(() -&gt; {
+                try {
+                    semaphore.acquire();
+                    update(count);
+                    semaphore.release();
+                } catch (Exception e) {
+                    log.error(&quot;exception&quot;, e);
+                }
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executorService.shutdown();
+        log.info(&quot;size:{}&quot;, map.size());
+    }
+
+    private static void update(int i) {
+        map.put(i, i);
+    }
+}
+</code></pre><h3 id="6-安全共享对象策略总结"><a href="#6-安全共享对象策略总结" class="headerlink" title="6. 安全共享对象策略总结"></a>6. 安全共享对象策略总结</h3><ul>
+<li>线程限制：一个被线程限制的对象，由线程独占，并且只能被占有它的线程修改</li>
+<li>共享只读：一个共享只读的对象，在没有额外同步的情况下，可以被多个线程并发访问，但是任何线程都不能修改它</li>
+<li>线程安全对象：一个线程安全的对象或者容器，在内部通过同步机制来保证线程安全，所以其他线程无需额外的同步就可以通过公共接口随意访问它</li>
+<li>被守护对象：被守护对象只能通过获取特定的锁来访问</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/28/Java-Concurrent-Programming-3/" style="float: left;">
+        ← J.U.C
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/22/Docker-Kubernetes-k8s-1/">
+        初识微服务 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

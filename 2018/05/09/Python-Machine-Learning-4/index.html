@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>PCA与梯度上升法 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-09T04:47:57.000Z" itemprop="datePublished">
+          2018-05-09
+      </time>
+    
+</span>
+                <h1>PCA与梯度上升法</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-初识PCA"><a href="#1-初识PCA" class="headerlink" title="1. 初识PCA"></a>1. 初识PCA</h2><h3 id="1-什么是PCA"><a href="#1-什么是PCA" class="headerlink" title="1. 什么是PCA"></a>1. 什么是PCA</h3><p><strong>主成分分析 Principal Component Analysis</strong></p>
+<ul>
+<li>一个非监督的机器学习算法</li>
+<li>主要用于数据的降维</li>
+<li>通过降维，可以发现更便于人类理解的特征</li>
+<li>其他应用：可视化，去噪</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A0%B7%E6%9C%AC%E9%97%B4%E8%B7%9D.png" alt=""></p>
+<ul>
+<li>如何找到这个让样本间距最大的轴</li>
+<li>如何定义样本间距<ul>
+<li>使用方差</li>
+</ul>
+</li>
+<li>第一步：将样例的均值归为0(demean)</li>
+<li>我们想要求一个轴的方向w = (w1, w2)</li>
+<li>使得我们所有的样本，映射到w以后，方差最大</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%95.png" alt=""></p>
+<h3 id="2-使用梯度上升法求解PCA问题"><a href="#2-使用梯度上升法求解PCA问题" class="headerlink" title="2. 使用梯度上升法求解PCA问题"></a>2. 使用梯度上升法求解PCA问题</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%95.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%952.png" alt=""></p>
+<h3 id="3-求数据的主成分PCA"><a href="#3-求数据的主成分PCA" class="headerlink" title="3. 求数据的主成分PCA"></a>3. 求数据的主成分PCA</h3><ul>
+<li>生成虚拟测试用例</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.empty((100, 2))
+X[:,0] = np.random.uniform(0., 100., size=100)
+X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 10., size=100)
+
+plt.scatter(X[:,0], X[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%901.png" alt=""></p>
+<ul>
+<li>首先我们需要进行demean操作</li>
+</ul>
+<pre><code>def demean(X):
+    return X - np.mean(X, axis=0)
+
+X_demean = demean(X)
+
+plt.scatter(X_demean[:,0], X_demean[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%902.png" alt=""></p>
+<pre><code>np.mean(X_demean[:,0])
+</code></pre><blockquote>
+<p>2.6290081223123707e-15</p>
+</blockquote>
+<pre><code>np.mean(X_demean[:,1])
+</code></pre><blockquote>
+<p>2.3661073100811337e-14</p>
+</blockquote>
+<ul>
+<li>现在就完成了均值归0化</li>
+<li>接下来就来实现梯度上升法</li>
+<li>目标函数</li>
+</ul>
+<pre><code>def f(w, X):
+    return np.sum((X.dot(w)**2)) / len(X)
+</code></pre><ul>
+<li>求梯度方法</li>
+</ul>
+<pre><code>def df_math(w, X):
+    return X.T.dot(X.dot(w)) * 2. / len(X)
+
+def df_debug(w, X, epsilon=0.0001):
+    res = np.empty(len(w))
+    for i in range(len(w)):
+        w_1 = w.copy()
+        w_1[i] += epsilon
+        w_2 = w.copy()
+        w_2[i] -= epsilon
+        res[i] = (f(w_1, X) - f(w_2, X)) / (2 * epsilon)
+    return res
+
+def direction(w):
+    return w / np.linalg.norm(w)
+
+def gradient_ascent(df, X, initial_w, eta, n_iters = 1e4, epsilon=1e-8):
+
+    w = direction(initial_w) 
+    cur_iter = 0
+
+    while cur_iter &lt; n_iters:
+        gradient = df(w, X)
+        last_w = w
+        w = w + eta * gradient
+        w = direction(w) # 注意1：每次求一个单位方向
+        if(abs(f(w, X) - f(last_w, X)) &lt; epsilon):
+            break
+
+        cur_iter += 1
+
+    return w
+</code></pre><ul>
+<li>接下来我们来调用我们的梯度上升法</li>
+</ul>
+<pre><code>initial_w = np.random.random(X.shape[1]) # 注意2：不能用0向量开始
+initial_w
+</code></pre><blockquote>
+<p>array([ 0.71364513,  0.01301193])</p>
+</blockquote>
+<pre><code>eta = 0.001
+# 注意3： 不能使用StandardScaler标准化数据
+
+gradient_ascent(df_debug, X_demean, initial_w, eta) 
+</code></pre><blockquote>
+<p>array([ 0.75844861,  0.65173285])</p>
+</blockquote>
+<pre><code>gradient_ascent(df_math, X_demean, initial_w, eta)
+</code></pre><blockquote>
+<p>array([ 0.75844861,  0.65173285])</p>
+</blockquote>
+<ul>
+<li>最后我们来可视化一下</li>
+</ul>
+<pre><code>w = gradient_ascent(df_math, X_demean, initial_w, eta)
+
+plt.scatter(X_demean[:,0], X_demean[:,1])
+plt.plot([0, w[0]*30], [0, w[1]*30], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%903.png" alt=""></p>
+<ul>
+<li>我们最后尝试用一个极端数据看一看结果</li>
+</ul>
+<pre><code>X2 = np.empty((100, 2))
+X2[:,0] = np.random.uniform(0., 100., size=100)
+X2[:,1] = 0.75 * X2[:,0] + 3.
+
+plt.scatter(X2[:,0], X2[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%904.png" alt=""></p>
+<pre><code>X2_demean = demean(X2)
+w2 = gradient_ascent(df_math, X2_demean, initial_w, eta)
+
+plt.scatter(X2_demean[:,0], X2_demean[:,1])
+plt.plot([0, w2[0]*30], [0, w2[1]*30], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%905.png" alt=""></p>
+<h3 id="4-求数据的前n个主成分"><a href="#4-求数据的前n个主成分" class="headerlink" title="4. 求数据的前n个主成分"></a>4. 求数据的前n个主成分</h3><ul>
+<li>当求出第一主成分后，如何求出下一个主成分</li>
+<li>数据进行改变，将数据在第一个主成分上的分量去掉</li>
+<li>在新的数据上求第一主成分</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8E%BB%E9%99%A4%E7%AC%AC%E4%B8%80%E4%B8%BB%E6%88%90%E5%88%86.png" alt=""></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.empty((100, 2))
+X[:,0] = np.random.uniform(0., 100., size=100)
+X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 10., size=100)
+
+def demean(X):
+    return X - np.mean(X, axis=0)
+
+X = demean(X)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%906.png" alt=""></p>
+<ul>
+<li>求出第一主成分的代码</li>
+</ul>
+<pre><code>def f(w, X):
+    return np.sum((X.dot(w)**2)) / len(X)
+
+def df(w, X):
+    return X.T.dot(X.dot(w)) * 2. / len(X)
+
+def direction(w):
+    return w / np.linalg.norm(w)
+
+def first_component(X, initial_w, eta, n_iters = 1e4, epsilon=1e-8):
+
+    w = direction(initial_w) 
+    cur_iter = 0
+
+    while cur_iter &lt; n_iters:
+        gradient = df(w, X)
+        last_w = w
+        w = w + eta * gradient
+        w = direction(w) 
+        if(abs(f(w, X) - f(last_w, X)) &lt; epsilon):
+            break
+
+        cur_iter += 1
+
+    return w
+</code></pre><ul>
+<li>求出第一主成分对应的单位方向</li>
+</ul>
+<pre><code>initial_w = np.random.random(X.shape[1])
+eta = 0.01
+w = first_component(X, initial_w, eta)
+w
+</code></pre><blockquote>
+<p>array([ 0.77724743,  0.62919506])</p>
+</blockquote>
+<ul>
+<li>现在就是要把关于第一主成分对应的分量全部去掉</li>
+</ul>
+<pre><code>X2 = np.empty(X.shape)
+for i in range(len(X)):
+    X2[i] = X[i] - X[i].dot(w) * w
+
+plt.scatter(X2[:,0], X2[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%907.png" alt=""></p>
+<ul>
+<li><p>求第二主成分方向</p>
+<p>  w2 = first_component(X2, initial_w, eta)<br>  w2</p>
+</li>
+</ul>
+<blockquote>
+<p>array([-0.62919139,  0.77725041])</p>
+</blockquote>
+<ul>
+<li>此时w和w2应该是互相垂直的</li>
+</ul>
+<pre><code>w.dot(w2)
+</code></pre><blockquote>
+<p>4.7305811214926052e-06</p>
+</blockquote>
+<ul>
+<li>上面求X2的时候我们使用了循环，其实这个过程也是可以向量化的</li>
+</ul>
+<pre><code>X2 = X - X.dot(w).reshape(-1, 1) * w
+
+plt.scatter(X2[:,0], X2[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%907.png" alt=""></p>
+<ul>
+<li>现在我们就可以把前面学习的内容合成一个部分了</li>
+</ul>
+<pre><code>def first_n_components(n, X, eta=0.01, n_iters = 1e4, epsilon=1e-8):
+    X_pca = X.copy()
+    X_pca = demean(X_pca)
+    res = []
+    for i in range(n):
+        initial_w = np.random.random(X_pca.shape[1])
+        w = first_component(X_pca, initial_w, eta)
+        res.append(w)
+
+        X_pca = X_pca - X_pca.dot(w).reshape(-1, 1) * w
+
+    return res
+</code></pre><ul>
+<li>求出前两个主成分</li>
+</ul>
+<pre><code>first_n_components(2, X)
+</code></pre><blockquote>
+<p>[array([ 0.77724759,  0.62919487]), array([ 0.62919847, -0.77724467])]</p>
+</blockquote>
+<h3 id="5-高维数据映射为低维数据"><a href="#5-高维数据映射为低维数据" class="headerlink" title="5. 高维数据映射为低维数据"></a>5. 高维数据映射为低维数据</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AE%E6%98%A0%E5%B0%84%E4%B8%BA%E4%BD%8E%E7%BB%B4%E6%95%B0%E6%8D%AE.png" alt=""></p>
+<ul>
+<li>我们封装以前写过的代码，并添加transform和inverse_transform方法</li>
+</ul>
+<pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import numpy as np
+
+
+class PCA:
+
+    def __init__(self, n_components):
+        &quot;&quot;&quot;初始化PCA&quot;&quot;&quot;
+        assert n_components &gt;= 1, &quot;n_components must be valid&quot;
+        self.n_components = n_components
+        self.components_ = None
+
+    def fit(self, X, eta=0.01, n_iters=1e4):
+        &quot;&quot;&quot;获得数据集X的前n个主成分&quot;&quot;&quot;
+        assert self.n_components &lt;= X.shape[1], \
+            &quot;n_components must not be greater than the feature number of X&quot;
+
+        def demean(X):
+            return X - np.mean(X, axis=0)
+
+        def f(w, X):
+            return np.sum((X.dot(w) ** 2)) / len(X)
+
+        def df(w, X):
+            return X.T.dot(X.dot(w)) * 2. / len(X)
+
+        def direction(w):
+            return w / np.linalg.norm(w)
+
+        def first_component(X, initial_w, eta=0.01, n_iters=1e4, epsilon=1e-8):
+
+            w = direction(initial_w)
+            cur_iter = 0
+
+            while cur_iter &lt; n_iters:
+                gradient = df(w, X)
+                last_w = w
+                w = w + eta * gradient
+                w = direction(w)
+                if (abs(f(w, X) - f(last_w, X)) &lt; epsilon):
+                    break
+
+                cur_iter += 1
+
+            return w
+
+        X_pca = demean(X)
+        self.components_ = np.empty(shape=(self.n_components, X.shape[1]))
+        for i in range(self.n_components):
+            initial_w = np.random.random(X_pca.shape[1])
+            w = first_component(X_pca, initial_w, eta, n_iters)
+            self.components_[i,:] = w
+
+            X_pca = X_pca - X_pca.dot(w).reshape(-1, 1) * w
+
+        return self
+
+    def transform(self, X):
+        &quot;&quot;&quot;将给定的X，映射到各个主成分分量中&quot;&quot;&quot;
+        assert X.shape[1] == self.components_.shape[1]
+
+        return X.dot(self.components_.T)
+
+    def inverse_transform(self, X):
+        &quot;&quot;&quot;将给定的X，反向映射回原来的特征空间&quot;&quot;&quot;
+        assert X.shape[1] == self.components_.shape[0]
+
+        return X.dot(self.components_)
+
+    def __repr__(self):
+        return &quot;PCA(n_components=%d)&quot; % self.n_components
+</code></pre><ul>
+<li>现在我们使用一下刚才封装好的类</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.empty((100, 2))
+X[:,0] = np.random.uniform(0., 100., size=100)
+X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 10., size=100)
+
+from playML.PCA import PCA
+
+pca = PCA(n_components=2)
+pca.fit(X)
+</code></pre><blockquote>
+<p>PCA(n_components=2)</p>
+</blockquote>
+<pre><code>pca.components_
+</code></pre><blockquote>
+<p>array([[ 0.78656673,  0.61750528],<br>       [-0.6175033 ,  0.78656829]])</p>
+</blockquote>
+<ul>
+<li>重新构造只有一个主成分的PCA</li>
+</ul>
+<pre><code>pca = PCA(n_components=1)
+pca.fit(X)
+</code></pre><ul>
+<li>进行降维</li>
+</ul>
+<pre><code>X_reduction = pca.transform(X)
+
+X_reduction.shape
+</code></pre><blockquote>
+<p>(100, 1)</p>
+</blockquote>
+<ul>
+<li>也可以恢复</li>
+</ul>
+<pre><code>X_restore = pca.inverse_transform(X_reduction)
+
+X_restore.shape
+</code></pre><blockquote>
+<p>(100, 2)</p>
+</blockquote>
+<ul>
+<li>尝试绘制X_restore</li>
+</ul>
+<pre><code>plt.scatter(X[:,0], X[:,1], color=&apos;b&apos;, alpha=0.5)
+plt.scatter(X_restore[:,0], X_restore[:,1], color=&apos;r&apos;, alpha=0.5)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%908.png" alt=""></p>
+<ul>
+<li>我们的数据进行降维再恢复，其实就回到了所有数据点在主成分这个轴上的位置</li>
+<li>在降维中失去的信息并不能恢复</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-PCA实战"><a href="#2-PCA实战" class="headerlink" title="2. PCA实战"></a>2. PCA实战</h2><h3 id="1-scikit-learn中的PCA"><a href="#1-scikit-learn中的PCA" class="headerlink" title="1. scikit-learn中的PCA"></a>1. scikit-learn中的PCA</h3><pre><code>from sklearn.decomposition import PCA
+
+pca = PCA(n_components=1)
+pca.fit(X)
+
+pca.components_
+</code></pre><blockquote>
+<p>array([[ 0.78656676,  0.61750525]])</p>
+</blockquote>
+<pre><code>X_reduction = pca.transform(X)
+X_restore = pca.inverse_transform(X_reduction)
+
+plt.scatter(X[:,0], X[:,1], color=&apos;b&apos;, alpha=0.5)
+plt.scatter(X_restore[:,0], X_restore[:,1], color=&apos;r&apos;, alpha=0.5)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%909.png" alt=""></p>
+<ul>
+<li>我们下面使用一个真实的数据集，真实看一下PCA的威力</li>
+<li>我们使用的是手写识别的数据</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+digits = datasets.load_digits()
+X = digits.data
+y = digits.target
+</code></pre><ul>
+<li>对数据集进行分类</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+
+X_train.shape
+</code></pre><blockquote>
+<p>(1347, 64)</p>
+</blockquote>
+<ul>
+<li>对原始数据训练，看一下识别率是多少</li>
+</ul>
+<p>%%time</p>
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+
+knn_clf = KNeighborsClassifier()
+knn_clf.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>Wall time: 28 ms</p>
+</blockquote>
+<pre><code>knn_clf.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.98666666666666669</p>
+</blockquote>
+<ul>
+<li>下面我们尝试用PCA对这些数据进行一下降维，我们从64维直接降到了二维</li>
+</ul>
+<pre><code>from sklearn.decomposition import PCA
+
+pca = PCA(n_components=2)
+pca.fit(X_train)
+X_train_reduction = pca.transform(X_train)
+X_test_reduction = pca.transform(X_test)
+</code></pre><ul>
+<li>对降维的数据进行训练</li>
+</ul>
+<pre><code>%%time 
+knn_clf = KNeighborsClassifier()
+knn_clf.fit(X_train_reduction, y_train)
+</code></pre><blockquote>
+<p>Wall time: 2.5 ms</p>
+</blockquote>
+<pre><code>knn_clf.score(X_test_reduction, y_test)
+</code></pre><blockquote>
+<p>0.60666666666666669</p>
+</blockquote>
+<ul>
+<li>识别精度也降低了很多，这样就产生矛盾，维度降低虽然速度提高了，但是精度也降低了</li>
+<li><strong>主成分所解释的方差</strong></li>
+</ul>
+<pre><code>pca.explained_variance_ratio_
+</code></pre><blockquote>
+<p>array([ 0.14566817,  0.13735469])</p>
+</blockquote>
+<ul>
+<li>第一个轴能解释14%的数据，第二个轴能解释13%的原数据的方差</li>
+<li>通过这个变量，我们可以找到应该将数据降到多少维</li>
+<li>我们重新构造PCA，传入数据特征数</li>
+</ul>
+<pre><code>from sklearn.decomposition import PCA
+
+pca = PCA(n_components=X_train.shape[1])
+pca.fit(X_train)
+pca.explained_variance_ratio_
+</code></pre><blockquote>
+<p>array([  1.45668166e-01,   1.37354688e-01,   1.17777287e-01,<br>         8.49968861e-02,   5.86018996e-02,   5.11542945e-02,<br>         4.26605279e-02,   3.60119663e-02,   3.41105814e-02,<br>         3.05407804e-02,   2.42337671e-02,   2.28700570e-02,<br>         1.80304649e-02,   1.79346003e-02,   1.45798298e-02,<br>         1.42044841e-02,   1.29961033e-02,   1.26617002e-02,<br>         1.01728635e-02,   9.09314698e-03,   8.85220461e-03,<br>         7.73828332e-03,   7.60516219e-03,   7.11864860e-03,<br>         6.85977267e-03,   5.76411920e-03,   5.71688020e-03,<br>         5.08255707e-03,   4.89020776e-03,   4.34888085e-03,<br>         3.72917505e-03,   3.57755036e-03,   3.26989470e-03,<br>         3.14917937e-03,   3.09269839e-03,   2.87619649e-03,<br>         2.50362666e-03,   2.25417403e-03,   2.20030857e-03,<br>         1.98028746e-03,   1.88195578e-03,   1.52769283e-03,<br>         1.42823692e-03,   1.38003340e-03,   1.17572392e-03,<br>         1.07377463e-03,   9.55152460e-04,   9.00017642e-04,<br>         5.79162563e-04,   3.82793717e-04,   2.38328586e-04,<br>         8.40132221e-05,   5.60545588e-05,   5.48538930e-05,<br>         1.08077650e-05,   4.01354717e-06,   1.23186515e-06,<br>         1.05783059e-06,   6.06659094e-07,   5.86686040e-07,<br>         7.44075955e-34,   7.44075955e-34,   7.44075955e-34,<br>         7.15189459e-34])</p>
+</blockquote>
+<ul>
+<li>这64个数据就是每一个主成分依次可以解释的方差是多少</li>
+</ul>
+<pre><code>plt.plot([i for i in range(X_train.shape[1])], 
+         [np.sum(pca.explained_variance_ratio_[:i+1]) for i in range(X_train.shape[1])])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9010.png" alt=""></p>
+<ul>
+<li>这个图就解释了主成分对应解释的方差，比如我们希望保持95%以上的信息</li>
+<li>这种功能已经被我们的sklearn封装好了</li>
+</ul>
+<pre><code>pca = PCA(0.95)
+pca.fit(X_train)
+
+pca.n_components_
+</code></pre><blockquote>
+<p>28</p>
+</blockquote>
+<ul>
+<li>说明我们使用28维数据就能解释原有数据的95%以上的方差</li>
+</ul>
+<pre><code>X_train_reduction = pca.transform(X_train)
+X_test_reduction = pca.transform(X_test)
+
+%%time 
+knn_clf = KNeighborsClassifier()
+knn_clf.fit(X_train_reduction, y_train)
+</code></pre><blockquote>
+<p>Wall time: 5 ms</p>
+</blockquote>
+<pre><code>knn_clf.score(X_test_reduction, y_test)
+</code></pre><blockquote>
+<p>0.97999999999999998</p>
+</blockquote>
+<ul>
+<li>使用PCA对数据进行降维可视化</li>
+</ul>
+<pre><code>pca = PCA(n_components=2)
+pca.fit(X)
+X_reduction = pca.transform(X)
+
+for i in range(10):
+    plt.scatter(X_reduction[y==i,0], X_reduction[y==i,1], alpha=0.8)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9011.png" alt=""></p>
+<ul>
+<li>可以看到我们把数据降到二维，有些数字也有很高的区分度</li>
+</ul>
+<h3 id="2-试手MNIST数据集"><a href="#2-试手MNIST数据集" class="headerlink" title="2. 试手MNIST数据集"></a>2. 试手MNIST数据集</h3><ul>
+<li>加载MNIST数据集</li>
+</ul>
+<pre><code>import numpy as np 
+from sklearn.datasets import fetch_mldata
+
+mnist = fetch_mldata(&apos;MNIST original&apos;)
+
+mnist
+</code></pre><blockquote>
+<p>{‘COL_NAMES’: [‘label’, ‘data’],<br> ‘DESCR’: ‘mldata.org dataset: mnist-original’,<br> ‘data’: array([[0, 0, 0, …, 0, 0, 0],<br>        [0, 0, 0, …, 0, 0, 0],<br>        [0, 0, 0, …, 0, 0, 0],<br>        …,<br>        [0, 0, 0, …, 0, 0, 0],<br>        [0, 0, 0, …, 0, 0, 0],<br>        [0, 0, 0, …, 0, 0, 0]], dtype=uint8),<br> ‘target’: array([ 0.,  0.,  0., …,  9.,  9.,  9.])}</p>
+</blockquote>
+<ul>
+<li>获取数据，MNIST已经帮我们分离好了训练数据和测试数据，前60000个位训练数据</li>
+</ul>
+<pre><code>X, y = mnist[&apos;data&apos;], mnist[&apos;target&apos;]
+X_train = np.array(X[:60000], dtype=float)
+y_train = np.array(y[:60000], dtype=float)
+X_test = np.array(X[60000:], dtype=float)
+y_test = np.array(y[60000:], dtype=float)
+
+X_train.shape
+</code></pre><blockquote>
+<p>(60000, 784)</p>
+</blockquote>
+<pre><code>X_test.shape
+</code></pre><blockquote>
+<p>(10000, 784)</p>
+</blockquote>
+<ul>
+<li>使用kNN</li>
+</ul>
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+
+knn_clf = KNeighborsClassifier()
+%time knn_clf.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>Wall time: 41.9 s<br>KNeighborsClassifier(algorithm=’auto’, leaf_size=30, metric=’minkowski’,<br>           metric_params=None, n_jobs=1, n_neighbors=5, p=2,<br>           weights=’uniform’)</p>
+</blockquote>
+<ul>
+<li>我们可以发现是非常耗时的</li>
+</ul>
+<pre><code>%time knn_clf.score(X_test, y_test)
+</code></pre><blockquote>
+<p>CPU times: user 14min 20s, sys: 4.3 s, total: 14min 24s<br>Wall time: 14min 29s<br>0.96879999999999999</p>
+</blockquote>
+<ul>
+<li><strong>PCA进行降维</strong></li>
+</ul>
+<pre><code>from sklearn.decomposition import PCA 
+
+pca = PCA(0.90)
+pca.fit(X_train)
+X_train_reduction = pca.transform(X_train)
+X_test_reduction = pca.transform(X_test)
+</code></pre><ul>
+<li>最终的结果只有87个维度</li>
+</ul>
+<pre><code>X_train_reduction.shape
+</code></pre><blockquote>
+<p>(60000, 87)</p>
+</blockquote>
+<pre><code>knn_clf = KNeighborsClassifier()
+%time knn_clf.fit(X_train_reduction, y_train)
+</code></pre><blockquote>
+<p>Wall time: 763 ms<br>KNeighborsClassifier(algorithm=’auto’, leaf_size=30, metric=’minkowski’,<br>           metric_params=None, n_jobs=1, n_neighbors=5, p=2,<br>           weights=’uniform’)</p>
+</blockquote>
+<ul>
+<li>看一下进行预测的时间和准确度是怎么样的</li>
+</ul>
+<pre><code>%time knn_clf.score(X_test_reduction, y_test)
+</code></pre><blockquote>
+<p>Wall time: 1min 37s<br>0.9728</p>
+</blockquote>
+<ul>
+<li>降维去除了噪音，有可能准确率更高</li>
+</ul>
+<h3 id="3-使用PCA对数据进行降噪"><a href="#3-使用PCA对数据进行降噪" class="headerlink" title="3. 使用PCA对数据进行降噪"></a>3. 使用PCA对数据进行降噪</h3><ul>
+<li>回忆我们之前的例子</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.empty((100, 2))
+X[:,0] = np.random.uniform(0., 100., size=100)
+X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size=100)
+
+plt.scatter(X[:,0], X[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9012.png" alt=""></p>
+<pre><code>from sklearn.decomposition import PCA
+
+pca = PCA(n_components=1)
+pca.fit(X)
+X_reduction = pca.transform(X)
+X_restore = pca.inverse_transform(X_reduction)
+
+plt.scatter(X_restore[:,0], X_restore[:,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9013.png" alt=""></p>
+<ul>
+<li><strong>降维的过程可以理解成是去噪</strong></li>
+<li>手写识别的例子</li>
+</ul>
+<pre><code>from sklearn import datasets
+
+digits = datasets.load_digits()
+X = digits.data
+y = digits.target
+</code></pre><ul>
+<li>主动给数据加上噪音</li>
+</ul>
+<pre><code>noisy_digits = X + np.random.normal(0, 4, size=X.shape)
+
+example_digits = noisy_digits[y==0,:][:10]
+for num in range(1,10):
+    example_digits = np.vstack([example_digits, noisy_digits[y==num,:][:10]])
+</code></pre><ul>
+<li>取出100个元素，每个元素维度为64</li>
+</ul>
+<pre><code>example_digits.shape
+</code></pre><blockquote>
+<p>(100, 64)</p>
+</blockquote>
+<ul>
+<li>绘制100个图形</li>
+</ul>
+<pre><code>def plot_digits(data):
+    fig, axes = plt.subplots(10, 10, figsize=(10, 10),
+                             subplot_kw={&apos;xticks&apos;:[], &apos;yticks&apos;:[]},
+    gridspec_kw=dict(hspace=0.1, wspace=0.1)) 
+    for i, ax in enumerate(axes.flat):
+        ax.imshow(data[i].reshape(8, 8),
+                  cmap=&apos;binary&apos;, interpolation=&apos;nearest&apos;,
+                  clim=(0, 16))
+
+    plt.show()
+
+plot_digits(example_digits)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9014.png" alt=""></p>
+<ul>
+<li>下面我们使用PCA进行降噪</li>
+</ul>
+<pre><code>pca = PCA(0.5).fit(noisy_digits)
+pca.n_components_
+</code></pre><blockquote>
+<p>12</p>
+</blockquote>
+<pre><code>components = pca.transform(example_digits)
+filtered_digits = pca.inverse_transform(components)
+plot_digits(filtered_digits)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9015.png" alt=""></p>
+<h3 id="4-人脸识别与特征脸"><a href="#4-人脸识别与特征脸" class="headerlink" title="4. 人脸识别与特征脸"></a>4. 人脸识别与特征脸</h3><ul>
+<li>每一个特征脸相当于一个主成分</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import fetch_lfw_people
+
+faces = fetch_lfw_people()
+
+faces.keys()
+</code></pre><blockquote>
+<p>dict_keys([‘data’, ‘images’, ‘target’, ‘target_names’, ‘DESCR’])</p>
+</blockquote>
+<pre><code>faces.data.shape
+</code></pre><blockquote>
+<p>(13233, 2914)</p>
+</blockquote>
+<pre><code>faces.target_names
+</code></pre><blockquote>
+<p>array([‘AJ Cook’, ‘AJ Lamas’, ‘Aaron Eckhart’, …, ‘Zumrati Juma’,<br>       ‘Zurab Tsereteli’, ‘Zydrunas Ilgauskas’],<br>      dtype=’&lt;U35’)</p>
+</blockquote>
+<pre><code>faces.images.shape
+</code></pre><blockquote>
+<p>(13233, 62, 47)</p>
+</blockquote>
+<ul>
+<li>随机获得36张脸</li>
+</ul>
+<pre><code>random_indexes = np.random.permutation(len(faces.data))
+X = faces.data[random_indexes]
+example_faces = X[:36,:]
+example_faces.shape
+</code></pre><blockquote>
+<p>(36, 2914)</p>
+</blockquote>
+<pre><code>def plot_faces(faces):
+
+    fig, axes = plt.subplots(6, 6, figsize=(10, 10),
+                         subplot_kw={&apos;xticks&apos;:[], &apos;yticks&apos;:[]},
+    gridspec_kw=dict(hspace=0.1, wspace=0.1)) 
+    for i, ax in enumerate(axes.flat):
+        ax.imshow(faces[i].reshape(62, 47), cmap=&apos;bone&apos;)
+    plt.show()
+
+plot_faces(example_faces)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E6%9E%9016.png" alt=""></p>
+<ul>
+<li>特征脸，进行PCA过程</li>
+</ul>
+<pre><code>%%time
+from sklearn.decomposition import PCA 
+pca = PCA(svd_solver=&apos;randomized&apos;)
+pca.fit(X)
+</code></pre><blockquote>
+<p>Wall time: 6min 40s</p>
+</blockquote>
+<pre><code>pca.components_.shape
+</code></pre><blockquote>
+<p>(2914, 2914)</p>
+</blockquote>
+<ul>
+<li>所谓特征脸就是将主成分每一行都当成一个样本看待</li>
+</ul>
+<pre><code>plot_faces(pca.components_[:36,:])
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E6%9E%9017.png" alt=""></p>
+<ul>
+<li>更多关于lfw_people数据集</li>
+</ul>
+<pre><code>faces2 = fetch_lfw_people(min_faces_per_person=60)
+
+faces2.data.shape
+</code></pre><blockquote>
+<p>(1348, 2914)</p>
+</blockquote>
+<pre><code>faces2.target_names
+</code></pre><blockquote>
+<p>array([‘Ariel Sharon’, ‘Colin Powell’, ‘Donald Rumsfeld’, ‘George W Bush’,<br>       ‘Gerhard Schroeder’, ‘Hugo Chavez’, ‘Junichiro Koizumi’,<br>       ‘Tony Blair’],<br>      dtype=’&lt;U17’)</p>
+</blockquote>
+<pre><code>len(faces2.target_names)
+</code></pre><blockquote>
+<p>8</p>
+</blockquote>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/08/Python-Machine-Learning-3/">
+        梯度下降法 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

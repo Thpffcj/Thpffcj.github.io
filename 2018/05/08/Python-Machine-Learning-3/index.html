@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>梯度下降法 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-08T12:19:46.000Z" itemprop="datePublished">
+          2018-05-08
+      </time>
+    
+</span>
+                <h1>梯度下降法</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-梯度下降法"><a href="#1-梯度下降法" class="headerlink" title="1. 梯度下降法"></a>1. 梯度下降法</h2><ul>
+<li>不是一个机器学习算法</li>
+<li>是一种基于搜索的最优化方法</li>
+<li>作用：最小化一个损失函数</li>
+<li>梯度上升法：最大化一个效用函数</li>
+</ul>
+<h3 id="1-什么是梯度下降法"><a href="#1-什么是梯度下降法" class="headerlink" title="1. 什么是梯度下降法"></a>1. 什么是梯度下降法</h3><ul>
+<li>导数代表theta单位变化时，损失函数J相应的变化</li>
+<li>导数可以代表方向，对应J增大的方向</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.png" alt=""></p>
+<ul>
+<li>η 称为学习率(learning rate)</li>
+<li>η 的取值影响获得最优解的速度</li>
+<li>η 取值不合适，甚至得不到最优解</li>
+<li>η 是梯度下降法的一个超参数</li>
+<li>η 太小，减慢收敛学习速度</li>
+<li>η 太大，甚至导致不收敛</li>
+<li>并不是所有函数都有唯一的极值点<ul>
+<li>解决方案：<ul>
+<li>多次运行，随机化初始点</li>
+<li>梯度下降法的初始点也是一个超参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线性回归法的损失函数具有唯一的最优解</li>
+</ul>
+<h3 id="2-模拟实现梯度下降法"><a href="#2-模拟实现梯度下降法" class="headerlink" title="2. 模拟实现梯度下降法"></a>2. 模拟实现梯度下降法</h3><pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+plot_x = np.linspace(-1., 6., 141)
+plot_y = (plot_x-2.5)**2 - 1.
+
+plt.plot(plot_x, plot_y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%951.png" alt=""></p>
+<ul>
+<li>我们假设这就是我们的损失函数，下面我们就来实现我们的梯度下降法</li>
+</ul>
+<pre><code>epsilon = 1e-8
+eta = 0.1
+</code></pre><ul>
+<li>我们设置学习率为0.1，epsilon为1e-8</li>
+</ul>
+<pre><code>def J(theta):
+    return (theta-2.5)**2 - 1.
+
+def dJ(theta):
+    return 2*(theta-2.5)
+
+theta = 0.0
+while True:
+    gradient = dJ(theta)
+    last_theta = theta
+    theta = theta - eta * gradient
+
+    if(abs(J(theta) - J(last_theta)) &lt; epsilon):
+        break
+
+print(theta)
+print(J(theta))
+</code></pre><blockquote>
+<p>2.499891109642585<br>-0.99999998814289</p>
+</blockquote>
+<ul>
+<li>下面我们来看当我们et取0.1时是怎样一步一步到达最低点的</li>
+</ul>
+<pre><code>theta = 0.0
+theta_history = [theta]
+while True:
+    gradient = dJ(theta)
+    last_theta = theta
+    theta = theta - eta * gradient
+    theta_history.append(theta)
+
+    if(abs(J(theta) - J(last_theta)) &lt; epsilon):
+        break
+
+plt.plot(plot_x, J(plot_x))
+plt.plot(np.array(theta_history), J(np.array(theta_history)), color=&quot;r&quot;, marker=&apos;+&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%952.png" alt=""></p>
+<ul>
+<li>我们通过45次查找找到了最小值</li>
+</ul>
+<pre><code>len(theta_history)
+</code></pre><blockquote>
+<p>46</p>
+</blockquote>
+<ul>
+<li>我们接下来准备看一下不同eta对梯度下降法的影响，首先我们先将刚才的过程做一个封装</li>
+</ul>
+<pre><code>theta_history = []
+
+def gradient_descent(initial_theta, eta, epsilon=1e-8):
+    theta = initial_theta
+    theta_history.append(initial_theta)
+
+    while True:
+        gradient = dJ(theta)
+        last_theta = theta
+        theta = theta - eta * gradient
+        theta_history.append(theta)
+
+        if(abs(J(theta) - J(last_theta)) &lt; epsilon):
+            break
+
+def plot_theta_history():
+    plt.plot(plot_x, J(plot_x))
+    plt.plot(np.array(theta_history), J(np.array(theta_history)), color=&quot;r&quot;, marker=&apos;+&apos;)
+    plt.show()
+</code></pre><ul>
+<li>之前的eta取了0.1，现在我们看下0.01</li>
+</ul>
+<pre><code>eta = 0.01
+theta_history = []
+gradient_descent(0, eta)
+plot_theta_history()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%953.png" alt=""></p>
+<pre><code>len(theta_history)
+</code></pre><blockquote>
+<p>424</p>
+</blockquote>
+<ul>
+<li>取eta = 0.001</li>
+</ul>
+<pre><code>eta = 0.001
+theta_history = []
+gradient_descent(0, eta)
+plot_theta_history()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%954.png" alt=""></p>
+<pre><code>len(theta_history)
+</code></pre><blockquote>
+<p>3682</p>
+</blockquote>
+<ul>
+<li>下面我们来看当我们eta取值过大会发生什么</li>
+</ul>
+<pre><code>eta = 0.8
+theta_history = []
+gradient_descent(0, eta)
+plot_theta_history()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E5%9B%9E%E5%BD%92%E6%B3%955.png" alt=""></p>
+<ul>
+<li>如果我们eta取1.1会发生什么</li>
+</ul>
+<pre><code>eta = 1.1
+theta_history = []
+gradient_descent(0, eta)
+</code></pre><ul>
+<li>编译器直接报错了</li>
+</ul>
+<pre><code>OverflowError                             Traceback (most recent call last)
+&lt;ipython-input-16-81ad09e9d3e0&gt; in &lt;module&gt;()
+      1 eta = 1.1
+      2 theta_history = []
+----&gt; 3 gradient_descent(0, eta)
+
+&lt;ipython-input-10-37822183f4df&gt; in gradient_descent(initial_theta, eta, epsilon)
+     11         theta_history.append(theta)
+     12 
+---&gt; 13         if(abs(J(theta) - J(last_theta)) &lt; epsilon):
+     14             break
+     15 
+
+&lt;ipython-input-7-e8b6a6f56c24&gt; in J(theta)
+      1 def J(theta):
+----&gt; 2     return (theta-2.5)**2 - 1.
+      3 
+      4 def dJ(theta):
+      5     return 2*(theta-2.5)
+
+OverflowError: (34, &apos;Result too large&apos;)
+</code></pre><ul>
+<li>说明我们的J不断变大，随后超过了界限，但这样报错不是很好的写法，我们重新写一下J</li>
+</ul>
+<pre><code>def J(theta):
+    try:
+        return (theta-2.5)**2 - 1.
+    except:
+        return float(&apos;inf&apos;)
+</code></pre><ul>
+<li>同时，为了防止死循环，我们设置一下循环最大次数</li>
+</ul>
+<pre><code>def gradient_descent(initial_theta, eta, n_iters = 1e4, epsilon=1e-8):
+
+    theta = initial_theta
+    i_iter = 0
+    theta_history.append(initial_theta)
+
+    while i_iter &lt; n_iters:
+        gradient = dJ(theta)
+        last_theta = theta
+        theta = theta - eta * gradient
+        theta_history.append(theta)
+
+        if(abs(J(theta) - J(last_theta)) &lt; epsilon):
+            break
+
+        i_iter += 1
+
+    return
+</code></pre><ul>
+<li>我们再来看一下eta取1.1时的情况</li>
+</ul>
+<pre><code>eta = 1.1
+theta_history = []
+gradient_descent(0, eta)
+
+len(theta_history)
+</code></pre><blockquote>
+<p>10001</p>
+</blockquote>
+<pre><code>eta = 1.1
+theta_history = []
+gradient_descent(0, eta, n_iters=10)
+plot_theta_history()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%956.png" alt=""></p>
+<ul>
+<li>大多数情况eta=0.01都是胜任的</li>
+</ul>
+<h3 id="3-线性回归中的梯度下降法"><a href="#3-线性回归中的梯度下降法" class="headerlink" title="3. 线性回归中的梯度下降法"></a>3. 线性回归中的梯度下降法</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%AD%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.png" alt=""></p>
+<ul>
+<li>线性回归中使用梯度下降法</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.png" alt=""></p>
+<h3 id="4-实现线性回归中的梯度下降法"><a href="#4-实现线性回归中的梯度下降法" class="headerlink" title="4. 实现线性回归中的梯度下降法"></a>4. 实现线性回归中的梯度下降法</h3><ul>
+<li>首先还是需要准备数据</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
+x = 2 * np.random.random(size=100)
+y = x * 3. + 4. + np.random.normal(size=100)
+np.random.seed(666)
+x = 2 * np.random.random(size=100)
+y = x * 3. + 4. + np.random.normal(size=100)
+
+X = x.reshape(-1, 1)
+
+X[:5]
+</code></pre><blockquote>
+<p>array([[ 1.40087424],<br>       [ 1.68837329],<br>       [ 1.35302867],<br>       [ 1.45571611],<br>       [ 1.90291591]])</p>
+</blockquote>
+<ul>
+<li>我们使用图像看一下数据</li>
+</ul>
+<pre><code>plt.scatter(x, y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%957.png" alt=""></p>
+<ul>
+<li>接下来我们使用梯度下降法训练</li>
+</ul>
+<pre><code>def J(theta, X_b, y):
+    try:
+        return np.sum((y - X_b.dot(theta))**2) / len(X_b)
+    except:
+        return float(&apos;inf&apos;)
+
+def dJ(theta, X_b, y):
+    res = np.empty(len(theta))
+    res[0] = np.sum(X_b.dot(theta) - y)
+    for i in range(1, len(theta)):
+        res[i] = (X_b.dot(theta) - y).dot(X_b[:,i])
+    return res * 2 / len(X_b)
+
+def gradient_descent(X_b, y, initial_theta, eta, n_iters = 1e4, epsilon=1e-8):
+
+    theta = initial_theta
+    cur_iter = 0
+
+    while cur_iter &lt; n_iters:
+        gradient = dJ(theta, X_b, y)
+        last_theta = theta
+        theta = theta - eta * gradient
+        if(abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+            break
+
+        cur_iter += 1
+
+    return theta
+</code></pre><ul>
+<li>下面我们就可以具体真实的来调用了</li>
+</ul>
+<pre><code>X_b = np.hstack([np.ones((len(x), 1)), x.reshape(-1,1)])
+initial_theta = np.zeros(X_b.shape[1])
+eta = 0.01
+
+theta = gradient_descent(X_b, y, initial_theta, eta)
+
+theta
+</code></pre><blockquote>
+<p>array([ 4.02145786,  3.00706277])</p>
+</blockquote>
+<ul>
+<li>基本和我们创建之初截距是4，斜率是3，说明我们的梯度下降法成功训练了模型</li>
+<li>接下来我们将方法添加进我们的LinearRegression类</li>
+</ul>
+<pre><code>def fit_gd(self, X_train, y_train, eta=0.01, n_iters=1e4):
+    &quot;&quot;&quot;根据训练数据集X_train, y_train, 使用梯度下降法训练Linear Regression模型&quot;&quot;&quot;
+    assert X_train.shape[0] == y_train.shape[0], \
+        &quot;the size of X_train must be equal to the size of y_train&quot;
+
+    def J(theta, X_b, y):
+        try:
+            return np.sum((y - X_b.dot(theta)) ** 2) / len(y)
+        except:
+            return float(&apos;inf&apos;)
+
+    def dJ(theta, X_b, y):
+        res = np.empty(len(theta))
+        res[0] = np.sum(X_b.dot(theta) - y)
+        for i in range(1, len(theta)):
+            res[i] = (X_b.dot(theta) - y).dot(X_b[:, i])
+        return res * 2 / len(X_b)
+
+    def gradient_descent(X_b, y, initial_theta, eta, n_iters=1e4, epsilon=1e-8):
+
+        theta = initial_theta
+        cur_iter = 0
+
+        while cur_iter &lt; n_iters:
+            gradient = dJ(theta, X_b, y)
+            last_theta = theta
+            theta = theta - eta * gradient
+            if (abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+                break
+
+            cur_iter += 1
+
+        return theta
+
+    X_b = np.hstack([np.ones((len(X_train), 1)), X_train])
+    initial_theta = np.zeros(X_b.shape[1])
+    self._theta = gradient_descent(X_b, y_train, initial_theta, eta, n_iters)
+
+    self.intercept_ = self._theta[0]
+    self.coef_ = self._theta[1:]
+
+    return self
+</code></pre><ul>
+<li>测试我们封装的线性回归算法</li>
+</ul>
+<pre><code>from playML.linearRegression import LinearRegression
+​
+lin_reg = LinearRegression()
+lin_reg.fit_gd(X, y)
+</code></pre><blockquote>
+<p>LinearRegression()</p>
+</blockquote>
+<pre><code>lin_reg.coef_
+</code></pre><blockquote>
+<p>array([ 3.00706277])</p>
+</blockquote>
+<pre><code>lin_reg.intercept_
+</code></pre><blockquote>
+<p>4.021457858204859</p>
+</blockquote>
+<p><br></p>
+<hr>
+<h2 id="2-真实数据中的梯度下降法"><a href="#2-真实数据中的梯度下降法" class="headerlink" title="2. 真实数据中的梯度下降法"></a>2. 真实数据中的梯度下降法</h2><h3 id="1-梯度下降的向量化和数据标准化"><a href="#1-梯度下降的向量化和数据标准化" class="headerlink" title="1. 梯度下降的向量化和数据标准化"></a>1. 梯度下降的向量化和数据标准化</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96.png" alt=""></p>
+<ul>
+<li>我们只需要修改求损失函数的方法</li>
+</ul>
+<pre><code>def dJ(theta, X_b, y):
+    return X_b.T.dot(X_b.dot(theta) - y) * 2. / len(y)
+</code></pre><ul>
+<li>现在我们把向量化后的梯度下降法用在真实数据上</li>
+</ul>
+<pre><code>import numpy as np
+from sklearn import datasets
+
+boston = datasets.load_boston()
+X = boston.data
+y = boston.target
+
+X = X[y &lt; 50.0]
+y = y[y &lt; 50.0]from playML.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, seed=666)
+
+from playML.linearRegression import LinearRegression
+
+lin_reg1 = LinearRegression()
+%time lin_reg1.fit_normal(X_train, y_train)
+lin_reg1.score(X_test, y_test)
+</code></pre><blockquote>
+<p>Wall time: 520 ms<br>0.8129802602658458</p>
+</blockquote>
+<ul>
+<li>下面使用梯度下降法训练模型</li>
+</ul>
+<pre><code>lin_reg2 = LinearRegression()
+lin_reg2.fit_gd(X_train, y_train)
+</code></pre><ul>
+<li>发现有报错</li>
+</ul>
+<pre><code>F:\Anaconda3\Jupyter\Gradient-Descent\playML\linearRegression.py:36: RuntimeWarning: overflow encountered in square
+  return np.sum((y - X_b.dot(theta)) ** 2) / len(y)
+F:\Anaconda3\Jupyter\Gradient-Descent\playML\linearRegression.py:52: RuntimeWarning: invalid value encountered in double_scalars
+  if (abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+</code></pre><ul>
+<li>看一下参数</li>
+</ul>
+<pre><code>lin_reg2.coef_
+</code></pre><blockquote>
+<p>array([ nan,  nan,  nan,  nan,  nan,  nan,  nan,  nan,  nan,  nan,  nan,<br>        nan,  nan])</p>
+</blockquote>
+<pre><code>X_train[:1,:]
+</code></pre><blockquote>
+<p>array([[  1.42362000e+01,   0.00000000e+00,   1.81000000e+01,<br>          0.00000000e+00,   6.93000000e-01,   6.34300000e+00,<br>          1.00000000e+02,   1.57410000e+00,   2.40000000e+01,<br>          6.66000000e+02,   2.02000000e+01,   3.96900000e+02,<br>          2.03200000e+01],</p>
+</blockquote>
+<ul>
+<li>我们可以看到不同维度相差太大，使用默认的eta可能最终形成的步长过大</li>
+</ul>
+<pre><code>lin_reg2.fit_gd(X_train, y_train, eta=0.000001)
+
+lin_reg2.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.27556634853389206</p>
+</blockquote>
+<ul>
+<li>我们在手动修改最大寻找次数</li>
+</ul>
+<pre><code>%time lin_reg2.fit_gd(X_train, y_train, eta=0.000001, n_iters=1e6)
+</code></pre><blockquote>
+<p>Wall time: 54.1 s</p>
+</blockquote>
+<pre><code>lin_reg2.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.75418523539807647</p>
+</blockquote>
+<ul>
+<li><strong>之所以出现这种情况是因为他的数据不在一个规模上，使用梯度下降法前，最好进行数据归一化</strong></li>
+</ul>
+<pre><code>from sklearn.preprocessing import StandardScaler
+
+standardScaler = StandardScaler()
+standardScaler.fit(X_train)
+X_train_standard = standardScaler.transform(X_train)
+
+lin_reg3 = LinearRegression()
+%time lin_reg3.fit_gd(X_train_standard, y_train)
+</code></pre><blockquote>
+<p>Wall time: 456 ms</p>
+</blockquote>
+<pre><code>X_test_standard = standardScaler.transform(X_test)
+lin_reg3.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>0.81298806201222351</p>
+</blockquote>
+<ul>
+<li>这时我们也找到了损失函数最小值，同时速度非常快</li>
+<li>使用梯度下降法有什么优势呢？</li>
+</ul>
+<pre><code>m = 1000
+n = 5000
+
+big_X = np.random.normal(size=(m, n))
+
+true_theta = np.random.uniform(0.0, 100.0, size=n+1)
+
+big_y = big_X.dot(true_theta[1:]) + true_theta[0] + np.random.normal(0., 10., size=m)
+</code></pre><ul>
+<li>使用正规方程解</li>
+</ul>
+<pre><code>big_reg1 = LinearRegression()
+%time big_reg1.fit_normal(big_X, big_y)
+</code></pre><blockquote>
+<p>Wall time: 59 s</p>
+</blockquote>
+<ul>
+<li>使用梯度下降法训练</li>
+</ul>
+<pre><code>big_reg2 = LinearRegression()
+%time big_reg2.fit_gd(big_X, big_y)
+</code></pre><blockquote>
+<p>Wall time: 7.83 s</p>
+</blockquote>
+<ul>
+<li>当矩阵比较大时，正规方程法耗时是更高的</li>
+</ul>
+<h3 id="2-随机梯度下降法"><a href="#2-随机梯度下降法" class="headerlink" title="2. 随机梯度下降法"></a>2. 随机梯度下降法</h3><ul>
+<li>对于每一次更新参数，不必遍历所有的训练集合，仅仅使用了一个数据，来变换一个参数。这样做不如完全梯度下降的精确度高，可能会走很多弯路，但整体趋势是走向minmum。</li>
+<li>这样做可以节省更多的时间，算法更快。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.png" alt=""></p>
+<ul>
+<li>在随机梯度下降法中，我们eta值一般是随着循环次数增加越来越小的<ul>
+<li>模拟退火的思想</li>
+</ul>
+</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as pltm = 100000
+
+x = np.random.normal(size=m)
+X = x.reshape(-1,1)
+y = 4.*x + 3. + np.random.normal(0, 3, size=m)
+
+def J(theta, X_b, y):
+    try:
+        return np.sum((y - X_b.dot(theta)) ** 2) / len(y)
+    except:
+        return float(&apos;inf&apos;)
+
+def dJ(theta, X_b, y):
+    return X_b.T.dot(X_b.dot(theta) - y) * 2. / len(y)
+
+def gradient_descent(X_b, y, initial_theta, eta, n_iters=1e4, epsilon=1e-8):
+
+    theta = initial_theta
+    cur_iter = 0
+
+    while cur_iter &lt; n_iters:
+        gradient = dJ(theta, X_b, y)
+        last_theta = theta
+        theta = theta - eta * gradient
+        if (abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+            break
+
+        cur_iter += 1
+
+    return theta
+
+%%time
+X_b = np.hstack([np.ones((len(X), 1)), X])
+initial_theta = np.zeros(X_b.shape[1])
+eta = 0.01
+theta = gradient_descent(X_b, y, initial_theta, eta)
+</code></pre><blockquote>
+<p>CPU times: user 2.81 s, sys: 134 ms, total: 2.94 s<br>Wall time: 1.88 s</p>
+</blockquote>
+<pre><code>theta
+</code></pre><blockquote>
+<p>array([ 3.00175647,  3.98342457])</p>
+</blockquote>
+<ul>
+<li>上面展示了梯度下降法，下面我们来实现随机梯度下降法</li>
+</ul>
+<pre><code>def dJ_sgd(theta, X_b_i, y_i):
+    return 2 * X_b_i.T.dot(X_b_i.dot(theta) - y_i)
+
+def sgd(X_b, y, initial_theta, n_iters):
+
+    t0, t1 = 5, 50
+    def learning_rate(t):
+        return t0 / (t + t1)
+
+    theta = initial_theta
+    for cur_iter in range(n_iters):
+        rand_i = np.random.randint(len(X_b))
+        gradient = dJ_sgd(theta, X_b[rand_i], y[rand_i])
+        theta = theta - learning_rate(cur_iter) * gradient
+
+    return theta
+</code></pre><ul>
+<li>接下来我测试这个随机梯度下降法</li>
+</ul>
+<pre><code>%%time
+X_b = np.hstack([np.ones((len(X), 1)), X])
+initial_theta = np.zeros(X_b.shape[1])
+theta = sgd(X_b, y, initial_theta, n_iters=m//3)
+</code></pre><blockquote>
+<p>Wall time: 437 ms</p>
+</blockquote>
+<pre><code>theta
+</code></pre><blockquote>
+<p>array([ 3.06926273,  4.06124821])</p>
+</blockquote>
+<h3 id="3-scikit-learn中的随机梯度下降法"><a href="#3-scikit-learn中的随机梯度下降法" class="headerlink" title="3. scikit-learn中的随机梯度下降法"></a>3. scikit-learn中的随机梯度下降法</h3><ul>
+<li>首先封装自己的随机梯度下降法</li>
+</ul>
+<pre><code>def fit_sgd(self, X_train, y_train, n_iters=50, t0=5, t1=50):
+    &quot;&quot;&quot;根据训练数据集X_train, y_train, 使用梯度下降法训练Linear Regression模型&quot;&quot;&quot;
+    assert X_train.shape[0] == y_train.shape[0], \
+        &quot;the size of X_train must be equal to the size of y_train&quot;
+    assert n_iters &gt;= 1
+
+    def dJ_sgd(theta, X_b_i, y_i):
+        return X_b_i * (X_b_i.dot(theta) - y_i) * 2.
+
+    def sgd(X_b, y, initial_theta, n_iters=5, t0=5, t1=50):
+
+        def learning_rate(t):
+            return t0 / (t + t1)
+
+        theta = initial_theta
+        m = len(X_b)
+        for i_iter in range(n_iters):
+            indexes = np.random.permutation(m)
+            X_b_new = X_b[indexes,:]
+            y_new = y[indexes]
+            for i in range(m):
+                gradient = dJ_sgd(theta, X_b_new[i], y_new[i])
+                theta = theta - learning_rate(i_iter * m + i) * gradient
+
+        return theta
+
+    X_b = np.hstack([np.ones((len(X_train), 1)), X_train])
+    initial_theta = np.random.randn(X_b.shape[1])
+    self._theta = sgd(X_b, y_train, initial_theta, n_iters, t0, t1)
+
+    self.intercept_ = self._theta[0]
+    self.coef_ = self._theta[1:]
+
+    return self
+</code></pre><ul>
+<li>下面我们真实使用我们自己的SGD</li>
+</ul>
+<pre><code>from sklearn import datasets
+
+boston = datasets.load_boston()
+X = boston.data
+y = boston.target
+
+X = X[y &lt; 50.0]
+y = y[y &lt; 50.0]
+
+from playML.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, seed=666)
+
+from sklearn.preprocessing import StandardScaler
+
+standardScaler = StandardScaler()
+standardScaler.fit(X_train)
+X_train_standard = standardScaler.transform(X_train)
+X_test_standard = standardScaler.transform(X_test)
+
+from playML.LinearRegression import LinearRegression
+
+lin_reg = LinearRegression()
+%time lin_reg.fit_sgd(X_train_standard, y_train, n_iters=2)
+lin_reg.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>Wall time: 10 ms<br>0.78651716204682975</p>
+</blockquote>
+<pre><code>%time lin_reg.fit_sgd(X_train_standard, y_train, n_iters=50)
+lin_reg.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>Wall time: 214 ms<br>0.80857287165738356</p>
+</blockquote>
+<ul>
+<li>最后我们来看看scikit-learn中的SGD</li>
+</ul>
+<pre><code>from sklearn.linear_model import SGDRegressor
+
+sgd_reg = SGDRegressor()
+%time sgd_reg.fit(X_train_standard, y_train)
+sgd_reg.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>Wall time: 319 ms<br>0.80458078390662591</p>
+</blockquote>
+<pre><code>sgd_reg = SGDRegressor(n_iter=50)
+%time sgd_reg.fit(X_train_standard, y_train)
+sgd_reg.score(X_test_standard, y_test)
+</code></pre><blockquote>
+<p>Wall time: 4.5 ms<br>0.81138879817016163</p>
+</blockquote>
+<h3 id="4-如何确定梯度计算的准确性，调试梯度下降法"><a href="#4-如何确定梯度计算的准确性，调试梯度下降法" class="headerlink" title="4. 如何确定梯度计算的准确性，调试梯度下降法"></a>4. 如何确定梯度计算的准确性，调试梯度下降法</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E8%B0%83%E8%AF%95%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.png" alt=""></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
+X = np.random.random(size=(1000, 10))
+
+true_theta = np.arange(1, 12, dtype=float)
+X_b = np.hstack([np.ones((len(X), 1)), X])
+y = X_b.dot(true_theta) + np.random.normal(size=1000)
+</code></pre><ul>
+<li>求损失函数</li>
+</ul>
+<pre><code>def J(theta, X_b, y):
+    try:
+        return np.sum((y - X_b.dot(theta))**2) / len(X_b)
+    except:
+        return float(&apos;inf&apos;)
+</code></pre><ul>
+<li>前面我们是使用数学方法推导求出的梯度</li>
+</ul>
+<pre><code>def dJ_math(theta, X_b, y):
+    return X_b.T.dot(X_b.dot(theta) - y) * 2. / len(y)
+</code></pre><ul>
+<li>下面我们使用dubug的方式来求梯度</li>
+</ul>
+<pre><code>def dJ_debug(theta, X_b, y, epsilon=0.01):
+    res = np.empty(len(theta))
+    for i in range(len(theta)):
+        theta_1 = theta.copy()
+        theta_1[i] += epsilon
+        theta_2 = theta.copy()
+        theta_2[i] -= epsilon
+        res[i] = (J(theta_1, X_b, y) - J(theta_2, X_b, y)) / (2 * epsilon)
+    return res
+</code></pre><ul>
+<li>使用梯度下降法验证</li>
+</ul>
+<pre><code>def gradient_descent(dJ, X_b, y, initial_theta, eta, n_iters = 1e4, epsilon=1e-8):
+
+    theta = initial_theta
+    cur_iter = 0
+
+    while cur_iter &lt; n_iters:
+        gradient = dJ(theta, X_b, y)
+        last_theta = theta
+        theta = theta - eta * gradient
+        if(abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+            break
+
+        cur_iter += 1
+
+    return theta
+</code></pre><ul>
+<li>调用我们的dubug</li>
+</ul>
+<pre><code>X_b = np.hstack([np.ones((len(X), 1)), X])
+initial_theta = np.zeros(X_b.shape[1])
+eta = 0.01
+
+%time theta = gradient_descent(dJ_debug, X_b, y, initial_theta, eta)
+theta
+</code></pre><blockquote>
+<p>Wall time: 6.54 s<br>array([  1.1251597 ,   2.05312521,   2.91522497,   4.11895968,<br>         5.05002117,   5.90494046,   6.97383745,   8.00088367,<br>         8.86213468,   9.98608331,  10.90529198])</p>
+</blockquote>
+<ul>
+<li>使用数学方法</li>
+</ul>
+<pre><code>%time theta = gradient_descent(dJ_math, X_b, y, initial_theta, eta)
+theta
+</code></pre><blockquote>
+<p>Wall time: 758 ms<br>array([  1.1251597 ,   2.05312521,   2.91522497,   4.11895968,<br>         5.05002117,   5.90494046,   6.97383745,   8.00088367,<br>         8.86213468,   9.98608331,  10.90529198])</p>
+</blockquote>
+<h3 id="5-有关梯度下降法的更多深入讨论"><a href="#5-有关梯度下降法的更多深入讨论" class="headerlink" title="5. 有关梯度下降法的更多深入讨论"></a>5. 有关梯度下降法的更多深入讨论</h3><ul>
+<li>批量梯度下降法 Batch Gradient Descent</li>
+<li>随机梯度下降法 Stochastic Gradient Descent</li>
+<li>小批量梯度下降法 Mini-Batch Gradient Descent</li>
+</ul>
+<p><strong>随机</strong></p>
+<ul>
+<li>跳出局部最优解</li>
+<li>更快的运行速度</li>
+<li>机器学习领域很多算法都要使用随机的特点<ul>
+<li>随机搜索，随机森林</li>
+</ul>
+</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/09/Python-Machine-Learning-4/" style="float: left;">
+        ← PCA与梯度上升法
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/02/Java-Concurrent-Programming-4/">
+        线程调度-线程池 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Big Data SparkSQL | Thpffcj的树洞</title>
+  <title>线程调度-线程池 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,28 +172,46 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-04-14T03:38:10.000Z" itemprop="datePublished">
-          2018-04-14
+      <time datetime="2018-05-02T15:01:54.000Z" itemprop="datePublished">
+          2018-05-02
       </time>
     
 </span>
-                <h1>Big Data SparkSQL</h1>
+                <h1>线程调度-线程池</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<h2 id="1-线程池"><a href="#1-线程池" class="headerlink" title="1. 线程池"></a>1. 线程池</h2><ul>
+<li>new Thread 弊端<ul>
+<li>每次 new Thread 新建对象，性能差</li>
+<li>线程缺乏统一管理，可能无限制的新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM</li>
+<li>缺少更多功能，如更多执行，定期执行，线程中断</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-线程池的好处"><a href="#1-线程池的好处" class="headerlink" title="1. 线程池的好处"></a>1. 线程池的好处</h3><ul>
+<li>重用存在的线程，减少对象创建，消亡的开销，性能佳</li>
+<li>可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞</li>
+<li>提供定时执行，定期执行，单线程，并发数控制等功能</li>
+</ul>
+<h3 id="2-线程池-ThreadPoolExecutor"><a href="#2-线程池-ThreadPoolExecutor" class="headerlink" title="2. 线程池 - ThreadPoolExecutor"></a>2. 线程池 - ThreadPoolExecutor</h3><ul>
+<li>corePoolSize：核心线程数量</li>
+<li>maximumPoolSize：最大线程数</li>
+<li>workQueue：阻塞队列，存储等待执行的任务，很重要，会对线程池运行过程产生重要影响</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/04/15/Big-Data-Interview/" style="float: left;">
-        ← 大数据面试
+    <a class="pull-left" href="/2018/05/08/Python-Machine-Learning-3/" style="float: left;">
+        ← 梯度下降法
     </a>
     
     
-    <a class="pull-right" href="/2018/04/14/Java-Concurrent-Programming-1/">
-        Java 并发编程 1 →
+    <a class="pull-right" href="/2018/05/01/System-Learning-Docker-1/">
+        System Learning Docker 1 →
     </a>
     
 </nav>
