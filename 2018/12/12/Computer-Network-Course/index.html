@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>计算机网络(未完) | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-12-12T00:45:00.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                <h1>计算机网络(未完)</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-计算机网络及其参考模型"><a href="#1-计算机网络及其参考模型" class="headerlink" title="1. 计算机网络及其参考模型"></a>1. 计算机网络及其参考模型</h2><h3 id="1-一些概念"><a href="#1-一些概念" class="headerlink" title="1. 一些概念"></a>1. 一些概念</h3><ul>
+<li>LAN：Local Area Network，局域网</li>
+<li>WAN：Wide Area Network，广域网</li>
+<li>ISP: Internet Service Provider，网络服务供应商</li>
+<li>局域网设备：集线器(hub)、网桥(bridge)、交换机(switch)、路由器(router)</li>
+<li>广域网设备：路由器(router)、调制解调器(modem)</li>
+<li>以太网是局域网。</li>
+<li>为什么要使用数据包？<ol>
+<li>计算机可以轮流发送数据包。</li>
+<li>如果数据包丢失，只需重传少量的数据。</li>
+<li>数据可从不同的路径到达。</li>
+</ol>
+</li>
+<li>带宽：在给定时间内可传输的数据量。</li>
+<li>吞吐量：在特定时间内所测量的出的真实的数据流量。<ul>
+<li>吞吐量 &lt;= 带宽</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-参考模型"><a href="#2-参考模型" class="headerlink" title="2. 参考模型"></a>2. 参考模型</h3><p><strong>使用分层模型的原因：</strong></p>
+<ol>
+<li>降低复杂度。</li>
+<li>标准化接口。</li>
+<li>促进模块化工程。</li>
+<li>确保内部可操作的技术。</li>
+<li>促进发展。</li>
+<li>简化教学与学习。</li>
+</ol>
+<p><strong>OSI: Open System Interconnection，开放系统互连</strong><br><strong>OSI的七层：</strong></p>
+<ul>
+<li>第一层：物理层(Physical)，二进制传输；关键词：信号、介质。</li>
+<li>第二层：数据链路层(Data Link)，介质访问；关键词：帧、媒介访问控制；提供数据的可靠传输，与物理寻址、网络拓扑、网络接入、错误通知、帧的顺序传送和流控制有关。</li>
+<li>第三层：网络层(Network)，寻址和最优路径选择关键词：路径选择、路由、寻址；在路由时提供连接和路径选择。</li>
+<li>第四层：传输层(Transport)，终端对终端的连接；关键词：可靠性、流控制、错误校正。</li>
+<li>第五层：会话层(Session)，内部宿主连接；关键词：会话；管理表现层实体间的数据交换。</li>
+<li>第六层：表现层(Presentation)，数据显示和加密；关键词：通用格式；与数据结构和数据传输语法间的协商有关。</li>
+<li>第七层：应用层(Application)，用户界面；关键词：浏览器；向用户程序提供网络服务。</li>
+<li>5-7层被称为应用层；1-4层被称为数据流层。</li>
+</ul>
+<p><strong>各层传输数据类型：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%90%84%E5%B1%82%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png" alt=""></p>
+<p><strong>各层协议：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%90%84%E5%B1%82%E5%8D%8F%E8%AE%AE.png" alt=""></p>
+<p><strong>TCP/IP的四层：</strong></p>
+<ul>
+<li>第一层：网络接入层(Network Access)；</li>
+<li>第二层：网际互联层(Internet)；最佳路径选择和同层的包交换。</li>
+<li>第三层：传输层(Transport)；处理可靠性、流控制、纠错的服务质量问题，将应用层信息打包成段。</li>
+<li>第四层：应用层(Application)；处理高层拓扑、显示问题、编码和通话控制。</li>
+<li>TCP：Transmission Control Protocol，传输控制协议</li>
+<li>UDP：User Datagram Protocol，用户数据电报协议</li>
+<li>IP：Internet protocol，互联网协议</li>
+</ul>
+<p><strong>TCP/IP拓扑层次图：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/TCPIP%E6%8B%93%E6%89%91%E5%B1%82%E6%AC%A1%E5%9B%BE.png" alt=""></p>
+<ul>
+<li>FTP - File Transfer Protocol 文件传输协议</li>
+<li>HTTP - Hypertext Transfer Protocol  超文本传输协议</li>
+<li>SMTP - Simple Mail Transfer protocol  简单邮件传输协议</li>
+<li>DNS - Domain Name System 域名系统</li>
+<li>TFTP - Trivial File Transfer Protocol 简单文件传输协议</li>
+</ul>
+<p><strong>TCP/IP和OSI各层的对应关系：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/TCPIP%E5%92%8COSI%E5%90%84%E5%B1%82%E7%9A%84%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB.png" alt=""></p>
+<p><strong>物理网络拓扑结构：</strong></p>
+<ul>
+<li>总线拓扑，环形拓扑，星形拓扑，扩展星形拓扑，层次型(树形)拓扑，网络拓扑</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%A9%E7%90%86%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png" alt=""></p>
+<ul>
+<li>总线拓扑：<ul>
+<li>优点：所有节点之间都能直接通信。</li>
+<li>缺点：如果线缆上的一点断开，会影响到所有两边的节点。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>双环形拓扑：在环形拓扑的基础上增加一个冗余环路，提高了可靠性和灵活性。</li>
+</ul>
+<ul>
+<li>星形拓扑：<ul>
+<li>优点：允许所有节点方便地交流，有较好的安全性和接入控制。</li>
+<li>缺点：中间节点崩溃会使整个网络崩溃，冲突也会是一个严重的问题。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>网络拓扑：<ul>
+<li>优点：连通性和可靠性最好。</li>
+<li>缺点：介质和连接的数量无法控制。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>细胞拓扑：用于无线网。</li>
+</ul>
+<h3 id="3-网络设备"><a href="#3-网络设备" class="headerlink" title="3. 网络设备"></a>3. 网络设备</h3><ul>
+<li>第一层设备：集线器(Hub)，中继器(Repeater)，网卡(NIC)*</li>
+<li>第二层设备：网卡(NIC)，交换机(Switch)，网桥(Bridge)</li>
+<li>第三层设备：路由(Router)</li>
+</ul>
+<ul>
+<li>网卡：MAC地址，接受和发送数据，实现串行信号和并行信号之间的转换。</li>
+<li>中继器：整理、放大并重发信号，不做过滤，不划分冲突域。</li>
+<li>集线器：多端口的中继器，整理、放大并复制电信号向所有端口转发，不做过滤，不划分冲突域。</li>
+<li>网桥：通过MAC地址判断，维护MAC地址表，划分冲突域。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-OSI层次：物理层"><a href="#2-OSI层次：物理层" class="headerlink" title="2. OSI层次：物理层"></a>2. OSI层次：物理层</h2><h3 id="1-一些概念-1"><a href="#1-一些概念-1" class="headerlink" title="1. 一些概念"></a>1. 一些概念</h3><ul>
+<li>网络类型：<ul>
+<li>共享介质环境。</li>
+<li>点对点网络环境(广泛使用于拨号网络中)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-物理层下面的传输媒体"><a href="#2-物理层下面的传输媒体" class="headerlink" title="2. 物理层下面的传输媒体"></a>2. 物理层下面的传输媒体</h3><p><strong>双绞线</strong></p>
+<ul>
+<li>双绞线类型：<ul>
+<li>STP：Shielded Twisted Pair，屏蔽双绞线：由4对细铜线组成，每根线外使用有颜色的塑料隔离。每两根线一个壳，八根线共一个壳，最外层一个外部护套。</li>
+<li>ScTP：Screened Twisted Pair，网屏式双绞线：由4对细铜线组成，每根线外使用颜色的塑料隔离。八根线共一个壳，最外层一个外部护套。</li>
+<li>UTP：Unshielded Twisted Pair，非屏蔽双绞线：由4对细铜线组成，每根线外使用颜色的塑料隔离。只有最外层的一个外部护套。</li>
+<li>STP和ScTP的优点：<ul>
+<li>比UTP抗外部干扰的能力强。</li>
+</ul>
+</li>
+<li>STP和ScTP的缺点：<ul>
+<li>信号传播距离较短。</li>
+<li>隔离层极大地增加了线缆的大小、重量和价格。</li>
+<li>金属屏蔽层必须接地，线缆难以安装。</li>
+</ul>
+</li>
+<li>UTP的优点：<ul>
+<li>1.线缆不需要接地，因此便于在线缆末端加上连接器。</li>
+<li>价格低。</li>
+<li>直径小，因此安装简单且更适合安装在管道中。</li>
+<li>和其他铜传输介质具有一样的数据传输速率</li>
+<li>使用RJ连接器后极大地降低了噪音的影响。</li>
+</ul>
+</li>
+<li>UTP的缺点：<ul>
+<li>更容易受到电子噪音和干扰的影响。</li>
+<li>相对于同轴电缆和光缆而言，能支持的线缆长度较短。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Coaxial(同轴电缆)：</strong></p>
+<ul>
+<li>铜导线，外部包有绝缘塑料，再外层是铜网屏蔽层，最外层是外部护套。</li>
+<li>同轴线缆的优点：<ul>
+<li>与STP和UDP相比，统战线缆可以在几乎没有中继器推动的情况下，在距离较远的两个网络节点之间传输数据。</li>
+<li>比光缆便宜(比STP和UTP贵)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Fiber-Optic(光纤)：</strong></p>
+<ul>
+<li>硅的氧化物作纤芯，外面一层覆层用于防止光外溢，再外层是缓冲层，包裹在一层加强材料当中，最外层是外套。</li>
+<li>Fiber-Optic的优点：<ul>
+<li>可以使用更长的距离。</li>
+<li>接口不容易损坏。</li>
+</ul>
+</li>
+<li>Fiber-Optic的缺点：<ul>
+<li>价格昂贵。</li>
+</ul>
+</li>
+<li>Single Mode(单模光纤)：<ul>
+<li>轴传播。</li>
+<li>比多模光纤快，传输距离长。</li>
+<li>较多使用在WAN。</li>
+<li>直径小。</li>
+<li>通常使用激光器型发送器，也使用发光二极管。</li>
+</ul>
+</li>
+<li>Multimode(多模光纤)：<ul>
+<li>光以不同的角度进入光纤。</li>
+<li>直径比单模光纤大。</li>
+<li>多用在LAN中。</li>
+<li>能量损耗较大。</li>
+</ul>
+</li>
+</ul>
+<p><strong>无线介质类型：</strong></p>
+<ul>
+<li>Lasers(激光)</li>
+<li>Infrared(红外线)</li>
+<li>Radio(无线电)</li>
+</ul>
+<p><strong>UTP线缆的类型：</strong></p>
+<ul>
+<li>一类线：主要用于语音传输，不用于数据传输。</li>
+<li>二类线：用于语音和最高4Mbps的数据传输，常见于令牌网。</li>
+<li>三类线：EIA/TIA568标准指定电缆，用于语音传输及最高传输速率为10Mbps的数据传输，主要用于10BASE-T。</li>
+<li>四类线：用于语音传输和最高传输速率16Mbps的数据传输，主要用于令牌网和 10BASE-T/100BASE-T。</li>
+<li>五类线：增加了绕线密度，外套高质量绝缘材料，用于语音和数据传输(主要为100/1000BASE-T)，是最常用的以太网电缆。</li>
+<li>超五类线：衰减小，串扰少，具有更高的衰减/串扰比和信噪比、更小的时延误差，主要用于1000BASE-T。</li>
+<li>六类线：性能远高于超五类标准，适用于高于1Gbps的应用。</li>
+<li>七类线：带宽为600MHz，可能用于今后的10G比特以太网。</li>
+</ul>
+<p><strong>UTP线缆类型：</strong></p>
+<ul>
+<li>直通线：<ul>
+<li>1号引脚与1号引脚相连，2号与2号相连，其他依次类推，两端设备使用相同的引脚。</li>
+</ul>
+</li>
+<li>全反线：<ul>
+<li>又叫控制台线缆，1号引脚与8号引脚相连，2号与7号相连，其他依次类推，用于连接PC的串口与路由器或交换机的控制台端口。</li>
+</ul>
+</li>
+<li>交叉线：<ul>
+<li>1号引脚与3号引脚相连，2号与6号相连，4号与7号相连，5号与8号相连。</li>
+</ul>
+</li>
+</ul>
+<p><strong>线缆引脚的使用：(不过听说现在很多线都可以通用了)</strong></p>
+<ul>
+<li>连接计算机与网络设备的控制台端口时使用全反线.</li>
+<li>两台设备使用的传输引脚相同时使用交叉线。</li>
+<li>两台设备使用的传输引脚不同时使用直通线。</li>
+<li>计算机、路由器、服务器和无线接入点的以太网接口通常使用1、2号引脚。</li>
+<li>交换机、集线器和网桥通常使用3、6号引脚。</li>
+<li>连接两个隔离的计算机系统创建小型局域网时使用交叉线。</li>
+</ul>
+<h3 id="3-数据通信"><a href="#3-数据通信" class="headerlink" title="3. 数据通信"></a>3. 数据通信</h3><p><strong>5-4-3-2-1 Rule：</strong></p>
+<ul>
+<li>允许将网络划分为5个网段。</li>
+<li>在任何两台最终用户设备之间最多有4台中继器或集线器。</li>
+<li>5个网段中的3个可以连接最终用户设备。</li>
+<li>如果在两台最终用户设备之间有5个网段，则其中两个网段不能连接最终用户设备，只能作中继器链路。</li>
+<li>上述将构成一个大型的冲突域，最大站点数1024，网络直径达2500米。</li>
+</ul>
+<p><strong>概念</strong></p>
+<ul>
+<li>无噪信道的最高传输速率C = W log2L (bps)，其中W为信道的带宽(以Hz为单位)，L为表示数据的信号电平的数量。</li>
+<li>噪声信道的最高传输速率C = W log2(1+S/N)(bps)，其中W为信道的带宽(以Hz为单位)，S为信道内所传信号的平均功率，N为信道内部的高斯噪声功率，S/N称为信噪比。</li>
+<li>波特率/调制速率(baud)：信号每秒钟变化的次数。</li>
+<li>比特率(bit)：每秒钟传送的二进制位数。</li>
+<li>基带：基本频带，指传输变换前所占用的频带，是原始信号所固有的频带。</li>
+<li>基带传输：在传输时直接使用基带数字信号(不转换为模拟信号，即不调制)。</li>
+</ul>
+<p><strong>编码方式</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F.png" alt=""></p>
+<ul>
+<li>单极性编码：<ul>
+<li>用零电平表示“0”，正电平表示“1”，容易产生传播错误。</li>
+<li>缺点：<ul>
+<li>难以分辨一位的结束和另一位的开始；</li>
+<li>发送方和接收方必须有时钟同步；</li>
+<li>若信号中“0”或“1”连续出现，信号直流分量将累加，单极性编码的直流分量问题严重。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>不归零电平编码：<ul>
+<li>用负电平表示“0”，正电平表示“1”(或相反)。</li>
+<li>缺点：<ul>
+<li>难以分辨一位的结束和另一位的开始。</li>
+<li>发送方和接收方必须有时钟同步。</li>
+<li>尽管没有单极性编码严重，但若信号中“0”或“1”连续出现，信号直流分量仍将累加。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>不归零反相编码：<ul>
+<li>信号电平的一次翻转代表比特1，无电平变化代表0。</li>
+<li>优点：<ul>
+<li>每次遇到“1”(或“0”)都要发生跃迁，可以根据电平跃迁进行有限的同步。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>归零制码(RZ：Return to Zero)：<ul>
+<li>用负电平表示“0”，正电平表示“1”（或相反），比特中位跳变到零电平，从而提供同步。</li>
+<li>优点：<ul>
+<li>信号本身带有同步信息，经济性好，且不易出错。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>需要采用三个不同电平，两次信号变化来编码1比特，因此增加了占用的带宽。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>曼彻斯特码(Manchester)：<ul>
+<li>每一位中间都有一个跳变，从低跳到高表示“0”，从高跳到低表示“1”。</li>
+<li>优点：<ul>
+<li>克服了NRZ码的不足，每位中间的跳变既可作为数据，又可作为时钟，能够自同步；同时只采用两个电平，跳变减少，比RZ码效率更高。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>差分曼彻斯特码(Differential Manchester)<ul>
+<li>每一位中间都有一个跳变，表示时钟；位前有跳变表示“0”，无跳变表示“1”。</li>
+<li>优点：<ul>
+<li>时钟、数据分离，便于提取。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>双极性传号交替反转码(AMI)：<ul>
+<li>采用三个电平：正、负与零，零电平表示“0”，正负电平的跃迁表示“1”。</li>
+<li>优点：<ul>
+<li>对每次出现的“1”交替反转，使直流分量为0；</li>
+<li>尽管连续“0”不能同步，但连续“1”可以同步。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-信道复用技术"><a href="#4-信道复用技术" class="headerlink" title="4. 信道复用技术"></a>4. 信道复用技术</h3><p><strong>多路复用：为了提高线路利用率，让多个信号共用一条物理线路。</strong></p>
+<ul>
+<li>TDM：Time Division Multiplexing，时分复用</li>
+<li>STDM：Statistic TDM，统计时分复用</li>
+<li>FDM：Frequency Division Multiplexing，频分复用</li>
+<li>WDM：Wavelength Division Multiplexing，波分复用</li>
+<li>CDM：Code Division Multiplexing，码分复用</li>
+<li>CDMA：Code Division Multiple Access，码分多址，即码分复用</li>
+</ul>
+<p><strong>通信方式类型：</strong></p>
+<ul>
+<li>单工：信号单向传输。</li>
+<li>半双工：信号可双向传输，但不同时。</li>
+<li>全双工：信号可同时双向传输。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-OSI层次：数据链路层"><a href="#3-OSI层次：数据链路层" class="headerlink" title="3. OSI层次：数据链路层"></a>3. OSI层次：数据链路层</h2><h3 id="1-使用广播信道的数据链路层"><a href="#1-使用广播信道的数据链路层" class="headerlink" title="1. 使用广播信道的数据链路层"></a>1. 使用广播信道的数据链路层</h3><p><strong>数据链路层的两个部分：</strong></p>
+<ul>
+<li>MAC：Media Access Control，介质访问控制：向下到介质的过渡；定义了怎样在物理线缆上传输帧，处理物理寻址，定义网络拓扑，定义线缆规章。</li>
+<li>LLC：Logical Link Control，逻辑链路控制：向上到网络层的过渡；标示不同的拓扑类型并封装他们。<ul>
+<li>LLC提供的服务：<ul>
+<li>无应答的无连接服务。</li>
+<li>带应答的无连接服务。</li>
+<li>带应答的面向连接服务。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>概念</strong></p>
+<ul>
+<li>以太网：逻辑总线拓扑，物理星形或扩展星形拓扑。</li>
+<li>令牌环：逻辑环形拓扑，物理星形拓扑。</li>
+<li>FDDI：逻辑环形拓扑，物理双环形拓扑。</li>
+</ul>
+<ul>
+<li>CSMA/CD：Carrier Sense Multiple Access with Collision Detection，带冲突检测的载波侦听多路接入。</li>
+<li>CSMA：先侦听线路，如果发现空闲，则发送数据，否则等待。</li>
+<li>CD：在传输过程中，仍然侦听线路，如果冲突检测到，则先广播拥塞信号，后退算法决定哪个设备再次接入介质。</li>
+</ul>
+<h3 id="2-使用广播信道的以太网"><a href="#2-使用广播信道的以太网" class="headerlink" title="2. 使用广播信道的以太网"></a>2. 使用广播信道的以太网</h3><p><strong>以太网帧格式：</strong></p>
+<ul>
+<li>前导码，目的MAC地址，源MAC地址，长度，数据，帧校验序列</li>
+<li>注意：目的地址在前，源地址在后</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<p><strong>MAC地址：</strong></p>
+<ul>
+<li>48bits，前6位16进制数标示制造商、供货商，剩下的由供货商管理。</li>
+</ul>
+<p><strong>第二层广播地址为：FFFF.FFFF.FFFF.FFFF</strong></p>
+<p><strong>广播在下面两种情况下发生：</strong></p>
+<ul>
+<li>不知道目的MAC地址。</li>
+<li>目的地为全体主机。</li>
+</ul>
+<p><strong>Sliding Window Protocol(滑动窗口协议)：</strong></p>
+<ul>
+<li>发送的信息帧都有一个序号。</li>
+<li>发送端保持一个已发送但尚未确认的帧的序号表，称为发送窗口。<br>上界是要发送的下一个帧的序号，下界是未得到确认的帧的最小编号。<br>发送窗口大小 = 上界 - 下界，大小可变。</li>
+<li>发送端每发送一个帧，序号取上界值，上界加1；每接收到一个正确响应帧，下界加1。</li>
+<li>接收端有一个接收窗口，大小固定，但不一定与发送窗口相同。</li>
+<li>上界是允许接收的序号最大的帧，下界是希望接收的帧。</li>
+<li>接收窗口容纳允许接收的信息帧，落在窗口外的帧均被丢弃。序号等于下界的帧被正确接收，并产生一个响应帧，上界、下界都加1。接收窗口大小不变。</li>
+</ul>
+<p><strong>信道使用率</strong></p>
+<ul>
+<li>信道利用率 = (L/b) / (L/b + R) = L / (L + Rb)<ul>
+<li>其中信道带宽b比特/秒，帧长度L比特，往返传输延迟R秒。</li>
+<li>传输延迟大，信道带宽高，帧短时，信道利用率低。</li>
+</ul>
+</li>
+</ul>
+<p><strong>pipelining(流水线技术)：</strong></p>
+<ul>
+<li>出错重传时可以从出错帧起丢弃所有后继帧或者接收窗口先暂存出错帧的后继帧，只重传坏帧。</li>
+</ul>
+<h3 id="3-无线网络数据链路层"><a href="#3-无线网络数据链路层" class="headerlink" title="3. 无线网络数据链路层"></a>3. 无线网络数据链路层</h3><p><strong>由于无线网络和移动网络的数据链路层与传统的有线因特网的数据链路层相差很大，我们单独讨论这个问题</strong></p>
+<p><strong>概念</strong></p>
+<ul>
+<li>BSS：Basic Service Set，基本服务集</li>
+<li>BS：Base Station，基站</li>
+<li>DS：Distribution System，分布式系统</li>
+<li>ESS：Extended Service Set，扩展服务集</li>
+<li>AP：Access Point，接入点</li>
+<li>SSID：Service Set Identifier，服务集标识</li>
+</ul>
+<p><strong>主动扫描：</strong></p>
+<ol>
+<li>发送探针请求(带有要连接的网络的SSID)。</li>
+<li>匹配的AP发送一个探针相应。</li>
+<li>认证和连接完毕。</li>
+</ol>
+<p><strong>被动扫描：</strong></p>
+<ol>
+<li>监听信标管理帧。</li>
+<li>如果监听到匹配的网络，则连接。</li>
+<li>被动扫描是连续的过程。</li>
+<li>随着信号的强弱变化，节点可能会连接和断开连接。</li>
+</ol>
+<p><strong>无线局域网（WLAN）中的冲突问题：</strong></p>
+<ul>
+<li>隐藏站点问题(严重)。</li>
+<li>暴露站点问题。</li>
+</ul>
+<p><strong>CSMA/CA：Carrier Sense Multiple Access with Collision Avoidance，带冲突避免的载波侦听多路接入</strong></p>
+<ul>
+<li>RTS：Request To Send，请求传输帧</li>
+<li>CTS：Clear To Send，清除传输帧</li>
+<li><p>ACK：acknowledgment</p>
+</li>
+<li><p><strong>CSMA/CA原理：</strong></p>
+<ul>
+<li>发送站点在发送数据前，以控制短帧刺激接收站点发送应答短帧，使接收站点周围的站点监听到该帧，从而在一定时间内避免数据发送。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-在物理层扩展以太网"><a href="#4-在物理层扩展以太网" class="headerlink" title="4. 在物理层扩展以太网"></a>4. 在物理层扩展以太网</h3><p><strong>Transparent Bridge(透明网桥)：</strong></p>
+<ul>
+<li>“透明”是指局域网上的站点并不知道所发送的帧将经过哪几个网桥，因为网桥对各站来说是看不见的。透明网桥是一种即插即用设备，是目前以太网中使用得最多的网桥。</li>
+</ul>
+<p><strong>Source routing Bridge(源路由网桥)：</strong></p>
+<ul>
+<li>网桥发送帧时将详细的路由信息放在帧的首部中,从而使每个经过的网桥都了解帧的路径。在令牌环网络中被广泛使用。</li>
+</ul>
+<p><strong>二层设备还是在同一个广播域中。</strong></p>
+<ul>
+<li>网桥使用软件进行包转发，而交换机使用硬件。因此，交换机比网桥效率高。<br>有些交换机支持cut-through switching（更快），而网桥只支持store-and-forward switching。</li>
+</ul>
+<p><strong>路由器：</strong></p>
+<ul>
+<li>可划分冲突域和广播域。</li>
+<li>通过检查目的逻辑地址转发包。</li>
+<li>延迟更高。</li>
+<li>可用作网关(连接使用不同介质或不同局域网技术的网络)。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="4-OSI层次：网络层"><a href="#4-OSI层次：网络层" class="headerlink" title="4. OSI层次：网络层"></a>4. OSI层次：网络层</h2><h3 id="1-网际协议IP"><a href="#1-网际协议IP" class="headerlink" title="1. 网际协议IP"></a>1. 网际协议IP</h3><p><strong>IP地址：32Bits    网络号+主机号</strong></p>
+<p><strong>IP地址分类：</strong></p>
+<ul>
+<li>Class A:0+7bits网络号+24bits主机号</li>
+<li>Class B:10+14bits网络号+16bits主机号</li>
+<li>Class c:110+21bits网络号+8bits主机号</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB.png" alt=""></p>
+<p><strong>IP地址中前8位的含义：</strong></p>
+<ul>
+<li>0–127 Class A 地址</li>
+<li>128-191 Class B 地址</li>
+<li>192–223 Class C 地址</li>
+<li>224–239 Class D – 组播</li>
+<li>240–255 Class E - 研究</li>
+</ul>
+<p><strong>各类地址最多支持的主机数：</strong></p>
+<ul>
+<li>Class A：16,777,214 (224 –2)</li>
+<li>Class B：65,534 (216 –2)</li>
+<li>Class C：254 (28 –2)</li>
+</ul>
+<p><strong>保留地址：</strong></p>
+<ul>
+<li>网段地址：主机号全为0</li>
+<li>广播地址：主机号全为1</li>
+</ul>
+<p><strong>私有地址空间：</strong></p>
+<ul>
+<li>10.0.0.0 - 10.255.255.255 (A类)</li>
+<li>172.16.0.0 - 172.31.255.255 (B类)</li>
+<li>192.168.0.0 - 192.168.255.255 (C类)</li>
+</ul>
+<p><strong>IP地址消耗的解决办法：</strong></p>
+<ul>
+<li>NAT，即使用私有IP地址。</li>
+<li>CIDR。</li>
+<li>IPv6，长期解决办法。</li>
+</ul>
+<p><strong>子网：</strong></p>
+<ul>
+<li>提供灵活的寻址，通常由网管分配，能够减少广播域。</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%AD%90%E7%BD%91.png" alt=""></p>
+<ul>
+<li>最小可借位数 = 2</li>
+<li>最大可借位数 = host ID位数 – 2</li>
+<li>子网划分会造成地址的浪费。</li>
+</ul>
+<ul>
+<li><strong>子网划分的步骤：</strong><ol>
+<li>先确定是那类网。</li>
+<li>再确定要多少子网以及每个子网可支持的主机数。</li>
+<li>确定借位数。</li>
+<li>计算子网掩码。</li>
+<li>确定主机的可用地址范围。</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><strong>计算子网地址的步骤：</strong><ol>
+<li>将IP地址转化为二进制。</li>
+<li>将子网掩码转化为二进制。</li>
+<li>对两个数进行与操作。</li>
+<li>将子网地址转化为带点的十进制。</li>
+</ol>
+</li>
+</ul>
+<p><strong>每个路由接口都必须有一个单独的网段地址。</strong></p>
+<p><strong>IP数据包的格式：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/IP%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E6%A0%BC%E5%BC%8Fpng.png" alt=""></p>
+<ul>
+<li>注意：源地址在前，目的地址在后。</li>
+</ul>
+<h3 id="2-地址解析协议ARP"><a href="#2-地址解析协议ARP" class="headerlink" title="2. 地址解析协议ARP"></a>2. 地址解析协议ARP</h3><ul>
+<li>RARP：Reverse Address Resolution Protocol，逆向地址解析协议</li>
+<li>BOOTP：BOOTstrap Protocol，自举协议</li>
+<li>DHCP：Dynamic Host Configuration Protocol，动态主机配置协议</li>
+<li>ARP Protocol：Address Resolution Protocol，地址解析协议</li>
+</ul>
+<p><strong>RARP的工作原理：</strong></p>
+<ol>
+<li>发送主机发送一个本地的RARP广播，在此广播包中，声明自己的MAC地址并且请求任何收到此请求的RARP服务器分配一个IP地址。</li>
+<li>本地网段上的RARP服务器收到此请求后，检查其RARP列表，查找该MAC地址对应的IP地址。</li>
+<li>如果存在，RARP服务器就给源主机发送一个响应数据包并将此IP地址提供给对方主机使用；如果不存在，RARP服务器对此不做任何的响应。</li>
+<li>源主机收到从RARP服务器的响应信息，就利用得到的IP地址进行通讯；如果一直没有收到RARP服务器的响应信息，表示初始化失败。</li>
+</ol>
+<p><strong>BOOTP的工作原理：</strong></p>
+<ul>
+<li>客户机发送UDP广播请求IP地址，服务器收到请求后返回UDP广播，包含请求的IP地址。</li>
+</ul>
+<p><strong>DHCP的工作原理：</strong></p>
+<ol>
+<li>发现阶段，DHCP客户机以广播方式发送DHCP discover发现信息来寻找DHCP服务器(UDP广播)。</li>
+<li>服务器提供 IP 租用地址(UDP单播)。</li>
+<li>客户端接受 IP 租约(广播)，告诉DHCP服务器接受了哪台服务器的租约。</li>
+<li>租约确认，服务器确认租期。</li>
+</ol>
+<p><strong>ARP协议的(利用IP地址查询MAC地址)工作原理：</strong></p>
+<ul>
+<li>先查本地的ARP表(每个主机都维护一个ARP表)，如果不存在目的IP的MAC地址，则广播(二层)，目的主机收到广播报文之后，发现与自己的IP相匹配，就会发一个响应，其中包含自己的MAC地址，源主机收到响应报文之后，把目的主机MAC加入ARP表，然后再发送数据。</li>
+</ul>
+<p><strong>与不在一个网段的设备通信的方法：</strong></p>
+<ul>
+<li>默认网关：连接这个网段的路由接口的IP。(仍是ARP协议的一部分)。</li>
+<li>Proxy ARP(代理ARP)：中间设备(比如路由器)代表目的端发送一个ARP应答给发送请求的主机。</li>
+</ul>
+<p><strong>面向连接的网络服务：</strong></p>
+<ul>
+<li>传输数据前会在发送者和接受者之间建立连接。</li>
+</ul>
+<p><strong>无连接网络服务：</strong></p>
+<ul>
+<li>分别对待每一个包。每个包有不同的路径，可以不按次序到达。</li>
+<li>IP是无连接系统。</li>
+</ul>
+<h3 id="3-因特网的路由选择协议"><a href="#3-因特网的路由选择协议" class="headerlink" title="3. 因特网的路由选择协议"></a>3. 因特网的路由选择协议</h3><p><strong>routed protocol/routable protocol(被路由协议/可路由协议)：</strong></p>
+<ul>
+<li>可以被路由器转发的协议，如IP。</li>
+</ul>
+<p><strong>Non-routable protocol(不可路由协议)：</strong></p>
+<ul>
+<li>不能被路由器转发的包的协议，如NetBEUI。</li>
+</ul>
+<p><strong>routing protocol(路由协议)：</strong></p>
+<ul>
+<li>用于路由器之间的协议，以便它们可以动态地获知路由信息，并将它们添加到路由表中。</li>
+</ul>
+<p><strong>IGP：Interior Gateway Protocols，内部网关协议</strong></p>
+<ul>
+<li>用于自治系统，包括RIP, IGRP, EIGRP, OSPF等。</li>
+</ul>
+<p><strong>EGP：Exterior Gateway Protocols，外部网关协议</strong></p>
+<ul>
+<li>用于自制系统之间，包括EGP, BGP等。</li>
+</ul>
+<p><strong>DVP：Distance-Vector Protocol，距离矢量协议</strong></p>
+<ul>
+<li>通过计算目标路由器与源路由器之间的距离矢量和来选择最佳路径，有频繁和周期性的更新，每次更新都将整张路由表发给周围的路由器，包括RIP, IGRP等。</li>
+</ul>
+<p><strong>LSP：Link State Protocol，链路状态协议</strong></p>
+<ul>
+<li>每个路由器都了解整个网络的拓扑结构，利用算法计算两个路由之间的最短路径，更新由事件触发，每次更新都只像周围的路由器传递路由表的更新信息，包括OSPF等。</li>
+</ul>
+<p><strong>RIP：Route Information Protocol，路由信息协议</strong></p>
+<ul>
+<li>跳数位唯一的度量标准。</li>
+<li>最大跳数为15。</li>
+<li>每30秒更新一次。</li>
+<li>不总是选择最快路径。</li>
+<li>容易产生网络拥塞。</li>
+</ul>
+<p><strong>IGRP：Interior Gateway Route Protocol，内部网关路由协议。EIGRP：Enhanced IGRP，增强的内部网关路由协议</strong></p>
+<ul>
+<li>以延迟、带宽、链路负载、可靠性（链路错误率）为度量标准。</li>
+<li>最大跳数为255</li>
+<li>每90秒更新一次。</li>
+</ul>
+<p><strong>OSPF：Open Shortest Path First，开放最短路径优先</strong></p>
+<ul>
+<li>以代价、速度、通信量、可靠性、安全性为度量。</li>
+<li>更新由事件触发。</li>
+</ul>
+<h3 id="4-划分子网和构造超网"><a href="#4-划分子网和构造超网" class="headerlink" title="4. 划分子网和构造超网"></a>4. 划分子网和构造超网</h3><p><strong>SLSM：固定长度子网掩码</strong></p>
+<p><strong>VLSM：Variable-Length Subnet Mask，可变长子网掩码</strong></p>
+<ul>
+<li>VLSM的优点：<ul>
+<li>更有效的使用IP地址。</li>
+<li>使用路由汇总的能力更强。</li>
+</ul>
+</li>
+</ul>
+<p><strong>CIDR：Classless InterDomain Routing，无类域间路由</strong></p>
+<p><strong>支持无类路由的协议：</strong></p>
+<ul>
+<li>OSPF，EIGRP，RIP v2，静态路由</li>
+</ul>
+<p><strong>只有未使用的子网才能在被划分。先划分需要主机数最多的，然后接着按次序划分。两个路由之间相连的端口各需要一个IP地址。</strong></p>
+<p><strong>路由聚合：</strong></p>
+<ul>
+<li>减少路由表条目的数量。</li>
+<li>隔离拓扑的变化。</li>
+</ul>
+<p><strong>隧道：</strong></p>
+<ul>
+<li>将原有的IP报文作为载荷，在外面包上一层新的IP包头，转换成为一个新的IP报文。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="5-OSI层次：传输层"><a href="#5-OSI层次：传输层" class="headerlink" title="5. OSI层次：传输层"></a>5. OSI层次：传输层</h2><h3 id="1-传输层协议概述"><a href="#1-传输层协议概述" class="headerlink" title="1. 传输层协议概述"></a>1. 传输层协议概述</h3><p><strong>传输控制协议TCP</strong></p>
+<ul>
+<li>可靠。</li>
+<li>面向连接。</li>
+<li>数据的分片、重组和有序分发。</li>
+<li>重传所有丢失的或出错的报文。</li>
+<li>使用确认提供流控制。</li>
+<li>TCP不支持单播和组播。</li>
+</ul>
+<p><strong>用户数据包协议UDP</strong></p>
+<ul>
+<li>不可靠。</li>
+<li>无连接。</li>
+<li>无确认。</li>
+<li>无流控制。</li>
+</ul>
+<h3 id="2-传输控制协议TCP"><a href="#2-传输控制协议TCP" class="headerlink" title="2. 传输控制协议TCP"></a>2. 传输控制协议TCP</h3><p><strong>TCP报头格式：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/TCP%E6%8A%A5%E5%A4%B4%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<ul>
+<li>序号字段的值指本报文段所发送的数据的第一个字节的序号。</li>
+<li>确认号是期望收到对方的下一个报文段的数据的第一个字节的序号。</li>
+<li>代码位：URG(紧急)，ACK(确认)，PSH(推送)，RST(复位)，SYN(同步，为1表示是连接请求或连接接受报文)，FIN(终止)</li>
+<li>检验和字段检验的范围包括首部和数据这两部分。</li>
+<li>注意：源端口在前，目的端口在后。</li>
+</ul>
+<p><strong>建立连接(三次握手)：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%28%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%291.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%28%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%292.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%28%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%293.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%28%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%294.png" alt=""></p>
+<p><strong>ARQ：Automatic Repeat request，自动重复请求</strong></p>
+<p><strong>stop-and-wait protocol每发送一条报文后须等待应答再发送下一条报文。</strong></p>
+<p><strong>滑动窗口：</strong></p>
+<ul>
+<li>流控制机制；要求源设备在向目的设备发送一定数量数据之后接受一个确认。</li>
+</ul>
+<p><strong>拆除连接(四次握手)：</strong></p>
+<ul>
+<li>第一次：客户端 → 服务器， FIN = 1</li>
+<li>第二次：服务器 → 客户端， ACK = 1</li>
+<li>第三次：服务器 → 客户端， FIN = 1， ACK = 1</li>
+<li>第四次：客户端 → 服务器， ACK = 1</li>
+</ul>
+<p><strong>UDP用于对丢包可以忍受，但对速率敏感的场合。</strong></p>
+<p><strong>用UDP传输的协议：</strong></p>
+<ul>
+<li>RIP，DNS，SNMP，TFTP，DHCP</li>
+</ul>
+<p><strong>UDP报头格式：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/UDP%E6%8A%A5%E5%A4%B4%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<p><strong>NAT：Network Address Translator，网络地址转换</strong></p>
+<ul>
+<li>NAT：将内部(本地)网络地址转换为注册的网络地址，即全局网络地址。</li>
+<li>Static NAT：静态转换是指将内部网络的私有IP地址转换为公有IP地址，IP地址对是一对一的，是一成不变的，某个私有IP地址只转换为某个公有IP地址。借助于静态转换，可以实现外部网络对内部网络中某些特定设备(如服务器)的访问。</li>
+<li>Dynamic NAT：动态转换是指将内部网络的私有IP地址转换为公用IP地址时，IP地址是不确定的，是随机的，所有被授权访问上Internet的私有IP地址可随机转换为任何指定的合法IP地址。也就是说，只要指定哪些内部地址可以进行转换，以及用哪些合法地址作为外部地址时，就可以进行动态转换。动态转换根据先来先服务原则，可以使用多个合法外部地址集。当ISP提供的合法IP地址略少于网络内部的计算机数量时，可以采用动态转换的方式。</li>
+<li>PAT：PAT是指改变外出数据包的源端口并进行端口转换，即端口地址转换(PAT，Port Address Translation)。采用端口多路复用方式。内部网络的所有主机均可共享一个合法外部IP地址实现对Internet的访问，从而可以最大限度地节约IP地址资源。同时，又可隐藏网络内部的所有主机，有效避免来自internet的攻击。因此，目前网络中应用最多的就是端口多路复用方式。</li>
+<li>NAT的优点：可以多台机器使用少量地址。</li>
+<li>NAT的缺点：只能一对一映射，同时可以接入网络的主机少。</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="6-OSI层次：会话、表示、应用层"><a href="#6-OSI层次：会话、表示、应用层" class="headerlink" title="6. OSI层次：会话、表示、应用层"></a>6. OSI层次：会话、表示、应用层</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><p><strong>表示层：</strong></p>
+<ul>
+<li>数据格式化。</li>
+<li>数据压缩。</li>
+<li>数据加密。</li>
+</ul>
+<p><strong>应用层：</strong></p>
+<ul>
+<li>FTP：<ul>
+<li>可靠的面向连接的服务。</li>
+<li>使用TCP。</li>
+</ul>
+</li>
+<li>TFTP：<ul>
+<li>无连接服务。</li>
+<li>使用UDP。</li>
+</ul>
+</li>
+<li>SMTP：用于发邮件。</li>
+<li>POP(POP3，即POP version 3)：用于接收邮件。</li>
+<li>SNMP：Simple Network Management Protocol，简单网络管理协议。</li>
+</ul>
+<p><strong>DNS服务器系统采用树结构，每个服务器接收到域名后尝试解析，如果不能解析则传给上一层服务器。</strong></p>
+<p><br></p>
+<hr>
+<h2 id="7-路由与路由器"><a href="#7-路由与路由器" class="headerlink" title="7. 路由与路由器"></a>7. 路由与路由器</h2><h3 id="1-路由器组成"><a href="#1-路由器组成" class="headerlink" title="1. 路由器组成"></a>1. 路由器组成</h3><p><strong>路由器的内部组件：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%84%E4%BB%B6.png" alt=""></p>
+<ul>
+<li>RAM：<ul>
+<li>临时存储路由表、ARP缓存、快速交换缓存、包缓冲、包等待队列，关机或重启后信息会丢失。</li>
+</ul>
+</li>
+<li>NVRAM：<ul>
+<li>非易失RAM，存储备份或启动配置文件，关机或重启后信息不会丢失。</li>
+</ul>
+</li>
+<li>FLASH：<ul>
+<li>存储Cisco IOS，允许不更换芯片升级软件，可以存储多个版本的IOS，断点后保留信息。</li>
+</ul>
+</li>
+<li>ROM：<ul>
+<li>带有加电自检，用于加载ISO的引导程序和操作系统的备份。</li>
+</ul>
+</li>
+<li>Interface：<ul>
+<li>包出入的接口。</li>
+</ul>
+</li>
+</ul>
+<p><strong>POST：Power On Self Test，加电自检</strong></p>
+<p><strong>启动过程：</strong></p>
+<ol>
+<li>加电自检，对所有硬件模块执行ROM中的诊断程序。</li>
+<li>检验CPU、内存和网卡端口的所有基本操作。</li>
+<li>初始化软件：在CPU上执行ROM中的引导程序。</li>
+<li>初始化软件：查找操作系统。</li>
+<li>初始化软件：加载操作系统镜像。</li>
+<li>初始化软件：加载NVRAM中的配置文件并执行。</li>
+<li>初始化软件：如果没有找到配置文件，操作系统进入setup mode。</li>
+</ol>
+<h3 id="2-路由"><a href="#2-路由" class="headerlink" title="2. 路由"></a>2. 路由</h3><p><strong>静态路由的用途：</strong></p>
+<ul>
+<li>出于安全原因希望隐藏一部分网络。</li>
+<li>当一个网段只能通过一条路径被访问到，静态路由就足够了，这样的分割叫做终端网络。</li>
+</ul>
+<p><strong>administrative distance(管理距离)：</strong></p>
+<ul>
+<li>提供路由可靠性的一个可选参数，0-255。</li>
+<li>管理值越小越可靠。</li>
+<li>静态路由的管理距离通常为1。</li>
+</ul>
+<p><strong>问题：路由环路 → 计数到无穷大</strong></p>
+<ul>
+<li>解决方法：<ol>
+<li>定义最大跳数：当计数大于最大跳数时丢弃报文。</li>
+<li>水平分割：由一个接口发送出去的路由信息不能再朝这个接口往回发送。</li>
+<li>路由毒化：路由信息在路由表中失效的时候，把该表项的的度量值（metric）设为无穷大16，而不是马上从路由表中删掉这条路由信息，再将其信息发布出去，这样相邻的路由器就得知这条路由已无效了。</li>
+<li>毒性反转：它是指收到路由中毒消息的路由器，不遵守水平分割原则将中毒消息转发给所有的相邻路由器，也包括发送中毒信息的源路由器，也就是通告相邻路由器这条路由信息己失效了。主要是为了达到快速收敛的目的。</li>
+<li>抑制定时器：一条路由信息无效之后，一段时间内这条路由都处于抑制状态，即在一定时间内不再接收关于同一目的地址的路由更新。如果，路由器从一个网段上得知一条路径失效，然后，立即在另一个网段上得知这个路由有效。这个有效的信息往往是不正确的，抑制计时避免了这个问题，而且，当一条链路频繁起停时，抑制计时减少了路由的浮动，增加了网络的稳定性。</li>
+<li>触发更新：当路由失效时，不再等待下一个更新周期，而是立即出发，发布毒化路由更新。</li>
+</ol>
+</li>
+</ul>
+<p><strong>环路避免方法总结：</strong></p>
+<ol>
+<li>在稳定的网络中，路由器发送定期的全部更新，更新中包括除水平分割规则所略的所有路由信息。</li>
+<li>当由于路由失效引起网络变化时，路由器用毒化路由发送触发的部分更新。并且，路由器对这条路由忽略水平分割规则，向原通告这条毒化路由的路由器通告毒性反转路由。</li>
+<li>当学到某条失效路由时，所有路由器会将此路由置于抑制状态，并启动抑制计时器，在抑制期内，忽略这条路由的新信息，除非这条信息来自于原来通告这条路由的路由器。</li>
+</ol>
+<p><strong>两个需要考虑的问题：</strong></p>
+<ul>
+<li>处理器和内存的需求：链路状态协议比距离矢量协议对处理器和内存的要求都更高。</li>
+<li>带宽的需求：初始化链路状态包洪泛的时候会临时使可用带宽减小。</li>
+</ul>
+<p><strong>距离矢量协议与链路状态协议的比较：</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F%E5%8D%8F%E8%AE%AE%E4%B8%8E%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%AF%94%E8%BE%83.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="8-路由协议"><a href="#8-路由协议" class="headerlink" title="8. 路由协议"></a>8. 路由协议</h2><p><br></p>
+<hr>
+<h2 id="9-局域网交换与VLAN"><a href="#9-局域网交换与VLAN" class="headerlink" title="9. 局域网交换与VLAN"></a>9. 局域网交换与VLAN</h2>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/12/12/Operating-System-Course/" style="float: left;">
+        ← 操作系统(未完)
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/12/12/Data-Structures-and-Algorithms-Course/">
+        数据结构与算法 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

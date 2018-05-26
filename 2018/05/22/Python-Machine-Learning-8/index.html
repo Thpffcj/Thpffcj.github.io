@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>支撑向量机 SVM | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-22T07:41:15.000Z" itemprop="datePublished">
+          2018-05-22
+      </time>
+    
+</span>
+                <h1>支撑向量机 SVM</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-支撑向量机-SVM"><a href="#1-支撑向量机-SVM" class="headerlink" title="1. 支撑向量机 SVM"></a>1. 支撑向量机 SVM</h2><h3 id="1-什么是SVM"><a href="#1-什么是SVM" class="headerlink" title="1. 什么是SVM"></a>1. 什么是SVM</h3><ul>
+<li>Support Vector Machine</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%94%AF%E6%92%91%E5%90%91%E9%87%8F%E6%9C%BA%20SVM.png" alt=""></p>
+<ul>
+<li>解决的是线性可分问题</li>
+<li>Hard Margin SVM</li>
+<li>Soft Margin SVM</li>
+</ul>
+<h3 id="2-SVM背后的最优化问题"><a href="#2-SVM背后的最优化问题" class="headerlink" title="2. SVM背后的最优化问题"></a>2. SVM背后的最优化问题</h3><ul>
+<li>点到直线的距离</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%82%B9%E5%88%B0%E7%9B%B4%E7%BA%BF%E7%9A%84%E8%B7%9D%E7%A6%BB.png" alt=""></p>
+<ul>
+<li>支撑向量机</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%94%AF%E6%92%91%E5%90%91%E9%87%8F%E6%9C%BA.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%94%AF%E6%92%91%E5%90%91%E9%87%8F%E6%9C%BA2.png" alt=""></p>
+<ul>
+<li>我们也可以将两个式子变成一个</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%94%AF%E6%92%91%E5%90%91%E9%87%8F%E6%9C%BA3.png" alt=""></p>
+<ul>
+<li>最优化目标</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%94%AF%E6%92%91%E5%90%91%E9%87%8F%E6%9C%BA4.png" alt=""></p>
+<ul>
+<li>这是一个有条件的最优化问题</li>
+</ul>
+<h3 id="3-Soft-Margin-SVM"><a href="#3-Soft-Margin-SVM" class="headerlink" title="3. Soft Margin SVM"></a>3. Soft Margin SVM</h3><p><img src="http://oseihavwm.bkt.clouddn.com/SoftMarginSVM.png" alt=""></p>
+<ul>
+<li>L1，L2正则</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Soft%20Margin%20SVM%E6%AD%A3%E5%88%99.png" alt=""></p>
+<h3 id="4-scikit-learn中的SVM"><a href="#4-scikit-learn中的SVM" class="headerlink" title="4. scikit-learn中的SVM"></a>4. scikit-learn中的SVM</h3><ul>
+<li>使用SVM和kNN一样，要做数据标准化处理</li>
+<li>涉及距离</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import datasets
+
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
+
+X = X[y&lt;2,:2]
+y = y[y&lt;2]
+
+plt.scatter(X[y==0,0], X[y==0,1], color=&apos;red&apos;)
+plt.scatter(X[y==1,0], X[y==1,1], color=&apos;blue&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM1.png" alt=""></p>
+<ul>
+<li>进行标准化操作</li>
+</ul>
+<pre><code>from sklearn.preprocessing import StandardScaler
+
+standardScaler = StandardScaler()
+standardScaler.fit(X)
+X_standard = standardScaler.transform(X)
+</code></pre><ul>
+<li>引入LinearSVC，C取值越大就越偏向hard margin svm</li>
+</ul>
+<pre><code>from sklearn.svm import LinearSVC
+
+svc = LinearSVC(C=1e9)
+svc.fit(X_standard, y)
+</code></pre><blockquote>
+<p>LinearSVC(C=1000000000.0, class_weight=None, dual=True, fit_intercept=True,<br>     intercept_scaling=1, loss=’squared_hinge’, max_iter=1000,<br>     multi_class=’ovr’, penalty=’l2’, random_state=None, tol=0.0001,<br>     verbose=0)</p>
+</blockquote>
+<ul>
+<li>使用之前使用过的绘图方法</li>
+</ul>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+</code></pre><ul>
+<li>进行具体的绘制</li>
+</ul>
+<pre><code>plot_decision_boundary(svc, axis=[-3, 3, -3, 3])
+plt.scatter(X_standard[y==0,0], X_standard[y==0,1])
+plt.scatter(X_standard[y==1,0], X_standard[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM2.png" alt=""></p>
+<ul>
+<li>C传入0.01</li>
+</ul>
+<pre><code>svc2 = LinearSVC(C=0.01)
+svc2.fit(X_standard, y)
+
+plot_decision_boundary(svc2, axis=[-3, 3, -3, 3])
+plt.scatter(X_standard[y==0,0], X_standard[y==0,1])
+plt.scatter(X_standard[y==1,0], X_standard[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM3.png" alt=""></p>
+<ul>
+<li>对于第二个决策边界，有一个点被错误分类了</li>
+</ul>
+<pre><code>svc.coef_
+</code></pre><blockquote>
+<p>array([[ 4.03239757, -2.49296482]])</p>
+</blockquote>
+<pre><code>svc.intercept_
+</code></pre><blockquote>
+<p>array([ 0.95365598])</p>
+</blockquote>
+<ul>
+<li>改造绘图方法</li>
+</ul>
+<pre><code>def plot_svc_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+
+    w = model.coef_[0]
+    b = model.intercept_[0]
+
+    # w0*x0 + w1*x1 + b = 0
+    # =&gt; x1 = -w0/w1 * x0 - b/w1
+    plot_x = np.linspace(axis[0], axis[1], 200)
+    up_y = -w[0]/w[1] * plot_x - b/w[1] + 1/w[1]
+    down_y = -w[0]/w[1] * plot_x - b/w[1] - 1/w[1]
+
+    up_index = (up_y &gt;= axis[2]) &amp; (up_y &lt;= axis[3])
+    down_index = (down_y &gt;= axis[2]) &amp; (down_y &lt;= axis[3])
+    plt.plot(plot_x[up_index], up_y[up_index], color=&apos;black&apos;)
+    plt.plot(plot_x[down_index], down_y[down_index], color=&apos;black&apos;)
+</code></pre><ul>
+<li>进行绘图</li>
+</ul>
+<pre><code>plot_svc_decision_boundary(svc, axis=[-3, 3, -3, 3])
+plt.scatter(X_standard[y==0,0], X_standard[y==0,1])
+plt.scatter(X_standard[y==1,0], X_standard[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM4.png" alt=""></p>
+<ul>
+<li>对svc2绘图</li>
+</ul>
+<pre><code>plot_svc_decision_boundary(svc2, axis=[-3, 3, -3, 3])
+plt.scatter(X_standard[y==0,0], X_standard[y==0,1])
+plt.scatter(X_standard[y==1,0], X_standard[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM5.png" alt=""></p>
+<h3 id="5-SVM中使用多项式特征和核函数"><a href="#5-SVM中使用多项式特征和核函数" class="headerlink" title="5. SVM中使用多项式特征和核函数"></a>5. SVM中使用多项式特征和核函数</h3><pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import datasets
+
+X, y = datasets.make_moons()
+
+X.shape
+</code></pre><blockquote>
+<p>(100, 2)</p>
+</blockquote>
+<pre><code>y.shape
+</code></pre><blockquote>
+<p>(100,)</p>
+</blockquote>
+<pre><code>plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM6.png" alt=""></p>
+<ul>
+<li>添加噪音</li>
+</ul>
+<pre><code>X, y = datasets.make_moons(noise=0.15, random_state=666)
+
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM7.png" alt=""></p>
+<ul>
+<li>使用多项式特征的SVM</li>
+</ul>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.svm import LinearSVC
+from sklearn.pipeline import Pipeline
+
+def PolynomialSVC(degree, C=1.0):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;linearSVC&quot;, LinearSVC(C=C))
+    ])
+</code></pre><ul>
+<li>传入参数degree=3</li>
+</ul>
+<pre><code>poly_svc = PolynomialSVC(degree=3)
+poly_svc.fit(X, y)
+</code></pre><ul>
+<li>绘图函数</li>
+</ul>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+</code></pre><ul>
+<li>具体绘制</li>
+</ul>
+<pre><code>plot_decision_boundary(poly_svc, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM8.png" alt=""></p>
+<ul>
+<li>我们使用多项式让决策边界是一条曲线</li>
+<li>使用多项式核函数的SVM</li>
+</ul>
+<pre><code>from sklearn.svm import SVC
+
+def PolynomialKernelSVC(degree, C=1.0):
+    return Pipeline([
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;kernelSVC&quot;, SVC(kernel=&quot;poly&quot;, degree=degree, C=C))
+    ])
+
+poly_kernel_svc = PolynomialKernelSVC(degree=3)
+poly_kernel_svc.fit(X, y)
+
+plot_decision_boundary(poly_kernel_svc, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM9.png" alt=""></p>
+<h3 id="6-到底什么是核函数"><a href="#6-到底什么是核函数" class="headerlink" title="6. 到底什么是核函数"></a>6. 到底什么是核函数</h3><ul>
+<li>支持向量机通过某非线性变换 φ( x) ，将输入空间映射到高维特征空间。特征空间的维数可能非常高。如果支持向量机的求解只用到内积运算，而在低维输入空间又存在某个函数 K(x, x′) ，它恰好等于在高维空间中这个内积，即K( x, x′) =&lt;φ( x) ⋅φ( x′) &gt; 。那么支持向量机就不用计算复杂的非线性变换，而由这个函数 K(x, x′) 直接得到非线性变换的内积，使大大简化了计算。这样的函数 K(x, x′) 称为核函数</li>
+</ul>
+<p><strong>多项式核函数</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%A0%B8%E5%87%BD%E6%95%B0.png" alt=""></p>
+<h3 id="7-RBF核函数"><a href="#7-RBF核函数" class="headerlink" title="7. RBF核函数"></a>7. RBF核函数</h3><ul>
+<li>Radial Basis Function Kernel</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%AB%98%E6%96%AF%E6%A0%B8%E5%87%BD%E6%95%B0.png" alt=""></p>
+<ul>
+<li>将每一个样本点映射到一个无穷维的特征空间</li>
+</ul>
+<p><strong>多项式特征</strong></p>
+<ul>
+<li>依靠升维使得原本线性不可分的数据线性可分</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%AB%98%E6%96%AF%E6%A0%B8.png" alt=""></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(-4, 5, 1)
+
+x
+</code></pre><blockquote>
+<p>array([-4, -3, -2, -1,  0,  1,  2,  3,  4])</p>
+</blockquote>
+<pre><code>y = np.array((x &gt;= -2) &amp; (x &lt;= 2), dtype=&apos;int&apos;)
+
+y
+</code></pre><blockquote>
+<p>array([0, 0, 1, 1, 1, 1, 1, 0, 0])</p>
+</blockquote>
+<pre><code>plt.scatter(x[y==0], [0]*len(x[y==0]))
+plt.scatter(x[y==1], [0]*len(x[y==1]))
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM10.png" alt=""></p>
+<pre><code>def gaussian(x, l):
+    gamma = 1.0
+    return np.exp(-gamma * (x-l)**2)
+
+l1, l2 = -1, 1
+
+X_new = np.empty((len(x), 2))
+for i, data in enumerate(x):
+    X_new[i, 0] = gaussian(data, l1)
+    X_new[i, 1] = gaussian(data, l2)
+
+plt.scatter(X_new[y==0,0], X_new[y==0,1])
+plt.scatter(X_new[y==1,0], X_new[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM11.png" alt=""></p>
+<ul>
+<li>显然现在是线性可分的</li>
+<li>高斯核：对于每一个数据点都是landmark<ul>
+<li>m <em> n的数据映射成了m </em> m的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-RBF核函数中的gamma"><a href="#8-RBF核函数中的gamma" class="headerlink" title="8. RBF核函数中的gamma"></a>8. RBF核函数中的gamma</h3><ul>
+<li>gamma越大，高斯分布越窄</li>
+<li>gamma越小，高斯分布越宽</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import datasets
+
+X, y = datasets.make_moons(noise=0.15, random_state=666)
+
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM12.png" alt=""></p>
+<ul>
+<li>使用半月形数据并加入噪音</li>
+<li>对数据进行预处理</li>
+</ul>
+<pre><code>from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+
+def RBFKernelSVC(gamma):
+    return Pipeline([
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;svc&quot;, SVC(kernel=&quot;rbf&quot;, gamma=gamma))
+    ])
+</code></pre><ul>
+<li>gamma传入1</li>
+</ul>
+<pre><code>svc = RBFKernelSVC(gamma=1)
+svc.fit(X, y)
+</code></pre><blockquote>
+<p>Pipeline(steps=[(‘std_scaler’, StandardScaler(copy=True, with_mean=True, with_std=True)), (‘svc’, SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,<br>  decision_function_shape=None, degree=3, gamma=1, kernel=’rbf’,<br>  max_iter=-1, probability=False, random_state=None, shrinking=True,<br>  tol=0.001, verbose=False))])</p>
+</blockquote>
+<ul>
+<li>添加绘制图像函数</li>
+</ul>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+</code></pre><ul>
+<li>具体绘制决策边界</li>
+</ul>
+<pre><code>plot_decision_boundary(svc, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM13.png" alt=""></p>
+<ul>
+<li>gamma传入100，再观察决策边界</li>
+</ul>
+<pre><code>svc_gamma100 = RBFKernelSVC(gamma=100)
+svc_gamma100.fit(X, y)
+
+plot_decision_boundary(svc_gamma100, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM14.png" alt=""></p>
+<ul>
+<li>gamma越大，高斯分布越窄，每一个蓝色点周围有一个钟型图形，不过我们明显感觉过拟合了</li>
+<li>gamma传入10</li>
+</ul>
+<pre><code>svc_gamma10 = RBFKernelSVC(gamma=10)
+svc_gamma10.fit(X, y)
+
+plot_decision_boundary(svc_gamma10, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM15.png" alt=""></p>
+<ul>
+<li>gamma传入0.5，比1还小</li>
+</ul>
+<pre><code>svc_gamma05 = RBFKernelSVC(gamma=0.5)
+svc_gamma05.fit(X, y)
+
+plot_decision_boundary(svc_gamma05, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM16.png" alt=""></p>
+<ul>
+<li>gamma传入0.1</li>
+</ul>
+<pre><code>svc_gamma01 = RBFKernelSVC(gamma=0.1)
+svc_gamma01.fit(X, y)
+
+plot_decision_boundary(svc_gamma01, axis=[-1.5, 2.5, -1.0, 1.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/SVM17.png" alt=""></p>
+<ul>
+<li>现在的决策边界已经跟一个线性的决策边界差不多了，明显欠拟合了</li>
+<li><strong>gumma其实就是在调整模型的复杂度</strong></li>
+</ul>
+<h3 id="9-SVM思想解决回归问题"><a href="#9-SVM思想解决回归问题" class="headerlink" title="9. SVM思想解决回归问题"></a>9. SVM思想解决回归问题</h3><p><img src="http://oseihavwm.bkt.clouddn.com/SVM%E6%80%9D%E6%83%B3%E8%A7%A3%E5%86%B3%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98.png" alt=""></p>
+<ul>
+<li>加载波士顿房价数据集</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import datasets
+
+boston = datasets.load_boston()
+X = boston.data
+y = boston.target
+</code></pre><ul>
+<li>进行训练测试数据集分割</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+</code></pre><ul>
+<li>LinearSVR进行回归预测</li>
+</ul>
+<pre><code>from sklearn.svm import LinearSVR
+from sklearn.svm import SVR
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+def StandardLinearSVR(epsilon=0.1):
+    return Pipeline([
+        (&apos;std_scaler&apos;, StandardScaler()),
+        (&apos;linearSVR&apos;, LinearSVR(epsilon=epsilon))
+    ])
+
+svr = StandardLinearSVR()
+svr.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>Pipeline(steps=[(‘std_scaler’, StandardScaler(copy=True, with_mean=True, with_std=True)), (‘linearSVR’, LinearSVR(C=1.0, dual=True, epsilon=0.1, fit_intercept=True,<br>     intercept_scaling=1.0, loss=’epsilon_insensitive’, max_iter=1000,<br>     random_state=None, tol=0.0001, verbose=0))])</p>
+</blockquote>
+<pre><code>svr.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.63595732513984249</p>
+</blockquote>
+<ul>
+<li>显然这个R^2的值不太好，这里有很多超参数可以调节，我们这里不细研究SVM解决回归问题</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/25/Python-Machine-Learning-9/" style="float: left;">
+        ← 决策树
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/21/Python-Machine-Learning-7/">
+        评价分类结果 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

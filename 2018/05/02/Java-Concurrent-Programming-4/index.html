@@ -198,8 +198,276 @@
 <li>corePoolSize：核心线程数量</li>
 <li>maximumPoolSize：最大线程数</li>
 <li>workQueue：阻塞队列，存储等待执行的任务，很重要，会对线程池运行过程产生重要影响</li>
+<li>keepAliveTime：线程没有任务执行时最多保持多久时间终止</li>
+<li>unit：keepAliveTime的时间单位</li>
+<li>threadFactory：线程工厂，用来创建线程</li>
+<li>rejectHandler：当拒绝处理任务时的策略</li>
 </ul>
+<pre><code>/**
+ * Creates a new {@code ThreadPoolExecutor} with the given initial
+ * parameters.
+ *
+ * @param corePoolSize the number of threads to keep in the pool, even
+ *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
+ * @param maximumPoolSize the maximum number of threads to allow in the
+ *        pool
+ * @param keepAliveTime when the number of threads is greater than
+ *        the core, this is the maximum time that excess idle threads
+ *        will wait for new tasks before terminating.
+ * @param unit the time unit for the {@code keepAliveTime} argument
+ * @param workQueue the queue to use for holding tasks before they are
+ *        executed.  This queue will hold only the {@code Runnable}
+ *        tasks submitted by the {@code execute} method.
+ * @param threadFactory the factory to use when the executor
+ *        creates a new thread
+ * @param handler the handler to use when execution is blocked
+ *        because the thread bounds and queue capacities are reached
+ * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;
+ *         {@code corePoolSize &lt; 0}&lt;br&gt;
+ *         {@code keepAliveTime &lt; 0}&lt;br&gt;
+ *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;
+ *         {@code maximumPoolSize &lt; corePoolSize}
+ * @throws NullPointerException if {@code workQueue}
+ *         or {@code threadFactory} or {@code handler} is null
+ */
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue&lt;Runnable&gt; workQueue,
+                          ThreadFactory threadFactory,
+                          RejectedExecutionHandler handler) {
+    if (corePoolSize &lt; 0 ||
+        maximumPoolSize &lt;= 0 ||
+        maximumPoolSize &lt; corePoolSize ||
+        keepAliveTime &lt; 0)
+        throw new IllegalArgumentException();
+    if (workQueue == null || threadFactory == null || handler == null)
+        throw new NullPointerException();
+    this.acc = System.getSecurityManager() == null ?
+            null :
+            AccessController.getContext();
+    this.corePoolSize = corePoolSize;
+    this.maximumPoolSize = maximumPoolSize;
+    this.workQueue = workQueue;
+    this.keepAliveTime = unit.toNanos(keepAliveTime);
+    this.threadFactory = threadFactory;
+    this.handler = handler;
+}
+</code></pre><h3 id="3-ThreadPoolExecutor方法"><a href="#3-ThreadPoolExecutor方法" class="headerlink" title="3. ThreadPoolExecutor方法"></a>3. ThreadPoolExecutor方法</h3><ul>
+<li>execute：提交任务，交给线程池执行</li>
+<li>submit：提交任务，能够返回执行结果 execute + Future</li>
+<li>shutdown：关闭线程池，等待任务都执行完</li>
+<li>shutdownNow：关闭线程池，不等待任务执行完</li>
+<li>getTaskCount：线程池已执行和未执行的任务总数</li>
+<li>getCompletedTaskCount：已完成的任务数量</li>
+<li>getPoolSize：线程池当前线程数量</li>
+<li>getActiveCount：当前线程池中正在执行任务的线程数量</li>
+</ul>
+<h3 id="4-线程池-Executor框架接口"><a href="#4-线程池-Executor框架接口" class="headerlink" title="4. 线程池 - Executor框架接口"></a>4. 线程池 - Executor框架接口</h3><ul>
+<li>Executors.newCachedThreadPool</li>
+<li>Executors.newFixedThreadPool</li>
+<li>Executors.newScheduledThreadPool</li>
+<li>Executors.newSingleThreadPool</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/15.
+ */
+@Slf4j
+public class ThreadPoolExample1 {
 
+    public static void main(String[] args) {
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        for (int i = 0; i &lt; 10; i++) {
+            final int index = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    log.info(&quot;task:{}&quot;, index);
+                }
+            });
+        }
+        executorService.shutdown();
+    }
+}
+</code></pre><ul>
+<li>我们执行一下    </li>
+</ul>
+<pre><code>23:01:56.998 [pool-1-thread-7] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:6
+23:01:57.002 [pool-1-thread-2] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:1
+23:01:57.002 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:0
+23:01:56.998 [pool-1-thread-9] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:8
+23:01:56.998 [pool-1-thread-5] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:4
+23:01:56.998 [pool-1-thread-8] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:7
+23:01:57.001 [pool-1-thread-10] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:9
+23:01:57.002 [pool-1-thread-3] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:2
+23:01:56.998 [pool-1-thread-6] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:5
+23:01:57.002 [pool-1-thread-4] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample1 - task:3
+</code></pre><ul>
+<li>线程池的使用很简单，重点是如何使用合适的线程池</li>
+</ul>
+<pre><code>ExecutorService executorService = Executors.newFixedThreadPool(3);
+</code></pre><ul>
+<li>接下来演示newSingleThreadExecutor</li>
+</ul>
+<pre><code>ExecutorService executorService = Executors.newSingleThreadExecutor();
+</code></pre><ul>
+<li>顺序是一定的</li>
+</ul>
+<pre><code>23:03:46.122 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:0
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:1
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:2
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:3
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:4
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:5
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:6
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:7
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:8
+23:03:46.131 [pool-1-thread-1] INFO cn.edu.nju.concurrency.example.threadPool.ThreadPoolExample3 - task:9
+</code></pre><ul>
+<li>最后我们演示newScheduledThreadPool</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/15.
+ */
+@Slf4j
+public class ThreadPoolExample4 {
+
+    public static void main(String[] args) {
+
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+
+//        executorService.schedule(new Runnable() {
+//            @Override
+//            public void run() {
+//                log.warn(&quot;schedule run&quot;);
+//            }
+//        }, 3, TimeUnit.SECONDS);
+
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                log.warn(&quot;schedule run&quot;);
+            }
+        }, 1, 3, TimeUnit.SECONDS);
+//        executorService.shutdown();
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                log.warn(&quot;timer run&quot;);
+            }
+        }, new Date(), 5 * 1000);
+    }
+}
+</code></pre><p><strong>线程池 - 合理配置</strong></p>
+<ul>
+<li>CPU密集型任务，就需要尽量压榨CPU，参考值可以设置为NCPU + 1</li>
+<li>IO密集型任务，参考值可以设置为2 * NCPU</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-多线程并发拓展"><a href="#2-多线程并发拓展" class="headerlink" title="2. 多线程并发拓展"></a>2. 多线程并发拓展</h2><h3 id="1-死锁"><a href="#1-死锁" class="headerlink" title="1. 死锁"></a>1. 死锁</h3><p><strong>死锁 - 必要条件</strong></p>
+<ul>
+<li>互斥条件</li>
+<li>请求和保持条件</li>
+<li>不剥夺条件</li>
+<li>环路等待条件</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/15.
+ * 一个简单的死锁类
+ * 当DeadLock类的对象flag==1时（td1），先锁定o1,睡眠500毫秒
+ * 而td1在睡眠的时候另一个flag==0的对象（td2）线程启动，先锁定o2,睡眠500毫秒
+ * td1睡眠结束后需要锁定o2才能继续执行，而此时o2已被td2锁定；
+ * td2睡眠结束后需要锁定o1才能继续执行，而此时o1已被td1锁定；
+ * td1、td2相互等待，都需要得到对方锁定的资源才能继续执行，从而死锁。 
+ */
+@Slf4j
+public class DeadLock implements Runnable {
+    public int flag = 1;
+    //静态对象是类的所有对象共享的
+    private static Object o1 = new Object(), o2 = new Object();
+
+    @Override
+    public void run() {
+        log.info(&quot;flag:{}&quot;, flag);
+        if (flag == 1) {
+            synchronized (o1) {
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                synchronized (o2) {
+                    log.info(&quot;1&quot;);
+                }
+            }
+        }
+        if (flag == 0) {
+            synchronized (o2) {
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                synchronized (o1) {
+                    log.info(&quot;0&quot;);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        DeadLock td1 = new DeadLock();
+        DeadLock td2 = new DeadLock();
+        td1.flag = 1;
+        td2.flag = 0;
+        //td1,td2都处于可执行状态，但JVM线程调度先执行哪个线程是不确定的。
+        //td2的run()可能在td1的run()之前运行
+        new Thread(td1).start();
+        new Thread(td2).start();
+    }
+}
+</code></pre><ul>
+<li>我们执行程序永远打印不出1和0</li>
+</ul>
+<h3 id="2-并发最佳实践"><a href="#2-并发最佳实践" class="headerlink" title="2. 并发最佳实践"></a>2. 并发最佳实践</h3><ul>
+<li>使用本地变量</li>
+<li>使用不可变类</li>
+<li>最小化锁的作用域范围：S=1/(1-a+a/n)</li>
+<li>使用线程池的Executor，而不是直接new Thread执行</li>
+<li>宁可使用同步也不要使用线程的wait和notify</li>
+<li>使用BlockingQueue实现生产消费模式</li>
+<li>使用并发集合而不是加了锁的同步集合</li>
+<li>使用Semaphore创建有界的访问</li>
+<li>宁可使用同步代码块，也不使用同步的方法</li>
+<li>避免使用静态变量</li>
+</ul>
+<h3 id="3-Spring与线程安全"><a href="#3-Spring与线程安全" class="headerlink" title="3. Spring与线程安全"></a>3. Spring与线程安全</h3><ul>
+<li>Spring bean : singleton, prototype</li>
+<li>无状态对象</li>
+</ul>
+<h3 id="4-HashMap与ConcurrentHashMap解析"><a href="#4-HashMap与ConcurrentHashMap解析" class="headerlink" title="4. HashMap与ConcurrentHashMap解析"></a>4. HashMap与ConcurrentHashMap解析</h3><ul>
+<li>HashMap</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8D%95%E7%BA%BF%E7%A8%8Bre%E5%93%88%E5%B8%8C.jpg" alt=""></p>
+<ul>
+<li>多线程下的HashMap出现死循环</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E7%BA%BF%E7%A8%8Bre%E5%93%88%E5%B8%8C.jpg" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E7%BA%BF%E7%A8%8Bre%E5%93%88%E5%B8%8C2.jpg" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E7%BA%BF%E7%A8%8Bre%E5%93%88%E5%B8%8C3.jpg" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E7%BA%BF%E7%A8%8Bre%E5%93%88%E5%B8%8C4.jpg" alt=""></p>
+<ul>
+<li>ConcurrentHashMap</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/ConcurrentHashMap.jpg" alt=""></p>
+<h3 id="5-多线程并发与线程安全总结"><a href="#5-多线程并发与线程安全总结" class="headerlink" title="5. 多线程并发与线程安全总结"></a>5. 多线程并发与线程安全总结</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

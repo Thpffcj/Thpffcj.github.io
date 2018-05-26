@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>多项式回归与模型泛化 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-13T06:41:25.000Z" itemprop="datePublished">
+          2018-05-13
+      </time>
+    
+</span>
+                <h1>多项式回归与模型泛化</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-多项式回归"><a href="#1-多项式回归" class="headerlink" title="1. 多项式回归"></a>1. 多项式回归</h2><h3 id="1-什么是多项式回归"><a href="#1-什么是多项式回归" class="headerlink" title="1. 什么是多项式回归"></a>1. 什么是多项式回归</h3><ul>
+<li>多项式回归，回归函数是回归变量多项式的回归。多项式回归模型是线性回归模型的一种，此时回归函数关于回归系数是线性的。由于任一函数都可以用多项式逼近，因此多项式回归有着广泛应用。</li>
+<li>下面我们就来实际编程实现一下多项式回归</li>
+</ul>
+<pre><code>import numpy as np 
+import matplotlib.pyplot as plt
+
+x = np.random.uniform(-3, 3, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, 100)
+
+plt.scatter(x, y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%921.png" alt=""></p>
+<ul>
+<li>先使用线性回归来拟合这个数据集</li>
+</ul>
+<pre><code>from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+lin_reg.fit(X, y)
+y_predict = lin_reg.predict(X)
+
+plt.scatter(x, y)
+plt.plot(x, y_predict, color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%922.png" alt=""></p>
+<ul>
+<li>很明显这样的拟合效果是不够好的</li>
+<li>第一个解决方案：添加一个特征</li>
+</ul>
+<pre><code>X2 = np.hstack([X, X**2])
+
+X2.shape
+</code></pre><blockquote>
+<p>(100, 2)</p>
+</blockquote>
+<pre><code>lin_reg2 = LinearRegression()
+lin_reg2.fit(X2, y)
+y_predict2 = lin_reg2.predict(X2)
+
+plt.scatter(x, y)
+plt.plot(np.sort(x), y_predict2[np.argsort(x)], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%923.png" alt=""></p>
+<pre><code>lin_reg2.coef_
+</code></pre><blockquote>
+<p>array([ 1.04435743,  0.4306361 ])</p>
+</blockquote>
+<pre><code>lin_reg2.intercept_
+</code></pre><blockquote>
+<p>1.9944822962296886</p>
+</blockquote>
+<h3 id="2-scikit-learn中的多项式回归于pipeline"><a href="#2-scikit-learn中的多项式回归于pipeline" class="headerlink" title="2. scikit-learn中的多项式回归于pipeline"></a>2. scikit-learn中的多项式回归于pipeline</h3><pre><code>import numpy as np 
+import matplotlib.pyplot as plt
+
+x = np.random.uniform(-3, 3, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, 100)
+</code></pre><ul>
+<li>调用多项式回归</li>
+</ul>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=2)
+poly.fit(X)
+X2 = poly.transform(X)
+
+X2.shape
+</code></pre><blockquote>
+<p>(100, 3)</p>
+</blockquote>
+<ul>
+<li><p>第一列，它帮我们加入了一排1，就是X的零次方</p>
+<p>  X2[:5,:]</p>
+</li>
+</ul>
+<blockquote>
+<p>array([[ 1.        ,  0.13182365,  0.01737747],<br>       [ 1.        , -1.46962849,  2.15980789],<br>       [ 1.        ,  1.2708051 ,  1.61494561],<br>       [ 1.        ,  2.07262155,  4.2957601 ],<br>       [ 1.        ,  0.31038556,  0.0963392 ]])</p>
+</blockquote>
+<ul>
+<li>这样我们就获得了多项式特征相应的数据集，下面我们就开始拟合数据</li>
+</ul>
+<pre><code>from sklearn.linear_model import LinearRegression
+
+lin_reg2 = LinearRegression()
+lin_reg2.fit(X2, y)
+y_predict2 = lin_reg2.predict(X2)
+
+plt.scatter(x, y)
+plt.plot(np.sort(x), y_predict2[np.argsort(x)], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%924.png" alt=""></p>
+<ul>
+<li><p>我们就完成了整个多项式回归的过程</p>
+<p>  lin<em>reg2.coef</em></p>
+</li>
+</ul>
+<blockquote>
+<p>array([ 0.        ,  0.94531116,  0.48408019])</p>
+</blockquote>
+<pre><code>lin_reg2.intercept_
+</code></pre><blockquote>
+<p>2.0691253723124889</p>
+</blockquote>
+<ul>
+<li>我们到目前为止的例子x中都有一个特征，我们看一下如果有两个特征会怎么样</li>
+</ul>
+<pre><code>X = np.arange(1, 11).reshape(-1, 2)
+
+X
+</code></pre><blockquote>
+<p>array([[ 1,  2],<br>       [ 3,  4],<br>       [ 5,  6],<br>       [ 7,  8],<br>       [ 9, 10]])</p>
+</blockquote>
+<pre><code>poly = PolynomialFeatures(degree=2)
+poly.fit(X)
+X2 = poly.transform(X)
+
+X2.shape
+</code></pre><blockquote>
+<p>(5, 6)</p>
+</blockquote>
+<pre><code>X2
+</code></pre><blockquote>
+<p>array([[   1.,    1.,    2.,    1.,    2.,    4.],<br>       [   1.,    3.,    4.,    9.,   12.,   16.],<br>       [   1.,    5.,    6.,   25.,   30.,   36.],<br>       [   1.,    7.,    8.,   49.,   56.,   64.],<br>       [   1.,    9.,   10.,   81.,   90.,  100.]])</p>
+</blockquote>
+<ul>
+<li>Pipeline，我们的操作主要有三步<ul>
+<li>多项式特征</li>
+<li>数据归一化</li>
+<li>线性回归</li>
+</ul>
+</li>
+</ul>
+<pre><code>x = np.random.uniform(-3, 3, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, 100)
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+poly_reg = Pipeline([
+    (&quot;poly&quot;, PolynomialFeatures(degree=2)),
+    (&quot;std_scaler&quot;, StandardScaler()),
+    (&quot;lin_reg&quot;, LinearRegression())
+])
+
+poly_reg.fit(X, y)
+y_predict = poly_reg.predict(X)
+
+plt.scatter(x, y)
+plt.plot(np.sort(x), y_predict[np.argsort(x)], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%925.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-模型泛化"><a href="#2-模型泛化" class="headerlink" title="2. 模型泛化"></a>2. 模型泛化</h2><h3 id="1-过拟合与欠拟合"><a href="#1-过拟合与欠拟合" class="headerlink" title="1. 过拟合与欠拟合"></a>1. 过拟合与欠拟合</h3><ul>
+<li>我们先使用实际例子来看一下什么是过拟合与欠拟合</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
+x = np.random.uniform(-3.0, 3.0, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, size=100)
+</code></pre><ul>
+<li>使用线性回归拟合数据集，我们可以看到R^2值是很低的，说明我们的线性关系是比较弱的</li>
+</ul>
+<pre><code>from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+lin_reg.fit(X, y)
+lin_reg.score(X, y)
+</code></pre><blockquote>
+<p>0.49537078118650091</p>
+</blockquote>
+<ul>
+<li>我们使用均方误差来看我们的拟合结果</li>
+</ul>
+<pre><code>y_predict = lin_reg.predict(X)
+
+from sklearn.metrics import mean_squared_error
+
+y_predict = lin_reg.predict(X)
+mean_squared_error(y, y_predict)
+</code></pre><blockquote>
+<p>3.0750025765636577</p>
+</blockquote>
+<ul>
+<li>使用多项式回归拟合数据</li>
+</ul>
+<pre><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+
+def PolynomialRegression(degree):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;lin_reg&quot;, LinearRegression())
+    ])
+
+poly2_reg = PolynomialRegression(degree=2)
+poly2_reg.fit(X, y)
+</code></pre><blockquote>
+<p>Pipeline(steps=[(‘poly’, PolynomialFeatures(degree=2, include_bias=True, interaction_only=False)), (‘std_scaler’, StandardScaler(copy=True, with_mean=True, with_std=True)), (‘lin_reg’, LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False))])</p>
+</blockquote>
+<ul>
+<li>我们可以看到均方误差降低了</li>
+</ul>
+<pre><code>y2_predict = poly2_reg.predict(X)
+mean_squared_error(y, y2_predict)
+</code></pre><blockquote>
+<p>1.0987392142417856</p>
+</blockquote>
+<pre><code>poly10_reg = PolynomialRegression(degree=10)
+poly10_reg.fit(X, y)
+</code></pre><ul>
+<li>如果我们的degree传入其他值会怎么样呢</li>
+<li>这个结果比我们上面的1.09还要好</li>
+</ul>
+<pre><code>y10_predict = poly10_reg.predict(X)
+mean_squared_error(y, y10_predict)
+</code></pre><blockquote>
+<p>1.0508466763764135</p>
+</blockquote>
+<pre><code>plt.scatter(x, y)
+plt.plot(np.sort(x), y10_predict[np.argsort(x)], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%926.png" alt=""></p>
+<ul>
+<li>我们继续增大degree</li>
+</ul>
+<pre><code>poly100_reg = PolynomialRegression(degree=100)
+poly100_reg.fit(X, y)
+
+y100_predict = poly100_reg.predict(X)
+mean_squared_error(y, y100_predict)
+</code></pre><blockquote>
+<p>0.6874772262309925</p>
+</blockquote>
+<ul>
+<li>均方误差更小了，我们尝试绘制图像</li>
+</ul>
+<pre><code>plt.scatter(x, y)
+plt.plot(np.sort(x), y100_predict[np.argsort(x)], color=&apos;r&apos;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%927.png" alt=""></p>
+<ul>
+<li>我们尝试还原原来的曲线</li>
+</ul>
+<pre><code>X_plot = np.linspace(-3, 3, 100).reshape(100, 1)
+y_plot = poly100_reg.predict(X_plot)
+
+plt.scatter(x, y)
+plt.plot(X_plot[:,0], y_plot, color=&apos;r&apos;)
+plt.axis([-3, 3, 0, 10])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%928.png" alt=""></p>
+<ul>
+<li>很显然degree越高，拟合结果会越好，不过他的均方误差是越来越小的，不过他真的可以模拟我们样本的走势么</li>
+<li>它为了拟合我们所有的样本点变得太过于复杂了，这就是过拟合</li>
+<li>我们开始使用的线性回归太过于简单，就是欠拟合</li>
+</ul>
+<h3 id="2-为什么要训练数据集与测试数据集"><a href="#2-为什么要训练数据集与测试数据集" class="headerlink" title="2. 为什么要训练数据集与测试数据集"></a>2. 为什么要训练数据集与测试数据集</h3><ul>
+<li>机器学习主要解决的问题其实是过拟合问题</li>
+<li>我们这时就说我们的模型的泛化能力是很弱的，面对新的数据时，能力非常差</li>
+<li>我们其实并不关心模型对我们的样本数据的拟合程度有多高，而是模型的泛化能力有多好</li>
+<li><strong>测试数据集的意义</strong></li>
+<li>下面我们就来看不同degree的训练模型对测试数据集的效果</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+</code></pre><ul>
+<li>线性模型</li>
+</ul>
+<pre><code>lin_reg.fit(X_train, y_train)
+y_predict = lin_reg.predict(X_test)
+mean_squared_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>2.2199965269396573</p>
+</blockquote>
+<ul>
+<li>多项式模型</li>
+</ul>
+<pre><code>poly2_reg.fit(X_train, y_train)
+y2_predict = poly2_reg.predict(X_test)
+mean_squared_error(y_test, y2_predict)
+</code></pre><blockquote>
+<p>0.80356410562978997</p>
+</blockquote>
+<ul>
+<li>继续提高degree我们发现泛化模型能力变差了</li>
+</ul>
+<pre><code>poly10_reg.fit(X_train, y_train)
+y10_predict = poly10_reg.predict(X_test)
+mean_squared_error(y_test, y10_predict)
+</code></pre><blockquote>
+<p>0.92129307221507528</p>
+</blockquote>
+<pre><code>poly100_reg.fit(X_train, y_train)
+y100_predict = poly100_reg.predict(X_test)
+mean_squared_error(y_test, y100_predict)
+</code></pre><blockquote>
+<p>14075796432.292803</p>
+</blockquote>
+<ul>
+<li>面对新的数据时，他的结果是很差的</li>
+<li>欠拟合：算法所训练的模型不能完整表述数据关系</li>
+<li>过拟合：算法所训练的模型过多的表达了数据间的噪音关系</li>
+</ul>
+<h3 id="3-学习曲线"><a href="#3-学习曲线" class="headerlink" title="3. 学习曲线"></a>3. 学习曲线</h3><ul>
+<li>随着训练样本的逐渐增多，算法训练出的模型的表现能力</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
+x = np.random.uniform(-3.0, 3.0, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, size=100)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%929.png" alt=""></p>
+<ul>
+<li>学习曲线</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=10)
+</code></pre><ul>
+<li>下面我们就来具体看一下如何绘制学习曲线</li>
+</ul>
+<pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+train_score = []
+test_score = []
+for i in range(1, 76):
+    lin_reg = LinearRegression()
+    lin_reg.fit(X_train[:i], y_train[:i])
+
+    y_train_predict = lin_reg.predict(X_train[:i])
+    train_score.append(mean_squared_error(y_train[:i], y_train_predict))
+
+    y_test_predict = lin_reg.predict(X_test)
+    test_score.append(mean_squared_error(y_test, y_test_predict))
+
+plt.plot([i for i in range(1, 76)], np.sqrt(train_score), label=&quot;train&quot;)
+plt.plot([i for i in range(1, 76)], np.sqrt(test_score), label=&quot;test&quot;)
+plt.legend()
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9210.png" alt=""></p>
+<ul>
+<li>这就是对线性模型的学习曲线，训练数据集的误差是逐渐升高，后面比较稳定，测试数据集是逐渐下滑的</li>
+<li>为了方便对比其他算法，我们将上面的方法封装成一个函数</li>
+</ul>
+<pre><code>def plot_learning_curve(algo, X_train, X_test, y_train, y_test):
+    train_score = []
+    test_score = []
+    for i in range(1, len(X_train)+1):
+        algo.fit(X_train[:i], y_train[:i])
+
+        y_train_predict = algo.predict(X_train[:i])
+        train_score.append(mean_squared_error(y_train[:i], y_train_predict))
+
+        y_test_predict = algo.predict(X_test)
+        test_score.append(mean_squared_error(y_test, y_test_predict))
+
+    plt.plot([i for i in range(1, len(X_train)+1)], 
+                               np.sqrt(train_score), label=&quot;train&quot;)
+    plt.plot([i for i in range(1, len(X_train)+1)], 
+                               np.sqrt(test_score), label=&quot;test&quot;)
+    plt.legend()
+    plt.axis([0, len(X_train)+1, 0, 4])
+    plt.show()
+
+plot_learning_curve(LinearRegression(), X_train, X_test, y_train, y_test)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9211.png" alt=""></p>
+<ul>
+<li>看一下多项式回归的学习曲线</li>
+</ul>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+def PolynomialRegression(degree):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;lin_reg&quot;, LinearRegression())
+    ])
+
+poly2_reg = PolynomialRegression(degree=2)
+plot_learning_curve(poly2_reg, X_train, X_test, y_train, y_test)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9212.png" alt=""></p>
+<ul>
+<li>在整体趋势上和线性回归是一致的，最大的区别，我们的误差稳定在了1左右，说明二阶多项式拟合是比较好的</li>
+<li>看一下degree传入20的情况</li>
+</ul>
+<pre><code>poly20_reg = PolynomialRegression(degree=20)
+plot_learning_curve(poly20_reg, X_train, X_test, y_train, y_test)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9213.png" alt=""></p>
+<ul>
+<li>这两条曲线之间的差别是比较大的，说明泛化能力不足</li>
+</ul>
+<h3 id="4-验证数据集与交叉验证"><a href="#4-验证数据集与交叉验证" class="headerlink" title="4. 验证数据集与交叉验证"></a>4. 验证数据集与交叉验证</h3><ul>
+<li>测试数据集的意义<ul>
+<li>通过测试数据集判断模型好坏</li>
+<li>问题：针对特定测试数据集过拟合</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E6%84%8F%E4%B9%89.png" alt=""></p>
+<ul>
+<li>验证数据：调整超参数使用的数据集</li>
+<li>测试数据：作为衡量最终模型性能的数据集</li>
+</ul>
+<p><strong>交叉验证</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81.png" alt=""></p>
+<ul>
+<li>我们在这节使用的例子是手写识别的数据</li>
+</ul>
+<pre><code>import numpy as np
+from sklearn import datasets
+
+digits = datasets.load_digits()
+X = digits.data
+y = digits.target
+</code></pre><ul>
+<li>测试train_test_split</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=666)
+</code></pre><ul>
+<li>使用kNN训练模型</li>
+</ul>
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+
+best_k, best_p, best_score = 0, 0, 0
+for k in range(2, 11):
+    for p in range(1, 6):
+        knn_clf = KNeighborsClassifier(weights=&quot;distance&quot;, n_neighbors=k, p=p)
+        knn_clf.fit(X_train, y_train)
+        score = knn_clf.score(X_test, y_test)
+        if score &gt; best_score:
+            best_k, best_p, best_score = k, p, score
+
+print(&quot;Best K =&quot;, best_k)
+print(&quot;Best P =&quot;, best_p)
+print(&quot;Best Score =&quot;, best_score)
+</code></pre><blockquote>
+<p>Best K = 3<br>Best P = 4<br>Best Score = 0.986091794159</p>
+</blockquote>
+<ul>
+<li>使用交叉验证进行超参数的调整<ul>
+<li>默认分成三份进行交叉验证</li>
+</ul>
+</li>
+</ul>
+<pre><code>from sklearn.model_selection import cross_val_score
+
+knn_clf = KNeighborsClassifier()
+cross_val_score(knn_clf, X_train, y_train)
+</code></pre><blockquote>
+<p>array([ 0.98895028,  0.97777778,  0.96629213])</p>
+</blockquote>
+<pre><code>best_k, best_p, best_score = 0, 0, 0
+for k in range(2, 11):
+    for p in range(1, 6):
+        knn_clf = KNeighborsClassifier(weights=&quot;distance&quot;, n_neighbors=k, p=p)
+        scores = cross_val_score(knn_clf, X_train, y_train)
+        score = np.mean(scores)
+        if score &gt; best_score:
+            best_k, best_p, best_score = k, p, score
+
+print(&quot;Best K =&quot;, best_k)
+print(&quot;Best P =&quot;, best_p)
+print(&quot;Best Score =&quot;, best_score)
+</code></pre><blockquote>
+<p>Best K = 2<br>Best P = 2<br>Best Score = 0.982359987401</p>
+</blockquote>
+<ul>
+<li>和上面的结果是不一致的，我会更相信交叉验证得到的结果，通常不会过拟合某一组的数据</li>
+<li>获得了参数，我们就可以使用最好的kNN分类器</li>
+</ul>
+<pre><code>best_knn_clf = KNeighborsClassifier(weights=&quot;distance&quot;, n_neighbors=2, p=2)
+best_knn_clf.fit(X_train, y_train)
+best_knn_clf.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.98052851182197498</p>
+</blockquote>
+<ul>
+<li>回顾网格搜索，其实</li>
+</ul>
+<pre><code>from sklearn.model_selection import GridSearchCV
+
+param_grid = [
+    {
+        &apos;weights&apos;: [&apos;distance&apos;],
+        &apos;n_neighbors&apos;: [i for i in range(2, 11)], 
+        &apos;p&apos;: [i for i in range(1, 6)]
+    }
+]
+
+grid_search = GridSearchCV(knn_clf, param_grid, verbose=1)
+grid_search.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>Fitting 3 folds for each of 45 candidates, totalling 135 fits<br>[Parallel(n_jobs=1)]: Done 135 out of 135 | elapsed:  2.2min finished<br>GridSearchCV(cv=None, error_score=’raise’,<br>       estimator=KNeighborsClassifier(algorithm=’auto’, leaf_size=30, metric=’minkowski’,<br>           metric_params=None, n_jobs=1, n_neighbors=10, p=5,<br>           weights=’distance’),<br>       fit_params={}, iid=True, n_jobs=1,<br>       param_grid=[{‘weights’: [‘distance’], ‘n_neighbors’: [2, 3, 4, 5, 6, 7, 8, 9, 10], ‘p’: [1, 2, 3, 4, 5]}],<br>       pre_dispatch=’2*n_jobs’, refit=True, return_train_score=True,<br>       scoring=None, verbose=1)</p>
+</blockquote>
+<pre><code>grid_search.best_score_
+</code></pre><blockquote>
+<p>0.98237476808905377</p>
+</blockquote>
+<pre><code>grid_search.best_params_
+</code></pre><blockquote>
+<p>{‘n_neighbors’: 2, ‘p’: 2, ‘weights’: ‘distance’}</p>
+</blockquote>
+<pre><code>best_knn_clf = grid_search.best_estimator_
+best_knn_clf.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.98052851182197498</p>
+</blockquote>
+<ul>
+<li>cv参数，指定将数据分为几份</li>
+</ul>
+<pre><code>cross_val_score(knn_clf, X_train, y_train, cv=5)
+</code></pre><blockquote>
+<p>array([ 0.99543379,  0.96803653,  0.98148148,  0.96261682,  0.97619048])</p>
+</blockquote>
+<pre><code>grid_search = GridSearchCV(knn_clf, param_grid, verbose=1, cv=5)
+</code></pre><ul>
+<li>降训练数据分成k份，称为k-folds cross validation</li>
+<li>缺点：每次训练k个模型，相当于整体性能慢了k倍</li>
+</ul>
+<h3 id="5-偏差方差权衡"><a href="#5-偏差方差权衡" class="headerlink" title="5. 偏差方差权衡"></a>5. 偏差方差权衡</h3><p><strong>模型误差</strong></p>
+<ul>
+<li>模型误差 = 偏差(bias) + 方差(variance) + 不可避免的误差</li>
+</ul>
+<p><strong>偏差</strong></p>
+<ul>
+<li>导致偏差的主要原因：<ul>
+<li>对问题本身的假设不正确</li>
+<li>如：非线性数据使用线性回归</li>
+<li>欠拟合</li>
+</ul>
+</li>
+</ul>
+<p><strong>方差</strong></p>
+<ul>
+<li>数据的一点点扰动都会较大的影响模型</li>
+<li>通常原因，使用的模型太复杂<ul>
+<li>如高阶多项式回归</li>
+<li>过拟合</li>
+</ul>
+</li>
+</ul>
+<p><strong>偏差和方差</strong></p>
+<ul>
+<li>有一些算法天生是高方差的算法：如kNN</li>
+<li>非参数学习通常都是高方差算法，因为部队数据进行任何假设</li>
+<li>有一些算法天生是高偏差算法：如线性回归</li>
+<li>参数学习通常都是高偏差算法，因为对数据具有极强的假设</li>
+<li>大多数算法具有相应的参数，可以调整偏差和方差<ul>
+<li>如kNN中的k</li>
+<li>如线性回归中使用多项式回归</li>
+</ul>
+</li>
+<li>偏差和方差通常是矛盾的<ul>
+<li>偏差降低，会提高方差</li>
+<li>降低方差，会提高偏差</li>
+</ul>
+</li>
+<li>机器学习的主要挑战，来自于方差</li>
+<li>解决高方差的通常手段<ul>
+<li>降低模型复杂度</li>
+<li>降低数据维度，降噪</li>
+<li>增加样本数</li>
+<li>使用验证集 </li>
+<li><strong>模型正则化</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-模型泛化与岭回归"><a href="#6-模型泛化与岭回归" class="headerlink" title="6. 模型泛化与岭回归"></a>6. 模型泛化与岭回归</h3><ul>
+<li>我们在处理模型中含有巨大方差问题中有一种标准处理：模型正则化</li>
+<li>模型正则化：限制参数的大小</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A8%A1%E5%9E%8B%E6%AD%A3%E5%88%99%E5%8C%96.png" alt=""></p>
+<ul>
+<li>这种模型正则化的方式通常称作岭回归</li>
+<li>生成测试用例</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+x = np.random.uniform(-3.0, 3.0, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x + 3 + np.random.normal(0, 1, size=100)
+
+plt.scatter(x, y)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9214.png" alt=""></p>
+<ul>
+<li>通过多项式回归学习样本</li>
+</ul>
+<pre><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+
+def PolynomialRegression(degree):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;lin_reg&quot;, LinearRegression())
+    ])
+
+from sklearn.model_selection import train_test_split
+
+np.random.seed(666)
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+from sklearn.metrics import mean_squared_error
+
+poly_reg = PolynomialRegression(degree=20)
+poly_reg.fit(X_train, y_train)
+
+y_poly_predict = poly_reg.predict(X_test)
+mean_squared_error(y_test, y_poly_predict)
+</code></pre><blockquote>
+<p>167.94010867636359</p>
+</blockquote>
+<ul>
+<li>这个模型显然是过拟合了</li>
+</ul>
+<pre><code>X_plot = np.linspace(-3, 3, 100).reshape(100, 1)
+y_plot = poly_reg.predict(X_plot)
+
+plt.scatter(x, y)
+plt.plot(X_plot[:,0], y_plot, color=&apos;r&apos;)
+plt.axis([-3, 3, 0, 6])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9215.png" alt=""></p>
+<ul>
+<li>包装绘图代码</li>
+</ul>
+<pre><code>def plot_model(model):
+    X_plot = np.linspace(-3, 3, 100).reshape(100, 1)
+    y_plot = model.predict(X_plot)
+
+    plt.scatter(x, y)
+    plt.plot(X_plot[:,0], y_plot, color=&apos;r&apos;)
+    plt.axis([-3, 3, 0, 6])
+    plt.show()
+
+plot_model(poly_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9216.png" alt=""></p>
+<ul>
+<li>使用岭回归</li>
+</ul>
+<pre><code>from sklearn.linear_model import Ridge
+
+def RidgeRegression(degree, alpha):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;ridge_reg&quot;, Ridge(alpha=alpha))
+    ])
+</code></pre><ul>
+<li>这里我们要试验几组不同的数据，这里我们α取值为0.0001</li>
+</ul>
+<pre><code>ridge1_reg = RidgeRegression(20, 0.0001)
+ridge1_reg.fit(X_train, y_train)
+
+y1_predict = ridge1_reg.predict(X_test)
+mean_squared_error(y_test, y1_predict)
+</code></pre><blockquote>
+<p>1.3233492754001717</p>
+</blockquote>
+<pre><code>plot_model(ridge1_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9217.png" alt=""></p>
+<ul>
+<li>α取值为1</li>
+</ul>
+<pre><code>ridge2_reg = RidgeRegression(20, 1)
+ridge2_reg.fit(X_train, y_train)
+
+y2_predict = ridge2_reg.predict(X_test)
+mean_squared_error(y_test, y2_predict)
+</code></pre><blockquote>
+<p>1.1888759304218481</p>
+</blockquote>
+<pre><code>plot_model(ridge2_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9218.png" alt=""></p>
+<ul>
+<li>α取值为100</li>
+</ul>
+<pre><code>ridge3_reg = RidgeRegression(20, 100)
+ridge3_reg.fit(X_train, y_train)
+
+y3_predict = ridge3_reg.predict(X_test)
+mean_squared_error(y_test, y3_predict)
+</code></pre><blockquote>
+<p>1.3196456113086197</p>
+</blockquote>
+<pre><code>plot_model(ridge3_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9219.png" alt=""></p>
+<ul>
+<li>α取值为10000000</li>
+</ul>
+<pre><code>ridge4_reg = RidgeRegression(20, 10000000)
+ridge4_reg.fit(X_train, y_train)
+
+y4_predict = ridge4_reg.predict(X_test)
+mean_squared_error(y_test, y4_predict)
+</code></pre><blockquote>
+<p>1.8408455590998372</p>
+</blockquote>
+<pre><code>plot_model(ridge4_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9220.png" alt=""></p>
+<ul>
+<li>α非常大就是在优化模型正则化那一项</li>
+<li>引入岭回归就是引入了另一个超参数α</li>
+</ul>
+<h3 id="7-LASSO"><a href="#7-LASSO" class="headerlink" title="7. LASSO"></a>7. LASSO</h3><ul>
+<li>Least Absolute Shrinkage and Selection Operator Regression</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/LASSO.png" alt=""></p>
+<ul>
+<li>生成测试用例</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+x = np.random.uniform(-3.0, 3.0, size=100)
+X = x.reshape(-1, 1)
+y = 0.5 * x + 3 + np.random.normal(0, 1, size=100)
+</code></pre><ul>
+<li>使用多项式回归</li>
+</ul>
+<pre><code>from sklearn.model_selection import train_test_split
+
+np.random.seed(666)
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+
+def PolynomialRegression(degree):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;lin_reg&quot;, LinearRegression())
+    ])
+
+    from sklearn.metrics import mean_squared_error
+
+    poly_reg = PolynomialRegression(degree=20)
+    poly_reg.fit(X_train, y_train)
+
+    y_predict = poly_reg.predict(X_test)
+    mean_squared_error(y_test, y_predict)
+</code></pre><blockquote>
+<p>167.94010867636359</p>
+</blockquote>
+<pre><code>def plot_model(model):
+    X_plot = np.linspace(-3, 3, 100).reshape(100, 1)
+    y_plot = model.predict(X_plot)
+
+    plt.scatter(x, y)
+    plt.plot(X_plot[:,0], y_plot, color=&apos;r&apos;)
+    plt.axis([-3, 3, 0, 6])
+    plt.show()
+</code></pre><ul>
+<li>使用LASSO</li>
+</ul>
+<pre><code>from sklearn.linear_model import Lasso
+
+def LassoRegression(degree, alpha):
+    return Pipeline([
+        (&quot;poly&quot;, PolynomialFeatures(degree=degree)),
+        (&quot;std_scaler&quot;, StandardScaler()),
+        (&quot;lasso_reg&quot;, Lasso(alpha=alpha))
+    ])
+</code></pre><ul>
+<li>α取值0.01</li>
+</ul>
+<pre><code>lasso1_reg = LassoRegression(20, 0.01)
+lasso1_reg.fit(X_train, y_train)
+
+y1_predict = lasso1_reg.predict(X_test)
+mean_squared_error(y_test, y1_predict)
+</code></pre><blockquote>
+<p>1.1496080843259968</p>
+</blockquote>
+<pre><code>plot_model(lasso1_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9221.png" alt=""></p>
+<ul>
+<li>α取值0.1</li>
+</ul>
+<pre><code>lasso2_reg = LassoRegression(20, 0.1)
+lasso2_reg.fit(X_train, y_train)
+
+y2_predict = lasso2_reg.predict(X_test)
+mean_squared_error(y_test, y2_predict)
+</code></pre><blockquote>
+<p>1.1213911351818648</p>
+</blockquote>
+<pre><code>plot_model(lasso2_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9222.png" alt=""></p>
+<ul>
+<li>α取值1</li>
+</ul>
+<pre><code>lasso3_reg = LassoRegression(20, 1)
+lasso3_reg.fit(X_train, y_train)
+
+y3_predict = lasso3_reg.predict(X_test)
+mean_squared_error(y_test, y3_predict)
+</code></pre><blockquote>
+<p>1.8408939659515595</p>
+</blockquote>
+<pre><code>plot_model(lasso3_reg)
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9B%9E%E5%BD%9223.png" alt=""></p>
+<ul>
+<li><strong>LASSO趋向于使得一部分theta值变为0，所有可作为特征选择用</strong></li>
+</ul>
+<h3 id="8-L1-L2和弹性网络"><a href="#8-L1-L2和弹性网络" class="headerlink" title="8. L1,L2和弹性网络"></a>8. L1,L2和弹性网络</h3><ul>
+<li>岭回归和LASSO都是在原有的损失函数后面添加一项内容</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Ridge%E5%92%8CLASSO.png" alt=""></p>
+<ul>
+<li>L1正则，L2正则</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/L1%E6%AD%A3%E5%88%99%EF%BC%8CL2%E6%AD%A3%E5%88%99.png" alt=""></p>
+<ul>
+<li>L0正则：我们希望theta的个数尽量少</li>
+<li>实际用L1取代，因为L0正则的优化是一个NP难的问题</li>
+</ul>
+<p><strong>弹性网 Elastic Net</strong></p>
+<ul>
+<li>同时结合岭回归和LASSO</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%BC%B9%E6%80%A7%E7%BD%91.png" alt=""></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/20/Python-Machine-Learning-6/" style="float: left;">
+        ← 逻辑回归
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/09/Python-Machine-Learning-4/">
+        PCA与梯度上升法 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>逻辑回归 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-20T03:04:30.000Z" itemprop="datePublished">
+          2018-05-20
+      </time>
+    
+</span>
+                <h1>逻辑回归</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-逻辑回归"><a href="#1-逻辑回归" class="headerlink" title="1. 逻辑回归"></a>1. 逻辑回归</h2><h3 id="1-什么是逻辑回归"><a href="#1-什么是逻辑回归" class="headerlink" title="1. 什么是逻辑回归"></a>1. 什么是逻辑回归</h3><ul>
+<li>逻辑回归：解决分类问题</li>
+<li>回归问题怎么解决问题？<ul>
+<li>将样本的特征和样本发生的概率联系起来，概率是一个数</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92.png" alt=""></p>
+<ul>
+<li>逻辑回归既可以看作是回归算法，也可以看作是分类算法，通常作为分类算法用，只可以解决二分类问题</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%87%BD%E6%95%B0.png" alt=""></p>
+<p><strong>Sigmoid函数</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Sigmoid%E5%87%BD%E6%95%B0.png" alt=""></p>
+<ul>
+<li>Sigmoid函数是一个在生物学中常见的S型函数，也称为S型生长曲线。在信息科学中，由于其单增以及反函数单增等性质，Sigmoid函数常被用作神经网络的阈值函数，将变量映射到0,1之间。</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def sigmoid(t):
+    return 1. / (1. + np.exp(-t))
+
+x = np.linspace(-10, 10, 500)
+
+plt.plot(x, sigmoid(x))
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%921.png" alt=""></p>
+<ul>
+<li>值域(0,1)</li>
+<li>t &gt; 0时, p &gt; 0.5</li>
+<li>t &lt; 0时, p &lt; 0.5</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A6%82%E7%8E%87.png" alt=""></p>
+<ul>
+<li>问题：对于给定的样本数据集X，y，我们如何找到参数theta，使得用这样的方式，可以最大程度获得样本数据集X对应的分类输出y？</li>
+</ul>
+<h3 id="2-逻辑回归的损失函数"><a href="#2-逻辑回归的损失函数" class="headerlink" title="2. 逻辑回归的损失函数"></a>2. 逻辑回归的损失函数</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png" alt=""></p>
+<ul>
+<li>我们可以构造出这个cost函数</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B01.png" alt=""></p>
+<ul>
+<li>对于整体数据，得到逻辑回归对应的损失函数</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png" alt=""></p>
+<ul>
+<li>下面我们要做的事就是找到一组theta使得J最小</li>
+<li>没有公式解，只能使用梯度下降法求解</li>
+</ul>
+<h3 id="3-逻辑回归损失函数的梯度"><a href="#3-逻辑回归损失函数的梯度" class="headerlink" title="3. 逻辑回归损失函数的梯度"></a>3. 逻辑回归损失函数的梯度</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A6.png" alt=""></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A61.png" alt=""></p>
+<ul>
+<li>对比线性回归</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A62.png" alt=""></p>
+<ul>
+<li>进行向量化推导</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A63.png" alt=""></p>
+<h3 id="4-实现逻辑回归算法"><a href="#4-实现逻辑回归算法" class="headerlink" title="4. 实现逻辑回归算法"></a>4. 实现逻辑回归算法</h3><ul>
+<li>加载鸢尾花数据集</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
+</code></pre><ul>
+<li>只剩下两种分类</li>
+</ul>
+<pre><code>X = X[y&lt;2,:2]
+y = y[y&lt;2]
+
+X.shape
+</code></pre><blockquote>
+<p>(100, 2)</p>
+</blockquote>
+<pre><code>y.shape
+</code></pre><blockquote>
+<p>(100,)</p>
+</blockquote>
+<pre><code>plt.scatter(X[y==0,0], X[y==0,1], color=&quot;red&quot;)
+plt.scatter(X[y==1,0], X[y==1,1], color=&quot;blue&quot;)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%922.png" alt=""></p>
+<ul>
+<li>使用逻辑回归，我们完全可以从线性回归基础上修改</li>
+</ul>
+<pre><code># _*_ coding: utf-8 _*_
+__author__ = &apos;Thpffcj&apos;
+
+import numpy as np
+from .metrics import accuracy_score
+
+class LogisticRegression:
+
+    def __init__(self):
+        &quot;&quot;&quot;初始化Logistic Regression模型&quot;&quot;&quot;
+        self.coef_ = None
+        self.intercept_ = None
+        self._theta = None
+
+    def _sigmoid(self, t):
+        return 1. / (1. + np.exp(-t))
+
+    def fit(self, X_train, y_train, eta=0.01, n_iters=1e4):
+        &quot;&quot;&quot;根据训练数据集X_train, y_train, 使用梯度下降法训练Logistic Regression模型&quot;&quot;&quot;
+        assert X_train.shape[0] == y_train.shape[0], \
+            &quot;the size of X_train must be equal to the size of y_train&quot;
+
+        def J(theta, X_b, y):
+            y_hat = self._sigmoid(X_b.dot(theta))
+            try:
+                return - np.sum(y*np.log(y_hat) + (1-y)*np.log(1-y_hat)) / len(y)
+            except:
+                return float(&apos;inf&apos;)
+
+        def dJ(theta, X_b, y):
+            return X_b.T.dot(self._sigmoid(X_b.dot(theta)) - y) / len(y)
+
+        def gradient_descent(X_b, y, initial_theta, eta, n_iters=1e4, epsilon=1e-8):
+
+            theta = initial_theta
+            cur_iter = 0
+
+            while cur_iter &lt; n_iters:
+                gradient = dJ(theta, X_b, y)
+                last_theta = theta
+                theta = theta - eta * gradient
+                if (abs(J(theta, X_b, y) - J(last_theta, X_b, y)) &lt; epsilon):
+                    break
+
+                cur_iter += 1
+
+            return theta
+
+        X_b = np.hstack([np.ones((len(X_train), 1)), X_train])
+        initial_theta = np.zeros(X_b.shape[1])
+        self._theta = gradient_descent(X_b, y_train, initial_theta, eta, n_iters)
+
+        self.intercept_ = self._theta[0]
+        self.coef_ = self._theta[1:]
+
+        return self
+
+    def predict_proba(self, X_predict):
+        &quot;&quot;&quot;给定待预测数据集X_predict，返回表示X_predict的结果概率向量&quot;&quot;&quot;
+        assert self.intercept_ is not None and self.coef_ is not None, \
+            &quot;must fit before predict!&quot;
+        assert X_predict.shape[1] == len(self.coef_), \
+            &quot;the feature number of X_predict must be equal to X_train&quot;
+
+        X_b = np.hstack([np.ones((len(X_predict), 1)), X_predict])
+        return self._sigmoid(X_b.dot(self._theta))
+
+    def predict(self, X_predict):
+        &quot;&quot;&quot;给定待预测数据集X_predict，返回表示X_predict的结果向量&quot;&quot;&quot;
+        assert self.intercept_ is not None and self.coef_ is not None, \
+            &quot;must fit before predict!&quot;
+        assert X_predict.shape[1] == len(self.coef_), \
+            &quot;the feature number of X_predict must be equal to X_train&quot;
+
+        proba = self.predict_proba(X_predict)
+        return np.array(proba &gt;= 0.5, dtype=&apos;int&apos;)
+
+    def score(self, X_test, y_test):
+        &quot;&quot;&quot;根据测试数据集 X_test 和 y_test 确定当前模型的准确度&quot;&quot;&quot;
+
+        y_predict = self.predict(X_test)
+        return accuracy_score(y_test, y_predict)
+
+    def __repr__(self):
+        return &quot;LogisticRegression()&quot;
+</code></pre><ul>
+<li>进行测试</li>
+</ul>
+<pre><code>from playML.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, seed=666)
+
+from playML.LogisticRegression import LogisticRegression
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+</code></pre><ul>
+<li>我们所有的数据都进行了正确的分类</li>
+</ul>
+<pre><code>log_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>1.0</p>
+</blockquote>
+<pre><code>log_reg.predict_proba(X_test)
+</code></pre><blockquote>
+<p>array([ 0.92972035,  0.98664939,  0.14852024,  0.17601199,  0.0369836 ,<br>        0.0186637 ,  0.04936918,  0.99669244,  0.97993941,  0.74524655,<br>        0.04473194,  0.00339285,  0.26131273,  0.0369836 ,  0.84192923,<br>        0.79892262,  0.82890209,  0.32358166,  0.06535323,  0.20735334])</p>
+</blockquote>
+<pre><code>log_reg.predict(X_test)
+</code></pre><blockquote>
+<p>array([1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0])</p>
+</blockquote>
+<pre><code>y_test
+</code></pre><blockquote>
+<p>array([1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0])</p>
+</blockquote>
+<h3 id="5-决策边界"><a href="#5-决策边界" class="headerlink" title="5. 决策边界"></a>5. 决策边界</h3><ul>
+<li>我们的逻辑回归改自线性回归，所以参数也都有</li>
+</ul>
+<pre><code>log_reg.coef_
+</code></pre><blockquote>
+<p>array([ 3.01796521, -5.04447145])</p>
+</blockquote>
+<pre><code>log_reg.intercept_
+</code></pre><blockquote>
+<p>-0.69377192729112236</p>
+</blockquote>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C.png" alt=""></p>
+<ul>
+<li>现在我们感性看一下我们的决策边界</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C1.png" alt=""></p>
+<pre><code>def x2(x1):
+    return (-log_reg.coef_[0] * x1 - log_reg.intercept_) / log_reg.coef_[1]
+
+x1_plot = np.linspace(4, 8, 1000)
+x2_plot = x2(x1_plot)
+
+plt.scatter(X[y==0,0], X[y==0,1], color=&quot;red&quot;)
+plt.scatter(X[y==1,0], X[y==1,1], color=&quot;blue&quot;)
+plt.plot(x1_plot, x2_plot)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%923.png" alt=""></p>
+<ul>
+<li>这根直线就是我们的决策边界，不过我们看见了一个红色的点不在直线上方，说明这个点是我们训练的数据，我们现在只绘图测试数据</li>
+</ul>
+<pre><code>plt.scatter(X_test[y_test==0,0], X_test[y_test==0,1], color=&quot;red&quot;)
+plt.scatter(X_test[y_test==1,0], X_test[y_test==1,1], color=&quot;blue&quot;)
+plt.plot(x1_plot, x2_plot)
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%924.png" alt=""></p>
+<ul>
+<li>现在就是完全分类正确的</li>
+<li>我们现在需要一个不规则的决策边界的绘制方法</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%8D%E8%A7%84%E5%88%99%E7%9A%84%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C%E7%9A%84%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95.png" alt=""></p>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+
+plot_decision_boundary(log_reg, axis=[4, 7.5, 1.5, 4.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%925.png" alt=""></p>
+<ul>
+<li>我们有了这个绘制方法，来看一下kNN的决策边界</li>
+</ul>
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+
+knn_clf = KNeighborsClassifier()
+knn_clf.fit(X_train, y_train)
+
+knn_clf.score(X_test, y_test)
+</code></pre><blockquote>
+<p>1.0</p>
+</blockquote>
+<pre><code>plot_decision_boundary(knn_clf, axis=[4, 7.5, 1.5, 4.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%926.png" alt=""></p>
+<ul>
+<li>这个边界是一个曲线</li>
+<li>如果我们将kNN算法作用在三个类别上时，对应的决策边界是什么样的？</li>
+</ul>
+<pre><code>knn_clf_all = KNeighborsClassifier()
+knn_clf_all.fit(iris.data[:,:2], iris.target)
+
+plot_decision_boundary(knn_clf_all, axis=[4, 8, 1.5, 4.5])
+plt.scatter(iris.data[iris.target==0,0], iris.data[iris.target==0,1])
+plt.scatter(iris.data[iris.target==1,0], iris.data[iris.target==1,1])
+plt.scatter(iris.data[iris.target==2,0], iris.data[iris.target==2,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%927.png" alt=""></p>
+<ul>
+<li>可以看到这个决策边界是非常不规则的，显然是过拟合的情况</li>
+<li>尝试n_neighbors修改为50</li>
+</ul>
+<pre><code>knn_clf_all = KNeighborsClassifier(n_neighbors=50)
+knn_clf_all.fit(iris.data[:,:2], iris.target)
+
+plot_decision_boundary(knn_clf_all, axis=[4, 8, 1.5, 4.5])
+plt.scatter(iris.data[iris.target==0,0], iris.data[iris.target==0,1])
+plt.scatter(iris.data[iris.target==1,0], iris.data[iris.target==1,1])
+plt.scatter(iris.data[iris.target==2,0], iris.data[iris.target==2,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%928.png" alt=""></p>
+<ul>
+<li>现在决策边界更加的清晰</li>
+</ul>
+<h3 id="6-在逻辑回归中使用多项式特征"><a href="#6-在逻辑回归中使用多项式特征" class="headerlink" title="6. 在逻辑回归中使用多项式特征"></a>6. 在逻辑回归中使用多项式特征</h3><ul>
+<li>直线这种分类方式太简单了，我们需要引入多项式项</li>
+<li><p>构造数据集</p>
+<p>  import numpy as np<br>  import matplotlib.pyplot as plt</p>
+<p>  np.random.seed(666)<br>  X = np.random.normal(0, 1, size=(200, 2))<br>  y = np.array((X[:,0]<strong>2+X[:,1]</strong>2)&lt;1.5, dtype=’int’)</p>
+<p>  plt.scatter(X[y==0,0], X[y==0,1])<br>  plt.scatter(X[y==1,0], X[y==1,1])<br>  plt.show()</p>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%929.png" alt=""></p>
+<pre><code>from playML.LogisticRegression import LogisticRegression
+
+log_reg = LogisticRegression()
+log_reg.fit(X, y)
+
+log_reg.score(X, y)
+</code></pre><blockquote>
+<p>0.60499999999999998</p>
+</blockquote>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+
+plot_decision_boundary(log_reg, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9210.png" alt=""></p>
+<ul>
+<li>显然这个结果是很粗糙的</li>
+<li>尝试为逻辑回归添加多项式项</li>
+</ul>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+def PolynomialLogisticRegression(degree):
+    return Pipeline([
+        (&apos;poly&apos;, PolynomialFeatures(degree=degree)),
+        (&apos;std_scaler&apos;, StandardScaler()),
+        (&apos;log_reg&apos;, LogisticRegression())
+    ])
+
+poly_log_reg = PolynomialLogisticRegression(degree=2)
+poly_log_reg.fit(X, y)
+
+poly_log_reg.score(X, y)
+</code></pre><blockquote>
+<p>0.94999999999999996</p>
+</blockquote>
+<pre><code>plot_decision_boundary(poly_log_reg, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9211.png" alt=""></p>
+<ul>
+<li>尝试将degree传入20</li>
+</ul>
+<pre><code>poly_log_reg2 = PolynomialLogisticRegression(degree=20)
+poly_log_reg2.fit(X, y)
+
+plot_decision_boundary(poly_log_reg2, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9212.png" alt=""></p>
+<ul>
+<li>显然这个奇怪的外围就是因为degree太大了，显然发生了过拟合的现象</li>
+<li>我们可以减少degree或者使用模型正则化</li>
+<li><strong>模型的正则化变得必不可少</strong></li>
+</ul>
+<h3 id="7-scikit-learn中的逻辑回归"><a href="#7-scikit-learn中的逻辑回归" class="headerlink" title="7. scikit-learn中的逻辑回归"></a>7. scikit-learn中的逻辑回归</h3><ul>
+<li>我们在逻辑回归中添加了多项式，就会增加复杂度，就有可能产生过拟合</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%AD%A3%E5%88%99%E5%8C%96.png" alt=""></p>
+<ul>
+<li>使用虚拟的测试用例，同时里面添加了噪音</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
+X = np.random.normal(0, 1, size=(200, 2))
+y = np.array((X[:,0]**2+X[:,1])&lt;1.5, dtype=&apos;int&apos;)
+for _ in range(20):
+    y[np.random.randint(200)] = 1
+
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9213.png" alt=""></p>
+<pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+</code></pre><ul>
+<li>使用scikit-learn中的逻辑回归</li>
+</ul>
+<pre><code>from sklearn.linear_model import LogisticRegression
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,<br>          intercept_scaling=1, max_iter=100, multi_class=’ovr’, n_jobs=1,<br>          penalty=’l2’, random_state=None, solver=’liblinear’, tol=0.0001,<br>          verbose=0, warm_start=False)</p>
+</blockquote>
+<pre><code>log_reg.score(X_train, y_train)
+</code></pre><blockquote>
+<p>0.79333333333333333</p>
+</blockquote>
+<pre><code>log_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.85999999999999999</p>
+</blockquote>
+<ul>
+<li>可视化决策边界</li>
+</ul>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+
+plot_decision_boundary(log_reg, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9214.png" alt=""></p>
+<ul>
+<li>使用多项式项逻辑回归</li>
+</ul>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+def PolynomialLogisticRegression(degree):
+    return Pipeline([
+        (&apos;poly&apos;, PolynomialFeatures(degree=degree)),
+        (&apos;std_scaler&apos;, StandardScaler()),
+        (&apos;log_reg&apos;, LogisticRegression())
+    ])
+
+poly_log_reg = PolynomialLogisticRegression(degree=2)
+poly_log_reg.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>Pipeline(steps=[(‘poly’, PolynomialFeatures(degree=2, include_bias=True, interaction_only=False)), (‘std_scaler’, StandardScaler(copy=True, with_mean=True, with_std=True)), (‘log_reg’, LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,<br>          intercept_scaling=1, max_iter=100, multi_class=’ovr’, n_jobs=1,<br>          penalty=’l2’, random_state=None, solver=’liblinear’, tol=0.0001,<br>          verbose=0, warm_start=False))])</p>
+</blockquote>
+<ul>
+<li>查看分类效果</li>
+</ul>
+<pre><code>poly_log_reg.score(X_train, y_train)
+</code></pre><blockquote>
+<p>0.91333333333333333</p>
+</blockquote>
+<pre><code>poly_log_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.93999999999999995</p>
+</blockquote>
+<pre><code>plot_decision_boundary(poly_log_reg, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9215.png" alt=""></p>
+<ul>
+<li>现在尝试提高多项式的阶数</li>
+</ul>
+<pre><code>poly_log_reg2 = PolynomialLogisticRegression(degree=20)
+poly_log_reg2.fit(X_train, y_train)
+
+poly_log_reg2.score(X_train, y_train)
+</code></pre><blockquote>
+<p>0.93999999999999995</p>
+</blockquote>
+<pre><code>poly_log_reg2.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.92000000000000004</p>
+</blockquote>
+<pre><code>plot_decision_boundary(poly_log_reg2, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9216.png" alt=""></p>
+<ul>
+<li>决策边界又开始变得不规则，现在我们尝试使用C这个参数来进行模型正则化，C是损失函数前面的系数</li>
+</ul>
+<pre><code>def PolynomialLogisticRegression(degree, C):
+    return Pipeline([
+        (&apos;poly&apos;, PolynomialFeatures(degree=degree)),
+        (&apos;std_scaler&apos;, StandardScaler()),
+        (&apos;log_reg&apos;, LogisticRegression(C=C))
+    ])
+
+    poly_log_reg3 = PolynomialLogisticRegression(degree=20, C=0.1)
+    poly_log_reg3.fit(X_train, y_train)
+
+    poly_log_reg3.score(X_train, y_train)
+</code></pre><blockquote>
+<p>0.85333333333333339</p>
+</blockquote>
+<pre><code>poly_log_reg3.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.92000000000000004</p>
+</blockquote>
+<pre><code>plot_decision_boundary(poly_log_reg3, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9217.png" alt=""></p>
+<ul>
+<li>相比于C=1，边界变得规则</li>
+<li>传入参数penalty</li>
+</ul>
+<pre><code>def PolynomialLogisticRegression(degree, C, penalty=&apos;l2&apos;):
+    return Pipeline([
+        (&apos;poly&apos;, PolynomialFeatures(degree=degree)),
+        (&apos;std_scaler&apos;, StandardScaler()),
+        (&apos;log_reg&apos;, LogisticRegression(C=C, penalty=penalty))
+    ])
+
+    poly_log_reg4 = PolynomialLogisticRegression(degree=20, C=0.1, penalty=&apos;l1&apos;)
+    poly_log_reg4.fit(X_train, y_train)
+
+    poly_log_reg4.score(X_train, y_train)
+</code></pre><blockquote>
+<p>0.82666666666666666</p>
+</blockquote>
+<pre><code>poly_log_reg4.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.90000000000000002</p>
+</blockquote>
+<pre><code>plot_decision_boundary(poly_log_reg4, axis=[-4, 4, -4, 4])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9218.png" alt=""></p>
+<ul>
+<li>形状已经接近原始数据生成的数据了</li>
+</ul>
+<h3 id="8-OvR与OvO"><a href="#8-OvR与OvO" class="headerlink" title="8. OvR与OvO"></a>8. OvR与OvO</h3><ul>
+<li>逻辑回归只可以解决二分类问题</li>
+<li>解决多分类问题：<ul>
+<li>OvR：OvR每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器<ul>
+<li>n个类别就进行n次分类，选择分类得分最高的</li>
+</ul>
+</li>
+<li>OvO：OvO将这N个类别两两配对，产生N(N-1)/2个二分类任务，选择分类得分最高的<ul>
+<li>分类结果更加准确</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+
+iris = datasets.load_iris()
+X = iris.data[:,:2]
+y = iris.target
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+</code></pre><ul>
+<li>使用LogisticRegression解决多分类问题</li>
+</ul>
+<pre><code>from sklearn.linear_model import LogisticRegression
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+</code></pre><blockquote>
+<p>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,<br>          intercept_scaling=1, max_iter=100, multi_class=’ovr’, n_jobs=1,<br>          penalty=’l2’, random_state=None, solver=’liblinear’, tol=0.0001,<br>          verbose=0, warm_start=False)</p>
+</blockquote>
+<pre><code>log_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.65789473684210531</p>
+</blockquote>
+<ul>
+<li>先来感受一下三分类的决策边界是什么样的</li>
+</ul>
+<pre><code>def plot_decision_boundary(model, axis):
+
+    x0, x1 = np.meshgrid(
+        np.linspace(axis[0], axis[1], int((axis[1]-axis[0])*100)).reshape(-1, 1),
+        np.linspace(axis[2], axis[3], int((axis[3]-axis[2])*100)).reshape(-1, 1),
+    )
+    X_new = np.c_[x0.ravel(), x1.ravel()]
+
+    y_predict = model.predict(X_new)
+    zz = y_predict.reshape(x0.shape)
+
+    from matplotlib.colors import ListedColormap
+    custom_cmap = ListedColormap([&apos;#EF9A9A&apos;,&apos;#FFF59D&apos;,&apos;#90CAF9&apos;])
+
+    plt.contourf(x0, x1, zz, linewidth=5, cmap=custom_cmap)
+
+    plot_decision_boundary(log_reg, axis=[4, 8.5, 1.5, 4.5])
+    plt.scatter(X[y==0,0], X[y==0,1])
+    plt.scatter(X[y==1,0], X[y==1,1])
+    plt.scatter(X[y==2,0], X[y==2,1])
+    plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9219.png" alt=""></p>
+<ul>
+<li>使用OvO的来进行多分类任务</li>
+</ul>
+<pre><code>log_reg2 = LogisticRegression(multi_class=&quot;multinomial&quot;, solver=&quot;newton-cg&quot;)
+log_reg2.fit(X_train, y_train)
+log_reg2.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.78947368421052633</p>
+</blockquote>
+<pre><code>plot_decision_boundary(log_reg2, axis=[4, 8.5, 1.5, 4.5])
+plt.scatter(X[y==0,0], X[y==0,1])
+plt.scatter(X[y==1,0], X[y==1,1])
+plt.scatter(X[y==2,0], X[y==2,1])
+plt.show()
+</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9220.png" alt=""></p>
+<ul>
+<li>使用所有的数据</li>
+</ul>
+<pre><code>X = iris.data
+y = iris.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+log_reg.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.94736842105263153</p>
+</blockquote>
+<pre><code>log_reg2 = LogisticRegression(multi_class=&quot;multinomial&quot;, solver=&quot;newton-cg&quot;)
+log_reg2.fit(X_train, y_train)
+log_reg2.score(X_test, y_test)
+</code></pre><blockquote>
+<p>1.0 </p>
+</blockquote>
+<ul>
+<li>sklearn也提供了两个类支持OvO and OvR</li>
+</ul>
+<pre><code>from sklearn.multiclass import OneVsRestClassifier
+
+ovr = OneVsRestClassifier(log_reg)
+ovr.fit(X_train, y_train)
+ovr.score(X_test, y_test)
+</code></pre><blockquote>
+<p>0.94736842105263153</p>
+</blockquote>
+<pre><code>from sklearn.multiclass import OneVsOneClassifier
+
+ovo = OneVsOneClassifier(log_reg)
+ovo.fit(X_train, y_train)
+ovo.score(X_test, y_test)
+</code></pre><blockquote>
+<p>1.0</p>
+</blockquote>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/21/Python-Machine-Learning-7/" style="float: left;">
+        ← 评价分类结果
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/13/Python-Machine-Learning-5/">
+        多项式回归与模型泛化 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
