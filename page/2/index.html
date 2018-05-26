@@ -204,176 +204,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2018/05/09/Python-Machine-Learning-4/">PCA与梯度上升法</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-09T04:47:57.000Z" itemprop="datePublished">
-          2018-05-09
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 初识PCA1. 什么是PCA主成分分析 Principal Component Analysis
-
-一个非监督的机器学习算法
-主要用于数据的降维
-通过降维，可以发现更便于人类理解的特征
-其他应用：可视化，去噪
-
-
-
-如何找到这个让样本间距最大的轴
-如何定义样本间距
-使用方差
-
-
-第一步：将样例的均值归为0(demean)
-我们想要求一个轴的方向w = (w1, w2)
-使得我们所有的样本，映射到w以后，方差最大
-
-
-
-2. 使用梯
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/09/Python-Machine-Learning-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/08/Python-Machine-Learning-3/">梯度下降法</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-08T12:19:46.000Z" itemprop="datePublished">
-          2018-05-08
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 梯度下降法
-不是一个机器学习算法
-是一种基于搜索的最优化方法
-作用：最小化一个损失函数
-梯度上升法：最大化一个效用函数
-
-1. 什么是梯度下降法
-导数代表theta单位变化时，损失函数J相应的变化
-导数可以代表方向，对应J增大的方向
-
-
-
-η 称为学习率(learning rate)
-η 的取值影响获得最优解的速度
-η 取值不合适，甚至得不到最优解
-η 是梯度下降法的一个超参数
-η 太小，减慢收敛学习速度
-η 太大，甚至导致不收敛
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/08/Python-Machine-Learning-3/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/02/Java-Concurrent-Programming-4/">线程调度-线程池</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-02T15:01:54.000Z" itemprop="datePublished">
-          2018-05-02
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 线程池
-new Thread 弊端
-每次 new Thread 新建对象，性能差
-线程缺乏统一管理，可能无限制的新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM
-缺少更多功能，如更多执行，定期执行，线程中断
-
-
-
-1. 线程池的好处
-重用存在的线程，减少对象创建，消亡的开销，性能佳
-可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞
-提供定时执行，定期执行，单线程，并发数控制等功能
-
-2. 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/02/Java-Concurrent-Programming-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/01/System-Learning-Docker-1/">System Learning Docker 1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-01T08:52:16.000Z" itemprop="datePublished">
-          2018-05-01
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/01/System-Learning-Docker-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
                     <h3><a href="/2018/04/28/Java-Concurrent-Programming-3/">J.U.C</a></h3>
                     <span>
                         <span class="post-meta">
@@ -502,6 +332,36 @@ IT运维管理复杂，构建一支全功能团队困难
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/04/21/ZooKeeper-Distributed-Topics/">ZooKeeper Distributed Topics</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-21T00:39:02.000Z" itemprop="datePublished">
+          2018-04-21
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/21/ZooKeeper-Distributed-Topics/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/04/21/ZooKeeper-Distributed-Topics-1/">初识ZooKeeper</a></h3>
                     <span>
                         <span class="post-meta">
@@ -544,36 +404,6 @@ IT运维管理复杂，构建一支全功能团队困难
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2018/04/21/ZooKeeper-Distributed-Topics/">ZooKeeper Distributed Topics</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-21T00:39:02.000Z" itemprop="datePublished">
-          2018-04-21
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/21/ZooKeeper-Distributed-Topics/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
                     <h3><a href="/2018/04/15/Big-Data-Interview/">大数据面试</a></h3>
                     <span>
                         <span class="post-meta">
@@ -595,6 +425,160 @@ Step1：遍历文件a，对每个url求取hash(url)%1000，然后根据所取得
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/15/Big-Data-Interview/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Big-Data-SparkSQL/">Big Data SparkSQL</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T03:38:10.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Big-Data-SparkSQL/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Java-Concurrent-Programming-1/">Java 并发编程 1</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T01:39:17.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 基本概念1. 并发基本概念
+并发：同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时”存在”的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行
+高并发(High Concurrency)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求
+
+并发：多个线
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Java-Concurrent-Programming-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">逻辑回归</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-14T01:15:08.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 什么是逻辑回归逻辑回归(Logistic Regression)：解决分类问题
+
+回归问题怎么解决分类问题
+将样本的特征和样本发生的概率联系起来，概率是一个数
+
+
+逻辑回归既可以看作是回归算法，也可以看作是分类算法
+通常作为分类算法用，只可以解决二分类问题
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Storm综合项目实战</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-09T01:43:19.000Z" itemprop="datePublished">
+          2018-04-09
+      </time>
+    
+    
+    | 
+    <a href='/tags/大数据/'>大数据</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+下面是这段时间系统了解Storm的一些记录
+初识实时流处理Storm
+Storm编程
+Storm周边框架使用
+Storm架构及部署
+并行度
+分组策略与可靠性
+DRPC
+Storm整合其他大数据框架的使用
+Storm综合项目实战
+
+
+
+历经漫长的学习，积攒了足够的知识，我们终于迎来的Storm的实战项目。学习框架只有理论是不够的，这篇博客我们就来记录一下通过所学，使用Storm和周边框架解决一个实际生活中遇到的问题。
+
+1. 项目概述1
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Read More...</a>
                     </p>
                     
                 </div>
