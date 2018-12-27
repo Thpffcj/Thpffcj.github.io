@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -279,7 +279,11 @@ plt.show()
 <li>这根曲线是以0.5为对称轴的，此时数据是最不稳定的</li>
 <li>对于上面的问题，我们划分后要使得信息熵降低</li>
 </ul>
-<h3 id="3-使用信息熵寻找最优划分"><a href="#3-使用信息熵寻找最优划分" class="headerlink" title="3. 使用信息熵寻找最优划分"></a>3. 使用信息熵寻找最优划分</h3><pre><code>import numpy as np
+<h3 id="3-使用信息熵寻找最优划分"><a href="#3-使用信息熵寻找最优划分" class="headerlink" title="3. 使用信息熵寻找最优划分"></a>3. 使用信息熵寻找最优划分</h3><ul>
+<li>依然使用鸢尾花数据集</li>
+<li>entropy代表使用信息熵</li>
+</ul>
+<pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import datasets
@@ -295,6 +299,9 @@ dt_clf.fit(X, y)
 </code></pre><blockquote>
 <p>DecisionTreeClassifier(class_weight=None, criterion=’entropy’, max_depth=2,<br>            max_features=None, max_leaf_nodes=None,<br>            min_impurity_split=1e-07, min_samples_leaf=1,<br>            min_samples_split=2, min_weight_fraction_leaf=0.0,<br>            presort=False, random_state=42, splitter=’best’)</p>
 </blockquote>
+<ul>
+<li>绘制决策边界</li>
+</ul>
 <pre><code>def plot_decision_boundary(model, axis):
 
     x0, x1 = np.meshgrid(
@@ -319,13 +326,16 @@ plt.show()
 </code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E6%A0%914.png" alt=""></p>
 <ul>
 <li>模拟使用信息熵进行划分</li>
+<li>split只是进行划分</li>
 </ul>
 <pre><code>def split(X, y, d, value):
     index_a = (X[:,d] &lt;= value)
     index_b = (X[:,d] &gt; value)
     return X[index_a], X[index_b], y[index_a], y[index_b]
-
-from collections import Counter
+</code></pre><ul>
+<li>在所有数据上寻找d和value</li>
+</ul>
+<pre><code>from collections import Counter
 from math import log
 
 def entropy(y):
@@ -391,8 +401,8 @@ print(&quot;best_v =&quot;, best_v2)
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2019/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2018/05/28/Java-Concurrent-Programming-5/" style="float: left;">
+        ← 高并发之扩容思路
     </a>
     
     

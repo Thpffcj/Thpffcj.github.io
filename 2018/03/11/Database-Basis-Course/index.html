@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -524,7 +524,7 @@ WHERE city = ‘New York’;
 <h3 id="3-日志"><a href="#3-日志" class="headerlink" title="3. 日志"></a>3. 日志</h3><p><strong>UNDO日志：</strong></p>
 <ul>
 <li>记载规则：<ul>
-<li>如果事务T修改数据库元素X，则更新日志<t,x,v>必须在X的新值写到磁盘前写到磁盘。</t,x,v></li>
+<li>如果事务T修改数据库元素X，则更新日志&lt;T,X,V&gt;必须在X的新值写到磁盘前写到磁盘。</li>
 <li>如果事务T提交，则日志记录<commit t="">必须在事务T改变的所有DB元素已写到磁盘后再写到磁盘。</commit></li>
 </ul>
 </li>
@@ -532,14 +532,14 @@ WHERE city = ‘New York’;
 <p><strong>REDO日志：</strong></p>
 <ul>
 <li>记载规则：<ul>
-<li>在修改磁盘上的任何数据库元素X之前，要保证所有与X的这一修改有关的日志记录 (包括更新记录<t,x,v> 和提交记录 <commit t="">) 都必须出现在磁盘上。</commit></t,x,v></li>
+<li>在修改磁盘上的任何数据库元素X之前，要保证所有与X的这一修改有关的日志记录 (包括更新记录&lt;T,X,V&gt; 和提交记录 <commit t="">) 都必须出现在磁盘上。</commit></li>
 </ul>
 </li>
 </ul>
 <p><strong>UNDO/REDO日志：</strong></p>
 <ul>
 <li>记载规则：<ul>
-<li>在由于某个事务T所做的改变而修改磁盘上的数据库元素X之前，更新记录<t,x,v,w>必须出现在磁盘上。</t,x,v,w></li>
+<li>在由于某个事务T所做的改变而修改磁盘上的数据库元素X之前，更新记录&lt;T,X,v,w&gt;必须出现在磁盘上。</li>
 <li>在每一条 <commit t=""> 后面必须紧跟一条Flush Log操作。</commit></li>
 </ul>
 </li>

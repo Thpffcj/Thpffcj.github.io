@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       <!-- ============================ Hero Image =========================== -->
 
 <section id="hero" class="scrollme">
@@ -257,393 +257,11 @@ Leet
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2018/05/25/Python-Machine-Learning-9/">决策树</a></h3>
+                    <h3><a href="/2018/12/27/Postgraduate-Summary/">考研总结</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2018-05-25T02:50:18.000Z" itemprop="datePublished">
-          2018-05-25
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 决策树1. 什么是决策树
-
-直接使用决策树进行具体分类
-使用鸢尾花数据集
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn import datasets
-
-iris = datasets.load_iris()
-X = iris.data[:,2:]
-y = iris.target
-
-plt.scatter(X[y==0,0], X[y==0,1]
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/25/Python-Machine-Learning-9/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/22/Python-Machine-Learning-8/">支撑向量机 SVM</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-22T07:41:15.000Z" itemprop="datePublished">
-          2018-05-22
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 支撑向量机 SVM1. 什么是SVM
-Support Vector Machine
-
-
-
-解决的是线性可分问题
-Hard Margin SVM
-Soft Margin SVM
-
-2. SVM背后的最优化问题
-点到直线的距离
-
-
-
-支撑向量机
-
-
-
-
-我们也可以将两个式子变成一个
-
-
-
-最优化目标
-
-
-
-这是一个有条件的最优化问题
-
-3. Soft Margin SVM
-
-L1，L2正则
-
-
-4. scikit-learn中的SVM
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/22/Python-Machine-Learning-8/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/21/Python-Machine-Learning-7/">评价分类结果</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-21T01:15:02.000Z" itemprop="datePublished">
-          2018-05-21
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 分类算法的评价1. 准确度的陷阱和混淆矩阵分类准确度的问题
-
-一个癌症预测系统，输入体检信息，可以判断是否有癌症
-预测准确度：99.9%
-是好？是坏？
-如果癌症产生的概率只有0.1%
-我们的系统预测所有人都是健康，即可达到99.9%的准确率
-
-
-对于极度偏斜(Skewed Data)的数据
-只使用分类准确度是远远不够的
-
-
-
-使用混淆矩阵做进一步分析
-
-2. 精准率和召回率
-
-
-精准率和召回率
-
-
-3. 实现混淆矩阵，精准率和召回
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/21/Python-Machine-Learning-7/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/20/Python-Machine-Learning-6/">逻辑回归</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-20T03:04:30.000Z" itemprop="datePublished">
-          2018-05-20
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 逻辑回归1. 什么是逻辑回归
-逻辑回归：解决分类问题
-回归问题怎么解决问题？
-将样本的特征和样本发生的概率联系起来，概率是一个数
-
-
-
-
-
-逻辑回归既可以看作是回归算法，也可以看作是分类算法，通常作为分类算法用，只可以解决二分类问题
-
-
-Sigmoid函数
-
-
-Sigmoid函数是一个在生物学中常见的S型函数，也称为S型生长曲线。在信息科学中，由于其单增以及反函数单增等性质，Sigmoid函数常被用作神经网络的阈值函数，将变量映射
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/20/Python-Machine-Learning-6/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/13/Python-Machine-Learning-5/">多项式回归与模型泛化</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-13T06:41:25.000Z" itemprop="datePublished">
-          2018-05-13
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 多项式回归1. 什么是多项式回归
-多项式回归，回归函数是回归变量多项式的回归。多项式回归模型是线性回归模型的一种，此时回归函数关于回归系数是线性的。由于任一函数都可以用多项式逼近，因此多项式回归有着广泛应用。
-下面我们就来实际编程实现一下多项式回归
-
-import numpy as np 
-import matplotlib.pyplot as plt
-
-x = np.random.uniform(-3, 3, size=100)
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/13/Python-Machine-Learning-5/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/09/Python-Machine-Learning-4/">PCA与梯度上升法</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-09T04:47:57.000Z" itemprop="datePublished">
-          2018-05-09
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 初识PCA1. 什么是PCA主成分分析 Principal Component Analysis
-
-一个非监督的机器学习算法
-主要用于数据的降维
-通过降维，可以发现更便于人类理解的特征
-其他应用：可视化，去噪
-
-
-
-如何找到这个让样本间距最大的轴
-如何定义样本间距
-使用方差
-
-
-第一步：将样例的均值归为0(demean)
-我们想要求一个轴的方向w = (w1, w2)
-使得我们所有的样本，映射到w以后，方差最大
-
-
-
-2. 使用梯
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/09/Python-Machine-Learning-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/08/Python-Machine-Learning-3/">梯度下降法</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-08T12:19:46.000Z" itemprop="datePublished">
-          2018-05-08
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 梯度下降法
-不是一个机器学习算法
-是一种基于搜索的最优化方法
-作用：最小化一个损失函数
-梯度上升法：最大化一个效用函数
-
-1. 什么是梯度下降法
-导数代表theta单位变化时，损失函数J相应的变化
-导数可以代表方向，对应J增大的方向
-
-
-
-η 称为学习率(learning rate)
-η 的取值影响获得最优解的速度
-η 取值不合适，甚至得不到最优解
-η 是梯度下降法的一个超参数
-η 太小，减慢收敛学习速度
-η 太大，甚至导致不收敛
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/08/Python-Machine-Learning-3/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/02/Java-Concurrent-Programming-4/">线程调度-线程池</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-02T15:01:54.000Z" itemprop="datePublished">
-          2018-05-02
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 线程池
-new Thread 弊端
-每次 new Thread 新建对象，性能差
-线程缺乏统一管理，可能无限制的新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM
-缺少更多功能，如更多执行，定期执行，线程中断
-
-
-
-1. 线程池的好处
-重用存在的线程，减少对象创建，消亡的开销，性能佳
-可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞
-提供定时执行，定期执行，单线程，并发数控制等功能
-
-2. 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/02/Java-Concurrent-Programming-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/01/System-Learning-Docker-1/">System Learning Docker 1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-01T08:52:16.000Z" itemprop="datePublished">
-          2018-05-01
+      <time datetime="2018-12-27T01:52:02.000Z" itemprop="datePublished">
+          2018-12-27
       </time>
     
 </span>
@@ -657,7 +275,371 @@ new Thread 弊端
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2018/05/01/System-Learning-Docker-1/">Read More...</a>
+                        <a href="/2018/12/27/Postgraduate-Summary/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Operating-System-Course/">操作系统(未完)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T10:54:17.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+1. 操作系统概述1. 操作系统的分类批处理操作系统
+
+成批处理作业
+作业控制语言与作业说明书
+脱机工作方式
+追求系统效率与吞吐量
+
+分时操作系统
+
+用户通过终端直接控制程序执行
+交互式工作方式
+交互型、友善性、快速响应
+今天最常见的计算机操作方式
+
+实时操作系统
+
+事件驱动，有较高时间要求
+实时操作系统的分类
+过程控制系统
+信息查询系统
+事务处理系统 
+
+
+过程控制系统的处理步骤：数据采集、加工处理、操作控制、反馈处理
+
+系统调用的
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Operating-System-Course/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Computer-Network-Course-2/">计算机网络(未完)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:45:00.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        5. OSI层次：传输层1. 传输层协议概述传输控制协议TCP
+
+可靠。
+面向连接。
+数据的分片、重组和有序分发。
+重传所有丢失的或出错的报文。
+使用确认提供流控制。
+TCP不支持单播和组播。
+
+用户数据包协议UDP
+
+不可靠。
+无连接。
+无确认。
+无流控制。
+
+2. 传输控制协议TCPTCP报头格式：
+
+
+序号字段的值指本报文段所发送的数据的第一个字节的序号。
+确认号是期望收到对方的下一个报文段的数据的第一个字节的序号。
+代码位：UR
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Computer-Network-Course-2/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Computer-Network-Course-1/">计算机网络(未完)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:45:00.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 计算机网络及其参考模型1. 一些概念
+LAN：Local Area Network，局域网
+WAN：Wide Area Network，广域网
+ISP: Internet Service Provider，网络服务供应商
+局域网设备：集线器(hub)、网桥(bridge)、交换机(switch)、路由器(router)
+广域网设备：路由器(router)、调制解调器(modem)
+以太网是局域网。
+为什么要使用数据包？
+计算机可以
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Computer-Network-Course-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Data-Structures-and-Algorithms-Course/">数据结构与算法</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:04:53.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Data-Structures-and-Algorithms-Course/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Software-Engineering-and-Computing-Course-2/">软件工程与计算 2</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        体系结构基础1. 区分逻辑设计与物理设计
+物理设计 = 逻辑设计 + 介质匹配
+先逻辑后物理的设计思路
+否则：如果介质匹配的复杂度较高，可能会扰乱逻辑设计的思路
+
+
+
+物理是逻辑在载体上的实现
+
+(物理)设计复杂度=事物(逻辑)复杂度+载体与事物的适配复杂度
+
+物理实现的载体
+
+低层：基本类型+基本控制结构
+中层：oo编程语言机制
+类声明，实例创建与撤销，实例生命期管理
+类权限控制机制
+复杂机制：继承…
+
+
+高层
+导入导出和名称匹配
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Software-Engineering-and-Computing-Course-2/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">软件工程与计算 1</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        项目管理基础1. 项目和项目管理项目
+
+项目是具有下列特征的一系列活动和任务
+具有一个明确的目标
+有限定的开始和结束日期
+有成本限制
+消耗人力和非人力资源
+多工种合作
+
+
+
+项目管理的目标
+
+项目管理的目标是做到以下方面
+在限定时间内
+在一定的成本内
+在要求的质量水平上
+高效使用资源
+获得客户认可
+
+
+
+过程组与活动
+
+过程组
+项目启动，项目计划，项目执行，项目跟踪 与控制和项目收尾
+
+
+活动
+计划制定，团队管理，成本控制，质量保障，度
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/06/06/Business-Intelligence-Course/">商务智能</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-06-06T09:57:57.000Z" itemprop="datePublished">
+          2018-06-06
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/06/06/Business-Intelligence-Course/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/05/28/Java-Concurrent-Programming-5/">高并发之扩容思路</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
+          2018-05-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 高并发之扩容思路
+垂直扩容(纵向扩展)：提高系统部件能力
+水平扩容(横向扩展)：增加更多系统成员来实现
+
+扩容 - 数据库
+
+读操作扩展：memcache, redis, CDN等缓存
+写操作扩展：Cassandra, Hbase等
+
+
+
+2. 高并发之缓存思路
+1. 缓存特征，场景及组件介绍缓存特征
+
+命中率：命中数 / (命中数 + 没有命中数)
+最大元素(空间)
+清空策略：FIFO, LFU, LRU, 过期时间, 随机等
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/28/Java-Concurrent-Programming-5/">Read More...</a>
                     </p>
                     
                 </div>

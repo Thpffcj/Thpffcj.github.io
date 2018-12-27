@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -178,7 +178,7 @@
     
     
     | 
-    <a href='/tags/大数据/'>大数据</a>
+    <a href="/tags/大数据/">大数据</a>
     
     
 </span>
@@ -188,13 +188,13 @@
         <div class="col-md-8 col-md-offset-2">
       		<ul>
 <li>下面是这段时间系统了解Hadoop的一些记录<ul>
-<li><a href="http://www.thpffcj.com/2017/12/12/Big-Data-Getting-Started-2/" target="_blank" rel="external">大数据概述</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="external">分布式文件系统HDFS</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="external">分布式资源调度YARN</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="external">分布式计算框架MapReduce</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/07/Big-Data-Getting-Started-6/" target="_blank" rel="external">Hadoop项目实战</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-7/" target="_blank" rel="external">Hadoop集成Spring的使用</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/09/Big-Data-Getting-Started-8/" target="_blank" rel="external">大数据相关技术拓展</a></li>
+<li><a href="http://www.thpffcj.com/2017/12/12/Big-Data-Getting-Started-2/" target="_blank" rel="noopener">大数据概述</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="noopener">分布式文件系统HDFS</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="noopener">分布式资源调度YARN</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="noopener">分布式计算框架MapReduce</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/07/Big-Data-Getting-Started-6/" target="_blank" rel="noopener">Hadoop项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-7/" target="_blank" rel="noopener">Hadoop集成Spring的使用</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/09/Big-Data-Getting-Started-8/" target="_blank" rel="noopener">大数据相关技术拓展</a></li>
 </ul>
 </li>
 </ul>
@@ -206,7 +206,7 @@
 <li>框架多样性？</li>
 </ul>
 <h3 id="2-Spark特点"><a href="#2-Spark特点" class="headerlink" title="2. Spark特点"></a>2. Spark特点</h3><ul>
-<li>我们还是采用原来的套路，先去官网看一看 <a href="http://spark.apache.org/" target="_blank" rel="external">Spark Lightning-fast cluster computing</a></li>
+<li>我们还是采用原来的套路，先去官网看一看 <a href="http://spark.apache.org/" target="_blank" rel="noopener">Spark Lightning-fast cluster computing</a></li>
 <li>Apache Spark is a fast and general engine for large-scale data processing.</li>
 <li>Speed<ul>
 <li>Run programs up to 100x faster than Hadoop MapReduce in memory, or 10x faster on disk.</li>
@@ -288,7 +288,7 @@ hadoop-2.6.0-cdh5.7.0.tar.gz
 <pre><code>export MAVEN_HOME=/home/thpffcj/app/apache-maven-3.5.2
 export PATH=$MAVEN_HOME/bin:$PATH
 </code></pre><h3 id="6-Spark环境搭建及WordCount案例实现"><a href="#6-Spark环境搭建及WordCount案例实现" class="headerlink" title="6. Spark环境搭建及WordCount案例实现"></a>6. Spark环境搭建及WordCount案例实现</h3><ul>
-<li>官网下载spark代码自己编译 <a href="http://spark.apache.org/docs/2.1.0/building-spark.html" target="_blank" rel="external">Building Spark</a></li>
+<li>官网下载spark代码自己编译 <a href="http://spark.apache.org/docs/2.1.0/building-spark.html" target="_blank" rel="noopener">Building Spark</a></li>
 <li>我是选择官网提供编译好的</li>
 </ul>
 <pre><code>[root@localhost software]# tar -zxvf spark-2.1.0-bin-hadoop2.6.tgz -C /home/thpffcj/app/
@@ -341,7 +341,7 @@ res6: Array[(String, Int)] = Array((mapreduce,1), (welcome,1), (hadoop,3), (hdfs
 </code></pre><p><br></p>
 <hr>
 <h2 id="2-分布式计算框架Flink"><a href="#2-分布式计算框架Flink" class="headerlink" title="2. 分布式计算框架Flink"></a>2. 分布式计算框架Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><ul>
-<li>一样的套路，官网：<a href="http://flink.apache.org/" target="_blank" rel="external">Flink</a></li>
+<li>一样的套路，官网：<a href="http://flink.apache.org/" target="_blank" rel="noopener">Flink</a></li>
 <li>Apache Flink is an open-source stream processing framework for distributed, high-performing, always-available, and accurate data streaming applications.</li>
 <li>Continuous Processing for Unbounded Datasets<ul>
 <li><strong>First, 2 types of datasets</strong><ul>
@@ -379,7 +379,7 @@ conf  lib       log      opt     resources
 9079 TaskManager
 8697 JobManager
 </code></pre><ul>
-<li>访问 <a href="http://192.168.92.130:8081" target="_blank" rel="external">http://192.168.92.130:8081</a> 我们可以看见他的UI界面</li>
+<li>访问 <a href="http://192.168.92.130:8081" target="_blank" rel="noopener">http://192.168.92.130:8081</a> 我们可以看见他的UI界面</li>
 <li>文档侧面有一个 Deployment &amp; Operations 我们点击他下面的CLI，里面就有怎么使用的例子</li>
 </ul>
 <pre><code>[root@localhost flink-1.4.0]# ./bin/flink run ./examples/batch/WordCount.jar --input file:///home/thpffcj/data/hello.txt --output file:///home/thpffcj/tmp/flink_wc_out
@@ -408,7 +408,7 @@ import org.apache.flink.examples.java.wordcount.util.WordCountData
  *
  * Usage:
  * {{{
-     *   WordCount --input <path></path> --output <path></path>
+     *   WordCount --input <path> --output <path>
      * }}}
  *
  * If no parameters are provided, the program is run with default data from
@@ -455,14 +455,14 @@ object WordCount {
     }
   }
 }
-</code></pre><p><br></p>
+</path></path></code></pre><p><br></p>
 <hr>
 <h2 id="3-大数据处理神器Beam"><a href="#3-大数据处理神器Beam" class="headerlink" title="3. 大数据处理神器Beam"></a>3. 大数据处理神器Beam</h2><h3 id="1-Google新老三驾马车"><a href="#1-Google新老三驾马车" class="headerlink" title="1. Google新老三驾马车"></a>1. Google新老三驾马车</h3><ul>
 <li>老三架：GFS，MapReduce，BigTable</li>
 <li>新三架：Dremel，Pregel，Caffeine</li>
 </ul>
 <h3 id="2-Beam概述"><a href="#2-Beam概述" class="headerlink" title="2. Beam概述"></a>2. Beam概述</h3><ul>
-<li><strong><a href="https://beam.apache.org/" target="_blank" rel="external">Apache Beam: An advanced unified programming model</a></strong></li>
+<li><strong><a href="https://beam.apache.org/" target="_blank" rel="noopener">Apache Beam: An advanced unified programming model</a></strong></li>
 <li>Implement batch and streaming data processing jobs that run on any execution engine.</li>
 </ul>
 <h3 id="3-将WordCount的Beam程序以多种不同Runner运行"><a href="#3-将WordCount的Beam程序以多种不同Runner运行" class="headerlink" title="3. 将WordCount的Beam程序以多种不同Runner运行"></a>3. 将WordCount的Beam程序以多种不同Runner运行</h3><ul>
@@ -523,7 +523,7 @@ hdfs: 2
 </code></pre><p><br></p>
 <hr>
 <h2 id="4-Hadoop3-x新特性"><a href="#4-Hadoop3-x新特性" class="headerlink" title="4. Hadoop3.x新特性"></a>4. Hadoop3.x新特性</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
-<li><strong><a href="http://hadoop.apache.org/docs/r3.0.0/" target="_blank" rel="external">Apache Hadoop 3.0.0</a></strong></li>
+<li><strong><a href="http://hadoop.apache.org/docs/r3.0.0/" target="_blank" rel="noopener">Apache Hadoop 3.0.0</a></strong></li>
 <li>Apache Hadoop 3.0.0 incorporates a number of significant enhancements over the previous major release line (hadoop-2.x).</li>
 <li>This release is generally available (GA), meaning that it represents a point of API stability and quality that we consider production-ready.</li>
 <li>Minimum required Java version increased from Java 7 to Java 8</li>

@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -178,7 +178,7 @@
     
     
     | 
-    <a href='/tags/大数据/'>大数据</a>
+    <a href="/tags/大数据/">大数据</a>
     
     
 </span>
@@ -188,22 +188,22 @@
         <div class="col-md-8 col-md-offset-2">
       		<ul>
 <li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
-<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="noopener">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="noopener">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="noopener">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="noopener">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="noopener">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="noopener">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="noopener">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="noopener">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="noopener">可视化实战</a></li>
 </ul>
 </li>
 </ul>
 <p>要使用的基本框架都学完了就面临要将框架整合到一起，做过J2EE开发的人应该都有过整合过SSH，SSM等框架的经历，在对框架了解不深的情况下进场会出现各种情况，有时整合框架的时间比编写业务逻辑还要长。从这篇博客开始，我们要学习怎么把Flume，Kafka和Spark Streaming整合起来使用，最开始我们先来了解Spark Streaming整合Flume，官方提供了push和pull两种方式整合。</p>
 <hr>
 <h2 id="1-实战一：Flume-style-Push-based-Approach"><a href="#1-实战一：Flume-style-Push-based-Approach" class="headerlink" title="1. 实战一：Flume-style Push-based Approach"></a>1. 实战一：Flume-style Push-based Approach</h2><ul>
-<li><strong><a href="http://spark.apache.org/docs/2.2.0/streaming-flume-integration.html" target="_blank" rel="external">Spark 官网介绍</a></strong></li>
+<li><strong><a href="http://spark.apache.org/docs/2.2.0/streaming-flume-integration.html" target="_blank" rel="noopener">Spark 官网介绍</a></strong></li>
 <li>前面我们使用Spark Streaming都是基本数据源(filesystem等)</li>
 <li>高级数据源：<ul>
 <li>Kafka: Spark Streaming 2.2.0 is compatible with Kafka broker versions 0.8.2.1 or higher. </li>

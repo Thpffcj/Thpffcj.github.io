@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>软件工程与计算 1 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                <h1>软件工程与计算 1</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="项目管理基础"><a href="#项目管理基础" class="headerlink" title="项目管理基础"></a>项目管理基础</h2><h3 id="1-项目和项目管理"><a href="#1-项目和项目管理" class="headerlink" title="1. 项目和项目管理"></a>1. 项目和项目管理</h3><p><strong>项目</strong></p>
+<ul>
+<li>项目是具有下列特征的一系列活动和任务<ul>
+<li>具有一个明确的目标</li>
+<li>有限定的开始和结束日期</li>
+<li>有成本限制</li>
+<li>消耗人力和非人力资源</li>
+<li>多工种合作</li>
+</ul>
+</li>
+</ul>
+<p><strong>项目管理的目标</strong></p>
+<ul>
+<li>项目管理的目标是做到以下方面<ul>
+<li>在限定时间内</li>
+<li>在一定的成本内</li>
+<li>在要求的质量水平上</li>
+<li>高效使用资源</li>
+<li>获得客户认可</li>
+</ul>
+</li>
+</ul>
+<p><strong>过程组与活动</strong></p>
+<ul>
+<li>过程组<ul>
+<li>项目启动，项目计划，项目执行，项目跟踪 与控制和项目收尾</li>
+</ul>
+</li>
+<li>活动<ul>
+<li>计划制定，团队管理，成本控制，质量保障，度量，过程管理，进度跟踪与控制，凤险管理，配置管理</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-团队组织与管理"><a href="#2-团队组织与管理" class="headerlink" title="2. 团队组织与管理"></a>2. 团队组织与管理</h3><p><strong>团队</strong></p>
+<ul>
+<li>一个协作良好的团队是任何项目成功的基础</li>
+<li>软件项目尤其依赖于有效的团队组织和管理： 软件开发是一个以人为主的活动，人力资源是软件项目最大的资产</li>
+<li>有很多实践者认为比生产高质量产品更大的 成功是在生产过程中建立一个凝聚的团队</li>
+</ul>
+<p><strong>团队的特征</strong></p>
+<ul>
+<li>将团队定义为:为了一致的目的，绩效标准，方法而共担责任并且技能互补的少数人<ul>
+<li>团队成员要具备共同的目标</li>
+<li>团队成员要共担责任</li>
+<li>团队成员要技能互补</li>
+<li>团队内部要有一个明确的结构</li>
+</ul>
+</li>
+</ul>
+<p><strong>团队结构</strong></p>
+<ul>
+<li>主程序员团队</li>
+<li>民主团队</li>
+<li>开放团队</li>
+</ul>
+<p><strong>团队建设</strong></p>
+<ul>
+<li>建立团队章程</li>
+<li>持续成功</li>
+<li>和谐沟通</li>
+<li>避免团队杀手</li>
+</ul>
+<p><strong>避免团队杀手</strong></p>
+<ul>
+<li>组织和管理团队时要回避下列团队杀手<ul>
+<li>防范式管理</li>
+<li>官僚主义</li>
+<li>地理分散</li>
+<li>时间分割</li>
+<li>产品质量的降低</li>
+<li>虚假的最后期限</li>
+<li>小圈子控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-软件质量保证"><a href="#3-软件质量保证" class="headerlink" title="3. 软件质量保证"></a>3. 软件质量保证</h3><p><strong>软件质量</strong></p>
+<ul>
+<li>软件工程师也要对软件产品的质量负责</li>
+<li>对软件质量的要求可能是显式的，也可能是隐式的</li>
+<li>人们通常会选用系统的某些质量要素进行量化处理，建立质量特征，这些特征被称为质量属性(Quality Attribute)</li>
+<li>为了根据质量属性描述和评价系统的整体质量，人们从很多质量属性的定义当中选择了一些能够相互配合，相互联系的特征集，它们被称为质量模型</li>
+</ul>
+<p><strong>质量模型</strong></p>
+<ul>
+<li>因素<ul>
+<li>功能性</li>
+<li>可靠性</li>
+<li>易用性</li>
+<li>效率</li>
+<li>可维护性</li>
+<li>可移植性</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%B4%A8%E9%87%8F%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<p><strong>质量保证</strong></p>
+<ul>
+<li>需求开发    <ul>
+<li>需求评审，需求度量</li>
+</ul>
+</li>
+<li>体系结构    <ul>
+<li>体系结构评审，集成测试(持续集成)</li>
+</ul>
+</li>
+<li>详细设计    <ul>
+<li>详细设计评审，设计度量，集成测试(持续集成)</li>
+</ul>
+</li>
+<li>实现    <ul>
+<li>代码评审，代码度量，测试(测试驱动，持续集成)</li>
+</ul>
+</li>
+<li>测试    <ul>
+<li>测试，测试度量</li>
+</ul>
+</li>
+</ul>
+<p><strong>评审</strong></p>
+<ul>
+<li>在规划阶段(Planning)，制定审查计划，决定审查会议的次数，安排每次审查会议的时间，地点，参与人员，审查内容等等</li>
+<li>在总体部署阶段(Overview)，向所有参与审查会议的人员描述待审查材料的内容，审查的目标以及一些假设，并分发文档</li>
+<li>在准备阶段(Preparation)，审查人员各自独立执行检查任务。在检查的过程当中，他们可能会被要求使用检查清单，场景等检查方法。检查中发现的问题会被记录下来，以准备开会讨论或者提交给收集人员</li>
+<li>在审查会议阶段(Inspection Meeting)，通过会议讨论，识别，确认，分类发现的错误</li>
+<li>在返工阶段(Rework)，修改发现的缺陷</li>
+<li>在跟踪阶段(Follow-up)，要确认所有发现的问题都得到了解决，所有的错误都得到了修正</li>
+</ul>
+<p><strong>质量度量</strong></p>
+<ul>
+<li>度量产生自统计控制(Statistical  Control)思想。”你不能控制自己无法度量的东西”</li>
+<li>测度(Measure)就是为了描述软件产品而提供的定量指标<ul>
+<li>代码行数</li>
+</ul>
+</li>
+<li>进行测度的活动被称为测量(Measurement)</li>
+<li>度量(Metric)是软件产品在特定属性上的量化测度程度<ul>
+<li>例如基于所有对象的代码行数测度可以建立平均代码行数，最大代码行数，最小代码行数</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-软件配置管理"><a href="#4-软件配置管理" class="headerlink" title="4. 软件配置管理"></a>4. 软件配置管理</h3><p><strong>软件配置管理的动机</strong></p>
+<ul>
+<li>在软件开发活动中，除了最终产品之外，还会产生很多中间制品，例如需求规格说明，需求分析模型，软件体系结构设计模型，详细设计模型等。这些制品是不同阶段，不同角色，不同软件开发活动进行协同的基础</li>
+<li>在复杂软件系统开发中，产生的制品数量众多，以至于开发者需要维护一个清单才能清楚项目所处的状态，理解已经完成的工作和将要进行的工作</li>
+<li>某个制品发生变化带来的最大挑战是如何确保其使用者能够得到最新的制品，避免开发协同出现问题</li>
+</ul>
+<p><strong>配置管理</strong></p>
+<ul>
+<li>IEEE将配置管理定义为：”用技术的和管理的指导和监督方法，来标识和说明配置项的功能和物理特征，控制对这些特征的变更，记录和报告变更处理及其实现状态，并验证与规格需求的一 致性”</li>
+</ul>
+<p><strong>配置项</strong></p>
+<ul>
+<li>IEEE将配置项定义为：”置于软件配置管理之下的软件配置的各种有关项目，包括各类管理文档，评审记录与文档，软件文档，源码及其可执行码，运行所需的系统软件和支持软件以及有关 数据等”</li>
+</ul>
+<p><strong>配置管理活动</strong></p>
+<ul>
+<li>标识配置项</li>
+<li>版本管理</li>
+<li>变更控制</li>
+<li>配置审计</li>
+<li>状态报告</li>
+<li>软件发布管理</li>
+</ul>
+<p><strong>分支管理常见策略</strong></p>
+<ul>
+<li>主分支(Master)</li>
+<li>开发分支(Develop)</li>
+<li>面时性分支<ul>
+<li>功能(Feature)</li>
+<li>预发布(Release)</li>
+<li>修补bug(Fixbug)</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-管理实践"><a href="#5-管理实践" class="headerlink" title="5. 管理实践"></a>5. 管理实践</h3><p><strong>经济为本</strong></p>
+<ul>
+<li>人员的成本<ul>
+<li>这是最重要的一部分投入。现在的软件从业人员的工资不断上涨，工资占整个软件成本的比例更是呈上升趋势。除了开发人员外，还要计算项目管理人员和其他相应支持人员的费用(不是全职的，按时间乘比例计算)</li>
+</ul>
+</li>
+<li>工具的购买<ul>
+<li>包括计算机及其周围配套设备等硬件，也包括开发工具，办公套件等软件</li>
+</ul>
+</li>
+<li>培训的费用<ul>
+<li>开发人员接受培训，获得开发项目所需技能的费用</li>
+</ul>
+</li>
+<li>差服费<ul>
+<li>拜访客户，参加会议等的费用</li>
+</ul>
+</li>
+<li>维护的费用<ul>
+<li>定时的数据备份，系统监控，系统维修和升级等引起的费用</li>
+</ul>
+</li>
+<li>生产停顿的损失<ul>
+<li>因为项目调试引起正常工作业务停顿的损失</li>
+</ul>
+</li>
+<li>市扬和服务的费用<ul>
+<li>推广软件产品所要的广告费用，参加展览会的费用等</li>
+</ul>
+</li>
+<li>机会成本<ul>
+<li>因为投资该项目，而不能投资别的项目或者放银行收取利息，的机会成本</li>
+</ul>
+</li>
+<li>节约商业活动成本<ul>
+<li>只要是和无新软件系统时候比较，将节省的时间和原材料折算成量化的数字。例如，开发了新的库存管理系统后，加快了流通并减少 了库存浪费</li>
+</ul>
+</li>
+<li>创新商机增加销售<ul>
+<li>指由于使用新软件带来的盈利，可能是软件产品本身的销售，也可能是软件项目带来的营业成长</li>
+</ul>
+</li>
+<li>提高品牌含金量<ul>
+<li>提高质量和客户满意度，可以带来品牌含金量的提高。这比较虚一点，但也可以像企业的无形资产一样估算</li>
+</ul>
+</li>
+<li>为技术而技术是条死胡同</li>
+<li>以经济原则指导软件项目的决策过程</li>
+<li>按照产品规律来营销软件产品</li>
+<li>以收益为依据规划设计产品</li>
+</ul>
+<p><strong>分工协作</strong></p>
+<ul>
+<li>三驾马车<ul>
+<li>产品经理</li>
+<li>项目经理</li>
+<li>技术经理</li>
+</ul>
+</li>
+<li>项目管理的角色 <ul>
+<li>非正式的角色</li>
+<li>明确定义的角色(PM)<ul>
+<li>领导整个团队以了解项目工作(计划，进度安排以及收集需求)</li>
+<li>带领项目进行设计和开发工作(沟通、决策以及中期策略)</li>
+<li>以及驱动完成整个项目(领导力、凤险管理以及终局策略)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>目标驱动</strong></p>
+<ul>
+<li>目标的SMART原则<ul>
+<li>specific</li>
+<li>measurable</li>
+<li>achievable</li>
+<li>reasonable</li>
+<li>time</li>
+</ul>
+</li>
+</ul>
+<p><strong>常来常往</strong></p>
+<ul>
+<li>相互尊重</li>
+<li>管道流畅</li>
+<li>开放透明</li>
+<li>坦诚真实</li>
+</ul>
+<p><strong>有张有驰</strong></p>
+<ul>
+<li>•Kick-off Meeting</li>
+<li>发布聚会</li>
+<li>休假</li>
+<li>技术培训</li>
+<li>人员培训和被培训</li>
+<li>换个项目</li>
+</ul>
+<p><strong>不断总结</strong></p>
+<ul>
+<li>关键是”不断”</li>
+</ul>
+<h3 id="6-项目实践"><a href="#6-项目实践" class="headerlink" title="6. 项目实践"></a>6. 项目实践</h3><ul>
+<li>为实践项目组建你的团队<ul>
+<li>选择技能互补的成员组成团队，明确分工</li>
+<li>根据成员特点，选择团队结构。(建议使用 民主团队)</li>
+<li>建立团队章程</li>
+<li>明确团队的交流沟通手段</li>
+</ul>
+</li>
+<li>选择并熟悉一个配置管理工具，搭建配置管理环境，确定配置管理工具使用规则<ul>
+<li>常见的配置管理工具有<ul>
+<li>SVN(Subversion)</li>
+<li>CVS(Concurrent Versions System)</li>
+<li>VSS(Visual Source Safe</li>
+<li>ClearCase</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件需求基础"><a href="#软件需求基础" class="headerlink" title="软件需求基础"></a>软件需求基础</h2><h3 id="1-为什么要开发需求？"><a href="#1-为什么要开发需求？" class="headerlink" title="1. 为什么要开发需求？"></a>1. 为什么要开发需求？</h3><p><strong>软件建立的依据？</strong></p>
+<ul>
+<li>单纯的软件系统是不能解决问题的，它只有和现实世界之间形成有效互动才能实现问题的解决</li>
+</ul>
+<h3 id="2-如何得到需求？"><a href="#2-如何得到需求？" class="headerlink" title="2. 如何得到需求？"></a>2. 如何得到需求？</h3><p><strong>需求工程</strong></p>
+<ul>
+<li>概念：<ul>
+<li>所有需求处理活动的总和。它收集信息，分析问题，整合观点，记录需求并验证其正确性，最终描述出软件被应用后与其环境互动形成的期望效应</li>
+</ul>
+</li>
+<li>三个主要任务：<ul>
+<li>需求工程必须说明软件系统将被应用的应用环境及其目标，说明用来达成这些目标的软件功能，也即要同时说明软件需要”做什么”和”为什么”需要做</li>
+<li>需求工程必须将目标和功能反映到软件系统当中，映射为可行的软件行为，并对软件行为进行准确的规格说明</li>
+<li>现实世界是不断变化的世界，因此需求工程还需要妥善处理目标和功能随着时间演化的变动情况</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求获取</strong></p>
+<ul>
+<li>从人，文档或者环境当中获取需求的过程</li>
+<li>要利用各种方法和技术来”发现”需求</li>
+<li>目标分析<ul>
+<li>根据问题确定目标</li>
+<li>通过分析利害关系人确定目标</li>
+</ul>
+</li>
+<li>用户需求获取<ul>
+<li>面谈(Interview)</li>
+<li>集体获取方法</li>
+<li>头脑风暴</li>
+<li>原型</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求分析</strong></p>
+<ul>
+<li>通过建模来整合各种信息，以使得人们更好的理解问题</li>
+<li>为问题定义出一个需求集合，这个集合能够为问题界定一个有效的解决方案</li>
+<li>检查需求当中存在的错误，遗漏，不一致等各种缺陷，并加以修正</li>
+<li>边界分析<ul>
+<li>定义项目的范围</li>
+<li>系统边界的定义要保证系统能够和周围环境形成有效的互动</li>
+<li>系统用例图通常被用来定义系统的边界</li>
+</ul>
+</li>
+<li>需求建模<ul>
+<li>建模是为展现和解释信息而进行的抽象描述活动</li>
+<li>常用的技术包括类图，顺序图，状态图等建模技术</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求规格说明</strong></p>
+<ul>
+<li>在系统用户之间交流需求信息</li>
+<li>要简洁，精确，一致和易于理解</li>
+<li>定制文档模版</li>
+<li>编写文档</li>
+</ul>
+<p><strong>需求验证</strong></p>
+<ul>
+<li>需求规格说明文档至少要满足下面几个标准<ul>
+<li>文档内每条需求都正确，准确的反映了用户的意图</li>
+<li>文档记录的需求集在整体上具有完整性和一致性</li>
+<li>文档的组织方式和需求的书写方式具有可读性和可修改性</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求管理</strong></p>
+<ul>
+<li>保证需求作用的持续，稳定和有效发挥<ul>
+<li>在需求开发活动之后，设计，测试，实现等后续的软件系统开发活动都需要以围绕需求开展工作</li>
+</ul>
+</li>
+<li>进行变更控制<ul>
+<li>纳入和实现合理的变更请求，拒绝不合理的变更请求，控制变更的成本和影响范围</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-什么是需求？"><a href="#3-什么是需求？" class="headerlink" title="3. 什么是需求？"></a>3. 什么是需求？</h3><p><strong>需求定义</strong></p>
+<ul>
+<li>IEEE对需求的定义为<ul>
+<li>用户为了解决问题或达到某些目标所需要的条件或能力</li>
+<li>系统或系统部件为了满足合同，标准，规范或其它正式文档所规定的要求而需要具备的条件或能力</li>
+<li>对上面的一个条件或一种能力的一种文档化表述</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求开发的目标</strong></p>
+<ul>
+<li>需求是一种解决问题后所能达到的期望</li>
+<li>一件事情的两面<ul>
+<li>问题是糟糕的一面</li>
+<li>需求是理想的一面</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%9C%80%E6%B1%82%E5%BC%80%E5%8F%91%E7%9A%84%E7%9B%AE%E6%A0%87.png" alt=""></p>
+<p><strong>需求</strong></p>
+<ul>
+<li>是一种期望</li>
+<li>源自现实又高于现实</li>
+<li>需求是多变和可调整的，项目可以依据实际情况调整需求的实现程度</li>
+</ul>
+<p><strong>问题域</strong></p>
+<ul>
+<li>现实世界运行规律的一种反映</li>
+<li>需求的产生地，也是需求的解决地</li>
+<li>最终的软件产品要在现实中部署，它能够部分影响问题域，但不能任意改变现实<ul>
+<li>软件开发必须尊重问题域，不能因为技术原因妄自修改现实世界的实际情况。</li>
+</ul>
+</li>
+</ul>
+<p><strong>规格说明</strong></p>
+<ul>
+<li>软件产品的方案描述，它以软件产品的运行机制为主要内容</li>
+<li>它不是需求但实现需求，不是问题域但需要与问题域互动</li>
+<li>它不是需求但实现需求，不是问题域但需要与问题域互动</li>
+</ul>
+<h3 id="4-需求的层次性"><a href="#4-需求的层次性" class="headerlink" title="4. 需求的层次性"></a>4. 需求的层次性</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%9C%80%E6%B1%82%E5%B1%82%E6%AC%A1%E6%80%A7.png" alt=""></p>
+<ul>
+<li>R2：在系统使用3个月后，销售额度应该提高20%</li>
+<li>R3：系统要帮助收银员完成销售处理</li>
+<li>R4：收银员输入购买的商品时，系统要显示该商品的描述，单价，数量和总价</li>
+</ul>
+<p><strong>业务需求</strong></p>
+<ul>
+<li>系统建立的战略出发点，表现为高层次的目标(Objective)，它描述了组织为什么要开发系统 </li>
+<li>为了满足用户的业务需求，需求工程师需要描述系统高层次的解决方案，定义系统应该具备的特性(Feature)</li>
+<li>R2：在系统使用3个月后，销售额度应该提高20%</li>
+<li>可以建立高层次的解决方案，其系统特性如SF1～SF4所示<ul>
+<li>SF1：管理VIP顾客信息</li>
+<li>SF2：提供VIP顾客服务，增加回头率</li>
+<li>SF3：使用多样化的特价方案，吸引顾客购买，增加销售额</li>
+<li>SF4：使用多样化的赠送方案，吸引顾客购买，增加销售额</li>
+</ul>
+</li>
+</ul>
+<p><strong>用户需求</strong></p>
+<ul>
+<li>执行实际工作的用户对系统所能完成的具体任务的期望，描述了系统能够帮助用户做些什么<ul>
+<li>直接用户</li>
+<li>间接用户 </li>
+</ul>
+</li>
+<li>对所有的用户需求，都应该有充分的问题域知识作为背景支持 </li>
+<li>特性<ul>
+<li>模糊，不清晰 </li>
+<li>多特性混杂 </li>
+<li>多逻辑混杂 </li>
+</ul>
+</li>
+<li>SF1：管理VIP顾客信息</li>
+<li>针对每一个系统特性，都可以建立一组用户需求。例如对SF1，可以建立用户需求组如UR1.1～UR1.4，它们中每一条都是用户完成具体任务所需要的功能：<ul>
+<li>UR1.1：客户经理可以使用系统添加，修改或者删除会员个人信息</li>
+<li>UR1.2：收银员使用系统进行销售时会记录会员的购买信息</li>
+<li>UR1.3：客户经理可以使用系统查看会员的个人信息和购买信息</li>
+<li>UR1.4：客户经理可以使用系统查看所有会员的统计信息</li>
+</ul>
+</li>
+</ul>
+<p><strong>系统级需求</strong></p>
+<ul>
+<li>用户对系统行为的期望，每个系统级需求反映了一次外界与系统的交互行为，或者系统的一个实现细节</li>
+<li>描述了开发人员需要实现什么 </li>
+<li>将用户需求转化为系统需求的过程是一个复杂的过程<ul>
+<li>首先需要分析问题领域及其特性，从中发现问题域和计算机系统的共享知识，建立系统的知识模型</li>
+<li>然后将用户需求部署到系统模型当中，即定义系列的系统行为，让它们联合起来实现用户需求，每一个系统行为即为一个系统需求</li>
+<li>该过程就是需求工程当中最为重要的需求分析活动，又称建模与分析活动</li>
+</ul>
+</li>
+<li>UR1.3：客户经理可以使用系统查看会员的个人信息和购买信息</li>
+<li>对用户需求UR1.3，可以依据任务中的交互细节将之转化为系统级需求SR1.3.1～SR1.3.4<ul>
+<li>SR1.3.1在接到客户经理的请求后，系统应该为客户经理提供所有会员的个人信息</li>
+<li>SR1.3.2在客户经理输入会员的客户编号时，系统要提供该会员的个人信息</li>
+<li>SR1.3.3在客户经理选定一个会员并申请查看购买信息时，系统要提供该会员的历史购买记录</li>
+<li>SR1.3.4经理可以通过键盘输入客户编号，也可以通过读卡器输入客户编号</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-需求分类与书写"><a href="#5-需求分类与书写" class="headerlink" title="5. 需求分类与书写"></a>5. 需求分类与书写</h3><p><strong>需求书写</strong></p>
+<ul>
+<li>作为一种期望，需求通常被表述为”系统应该…”，”在…时，系统应该…”，”用户可以使用系统…”等，例如R1<ul>
+<li>R1：系统应该允许顾客退回已经购买的产品</li>
+</ul>
+</li>
+</ul>
+<p><strong>案例</strong></p>
+<ul>
+<li>项目需求<ul>
+<li>R5：项目的成本要控制在60万元人民币以下</li>
+<li>R6：项目要在6个月内完成</li>
+</ul>
+</li>
+<li>过程需求<ul>
+<li>R7：在开发中，开发者要提交软件需求规格说明文档，设计描述文档和测试报告</li>
+<li>R8：项目要使用持续集成方法进行开发</li>
+</ul>
+</li>
+<li>其他需求<ul>
+<li>R9：系统要购买专用服务器，其规格不低于….</li>
+<li>R10：系统投入使用时，需要对用户进行1个星期的集中培训</li>
+</ul>
+</li>
+<li>不切实际的期望<ul>
+<li>R11：系统要分析会员的购买记录，预测该会员将来一周和一个月内会购买的商品</li>
+<li>R12：系统要能够对每月的出入库以及销售行为进行标准的财务分析</li>
+<li>R13：在使用系统时，收银员必须要在2个小时内完成一个销售处理的所有操作</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求的分类</strong></p>
+<ul>
+<li>功能需求(Functional Requirement)：<ul>
+<li>和系统主要工作相关的需求，即在不考虑物理约束的情况下，用户希望系统所能够执行的活动，这些活动可以帮助用户完成任务。功能需求主要表现为系统和环境之间的行为交互</li>
+</ul>
+</li>
+<li>性能需求(Performance Requirement)：<ul>
+<li>系统整体或系统组成部分应该拥有的性能特征，例如CPU使用率，内存使用率等</li>
+</ul>
+</li>
+<li>质量属性(Quality Attribute)：<ul>
+<li>系统完成工作的质量，即系统需要在一个”好的程度”上实现功能需求，例如可靠性程度，可维护性程度等</li>
+</ul>
+</li>
+<li>对外接口(External Interface)：<ul>
+<li>系统和环境中其他系统之间需要建立的接口，包括硬件接口，软件接口，数据库接口等等</li>
+</ul>
+</li>
+<li>约束 <ul>
+<li>进行系统构造时需要遵守的约束，例如编程语言，硬件设施等</li>
+</ul>
+</li>
+<li>其他 </li>
+</ul>
+<p><strong>功能需求</strong></p>
+<ul>
+<li>最常见，最主要和最重要的需求</li>
+<li>能够为用户带来业务价值的系统行为</li>
+<li>最需要按照三个抽象层次进行展开</li>
+<li>软件产品产生价值的基础</li>
+</ul>
+<p><strong>性能需求</strong></p>
+<ul>
+<li>需要进行专门模拟和测试</li>
+<li>速度(Speed)，系统完成任务的时间，例如PR1<ul>
+<li>PR1：所有的用户查询都必须在10秒内完成。</li>
+</ul>
+</li>
+<li>容量(Capacity)，系统所能存储的数据量，例如PR2<ul>
+<li>PR2：系统应该能够存储至少100万个销售信息</li>
+</ul>
+</li>
+<li>吞吐量(Throughput)，系统在连续的时间内完成的事务数量，例如PR3<ul>
+<li>PR3：解释器每分钟应该至少解析5000条没有错误的语句</li>
+</ul>
+</li>
+<li>负载(Load)，系统可以承载的并发工作量，例如PR4<ul>
+<li>PR4：系统应该允许50个营业服务器同时从集中服务器上进行数据的上传或下载</li>
+</ul>
+</li>
+<li>实时性(Time-Critical)，严格的实时要求，例如PR5<ul>
+<li>PR5：监测到病人异常后，监控器必须在0.5秒内发出警报</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求的灵活性</strong></p>
+<ul>
+<li>PR6：98％的查询不能超过10秒</li>
+<li>PR7：<ul>
+<li>(最低标准)在200个用户并发时，系统不能崩溃</li>
+<li>(一般标准)在200个用户并发时，系统应该在80％的时间内能正常工作</li>
+<li>(理想标准)在200个用户并发时，系统应该能保持正常的工作状态</li>
+</ul>
+</li>
+</ul>
+<p><strong>常见质量属性</strong></p>
+<ul>
+<li>可靠性(Reliability)：在规格时间间隔内和规定条件下，系统或部件执行所要求能力的能力<ul>
+<li>QA1：在进行数据的下载和上传中，如果网络故障，系统不能出现故障</li>
+</ul>
+</li>
+<li>可用性(Availability)：软件系统在投入使用时可操作和可访问的程度或能实现其指定系统功能的概率<ul>
+<li>QA2：系统的可用性要达到98%</li>
+</ul>
+</li>
+<li>安全性(Security)：软件阻止对其程序和数据进行未授权访问的能力，未授权的访问可能是有意，也可能是无意的<ul>
+<li>QA3：VIP顾客只能查看自己的个人信息和购买记录。收银员只能查看，不能修改，删除VIP顾客的信息</li>
+</ul>
+</li>
+<li>可维护性(Maintainability)：软件系统或部件能修改以排除故障，改进性能或其他属性或适应变更了的环境的容易程度，包括可修改性(Modifiability)和可扩展性(Extensibility)<ul>
+<li>QA4：如果系统要增加新的特价类型，要能够在2个人月内完成</li>
+</ul>
+</li>
+<li>可移植性(Portability)：系统或部件能从一种硬件或软件环境转换至另外一种环境的特性<ul>
+<li>QA5：集中服务器要能够在1人月内从Window 7操作系统更换到Solaris 10操作系统</li>
+</ul>
+</li>
+<li>易用性(Usability)：与用户使用软件所花费的努力及其对使用的评价相关的特性<ul>
+<li>QA6：使用系统1个月的收银员进行销售处理的效率要达到10件商品/分钟</li>
+</ul>
+</li>
+</ul>
+<p><strong>对外接口</strong></p>
+<ul>
+<li>解系统和其他系统之间的软硬件接口 <ul>
+<li>接口的用途</li>
+<li>接口的输入输出</li>
+<li>数据格式</li>
+<li>命令格式</li>
+<li>异常处理要求</li>
+</ul>
+</li>
+<li>用户界面 </li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>总体上限制了开发人员设计和构建系统时的选择范围 <ul>
+<li>系统开发及运行的环境<ul>
+<li>包括目标机器，操作系统，网络环境，编程语言，数据库管理系统等</li>
+<li>C1：系统要使用Java语言进行开发</li>
+</ul>
+</li>
+<li>问题域内的相关标准<ul>
+<li>包括法律法规，行业协定，企业规章等</li>
+</ul>
+</li>
+<li>商业规则<ul>
+<li>用户在任务执行中的一些潜在规则也会限制开发人员设计和构建系统的选择范围 </li>
+<li>R1：已过保质期的食品不能销售</li>
+<li>R2：顾客可以使用美元付款</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>其他：数据需求</strong></p>
+<ul>
+<li>功能需求的补充<ul>
+<li>如果在功能需求部分明确定义了相关的数据结构，那么就不需要再行定义数据需求</li>
+</ul>
+</li>
+<li>数据需求是需要在数据库，文件或者其他介质中存储的数据描述，通常包括下列内容<ul>
+<li>各个功能使用的数据信息</li>
+<li>使用频率</li>
+<li>可访问性要求</li>
+<li>数据实体及其关系</li>
+<li>完整性约束</li>
+<li>数据保持要求</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><ul>
+<li>需求工程包括需求开发与需求管理，需求开发包括需求获取，需求分析，需求规格说明和需求验证<ul>
+<li>在中小规模系统开发中，需求分析居于主要地位</li>
+</ul>
+</li>
+<li>需求是用户为了解决问题或达到某些目标所需要的条件或能力<ul>
+<li>问题，需求，问题域，解系统，规格说明</li>
+<li>主要分为3个层次：业务需求(战略问题与目标)，用户需求(任务问题与目标)，系统级需求(系统行为与目标)</li>
+</ul>
+</li>
+<li>需求是系统或系统部件为了满足各类正式文档所规定的要求而需要具备的条件或能力<ul>
+<li>需求谱系</li>
+<li>IEEE的需求分类与书写</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="需求分析方法"><a href="#需求分析方法" class="headerlink" title="需求分析方法"></a>需求分析方法</h2><h3 id="1-为什么进行需求分析"><a href="#1-为什么进行需求分析" class="headerlink" title="1. 为什么进行需求分析"></a>1. 为什么进行需求分析</h3><p><strong>为什么要需求分析</strong></p>
+<ul>
+<li>获取结果<ul>
+<li>用户的理解</li>
+<li>问题的描述</li>
+</ul>
+</li>
+<li>需求分析<ul>
+<li>建立分析模型</li>
+<li>创建解决方案</li>
+</ul>
+</li>
+<li>需求开发目标<ul>
+<li>共同的理解</li>
+<li>解决方案的描述</li>
+</ul>
+</li>
+</ul>
+<p><strong>需求分析的任务</strong></p>
+<ul>
+<li>建立分析模型，达成开发者和用户对需求信息的共同理解</li>
+<li>依据共同的理解，发挥创造性，创建软件系统解决方案</li>
+</ul>
+<p><strong>需求分析模型与建模</strong></p>
+<ul>
+<li>模型是对事物的抽象，帮助人们在创建一个事物之前可以有更好的理解</li>
+<li>建立模型的过程被称为建模。”它是对系统进行思考和推理的一种方式。建模的目标是建立系统的一个表示，这个表示以精确一致的方式描述系统，使得系统的使用更加容易”</li>
+</ul>
+<h3 id="2-面向对象分析"><a href="#2-面向对象分析" class="headerlink" title="2. 面向对象分析"></a>2. 面向对象分析</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%80%E5%8D%95%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p><strong>用例</strong></p>
+<ul>
+<li>基本特点：目标，交互，场景(行为序列)</li>
+<li>“在系统(或者子系统或者类)和外部对象的交互当中所执行的行为序列的描述，包括各种不同的序列和错误的序列，它们能够联合提供一种有价值的服务”</li>
+<li>用例描述了在不同条件下系统对某一用户的请求的响应。根据用户的请求和请求时的系统条件，系统将执行不同的行为序列，每一个行为序列被称为一个场景。一个用例是多个场景的集合</li>
+</ul>
+<p><strong>用例图基本元素</strong></p>
+<ul>
+<li>用例</li>
+<li>参与者</li>
+<li>关系</li>
+<li>系统边界</li>
+</ul>
+<p><strong>参与者</strong></p>
+<ul>
+<li>参与者是与开发的系统进行交互的用户或其他系统等角色</li>
+<li>用例图中一个单一的参与者可以代表多个用户(或系统)</li>
+<li>一个单一的用户(或系统)可能扮演多种角色</li>
+<li>参与者不一定是人，例如，需要从当前系统获取信息的外部系统也是参与者</li>
+</ul>
+<p><strong>用例: 上下文中的需求</strong></p>
+<ul>
+<li>以用例的形式表达需求</li>
+<li>用例代表了一组典型的场景，帮助构建，关联和理解基本需求</li>
+<li>场景描述了系统在实际中如何使用<ul>
+<li>用户和计算机系统间的典型交互</li>
+</ul>
+</li>
+</ul>
+<p><strong>系统边界</strong></p>
+<ul>
+<li>强调将重点放在哪些应该被细化哪些不应该</li>
+<li>系统边界隐式存在于图中，没有明确表示系统边界</li>
+<li>参与者通常在边界外面，用例通常在边界里面</li>
+</ul>
+<p><strong>用例图的建立</strong></p>
+<ul>
+<li>目标分析与解决方向的确定</li>
+<li>寻找参与者</li>
+<li>寻找用例</li>
+<li>细化用例</li>
+</ul>
+<p><strong>目标分析</strong></p>
+<ul>
+<li>问题 -&gt; 目标 -&gt; 解决方案</li>
+<li>×××连锁商店是一家刚刚发展起来的小型连锁商店，其前身是一家独立的小百货门面店。<ul>
+<li>首先是随着商店规模的扩大，顾客量大幅增长，手工作业销售迟缓，顾客购物排队现象严重，导致流失客源</li>
+<li>其次是商店的商品品种增多，无法准确掌握库存，商品积压，缺货和报废的现象上升明显</li>
+<li>再次是商店面临的竞争比以前更大，希望在降低成本，吸引顾客，增强竞争力的同时，保持盈利水平</li>
+</ul>
+</li>
+<li>BR1：在系统使用6个月后，商品积压，缺货和报废的现象要减少50%</li>
+<li>BR2：在系统使用3个月后，销售人员工作效率提高50%</li>
+<li>BR3：在系统使用6个月后，运营成本要降低15%<ul>
+<li>范围：人力成本和库存成本</li>
+<li>度量：检查平均员工数量和平均每10,000元销售额的库存成本</li>
+</ul>
+</li>
+<li>BR4：在系统使用6个月后，销售额度要提高20%<ul>
+<li>最好情况：40%</li>
+<li>最可能情况：20%</li>
+<li>最坏情况：10%</li>
+</ul>
+</li>
+<li>SF1：分析商品库存，发现可能的商品积压，缺货和报废现象</li>
+<li>SF2：根据市场变化调整销售的商品</li>
+<li>SF3：制定促销手段，处理积压商品</li>
+<li>SF4：与生产厂家联合进行商品促销</li>
+<li>SF5：制定促销手段进行销售竞争</li>
+<li>SF6：掌握员工变动和授权情况</li>
+<li>SF7：处理商品入库与出库</li>
+<li>SF8：发展会员，提高顾客回头率</li>
+<li>SF9：允许积分兑换商品和赠送吸引会员的礼品，提高会员满意度</li>
+<li>SF10：帮助收银员处理销售与退货任务</li>
+<li><strong>从上述特性可以发现涉及的用户类别：</strong><ul>
+<li>总经理</li>
+<li>客户经理</li>
+<li>收银员</li>
+<li>管理员</li>
+</ul>
+</li>
+<li><strong>每个用户的任务(目标)都是一个独立用例</strong></li>
+</ul>
+<p><strong>寻找参与者与用例</strong></p>
+<ul>
+<li>总经理的目标有：<ul>
+<li>产品调整(增删改产品信息)</li>
+<li>特价策略制定(增删改特价策略)</li>
+<li>赠送策略制定(增删改赠送策略)</li>
+<li>库存分析(分析可能的商品积压)</li>
+</ul>
+</li>
+<li>客户经理的目标有：<ul>
+<li>会员管理(会员发展，礼品赠送)</li>
+<li>库存管理(商品入库，出库和库存分析)</li>
+</ul>
+</li>
+<li>收银员的目标有：<ul>
+<li>销售处理(销售)</li>
+<li>退货(退货)</li>
+</ul>
+</li>
+<li>管理员的目标有：<ul>
+<li>用户管理(增删改用户信息)</li>
+</ul>
+</li>
+</ul>
+<p><strong>细化用例</strong></p>
+<ul>
+<li>如果用例的粒度不合适就需要进行细化和调整<ul>
+<li>判断标准是：用例描述了为应对一个业务事件，由一个用户发起，并在一个连续时间段内完成，可以增加业务价值的任务</li>
+<li>不要将没有业务价值(而是技术实现需要)的事件作为用例(例如，登录(安全性需求)，输入/输入数据检查(数据需求或者业务规则)，连接数据库，网络传输等等)</li>
+<li>不要将没有独立业务价值的单个操作(它们仅仅是技术实现上独立)作为用例，例如删除，增加，修改，保存等等</li>
+</ul>
+</li>
+<li>总经理的目标有：<ul>
+<li>产品调整(增删改产品信息)</li>
+<li>特价策略制定(增删改特价策略)</li>
+<li>赠送策略制定(增删改赠送策略)</li>
+<li>库存分析(分析可能的商品积压)</li>
+</ul>
+</li>
+<li>特价策略制定，赠送策略制定两个用例的业务目的，发起源和过程基本相同，仅仅是业务数据不同，所以可以合并为一个用例销售策略制定</li>
+<li>客户经理的目标有：<ul>
+<li>会员管理(会员发展，礼品赠送)</li>
+<li>库存管理(商品入库，出库和库存分析)</li>
+</ul>
+</li>
+<li>会员管理用例有两个明显不同的业务事件，可以被细化为发展会员和礼品赠送2个更细粒度的用例</li>
+<li>客户经理的库存管理用例也有三个不同的业务目标：出库，入库和库存分析，所以也应该细化为三个用例商品出库，商品入库和库存分析，其中库存分析用例与总经理的库存分析用例相同</li>
+</ul>
+<p><strong>常见错误</strong></p>
+<ul>
+<li>不要将用例细化为单个操作</li>
+<li>不要将单个步骤细化为用例</li>
+<li>不要将片面的一个方面细化为用例</li>
+<li>不要将”登录”，”数据验证”，”连接数据库”等没有业务价值的内容作为用例</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%BF%9E%E9%94%81%E8%B6%85%E5%B8%82%E7%94%A8%E4%BE%8B%E5%9B%BE.png" alt=""></p>
+<p><strong>用例描述——用例模板</strong></p>
+<ul>
+<li>ID：用例的标识</li>
+<li>名称：对用例内容的精确描述，体现了用例所描述的任务</li>
+<li>参与者：描述系统的参与者和每个参与者的目标</li>
+<li>触发条件：标识启动用例的事件，可能是系统外部的事件，也可能是系统内部的事件，还可能是正常流程的第一个步骤</li>
+<li>前置条件：用例能够正常启动和工作的系统状态条件</li>
+<li>后置条件：用例执行完成后的系统状态条件</li>
+<li>正常流程：在常见和符合预期的条件下，系统与外界的行为交互序列</li>
+<li>扩展流程：用例中可能发生的其他场景</li>
+<li>特殊需求：和用例相关的其他特殊需求，尤其是非功能性需求</li>
+</ul>
+<p><strong>UC1 销售处理</strong></p>
+<ul>
+<li>参与者：收银员，目标是快速，正确地完成商品销售，尤其不要出现支付错误</li>
+<li>触发条件：顾客携带商品到达销售点</li>
+<li>前置条件：收银员必须已经被识别和授权</li>
+<li>后置条件：存储销售记录，包括购买记录，商品清单，赠送清单和付款信息。更新库存。打印收据</li>
+<li>正常流程:<ol>
+<li>收银员输入会员编号</li>
+<li>收银员输入商品</li>
+<li>系统显示购买信息。收银员重复2-3步，直至完成所有输入</li>
+<li>系统显示总价和赠品信息</li>
+<li>顾客付款</li>
+<li>系统找零</li>
+<li>系统更新数据</li>
+<li>系统打印收据</li>
+<li>顾客离开</li>
+</ol>
+</li>
+<li>扩展流程：<ul>
+<li>2a 有多个具有相同商品类别的商品(如5把相同的雨伞)<ol>
+<li>收银员可以手工输入商品标识和数量</li>
+</ol>
+</li>
+<li>2-5a 顾客要求收银员从已输入的商品中去掉一个商品：<ol>
+<li>收银员输入商品标识并将其删除</li>
+<li>系统更新显示的商品列表</li>
+<li>系统重新计算总价</li>
+<li>系统重新计算赠送商品</li>
+</ol>
+</li>
+<li>2-5b 顾客要求收银员取消交易<ol>
+<li>收银员在系统中取消交易</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>特殊需求:<ul>
+<li>系统显示的信息要在1米之外能看清</li>
+<li>商品标识为13位0～9的数字</li>
+</ul>
+</li>
+</ul>
+<p><strong>交互图</strong></p>
+<ul>
+<li>通常描述的是单个用例的典型场景，它也因此被成为”用例的实现”</li>
+<li>交互图有顺序图，通信图，交互概述图和时间图四种类型，其中顺序图是最为常用的一种</li>
+</ul>
+<h3 id="3-结构化分析"><a href="#3-结构化分析" class="headerlink" title="3. 结构化分析"></a>3. 结构化分析</h3><h3 id="4-需求细化"><a href="#4-需求细化" class="headerlink" title="4. 需求细化"></a>4. 需求细化</h3><p><br></p>
+<hr>
+<h2 id="需求文档化与验证"><a href="#需求文档化与验证" class="headerlink" title="需求文档化与验证"></a>需求文档化与验证</h2><h3 id="1-为什么文档化需求"><a href="#1-为什么文档化需求" class="headerlink" title="1. 为什么文档化需求"></a>1. 为什么文档化需求</h3><p><strong>为什么需要文档？</strong></p>
+<ul>
+<li>团队合作和沟通<ul>
+<li>项目经理</li>
+<li>架构师</li>
+<li>软件设计人员</li>
+<li>程序员</li>
+<li>维护人员</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-用例文档"><a href="#2-用例文档" class="headerlink" title="2. 用例文档"></a>2. 用例文档</h3><ul>
+<li>在用户的角度以用例文本为主描述软件系统与外界的交互</li>
+<li>基本职责是把问题域信息和需求传达给软件系统解决方案的设计者</li>
+</ul>
+<h3 id="3-软件需求规格说明文档"><a href="#3-软件需求规格说明文档" class="headerlink" title="3. 软件需求规格说明文档"></a>3. 软件需求规格说明文档</h3><ul>
+<li>在软件产品的角度以系统级需求列表的方式描述软件系统解决方案</li>
+<li>用例 -&gt; 软件规格说明文档<ul>
+<li>用例侧重于交互流程</li>
+<li>规格(解决方案)侧重于独立需求</li>
+<li>用例以一次交互为基础</li>
+<li>规格需求以一次交互中的软件系统处理细节为基础</li>
+</ul>
+</li>
+<li>用例：任务型</li>
+<li>规格：列表型</li>
+</ul>
+<h3 id="4-文档化需求的注意事项"><a href="#4-文档化需求的注意事项" class="headerlink" title="4. 文档化需求的注意事项"></a>4. 文档化需求的注意事项</h3><p><strong>技术文档写作要点</strong></p>
+<ul>
+<li>简洁</li>
+<li>精确</li>
+<li>易读(查询)<ul>
+<li>有效使用引言，目录，索引等能够增强文档易读性的方法</li>
+<li>使用系统化的方式组织内容信息，提供文档内容的可读性</li>
+</ul>
+</li>
+<li>易修改</li>
+</ul>
+<p><strong>书写要点</strong></p>
+<ul>
+<li>需求书写要点<ul>
+<li>使用用户术语</li>
+<li>可验证</li>
+<li>可行性</li>
+</ul>
+</li>
+<li>需求规格说明文档书写要点<ul>
+<li>充分利用标准的文档模版，保持所有内容位置得当</li>
+<li>保持文档内的需求集具有完备性和一致性。</li>
+<li>为需求划分优先级</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-验证需求"><a href="#5-验证需求" class="headerlink" title="5. 验证需求"></a>5. 验证需求</h3><p><strong>验证需求的方法</strong></p>
+<ul>
+<li>评审</li>
+<li>开发系统测试用例</li>
+<li>度量</li>
+</ul>
+<p><strong>评审</strong></p>
+<ul>
+<li>重视需求评审</li>
+<li>保证用户与客户参与</li>
+<li>场景与线索最受环境</li>
+<li>检查列表</li>
+</ul>
+<p><strong>开发系统测试用例</strong></p>
+<ul>
+<li>以需求为线索，开发测试用例套件</li>
+<li>使用测试技术确定输入/输出数据，开发测试用例</li>
+</ul>
+<p><strong>度量需求</strong></p>
+<ul>
+<li>用例的数量<ul>
+<li>平均每个用例中的场景数量</li>
+<li>平均用例行数</li>
+</ul>
+</li>
+<li>软件需求数量</li>
+<li>非功能需求数量</li>
+<li>功能点数量</li>
+<li>如果平均的用例场景数量过低，那么就可能存在对异常流程考虑不周的可能</li>
+<li>如果平均用例行数过大或者过小，那么可能对用例的细分粒度过大或者过小</li>
+<li>用例数量，软件需求数量和功能点数量应该是相对比例均衡的，如果三者之间有着非常大的差距，那么可能会有需求的遗漏</li>
+</ul>
+<h3 id="6-度量需求功能点"><a href="#6-度量需求功能点" class="headerlink" title="6. 度量需求功能点"></a>6. 度量需求功能点</h3><p><strong>功能点度量</strong></p>
+<ul>
+<li>用于估算和度量软件系统规模与复杂度的抽象单位</li>
+<li>在需求开发阶段，估计代码行数误差较大，使用功能点来估算和度量软件系统的规模与复杂度则有较好的效果</li>
+</ul>
+<p><strong>Function point: data</strong></p>
+<ul>
+<li>ILF：Internal Logical File，用户能识别的由本系统维护（增，删，改）的数据对象，数据对象可以是业务数据、控制信息、或者业务规则数据。E-R图中的一个实体，系统的一个配置文件等都是ILF的实例</li>
+<li>EIF：External Interface File, 由别的系统维护的数据对象，但本系统需要参照。通常是别的系统的ILF</li>
+<li>EI：External Input，外部输入型事务处理，EI事务从系统外部输入数据到系统内部，这可能是用户通过画面输入，也可能是别的系统通过系统接口输入。输入包括业务数据，也包括按钮，Checkbox等控制数据。EI通常输入数据到ILF，一个ILF的维护通常包括增删改三个EI</li>
+<li>EO：External Output，输出型事务处理，如报表输出，画面初始化的输出。EO从系统内部输出数据到系统外部。EO输出的数据或者来自ILF或EIF，或者组合ILF/EIF的字段而来的新数据，或者通过算法计算而来的数据。通常确认Message或错误提示不算作独立的EO，但通知Mail之类的算作独立的EO</li>
+<li>EQ：External Inquiry，外部查询，从外部输入一些条件，系统返回一定的输出。简单的信息抽取</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件设计基础"><a href="#软件设计基础" class="headerlink" title="软件设计基础"></a>软件设计基础</h2><h3 id="1-什么是软件设计"><a href="#1-什么是软件设计" class="headerlink" title="1. 什么是软件设计"></a>1. 什么是软件设计</h3><p><strong>什么是设计?</strong></p>
+<ul>
+<li>设计是规划，奠定基础作出系统每个对象</li>
+<li>设计是一种建造之前的”规划”！</li>
+<li>包括工程成分，也包含艺术成分</li>
+<li>设计经常需要一个设计师考虑一个对象或过程的审美，功能以及其他方面，这通常需要进行相当的研究，思考，建模，交互调整和重新设计</li>
+</ul>
+<p><strong>广义的软件设计</strong></p>
+<ul>
+<li>区分最终的产品与规划<ul>
+<li>规划是设计！</li>
+<li>真正的产品运行在计算机上，由0和1组成</li>
+</ul>
+</li>
+<li>程序代码是对真正软件的规划<ul>
+<li>编译器负责根据规划建造真正产品</li>
+<li>为产生程序代码所进行的一切工作都是设计活动<ul>
+<li>好的设计保证质量</li>
+<li>需求分析，概要设计，详细设计，编码，测试…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>狭义的软件设计</strong></p>
+<ul>
+<li>为使一软件系统满足规定的需求而定义系统或部件的体系结构，部件，接口和其他特征的过程</li>
+<li>设计过程的结果</li>
+</ul>
+<h3 id="2-设计的核心：复杂度控制"><a href="#2-设计的核心：复杂度控制" class="headerlink" title="2. 设计的核心：复杂度控制"></a>2. 设计的核心：复杂度控制</h3><p><strong>为什么要设计？</strong></p>
+<ul>
+<li>软件设计为什么是必要的？<ul>
+<li>事物的复杂性 VS 思维的有限性<ul>
+<li>7±2规则</li>
+<li>关注点分离与层次性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设计的难点是控制复杂性<ul>
+<li>抽象与分解 -&gt; 层次结构</li>
+<li>关注点分解 -&gt; 多视图模型</li>
+</ul>
+</li>
+</ul>
+<p><strong>广义上软件设计的层次性</strong></p>
+<ul>
+<li>产品设计</li>
+<li>工程设计<ul>
+<li>低层设计</li>
+<li>中层设计</li>
+<li>高层设计</li>
+<li>特殊主题<ul>
+<li>人机交互设计</li>
+<li>数据设计</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件产品设计</strong></p>
+<ul>
+<li>软件产品设计是规定软件产品特性，功能和接口以满足用户需求和愿望的活动</li>
+<li>需要用户界面，交互设计，沟通，工业设计，市场营销等技能</li>
+</ul>
+<p><strong>软件工程设计</strong></p>
+<ul>
+<li>软件工程设计是规定程序，子系统以及它们的组成部分和工作方式以满足软件产品规格的活动</li>
+<li>需要编程，算法，数据结构，软件设计原则，实践，过程，技术，架构和模式等技能</li>
+</ul>
+<p><strong>常见设计视角</strong></p>
+<ul>
+<li>上下文 <ul>
+<li>系统服务和用户</li>
+<li>UML用例图</li>
+</ul>
+</li>
+<li>组合<ul>
+<li>功能分解和运行时分解，子系统的构造，购买vs建造，构件的重用</li>
+<li>UML包图，构件图</li>
+</ul>
+</li>
+<li>逻辑结构<ul>
+<li>静态结构，类型和实现的重用。最重要的层，子系统，包，框架，类，接口等的概念性组织</li>
+<li>UML类图，对象图</li>
+</ul>
+</li>
+<li>依赖<ul>
+<li>互联，分享，参数化</li>
+<li>包图，构件图</li>
+</ul>
+</li>
+<li>交互<ul>
+<li>对象之间的消息通讯</li>
+<li>顺序图，通讯图</li>
+</ul>
+</li>
+<li>动态状态<ul>
+<li>动态状态的转移</li>
+<li>状态图</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-软件设计的目标与衡量标准"><a href="#3-软件设计的目标与衡量标准" class="headerlink" title="3. 软件设计的目标与衡量标准"></a>3. 软件设计的目标与衡量标准</h3><ul>
+<li>Vitruvius（《De Architectura》）<ul>
+<li>效用(Useful)，坚固(Solid)与美感(Beautiful)”</li>
+<li>效用：需求</li>
+<li>坚固：质量(可修改性，可靠性，安全性，性能…参加IEEE与ISO/IEC质量模型标准)</li>
+</ul>
+</li>
+<li>Brooks，设计原本：设计美学<ul>
+<li>简洁性</li>
+<li>结构清晰</li>
+<li>一致性</li>
+</ul>
+</li>
+</ul>
+<p><strong>衡量软件设计的标准</strong></p>
+<ul>
+<li>功效是必须的，容易达到的</li>
+<li>坚固才是设计的重点任务，是合格设计必须的</li>
+<li>美感是卓越者的素质<ul>
+<li>简洁：抽象，归纳，去除噪音</li>
+<li>结构清晰：隐喻—显而易见是正确的</li>
+<li>一致：用相同的方法做相同的事情</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-区分外部表现与内部结构"><a href="#4-区分外部表现与内部结构" class="headerlink" title="4. 区分外部表现与内部结构"></a>4. 区分外部表现与内部结构</h3><ul>
+<li>外部：简洁</li>
+<li>内部：坚固</li>
+</ul>
+<h3 id="5-软件设计过程"><a href="#5-软件设计过程" class="headerlink" title="5. 软件设计过程"></a>5. 软件设计过程</h3><ul>
+<li>软件设计有没有严谨、精确的过程？<ul>
+<li>没有！</li>
+<li>经验主义 VS 理性主义</li>
+<li>个人设计 VS 协作设计</li>
+<li>决策性</li>
+<li>演化性</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件设计的决策性</strong></p>
+<ul>
+<li>决策：为解决一个问题而采取的决定</li>
+<li>决策<ul>
+<li>生成新的想法是设计的基础 </li>
+<li>设计是”从当前事实到未来可能性的富有想象力的跳跃”</li>
+</ul>
+</li>
+</ul>
+<p><strong>决策与演化</strong></p>
+<ul>
+<li>遵循路线：问题 -&gt; 决策 -&gt; 验证 -&gt; 下一个问题</li>
+<li>决策的顺序影响<ul>
+<li>前一个决策会影响后一个，而且不可预见</li>
+</ul>
+</li>
+<li>决策要一致！</li>
+</ul>
+<h3 id="6-总结-1"><a href="#6-总结-1" class="headerlink" title="6. 总结"></a>6. 总结</h3><ul>
+<li>软件设计是为了开发软件产品而进行的规划活动</li>
+<li>复杂软件的设计需要分层，分视图进行</li>
+<li>软件设计的目标是效用(需求)，美感(简洁，清晰，一致)，坚固(质量)</li>
+<li>内部结构坚固是需要设计的！</li>
+<li>软件设计是演化性和决策性活动</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="体系结构基础"><a href="#体系结构基础" class="headerlink" title="体系结构基础"></a>体系结构基础</h2><h3 id="1-区分逻辑设计与物理设计"><a href="#1-区分逻辑设计与物理设计" class="headerlink" title="1. 区分逻辑设计与物理设计"></a>1. 区分逻辑设计与物理设计</h3><ul>
+<li>物理设计 = 逻辑设计 + 介质匹配</li>
+<li>先逻辑后物理的设计思路<ul>
+<li>否则：如果介质匹配的复杂度较高，可能会扰乱逻辑设计的思路</li>
+</ul>
+</li>
+</ul>
+<p><strong>物理是逻辑在载体上的实现</strong></p>
+<ul>
+<li>(物理)设计复杂度=事物(逻辑)复杂度+载体与事物的适配复杂度</li>
+</ul>
+<p><strong>物理实现的载体</strong></p>
+<ul>
+<li>低层：基本类型+基本控制结构</li>
+<li>中层：oo编程语言机制<ul>
+<li>类声明，实例创建与撤销，实例生命期管理</li>
+<li>类权限控制机制</li>
+<li>复杂机制：继承…</li>
+</ul>
+</li>
+<li>高层<ul>
+<li>导入导出和名称匹配</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-体系结构基础"><a href="#2-体系结构基础" class="headerlink" title="2. 体系结构基础"></a>2. 体系结构基础</h3><p><strong>高层结构</strong></p>
+<ul>
+<li>部件承载了计算(功能)和状态(数据)</li>
+<li>连接件承载了部件间的关系</li>
+</ul>
+<p><strong>部件</strong></p>
+<ul>
+<li>在系统体系结构中封装处理和数据的元素称为软件部件</li>
+<li>部件通常提供特定应用的服务</li>
+</ul>
+<p><strong>连接件</strong></p>
+<ul>
+<li>在复杂系统中，交互可能比独立部件的功能更重要且更有挑战性</li>
+</ul>
+<p><strong>连接件实现</strong></p>
+<ul>
+<li>隐式<ul>
+<li>程序调用(Procedure Call)</li>
+<li>共享变量(Shared variable)</li>
+<li>消息(Message)</li>
+<li>管道(Pipe)</li>
+<li>事件(Event)</li>
+<li>远程过程调用(RPC)</li>
+<li>网络协议(Network　Protocol)</li>
+<li>数据库访问协议(Database Access Protocol)</li>
+</ul>
+</li>
+<li>显式<ul>
+<li>适配器(Adaptor)</li>
+<li>委托(Delegator)</li>
+<li>中介(Intermediate)</li>
+</ul>
+</li>
+</ul>
+<p><strong>配置</strong></p>
+<ul>
+<li>部件和连接件在给定系统的架构中以特定的方式组织起来完成系统的目标</li>
+</ul>
+<h3 id="3-体系结构风格"><a href="#3-体系结构风格" class="headerlink" title="3. 体系结构风格"></a>3. 体系结构风格</h3><p><strong>主程序和子程序风格</strong></p>
+<ul>
+<li>部件：程序，函数，模块</li>
+<li>连接件：它们之间的调用</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>控制从子程序层次结构顶部开始且向下移动<ul>
+<li>层次化分解<ul>
+<li>基于定义使用关系</li>
+</ul>
+</li>
+<li>单线程控制</li>
+<li>隐含子系统结构<ul>
+<li>子程序通常合并成模块</li>
+</ul>
+</li>
+<li>层次化推理<ul>
+<li>子程序的正确性依赖于它调用的子程序的正确性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>功能分解</li>
+<li>集中控制</li>
+<li>每个构件一个模块实现<ul>
+<li>主要是单向依赖</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>面向对象风格</strong></p>
+<ul>
+<li>部件: 对象或模块</li>
+<li>连接件: 功能或调用(方法)</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>数据表示对于其他对象是隐藏的</li>
+<li>对象负责保持数据表示的完整性(例如一些不变量)</li>
+<li>每个对象都是自主代理</li>
+</ul>
+<p><strong>面向对象风格的应用</strong></p>
+<ul>
+<li>适用于核心问题是识别和保护相关机构信息(数据)的应用</li>
+<li>数据表示和相关操作封装在抽象数据类型</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>任务分解</li>
+<li>(委托式)分散式控制</li>
+<li>每个构件一个模块实现<ul>
+<li>使用接口将双向依赖转换为单向依赖</li>
+<li>将每个构件分割为多个模块，以保证单向依赖</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>分层风格</strong></p>
+<ul>
+<li>部件: 通常是程序或对象的集合</li>
+<li>连接件: 通常是有限可见度下的程序调用或方法调用</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>系统组织成层，其中每一层：<ul>
+<li>给上一层提供服务</li>
+<li>作为下一层的客户端</li>
+</ul>
+</li>
+<li>不允许跨层</li>
+</ul>
+<p><strong>分层风格的应用</strong></p>
+<ul>
+<li>适用于包含不同类服务的应用，而且这些服务能够分层组织<ul>
+<li>尤其当应用可能在某些层改变，例如交互，通信，硬件，平台等</li>
+</ul>
+</li>
+<li>例子:<ul>
+<li>分层通信协议:  <ul>
+<li>每一层在某种程度的抽象上提供了通信的基底</li>
+<li>低层定义了低层次的交互最底层是硬件连接(物理层)</li>
+</ul>
+</li>
+<li>操作系统 <ul>
+<li>Unix</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>关注点分离(每层逐次抽象)</li>
+<li>层间接口使用固定协议(固定控制)</li>
+<li>每层一或多个模块实现<ul>
+<li>单向依赖</li>
+<li>层间数据传递建立专门模块</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>模型-视图-控制器风格</strong></p>
+<ul>
+<li>Model子系统被设计成不依赖任何View或Controller子系统</li>
+<li>它们状态的改变会传播到View子系统</li>
+<li>部件<ul>
+<li>Model部件负责维护领域知识和通知视图变化</li>
+<li>View部件负责给用户显示信息和将用户手势发送给控制器</li>
+<li>Controller<ul>
+<li>改变模型的状态<ul>
+<li>将用户操作映射到模型更新</li>
+</ul>
+</li>
+<li>选择视图进行响应</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接件: <ul>
+<li>程序调用，消息，事件</li>
+</ul>
+</li>
+</ul>
+<p><strong>MVC的应用</strong></p>
+<ul>
+<li>适用于以下应用:<ul>
+<li>在运行时，用户界面的改变很容易且是可能的</li>
+<li>用户界面的调整或移植不会影响该应用功能部分的设计和编码</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>特定技术实现，通常专用于WEB<ul>
+<li>Model与Controller单向</li>
+<li>Controller与View双向</li>
+<li>Model与View双向</li>
+</ul>
+</li>
+<li>典型实现<ul>
+<li>View：JSP，HTML</li>
+<li>Controller：Servlet</li>
+<li>Model：JavaBean</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><ul>
+<li>软件体系结构是高层次设计，通过逻辑设计进行系统的功能组织</li>
+<li>软件体系结构的基本元素是部件，连接件和配置</li>
+<li>软件体系结构风格是设计经验的总结，可以帮助设计师更好地进行软件体系结构设计</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="体系结构设计与构建"><a href="#体系结构设计与构建" class="headerlink" title="体系结构设计与构建"></a>体系结构设计与构建</h2><h3 id="1-体系结构设计"><a href="#1-体系结构设计" class="headerlink" title="1. 体系结构设计"></a>1. 体系结构设计</h3><p><strong>体系结构设计过程</strong></p>
+<ul>
+<li>逻辑设计<ul>
+<li>分析关键需求和限制条件</li>
+<li>通过选择体系结构风格，确定顶层架构</li>
+<li>实现功能需求的逻辑映射</li>
+</ul>
+</li>
+<li>物理设计<ul>
+<li>通过构件的逐层设计从逻辑视角向物理视角的转化</li>
+<li>添加辅助构件</li>
+<li>完善构件之间接口的定义</li>
+<li>完善数据的定义</li>
+<li>迭代过程3-8</li>
+</ul>
+</li>
+</ul>
+<p><strong>体系结构需求</strong></p>
+<ul>
+<li>功能需求概要</li>
+<li>质量需求</li>
+<li>项目环境<ul>
+<li>技术要求</li>
+<li>资源条件</li>
+<li>商业环境</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-体系结构构建"><a href="#2-体系结构构建" class="headerlink" title="2. 体系结构构建"></a>2. 体系结构构建</h3><h3 id="3-体系结构文档化"><a href="#3-体系结构文档化" class="headerlink" title="3. 体系结构文档化"></a>3. 体系结构文档化</h3><h3 id="4-体系结构验证"><a href="#4-体系结构验证" class="headerlink" title="4. 体系结构验证"></a>4. 体系结构验证</h3><p><br></p>
+<hr>
+<h2 id="人机交互设计"><a href="#人机交互设计" class="headerlink" title="人机交互设计"></a>人机交互设计</h2><h3 id="1-为什么要进行人机交互设计"><a href="#1-为什么要进行人机交互设计" class="headerlink" title="1. 为什么要进行人机交互设计"></a>1. 为什么要进行人机交互设计</h3><ul>
+<li>好的人机交互往往是透明(自然)的，坏的人机交互才能显现人机交互设计的必要性</li>
+</ul>
+<p><strong>为什么要进行人机交互设计</strong></p>
+<ul>
+<li>用户判断一个系统好坏主要依赖于用户界面与交互而不是系统的功能<ul>
+<li>用户界面及其交互的设计要适合预期用户的技能，经验与期望</li>
+</ul>
+</li>
+<li>坏的人机交互会让用户在使用中犯灾难性错误<ul>
+<li>用户却会承受所有责难<ul>
+<li>案例：汽车，医疗设备，12306登录……</li>
+</ul>
+</li>
+<li>坏的人机交互常常是很多软件系统没有被用户接受的原因<ul>
+<li>Unix, Windows phone……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>人机交互设计</strong></p>
+<ul>
+<li>人机交互的目标是探索在人和机器之间沟通的有效方法，让用户利用机器顺利地完成任务<ul>
+<li>美观<ul>
+<li>静态的界面布局</li>
+</ul>
+</li>
+<li>使用过程更顺利<ul>
+<li>使用软件产品的动态过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-人机交互设计的目标——易用性"><a href="#2-人机交互设计的目标——易用性" class="headerlink" title="2. 人机交互设计的目标——易用性"></a>2. 人机交互设计的目标——易用性</h3><p><strong>什么样的人机交互是好的？</strong></p>
+<ul>
+<li>定性的评价<ul>
+<li>透明，自然</li>
+<li>能够鼓励用户与计算机的交互：安全</li>
+<li>符合用户的想法，顺利完成工作</li>
+</ul>
+</li>
+<li>定量的评价<ul>
+<li>易用性</li>
+</ul>
+</li>
+</ul>
+<p><strong>易用性</strong></p>
+<ul>
+<li>易学性</li>
+<li>易记性</li>
+<li>效率<ul>
+<li>易学性和效率是存在冲突的</li>
+</ul>
+</li>
+<li>低出错率</li>
+<li>主观满意度</li>
+</ul>
+<h3 id="3-人机交互设计的人类因素"><a href="#3-人机交互设计的人类因素" class="headerlink" title="3. 人机交互设计的人类因素"></a>3. 人机交互设计的人类因素</h3><p><strong>人类因素</strong></p>
+<ul>
+<li>人机交互中的人因素？<ul>
+<li>普通用户，而不是开发者</li>
+<li>为了完成自己的任务，而不是专为使用计算机</li>
+<li>用户只能看到自己想看到的内容!</li>
+</ul>
+</li>
+</ul>
+<p><strong>精神模型(Mental Model)</strong></p>
+<ul>
+<li>精神模型就是用户进行人机交互时头脑中的任务模型</li>
+<li>依据精神模型可以进行隐喻(Metaphor)设计<ul>
+<li>隐喻又被称为视觉隐喻，是视觉上的图像，但会被用户映射为业务事物</li>
+<li>用户在识别图像时，会依据隐喻将控件功能与已知的熟悉事物联系起来，形成任务模型</li>
+<li>隐喻本质上是在用户已有知识的基础上建立一组新的知识，实现界面视觉提示和系统功能之间的知觉联系</li>
+</ul>
+</li>
+</ul>
+<p><strong>发现用户的精神模型</strong></p>
+<ul>
+<li>发现用要做什么<ul>
+<li>用户的需求，目标和任务</li>
+<li>识别并添加哪些能够帮助用户完成任务的功能<ul>
+<li>常见错误：加入一些容易加入(例如正好是一个独立的软件过程)的功能，这会扰乱用户的精神模型，影响使用过程的顺利性</li>
+<li>任务的频率也要纳入考虑</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户希望看到的 +  希望用户看到的</li>
+</ul>
+<p><strong>用户的差异性</strong></p>
+<ul>
+<li>新手用户<ul>
+<li>关注易学性，进行业务导航，尽量避免出错</li>
+</ul>
+</li>
+<li>专家用户<ul>
+<li>关注效率</li>
+</ul>
+</li>
+<li>熟练用户<ul>
+<li>在易学性和效率之间进行折中</li>
+</ul>
+</li>
+<li>好的人机交互应该为不同的用户群体提供差异化的交互机制<ul>
+<li>既为新手用户提供易学性高的人机交互机制(图形界面)</li>
+<li>又为专家用户提供效率高的人机交互机制(命令行，快捷方式，热键)</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-人机交互设计的计算机因素"><a href="#4-人机交互设计的计算机因素" class="headerlink" title="4. 人机交互设计的计算机因素"></a>4. 人机交互设计的计算机因素</h3><p><strong>计算机的人机交互因素</strong></p>
+<ul>
+<li>人机交互设备<ul>
+<li>输入设备<ul>
+<li>键盘</li>
+<li>鼠标</li>
+<li>手写板</li>
+</ul>
+</li>
+<li>输出设备<ul>
+<li>显示屏</li>
+<li>喇叭</li>
+<li>打印机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>可视化设计</strong></p>
+<ul>
+<li>从可视化设计语言Visual Basic开始，对可视化构件的布局就成为可视化设计的主要工作</li>
+<li>常见的可视化构件包括：窗口，菜单，标签(Tab)，表单，按钮，列表，树形控件，组合框，输入框等等</li>
+</ul>
+<p><strong>可视化设计要点</strong></p>
+<ul>
+<li>按照任务模型设计界面隐喻，同时不要把软件系统的内部构造机制暴露给用户</li>
+<li>可视化设计还应该基于界面隐喻，尽可能地把功能和任务细节表现出来</li>
+</ul>
+<p><strong>常见界面类型</strong></p>
+<ul>
+<li>批处理</li>
+<li>命令行</li>
+<li>全屏</li>
+<li>图形化</li>
+<li>多维交互</li>
+</ul>
+<h3 id="5-人机交互设计的交互性"><a href="#5-人机交互设计的交互性" class="headerlink" title="5. 人机交互设计的交互性"></a>5. 人机交互设计的交互性</h3><p><strong>交互</strong></p>
+<ul>
+<li>“交互”是双向的<ul>
+<li>一方面用户主动向软件系统提出请求(输入信息)，软件系统给予用户响应(输出信息)</li>
+<li>另一方面，软件系统也应该主动告知用户相应的信息，并等待用户的响应<ul>
+<li>智能系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>导航</strong></p>
+<ul>
+<li>主动将自己的产品和服务简明扼要地告诉用户，这个就是导航</li>
+<li>导航的目的就是为用户提供一个很好的完成任务的入口，好的导航会让这个入口非常符合人的精神模型</li>
+<li>全局结构按照任务模型将软件产品的功能组织起来，并区分不同的重要性和主题提供给不同的用户<ul>
+<li>全局结构常用的导航控件包括窗口，菜单，列表，快捷方式，热键等等。</li>
+<li>全局结构的设计主要以功能分层和任务交互过程为主要依据</li>
+</ul>
+</li>
+<li>局部结构通过安排界面布局细节，制造视觉上的线索来给用户提供导航<ul>
+<li>局部结构常用的导航控件包括可视化控件布局与组合，按钮设置，文本颜色或字体大小等等</li>
+<li>局部结构的设计主要以用户关注的任务细节为主要依据</li>
+</ul>
+</li>
+</ul>
+<p><strong>反馈</strong></p>
+<ul>
+<li>让用户能够意识到行为的结果</li>
+<li>但不能打断用户工作时的意识流</li>
+</ul>
+<p><strong>协作式设计</strong></p>
+<ul>
+<li>人和计算机是人机交互的两方，其中人的因素是比较固定的，一定时期内不会发生大的变化，所以要让二者交互顺畅，就需要让计算机更多地适应人的因素，这也是人机交互设计以用户为中心的根本原因</li>
+<li>这种调整计算机因素以更好地适应并帮助用户的设计方式被称为协作式设计</li>
+</ul>
+<p><strong>简洁的设计</strong></p>
+<ul>
+<li>易于理解，易于记忆</li>
+</ul>
+<p><strong>简洁的方法</strong></p>
+<ul>
+<li>列举<ul>
+<li>隐藏</li>
+<li>赋予</li>
+<li>标签，图标等线索暗示</li>
+</ul>
+</li>
+</ul>
+<p><strong>一致的设计</strong></p>
+<ul>
+<li>一致的规律性易于理解和记忆</li>
+</ul>
+<p><strong>低出错率设计</strong></p>
+<ul>
+<li>人总是会犯错的，计算机要容忍使用者的错误</li>
+<li>人机交互设计首先要帮助人们避免犯错，尽可能设计不让用户犯严重错误的系统<ul>
+<li>具体措施包括将不适当的菜单选项功能以灰色显示屏蔽</li>
+<li>禁止在数值输入域中出现字母字符</li>
+</ul>
+</li>
+<li>当错误出现时，系统还要在人机交互中提供简洁，有建设性，具体的指导来帮助用户消除错误<ul>
+<li>出错信息应当遵循以下四个简单原则：<ul>
+<li>应当使用清晰的语言来表达，而不要使用难懂的代码</li>
+<li>使用的语言应当精炼准确，而不是空泛、模糊的</li>
+<li>应当对用户解决问题提供建设性的帮助</li>
+<li>出错信息应当友好，不要威胁或责备用户</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统还应该提供错误恢复和故障解决帮助手册</li>
+</ul>
+<p><strong>低出错率方法</strong></p>
+<ul>
+<li>限制输入<ul>
+<li>列表，可选框等选择性组件代替输入框</li>
+<li>按钮代替命令行</li>
+<li>限定输入：类型，范围，格式…</li>
+</ul>
+</li>
+<li>限制范围<ul>
+<li>简单化单步操作</li>
+</ul>
+</li>
+<li>辅助<ul>
+<li>事前提示</li>
+<li>事后检查</li>
+<li>随时可以撤销</li>
+</ul>
+</li>
+</ul>
+<p><strong>易记性设计</strong></p>
+<ul>
+<li>减少短期记忆负担</li>
+<li>使用逐层递进的方式展示信息</li>
+<li>使用直观的快捷方式。重新认知比记忆更容易</li>
+<li>设置有意义的缺省值，可以帮助用户减少记忆负担</li>
+</ul>
+<h3 id="6-人机交互设计过程"><a href="#6-人机交互设计过程" class="headerlink" title="6. 人机交互设计过程"></a>6. 人机交互设计过程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="详细设计概述"><a href="#详细设计概述" class="headerlink" title="详细设计概述"></a>详细设计概述</h2><h3 id="1-什么是详细设计"><a href="#1-什么是详细设计" class="headerlink" title="1. 什么是详细设计"></a>1. 什么是详细设计</h3><ul>
+<li>一个特定模块的中层设计</li>
+<li>以及特定模块中的对象或类的低层设计</li>
+<li>软件体系结构定义了模块的规范</li>
+<li>详细设计用详细设计机制实现模块<ul>
+<li>中层：(子模块 -&gt; )面向对象 -&gt; 类的规格说明</li>
+<li>低层：数据结构+算法 -&gt; 类的实现</li>
+</ul>
+</li>
+<li>详细设计需要设计师考虑模块的功效，美观和坚固性<ul>
+<li>详细设计的质量属性</li>
+<li>修改，维护，性能…</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-详细设计的出发点"><a href="#2-详细设计的出发点" class="headerlink" title="2. 详细设计的出发点"></a>2. 详细设计的出发点</h3><p><strong>哪些模块需要哪些详细设计？</strong></p>
+<ul>
+<li>View<ul>
+<li>HCI设计: ch11 -&gt; 人机交互课程</li>
+</ul>
+</li>
+<li>Logic<ul>
+<li>OO设计</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Data设计：简单设计 -&gt; 数据库课程</li>
+</ul>
+</li>
+</ul>
+<p><strong>OO详细设计从哪儿开始？</strong></p>
+<ul>
+<li>上下文<ul>
+<li>模块的规格说明<ul>
+<li>导出/导入接口</li>
+</ul>
+</li>
+<li>职责分配：<ul>
+<li>部分职责来自RE(SRS)<ul>
+<li>典型的有用例，领域模型，(顺序图，状态图)</li>
+</ul>
+</li>
+<li>另一些来自决策实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-详细设计的三种方法学"><a href="#3-详细设计的三种方法学" class="headerlink" title="3. 详细设计的三种方法学"></a>3. 详细设计的三种方法学</h3><p><strong>详细设计的三种方法学</strong></p>
+<ul>
+<li>功能分解：逐步精华<ul>
+<li>传统结构化设计方法</li>
+</ul>
+</li>
+<li>数据结构为中心<ul>
+<li>现代结构化设计方法，数据驱动的面向对象设计方法</li>
+</ul>
+</li>
+<li>面向对象<ul>
+<li>职责驱动的面向对象设计方法</li>
+</ul>
+</li>
+</ul>
+<p><strong>功能分解：逐步精华</strong></p>
+<ul>
+<li>分解功能与过程，忽略数据。迭代分解过程，直到所有过程和步骤都可实现</li>
+<li>功能分解完成后再安排数据</li>
+<li>会在局部产生主程序与子路径风格</li>
+<li>缺少对象概念</li>
+<li>可能会导致数据共享</li>
+</ul>
+<h3 id="4-面向对象详细设计-GRASP初步"><a href="#4-面向对象详细设计-GRASP初步" class="headerlink" title="4. 面向对象详细设计(GRASP初步)"></a>4. 面向对象详细设计(GRASP初步)</h3><h3 id="5-详细设计文档化"><a href="#5-详细设计文档化" class="headerlink" title="5. 详细设计文档化"></a>5. 详细设计文档化</h3><h3 id="6-详细设计验证"><a href="#6-详细设计验证" class="headerlink" title="6. 详细设计验证"></a>6. 详细设计验证</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/12/12/Software-Engineering-and-Computing-Course-2/" style="float: left;">
+        ← 软件工程与计算 2
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/06/06/Business-Intelligence-Course/">
+        商务智能 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

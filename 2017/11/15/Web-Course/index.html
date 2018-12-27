@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -178,7 +178,7 @@
     
     
     | 
-    <a href='/tags/杂记/'>杂记</a>
+    <a href="/tags/杂记/">杂记</a>
     
     
 </span>
@@ -504,16 +504,16 @@
 <ul>
 <li>新的&amp;ltaudio&gt; 和 &amp;ltvideo&gt; 标记可能是HTML5中增加的最有用处的两个东西了。正如标记名称，它们是用来嵌入音频和视频文件的。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;audio autoplay=&quot;autoplay&quot; controls=&quot;controls&quot;&gt;</div><div class="line">    &lt;source src=&quot;music.ogg&quot;</div><div class="line">    &lt;source src=&quot;music.mp3&quot; /&gt;</div><div class="line">&lt;/audio&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio autoplay=&quot;autoplay&quot; controls=&quot;controls&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;music.ogg&quot;</span><br><span class="line">    &lt;source src=&quot;music.mp3&quot; /&gt;</span><br><span class="line">&lt;/audio&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>7. 全新的表单设计</strong></p>
 <p><strong>8.不再使用 &lt;b&gt; 和 &lt;font&gt; 标记，将内容和展示分离</strong></p>
 <p><strong>9. 不再使用 &lt;frame&gt;, &lt;center&gt;, &lt;big&gt; 标记</strong></p>
 <h2 id="6-CSS"><a href="#6-CSS" class="headerlink" title="6. CSS"></a>6. CSS</h2><h3 id="1-几种方式"><a href="#1-几种方式" class="headerlink" title="1. 几种方式"></a>1. 几种方式</h3><p><strong>1. 内联样式</strong><br>内联样式是直接在html标签上定义该标签的css样式，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>2. 内部样式</strong><br>内部样式是写在html文件中，且包含在&lt;style&gt;&lt;/style&gt;代码中，style写在head里面如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    div&#123;width:100px;height:100px;&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;div&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    div&#123;width:100px;height:100px;&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>3. 外部样式</strong><br>外部样式是通过在html中引用外部css文件来控制样式，如：html文件中写入引用语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link href=&quot;css文件路径&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot; /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=&quot;css文件路径&quot; rel=&quot;stylesheet&quot; media=&quot;screen&quot; /&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="2-css盒模型"><a href="#2-css盒模型" class="headerlink" title="2. css盒模型"></a>2. css盒模型</h3><p><img src="http://oseihavwm.bkt.clouddn.com/CSS%E7%9B%92%E6%A8%A1%E5%9E%8B.png" alt=""></p>
 <h3 id="3-优先级顺序和继承关系"><a href="#3-优先级顺序和继承关系" class="headerlink" title="3. 优先级顺序和继承关系"></a>3. 优先级顺序和继承关系</h3><ul>
 <li>层叠优先级是：<ul>
@@ -560,46 +560,46 @@
 <li><p>在JavaScript中对象事件的处理通常由函数(Function)担任。其基本格式与函数全部一样，可以将前面所介绍的所有函数作为事件处理程序。<br>格式如下：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Function 事件处理名(参数表)&#123;</div><div class="line">    事件处理语句集;</div><div class="line">    ……</div><div class="line">&#125;</div><div class="line"></div><div class="line">1. 单击事件onClick：button，radio，reset button，submit</div><div class="line">2. onChange改变事件</div><div class="line">3. 选中事件onSelect</div><div class="line">4. 获得焦点事件onFocus</div><div class="line">5. 失去焦点onBlur</div><div class="line">6. 载入文件onLoad</div><div class="line">7. 卸载文件onUnload：当Web页面退出时引发onUnload事件，并可更新Cookie的状态。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Function 事件处理名(参数表)&#123;</span><br><span class="line">    事件处理语句集;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">1. 单击事件onClick：button，radio，reset button，submit</span><br><span class="line">2. onChange改变事件</span><br><span class="line">3. 选中事件onSelect</span><br><span class="line">4. 获得焦点事件onFocus</span><br><span class="line">5. 失去焦点onBlur</span><br><span class="line">6. 载入文件onLoad</span><br><span class="line">7. 卸载文件onUnload：当Web页面退出时引发onUnload事件，并可更新Cookie的状态。</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>事务注册的方法</p>
 <ul>
 <li><p>inline:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;somewhere.html&quot; onClick=&quot;myFunction()&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;somewhere.html&quot; onClick=&quot;myFunction()&quot;&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>traditional</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.onclick=myFunction;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.onclick=myFunction;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>DOM 2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.addEventListener(&quot;click&quot;,myFunction);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(&quot;click&quot;,myFunction);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>IE:(evil enough!)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.attachEvent(&apos;onclick&apos;,myFunction);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.attachEvent(&apos;onclick&apos;,myFunction);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Prototype…and so on:(prefered)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Event.observe(&apos;target&apos;,&apos;click&apos;,myFunction);</div><div class="line">document.observe(&apos;dom:loaded&apos;myFunction);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Event.observe(&apos;target&apos;,&apos;click&apos;,myFunction);</span><br><span class="line">document.observe(&apos;dom:loaded&apos;myFunction);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="4-面向对象"><a href="#4-面向对象" class="headerlink" title="4. 面向对象"></a>4. 面向对象</h3><p><strong>1. 用JavaScript实现类</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function myClass()</div><div class="line">&#123;</div><div class="line">    //此处相当于构造函数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-面向对象"><a href="#4-面向对象" class="headerlink" title="4. 面向对象"></a>4. 面向对象</h3><p><strong>1. 用JavaScript实现类</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function myClass()</span><br><span class="line">&#123;</span><br><span class="line">    //此处相当于构造函数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>2. 如何获得一个类的实例</strong><br>JavaScritpt没有专门的机制实现类，这里是借助它的函数允许嵌套的机制来实现类的。一个函数可以包含变量，又可以包含其它函数，这样，变量可以作为属性，内部的函数就可以作为成员方法了。因此外层函数本身就可以作为一个类了。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var obj1 = new myClass();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = new myClass();</span><br></pre></td></tr></table></figure>
 <p><strong>3. 对象的成员的引用</strong><br>在JavaScript中引用一个类的属性或方法的方法有以下三种。</p>
 <ul>
 <li>点号操作符:这是一种最普遍的引用方式，就不累赘。即如下形式：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名.属性名;</div><div class="line">对象名.方法名;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对象名.属性名;</span><br><span class="line">对象名.方法名;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>方括号引用:JavaScript中允许用方括号引用对象的成员。如下：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对象名[&quot;属性名&quot;];</div><div class="line">对象名[&quot;方法名&quot;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对象名[&quot;属性名&quot;];</span><br><span class="line">对象名[&quot;方法名&quot;];</span><br></pre></td></tr></table></figure>
 <ul>
 <li>这里方括号内是代表属性或方法名的字符串，不一定是字符串常量。也可以使用变量。这样就可以使用变量传递属性或方法名。为编程带来了方便。在某些情况下，代码中不能确定要调用那个属性或方法时，就可以采用这种方式。否则，如果使用点号操作符，还需要使用条件判断来调用属性或方法。</li>
 <li>另外，使用方括号引用的属性和方法名还可以以数字开头，或者出现空格，而使用点号引用的属性和方法名则遵循标示符的规则。但一般不提倡使用非标示符的命名方法。</li>
 </ul>
 <p><strong>4. 匿名函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function()&#123;  </div><div class="line">    //这里忽略jQuery所有实现  </div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;  </span><br><span class="line">    //这里忽略jQuery所有实现  </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <ul>
 <li>匿名函数就是没有实际名字的函数。<br>例如我们在设定一个DOM元素事件处理函数的时候，我们通常都不会为他们定名字，而是赋予它的对应事件引用一个匿名函数。</li>
 <li>对匿名函数的调用其实还有一种做法，也就是我们看到的jQuery片段——使用()将匿名函数括起来，然后后面再加一对小括号（包含参数列表）。</li>

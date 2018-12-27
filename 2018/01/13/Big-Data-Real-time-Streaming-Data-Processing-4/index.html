@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -178,7 +178,7 @@
     
     
     | 
-    <a href='/tags/大数据/'>大数据</a>
+    <a href="/tags/大数据/">大数据</a>
     
     
 </span>
@@ -188,22 +188,22 @@
         <div class="col-md-8 col-md-offset-2">
       		<ul>
 <li>下面是这段时间系统了解Spark Streaming的一些记录<ul>
-<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="external">初识实时流处理</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="external">分布式日志收集框架Flume</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="external">分布式发布订阅消息系统Kafka</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="external">Spark Streaming入门</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="external">Spark Streaming整合Flume</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="external">Spark Streaming整合Kafka</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="external">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="external">Spark Streaming项目实战</a></li>
-<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="external">可视化实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/10/Big-Data-Real-time-Streaming-Data-Processing-1/" target="_blank" rel="noopener">初识实时流处理</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/11/Big-Data-Real-time-Streaming-Data-Processing-2/" target="_blank" rel="noopener">分布式日志收集框架Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/12/Big-Data-Real-time-Streaming-Data-Processing-3/" target="_blank" rel="noopener">分布式发布订阅消息系统Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/13/Big-Data-Real-time-Streaming-Data-Processing-4/" target="_blank" rel="noopener">Spark Streaming入门</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/14/Big-Data-Real-time-Streaming-Data-Processing-5/" target="_blank" rel="noopener">Spark Streaming整合Flume</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/15/Big-Data-Real-time-Streaming-Data-Processing-6/" target="_blank" rel="noopener">Spark Streaming整合Kafka</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/16/Big-Data-Real-time-Streaming-Data-Processing-7/" target="_blank" rel="noopener">Spark Streaming整合Flume&amp;Kafka打造通用流处理基础</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/17/Big-Data-Real-time-Streaming-Data-Processing-8/" target="_blank" rel="noopener">Spark Streaming项目实战</a></li>
+<li><a href="http://www.thpffcj.com/2018/01/18/Big-Data-Real-time-Streaming-Data-Processing-9/" target="_blank" rel="noopener">可视化实战</a></li>
 </ul>
 </li>
 </ul>
 <p>在了解了分布式日志收集框架Flume和分布式发布订阅消息系统Kafka之后，我们就需要了解我们的主角Spark Streaming了，Spark Streaming是建立在Spark上的实时计算框架，通过它提供的丰富的API、基于内存的高速执行引擎，用户可以结合流式、批处理和交互式查询应用。相比Strom真正的实时计算，其实Spark Streaming应该叫做小批次计算。这篇博客我们从官网看起，了解Spark Streaming基本情况并自己编写出官方基本实例体验实时流处理过程。</p>
 <hr>
 <h2 id="1-Spark-Streaming"><a href="#1-Spark-Streaming" class="headerlink" title="1. Spark Streaming"></a>1. Spark Streaming</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
-<li>一贯的学习方法 - 官网：<strong><a href="http://spark.apache.org/docs/2.2.0/streaming-programming-guide.html" target="_blank" rel="external">Spark Streaming Programming Guide</a></strong></li>
+<li>一贯的学习方法 - 官网：<strong><a href="http://spark.apache.org/docs/2.2.0/streaming-programming-guide.html" target="_blank" rel="noopener">Spark Streaming Programming Guide</a></strong></li>
 <li>Spark Streaming is an extension of the core Spark API that enables scalable, high-throughput, fault-tolerant stream processing of live data streams. </li>
 <li>Data can be ingested from many sources like Kafka, Flume, Kinesis, or TCP sockets, and can be processed using complex algorithms expressed with high-level functions like map, reduce, join and window. Finally, processed data can be pushed out to filesystems, databases, and live dashboards.</li>
 <li>In fact, you can apply Spark’s machine learning and graph processing algorithms on data streams.</li>
@@ -227,11 +227,11 @@
 </ul>
 <h3 id="4-发展史"><a href="#4-发展史" class="headerlink" title="4. 发展史"></a>4. 发展史</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Spark%20Streaming%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt=""></p>
 <h3 id="5-从词频统计功能着手入门"><a href="#5-从词频统计功能着手入门" class="headerlink" title="5. 从词频统计功能着手入门"></a>5. 从词频统计功能着手入门</h3><ul>
-<li><strong><a href="https://github.com/apache/spark" target="_blank" rel="external">Spark 源码 Github 地址</a></strong></li>
+<li><strong><a href="https://github.com/apache/spark" target="_blank" rel="noopener">Spark 源码 Github 地址</a></strong></li>
 </ul>
 <ul>
 <li><strong>spark-submit执行(生产)</strong></li>
-<li>我们要执行github上的一个例子 <a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/streaming/NetworkWordCount.scala" target="_blank" rel="external">NetworkWordCount </a></li>
+<li>我们要执行github上的一个例子 <a href="https://github.com/apache/spark/blob/master/examples/src/main/scala/org/apache/spark/examples/streaming/NetworkWordCount.scala" target="_blank" rel="noopener">NetworkWordCount </a></li>
 <li>To run this on your local machine, you need to first run a Netcat server</li>
 </ul>
 <pre><code>[thpffcj@thpffcj ~]$ nc -lk 9999

@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -347,7 +347,7 @@
 </ul>
 </li>
 <li>URL组成：<ul>
-<li><a href="http://[host]:[port][request" target="_blank" rel="external">http://[host]:[port][request</a> path]?[query string] 请求路径由以下元素组成：</li>
+<li>http://[host]:[port][request path]?[query string] 请求路径由以下元素组成：</li>
 <li>上下文路径：向前的斜线/和servlet的Web应用的上下文根的拼接</li>
 <li>servlet路径：与激活该请求的组件别名相应的路径部分，由向前的斜线/开始</li>
 <li>路径信息：请求路径的部分，不是上下文路径或者servlet路径的部分</li>
@@ -370,9 +370,9 @@
 <li>Connector：在某一个指定端口监听用户请求，并且将获得的请求交给engine来处理</li>
 <li>Engine：将获得的请求匹配到某个虚拟主机上，并且把请求交给该host来处理</li>
 <li>Host：代表虚拟主机，每一个都和某个网络域名相匹配，每一个都可部署多个web应用</li>
-<li>Context：对应一个 Web 应用(由一些 Servlet，HTML，Java 类，JSP 页面和一些其他的资源组成，在创建时根据在获得 <tomcat_home>\conf\web.xml 和 <webapp_home>/WEB-INF/web.xml 载入 Servlet 类。在请求时查询映射表找到被请求Servlet类并且执行以获得请求回应)</webapp_home></tomcat_home></li>
+<li>Context：对应一个 Web 应用(由一些 Servlet，HTML，Java 类，JSP 页面和一些其他的资源组成，在创建时根据在获得 &lt;Tomcat_home&gt;\conf\web.xml 和 &lt;Webapp_home&gt;/WEB-INF/web.xml 载入 Servlet 类。在请求时查询映射表找到被请求Servlet类并且执行以获得请求回应)</li>
 </ul>
-<p><strong>请求处理流程：例如(<a href="http://localhost:8080/HelloWorld" target="_blank" rel="external">http://localhost:8080/HelloWorld</a>)</strong></p>
+<p><strong>请求处理流程：例如(<a href="http://localhost:8080/HelloWorld" target="_blank" rel="noopener">http://localhost:8080/HelloWorld</a>)</strong></p>
 <ul>
 <li>请求被发送到本机端口8080，被Java HTTP Connector获得</li>
 <li>Connector将该请求交给它所在的Service的Engine来处理并等待Engine的回应</li>
@@ -548,7 +548,7 @@
 </ul>
 <h3 id="9-定制标签有哪些，作用，使用场景"><a href="#9-定制标签有哪些，作用，使用场景" class="headerlink" title="9. 定制标签有哪些，作用，使用场景"></a>9. 定制标签有哪些，作用，使用场景</h3><ul>
 <li>定制标签：<ul>
-<li>在标签库中声明自定义的标签：<prefix:tag attr1="value" ...="" attrn="value"></prefix:tag></li>
+<li>在标签库中声明自定义的标签：&lt;prefix:tag attr1=”value” … attrN=”value” /&gt;</li>
 <li>在Web应用中实现这个标签库，使其可用</li>
 </ul>
 </li>
@@ -572,7 +572,7 @@
 <li>使用你指定的名称(id属性值)定义一个引用类型变量</li>
 <li>假如找到Bean对象，将其引用给步骤２定义的变量。假如你指定类型(type属性)，赋予该Bean对象该类型</li>
 <li>假如没找到，则实例化一个新的Bean对象，并将其引用给步骤２定义的变量。假如该类名(由beanName属性指定的类名)代表的是一个序列化模板(serialized template)，该Bean对象由java.beans.Beans.instantiate初始化</li>
-<li>假如<jsp:usebean>此次是实例化Bean对象而不是定位Bean对象，且它有体标记(body tags)或元素(位于<jsp:usebean>和</jsp:usebean>之间的内容，则执行该体标记</jsp:usebean></li>
+<li>假如<a href="jsp:useBean" target="_blank" rel="noopener">jsp:useBean</a>此次是实例化Bean对象而不是定位Bean对象，且它有体标记(body tags)或元素(位于<a href="jsp:useBean" target="_blank" rel="noopener">jsp:useBean</a>和&lt;/jsp:useBean&gt;之间的内容，则执行该体标记</li>
 </ul>
 <h3 id="11-JSP有四种作用域对象，分别是什么？"><a href="#11-JSP有四种作用域对象，分别是什么？" class="headerlink" title="11. JSP有四种作用域对象，分别是什么？"></a>11. JSP有四种作用域对象，分别是什么？</h3><ul>
 <li>页面域(page scope)</li>

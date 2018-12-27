@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -497,12 +497,12 @@
 <li>Sql语句先执行关系操作，再执行非关系操作(order by)</li>
 <li>逻辑查询处理阶段简介<ul>
 <li>FROM：对FROM子句中的前两个表执行笛卡尔积（Cartesian product)(交叉联接），生成虚拟表VT1。</li>
-<li>ON：对VT1应用ON筛选器。只有那些使<join_condition>为真的行才被插入VT2。</join_condition></li>
+<li>ON：对VT1应用ON筛选器。只有那些使&lt;join_condition&gt;为真的行才被插入VT2。</li>
 <li>OUTER(JOIN)：如 果指定了OUTER JOIN（相对于CROSS JOIN 或(INNER JOIN),保留表（preserved table：左外部联接把左表标记为保留表，右外部联接把右表标记为保留表，完全外部联接把两个表都标记为保留表）中未找到匹配的行将作为外部行添加到 VT2,生成VT3.如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表为止。</li>
-<li>WHERE：对VT3应用WHERE筛选器。只有使<where_condition>为true的行才被插入VT4。</where_condition></li>
+<li>WHERE：对VT3应用WHERE筛选器。只有使&lt;where_condition&gt;为true的行才被插入VT4。</li>
 <li>GROUP BY：按GROUP BY子句中的列列表对VT4中的行分组，生成VT5。</li>
 <li>CUBE|ROLLUP：把超组(Suppergroups)插入VT5,生成VT6。</li>
-<li>HAVING：对VT6应用HAVING筛选器。只有使<having_condition>为true的组才会被插入VT7。</having_condition></li>
+<li>HAVING：对VT6应用HAVING筛选器。只有使&lt;having_condition&gt;为true的组才会被插入VT7。</li>
 <li>SELECT：处理SELECT列表，产生VT8。</li>
 <li>DISTINCT：将重复的行从VT8中移除，产生VT9。</li>
 <li>ORDER BY：将VT9中的行按ORDER BY 子句中的列列表排序，生成游标（VC10)。</li>
@@ -610,15 +610,15 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 <ul>
 <li>找出最近6个月住在nanjing，购买了<br>BMW的所有客户(不对的方式)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">select distinct c.custname</div><div class="line">from customers c</div><div class="line">  join orders o</div><div class="line">    on o.custid = c.custid</div><div class="line">  join orderdetail od</div><div class="line">    on od.ordid = o.ordid</div><div class="line">  join articles a</div><div class="line">    on a.artid = od.artid</div><div class="line">where c.city = &apos;Nanjing&apos;</div><div class="line">      and a.artname = &apos;BMW&apos;</div><div class="line">      and o.ordered &gt;= somefunc /*函数，返回六个月前的具体日期*/</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select distinct c.custname</span><br><span class="line">from customers c</span><br><span class="line">  join orders o</span><br><span class="line">    on o.custid = c.custid</span><br><span class="line">  join orderdetail od</span><br><span class="line">    on od.ordid = o.ordid</span><br><span class="line">  join articles a</span><br><span class="line">    on a.artid = od.artid</span><br><span class="line">where c.city = &apos;Nanjing&apos;</span><br><span class="line">      and a.artname = &apos;BMW&apos;</span><br><span class="line">      and o.ordered &gt;= somefunc /*函数，返回六个月前的具体日期*/</span><br></pre></td></tr></table></figure>
 <ul>
 <li>改进：摆脱distinct的方法</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select c.custname</div><div class="line">from customers c</div><div class="line">where c.city = &apos;Nanjing&apos;</div><div class="line">    and exists (select null</div><div class="line">        from orders o,</div><div class="line">            orderdetail od,</div><div class="line">            articles a</div><div class="line">        where a.artname = &apos;BMW&apos;</div><div class="line">            and a.artid = od.artid</div><div class="line">            and od.ordid = o.ordid</div><div class="line">            and o.custid = c.custid</div><div class="line">            and o.ordered &gt;= somefunc )</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select c.custname</span><br><span class="line">from customers c</span><br><span class="line">where c.city = &apos;Nanjing&apos;</span><br><span class="line">    and exists (select null</span><br><span class="line">        from orders o,</span><br><span class="line">            orderdetail od,</span><br><span class="line">            articles a</span><br><span class="line">        where a.artname = &apos;BMW&apos;</span><br><span class="line">            and a.artid = od.artid</span><br><span class="line">            and od.ordid = o.ordid</span><br><span class="line">            and o.custid = c.custid</span><br><span class="line">            and o.ordered &gt;= somefunc )</span><br></pre></td></tr></table></figure>
 <ul>
 <li>非关联子查询</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select custname</div><div class="line">from customers</div><div class="line">where city = &apos;Nanjing&apos;</div><div class="line">    and custid in (</div><div class="line">        select o.custid</div><div class="line">            from orders o,</div><div class="line">                 orderdetail od,</div><div class="line">                 articles a</div><div class="line">            where a.artname = &apos;BMW&apos;</div><div class="line">                and a.artid = od.artid</div><div class="line">                and od.ordid = o.ordid</div><div class="line">                and o.ordered &gt;= somefunc)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select custname</span><br><span class="line">from customers</span><br><span class="line">where city = &apos;Nanjing&apos;</span><br><span class="line">    and custid in (</span><br><span class="line">        select o.custid</span><br><span class="line">            from orders o,</span><br><span class="line">                 orderdetail od,</span><br><span class="line">                 articles a</span><br><span class="line">            where a.artname = &apos;BMW&apos;</span><br><span class="line">                and a.artid = od.artid</span><br><span class="line">                and od.ordid = o.ordid</span><br><span class="line">                and o.ordered &gt;= somefunc)</span><br></pre></td></tr></table></figure>
 <p><strong>4. 降维优化的过程</strong></p>
 <ul>
 <li>再回头看订单和客户的例子</li>
@@ -628,7 +628,7 @@ where grades.sno=students.sno AND cno=&apos;B2&apos;)
 <ul>
 <li>非关联子查询变成内嵌视图</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">select c.custname, o.ordid, os.status, os.statusdate</div><div class="line">from customers c,</div><div class="line">  orders o,</div><div class="line">  orderstatus os,</div><div class="line">  (select ordid, max(statusdate) laststatusdate</div><div class="line">   from orderstatus</div><div class="line">   group by ordid) x</div><div class="line">where o.ordid = os.ordid</div><div class="line">      and os.statusdate = x.laststatusdate</div><div class="line">      and os.ordid = x.ordid</div><div class="line">      and os.status != &apos;COMPLETE&apos;</div><div class="line">      and o.custid = c.custid</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select c.custname, o.ordid, os.status, os.statusdate</span><br><span class="line">from customers c,</span><br><span class="line">  orders o,</span><br><span class="line">  orderstatus os,</span><br><span class="line">  (select ordid, max(statusdate) laststatusdate</span><br><span class="line">   from orderstatus</span><br><span class="line">   group by ordid) x</span><br><span class="line">where o.ordid = os.ordid</span><br><span class="line">      and os.statusdate = x.laststatusdate</span><br><span class="line">      and os.ordid = x.ordid</span><br><span class="line">      and os.status != &apos;COMPLETE&apos;</span><br><span class="line">      and o.custid = c.custid</span><br></pre></td></tr></table></figure>
 <h2 id="5-物理组织的优化"><a href="#5-物理组织的优化" class="headerlink" title="5. 物理组织的优化"></a>5. 物理组织的优化</h2><ul>
 <li>行迁移：当一个行上的更新操作(原来的数据存在且没有减少)导致当前的数据不能在容纳在当前块，我们需要进行行迁移。一个行迁移意味着整行数据将会移动，仅仅保留的是一个转移地址。因此整行数据都被移动，原始的数据块上仅仅保留的是指向新块的一个地址信息。</li>
 </ul>

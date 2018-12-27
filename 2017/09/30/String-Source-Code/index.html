@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -433,7 +433,7 @@ public char[] toCharArray() {
 <p>通过源码我们知道 value 是 String 内部持有的真正的对象，String 是用它来保存它表示其值的，我们知道数组在Java中是对象的一种，也就是说 final char value[] 仅仅表示它不能指向其他的 char[] 对象引用了，而 char valuel[] 自身的内容，其实是可以改变的。那为什么大家都在说，String 是不可变的类型呢，因为 String 类中，根本没有提供 API 给你修改 char valuel[] 的内容.</p>
 <p>String 中的所有的修改方法，都是复制一个新的 char value[] 的值然后作为 String 对象返回的。</p>
 <p>所以，为什么一般说 String 不可变？其实只是 API 本身并没有提供让你修改 value 字符数组的接口，而且 String 类，是 final 的，也就是说，它也不允许你通过继承来修改它。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://emacsist.github.io/2017/07/01/JDK-%E4%B9%8B-String-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">JDK 之 String 源码阅读笔记</a><br><a href="http://lioncruise.github.io/2016/10/08/java-string/" target="_blank" rel="external">String源码阅读</a><br><a href="http://moon-walker.iteye.com/blog/2375522" target="_blank" rel="external">不可变类String–阅读源码从jdk开始</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://emacsist.github.io/2017/07/01/JDK-%E4%B9%8B-String-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">JDK 之 String 源码阅读笔记</a><br><a href="http://lioncruise.github.io/2016/10/08/java-string/" target="_blank" rel="noopener">String源码阅读</a><br><a href="http://moon-walker.iteye.com/blog/2375522" target="_blank" rel="noopener">不可变类String–阅读源码从jdk开始</a></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

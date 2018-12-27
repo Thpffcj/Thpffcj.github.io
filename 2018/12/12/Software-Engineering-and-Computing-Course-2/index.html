@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>软件工程与计算 2 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                <h1>软件工程与计算 2</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="体系结构基础"><a href="#体系结构基础" class="headerlink" title="体系结构基础"></a>体系结构基础</h2><h3 id="1-区分逻辑设计与物理设计"><a href="#1-区分逻辑设计与物理设计" class="headerlink" title="1. 区分逻辑设计与物理设计"></a>1. 区分逻辑设计与物理设计</h3><ul>
+<li>物理设计 = 逻辑设计 + 介质匹配</li>
+<li>先逻辑后物理的设计思路<ul>
+<li>否则：如果介质匹配的复杂度较高，可能会扰乱逻辑设计的思路</li>
+</ul>
+</li>
+</ul>
+<p><strong>物理是逻辑在载体上的实现</strong></p>
+<ul>
+<li>(物理)设计复杂度=事物(逻辑)复杂度+载体与事物的适配复杂度</li>
+</ul>
+<p><strong>物理实现的载体</strong></p>
+<ul>
+<li>低层：基本类型+基本控制结构</li>
+<li>中层：oo编程语言机制<ul>
+<li>类声明，实例创建与撤销，实例生命期管理</li>
+<li>类权限控制机制</li>
+<li>复杂机制：继承…</li>
+</ul>
+</li>
+<li>高层<ul>
+<li>导入导出和名称匹配</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-体系结构基础"><a href="#2-体系结构基础" class="headerlink" title="2. 体系结构基础"></a>2. 体系结构基础</h3><p><strong>高层结构</strong></p>
+<ul>
+<li>部件承载了计算(功能)和状态(数据)</li>
+<li>连接件承载了部件间的关系</li>
+</ul>
+<p><strong>部件</strong></p>
+<ul>
+<li>在系统体系结构中封装处理和数据的元素称为软件部件</li>
+<li>部件通常提供特定应用的服务</li>
+</ul>
+<p><strong>连接件</strong></p>
+<ul>
+<li>在复杂系统中，交互可能比独立部件的功能更重要且更有挑战性</li>
+</ul>
+<p><strong>连接件实现</strong></p>
+<ul>
+<li>隐式<ul>
+<li>程序调用(Procedure Call)</li>
+<li>共享变量(Shared variable)</li>
+<li>消息(Message)</li>
+<li>管道(Pipe)</li>
+<li>事件(Event)</li>
+<li>远程过程调用(RPC)</li>
+<li>网络协议(Network　Protocol)</li>
+<li>数据库访问协议(Database Access Protocol)</li>
+</ul>
+</li>
+<li>显式<ul>
+<li>适配器(Adaptor)</li>
+<li>委托(Delegator)</li>
+<li>中介(Intermediate)</li>
+</ul>
+</li>
+</ul>
+<p><strong>配置</strong></p>
+<ul>
+<li>部件和连接件在给定系统的架构中以特定的方式组织起来完成系统的目标</li>
+</ul>
+<h3 id="3-体系结构风格"><a href="#3-体系结构风格" class="headerlink" title="3. 体系结构风格"></a>3. 体系结构风格</h3><p><strong>主程序和子程序风格</strong></p>
+<ul>
+<li>部件：程序，函数，模块</li>
+<li>连接件：它们之间的调用</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>控制从子程序层次结构顶部开始且向下移动<ul>
+<li>层次化分解<ul>
+<li>基于定义使用关系</li>
+</ul>
+</li>
+<li>单线程控制</li>
+<li>隐含子系统结构<ul>
+<li>子程序通常合并成模块</li>
+</ul>
+</li>
+<li>层次化推理<ul>
+<li>子程序的正确性依赖于它调用的子程序的正确性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>功能分解</li>
+<li>集中控制</li>
+<li>每个构件一个模块实现<ul>
+<li>主要是单向依赖</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>面向对象风格</strong></p>
+<ul>
+<li>部件: 对象或模块</li>
+<li>连接件: 功能或调用(方法)</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>数据表示对于其他对象是隐藏的</li>
+<li>对象负责保持数据表示的完整性(例如一些不变量)</li>
+<li>每个对象都是自主代理</li>
+</ul>
+<p><strong>面向对象风格的应用</strong></p>
+<ul>
+<li>适用于核心问题是识别和保护相关机构信息(数据)的应用</li>
+<li>数据表示和相关操作封装在抽象数据类型</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>任务分解</li>
+<li>(委托式)分散式控制</li>
+<li>每个构件一个模块实现<ul>
+<li>使用接口将双向依赖转换为单向依赖</li>
+<li>将每个构件分割为多个模块，以保证单向依赖</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>分层风格</strong></p>
+<ul>
+<li>部件: 通常是程序或对象的集合</li>
+<li>连接件: 通常是有限可见度下的程序调用或方法调用</li>
+</ul>
+<p><strong>约束</strong></p>
+<ul>
+<li>系统组织成层，其中每一层：<ul>
+<li>给上一层提供服务</li>
+<li>作为下一层的客户端</li>
+</ul>
+</li>
+<li>不允许跨层</li>
+</ul>
+<p><strong>分层风格的应用</strong></p>
+<ul>
+<li>适用于包含不同类服务的应用，而且这些服务能够分层组织<ul>
+<li>尤其当应用可能在某些层改变，例如交互，通信，硬件，平台等</li>
+</ul>
+</li>
+<li>例子:<ul>
+<li>分层通信协议:  <ul>
+<li>每一层在某种程度的抽象上提供了通信的基底</li>
+<li>低层定义了低层次的交互最底层是硬件连接(物理层)</li>
+</ul>
+</li>
+<li>操作系统 <ul>
+<li>Unix</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>关注点分离(每层逐次抽象)</li>
+<li>层间接口使用固定协议(固定控制)</li>
+<li>每层一或多个模块实现<ul>
+<li>单向依赖</li>
+<li>层间数据传递建立专门模块</li>
+</ul>
+</li>
+<li>使用utility或tools等基础模块</li>
+</ul>
+<p><strong>模型-视图-控制器风格</strong></p>
+<ul>
+<li>Model子系统被设计成不依赖任何View或Controller子系统</li>
+<li>它们状态的改变会传播到View子系统</li>
+<li>部件<ul>
+<li>Model部件负责维护领域知识和通知视图变化</li>
+<li>View部件负责给用户显示信息和将用户手势发送给控制器</li>
+<li>Controller<ul>
+<li>改变模型的状态<ul>
+<li>将用户操作映射到模型更新</li>
+</ul>
+</li>
+<li>选择视图进行响应</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接件: <ul>
+<li>程序调用，消息，事件</li>
+</ul>
+</li>
+</ul>
+<p><strong>MVC的应用</strong></p>
+<ul>
+<li>适用于以下应用:<ul>
+<li>在运行时，用户界面的改变很容易且是可能的</li>
+<li>用户界面的调整或移植不会影响该应用功能部分的设计和编码</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>特定技术实现，通常专用于WEB<ul>
+<li>Model与Controller单向</li>
+<li>Controller与View双向</li>
+<li>Model与View双向</li>
+</ul>
+</li>
+<li>典型实现<ul>
+<li>View：JSP，HTML</li>
+<li>Controller：Servlet</li>
+<li>Model：JavaBean</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><ul>
+<li>软件体系结构是高层次设计，通过逻辑设计进行系统的功能组织</li>
+<li>软件体系结构的基本元素是部件，连接件和配置</li>
+<li>软件体系结构风格是设计经验的总结，可以帮助设计师更好地进行软件体系结构设计</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="体系结构设计与构建"><a href="#体系结构设计与构建" class="headerlink" title="体系结构设计与构建"></a>体系结构设计与构建</h2><h3 id="1-体系结构设计"><a href="#1-体系结构设计" class="headerlink" title="1. 体系结构设计"></a>1. 体系结构设计</h3><p><strong>体系结构设计过程</strong></p>
+<ul>
+<li>逻辑设计<ul>
+<li>分析关键需求和限制条件</li>
+<li>通过选择体系结构风格，确定顶层架构</li>
+<li>实现功能需求的逻辑映射</li>
+</ul>
+</li>
+<li>物理设计<ul>
+<li>通过构件的逐层设计从逻辑视角向物理视角的转化</li>
+<li>添加辅助构件</li>
+<li>完善构件之间接口的定义</li>
+<li>完善数据的定义</li>
+<li>迭代过程3-8</li>
+</ul>
+</li>
+</ul>
+<p><strong>体系结构需求</strong></p>
+<ul>
+<li>功能需求概要</li>
+<li>质量需求</li>
+<li>项目环境<ul>
+<li>技术要求</li>
+<li>资源条件</li>
+<li>商业环境</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-体系结构构建"><a href="#2-体系结构构建" class="headerlink" title="2. 体系结构构建"></a>2. 体系结构构建</h3><h3 id="3-体系结构文档化"><a href="#3-体系结构文档化" class="headerlink" title="3. 体系结构文档化"></a>3. 体系结构文档化</h3><h3 id="4-体系结构验证"><a href="#4-体系结构验证" class="headerlink" title="4. 体系结构验证"></a>4. 体系结构验证</h3><p><br></p>
+<hr>
+<h2 id="人机交互设计"><a href="#人机交互设计" class="headerlink" title="人机交互设计"></a>人机交互设计</h2><h3 id="1-为什么要进行人机交互设计"><a href="#1-为什么要进行人机交互设计" class="headerlink" title="1. 为什么要进行人机交互设计"></a>1. 为什么要进行人机交互设计</h3><ul>
+<li>好的人机交互往往是透明(自然)的，坏的人机交互才能显现人机交互设计的必要性</li>
+</ul>
+<p><strong>为什么要进行人机交互设计</strong></p>
+<ul>
+<li>用户判断一个系统好坏主要依赖于用户界面与交互而不是系统的功能<ul>
+<li>用户界面及其交互的设计要适合预期用户的技能，经验与期望</li>
+</ul>
+</li>
+<li>坏的人机交互会让用户在使用中犯灾难性错误<ul>
+<li>用户却会承受所有责难<ul>
+<li>案例：汽车，医疗设备，12306登录……</li>
+</ul>
+</li>
+<li>坏的人机交互常常是很多软件系统没有被用户接受的原因<ul>
+<li>Unix, Windows phone……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>人机交互设计</strong></p>
+<ul>
+<li>人机交互的目标是探索在人和机器之间沟通的有效方法，让用户利用机器顺利地完成任务<ul>
+<li>美观<ul>
+<li>静态的界面布局</li>
+</ul>
+</li>
+<li>使用过程更顺利<ul>
+<li>使用软件产品的动态过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-人机交互设计的目标——易用性"><a href="#2-人机交互设计的目标——易用性" class="headerlink" title="2. 人机交互设计的目标——易用性"></a>2. 人机交互设计的目标——易用性</h3><p><strong>什么样的人机交互是好的？</strong></p>
+<ul>
+<li>定性的评价<ul>
+<li>透明，自然</li>
+<li>能够鼓励用户与计算机的交互：安全</li>
+<li>符合用户的想法，顺利完成工作</li>
+</ul>
+</li>
+<li>定量的评价<ul>
+<li>易用性</li>
+</ul>
+</li>
+</ul>
+<p><strong>易用性</strong></p>
+<ul>
+<li>易学性</li>
+<li>易记性</li>
+<li>效率<ul>
+<li>易学性和效率是存在冲突的</li>
+</ul>
+</li>
+<li>低出错率</li>
+<li>主观满意度</li>
+</ul>
+<h3 id="3-人机交互设计的人类因素"><a href="#3-人机交互设计的人类因素" class="headerlink" title="3. 人机交互设计的人类因素"></a>3. 人机交互设计的人类因素</h3><p><strong>人类因素</strong></p>
+<ul>
+<li>人机交互中的人因素？<ul>
+<li>普通用户，而不是开发者</li>
+<li>为了完成自己的任务，而不是专为使用计算机</li>
+<li>用户只能看到自己想看到的内容!</li>
+</ul>
+</li>
+</ul>
+<p><strong>精神模型(Mental Model)</strong></p>
+<ul>
+<li>精神模型就是用户进行人机交互时头脑中的任务模型</li>
+<li>依据精神模型可以进行隐喻(Metaphor)设计<ul>
+<li>隐喻又被称为视觉隐喻，是视觉上的图像，但会被用户映射为业务事物</li>
+<li>用户在识别图像时，会依据隐喻将控件功能与已知的熟悉事物联系起来，形成任务模型</li>
+<li>隐喻本质上是在用户已有知识的基础上建立一组新的知识，实现界面视觉提示和系统功能之间的知觉联系</li>
+</ul>
+</li>
+</ul>
+<p><strong>发现用户的精神模型</strong></p>
+<ul>
+<li>发现用要做什么<ul>
+<li>用户的需求，目标和任务</li>
+<li>识别并添加哪些能够帮助用户完成任务的功能<ul>
+<li>常见错误：加入一些容易加入(例如正好是一个独立的软件过程)的功能，这会扰乱用户的精神模型，影响使用过程的顺利性</li>
+<li>任务的频率也要纳入考虑</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户希望看到的 +  希望用户看到的</li>
+</ul>
+<p><strong>用户的差异性</strong></p>
+<ul>
+<li>新手用户<ul>
+<li>关注易学性，进行业务导航，尽量避免出错</li>
+</ul>
+</li>
+<li>专家用户<ul>
+<li>关注效率</li>
+</ul>
+</li>
+<li>熟练用户<ul>
+<li>在易学性和效率之间进行折中</li>
+</ul>
+</li>
+<li>好的人机交互应该为不同的用户群体提供差异化的交互机制<ul>
+<li>既为新手用户提供易学性高的人机交互机制(图形界面)</li>
+<li>又为专家用户提供效率高的人机交互机制(命令行，快捷方式，热键)</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-人机交互设计的计算机因素"><a href="#4-人机交互设计的计算机因素" class="headerlink" title="4. 人机交互设计的计算机因素"></a>4. 人机交互设计的计算机因素</h3><p><strong>计算机的人机交互因素</strong></p>
+<ul>
+<li>人机交互设备<ul>
+<li>输入设备<ul>
+<li>键盘</li>
+<li>鼠标</li>
+<li>手写板</li>
+</ul>
+</li>
+<li>输出设备<ul>
+<li>显示屏</li>
+<li>喇叭</li>
+<li>打印机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>可视化设计</strong></p>
+<ul>
+<li>从可视化设计语言Visual Basic开始，对可视化构件的布局就成为可视化设计的主要工作</li>
+<li>常见的可视化构件包括：窗口，菜单，标签(Tab)，表单，按钮，列表，树形控件，组合框，输入框等等</li>
+</ul>
+<p><strong>可视化设计要点</strong></p>
+<ul>
+<li>按照任务模型设计界面隐喻，同时不要把软件系统的内部构造机制暴露给用户</li>
+<li>可视化设计还应该基于界面隐喻，尽可能地把功能和任务细节表现出来</li>
+</ul>
+<p><strong>常见界面类型</strong></p>
+<ul>
+<li>批处理</li>
+<li>命令行</li>
+<li>全屏</li>
+<li>图形化</li>
+<li>多维交互</li>
+</ul>
+<h3 id="5-人机交互设计的交互性"><a href="#5-人机交互设计的交互性" class="headerlink" title="5. 人机交互设计的交互性"></a>5. 人机交互设计的交互性</h3><p><strong>交互</strong></p>
+<ul>
+<li>“交互”是双向的<ul>
+<li>一方面用户主动向软件系统提出请求(输入信息)，软件系统给予用户响应(输出信息)</li>
+<li>另一方面，软件系统也应该主动告知用户相应的信息，并等待用户的响应<ul>
+<li>智能系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>导航</strong></p>
+<ul>
+<li>主动将自己的产品和服务简明扼要地告诉用户，这个就是导航</li>
+<li>导航的目的就是为用户提供一个很好的完成任务的入口，好的导航会让这个入口非常符合人的精神模型</li>
+<li>全局结构按照任务模型将软件产品的功能组织起来，并区分不同的重要性和主题提供给不同的用户<ul>
+<li>全局结构常用的导航控件包括窗口，菜单，列表，快捷方式，热键等等。</li>
+<li>全局结构的设计主要以功能分层和任务交互过程为主要依据</li>
+</ul>
+</li>
+<li>局部结构通过安排界面布局细节，制造视觉上的线索来给用户提供导航<ul>
+<li>局部结构常用的导航控件包括可视化控件布局与组合，按钮设置，文本颜色或字体大小等等</li>
+<li>局部结构的设计主要以用户关注的任务细节为主要依据</li>
+</ul>
+</li>
+</ul>
+<p><strong>反馈</strong></p>
+<ul>
+<li>让用户能够意识到行为的结果</li>
+<li>但不能打断用户工作时的意识流</li>
+</ul>
+<p><strong>协作式设计</strong></p>
+<ul>
+<li>人和计算机是人机交互的两方，其中人的因素是比较固定的，一定时期内不会发生大的变化，所以要让二者交互顺畅，就需要让计算机更多地适应人的因素，这也是人机交互设计以用户为中心的根本原因</li>
+<li>这种调整计算机因素以更好地适应并帮助用户的设计方式被称为协作式设计</li>
+</ul>
+<p><strong>简洁的设计</strong></p>
+<ul>
+<li>易于理解，易于记忆</li>
+</ul>
+<p><strong>简洁的方法</strong></p>
+<ul>
+<li>列举<ul>
+<li>隐藏</li>
+<li>赋予</li>
+<li>标签，图标等线索暗示</li>
+</ul>
+</li>
+</ul>
+<p><strong>一致的设计</strong></p>
+<ul>
+<li>一致的规律性易于理解和记忆</li>
+</ul>
+<p><strong>低出错率设计</strong></p>
+<ul>
+<li>人总是会犯错的，计算机要容忍使用者的错误</li>
+<li>人机交互设计首先要帮助人们避免犯错，尽可能设计不让用户犯严重错误的系统<ul>
+<li>具体措施包括将不适当的菜单选项功能以灰色显示屏蔽</li>
+<li>禁止在数值输入域中出现字母字符</li>
+</ul>
+</li>
+<li>当错误出现时，系统还要在人机交互中提供简洁，有建设性，具体的指导来帮助用户消除错误<ul>
+<li>出错信息应当遵循以下四个简单原则：<ul>
+<li>应当使用清晰的语言来表达，而不要使用难懂的代码</li>
+<li>使用的语言应当精炼准确，而不是空泛、模糊的</li>
+<li>应当对用户解决问题提供建设性的帮助</li>
+<li>出错信息应当友好，不要威胁或责备用户</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统还应该提供错误恢复和故障解决帮助手册</li>
+</ul>
+<p><strong>低出错率方法</strong></p>
+<ul>
+<li>限制输入<ul>
+<li>列表，可选框等选择性组件代替输入框</li>
+<li>按钮代替命令行</li>
+<li>限定输入：类型，范围，格式…</li>
+</ul>
+</li>
+<li>限制范围<ul>
+<li>简单化单步操作</li>
+</ul>
+</li>
+<li>辅助<ul>
+<li>事前提示</li>
+<li>事后检查</li>
+<li>随时可以撤销</li>
+</ul>
+</li>
+</ul>
+<p><strong>易记性设计</strong></p>
+<ul>
+<li>减少短期记忆负担</li>
+<li>使用逐层递进的方式展示信息</li>
+<li>使用直观的快捷方式。重新认知比记忆更容易</li>
+<li>设置有意义的缺省值，可以帮助用户减少记忆负担</li>
+</ul>
+<h3 id="6-人机交互设计过程"><a href="#6-人机交互设计过程" class="headerlink" title="6. 人机交互设计过程"></a>6. 人机交互设计过程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="详细设计概述"><a href="#详细设计概述" class="headerlink" title="详细设计概述"></a>详细设计概述</h2><h3 id="1-什么是详细设计"><a href="#1-什么是详细设计" class="headerlink" title="1. 什么是详细设计"></a>1. 什么是详细设计</h3><ul>
+<li>一个特定模块的中层设计</li>
+<li>以及特定模块中的对象或类的低层设计</li>
+<li>软件体系结构定义了模块的规范</li>
+<li>详细设计用详细设计机制实现模块<ul>
+<li>中层：(子模块 -&gt; )面向对象 -&gt; 类的规格说明</li>
+<li>低层：数据结构+算法 -&gt; 类的实现</li>
+</ul>
+</li>
+<li>详细设计需要设计师考虑模块的功效，美观和坚固性<ul>
+<li>详细设计的质量属性</li>
+<li>修改，维护，性能…</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-详细设计的出发点"><a href="#2-详细设计的出发点" class="headerlink" title="2. 详细设计的出发点"></a>2. 详细设计的出发点</h3><p><strong>哪些模块需要哪些详细设计？</strong></p>
+<ul>
+<li>View<ul>
+<li>HCI设计: ch11 -&gt; 人机交互课程</li>
+</ul>
+</li>
+<li>Logic<ul>
+<li>OO设计</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Data设计：简单设计 -&gt; 数据库课程</li>
+</ul>
+</li>
+</ul>
+<p><strong>OO详细设计从哪儿开始？</strong></p>
+<ul>
+<li>上下文<ul>
+<li>模块的规格说明<ul>
+<li>导出/导入接口</li>
+</ul>
+</li>
+<li>职责分配：<ul>
+<li>部分职责来自RE(SRS)<ul>
+<li>典型的有用例，领域模型，(顺序图，状态图)</li>
+</ul>
+</li>
+<li>另一些来自决策实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-详细设计的三种方法学"><a href="#3-详细设计的三种方法学" class="headerlink" title="3. 详细设计的三种方法学"></a>3. 详细设计的三种方法学</h3><p><strong>详细设计的三种方法学</strong></p>
+<ul>
+<li>功能分解：逐步精华<ul>
+<li>传统结构化设计方法</li>
+</ul>
+</li>
+<li>数据结构为中心<ul>
+<li>现代结构化设计方法，数据驱动的面向对象设计方法</li>
+</ul>
+</li>
+<li>面向对象<ul>
+<li>职责驱动的面向对象设计方法</li>
+</ul>
+</li>
+</ul>
+<p><strong>功能分解：逐步精华</strong></p>
+<ul>
+<li>分解功能与过程，忽略数据。迭代分解过程，直到所有过程和步骤都可实现</li>
+<li>功能分解完成后再安排数据</li>
+<li>会在局部产生主程序与子路径风格</li>
+<li>缺少对象概念</li>
+<li>可能会导致数据共享</li>
+</ul>
+<h3 id="4-面向对象详细设计-GRASP初步"><a href="#4-面向对象详细设计-GRASP初步" class="headerlink" title="4. 面向对象详细设计(GRASP初步)"></a>4. 面向对象详细设计(GRASP初步)</h3><h3 id="5-详细设计文档化"><a href="#5-详细设计文档化" class="headerlink" title="5. 详细设计文档化"></a>5. 详细设计文档化</h3><h3 id="6-详细设计验证"><a href="#6-详细设计验证" class="headerlink" title="6. 详细设计验证"></a>6. 详细设计验证</h3><p><br></p>
+<hr>
+<h2 id="软件构造"><a href="#软件构造" class="headerlink" title="软件构造"></a>软件构造</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><ul>
+<li>SWEBOK2004<ul>
+<li>将”软件构造”定义为：通过编码，验证，单元测试，集成测试和调试等工作的结合，生产可工作的，有意义的软件的详细创建过程</li>
+</ul>
+</li>
+<li>McConnell2004<ul>
+<li>认为软件构造除了核心的编程任务之外，还涉及详细设计(数据结构与算法设计)，单元测试，集成与集成测试，以及其他活动</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件构造是设计的延续</strong></p>
+<ul>
+<li>设计是规划软件构建方案的过程，实现是依据规划的软件构建方案建造真正产品的过程</li>
+<li>源程序是软件构建方案的最一个规划，不是产品本身，真正的产品是运行于计算机上的由二进制代码组成的可执行程序</li>
+<li>源程序的生产过程——编程，属于设计活动，编译器完成的编译和链接才是依据规划建造软件产品的实现活动</li>
+</ul>
+<h3 id="2-活动"><a href="#2-活动" class="headerlink" title="2. 活动"></a>2. 活动</h3><ul>
+<li>详细设计</li>
+<li>编程</li>
+<li>测试</li>
+<li>调试</li>
+<li>代码评审</li>
+<li>集成与构建(Build)</li>
+<li>构造管理</li>
+</ul>
+<p><strong>详细设计</strong></p>
+<ul>
+<li>有些项目会将主要的详细设计工作分配在软件构造阶段完成</li>
+<li>不论是哪种项目，在软件构造阶段都不可避免的会涉及到详细设计的调整工作。因为编程语言是软件设计的一个重要约束，随着编程工作的进行和深入，人们可能会发现与预想不一致的情况和更多的约束，这个时候就需要在软件构造阶段修改详细设计方案</li>
+<li>软件构造阶段详细设计使用的方法与技术与软件设计阶段是一样的，只是应用在更小的规模上</li>
+</ul>
+<p><strong>程序代码的典型质量</strong></p>
+<ul>
+<li>易读性<ul>
+<li>程序代码必须是易读的，看上去”显而易见是正确的”。易读性是编程最为重要的目标，它可以使得程序更容易开发，尤其是易于调试。可以使得程序更容易维护，减少理解代码的难度和成本。可以使得程序易于复用</li>
+</ul>
+</li>
+<li>易维护性<ul>
+<li>除了易读之外，易维护性要求程序代码易于修改</li>
+</ul>
+</li>
+<li>可靠性<ul>
+<li>程序代码必须是可靠的，要执行正确，并妥善处理故障</li>
+</ul>
+</li>
+<li>性能<ul>
+<li>程序代码必须是高性能的，包括时间性能和空间性能，需要进行仔细的数据结构和算法设计</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>不要遗留程序漏洞，不要出现重要信息的泄漏(例如内存数据区泄漏)</li>
+</ul>
+</li>
+</ul>
+<p><strong>编程的主要技术</strong></p>
+<ul>
+<li>构造可理解的源代码的技术，包括命名和空间布局</li>
+<li>使用类，枚举类型，变量，命名常量和其它类似实体</li>
+<li>使用控制结构</li>
+<li>处理错误条件——既包括预计的错误，也包括未预期的异常</li>
+<li>预防代码级的安全泄露(例如，缓冲区超限或数组下标溢出)</li>
+<li>使用资源，用互斥机制访问串行可复用资源(包括线程和数据库锁)</li>
+<li>源代码组织(组织为语句，例程，类，包或其它结构)</li>
+<li>代码文档</li>
+<li>代码调整</li>
+</ul>
+<p><strong>测试</strong></p>
+<ul>
+<li>通常来说，程序员每修改一次程序就会进行最少一次单元测试，在编写程序的过程中前后很可能要进行多次单元测试，以证实程序达到了要求，没有程序错误。集成测试一般在单元测试之后，用来测试多个单元之间的接口是否编程正确</li>
+</ul>
+<p><strong>调试</strong></p>
+<ul>
+<li>调试过程可以分为三个部分：重现问题，诊断缺陷和修复缺陷</li>
+</ul>
+<p><strong>重现问题的方法</strong></p>
+<ul>
+<li>控制输入<ul>
+<li>找到相应的数据输入，能够重现绝大多数的问题。可以通过控制数据输入来重现问题意味着缺陷就发生在对该数据的处理代码之中</li>
+<li>寻找能够重现问题的数据输入可以使用问题回溯推理，内存数据监控，记录输入数据日志等方法</li>
+</ul>
+</li>
+<li>控制环境。<ul>
+<li>有些问题是编译器，操作系统，数据库管理系统，网络管理系统等系统软件环境造成的，通过控制数据输入无法重现问题。这时就需要通过控制环境来重现问题。一定要记住的是，如果你进行各种手段诊断之后确信你的程序代码没有缺陷，就要警惕可能是软件环境造成了问题</li>
+<li>控制环境以重现问题经常使用替换法，例如替换机器，操作系统，数据库管理系统等</li>
+</ul>
+</li>
+</ul>
+<p><strong>寻找和定位缺陷的方法</strong></p>
+<ul>
+<li>灵活使用编译器提示</li>
+<li>持续缩小嫌疑代码的范围</li>
+<li>检查刚刚修改过的部分</li>
+<li>警惕已出现缺陷和常见缺陷</li>
+<li>利用工具</li>
+</ul>
+<p><strong>修复缺陷的注意点</strong></p>
+<ul>
+<li>一次只修复一个缺陷</li>
+<li>修改前保留旧版本的备份，如果项目使用了配置管理系统，这个工作会由配置管理工具完成，否则就需要由程序员手动完成</li>
+<li>使用测试和评审验证修复的有效性</li>
+<li>检查和修复类似的缺陷，这可以在代码搜索,程序切片等工具的帮助下进行</li>
+</ul>
+<p><strong>代码评审</strong></p>
+<ul>
+<li>代码评审对代码的系统检查，通常是通过同行专家评审来完成的。通过评审会议可以发现并修正之前忽略的代码错误，从而同时提高软件的质量和开发者的技巧</li>
+<li>代码评审一般分为正式评审,轻量级评审和结对编程</li>
+</ul>
+<p><strong>集成与构建</strong></p>
+<ul>
+<li>在以分散的方式完成程序基本单位(例程，类)之后，软件构造还需要将这些分散单位集成和构建为构件，子系统和完整系统</li>
+<li>集成有大爆炸式集成和增量式集成两种方式。实践中增量式集成有着更好的效果</li>
+<li>构建将可读的源代码转换为标准的能在计算机上运行的可执行文件。构建过程需要配置管理工具的帮助</li>
+</ul>
+<p><strong>构造管理</strong></p>
+<ul>
+<li>构造计划</li>
+<li>度量</li>
+<li>配置管理</li>
+</ul>
+<h3 id="3-实践方法"><a href="#3-实践方法" class="headerlink" title="3. 实践方法"></a>3. 实践方法</h3><ul>
+<li>重构</li>
+<li>测试驱动开发</li>
+<li>结对编程</li>
+</ul>
+<p><strong>重构</strong></p>
+<ul>
+<li>为什么要重构？<ul>
+<li>因为无法预计到后续数年的修改，导致软件开发阶段的设计方案不能满足修改要求</li>
+<li>随着修改次数的增多，软件设计结构的质量越来越脆弱，很难继续维持可修改性</li>
+</ul>
+</li>
+<li>什么是重构？<ul>
+<li>修改软件系统的严谨方法，它在不改变代码外部表现的情况下改进其内部结构</li>
+</ul>
+</li>
+<li>重构的时机？<ul>
+<li>增加新的功能时。需要注意的是重构发生在新功能增加完成之后，用来消除新功能所添加代码导致的坏味道。而不是发生在新功能添加之前，重构不改变代码外部行为，不是能够实现新功能添加的方法</li>
+<li>发现了缺陷进⾏修复时。诊断缺陷时如果发现代码存在坏味道或者修复代码会引入坏味道，就需要进行重构</li>
+<li>进行代码评审时。如果在评审代码时发现了坏味道，就需要进行重构</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码的坏味道</strong></p>
+<ul>
+<li>太长的方法，往往意味着方法完成了太多的任务，不是功能内聚的，需要被分解为多个方法</li>
+<li>太大的类，往往意味着类不是单一职责的，需要被分解为多个类</li>
+<li>太多的方法参数，往往意味着方法的任务太多或者参数的数据类型抽象层次太低，不符合接口最小化的低耦合原则，需要将其分解为多个参数少的方法或者将参数包装成对象，结构体等抽象层次更高的数据类型</li>
+<li>多处相似的复杂控制结构，例如多处相同类型的Case结构，往往意味着多态策略不足，需要使用继承树多态机制消除复杂控制结构</li>
+<li>重复的代码，往往意味着隐式耦合，需要将重复代码提取为独立方法。 一个类过多使用其他类的属性，往往意味着属性分配不正确或者协作设计不正确，需要在类间转移属性或使用方法委托代替属性访问</li>
+<li>过多的注释，往往意味着代码的逻辑结构不清晰或者可读性不好，需要进行逻辑结构重组或者代码重组</li>
+</ul>
+<p><strong>测试驱动开发</strong></p>
+<ul>
+<li>测试驱动开发又被称为测试优先(Test First)的开发，随着极限编程方法的普遍应用而得到普及</li>
+<li>测试驱动开发要求程序员在编写一段代码之前，优先完成该段代码的测试代码。测试代码通常由测试工具自动装载执行，也可以由程序员手工执行。完成测试代码之后，程序员再编写程序代码，并在编程中重复执行测试代码，以验证程序代码的正确性</li>
+</ul>
+<h3 id="4-Construction-Idea"><a href="#4-Construction-Idea" class="headerlink" title="4. Construction Idea"></a>4. Construction Idea</h3><p><br></p>
+<hr>
+<h2 id="代码设计"><a href="#代码设计" class="headerlink" title="代码设计"></a>代码设计</h2><h3 id="1-设计易读的代码"><a href="#1-设计易读的代码" class="headerlink" title="1. 设计易读的代码"></a>1. 设计易读的代码</h3><ul>
+<li>维护的需要</li>
+<li>团队协作的需要</li>
+</ul>
+<p><strong>代码规范</strong></p>
+<ul>
+<li>格式</li>
+<li>命名</li>
+<li>注释</li>
+</ul>
+<p><strong>布局格式</strong></p>
+<ul>
+<li>使用缩进与对齐表达逻辑结构</li>
+<li>将相关逻辑组织在一起</li>
+<li>使用空行分割逻辑</li>
+<li>语句分行</li>
+</ul>
+<p><strong>类定义的逻辑组织</strong></p>
+<ul>
+<li>成员变量声明</li>
+<li>构造方法与析构方法</li>
+<li>public 方法</li>
+<li>protected 方法</li>
+<li>private 方法</li>
+</ul>
+<p><strong>命名</strong></p>
+<ul>
+<li>使用有意义的名称进行命名。例如对”销售信息”类，命名为Sales而不是ClassA</li>
+<li>名称要与实际内容相符</li>
+<li>如果存在惯例，命名时要遵守惯例</li>
+<li>临时变量命名要符合常规</li>
+<li>不要使用太长的名称</li>
+<li>不要使用易混字符进行命名</li>
+<li>不要仅仅使用不易区分的多个名称</li>
+<li>不要使用没有任何逻辑的字母缩写进行命名</li>
+</ul>
+<p><strong>注释</strong></p>
+<ul>
+<li>注释类型(Java)<ul>
+<li>语句注释（//）</li>
+<li>标准注释(/<em> </em>/)</li>
+<li>文档注释(/*<em> </em>/)</li>
+</ul>
+</li>
+</ul>
+<p><strong>文档注释的内容</strong></p>
+<ul>
+<li>包的总结和概述，每个包都要有概述</li>
+<li>类和接口的描述，每个类和接口都要有概述</li>
+<li>类方法的描述，每个方法都要有功能概述，都要定义完整的接口描述</li>
+<li>字段的描述，重要字段含义，用法与约束的描述</li>
+</ul>
+<p><strong>Javadoc</strong></p>
+<ul>
+<li>为了方便使用注释文档化程序代码，人们还为Java程序提供了Javadoc工具。只要程序员注释程序时使用特定的标签，Javadoc就能从代码中抽取出注释形成一个HTML格式的代码文档</li>
+<li>在描述类与接口时，Javadoc常用的标签是<ul>
+<li>@author：作者名</li>
+<li>@version：版本号</li>
+<li>@see：引用</li>
+<li>@since：最早使用该方法/类/接口的JDK版本</li>
+<li>@deprecated 引起不推荐使用的警告</li>
+</ul>
+</li>
+<li>在描述方法时，Javadoc常用的标签是<ul>
+<li>@param 参数及其意义</li>
+<li>@return 返回值</li>
+<li>@throws 异常类及抛出条件</li>
+<li>@see：引用</li>
+<li>@since：最早使用该方法/类/接口的JDK版本</li>
+<li>@deprecated 引起不推荐使用的警告</li>
+</ul>
+</li>
+</ul>
+<p><strong>内部注释</strong></p>
+<ul>
+<li>注释要有意义，不要简单重复代码的含义</li>
+<li>重视对数据类型的注释</li>
+<li>重视对复杂控制结构的注释</li>
+</ul>
+<h3 id="2-设计易维护的代码"><a href="#2-设计易维护的代码" class="headerlink" title="2. 设计易维护的代码"></a>2. 设计易维护的代码</h3><p><strong>小型任务</strong></p>
+<ul>
+<li>要让程序代码可修改，就要控制代码的复杂度。这首先要求每个函数或方法的代码应该是内聚的，恰好完成一个功能与目标</li>
+<li>如果内聚的代码本身比较简单，复杂性可控，那么它就具有比较好的可维护性。反之，内聚的代码也可以比较复杂，典型表现是完成一个功能需要多个步骤，代码比较长，那么就需要将其进一步分解为多个高内聚，低耦合的小型任务</li>
+</ul>
+<p><strong>复杂决策</strong></p>
+<ul>
+<li>使用新的布尔变量简化复杂决策</li>
+<li>使用有意义的名称封装复杂决策<ul>
+<li>对于决策”If ((id&gt;0) &amp;&amp; (id&lt;=MAX_ID))”，可以封装为”If (isIdValid(id))”，方法isIdValid(id)的内容为”return ((id&gt;0) &amp;&amp; (id&lt;=MAX_ID))”</li>
+</ul>
+</li>
+<li>表驱动编程</li>
+</ul>
+<p><strong>数据使用</strong></p>
+<ul>
+<li>不要将变量应用于与命名不相符的目的。例如使用变量total表示销售的总价，而不是临时客串for循环的计数器</li>
+<li>不要将单个变量用于多个目的。在代码的前半部分使用total表示销售总价，在代码后半部分不再需要”销售总价”信息时再用total客串for循环的计数器也是不允许的</li>
+<li>限制全局变量的使用，如果不得不使用全局变量，就明确注释全局变量的声明和使用处</li>
+<li>不要使用突兀的数字与字符，例如15(天)，”MALE”等，要将它们定义为常量或变量后使用</li>
+</ul>
+<p><strong>明确依赖关系</strong></p>
+<ul>
+<li>类之间模糊的依赖关系会影响到代码的理解与修改，非常容易导致修改时产生未预期的连锁反应</li>
+</ul>
+<h3 id="3-设计可靠的代码"><a href="#3-设计可靠的代码" class="headerlink" title="3. 设计可靠的代码"></a>3. 设计可靠的代码</h3><ul>
+<li>契约式设计<ul>
+<li>异常方式</li>
+<li>断言方式</li>
+</ul>
+</li>
+<li>防御式编程</li>
+</ul>
+<p><strong>Java中断言语句的实现</strong></p>
+<ul>
+<li>为了方便实现契约式设计，Java 提供了断言语句：”assert Expression1( : Expression2) ;”：<ul>
+<li>Expression1 是一个布尔表达式，在契约式设计中可以将其设置为前置条件或者后置条件</li>
+<li>Expression2 是一个值，各种常见类型都可以</li>
+<li>如果Expression1 为true，断言不影响程序执行</li>
+<li>如果Expression1 为false，断言抛出AssertionError 异常，如果存在Expression2 就使用它作为参数构造AssertionError</li>
+</ul>
+</li>
+</ul>
+<p><strong>防御式编程常见场景</strong></p>
+<ul>
+<li>防御式编程的基本思想是：在一个方法与其他方法，操作系统，硬件等外界环境交互时，不能确保外界都是正确的，所以要在外界发生错误时，保护方法内部不受损害</li>
+<li>常见场景<ul>
+<li>输如参数是否合法？</li>
+<li>用户输如是否有效？</li>
+<li>外部文件是否存在？</li>
+<li>对其他对象的引用是否为NULL？</li>
+<li>其他对象是否已初始化？</li>
+<li>其他对象的某个方法是否已执行？</li>
+<li>其他对象的返回值是否正确？</li>
+<li>数据库系统连接是否正常？</li>
+<li>网络连接是否正常？</li>
+<li>网络接收的信息是否有效？</li>
+</ul>
+</li>
+<li>异常和断言都可以用来实现防御式编程，两种实现方式的差异与契约式设计的实现一样</li>
+</ul>
+<h3 id="4-使用模型辅助设计复杂代码"><a href="#4-使用模型辅助设计复杂代码" class="headerlink" title="4. 使用模型辅助设计复杂代码"></a>4. 使用模型辅助设计复杂代码</h3><ul>
+<li>决策表</li>
+<li>伪代码</li>
+<li>程序流程图</li>
+</ul>
+<h3 id="5-为代码开发单元测试用例"><a href="#5-为代码开发单元测试用例" class="headerlink" title="5. 为代码开发单元测试用例"></a>5. 为代码开发单元测试用例</h3><ul>
+<li>为方法开发测试用例主要使用两种线索：<ul>
+<li>方法的规格<ul>
+<li>根据第一种线索，可以使用基于规格的测试技术开发测试用例，等价类划分和边界值分析是开发单元测试用例常用的黑盒测试方法</li>
+</ul>
+</li>
+<li>方法代码的逻辑结构<ul>
+<li>根据第二种线索，可以使用基于代码的测试技术开发测试用例，对关键，复杂的代码使用路径覆盖，对复杂代码使用分支覆盖，简单情况使用语句覆盖</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>为类开发测试用例</strong></p>
+<ul>
+<li>在复杂类中，常常有着多变的状态，每次一个方法的执行改变了类状态时，都会给其他方法带来影响，也就是说复杂类的多个方法间是互相依赖的</li>
+<li>所以，除了测试类的每一个方法之外，还要测试类不同方法之间的互相影响情况</li>
+</ul>
+<h3 id="6-代码复杂度度量"><a href="#6-代码复杂度度量" class="headerlink" title="6. 代码复杂度度量"></a>6. 代码复杂度度量</h3><ul>
+<li>程序复杂度是造成各种编程困难的主要原因。[Dijkstra1972]很早就指出：”有能力的程序员会充分认识到自己的大脑容量是多么地有限；所以，他会非常谦卑的处理编程任务。”</li>
+</ul>
+<p><strong>衡量圈复杂度</strong></p>
+<ul>
+<li>衡量圈复杂度的基本思路是计算程序中独⽴路径的最大数量。第一种计算方法是建立程序的流程图G，假设图的节点数为N，边数为E，那么复杂度V(G)=E-N+2</li>
+<li>还有一种简单的算法是直接计数程序中决策点的数量：(1) 从1开始，一直往下通过程序。 (2) 一旦遇到下列关键字，或者同类的词，就加1：if, while, repeat, for。 (3) 给case语句中的每一种情况都加1</li>
+</ul>
+<p><strong>度量的意义</strong></p>
+<ul>
+<li>基于圈复杂度，你可以衡量一下程序代码是否需要调整。[McConnell2004]认为：<ul>
+<li>0-5 子程序可能还不错</li>
+<li>6-10 得想办法简化子程序了</li>
+<li>10+ 把子程序的某一个部分拆分成另一个子程序并调用它。 10个决策点的上限并不是绝对的。应该把决策点的数量当做一个警示，该警示说明某个子程序可能需要重新设计了</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-代码大全"><a href="#7-代码大全" class="headerlink" title="7. 代码大全"></a>7. 代码大全</h3><p><strong>变量</strong></p>
+<ul>
+<li>变量定义</li>
+<li>变量初始化</li>
+<li>作用域</li>
+<li>持续性</li>
+</ul>
+<p><strong>变量定义</strong></p>
+<ul>
+<li>关闭隐式声明</li>
+<li>声明全部的变量</li>
+<li>遵循某种命名规则</li>
+<li>检查变量名</li>
+</ul>
+<p><strong>变量初始化</strong></p>
+<ul>
+<li>在声明变量的时候初始化</li>
+<li>在靠近变量第一次使用的位置初始化</li>
+<li>理想情况下，在靠近第一次使用变量的位置声明和定义该变量</li>
+<li>在可能的情况下使用final或者const</li>
+<li>特别注意计数器和累加器</li>
+<li>在类的构造函数里初始化该类的数据成员</li>
+<li>检查是否需要重新初始化</li>
+<li>一次性初始化具名常量。用可执行代码来初始化变量</li>
+<li>使用编译器设置来自动化初始化所有变量</li>
+<li>利应编译器的警告信息</li>
+<li>检查输入参数的合法性</li>
+<li>用内存访问检查工具来检查错误的指针</li>
+<li>在程序开始时初始化工作内存</li>
+</ul>
+<p><strong>作用域</strong></p>
+<ul>
+<li>使变量应用局部化(空间)<ul>
+<li>变量跨度尽可能小</li>
+</ul>
+</li>
+<li>尽可能缩短变量的存活时间(时间)<ul>
+<li>变量生存时间尽可能小</li>
+</ul>
+</li>
+</ul>
+<p><strong>减小作用域的一般原则</strong></p>
+<ul>
+<li>在循环开始之前再去初始化该循环里使用的变量，而不是在该循环所属自程序的开始处初始化这些变量</li>
+<li>直到变量即将被使用时再赋值</li>
+<li>把相关语句放到一起</li>
+<li>把相关语句组提取成单独的子程序</li>
+<li>开始时采用最严格的可见性，然后根据需要扩展变量的作用域</li>
+</ul>
+<p><strong>持续性</strong></p>
+<ul>
+<li>在程序中加入调试代码或者断言来检查那些关键变量的合理取值</li>
+<li>准备抛弃变量时给它们赋上”不合理的值”</li>
+<li>编写代码时要假设数据并没有持续性</li>
+<li>养成在使用所有数据之前声明和初始化的习惯</li>
+</ul>
+<p><strong>持续性的多种形态</strong></p>
+<ul>
+<li>特定代码端或子程序的生命期<ul>
+<li>for循环里声明的变量</li>
+</ul>
+</li>
+<li>只要你允许，它就会持续下去<ul>
+<li>new</li>
+</ul>
+</li>
+<li>程序的声明期<ul>
+<li>static</li>
+</ul>
+</li>
+<li>永远持续<ul>
+<li>存储在文件</li>
+</ul>
+</li>
+</ul>
+<p><strong>为变量制定单一用途</strong></p>
+<p><strong>两个变量用于两种用途</strong></p>
+<p><strong>避免让代码具有隐含意义</strong></p>
+<ul>
+<li>Bad example<ul>
+<li>pageCount的取值可能表示已打印纸张的数量，除非它等于-1，在这种情况下表明有错误发生</li>
+</ul>
+</li>
+</ul>
+<p><strong>变量的命名</strong></p>
+<p><strong>数值理论</strong></p>
+<ul>
+<li>避免使用”神秘数值”</li>
+<li>如果需要，可以使用硬编码的0和1</li>
+<li>0表示起始值</li>
+<li>1表示增量</li>
+<li>预防除0的错误</li>
+<li>使类型转换变得明显</li>
+<li>避免混合类型的比较</li>
+</ul>
+<p><strong>整数</strong></p>
+<ul>
+<li>检查整数除法</li>
+<li>检查整数溢出</li>
+<li>检查中间结果溢出</li>
+</ul>
+<p><strong>浮点数</strong></p>
+<ul>
+<li>避免数量级相差巨大的数之间的加减运算</li>
+<li>避免等量判断</li>
+<li>10个0.1相加等于1？</li>
+<li>处理舍入误差</li>
+<li>检查语言和函数库对特定数据类型的支持</li>
+</ul>
+<p><strong>创建子程序的正当理由</strong></p>
+<ul>
+<li>降低复杂度</li>
+<li>引入中间，易懂的抽象</li>
+<li>避免代码重复</li>
+<li>支持子类化</li>
+<li>隐藏顺序</li>
+<li>隐藏指针操作</li>
+<li>提高可移植性</li>
+<li>简化复杂的布尔判断</li>
+<li>改善性能</li>
+<li>确保所有的子程序都很⼩</li>
+</ul>
+<p><strong>好的子程序名字</strong></p>
+<ul>
+<li>描述子程序所做的所有事情<ul>
+<li>computReportTotals</li>
+<li>computReportTotalsAndOpenOutputFile</li>
+</ul>
+</li>
+<li>避免使用无意义的，模糊或者表述不清的动词<ul>
+<li>HandleCalculation,PerformService,ProcessInput</li>
+</ul>
+</li>
+<li>不要同多数字来形成不同的子程序名字<ul>
+<li>Part1,part2</li>
+</ul>
+</li>
+<li>根据需要确定子程序名字的长度<ul>
+<li>9-15为佳</li>
+</ul>
+</li>
+<li>给函数命名时要对返回值有所描述<ul>
+<li>isReady, currentColor</li>
+</ul>
+</li>
+<li>给过程起名时使用语气强烈的动词加宾语的形式<ul>
+<li>printDocument</li>
+</ul>
+</li>
+<li>准确使用对仗词<ul>
+<li>Add/remove</li>
+</ul>
+</li>
+<li>为常用操作确立命名规则</li>
+</ul>
+<p><strong>算法的设计</strong></p>
+<ul>
+<li>我们一个重要的关注点是实现的性能或效率。直觉上你要使得代码运行得尽可能快。但是，这隐含了一些代价<ul>
+<li>编写更快代码的代价。可能会使代码更加复杂，从而花费更多的时间编写</li>
+<li>测试代码的代价。代码的复杂度要求更多的测试用例或测试数据</li>
+<li>用户理解代码的时间代价</li>
+<li>需要修改代码时，修改代码的时间代价</li>
+</ul>
+</li>
+</ul>
+<p><strong>在执行时间与设计质量，标准，和客户需求之间平衡考虑</strong></p>
+<p><strong>一般控制问题</strong></p>
+<ul>
+<li>布尔表达式</li>
+<li>复合语句</li>
+<li>空语句</li>
+<li>驯服危险的深层嵌套</li>
+<li>程序的复杂度</li>
+</ul>
+<p><strong>布尔表达式</strong></p>
+<ul>
+<li>用true和false做布尔判断<ul>
+<li>不要用0和1</li>
+<li>隐式地比较布尔值与true和false</li>
+</ul>
+</li>
+<li>简化复杂的表达式<ul>
+<li>拆分复杂的判断并引入新的布尔变量</li>
+<li>把复杂的表达式做成布尔函数</li>
+<li>用决策表代替复杂的条件</li>
+</ul>
+</li>
+<li>编写肯定形式的布尔表达式</li>
+<li>用括号使布尔表达式更清晰</li>
+<li>短路求值</li>
+<li>按照数轴的顺序编写数值表达式</li>
+<li>与0比较<ul>
+<li>隐式地比较逻辑变量</li>
+<li>把数与0相比较</li>
+<li>在C中显示地比较字符和零终⽌符(’\0’)</li>
+<li>把指针与NULL相比较</li>
+</ul>
+</li>
+</ul>
+<p><strong>复合语句</strong></p>
+<ul>
+<li>把括号对一起写出</li>
+<li>用括号被条件表达清楚</li>
+</ul>
+<p><strong>驯服危险的深层嵌套</strong></p>
+<ul>
+<li>通过重复检测条件中的某一部分来简化嵌套的if语句</li>
+<li>用break块来简化嵌套if</li>
+<li>把嵌套if转换成一组if-then-else语句</li>
+<li>把嵌套if转换成case语句</li>
+<li>把深层嵌套的代码抽取出来放进单独的子程序</li>
+<li>使用面向对象的方法</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件测试"><a href="#软件测试" class="headerlink" title="软件测试"></a>软件测试</h2><h3 id="1-什么是软件测试？"><a href="#1-什么是软件测试？" class="headerlink" title="1. 什么是软件测试？"></a>1. 什么是软件测试？</h3><p><strong>软件测试的目的</strong></p>
+<ul>
+<li>向开发者和用户展示软件满足了需求，表明软件产品是一个合格的产品<ul>
+<li>有效性测试</li>
+</ul>
+</li>
+<li>找出软件中的缺陷和不足<ul>
+<li>缺陷测试</li>
+</ul>
+</li>
+</ul>
+<p><strong>桩程序驱动程序</strong></p>
+<ul>
+<li>桩程序是被测试部件的交互环境，它扮演被测试部件需要调用的其他系统部件。桩程序对其他系统部件的扮演仅限于规格相同，内部代码要简单地多，通常是直接返回固定数据或者按照固定规则返回数据。</li>
+<li>驱动程序负责创建被测试部件的执行环境，并驱动和监控被测试部件执行测试用例的过程，判定测试用例的执行结果</li>
+</ul>
+<h3 id="2-软件测试的分类"><a href="#2-软件测试的分类" class="headerlink" title="2. 软件测试的分类"></a>2. 软件测试的分类</h3><p><strong>单元测试</strong></p>
+<p><strong>集成测试</strong></p>
+<p><strong>系统测试</strong></p>
+<ul>
+<li>单元测试，集成测试更加关注技术上的正确性，重在发现设计缺陷和代码缺陷。系统测试则不同，它更关注不符合需求的缺陷和需求自身的内在缺陷</li>
+<li>根据测试目标的不同，有很多不同类型的系统测试：功能测试，非功能性测试，验收测试，安装测试等等。但是发⽣在软件测试阶段，完全由软件测试⼈员控制和执行的主要是功能测试和非功能性测试</li>
+<li>系统测试关注整个系统的行为，所以不依赖于桩程序和驱动程序。但是，使用一些测试工具可以让系统测试过程更加自动化</li>
+<li>系统测试的功能测试计划以需求规格说明文档或用例文档为基础，主要使用随机测试和基于规格的测试技术设计功能测试用例。在测试非功能性需求时需要使用针对非功能需求的特定测试技术进行测试计划和测试用例设计</li>
+</ul>
+<h3 id="3-软件测试技术"><a href="#3-软件测试技术" class="headerlink" title="3. 软件测试技术"></a>3. 软件测试技术</h3><ul>
+<li>测试用例的选择</li>
+<li>随机测试</li>
+<li>基于规格的技术 - 黑盒测试方法</li>
+<li>基于代码的技术 - 白盒测试方法</li>
+<li>特定测试技术</li>
+</ul>
+<p><strong>测试用例的选择</strong></p>
+<ul>
+<li>测试的目标是发现尽可能多缺陷， 并不绝对要求所有</li>
+<li>因为测试是有代价的，不仅要耗费桩程序，驱动人力等成本，更重的是随着测试用例数量增多会直线上升</li>
+<li>所以，软件测试人员需要仔细地选择用例在代价尽可能小的情况下发现足够多的缺陷</li>
+<li>测试技术就是帮助软件人员设计和选择用例的</li>
+</ul>
+<p><strong>随机测试</strong></p>
+<ul>
+<li>随机测试(随机测试Ad hoc Testing)是⼀种基于软件工程师直觉和经验的技术，也许是实践中使⽤最为广泛的测试技术</li>
+<li>随机测试根据软件⼯程师的技能，直觉和对类似程序的经验，从所有可能的输入值中选择输入子集，建立测试用例</li>
+</ul>
+<p><strong>黑盒测试方法</strong></p>
+<ul>
+<li>等价类划分<ul>
+<li>有效等价类：是指对于程序的规格说明来合理，意义输如数据构成集合。利用有效等价类可检验程序是否实现了规格说明中所定的功能和性能</li>
+</ul>
+</li>
+<li>边界值分析</li>
+<li>决策表</li>
+<li>状态转换<ul>
+<li>使用状态转换测试技术时，通常要先为对象建立状态图，描述测试对象的状态集合，输入集合和输入导致的状态转换集合</li>
+<li>以状态图基础，可建立测试对象的转换表。状态转换表每一行都应该被设计为测试用例</li>
+</ul>
+</li>
+</ul>
+<p><strong>白盒测试方法</strong></p>
+<ul>
+<li>语句覆盖<ul>
+<li>语句覆盖设计测试用例的标准是确保被测试对象的每一行程序代码都至少执行一次</li>
+</ul>
+</li>
+<li>条件覆盖<ul>
+<li>条件覆盖设计测试用例的标准是确保程序中每个判断的每个结果都至少满足一次</li>
+</ul>
+</li>
+<li>路径覆盖<ul>
+<li>路径覆盖测试用例的标准是确保程序中每条独立执行路径都至少执行一次</li>
+</ul>
+</li>
+</ul>
+<p><strong>特点测试技术</strong></p>
+<ul>
+<li>面向对象的测试</li>
+<li>图形用户接口GUI测试</li>
+<li>基于Web的测试</li>
+<li>基于组件的测试</li>
+<li>并发程序的测试</li>
+<li>协议遵从性测试</li>
+<li>实时系统测试</li>
+<li>极端要求安全性的系统的测试</li>
+</ul>
+<h3 id="4-软件测试活动"><a href="#4-软件测试活动" class="headerlink" title="4. 软件测试活动"></a>4. 软件测试活动</h3><ul>
+<li>测试计划</li>
+<li>测试设计</li>
+<li>测试执行</li>
+<li>测试评价</li>
+</ul>
+<h3 id="5-软件测试的度量"><a href="#5-软件测试的度量" class="headerlink" title="5. 软件测试的度量"></a>5. 软件测试的度量</h3><ul>
+<li>缺陷数据</li>
+<li>测试覆盖率<ul>
+<li>需求覆盖率</li>
+<li>模块覆盖律</li>
+<li>代码覆盖率</li>
+</ul>
+</li>
+</ul>
+<p><strong>缺陷度量</strong></p>
+<ul>
+<li>根据引入缺陷的阶段<ul>
+<li>系统需求缺陷，设计缺陷和编码缺陷</li>
+</ul>
+</li>
+<li>根据缺陷的影响力<ul>
+<li>严重，一般和无影响</li>
+</ul>
+</li>
+</ul>
+<p><strong>覆盖率</strong></p>
+<ul>
+<li>需求覆盖率 = 被测试的需求数量 / 需求总数</li>
+<li>模块覆盖率 = 被测试的模块数量 / 模块总数</li>
+<li>代码覆盖率 = 被测试的代码行 / 代码行数总数</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件移交"><a href="#软件移交" class="headerlink" title="软件移交"></a>软件移交</h2><ul>
+<li>安装</li>
+<li>部署</li>
+<li>培训</li>
+<li>文档支持</li>
+<li>项目评价</li>
+</ul>
+<p><strong>软件交付</strong></p>
+<ul>
+<li>软件交付是软件项目的结束阶段，标志着软件开发任务的完成</li>
+<li>软件交付是软件开发与软件维护两个既连续又不同的软件产品生存状态</li>
+</ul>
+<p><strong>安装</strong></p>
+<ul>
+<li>安装是软件交付的最常见形式，现在大多数产品都通过安装的形式交付，它要求开发团队创建一个安装包，用户可以通过的执行将软件产品部署到工作环境</li>
+<li>安装包需要进行仔细的设计，并使用工具(例如 Advanced Installer, Setup Factory 等)帮助进行安装包的创建。一个好软件产品应该简单，健壮，可靠，完全。要创建很容易使用的安装包，让用户可以无需创建安装包的人员的帮助就能使用</li>
+</ul>
+<p><strong>关于安装的前期考虑</strong></p>
+<ul>
+<li>需求决策时，考虑到最终产品的安装与部署需求<ul>
+<li>环境约束等</li>
+</ul>
+</li>
+<li>体系结构设计时，考虑产品部署的设计决策<ul>
+<li>网络拓扑，库文件，动态链接库和配置文件<br>等</li>
+</ul>
+</li>
+<li>开发过程中使用的支持软件也会影响到交付</li>
+</ul>
+<p><strong>创建安装包的步骤</strong></p>
+<ul>
+<li>确定安装环境</li>
+<li>列举安装清单</li>
+<li>设计和建立安装包</li>
+<li>测试安装包</li>
+</ul>
+<p><strong>确定安装环境</strong></p>
+<ul>
+<li>确定安装包需要支持的操作系统，这既需要考虑当前用户的工作环境，又需要考虑产品未来的市场规划</li>
+<li>确定软件产品的语言支撑环境，例如使用Java语言开发的软件产品就需要安装JDK</li>
+<li>确定软件产品需要的软件支持，例如数据库系统，网络系统等</li>
+<li>确定硬件等其他要求，例如有些软件产品可能会要求扫描仪，视频卡，通信设备等特殊硬件</li>
+</ul>
+<p><strong>列举安装清单</strong></p>
+<ul>
+<li>要根据软件产品的实现情况，结合所需的环境支撑，列举需要安装的文件，初始化数据，注册表等清单信息，要清楚标明它们在安装后将会出现的位置</li>
+<li>在考虑安装位置时要遵守一致性，标记名称的使用要意义清楚，让用户能便利地找出相应文件</li>
+</ul>
+<p><strong>设计和建立安装包</strong></p>
+<ul>
+<li>要对安装包进行详细的设计，包括一个渐进的安装步骤，各步骤的人机交互方式等等。完成设计后就可以使用安装工具创建安装包</li>
+</ul>
+<p><strong>测试安装包</strong></p>
+<ul>
+<li>安装包需要在目标环境中进行安装测试，以发现可能的问题</li>
+<li>需要注意的是：必须以用户的工作环境为目标环境进行测试，因为用户使用的机器环境与开发者的机器环境有很大的不同(包括程序环境，操作系统版本，支撑软件版本等等)，在开发者机器上可以正确执行的安装包未必能够在用户的机器上运行</li>
+</ul>
+<p><strong>部署</strong></p>
+<ul>
+<li>在软件产品比较复杂时，仅仅通过一个安装包无法完成软件交付任务，这时可以使用另一种常见的软件交付方式——部署</li>
+<li>部署通常是由开发人员直接操纵软件产品的目标环境，使得软件产品能够在目标环境中正常运行</li>
+<li>部署的过程中通常需要执行安装任务，但是还有很多比安装复杂得多的其他任务，例如：安装，设置或调整操作系统，尤其是权限管理参数。安装，设置和调整数据库系统，包括新建数据库和设置访问权限。安装和设置库文件，应用服务器等应用环境</li>
+</ul>
+<p><strong>部署的步骤</strong></p>
+<ul>
+<li>确定部署环境</li>
+<li>确定部署任务</li>
+<li>完成部署准备</li>
+<li>执行部署任务</li>
+</ul>
+<p><strong>确定部署环境</strong></p>
+<ul>
+<li>和安装一样，软件部署要首先要需要确定部署的目标环境，当然它比安装要求的更高一些。它需要对目标环境进行调查分析，搞清楚部署前的环境细节，然后才能与软件产品需要的环境细节进行比较，才能明确需要执行的部署任务</li>
+<li>具体来说，软件部署需要了解服务器与网络拓扑，安全控制与权限管理，软硬件系统的配置信息等</li>
+</ul>
+<p><strong>确定部署任务</strong></p>
+<ul>
+<li>将软件产品需要的目标环境与部署前的环境进行比较，分析二者之间的差距，并将其确立为部署的任务</li>
+<li>确定任务之后，还需要以渐进的方式安排任务之间的执行次序。例如，先安装和配置操作系统，然后安装和配置相应的软硬件系统，最后完成软件产品的安装与配置，等等</li>
+</ul>
+<p><strong>完成部署准备</strong></p>
+<ul>
+<li>有些部署工作可以完全依靠现场执行，但多数的部署任务需要进行一定的事前准备，尤其是要综合考虑部署工作可能出现的各种情况，制定完备的应对方案</li>
+</ul>
+<p><strong>执行部署任务</strong></p>
+<ul>
+<li>按照准备的计划，执行相应的部署任务</li>
+</ul>
+<p><strong>培训</strong></p>
+<ul>
+<li>培训主要是教会用户使用软件产品的功能来完成其工作和任务。依据任务的不同，要为不同的用户进行不同类型的培训</li>
+</ul>
+<p><strong>培训的注意点</strong></p>
+<ul>
+<li>尤其不能忽略的是对系统管理员进行培训。要培训系统管理员如何启动和运行新系统，如何配置系统，如何授权或拒绝对系统的访问，如何支持用户，如何处理异常等</li>
+<li>在培训中，只介绍能够帮助用户完成主要工作和任务的功能，不要把培训当作软件产品所有功能的展示会。对于一些很少会被使用并且不太重要的功能，即使培训也会很快被用户忘记，可以让用户使用文档支持来学会使用</li>
+<li>培训时，要关注用户的工作和任务，不必涉及系统的内部操作，不必知道系统的存储方式，访问方式和权限控制方式</li>
+</ul>
+<p><strong>文档支持</strong></p>
+<ul>
+<li>用户文档</li>
+<li>系统管理员文档</li>
+</ul>
+<p><strong>用户文档</strong></p>
+<ul>
+<li>这里的文档支持是指为用户编写参考指南或者操作教程，常见的如用户使用手册，联机帮助文档等，统称为用户文档</li>
+</ul>
+<p><strong>用户文档的形式</strong></p>
+<ul>
+<li>用户文档可以是纸质的，也可以是电子的，可以只有一份文档，也可以是由多份文档组成的集合，具体情况要视用户的特点而定</li>
+<li>用户文档的写作要考虑用户群体的特点，最好是图文结合的方式，以方便普通用户的使用。用户文档写作应该使用逐层展开和系统化(例如层次编码，列表)的方式描述复杂内容</li>
+</ul>
+<p><strong>用户文档的要素</strong></p>
+<ul>
+<li>标识信息<ul>
+<li>标识信息应该放在包装袋或封面，用户可以不用翻阅文档就能看到。标识信息的内容包括文档标题，文档产生的版本和期，相关的软件产品和版本</li>
+</ul>
+</li>
+<li>引言<ul>
+<li>引言是正文的第一部分，描述了文档的预期读者，描述范围和对文档目的，功能和操作环境的概要描述</li>
+</ul>
+</li>
+<li>文档使用信息 <ul>
+<li>描述关于文档的使用信息，例如解释各种图示的含义，介绍如何使用帮助等</li>
+</ul>
+</li>
+<li>操作模式<ul>
+<li>操作模式是使用用户文档的模式，例如对操作流程的图示或者文字性描述，再例如解释操作的理论，原因，算法或者通用概念</li>
+</ul>
+</li>
+<li>操作规程<ul>
+<li>指导模式文档应包括下列很多软件功能都会涉及到的常见活动规程<ul>
+<li>需要由用户执行的软件安装与卸载</li>
+<li>图形用户界面特性的使用指导</li>
+<li>访问，登录或者关闭软件</li>
+<li>通过软件的导航访问和退出相关功能</li>
+<li>数据操作(输入，保存，读取，打印，更新和删除)</li>
+<li>取消，中断和重启操作的方法</li>
+</ul>
+</li>
+<li>对于完成用户任务的操作规程，指导模式文档应该从基本信息，指导步骤和结束信息三个方面来描述<ul>
+<li>基本信息应包括：<ul>
+<li>简要概述操作规程的目的，定义或解释必要的概念</li>
+<li>标明执行任务前需要完成的技术活动</li>
+<li>列举用户完成任务所需要的资源情况，例如数据，文档，密码等</li>
+<li>指出操作规程中的相关警告，提醒或注意事项</li>
+</ul>
+</li>
+<li>指导步骤通常使用祈使语句描述用户的行为，并指出预期的结果。指导步骤要说明用户输入数据的域值范围，最大长度和格式，要说明相应的错误消息和恢复办法，要清楚地说明其他可选择的步骤和重复步骤</li>
+<li>完成信息要标明操作规程的最后步骤，让用户知道怎样判断整个操作规程的成功完成，告诉用户如何退出操作规程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>软件命令信息<ul>
+<li>文档要解释用户输入命令的格式和操作规程，包括必需参数，可选参数，缺省值等，要示例说明命令的使用，说明怎样判断命令是成功完成还是异常中止</li>
+</ul>
+</li>
+<li>错误信息与问题解决<ul>
+<li>文档要详细描述软件使用中的已知问题，要让用户清楚如何自行解决问题或者怎样向技术支持人员报告准确的信息</li>
+</ul>
+</li>
+<li>导航特征<ul>
+<li>导航特征包括章节，主题，页码，链接，图标等</li>
+</ul>
+</li>
+</ul>
+<p><strong>系统管理员文档</strong></p>
+<ul>
+<li>与用户文档注重系统使用细节不同，系统管理员文档更注重系统维护方面的内容，例如系统性能调整，访问权限控制，常见故障解决等等。因此，系统管理员文档需要详细介绍软硬件的配置方式，网络连接方式，安全验证与访问授权方法，备份与容灾方法，部件替换方法等等</li>
+</ul>
+<p><strong>为什么要进行项目评价</strong></p>
+<ul>
+<li>设置”项目”是要保证项目中的各种事件与活动能够依照计划顺利进行，项目评价就是检查其事件与活动的实际执行情况。在理论上，项目评价可以发生在项目进行的任何时机，尤其是到达各个里程碑之后。但最重要的项目评价是在项目结束时进行的项目评价，这也是本章节所要描的项目评价</li>
+<li>虽然从单个项目看，项目已经结束，评价似乎用处不大。但是考虑到一个组织会有很多项目持续进行，那么评价一个已结束目就可以”以史为鉴”，帮助更好地完成后续项目。而且因为项目已经完成，总结和评价就远比项目进行中更加准确</li>
+<li>项目评价工作也需要仔细组织，不是简单的开个总结会完事，否则就无法获得比较深入的信息</li>
+</ul>
+<p><strong>项目评价的内容</strong></p>
+<ul>
+<li>一个已结束的项目具有各种事件和活动的信息，通过组织对项目的不同方面内容进行评价，就可以获得各种不同方面的经验，就可以搞清楚出现了哪些问题，为什么会出现，怎样解决，有哪些偏差，最终结果与质量，以及(最重要的是)在下个项目中有哪些需要提高</li>
+<li>常见的项目评价针对四个方面：<ul>
+<li>项目管理：可以帮助建立对项目的更准确认知，例如常见的管理问题与偏差时间与成本耗费分布等</li>
+<li>产品：可以帮助开发者建立对产品的更准确认知，提高产品的开发经验</li>
+<li>团队：可以帮助开发者更好地组织分工，也可以帮助团队建立更好的沟通与交流途径</li>
+<li>个人：可以帮助开发者更准确认知自己的生产力，学习常见问题及其处理方法，了解自己的长处和不足并持续提高</li>
+</ul>
+</li>
+</ul>
+<p><strong>项目评价方法</strong></p>
+<ul>
+<li>评审<ul>
+<li>项目评审通过评审重要项目制品的方法来评价项目，这些重要制品包括项目计划，管理文档，会议记录，历史数据等</li>
+</ul>
+</li>
+<li>度量数据分析<ul>
+<li>度量数据可以提供丰富的信息，通过分析这些信息，开发团队可以获得正确和深入的结论</li>
+</ul>
+</li>
+</ul>
+<p><strong>产品信息定量的度量</strong></p>
+<ul>
+<li>一个项目常见的产品信息度量应该包括<ul>
+<li>(随着时间而变化的)产品的增长情况和变化历史</li>
+<li>产品在每个里程碑上的测量</li>
+<li>产品复杂度和内容的测量</li>
+<li>过程和工具对产品的影响</li>
+</ul>
+</li>
+</ul>
+<p><strong>定性文件</strong></p>
+<ul>
+<li>在进行度量数据分析时可能会遇到数据贫乏——这意味着没有足够的定量数据来支持项目评价，这时可以用问卷调查表和面谈来补充数据信息。也可以通过检查定性文件来建里数据信息，这些定性文件可能包括：<ul>
+<li>对团队会议和子团队会议所做的记录</li>
+<li>项目电子邮件的存档(来获得问题确定和决策的日期)</li>
+<li>任务列表，项目决策和行动条目中所有其他的轶事般的信息</li>
+</ul>
+</li>
+</ul>
+<p><strong>评价的注意事项</strong></p>
+<ul>
+<li>项目的评价需要仔细的计划</li>
+<li>评价要客观</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件维护与演化"><a href="#软件维护与演化" class="headerlink" title="软件维护与演化"></a>软件维护与演化</h2><h3 id="1-维护"><a href="#1-维护" class="headerlink" title="1. 维护"></a>1. 维护</h3><ul>
+<li>各个工程领域都会在将产品交付给用户之后进行维护工作<ul>
+<li>主要是为了保证产品的正常运转而进行使用帮助，故障解决和磨损处理等工作</li>
+</ul>
+</li>
+<li>因为软件不会磨损<ul>
+<li>软件维护只需要完成少量的使用帮助，故障解决和磨损处理等工作</li>
+</ul>
+</li>
+<li>人们需要经常”修改”软件</li>
+</ul>
+<p><strong>软件维护的定义</strong></p>
+<ul>
+<li>IEEE就定义软件维护为：软件维护是在交付之后修改软件系统或其部件的活动过程，以修正缺陷，提高性能或其他属性，适应变化的环境</li>
+</ul>
+<p><strong>软件变更的情景</strong></p>
+<ul>
+<li>问题发生了改变<ul>
+<li>随着时间的发展，形势可能会发生变化，导致用户的问题发生变化。这些使得软件的需求发生变化，出现新的需求，否则软件将减小甚至失去服务用户的作用</li>
+</ul>
+</li>
+<li>环境发生了改变<ul>
+<li>随着软件产品的生命周期越来越长，在软件生存期内外界环境发生变化的可能性越来越大，因此，软件经常需要修改以适应外界环境的改变</li>
+</ul>
+</li>
+<li>软件产品中存在缺陷<ul>
+<li>软件开发的理想结果当然是建立一个完全无缺陷的软件产品，但这是不可能达到的目标。最终的软件产品总是或多或少的会遗留下一些缺陷。当这些缺陷在使用中暴露出来时，必须予以及时的解决</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件维护类型划分</strong></p>
+<ul>
+<li>完善性维护(Perfective maintenance)：<ul>
+<li>为了满足用户新的需求，增加软件功能而进行的软件修改活动</li>
+</ul>
+</li>
+<li>适应性维(Adaptive maintenance)：<ul>
+<li>为了使软件能适应新的环境而进行的软件修改活动。</li>
+</ul>
+</li>
+<li>修正性维护(Corrective maintenance)：<ul>
+<li>为了排除软件产品中遗留缺陷而进行的软件修改活动</li>
+</ul>
+</li>
+<li>预防性维护(Preventive maintenance)：<ul>
+<li>为了让软件产品在将来可维护，提升可维护性的软件修改活动</li>
+</ul>
+</li>
+</ul>
+<p><strong>可维护性的下降</strong></p>
+<ul>
+<li>实践一再表明软件维护活动的确会降低软件产品的质量，以致于一个软件产品在进行一系列维护活动之后会失去可维护性</li>
+<li>一个程序发生变更时，它的结构倾向于变得更加复杂，因此需要投入一些额外的资源以在保持功能的同时简化程序结构</li>
+<li>预防性维护就是为了简化维护后的软件结构以提高软件可维护性的那些额外投入</li>
+</ul>
+<p><strong>软件维护高代价的原因</strong></p>
+<ul>
+<li>变更的频繁性</li>
+<li>维护的困难性</li>
+</ul>
+<p><strong>维护的困难性</strong></p>
+<ul>
+<li>程序的理解</li>
+<li>影响分析</li>
+<li>实践调查表明维护时间的50%～90%都被消耗在了程序理解上</li>
+</ul>
+<p><strong>软件开发中需要为后期维护而执行的工作</strong></p>
+<ul>
+<li>考虑软件的可变更性<ul>
+<li>分析需求的易变性</li>
+<li>为变更进行设计</li>
+</ul>
+</li>
+<li>为降低维护困难而开发<ul>
+<li>编写详细的技术文档并保持及时更新</li>
+<li>保证代码的可读性</li>
+<li>维护需求跟踪链</li>
+<li>维护回归测试基线</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件维护过程</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%BD%AF%E4%BB%B6%E7%BB%B4%E6%8A%A4%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<p><strong>问题/修改的标识，分类与划分优先级</strong></p>
+<ul>
+<li>该步骤的主要任务是进行变更管理(Change Management)：<ul>
+<li>用户，客户或其他人员提出变更请求</li>
+<li>维护人员为变更请求建立变更记录(Change Record)，赋予标识，进行变更类别分类，确定其优先级</li>
+<li>初步评估变更的可能影响，并据此确定是否接受该变更请求</li>
+<li>如果决定执行变更，就为其安排修改时间。通常多个小的修改会安排到一个时间内批量完成</li>
+</ul>
+</li>
+</ul>
+<p><strong>分析</strong></p>
+<ul>
+<li>该步骤的主要任务是为后续的修改(设计，实现，测试，交付发布等)确定一个基本的规划，包括2个阶段<ul>
+<li>可行性分析<ul>
+<li>该步骤的任务是提出候选方案，并分析方案的可行性，建立可行性报告</li>
+<li>可行性报告的内容包括：变更的影响范围，候选方案，需求变化分析，对安全性和保密性的影响，人的因素，短期和长期成本，修正的价值与效益等</li>
+</ul>
+</li>
+<li>详细分析<ul>
+<li>该步骤的任务是准确定义修改的需求，标识需要修改的元素，标识修改中的安全与保密因素，确定一个测试策略和建立一个实现计划</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>设计</strong></p>
+<ul>
+<li>该步骤的主要任务是依据变更分析的结果和已有系统的信息，完成对系统设计的变更</li>
+<li>具体工作包括：标识被影响的软件模型，修改软件设计文档，为新的设计创建测试用例，更新回归测试集，更新需求文档</li>
+<li>在进行完善性维护和适应性维护时，设计步骤要针对新的功能需求执行一个完整的详细设计过程</li>
+<li>在进行修正性维护时，设计要防止程序修改带来连锁的负面效应</li>
+<li>在进行预防性维护时，设计要重点关注软件结构的质量，以此为依据修改程序代码和软件系统结构</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li>该步骤的主要任务是根据变更的设计，完成代码实现具体</li>
+<li>工作包括：编码与单元测试，集成新修改代码，集成测试，风险分析和代码评审</li>
+</ul>
+<p><strong>回归测试</strong></p>
+<ul>
+<li>该步骤的主要任务是确保对变更的修改不会带来连锁的负面效应，要保证系统仍然能够满足其他未被修改的需求</li>
+<li>具体工作包括：针对变更情况进行功能测试和界面测试，对整个系统进行回归测试，验证系统是否准备好进行验收测试</li>
+</ul>
+<p><strong>验收测试</strong></p>
+<ul>
+<li>该步骤的主要任务是由⽤户，客户或客户指定的第三方来验证系统是否满足用户的变更请求</li>
+<li>具体工作包括：针对变更请求的功能测试，针对用户使用环境的兼容性测试，对整个系统进行回归测试</li>
+</ul>
+<p><strong>交付</strong></p>
+<ul>
+<li>该步骤的主要任务是将修正的系统发布用于安装和运营</li>
+<li>具体工作包括：进行配置审计。通知用户团体，为了备份系统而开发一个阶段性版本，在客户的设施上进行安装和培训。其中配置审计是要通过配置管理系统确定一个系统的发布包，包括文档，软件程序，培训文档，以及其他相关文档</li>
+</ul>
+<h3 id="2-演化"><a href="#2-演化" class="headerlink" title="2. 演化"></a>2. 演化</h3><p><strong>软件演化定律</strong></p>
+<ul>
+<li>在研究的基础上，Lehman提出了大型软件系统演化的8条定律，下面是其中的3条<ul>
+<li>持续变化<ul>
+<li>一个大型软件系统要么进行不断的变化，要么用处会越来越少</li>
+</ul>
+</li>
+<li>不断增加的复杂度<ul>
+<li>随着软件系统的发展，它的复杂性会不断增加，除非进行一定的工作来维持或降低复杂度</li>
+</ul>
+</li>
+<li>质量降低<ul>
+<li>系统的质量将出现下滑，除非进行一定的工作来适应环境变化</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>软件演化生命周期模型</strong></p>
+<ul>
+<li>初始开发</li>
+<li>演化</li>
+<li>服务</li>
+<li>逐步淘汰</li>
+<li>停止</li>
+</ul>
+<p><strong>初步开发</strong></p>
+<ul>
+<li>初始开发阶段按照传统的软件开发方式完成第一个版本的软件产品开发。第一版的软件产品可以实现全部需求，也可以(通常是)只包含部分需求 - 用户来说非常重要和紧急的最高优先级需求</li>
+<li>初始阶段的一个极其重要的工作是建立一个好的软件体系结构<ul>
+<li>具有很好的可扩展性，能够包容后续的演化增量</li>
+<li>具有很好的可修改性，能够处理后续阶段中的预期变更请求和未预期变更请求</li>
+<li>比较坚实，可靠，能够在后续演化保持稳定的表现</li>
+</ul>
+</li>
+<li>在初始阶段的详细设计也要关注软件系统的可扩展性和可修改性，编程要关注程序的可读性以方便后续阶段的程序理解，技术文档的准备要充分以帮助后续阶段的程序理解</li>
+</ul>
+<p><strong>演化</strong></p>
+<ul>
+<li>在完成初始开发之后，软件产品就进入演化阶段。该阶段可能会有预先安排的需求增量，也可能完全是对变更请求的处理，它们的共同点都是保持软件产品的持续增值，让软件产品能够满足用户越来越多的需要，实现更大的业务价值</li>
+<li>总的来说，该阶段可能的演化增量有：<ul>
+<li>预先安排的需求增量</li>
+<li>因为问题变化或者环境变化产生的变更请求</li>
+<li>修正已有的缺陷</li>
+<li>随着用户与开发者之间越来越相互熟悉对方领域而新增加的需求</li>
+</ul>
+</li>
+<li>演化阶段的软件产品要具备两个特征：<ul>
+<li>软件产品具有较好的可演化性</li>
+<li>软件产品能够帮助用户实现较好的业务价值</li>
+</ul>
+</li>
+</ul>
+<p><strong>服务</strong></p>
+<ul>
+<li>服务阶段的软件产品不再持续的增加自己的价值，而只是周期性的修正已有的缺陷</li>
+<li>一个软件产品被置于服务阶段可能是因为它的软件结构已经无法继续演化，也可能是开发团队出于市场考虑，不再重点关注该产品</li>
+<li>服务阶段的产品还仍然被用户用，因为它仍然能够给用户提供一定的业务价值，所以开发团队仍然需要修正已有缺陷或者进行一些低程度的需求增量，保证用户的正常使用</li>
+</ul>
+<p><strong>逐步淘汰</strong></p>
+<ul>
+<li>在逐步淘汰阶段，开发者已经不再提供软件产品的任何服务，也即不再继续维护该软件</li>
+<li>虽然在开发者看来软件的生命周期已经结束，但是用户可能会继续使用处于该阶段的软件产品，因为它们仍然能够帮助用户实现一定的业务价值。只是用户在使用软件时必须要容忍软件产品中的各种不便，包括仍然存在的缺陷和对新环境的不适应</li>
+<li>对于该阶段的产品，开发者需要考虑该产品是否可以作为有用的遗留资源用于新软件的开发，用户需要考虑如何更换新的软件产品并转移已有的业务数据</li>
+</ul>
+<p><strong>停止</strong></p>
+<ul>
+<li>一个软件正式退出使用状态之后就进行停止状态。开发者不再进行维护，用户也不再使用</li>
+</ul>
+<p><strong>软件维护与演化的常见技术</strong></p>
+<ul>
+<li>遗留软件</li>
+<li>逆向工程</li>
+<li>再工程</li>
+</ul>
+<p><strong>遗留软件的方法</strong></p>
+<ul>
+<li>如果遗留软件已经没有使用价值，就直接丢弃该软件</li>
+<li>如果遗留软件还有使用价值，但是其维护的成本效益比低于新开发一个软件系统的成本效益比，那么冻结遗留软件，将其作为一个新的更大系统的组成部分进行使用</li>
+<li>如果遗留软件的成本效益比高于新开发一个软件系统的成本效益比，而且该遗留软件仍然具备较好的可维护性，那么就逆向工程遗留软件并继续维护一段时间</li>
+<li>如果遗留软件的成本效益比高于新开发一个软件系统的成本效益比，而且该遗留软件已经不具备可维护性，那么就修改系统使其获得新生(即再工程该系统)，然后继续维护再造后的系统</li>
+</ul>
+<p><strong>逆向工程</strong></p>
+<ul>
+<li>逆向工程技术是指：”分析目标系统，标识系统的部件及其交互关系，并且使用其它形式或者更高层的抽象创建系统表现的过程”</li>
+<li>逆向工程的基本原理是抽取软件系统的需求与设计而隐藏实现细节，然后在需求与设计的层次上描述软件系统，以建立对系统更加准确和清晰的理解</li>
+<li>逆向工程技术在实践中得到了广泛的应用，并在下列方面取得了较大的成功：<ul>
+<li>识别可复用资产</li>
+<li>在过程程序中寻找对象</li>
+<li>发现软件体系结构</li>
+<li>推导概念数据结构(即数据的需求分析模型和设计模型)</li>
+<li>检测重复冗余 </li>
+<li>将二进制程序转换为某种源代码</li>
+<li>重写用户界面</li>
+<li>将串行化程序并行化</li>
+<li>转换，约减，移植和包装遗留软件代码</li>
+</ul>
+</li>
+</ul>
+<p><strong>再工程</strong></p>
+<ul>
+<li>再工程的目的是对遗留软件系统进行分析和重新开发，以便进一步利用新技术来改善系统或促进现存系统的再利用</li>
+<li>检查和改造一个目标系统，用新的模式式及其实现复原目标系统</li>
+<li>常见的具体活动有<ul>
+<li>重新文档化</li>
+<li>重组系统的结构</li>
+<li>将系统转换为更新的编程语言</li>
+<li>修改数据的结构组织</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><h3 id="1-软件开发各典型阶段"><a href="#1-软件开发各典型阶段" class="headerlink" title="1. 软件开发各典型阶段"></a>1. 软件开发各典型阶段</h3><p><strong>典型的软件生命周期</strong></p>
+<ul>
+<li>需求工程</li>
+<li>软件设计</li>
+<li>软件实现</li>
+<li>软件测试</li>
+<li>软件交付</li>
+<li>软件维护</li>
+</ul>
+<h3 id="2-软件生命周期模型"><a href="#2-软件生命周期模型" class="headerlink" title="2. 软件生命周期模型"></a>2. 软件生命周期模型</h3><p><strong>构建-修复模型</strong></p>
+<ul>
+<li>背景与动机<ul>
+<li>最早也是最自然产生的软件开发模型</li>
+<li>不能算是一个软件过程模型，因为它对软件开发活动没有任何规划和组织，是完全依靠开发人员个人能力进行软件开发的方式</li>
+</ul>
+</li>
+<li>过程描述<ul>
+<li>构建低一个版本</li>
+<li>修复</li>
+<li>维护</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在这种模型中，没有对开发工作进行规范和组织，所以随着软件系统的复杂度提升，开发活动会超出个人的直接控制能力，构建-修复模型就会导致开发活动无法有效进行而失败</li>
+<li>没有分析需求的真实性，给软件开发带来很大的风险</li>
+<li>没有考虑软件结构的质量，使得软件结构在不断的修改中变得质量越来越糟，直至无法修改</li>
+<li>没有考虑测试和程序的可维护性，也没有任何文档，软件的维护十分困难</li>
+</ul>
+</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>软件规模很小，只需要几百行程序，其开发复杂度是个人能力能够胜任的</li>
+<li>软件对质量的要求不高，即使出错也无所谓</li>
+<li>只关注开发活动，对后期维护的要求不高，甚至不需要进行维护</li>
+</ul>
+<p><strong>瀑布模型</strong></p>
+<ul>
+<li>通过分析早期（1960s)的软件开发活动后发现，如果将软件开发活动划分为不同的阶段，并且保障每一个阶段工作的正确性和有效性(尤其是重视分析和设计阶段)，那么会取得比构建-修复方式好得多的表现，包括更高的质量，更低的成本和更小的风险</li>
+<li>基于这一点，经典的软件生命周期模型以及以其为基础的瀑布模型就产生了</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>优点</strong></p>
+<ul>
+<li>为软件开发活动定义了清晰的阶段划分(包括了输入/输出，主要工作及其关注点)，这让开发者能够以关注点分离的方式更好地进行那些复杂度超越个人能力的软件项目的开发活动</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>对文档的过高期望具有局限性。瀑布模型是文档驱动的，要求每个阶段都产生完备和可靠的文档，这一方面会耗费很大的工作量和成本，另一方面不切实际，因为实际开发中需求经常变化，无法建立完备可靠的文档</li>
+<li>对开发活动的线性顺序假设具有局限性。瀑布模型将开发活动区分为不同阶段，要求一个阶段的工作经过验证后才能进入后续阶段，这也是不切实际的。因为在实际开发中，常常需要进行一定的后续工作才能验证当前的工作是否正确，可靠(例如只有完成体系结构原型关键代码才能验证体系结构设计的有效性)</li>
+<li>客户，用户参与具有局限性。瀑布模型将需求限制为一个阶段，也就将客户，用户的项目参与限制在了一个时间段。但过去的实践，尤其是1990s以来的实践表明，这种用户参与方式是远远不够的，会导致项⽬的失败。成功的项目开发需要客户，用户从始至终的参与</li>
+<li>里程碑粒度具有局限性。瀑布模型要求一个阶段完成之后才进行验证，即在每一个阶段设置一个里程碑，这是远远不够的。因为现在的软件系统比较复杂，常常需要数月才能结束一个阶段，这种情况下的里程碑粒度过粗，基本丧失了”早发现缺陷早修复”这一瀑布模型最有意义的思想。尤其是只有在所有开发完成之后(常常持续数年)，客户和用户才能看到软件产品的方式具有极高的风险</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>需求非常成熟，稳定，没有不确定的内容，也不会发生变化</li>
+<li>所需的技术成熟，可靠，没有不确定的技术难点，也没有开发人员不熟悉的技术问题</li>
+<li>复杂度适中，不至于产生太大的文档负担和过粗的里程碑</li>
+</ul>
+<p><strong>增量迭代模型</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>1970s产生的瀑布模型基于经典的软件生命周期清晰地界定和解释了软件开发活动的任务划分与衔接，这对于人们更好地理解软件开发活动有着重要的作用。但是，正如前面所述，瀑布模型对开发活动的线性顺序假设具有局限性，实际开发中绝大多数复杂系统都是需要迭代完成的，所以，1980s以后迭代式过程成为人们组织软件开发过程的基本方式</li>
+<li>除了对”迭代”的认同之外，软件规模日益增长带来的挑战及其对策也促进了增量迭代模型的产生和普及，这些挑战和对策是：<ul>
+<li>周期过长和渐进交付</li>
+<li>时间压力和并行开发</li>
+</ul>
+</li>
+<li>总之，迭代式，渐进交付和并行开发共同促使了增量迭代模型的产生和普及</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A2%9E%E9%87%8F%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>优点</strong></p>
+<ul>
+<li>迭代式开发更加符合软件开发的实践情况，具有更好的适用性</li>
+<li>并行开发可以帮助缩短软件产品的开发时间</li>
+<li>渐进交付可以加强用户反馈，降低开发风险</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>由于各个构件是逐渐并入已有的软件体系结构中的，所以加入构件必须不破坏已构造好的系统部分，这需要软件具备开放式的体系结构</li>
+<li>增量交付模型需要一个完备，清晰的项目前景和范围以进行并发开发规划，但是在一些不稳定的领域，不确定性太多或者需求变化非常频繁，很难在项目开始就确定前景和范围</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>因为能够很好地适用于大规模软件系统开发，所以增量迭代模型在实践中有着广泛的应用，尤其是比较成熟和稳定的领域</li>
+</ul>
+<p><strong>演化模型</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>演化模型与增量迭代模型相比，相同点是它们都使用迭代式组织开发活动并且都适合大规模软件开发，不同点是增量迭代模型适用于比较成熟，稳定的领域，而演化模型主要用在需求变更比较频繁或不确定性较多的领域</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%BC%94%E5%8C%96%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>优点</strong></p>
+<ul>
+<li>使用了迭代式开发，具有更好的适用性，尤其是其演化式迭代安排能够适用于那些需求变更比较频繁或不确定性较多的软件系统的开发</li>
+<li>并行开发可以帮助缩短软件产品的开发时间</li>
+<li>渐进交付可以加强用户反馈，降低开发风险</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>无法在项目早期阶段建立项目范围，所以项目的整体计划，进度调度，尤其是商务协商事宜无法准确把握</li>
+<li>后续迭代的开发活动是在前导迭代基础上进行修改和扩展的，这容易让后续迭代忽略设分析与设计工作，蜕变为构建-修复方式</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>在实践中，不稳定领域的大规模软件系统开发适合使用演化模型进行组织</li>
+</ul>
+<p><strong>原型模型</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>原型是软件开发中广泛使用的方法，不论是探索需求，构建体系结构，还是试验技术细节，都会使用原型方法。但使用原型方法的软件开发活动并不就是原型模型的过程组织方式，关键要看原型方法在软件开发活动组织中的定位</li>
+<li>原型模型的基本特征并不是使用演化式原型，而是注重使用抛弃式原型，所以原型模型适用于不确定性较多情况下的软件开发</li>
+</ul>
+<p><strong>原型</strong></p>
+<ul>
+<li>原型产生于真正产品构建之前，一种情况是它被扩展之后成为真正的产品。另一种情况是它模拟真正产品但不会出现在真正产品中，而在真正产品中出现的是比原型质量更好的改进和替代</li>
+<li>一种原型被称为演化式原型，它将成为真正产品的一部分，所以必须具有很好的质量。在迭代式开发中，通常会在第一个迭代构建一个核心的体系结构演化式原型，并在后续迭代中不断扩充，最终成为真正的软件产品</li>
+<li>第二种原型被称为抛弃式原型，它存在的原因是不确定性——对未来知识的有限性。它通过模拟”未来”的产品，能够将”未”的知识置于”现在”进行推敲，以解决不确定性。因为构建原型时面临不确定性，那么在澄清的过程中就难免会调整和修改原型，最终使得原型的质量无法保障，所以这一类原型通常不出现在真正的产品中，需要抛弃后另行开发质量更好的改进或替代</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>优点</strong></p>
+<ul>
+<li>对原型方法的使用加强了与客户，用户的交流，可以让最终产品取得更好的满意度</li>
+<li>适用于非常新颖的领域，这些领域因为新颖所以有着大量的不确定性</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>原型方法能够解决风险，但是自身也能带来新的风险，例如原型开发的成本较高，可能会耗尽项目的费用和时间</li>
+<li>实践中，很多项目负责人不舍得抛弃”抛弃式原型”，使得质量较差的代码进入了最终产品，导致了最终产品的低质量</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>实践中，原型模型主要用于在有着大量不确定性的新颖领域进行开发活动组织</li>
+</ul>
+<p><strong>螺旋模型</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>随着软件系统日益复杂，开发软件的风险也越来越高，为了解决软件开发的风险，提出了螺旋模型</li>
+<li>螺旋模型的基本思想是尽早解决比较高的风险，如果有些问题实在无法解决，那么早发现比项目结束时再发现要好，至少损失要小得多</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%9E%BA%E6%97%8B%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>优点</strong></p>
+<ul>
+<li>可以降低风险，减少项目因风险造成的损失</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>风险解决需要使用原型手段，也就会存在原型自身带来的风险，这一点与原型模型相同</li>
+<li>模型过于复杂，不利于管理者依据其组织软件开发活动</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>在实践中，螺旋模型在高风险的大规模软件系统开发中有着较多的应用</li>
+</ul>
+<h3 id="3-软件过程模型"><a href="#3-软件过程模型" class="headerlink" title="3. 软件过程模型"></a>3. 软件过程模型</h3><p><strong>Rational统一过程模型</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>1970s随着瀑布模型的出现，人们认识到软件过程模型对软件开发活动组织有着很好的指导作用，于是后面出现了增量迭代，演化，原型等各种过程模型方法。这些过程模型方法互不相容，各有自己的优点和最佳实践方法，又都有自己的局限性</li>
+<li>为了减少过程模型方法选择上的困难，同时又充分吸收和利用各种过程模型方法下的最佳实践方法(Best Practice)，Rational公司(后来被IBM并购)提出了统一过程RUP(Rational Unified Process)。RUP总结和借鉴传统上的各种有效经验，建立最佳实践方法的集合，并提供有效的过程定制手段，允许开发者根据特定的需要定制一个有效的过程模型</li>
+</ul>
+<p><strong>过程描述</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Rational%E7%BB%9F%E2%BC%80%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B%E8%BF%87%E7%A8%8B%E6%8F%8F%E8%BF%B0.png" alt=""></p>
+<p><strong>RUP基础思想</strong></p>
+<ul>
+<li>迭代式开发，这是过去被反复证明的最佳实践方法</li>
+<li>管理需求，重视需求工程中除了需求开发之外的需求管理活动</li>
+<li>使用基于组件的体系结构，它帮助建立一个可维护，易开发，易复用的软件体系结构</li>
+<li>可视化建模，利用UML进行建模</li>
+<li>验证软件质量，尽早和持续地开展验证，以尽早发现缺陷，降低风险和成本</li>
+<li>控制软件变更，适应1990s以后需求变更越来越重要的事实</li>
+</ul>
+<p><strong>RUP裁剪步骤</strong></p>
+<ul>
+<li>确定本项目需要哪些工作流。RUP的9个核心工作流并不总是需要的，可以取舍</li>
+<li>确定每个工作流需要哪些制品</li>
+<li>确定4个阶段之间如何演进，决定每个阶段要哪些工作流，每个工作流执行到什么程度，制品有哪些</li>
+<li>确定每个阶段内的迭代计划</li>
+<li>规划工作流的组织，这涉及人员，任务及制品，通常用活动图的形式给出</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>吸收和借鉴了传统上的最佳实践方法，尤其是其核心的6个实践方法，能够保证软件开发过程的组织是基本有效和合理的</li>
+<li>RUP依据其定制机制的不同，可以适用于小型项目，也可以适用大型项目的开发，适用面广泛</li>
+<li>RUP有一套软件工程工具的支持，这可以帮助RUP的有效实施</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>没有考虑交付之后的软件维护问题</li>
+<li>裁剪和配置工作不是一个简单的任务，无法保证每个项目都能定制一个有效的RUP过程</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>RUP是重量级过程，能够胜任大型软件团队开发大型项目时的活动组织。但RUP经过裁剪和定制，也可以变为轻量级过程，也能够胜任小团队的开发活动组织</li>
+</ul>
+<p><strong>敏捷过程</strong></p>
+<p><strong>背景与动机</strong></p>
+<ul>
+<li>1990s以后，软件系统的规模日益增长，开发团队的规模也在增长，这都使得规划，组织和管理软件开发活动的软件过程也日益增长，出现了过度复杂的现象。同一时期，软件工程出现了重视需求变更和用户价值的发展趋势，传统的复杂过程模型在应对这些新问题时遇到了极大的挑战</li>
+<li>因此，很多开发者提出传统的软件过程模型过度强调了”纪律”，忽视了个人的能力，尤其是过度强调了计划，文档和工具，导致项目开发失去了灵活性，不能快速地应对需求变更和用户反馈，而且用户参与的不足也无法保证项目始终将用户价值置于首要地位</li>
+<li>针对传统过程模型的缺陷和新的形势，人们开始总结实践中的经验和最佳实践方法，尝试建立轻量级过程方法。2001年，企业界一些对轻量级过程方法有着共同思想的人士召开了一次会议，会议上宣布成立敏捷联盟，敏捷过程方法正式诞生</li>
+</ul>
+<p><strong>思想</strong></p>
+<ul>
+<li>最为重要的敏捷思想是敏捷联盟宣言所声明的价值观：<ul>
+<li>个体和互动 高于 流程和工具</li>
+<li>工作的软件 高于 详尽的文档</li>
+<li>客户合作 高于 合同谈判</li>
+<li>响应变化 高于 遵循计划</li>
+</ul>
+</li>
+<li>也就是说，尽管右项有其价值，敏捷方法更重视左项的价值</li>
+</ul>
+<p><strong>原则</strong></p>
+<ul>
+<li>除了上述4条核心价值观之外，敏捷宣言还提出了12条原则：<ol>
+<li>我们最重要的目标，是通过持续不断地及早交付有价值的软件使客户满意</li>
+<li>欣然面对需求变化，即使在开发后期也一样。为了客户的竞争优势，敏捷过程掌控变化</li>
+<li>经常地交付可工作的软件，相隔几星期或一两个月，倾向于采取较短的周期</li>
+<li>业务人员和开发人员必须相互合作，项目中的每一天都不例外</li>
+<li>激发个体的斗志，以他们为核心搭建项目。提供所需的环境和支援，辅以信任，从而达成目标</li>
+<li>不论团队内外，传递信息效果最好效率也最高的方式是面对面的交谈</li>
+<li>可工作的软件是进度的首要度量标准</li>
+<li>敏捷过程倡导可持续开发。责任人，开发人员和用户要能够共同维持其步调稳定延续</li>
+<li>坚持不懈地追求技术卓越和良好设计，敏捷能力由此增强</li>
+<li>以简洁为本，它是极力减少不必要工作量的艺术</li>
+<li>最好的架构，需求和设计出自组织团队</li>
+<li>团队定期地反思如何能提高成效，并依此调整自身的举止表现</li>
+</ol>
+</li>
+</ul>
+<p><strong>践行敏捷思想与原则的过程方法</strong></p>
+<ul>
+<li>极限编程XP(eXtreme Programming)</li>
+<li>Scrum</li>
+<li>特性驱动开发(FDD/Feature Driven Development)</li>
+<li>自适应软件开发(ASD/Adaptive Software Development)</li>
+<li>动态系统开发方法(DSDM/Dynamic Systems DevelopmentMethod)等等</li>
+<li>其中极限编程XP和Scrum应用较为广泛</li>
+</ul>
+<p><strong>极限编程思想</strong></p>
+<ul>
+<li>极限编程XP的一个重要思想是极限利用简单，有效的方法解决问题(这也是它被称为极限编程的原因)，例如：<ul>
+<li>如果单元测试好用，那么就让所有人一直做单元测试(测试驱动)</li>
+<li>如果集成测试好用，那么就一直做集成测试(持续集成）</li>
+<li>如果代码评审好用，那么就一直做评审(结对编程)</li>
+<li>如果简洁性好用，那么就只做最简洁的事情(简单设计)如果设计好用，那么就一直设计(重构)</li>
+<li>如果短迭代好用，那么就把迭代做的足够小(小版本发布)</li>
+<li>如果用户参与好用，那么就让用户始终参与(现场客户)</li>
+</ul>
+</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>敏捷过程包含的方法众多，各有特点，除了共同的思想和原则之外，很难准确描述它们的共同点，所以也无法确切界定它们的优缺点</li>
+</ul>
+<p><strong>适用性</strong></p>
+<ul>
+<li>从敏捷联盟声明的思想和原则来看，它们反映了1990s之后软件工程的发展趋势，所以得到了广泛的应用，尤其是能够适应于快速变化或者时间压力较大的项目</li>
+</ul>
+<p><strong>Scrum</strong></p>
+<ul>
+<li>‘接⼒跑’式的产品开发…… 模式一定程度上违背了以人为本，最大化生产力，灵活的生产方式的原则。相反另一种团队，如同一场橄榄球赛的团队合作方式——这种模式下，整个团队通过无间合作，灵活机动的处理接球，传球，并像一个整体迅速突破防线——这可能更加适应于今天更具挑战市场需求</li>
+</ul>
+<p><strong>精髓</strong></p>
+<ul>
+<li>SCRUM使得我们能够专注于如何在最短的时间内实现最有价值的部分</li>
+<li>SCRUM使得我们能够快速的经常的监督实际产品发展的状况(每两周或一个月)</li>
+<li>团队按照商业价值的高低先完成高优先级的产品功能，并自主管理，凝结了团队智慧创造出最好的方法因而提高效率</li>
+<li>每隔一两周或者一个月，我们就可以看到实实在在的可以上线的产品。此时，就可以下一步的决定是继续完善功能实现更多需求或者直接发布了</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/12/12/Data-Structures-and-Algorithms-Course/" style="float: left;">
+        ← 数据结构与算法
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">
+        软件工程与计算 1 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

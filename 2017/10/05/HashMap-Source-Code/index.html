@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -239,7 +239,7 @@ int threshold;
 final float loadFactor;
 </code></pre><p>装载因子是哈希表在扩容之前能装多满的度量值。当哈希表中“键值对”的数量超过当前容量(capacity)和装载因子的乘积后，哈希表重新散列(也就是内部的数据结构重建了)，并且哈希表的容量大约变为原来的两倍。</p>
 <p>从上面的变量定义可以看出，默认的装载因子DEFAULT_LOAD_FACTOR 是0.75。这个值越大，空间利用率越高，但查询速度(包括get和put)操作会变慢。明白了装载因子之后，threshold也就能理解了，它其实等于容量*装载因子。</p>
-<p>这里我们要知道&lt;&lt;运算符的意义，表示移位操作，每次向左移动一位(相对于二进制来说)，表示乘以2，此处1&lt;<4表示00001中的1向左移动了4位，变成了10000，换算成十进制就是2^4=16，也就是hashmap的默认容量就是16。java中还有一些位操作符，比如类似的>&gt;(右移)，还有&gt;&gt;&gt;(无符号右移)等，也是需要我们掌握的。这些位操作符的计算速度很快，我们在平时的工作中可以使用它们来提升我们系统的性能。</4表示00001中的1向左移动了4位，变成了10000，换算成十进制就是2^4=16，也就是hashmap的默认容量就是16。java中还有一些位操作符，比如类似的></p>
+<p>这里我们要知道&lt;&lt;运算符的意义，表示移位操作，每次向左移动一位(相对于二进制来说)，表示乘以2，此处1&lt;&lt;4表示00001中的1向左移动了4位，变成了10000，换算成十进制就是2^4=16，也就是HashMap的默认容量就是16。Java中还有一些位操作符，比如类似的&gt;&gt;(右移)，还有&gt;&gt;&gt;(无符号右移)等，也是需要我们掌握的。这些位操作符的计算速度很快，我们在平时的工作中可以使用它们来提升我们系统的性能。</p>
 <ul>
 <li>Node节点的数据结构:</li>
 </ul>
@@ -646,7 +646,7 @@ final Node&lt;K,V&gt; getNode(int hash, Object key) {
 </ol>
 <p>对于上述四种Map类型的类，要求映射中的key是不可变对象。不可变对象是该对象在创建后它的哈希值不会被改变。如果对象的哈希值发生变化，Map对象很可能就定位不到映射的位置了。</p>
 <p><img src="http://oseihavwm.bkt.clouddn.com/ArrayList2.png" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/7dcff1fd05ad" target="_blank" rel="external">JAVA源码分析-HashMap源码分析(一)</a><br><a href="http://www.jianshu.com/p/59240407fd9a" target="_blank" rel="external">HashMap源码分析（JDK1.8）</a><br><a href="https://liuzhengyang.github.io/2017/05/08/hashmap/" target="_blank" rel="external">HashMap源码分析</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/7dcff1fd05ad" target="_blank" rel="noopener">JAVA源码分析-HashMap源码分析(一)</a><br><a href="http://www.jianshu.com/p/59240407fd9a" target="_blank" rel="noopener">HashMap源码分析（JDK1.8）</a><br><a href="https://liuzhengyang.github.io/2017/05/08/hashmap/" target="_blank" rel="noopener">HashMap源码分析</a></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

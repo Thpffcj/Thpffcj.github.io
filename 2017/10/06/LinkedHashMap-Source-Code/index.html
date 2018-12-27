@@ -67,7 +67,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
+            <img src="/img/close.png" alt="Close">
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -122,7 +122,7 @@
                     <!-- Nav logo -->
                     <div class="logo">
                         <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
                         </a>
                     </div>
                     <!-- // Nav logo -->
@@ -165,7 +165,7 @@
 
         <!-- ============================ Header & Logo bar =========================== -->
 
-
+</div>
       
 <section id="intro">
     <div class="container">
@@ -187,7 +187,7 @@
     implements Map&lt;K,V&gt;
 </code></pre><p>从类声明中可以看到，LinkedHashMap 确实是继承了 HashMap，因而 HashMap 中的一些基本操作，如哈希计算、扩容、查找等，在 LinkedHashMap 中都和父类 HashMap 是一致的。</p>
 <p>但是，和 HashMap 有所区别的是，LinkedHashMap 支持按插入序 (insertion-order) 或访问序 (access-order) 来访问其中的元素。所谓插入顺序，就是 Entry 被添加到 Map 中的顺序，更新一个 Key 关联的 Value 并不会对插入顺序造成影响；而访问顺序则是对所有 Entry 按照最近访问 (least-recently) 到最远访问 (most-recently) 进行排序，读写都会影响到访问顺序，但是对迭代器 (entrySet(), keySet(), values()) 的访问不会影响到访问顺序。</p>
-<h2 id="2-LinkedHashMap-类的属性"><a href="#2-LinkedHashMap-类的属性" class="headerlink" title="2. LinkedHashMap 类的属性"></a>2. LinkedHashMap 类的属性</h2><p>LinkedHashMap的节点Entry<k,v>继承自HashMap.Node<k,v>，在其基础上扩展了一下。改成了一个双向链表。</k,v></k,v></p>
+<h2 id="2-LinkedHashMap-类的属性"><a href="#2-LinkedHashMap-类的属性" class="headerlink" title="2. LinkedHashMap 类的属性"></a>2. LinkedHashMap 类的属性</h2><p>LinkedHashMap的节点Entry&lt;K,V&gt;继承自HashMap.Node&lt;K,V&gt;，在其基础上扩展了一下。改成了一个双向链表。</p>
 <pre><code>/**
  * HashMap.Node subclass for normal LinkedHashMap entries.
  */
@@ -475,7 +475,7 @@ public boolean containsValue(Object value) {
 <li>nextNode() 就是迭代器里的next()方法 。<br>该方法的实现可以看出，迭代LinkedHashMap，就是从内部维护的双链表的表头开始循环输出。<br>而双链表节点的顺序在LinkedHashMap的增、删、改、查时都会更新。以满足按照插入顺序输出，还是访问顺序输出。<br>它与HashMap比，还有一个小小的优化，重写了containsValue()方法，直接遍历内部链表去比对value值是否相等。</li>
 </ul>
 <p><img src="http://oseihavwm.bkt.clouddn.com/ArrayList2.png" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.im/post/5997ff966fb9a024851009b7" target="_blank" rel="external">面试必备：LinkedHashMap源码解析（JDK8）</a><br><a href="http://blog.jrwang.me/2016/java-collections-linkedhashmap/" target="_blank" rel="external">Java 容器源码分析之 LinkedHashMap</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://juejin.im/post/5997ff966fb9a024851009b7" target="_blank" rel="noopener">面试必备：LinkedHashMap源码解析（JDK8）</a><br><a href="http://blog.jrwang.me/2016/java-collections-linkedhashmap/" target="_blank" rel="noopener">Java 容器源码分析之 LinkedHashMap</a></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
