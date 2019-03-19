@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Python 数据挖掘建模 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2019-01-03T10:12:29.000Z" itemprop="datePublished">
+          2019-01-03
+      </time>
+    
+</span>
+                <h1>Python 数据挖掘建模</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-数据分析概述"><a href="#1-数据分析概述" class="headerlink" title="1 数据分析概述"></a>1 数据分析概述</h2><h3 id="1-数据分析的含义与目标"><a href="#1-数据分析的含义与目标" class="headerlink" title="1 数据分析的含义与目标"></a>1 数据分析的含义与目标</h3><ul>
+<li>统计分析方法</li>
+<li>提取有用信息</li>
+<li>总结与概括</li>
+</ul>
+<h3 id="2-数据分析流程"><a href="#2-数据分析流程" class="headerlink" title="2 数据分析流程"></a>2 数据分析流程</h3><ul>
+<li>数据分析(狭义)<ul>
+<li>数据获取</li>
+<li>探索分析与可视化</li>
+</ul>
+</li>
+<li>数据建模与挖掘<ul>
+<li>预处理理论</li>
+<li>分析建模</li>
+<li>模型评估</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-数据获取"><a href="#2-数据获取" class="headerlink" title="2 数据获取"></a>2 数据获取</h2><h3 id="1-数据获取手段"><a href="#1-数据获取手段" class="headerlink" title="1. 数据获取手段"></a>1. 数据获取手段</h3><p><strong>数据仓库</strong></p>
+<ul>
+<li>将所有业务数据经汇总处理，构成数据仓库(DW)<ul>
+<li>全部事实的记录</li>
+<li>部分维度与数据的整理(数据集市 - DM)</li>
+</ul>
+</li>
+<li>数据库 vs 仓库<ul>
+<li>数据库面向业务存储，仓库面向主题存储(主题：较高层次上分析对象数据的一个完整并且一致的描述)</li>
+<li>数据库针对应用(OLTP)，仓库针对分析(OLAP)</li>
+<li>数据库组织规范，仓库可能冗余，相对变化大，数据量大 </li>
+</ul>
+</li>
+</ul>
+<p><strong>监测与抓取</strong></p>
+<ul>
+<li>直接解析网页，接口，文件的信息</li>
+</ul>
+<p><strong>填写，日志，埋点</strong></p>
+<ul>
+<li>用户填写信息</li>
+<li>APP或网页埋点(特定流程的信息记录点)</li>
+<li>操作日志</li>
+</ul>
+<p><strong>计算</strong></p>
+<ul>
+<li>通过已有数据计算生成衍生数据</li>
+</ul>
+<h3 id="2-数据学习网站"><a href="#2-数据学习网站" class="headerlink" title="2. 数据学习网站"></a>2. 数据学习网站</h3><ul>
+<li>数据竞赛网站(Kaggle &amp; 天池)</li>
+<li>数据集网站(ImageNet / Open Images)</li>
+<li>各领域统计数据(统计局，政府机构，公司财报等)</li>
+</ul>
+<h2 id="3-探索分析与可视化"><a href="#3-探索分析与可视化" class="headerlink" title="3. 探索分析与可视化"></a>3. 探索分析与可视化</h2><h3 id="1-单因子探索分析与可视化"><a href="#1-单因子探索分析与可视化" class="headerlink" title="1. 单因子探索分析与可视化"></a>1. 单因子探索分析与可视化</h3><p><strong>集中趋势：均值，中位数与分位数，众数</strong></p>
+<p><strong>集中趋势：标准差，方差</strong></p>
+<p><strong>数据分布：偏态与峰态，正态分布与三大分布</strong></p>
+<p><strong>抽样理论：抽样误差，抽样精度</strong></p>
+<h3 id="2-编码实现"><a href="#2-编码实现" class="headerlink" title="2. 编码实现"></a>2. 编码实现</h3><ul>
+<li>我们提前准备好csv文件</li>
+</ul>
+<pre><code>satisfaction_level,last_evaluation,number_project,average_monthly_hours,time_spend_company,Work_accident,left,promotion_last_5years,department,salary
+0.38,0.53,2,157,3,0,1,0,sales,low
+0.8,0.86,5,262,6,0,1,0,sales,medium
+0.11,0.88,7,272,4,0,1,0,sales,medium
+0.72,0.87,5,223,5,0,1,0,sales,low
+0.37,0.52,2,159,3,0,1,0,sales,low
+0.41,0.5,2,153,3,0,1,0,sales,low
+0.1,0.77,6,247,4,0,1,0,sales,low
+</code></pre><ul>
+<li>使用pandas处理数据</li>
+</ul>
+<pre><code>import pandas as pd
+df=pd.read_csv(&quot;./data/HR.csv&quot;)
+type(df)
+Out[4]: pandas.core.frame.DataFrame
+type(df[&quot;satisfaction_level&quot;])
+Out[5]: pandas.core.series.Series
+df[&quot;satisfaction_level&quot;].mean()
+Out[6]: 0.6128393333333333
+df[&quot;satisfaction_level&quot;].median()
+Out[7]: 0.64
+df[&quot;satisfaction_level&quot;].quantile(q=0.25)
+Out[8]: 0.44
+df[&quot;satisfaction_level&quot;].mode()
+Out[9]: 
+0    0.1
+dtype: float64
+df[&quot;satisfaction_level&quot;].std()
+Out[10]: 0.24862338135944925
+df[&quot;satisfaction_level&quot;].var()
+Out[11]: 0.061813585758606134
+df[&quot;satisfaction_level&quot;].sum()
+Out[12]: 9192.59
+df[&quot;satisfaction_level&quot;].skew()
+Out[13]: -0.47643761717258093
+df[&quot;satisfaction_level&quot;].kurt()
+Out[14]: -0.6706959323886252
+</code></pre><ul>
+<li>使用scipy计算分布函数</li>
+</ul>
+<pre><code>import scipy.stats as ss
+ss.norm.stats(moments=&quot;mvsk&quot;)
+Out[16]: (array(0.), array(1.), array(0.), array(0.))
+ss.norm.pdf(0.0)
+Out[17]: 0.3989422804014327
+ss.norm.ppf(0.9)
+Out[18]: 1.2815515655446004
+ss.norm.cdf(2)
+Out[19]: 0.9772498680518208
+ss.norm.cdf(2)-ss.norm.cdf(-2)
+Out[20]: 0.9544997361036416
+ss.norm.rvs(size=10)
+Out[21]: 
+array([-1.06402259,  0.44588153,  0.96036067, -0.8378802 , -0.66719706,
+       -0.37143609, -0.53469446, -0.7442353 ,  0.60226285, -1.3682985 ])
+ss.chi2
+Out[22]: &lt;scipy.stats._continuous_distns.chi2_gen at 0x107bf6c88&gt;
+ss.t
+Out[23]: &lt;scipy.stats._continuous_distns.t_gen at 0x107c5b4e0&gt;
+ss.f
+Out[24]: &lt;scipy.stats._continuous_distns.f_gen at 0x107c0d518&gt;
+</code></pre><h3 id="3-数据分类"><a href="#3-数据分类" class="headerlink" title="3. 数据分类"></a>3. 数据分类</h3><ul>
+<li>定类(类别)：根据事物离散，无差别属性进行的分类</li>
+<li>定序(顺序)：可以界定数据的大小，但不能测定差值</li>
+<li>定距(间隔)：可以界定数据大小的同时，可测定差值，但无绝对零点</li>
+<li>定比(比率)：可以界定数据大小，可测定差值，有绝对零点</li>
+</ul>
+<h3 id="4-单属性分析"><a href="#4-单属性分析" class="headerlink" title="4. 单属性分析"></a>4. 单属性分析</h3><p><strong>异常值分析</strong></p>
+<ul>
+<li>离散异常值</li>
+<li>连续异常值</li>
+<li>知识异常值</li>
+</ul>
+<p><strong>对比分析</strong></p>
+<ul>
+<li>绝对数与相对数，时间，空间，理论维度比较</li>
+</ul>
+<p><strong>结构分析</strong></p>
+<ul>
+<li>各组成部分的分布和规律</li>
+</ul>
+<p><strong>分布分析</strong></p>
+<ul>
+<li>数据分布频率的显式分析</li>
+</ul>
+<h3 id="5-分析人力资源表内容"><a href="#5-分析人力资源表内容" class="headerlink" title="5. 分析人力资源表内容"></a>5. 分析人力资源表内容</h3><pre><code>import pandas as pd
+import numpy as np
+df=pd.read_csv(&quot;./data/HR.csv&quot;)
+</code></pre><ul>
+<li>我们先来分析满意度这个属性</li>
+</ul>
+<pre><code>sl_s=df[&quot;satisfaction_level&quot;]
+sl_s[sl_s.isnull()]
+Out[7]: 
+14999   NaN
+15000   NaN
+Name: satisfaction_level, dtype: float64
+</code></pre><ul>
+<li>我们可以丢弃这个异常的数据</li>
+</ul>
+<pre><code>sl_s=sl_s.dropna()
+</code></pre><ul>
+<li>看一些基本的数据特征</li>
+</ul>
+<pre><code>sl_s.mean()
+Out[9]: 0.6128393333333333
+sl_s.std()
+Out[10]: 0.24862338135944925
+sl_s.max()
+Out[11]: 1.0
+sl_s.min()
+Out[12]: 0.09
+sl_s.median()
+Out[13]: 0.64
+sl_s.quantile(q=0.25)
+Out[14]: 0.44
+sl_s.quantile(q=0.75)
+Out[15]: 0.82
+sl_s.skew()
+Out[16]: -0.47643761717258093
+sl_s.kurt()
+Out[17]: -0.6706959323886252
+</code></pre><ul>
+<li>我们可以使用numpy来看看数据的离散化程度</li>
+</ul>
+<pre><code>np.histogram(sl_s.values,bins=np.arange(0.0,1.1,0.1))
+Out[18]: 
+(array([ 195, 1214,  532,  974, 1668, 2146, 1973, 2074, 2220, 2004]),
+ array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ]))
+</code></pre><ul>
+<li>我们来看第二个属性last_evaluation</li>
+</ul>
+<pre><code>le_s=df[&quot;last_evaluation&quot;]
+le_s[le_s.isnull()]
+Out[20]: Series([], Name: last_evaluation, dtype: float64)
+le_s.mean()
+Out[21]: 67.37373216904412
+le_s.std()
+Out[22]: 8164.407523745649
+le_s.median()
+Out[23]: 0.72
+le_s.max()
+Out[24]: 999999.0
+</code></pre><ul>
+<li>我们可以看出这个最大值很有可能有问题，我们可以去掉这个数据</li>
+</ul>
+<pre><code>le_s[le_s&gt;1]
+Out[25]: 
+15000    999999.0
+Name: last_evaluation, dtype: float64
+le_s=le_s[le_s&lt;=1]
+</code></pre><ul>
+<li>我们还可以使用分位数来判断异常数据</li>
+</ul>
+<pre><code>q_low=le_s.quantile(q=0.25)
+q_high=le_s.quantile(q=0.75)
+q_interval=q_high-q_low
+k=1.5
+le_s=le_s[le_s&lt;q_hign+k*q_interval][le_s&gt;q_low-k*q_interval]
+</code></pre><ul>
+<li>同样我们可以使用numpy来查看离散程度</li>
+</ul>
+<pre><code>np.histogram(le_s.values,bins=np.arange(0.0,1.1,0.1))
+Out[34]: 
+(array([   0,    0,    0,  179, 1390, 3396, 2234, 2062, 2752, 2988]),
+ array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. ]))
+</code></pre><ul>
+<li>查看time_spend_company属性</li>
+</ul>
+<pre><code>tsc_s=df[&quot;time_spend_company&quot;]
+tsc_s.value_counts().sort_index()
+Out[40]: 
+2     3245
+3     6445
+4     2557
+5     1473
+6      718
+7      188
+8      162
+10     214
+Name: time_spend_company, dtype: int64
+</code></pre><ul>
+<li>现在我们进行一些对比分析，首先去除掉异常值</li>
+</ul>
+<pre><code>df=df.dropna(axis=0,how=&quot;any&quot;)
+df=df[df[&quot;last_evaluation&quot;]&lt;=1][df[&quot;salary&quot;]!=&quot;nme&quot;][df[&quot;department&quot;]!=&quot;sale&quot;]
+</code></pre><ul>
+<li>我们可以根据部门分组查询</li>
+</ul>
+<pre><code>df.groupby(&quot;department&quot;).mean()
+Out[6]: 
+             satisfaction_level          ...            promotion_last_5years
+department                               ...                                 
+IT                     0.618142          ...                         0.002445
+RandD                  0.619822          ...                         0.034307
+accounting             0.582151          ...                         0.018253
+hr                     0.598809          ...                         0.020298
+management             0.621349          ...                         0.109524
+marketing              0.618601          ...                         0.050117
+product_mng            0.619634          ...                         0.000000
+sales                  0.614447          ...                         0.024155
+support                0.618300          ...                         0.008973
+technical              0.607897          ...                         0.010294
+</code></pre><ul>
+<li>我们还可以只取想要的属性进行查询</li>
+</ul>
+<pre><code>df.loc[:,[&quot;last_evaluation&quot;,&quot;department&quot;]].groupby(&quot;department&quot;).mean()
+Out[8]: 
+             last_evaluation
+department                  
+IT                  0.716830
+RandD               0.712122
+accounting          0.717718
+hr                  0.708850
+management          0.724000
+marketing           0.715886
+product_mng         0.714756
+sales               0.709717
+support             0.723109
+technical           0.721099
+</code></pre><h3 id="6-可视化"><a href="#6-可视化" class="headerlink" title="6. 可视化"></a>6. 可视化</h3><h2 id="4-多因子探索分析"><a href="#4-多因子探索分析" class="headerlink" title="4. 多因子探索分析"></a>4. 多因子探索分析</h2><h3 id="1-假设检验与方差检验"><a href="#1-假设检验与方差检验" class="headerlink" title="1. 假设检验与方差检验"></a>1. 假设检验与方差检验</h3><p><strong>假设检验</strong></p>
+<ul>
+<li>建立原假设H0(包含等号)，H0的反命题为H1，也叫备择假设</li>
+<li>选择检验统计量</li>
+<li>根据显著水平(一般为0.05)，确定拒绝域</li>
+<li>计算p值或样本统计值，作出判断</li>
+</ul>
+<p><strong>方差检验</strong></p>
+<h3 id="2-相关系数：皮尔逊，斯皮尔曼"><a href="#2-相关系数：皮尔逊，斯皮尔曼" class="headerlink" title="2. 相关系数：皮尔逊，斯皮尔曼"></a>2. 相关系数：皮尔逊，斯皮尔曼</h3><h3 id="3-回归：线性回归"><a href="#3-回归：线性回归" class="headerlink" title="3. 回归：线性回归"></a>3. 回归：线性回归</h3><ul>
+<li>回归：确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法</li>
+<li>关键指标：决定系数，残差不相关(DW检验)</li>
+</ul>
+<h3 id="4-PCA与奇异值分解"><a href="#4-PCA与奇异值分解" class="headerlink" title="4. PCA与奇异值分解"></a>4. PCA与奇异值分解</h3><ul>
+<li>求特征协方差矩阵</li>
+<li>求协方差的特征值和特征向量</li>
+<li>将特征值按照从大到小的顺序排序，选择其中最大的k个</li>
+<li>将样本点投影到选取的特征向量上</li>
+</ul>
+<h3 id="5-编程实现"><a href="#5-编程实现" class="headerlink" title="5. 编程实现"></a>5. 编程实现</h3><ul>
+<li>我们先来进行正态性的检验</li>
+</ul>
+<pre><code>import numpy as np
+import scipy.stats as ss
+norm_dist = ss.norm.rvs(size=20)
+norm_dist
+Out[5]: 
+array([-1.02508272,  0.54947011, -1.67313318, -0.37249508, -1.13956622,
+        1.40032626, -0.63727695,  0.80424192,  1.7226996 ,  0.32863272,
+        0.06714316,  1.4015813 ,  0.1947066 , -0.46626239,  0.76596065,
+       -0.40910378, -0.29153257,  0.26037531, -0.13365154, -0.62885115])
+</code></pre><ul>
+<li>我们怎么来检测它是否符合正态分布呢</li>
+</ul>
+<pre><code>ss.normaltest(norm_dist)
+Out[6]: NormaltestResult(statistic=0.18577749968996488, pvalue=0.91129487635324602)
+</code></pre><ul>
+<li>卡方检验使用ss.chi2_contingency，独立t分布检验使用ss.ttest_ind</li>
+<li>方差检验使用ss.f_oneway</li>
+</ul>
+<h2 id="5-预处理理论"><a href="#5-预处理理论" class="headerlink" title="5. 预处理理论"></a>5. 预处理理论</h2><h3 id="1-特征工程"><a href="#1-特征工程" class="headerlink" title="1. 特征工程"></a>1. 特征工程</h3><ul>
+<li>数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已。</li>
+</ul>
+<p><strong>特征工程一般包括</strong></p>
+<ul>
+<li>特征使用<ul>
+<li>数据选择</li>
+<li>可用性</li>
+</ul>
+</li>
+<li>特征获取<ul>
+<li>特征来源</li>
+<li>特征存储</li>
+</ul>
+</li>
+<li>特征处理<ul>
+<li>数据清洗</li>
+<li>特征预处理</li>
+</ul>
+</li>
+<li>特征监控<ul>
+<li>现有特征</li>
+<li>新特征</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据清洗"><a href="#2-数据清洗" class="headerlink" title="2. 数据清洗"></a>2. 数据清洗</h3><ul>
+<li>数据样本采集(抽样)<ul>
+<li>样本要具有代表性</li>
+<li>样本比例要平衡以及样本不平衡时如何处理</li>
+<li>考虑全量数据</li>
+</ul>
+</li>
+<li>异常值(空值)处理<ul>
+<li>识别异常值和重复值  Pandas:isnull()/duplicated()</li>
+<li>直接丢弃(包括重复数据)  Pandas:drop()/dropna()/drop_duplicated()</li>
+<li>当是否有异常当作一个新的属性，替代原值  Pandas:fillna()</li>
+<li>集中值指代  Pandas:fillna()</li>
+<li>边界值指代  Pandas:fillna()</li>
+<li>插值  Pandas:interpolate()—Series</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-特征预处理"><a href="#3-特征预处理" class="headerlink" title="3. 特征预处理"></a>3. 特征预处理</h3><ul>
+<li>标注(标记，标签，label)</li>
+</ul>
+<p><strong>特征选择</strong></p>
+<ul>
+<li>剔除与标注不相关或者冗余的特征</li>
+<li>数据规约的思路之一(另一个思路为抽样)</li>
+<li>过滤思想</li>
+<li>包裹思想：遍历特征子集</li>
+<li><p>嵌入思想：建立简单回归模型</p>
+</li>
+<li><p>我们现在来编程体验一下，首先生成随机数据</p>
+</li>
+</ul>
+<pre><code>df = pd.DataFrame({&quot;A&quot;:ss.norm.rvs(size=10),&quot;B&quot;:ss.norm.rvs(size=10),&quot;C&quot;:ss.norm.rvs(size=10),&quot;D&quot;:np.random.randint(low=0,high=2,size=10)})
+df
+Out[7]: 
+          A         B         C  D
+0  1.889420 -0.211727 -1.113711  1
+1 -0.140542  0.558122  1.535477  1
+2 -0.779024  1.089364 -0.386558  1
+3 -0.646721 -0.941322  0.076583  0
+4 -1.310745 -0.104850 -0.082407  0
+5 -1.596350 -0.990487 -1.265141  1
+6 -0.616682  0.203319  1.526396  0
+7  1.077713 -1.375539 -0.762857  1
+</code></pre><ul>
+<li>我们引入SVR回归器，再引入决策树回归器，X为特征，Y为标注</li>
+</ul>
+<pre><code>from sklearn.svm import SVR
+from sklearn.tree import DecisionTreeRegressor
+
+X=df.loc[:,[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]]
+Y=df.loc[:,&quot;D&quot;]
+</code></pre><ul>
+<li>引入特征选择</li>
+<li>过滤思想，选择过后留下了A和C</li>
+</ul>
+<pre><code>from sklearn.feature_selection import SelectKBest,RFE,SelectFromModel
+skb=SelectKBest(k=2)
+skb.fit(X,Y)
+Out[16]: SelectKBest(k=2, score_func=&lt;function f_classif at 0x116584c80&gt;)
+skb.transform(X)
+Out[17]: 
+array([[ 1.88941962, -1.1137106 ],
+       [-0.1405425 ,  1.53547673],
+       [-0.7790242 , -0.38655752],
+       [-0.64672111,  0.07658331],
+       [-1.31074502, -0.08240682],
+       [-1.5963497 , -1.26514071],
+       [-0.61668184,  1.52639613],
+       [ 1.07771314, -0.76285716],
+       [-0.09658046,  0.1721719 ],
+       [ 0.46080063,  0.51931399]])
+</code></pre><ul>
+<li>包裹思想，选择过后留下了A和C</li>
+</ul>
+<pre><code>rfe=RFE(estimator=SVR(kernel=&quot;linear&quot;),n_features_to_select=2,step=1)
+rfe.fit_transform(X,Y)
+Out[19]: 
+array([[ 1.88941962, -1.1137106 ],
+       [-0.1405425 ,  1.53547673],
+       [-0.7790242 , -0.38655752],
+       [-0.64672111,  0.07658331],
+       [-1.31074502, -0.08240682],
+       [-1.5963497 , -1.26514071],
+       [-0.61668184,  1.52639613],
+       [ 1.07771314, -0.76285716],
+       [-0.09658046,  0.1721719 ],
+       [ 0.46080063,  0.51931399]])
+</code></pre><ul>
+<li>嵌入思想，选择过后留下了B和C</li>
+</ul>
+<pre><code>sfm=SelectFromModel(estimator=DecisionTreeRegressor(),threshold=0.1)
+sfm.fit_transform(X,Y)
+Out[21]: 
+array([[-0.21172681, -1.1137106 ],
+       [ 0.55812247,  1.53547673],
+       [ 1.0893644 , -0.38655752],
+       [-0.94132221,  0.07658331],
+       [-0.10484969, -0.08240682],
+       [-0.99048721, -1.26514071],
+       [ 0.20331901,  1.52639613],
+       [-1.37553873, -0.76285716],
+       [ 1.49556048,  0.1721719 ],
+       [ 0.39101152,  0.51931399]])
+</code></pre><p><strong>特征变换</strong></p>
+<ul>
+<li>对指化</li>
+<li>离散化<ul>
+<li>将连续变量分成几段<ul>
+<li>客服数据缺陷</li>
+<li>某些算法要求</li>
+<li>非线数据映射</li>
+</ul>
+</li>
+<li>方法：<ul>
+<li>等频</li>
+<li>等距</li>
+<li>字因变量优化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据平滑</li>
+<li>归一化(标准化)<ul>
+<li>归一化是一种无量纲处理手段，使物理系统数值的绝对值变成某种相对值关系。简化计算，缩小量值的有效办法</li>
+<li>z-score 标准化：这种方法基于原始数据的均值（mean）和标准差（standard deviation）进行数据的标准化。将A的原始值x使用z-score标准化到x’。z-score标准化方法适用于属性A的最大值和最小值未知的情况，或有超出取值范围的离群数据的情况</li>
+</ul>
+</li>
+<li>数值化<ul>
+<li>标签化</li>
+<li>独热 One-Hot Encode</li>
+</ul>
+</li>
+<li>正规化<ul>
+<li>数据正规化（data normalization）是将数据的每个样本（向量）变换为单位范数的向量，各样本之间是相互独立的</li>
+<li>直接用在特征上</li>
+<li>用在每个对象的各个特征的表示(特征矩阵的行)</li>
+<li>模型的参数上(回归模型使用较多)</li>
+</ul>
+</li>
+</ul>
+<p><strong>特征降维</strong></p>
+<ul>
+<li>PCA<ul>
+<li>求特征协方差矩阵</li>
+<li>求协方差的特征值和特征向量</li>
+<li>将特征值按照从小到大的顺序排序，选择其中最大的k个</li>
+<li>将样本点投影到选取的特征向量上</li>
+</ul>
+</li>
+<li>奇异值分解</li>
+<li>LDA降维<ul>
+<li>LDA：Linear Discriminant Analysis 线性判别式分析</li>
+<li>核心思想：投影变换后同一标注内距离尽可能小，不同标注间距离尽可能大</li>
+</ul>
+</li>
+</ul>
+<p>  import numpy as np<br>  import pandas as pd<br>  from sklearn.discriminant_analysis import LinearDiscriminantAnalysis<br>  X=np.array([[-1,-1],[-2,-1],[-3,-2],[1,1],[2,1],[3,2]])<br>  Y=np.array([1,1,1,2,2,2])<br>  LinearDiscriminantAnalysis(n_components=1).fit_transform(X,Y)<br>  Out[7]:<br>  array([[-1.73205081],<br>         [-1.73205081],<br>         [-3.46410162],<br>         [ 1.73205081],<br>         [ 1.73205081],<br>         [ 3.46410162]])</p>
+<ul>
+<li>其实我们还可以把它看成一个分类器</li>
+</ul>
+<p>  clf=LinearDiscriminantAnalysis(n_components=1).fit(X,Y)<br>  clf.predict([[0.8,1]])<br>  Out[9]: array([2])</p>
+<p><strong>特征衍生</strong></p>
+<ul>
+<li>加减乘除</li>
+<li>求导与高阶求导</li>
+<li>人工归纳</li>
+</ul>
+<h2 id="6-挖掘建模"><a href="#6-挖掘建模" class="headerlink" title="6. 挖掘建模"></a>6. 挖掘建模</h2><h3 id="1-机器学习与建模"><a href="#1-机器学习与建模" class="headerlink" title="1. 机器学习与建模"></a>1. 机器学习与建模</h3><ul>
+<li>学习：通过接收到的数据，归纳提取相同于不同</li>
+<li>机器学习：让计算机以数据为基础，进行归纳与总结<ul>
+<li>监督学习<ul>
+<li>分类</li>
+<li>回归</li>
+</ul>
+</li>
+<li>非监督学习<ul>
+<li>聚类</li>
+<li>关联</li>
+</ul>
+</li>
+<li>半监督学习</li>
+</ul>
+</li>
+<li>模型：数据解释现象的系统</li>
+</ul>
+<p><strong>数据集</strong></p>
+<ul>
+<li>训练集：用来训练与拟合数据</li>
+<li>测试集：当通过训练集训练出过个模型后，使用验证集数据纠偏或比较预测</li>
+<li>验证集：模型泛化能力的考量<ul>
+<li>泛化：对未知数据的预测能力</li>
+</ul>
+</li>
+<li>K-fold交叉验证：将数据集分成K份，每份轮流做一遍测试集，其他做训练集</li>
+</ul>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/01/10/Netty-In-depth-Analysis/" style="float: left;">
+        ← Netty 深入剖析
+    </a>
+    
+    
+    <a class="pull-right" href="/2019/01/01/置顶目录/">
+        【置顶】 博客目录 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
