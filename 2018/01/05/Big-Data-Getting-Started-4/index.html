@@ -209,7 +209,7 @@
 <li>JobTracker：负责资源管理和作业调度</li>
 <li>TaskTracker：定期向JT汇报本节点的健康状况，资源使用情况，作业执行情况。接收来自JT的命令(启动任务/杀死任务)</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/hadoop1.x%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1lr7z3atnj20sb0gkn6u.jpg" alt=""></p>
 <ul>
 <li>整个集群只有一个JobTracker，只要JobTracker挂掉，就无法完成作业的运行</li>
 <li>JobTracker要接受很多请求，当集群越来越大，就必然会成为一个瓶颈，不容易扩展</li>
@@ -219,7 +219,7 @@
 </li>
 <li><strong>催生了YARN的诞生</strong></li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/YARN.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1lr7t3z9bj20ie07o0w1.jpg" alt=""></p>
 <ul>
 <li><strong>YARN：不同计算框架可以共享同一个HDFS集群上的数据，享受整体的资源调度</strong></li>
 <li>XXX on YARN的好处：与其他计算框架共享集群资源，按资源需要分配，进而提高集群资源的利用率</li>
@@ -228,7 +228,7 @@
 <p><strong>2. 通用的资源管理系统</strong></p>
 <p><strong>3. 为上层应用提供统一的资源管理和调度</strong></p>
 <h3 id="3-YARN架构"><a href="#3-YARN架构" class="headerlink" title="3. YARN架构"></a>3. YARN架构</h3><p><a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html" target="_blank" rel="noopener">Apache Hadoop YARN</a></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/YARN%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1lr9ynseuj20g20axwfo.jpg" alt=""></p>
 <p><strong>1. ResourceManager：RM</strong></p>
 <ul>
 <li>整个集群同一时间提供服务的RM只有一个，负责集群资源的统一管理和调度</li>

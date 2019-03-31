@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>操作系统(未完) | Thpffcj的树洞</title>
+  <title>Archives: 2020/1 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,154 +166,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 </div>
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2018-12-12T10:54:17.000Z" itemprop="datePublished">
-          2018-12-12
-      </time>
-    
-</span>
-                <h1>操作系统(未完)</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<p><img src="http://thpffcj-blog.oss-cn-beijing.aliyuncs.com/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%B7%AF%E7%BA%BF%E5%9B%BE.png" alt=""></p>
-<h2 id="1-操作系统概述"><a href="#1-操作系统概述" class="headerlink" title="1. 操作系统概述"></a>1. 操作系统概述</h2><h3 id="1-操作系统的分类"><a href="#1-操作系统的分类" class="headerlink" title="1. 操作系统的分类"></a>1. 操作系统的分类</h3><p><strong>批处理操作系统</strong></p>
-<ul>
-<li>成批处理作业</li>
-<li>作业控制语言与作业说明书</li>
-<li>脱机工作方式</li>
-<li>追求系统效率与吞吐量</li>
-</ul>
-<p><strong>分时操作系统</strong></p>
-<ul>
-<li>用户通过终端直接控制程序执行</li>
-<li>交互式工作方式</li>
-<li>交互型、友善性、快速响应</li>
-<li>今天最常见的计算机操作方式</li>
-</ul>
-<p><strong>实时操作系统</strong></p>
-<ul>
-<li>事件驱动，有较高时间要求</li>
-<li>实时操作系统的分类<ul>
-<li>过程控制系统</li>
-<li>信息查询系统</li>
-<li>事务处理系统 </li>
-</ul>
-</li>
-<li>过程控制系统的处理步骤：数据采集、加工处理、操作控制、反馈处理</li>
-</ul>
-<p><strong>系统调用的实现过程</strong></p>
-<p><img src="http://thpffcj-blog.oss-cn-beijing.aliyuncs.com/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.png" alt=""></p>
-<h3 id="2-操作系统结构分类"><a href="#2-操作系统结构分类" class="headerlink" title="2. 操作系统结构分类"></a>2. 操作系统结构分类</h3><ul>
-<li>单体式结构</li>
-<li>层次式结构</li>
-<li>虚拟机结构</li>
-<li>微内核结构</li>
-<li>客户/服务器结构</li>
-</ul>
-<p><br></p>
-<hr>
-<h2 id="2-处理器管理"><a href="#2-处理器管理" class="headerlink" title="2. 处理器管理"></a>2. 处理器管理</h2><h3 id="1-中断处理"><a href="#1-中断处理" class="headerlink" title="1. 中断处理"></a>1. 中断处理</h3><p><strong>特权指令和处理器状态</strong></p>
-<ul>
-<li>从资源管理和控制程序执行的角度出发，必须设置特权指令，提供给操作系统的核心程序使用</li>
-<li>处理器状态<ul>
-<li>管理状态(特权状态、系统模式、特态或管态): 处理器可以执行全部指令，使用所有资源，并具有改变处理器状态的能力</li>
-<li>用户状态(目标状态、用户模式、常态或目态): 处理器只能执行非特权指令</li>
-<li>核心状态、管理状态和用户状态 </li>
-</ul>
-</li>
-</ul>
-<p><strong>中断与指令周期</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%AD%E6%96%AD%E4%B8%8E%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F.png" alt=""></p>
-<p><strong>中断装置与中断响应</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%AD%E6%96%AD%E8%A3%85%E7%BD%AE%E4%B8%8E%E4%B8%AD%E6%96%AD%E5%93%8D%E5%BA%94.png" alt=""></p>
-<p><strong>自愿性中断事件的处理</strong></p>
-<ul>
-<li>用户程序执行系统调用(访管指令,广义指令); 操作系统把系统调用参数作为中断字, 分析检查后进行相应处理 </li>
-</ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E8%87%AA%E6%84%BF%E6%80%A7%E4%B8%AD%E6%96%AD%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86.png" alt=""></p>
-<p><strong>中断控制流程</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E6%B5%81%E7%A8%8B.png" alt=""></p>
-<h3 id="2-进程管理"><a href="#2-进程管理" class="headerlink" title="2. 进程管理"></a>2. 进程管理</h3><p><strong>三状态模型及其转换</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%89%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B%E5%8F%8A%E5%85%B6%E8%BD%AC%E6%8D%A2.png" alt=""></p>
-<p><strong>含两个挂起态(七状态模型)</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%90%AB%E4%B8%A4%E4%B8%AA%E6%8C%82%E8%B5%B7%E6%80%81%28%E4%B8%83%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B%29.png" alt=""></p>
-<p><strong>虚拟内存中的用户进程</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/0-1%E8%83%8C%E5%8C%85.png" alt=""></p>
-<h3 id="3-多线程技术"><a href="#3-多线程技术" class="headerlink" title="3. 多线程技术"></a>3. 多线程技术</h3><p><strong>单线程结构进程给并发程序设计效率带来问题</strong></p>
-<ul>
-<li>进程切换开销大</li>
-<li>进程通信开销大</li>
-<li>限制了进程并发的粒度</li>
-<li>不适合并行计算的要求</li>
-</ul>
-<p><strong>线程的概念</strong></p>
-<ul>
-<li>解决问题的基本思路：<ul>
-<li>把进程的两项功能－－“独立分配资源”与“被调度分派执行”分离开来</li>
-<li>进程作为系统资源分配和保护的独立单位，不需要频繁地切换和保护资源</li>
-<li>线程作为系统调度和分派的基本单位，能轻装运行，会被频繁地调度和切换，在这种指导思想下，产生了线程的概念</li>
-<li>操作系统中引入进程的目的是为了使多个程序并发执行，以改善资源使用率和提高系统效率</li>
-<li>操作系统中再引入线程，则是为了减少程序并发执行时所付出的时空开销，使得并发粒度更细、并发性更好</li>
-</ul>
-</li>
-</ul>
-<p><strong>多线程结构的进程</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BB%93%E6%9E%84%E7%9A%84%E8%BF%9B%E7%A8%8B.png" alt=""></p>
-<ul>
-<li>线程是进程的组成部分，每个进程内允许包含多个并发执行的实体(控制流) </li>
-<li>线程作为处理器调度和分派的一级单位</li>
-<li>线程的状态(运行态、就绪态、阻塞态)</li>
-</ul>
-<p><strong>线程组成</strong></p>
-<ul>
-<li>线程唯一标识符及线程状态信息</li>
-<li>未运行时保存的线程上下文，可把线程看成是进程中一个独立的程序计数器在操作</li>
-<li>核心栈，核心态下工作时，保存参数</li>
-<li>用于存放线程局部变量及用户栈的私有存储区</li>
-</ul>
-<p><strong>并发多线程程序设计的优点</strong></p>
-<ul>
-<li>快速线程切换</li>
-<li>减少(系统)管理开销</li>
-<li>(线程)通信易于实现</li>
-<li>便于共享资源</li>
-<li>并行程度提高</li>
-</ul>
-<p><strong>用户级线程 vs. 内核级线程</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E7%BA%A7%E7%BA%BF%E7%A8%8B%20vs.%20%E5%86%85%E6%A0%B8%E7%BA%A7%E7%BA%BF%E7%A8%8B.png" alt=""></p>
-<p><strong>Solaris系统: 混合多线程结构</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Solaris%E7%B3%BB%E7%BB%9F%E6%B7%B7%E5%90%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BB%93%E6%9E%84.png" alt=""></p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/2019/01/03/Python-Data-Mining/" style="float: left;">
-        ← Python 数据挖掘建模
-    </a>
-    
-    
-    <a class="pull-right" href="/2018/12/12/Computer-Network-Course-1/">
-        计算机网络(未完) →
-    </a>
-    
-</nav>
-
-        <div class="duoshuo">
-
-
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2020/01/01/置顶目录/">【置顶】 博客目录</a></h4>
+                            
+                            <p><time datetime="2019-12-31T16:00:00.000Z"><a href="/2020/01/01/置顶目录/">2020-01-01</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
