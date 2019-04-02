@@ -188,13 +188,13 @@
 </ul>
 </li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1muu08fcqj20e8064t8x.jpg" alt=""></p>
 <ul>
 <li>逻辑回归既可以看作是回归算法，也可以看作是分类算法，通常作为分类算法用，只可以解决二分类问题</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%87%BD%E6%95%B0.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1muta9ksaj20c308j74t.jpg" alt=""></p>
 <p><strong>Sigmoid函数</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Sigmoid%E5%87%BD%E6%95%B0.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1muvpfzo0j206z05e0sq.jpg" alt=""></p>
 <ul>
 <li>Sigmoid函数是一个在生物学中常见的S型函数，也称为S型生长曲线。在信息科学中，由于其单增以及反函数单增等性质，Sigmoid函数常被用作神经网络的阈值函数，将变量映射到0,1之间。</li>
 </ul>
@@ -208,39 +208,39 @@ x = np.linspace(-10, 10, 500)
 
 plt.plot(x, sigmoid(x))
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%921.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1muwnjqooj20af070q2v.jpg" alt=""></p>
 <ul>
 <li>值域(0,1)</li>
 <li>t &gt; 0时, p &gt; 0.5</li>
 <li>t &lt; 0时, p &lt; 0.5</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A6%82%E7%8E%87.png" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1muy4oig0j20a807f3yr.jpg" alt=""></p>
 <ul>
 <li>问题：对于给定的样本数据集X，y，我们如何找到参数theta，使得用这样的方式，可以最大程度获得样本数据集X对应的分类输出y？</li>
 </ul>
-<h3 id="2-逻辑回归的损失函数"><a href="#2-逻辑回归的损失函数" class="headerlink" title="2. 逻辑回归的损失函数"></a>2. 逻辑回归的损失函数</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png" alt=""></p>
+<h3 id="2-逻辑回归的损失函数"><a href="#2-逻辑回归的损失函数" class="headerlink" title="2. 逻辑回归的损失函数"></a>2. 逻辑回归的损失函数</h3><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1muyyi4syj20iy07m0tg.jpg" alt=""></p>
 <ul>
 <li>我们可以构造出这个cost函数</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B01.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1muz3rq7aj20e907tt98.jpg" alt=""></p>
 <ul>
 <li>对于整体数据，得到逻辑回归对应的损失函数</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mv2x4zf8j20hu06ft98.jpg" alt=""></p>
 <ul>
 <li>下面我们要做的事就是找到一组theta使得J最小</li>
 <li>没有公式解，只能使用梯度下降法求解</li>
 </ul>
-<h3 id="3-逻辑回归损失函数的梯度"><a href="#3-逻辑回归损失函数的梯度" class="headerlink" title="3. 逻辑回归损失函数的梯度"></a>3. 逻辑回归损失函数的梯度</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A6.png" alt=""></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A61.png" alt=""></p>
+<h3 id="3-逻辑回归损失函数的梯度"><a href="#3-逻辑回归损失函数的梯度" class="headerlink" title="3. 逻辑回归损失函数的梯度"></a>3. 逻辑回归损失函数的梯度</h3><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1mv3m6xnxj20j7070gmt.jpg" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1mv4fcemgj20i708xgn4.jpg" alt=""></p>
 <ul>
 <li>对比线性回归</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A62.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mv4is2jtj20jl08st9u.jpg" alt=""></p>
 <ul>
 <li>进行向量化推导</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A63.png" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mv4n51q0j20fd08wwf0.jpg" alt=""></p>
 <h3 id="4-实现逻辑回归算法"><a href="#4-实现逻辑回归算法" class="headerlink" title="4. 实现逻辑回归算法"></a>4. 实现逻辑回归算法</h3><ul>
 <li>加载鸢尾花数据集</li>
 </ul>
@@ -269,7 +269,7 @@ X.shape
 <pre><code>plt.scatter(X[y==0,0], X[y==0,1], color=&quot;red&quot;)
 plt.scatter(X[y==1,0], X[y==1,1], color=&quot;blue&quot;)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%922.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1muwspxf2j20af070q2t.jpg" alt=""></p>
 <ul>
 <li>使用逻辑回归，我们完全可以从线性回归基础上修改</li>
 </ul>
@@ -399,11 +399,11 @@ log_reg.fit(X_train, y_train)
 </code></pre><blockquote>
 <p>-0.69377192729112236</p>
 </blockquote>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mv6pkwq2j20jm07tq3k.jpg" alt=""></p>
 <ul>
 <li>现在我们感性看一下我们的决策边界</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C1.png" alt=""></p>
+<p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mv6t7xdqj207z07kq36.jpg" alt=""></p>
 <pre><code>def x2(x1):
     return (-log_reg.coef_[0] * x1 - log_reg.intercept_) / log_reg.coef_[1]
 
@@ -414,7 +414,7 @@ plt.scatter(X[y==0,0], X[y==0,1], color=&quot;red&quot;)
 plt.scatter(X[y==1,0], X[y==1,1], color=&quot;blue&quot;)
 plt.plot(x1_plot, x2_plot)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%923.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1muwzpkj7j20af070t8q.jpg" alt=""></p>
 <ul>
 <li>这根直线就是我们的决策边界，不过我们看见了一个红色的点不在直线上方，说明这个点是我们训练的数据，我们现在只绘图测试数据</li>
 </ul>
@@ -422,12 +422,12 @@ plt.show()
 plt.scatter(X_test[y_test==1,0], X_test[y_test==1,1], color=&quot;blue&quot;)
 plt.plot(x1_plot, x2_plot)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%924.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mux3v89gj20af070aa1.jpg" alt=""></p>
 <ul>
 <li>现在就是完全分类正确的</li>
 <li>我们现在需要一个不规则的决策边界的绘制方法</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%8D%E8%A7%84%E5%88%99%E7%9A%84%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C%E7%9A%84%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95.png" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1mv8ztsexj20gj0awdk4.jpg" alt=""></p>
 <pre><code>def plot_decision_boundary(model, axis):
 
     x0, x1 = np.meshgrid(
@@ -448,7 +448,7 @@ plot_decision_boundary(log_reg, axis=[4, 7.5, 1.5, 4.5])
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%925.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1mux7xhagj20ak0700sn.jpg" alt=""></p>
 <ul>
 <li>我们有了这个绘制方法，来看一下kNN的决策边界</li>
 </ul>
@@ -465,7 +465,7 @@ knn_clf.score(X_test, y_test)
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%926.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mva2l9x7j20ak070747.jpg" alt=""></p>
 <ul>
 <li>这个边界是一个曲线</li>
 <li>如果我们将kNN算法作用在三个类别上时，对应的决策边界是什么样的？</li>
@@ -478,7 +478,7 @@ plt.scatter(iris.data[iris.target==0,0], iris.data[iris.target==0,1])
 plt.scatter(iris.data[iris.target==1,0], iris.data[iris.target==1,1])
 plt.scatter(iris.data[iris.target==2,0], iris.data[iris.target==2,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%927.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mva6kybwj20ak070weh.jpg" alt=""></p>
 <ul>
 <li>可以看到这个决策边界是非常不规则的，显然是过拟合的情况</li>
 <li>尝试n_neighbors修改为50</li>
@@ -491,7 +491,7 @@ plt.scatter(iris.data[iris.target==0,0], iris.data[iris.target==0,1])
 plt.scatter(iris.data[iris.target==1,0], iris.data[iris.target==1,1])
 plt.scatter(iris.data[iris.target==2,0], iris.data[iris.target==2,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%928.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1mvah6iyyj20ak070gll.jpg" alt=""></p>
 <ul>
 <li>现在决策边界更加的清晰</li>
 </ul>
@@ -503,7 +503,7 @@ plt.show()
 <p>  plt.scatter(X[y==0,0], X[y==0,1])<br>  plt.scatter(X[y==1,0], X[y==1,1])<br>  plt.show()</p>
 </li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%929.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mval9tl1j20ae0703yh.jpg" alt=""></p>
 <pre><code>from playML.LogisticRegression import LogisticRegression
 
 log_reg = LogisticRegression()
@@ -533,7 +533,7 @@ plot_decision_boundary(log_reg, axis=[-4, 4, -4, 4])
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9210.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mvaowhzpj20ac070gll.jpg" alt=""></p>
 <ul>
 <li>显然这个结果是很粗糙的</li>
 <li>尝试为逻辑回归添加多项式项</li>
@@ -560,7 +560,7 @@ poly_log_reg.score(X, y)
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9211.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mvc30cluj20ae070jre.jpg" alt=""></p>
 <ul>
 <li>尝试将degree传入20</li>
 </ul>
@@ -571,7 +571,7 @@ plot_decision_boundary(poly_log_reg2, axis=[-4, 4, -4, 4])
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9212.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mvc6xbygj20ae0700sr.jpg" alt=""></p>
 <ul>
 <li>显然这个奇怪的外围就是因为degree太大了，显然发生了过拟合的现象</li>
 <li>我们可以减少degree或者使用模型正则化</li>
@@ -580,7 +580,7 @@ plt.show()
 <h3 id="7-scikit-learn中的逻辑回归"><a href="#7-scikit-learn中的逻辑回归" class="headerlink" title="7. scikit-learn中的逻辑回归"></a>7. scikit-learn中的逻辑回归</h3><ul>
 <li>我们在逻辑回归中添加了多项式，就会增加复杂度，就有可能产生过拟合</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%AD%A3%E5%88%99%E5%8C%96.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bgy1g1mvezals5j20dr09ijsb.jpg" alt=""></p>
 <ul>
 <li>使用虚拟的测试用例，同时里面添加了噪音</li>
 </ul>
@@ -596,7 +596,7 @@ for _ in range(20):
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9213.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mvccfxetj20ae070749.jpg" alt=""></p>
 <pre><code>from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=666)
@@ -641,7 +641,7 @@ plot_decision_boundary(log_reg, axis=[-4, 4, -4, 4])
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9214.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bgy1g1mvcgaw7rj20ae07074a.jpg" alt=""></p>
 <ul>
 <li>使用多项式项逻辑回归</li>
 </ul>
@@ -676,7 +676,7 @@ poly_log_reg.fit(X_train, y_train)
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9215.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1mvcl2x18j20ae0700sr.jpg" alt=""></p>
 <ul>
 <li>现在尝试提高多项式的阶数</li>
 </ul>
@@ -695,7 +695,7 @@ poly_log_reg2.score(X_train, y_train)
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9216.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mvh0gq2oj20ae070gln.jpg" alt=""></p>
 <ul>
 <li>决策边界又开始变得不规则，现在我们尝试使用C这个参数来进行模型正则化，C是损失函数前面的系数</li>
 </ul>
@@ -721,7 +721,7 @@ plt.show()
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9217.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1mvh585xfj20ae070dfv.jpg" alt=""></p>
 <ul>
 <li>相比于C=1，边界变得规则</li>
 <li>传入参数penalty</li>
@@ -748,7 +748,7 @@ plt.show()
 plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9218.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bgy1g1mvh8no5sj20ae07074b.jpg" alt=""></p>
 <ul>
 <li>形状已经接近原始数据生成的数据了</li>
 </ul>
@@ -815,7 +815,7 @@ log_reg.fit(X_train, y_train)
     plt.scatter(X[y==1,0], X[y==1,1])
     plt.scatter(X[y==2,0], X[y==2,1])
     plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9219.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mvhcjbjdj20ak070jrd.jpg" alt=""></p>
 <ul>
 <li>使用OvO的来进行多分类任务</li>
 </ul>
@@ -830,7 +830,7 @@ plt.scatter(X[y==0,0], X[y==0,1])
 plt.scatter(X[y==1,0], X[y==1,1])
 plt.scatter(X[y==2,0], X[y==2,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%9220.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bgy1g1mvhgx3i5j20ak070dft.jpg" alt=""></p>
 <ul>
 <li>使用所有的数据</li>
 </ul>

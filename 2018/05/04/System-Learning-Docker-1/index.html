@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Docker简介 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-04T05:24:43.000Z" itemprop="datePublished">
+          2018-05-04
+      </time>
+    
+</span>
+                <h1>Docker简介</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-容器技术和Docker简介"><a href="#1-容器技术和Docker简介" class="headerlink" title="1. 容器技术和Docker简介"></a>1. 容器技术和Docker简介</h2><h3 id="1-Docker导学"><a href="#1-Docker导学" class="headerlink" title="1. Docker导学"></a>1. Docker导学</h3><p><strong>Docker能干什么</strong></p>
+<ul>
+<li>简化配置</li>
+<li>代码流水线管理</li>
+<li>提高开发效率</li>
+<li>隔离应用</li>
+<li>整合服务器</li>
+<li>调试能力</li>
+<li>多租户</li>
+<li>快速部署</li>
+</ul>
+<h3 id="2-容器技术概述"><a href="#2-容器技术概述" class="headerlink" title="2. 容器技术概述"></a>2. 容器技术概述</h3><p><strong>虚拟化的优点</strong></p>
+<ul>
+<li>资源池 - 一个物理机的资源分配到了不同的虚拟机里</li>
+<li>很容易扩展 - 加物理机器 or 加虚拟机</li>
+<li>很容易云化 - 亚马逊AWS，阿里云等</li>
+</ul>
+<p><strong>虚拟化的局限性</strong></p>
+<ul>
+<li>每一个虚拟机都是一个完整的操作系统，要给其分配资源，当虚拟机数量增多时，操作系统本身消耗的资源势必增多</li>
+</ul>
+<p><strong>容器解决了什么问题</strong></p>
+<ul>
+<li>解决了开发和运维之前的矛盾</li>
+<li>在开发和运维之间搭建了一个桥梁，是实现devops的最佳解决方案</li>
+</ul>
+<p><strong>什么是容器</strong></p>
+<ul>
+<li>对软件和其依赖的标准化打包</li>
+<li>应用之间相互隔离</li>
+<li>共享同一个OS Kernel</li>
+<li>可以运行在很多主流操作系统上</li>
+</ul>
+<p><strong>容器和虚拟机的区别</strong></p>
+<ul>
+<li>容器是APP层面的隔离</li>
+<li>虚拟化是物理资源层面的隔离</li>
+</ul>
+<p><strong>Docker - 容器技术的一种实现</strong></p>
+<p><br></p>
+<hr>
+<h2 id="2-Docker的镜像和容器"><a href="#2-Docker的镜像和容器" class="headerlink" title="2. Docker的镜像和容器"></a>2. Docker的镜像和容器</h2><h3 id="1-dk的安装简介"><a href="#1-dk的安装简介" class="headerlink" title="1. dk的安装简介"></a>1. dk的安装简介</h3><ul>
+<li><strong><a href="https://docs.docker.com/install/linux/docker-ce/centos/#set-up-the-repository" target="_blank" rel="noopener">官网安装</a></strong></li>
+<li>我们主要演示在CentOS上安装Docker</li>
+<li>如果有旧版本，我们先卸载</li>
+</ul>
+<pre><code>$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+</code></pre><ul>
+<li>开始安装requirement</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo yum install -y yum-utils \
+&gt;   device-mapper-persistent-data \
+&gt;   lvm2
+</code></pre><ul>
+<li>添加repo</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo yum-config-manager \
+&gt;     --add-repo \
+&gt;     https://download.docker.com/linux/centos/docker-ce.repo
+</code></pre><ul>
+<li>安装 docker CE</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo yum install docker-ce
+</code></pre><ul>
+<li>启动 docker</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo systemctl start docker
+
+[thpffcj@thpffcj ~]$ sudo docker version 
+Client:
+ Version:      18.03.1-ce
+ API version:  1.37
+ Go version:   go1.9.5
+ Git commit:   9ee9f40
+ Built:        Thu Apr 26 07:20:16 2018
+ OS/Arch:      linux/amd64
+ Experimental: false
+ Orchestrator: swarm
+
+Server:
+ Engine:
+  Version:      18.03.1-ce
+  API version:  1.37 (minimum version 1.12)
+  Go version:   go1.9.5
+  Git commit:   9ee9f40
+  Built:        Thu Apr 26 07:23:58 2018
+  OS/Arch:      linux/amd64
+  Experimental: false
+</code></pre><ul>
+<li>验证是否安装成功</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo docker run hello-world
+Unable to find image &apos;hello-world:latest&apos; locally
+latest: Pulling from library/hello-world
+9bb5a5d4561a: Pull complete 
+Digest: sha256:f5233545e43561214ca4891fd1157e1c3c563316ed8e237750d59bde73361e77
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+</code></pre><h3 id="2-dk-Machine的本地使用"><a href="#2-dk-Machine的本地使用" class="headerlink" title="2. dk Machine的本地使用"></a>2. dk Machine的本地使用</h3><ul>
+<li>Docker Machine is a tool that lets you install Docker Engine on virtual hosts, and manage the hosts with docker-machine commands. You can use Machine to create Docker hosts on your local Mac or Windows box, on your company network, in your data center, or on cloud providers like Azure, AWS, or Digital Ocean.</li>
+</ul>
+<h3 id="3-dk架构和底层技术简介"><a href="#3-dk架构和底层技术简介" class="headerlink" title="3. dk架构和底层技术简介"></a>3. dk架构和底层技术简介</h3><p><strong>Docker Platform</strong></p>
+<ul>
+<li>Docker提供了一个开发，打包运行app的平台</li>
+<li>把app和底层infrastructure隔离开来</li>
+</ul>
+<p><strong>Docker Engine</strong></p>
+<ul>
+<li>后台进程(dockerd)</li>
+<li>REST API Server</li>
+<li>CLI接口(docker)</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ ps -ef | grep docker
+root       4578      1  6 10:06 ?        00:00:00 /usr/bin/dockerd
+root       4593   4578  8 10:06 ?        00:00:00 docker-containerd --config /var/run/docker/containerd/containerd.toml
+thpffcj    4757   3992  0 10:06 pts/0    00:00:00 grep --color=auto docker
+</code></pre><p><strong>Docker 架构</strong></p>
+<p><img src="http://oseihavwm.bkt.clouddn.com/docker%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>底层技术支持</strong></p>
+<ul>
+<li>Namespaces：隔离pid, net, ipc, mnt, uts</li>
+<li>Control groups：做资源限制</li>
+<li>Union file systems：Container和image的分层</li>
+</ul>
+<h3 id="4-dk-image概述"><a href="#4-dk-image概述" class="headerlink" title="4. dk image概述"></a>4. dk image概述</h3><p><strong>什么是Image</strong></p>
+<ul>
+<li>文件和meta data的集合(root filesystem)</li>
+<li>分层的，并且每一层都可以添加改变删除文件，成为一个新的image</li>
+<li>不同的image可以共享相同的layer</li>
+<li>Image本身是read-only的</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              e38bc07ac18e        3 weeks ago         1.85kB
+</code></pre><p><strong>Image的获取</strong></p>
+<ul>
+<li>Build from Dockerfile</li>
+<li>Pull from Registry</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo docker pull ubuntu:14.04
+[sudo] password for thpffcj: 
+14.04: Pulling from library/ubuntu
+Get https://registry-1.docker.io/v2/library/ubuntu/manifests/sha256:5ce5352e561e0fef9c6114d2f0536ed00f1694b20bbdbd8638d04201fe8d258b: net/http: TLS handshake timeout
+</code></pre><ul>
+<li>设置镜像加速，使用国内的镜像加速</li>
+<li>以CentOS7为例，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）</li>
+</ul>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://registry.docker-cn.com&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>注意，一定要保证该文件符合 json 规范，否则 Docker 将不能启动。</li>
+<li>之后重新启动服务。</li>
+</ul>
+<pre><code>$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+</code></pre><ul>
+<li>再次使用pull拉取镜像</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo docker pull ubuntu:14.04
+14.04: Pulling from library/ubuntu
+324d088ce065: Pull complete 
+2ab951b6c615: Pull complete 
+9b01635313e2: Pull complete 
+04510b914a6c: Pull complete 
+83ab617df7b4: Pull complete 
+Digest: sha256:b8855dc848e2622653ab557d1ce2f4c34218a9380cceaa51ced85c5f3c8eb201
+Status: Downloaded newer image for ubuntu:14.04
+[thpffcj@thpffcj ~]$ sudo docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              14.04               8cef1fa16c77        7 days ago          223MB
+hello-world         latest              e38bc07ac18e        3 weeks ago         1.85kB
+</code></pre><h3 id="5-DIY一个Base-Image"><a href="#5-DIY一个Base-Image" class="headerlink" title="5. DIY一个Base Image"></a>5. DIY一个Base Image</h3><ul>
+<li>制作镜像前我们先把用户加入到docker组中，这样就不用每次输入sudo了</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ sudo groupadd docker
+[sudo] password for thpffcj: 
+groupadd：“docker”组已存在
+[thpffcj@thpffcj ~]$ sudo gpasswd -a thpffcj docker
+正在将用户“thpffcj”加入到“docker”组中
+</code></pre><ul>
+<li>之后需要重启虚拟机就好了</li>
+<li>制作一个hello world</li>
+<li>先写一个C程序</li>
+</ul>
+<pre><code>#include&lt;stdio.h&gt;
+
+int main()
+{
+  printf(&quot;hello docker\n&quot;)
+}
+</code></pre><ul>
+<li>编译生成可执行文件，需要安装glibc-static</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hello-world]$ gcc -static hello.c -o hello
+[thpffcj@thpffcj hello-world]$ ls
+Dockerfile  hello  hello.c
+</code></pre><ul>
+<li>我们可以通过docekrfile将可执行文件打成docker image</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hello-world]$ cat Dockerfile 
+FROM scratch
+ADD hello /
+CMD [&quot;/hello&quot;]
+</code></pre><ul>
+<li>build image</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hello-world]$ docker build -t thpffcj/hello-world .
+Sending build context to Docker daemon  12.29kB
+Step 1/3 : FROM scratch
+ ---&gt; 
+Step 2/3 : ADD hello /
+ ---&gt; adc35a3c9101
+Step 3/3 : CMD [&quot;/hello&quot;]
+ ---&gt; Running in c5e4f87feed6
+Removing intermediate container c5e4f87feed6
+ ---&gt; 81f5e16ffc84
+Successfully built 81f5e16ffc84
+Successfully tagged thpffcj/hello-world:latest
+</code></pre><ul>
+<li>查看镜像</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker image ls
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/hello-world   latest              0cfc34326bb0        46 hours ago        844kB
+hello-world           latest              e38bc07ac18e        3 weeks ago         1.85kB
+centos                latest              e934aafc2206        4 weeks ago         199MB
+</code></pre><ul>
+<li>运行镜像</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hello-world]$ docker run thpffcj/hello-world
+hello docker
+</code></pre><h3 id="5-初识container"><a href="#5-初识container" class="headerlink" title="5. 初识container"></a>5. 初识container</h3><ul>
+<li>通过Image创建(copy)</li>
+<li>在Image layer之上建立一个container layer(可读写)</li>
+<li>类比面向对象：类和实例</li>
+<li>Image负责app的存储和分发，Container负责运行app</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker image ls
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/hello-world   latest              0cfc34326bb0        46 hours ago        844kB
+ubuntu                14.04               8cef1fa16c77        9 days ago          223MB
+hello-world           latest              e38bc07ac18e        3 weeks ago         1.85kB
+[thpffcj@thpffcj ~]$ docker run thpffcj/hello-world
+hello docker
+[thpffcj@thpffcj ~]$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[thpffcj@thpffcj ~]$ docker container ls -a
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS                      PORTS               NAMES
+9389f89d3f97        thpffcj/hello-world   &quot;/hello&quot;            10 seconds ago      Exited (13) 9 seconds ago                       epic_ardinghelli
+</code></pre><ul>
+<li>交互式运行容器</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker run -it centos
+[root@3d76368238f8 /]# 
+
+[thpffcj@thpffcj ~]$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+3d76368238f8        centos              &quot;/bin/bash&quot;         14 seconds ago      Up 11 seconds                           stupefied_wiles
+</code></pre><ul>
+<li>我们可以在交互式环境进行操作</li>
+</ul>
+<pre><code>[root@3d76368238f8 /]# touch test.txt
+[root@3d76368238f8 /]# ls
+anaconda-post.log  dev  home  lib64  mnt  proc  run   srv  test.txt  usr
+bin                etc  lib   media  opt  root  sbin  sys  tmp       var
+[root@3d76368238f8 /]# exit
+exit
+[thpffcj@thpffcj ~]$ 
+
+[thpffcj@thpffcj ~]$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+[thpffcj@thpffcj ~]$ docker container ls -a
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS                        PORTS               NAMES
+3d76368238f8        centos                &quot;/bin/bash&quot;         2 minutes ago       Exited (127) 31 seconds ago                       stupefied_wiles
+9389f89d3f97        thpffcj/hello-world   &quot;/hello&quot;            15 minutes ago      Exited (13) 15 minutes ago                        epic_ardinghelli
+6365e70faa42        thpffcj/hello-world   &quot;/hello&quot;            46 hours ago        Exited (13) 46 hours ago  
+</code></pre><ul>
+<li>删除容器</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker container rm 6365e70faa42
+6365e70faa42
+
+[thpffcj@thpffcj ~]$ docker container ls -a
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS                       PORTS               NAMES
+3d76368238f8        centos                &quot;/bin/bash&quot;         5 minutes ago       Exited (127) 3 minutes ago                       stupefied_wiles
+9389f89d3f97        thpffcj/hello-world   &quot;/hello&quot;            18 minutes ago      Exited (13) 18 minutes ago                       epic_ardinghelli
+</code></pre><ul>
+<li>也可以不用指定完整ID，只需能够判断唯一容器</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker rm 3d
+3d
+[thpffcj@thpffcj ~]$ docker ps -a
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS                       PORTS               NAMES
+9389f89d3f97        thpffcj/hello-world   &quot;/hello&quot;            20 minutes ago      Exited (13) 20 minutes ago                       epic_ardinghelli
+</code></pre><ul>
+<li>删除镜像</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/hello-world   latest              0cfc34326bb0        46 hours ago        844kB
+hello-world           latest              e38bc07ac18e        3 weeks ago         1.85kB
+centos                latest              e934aafc2206        4 weeks ago         199MB
+[thpffcj@thpffcj ~]$ docker image rm e38bc07ac18e
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:f5233545e43561214ca4891fd1157e1c3c563316ed8e237750d59bde73361e77
+Deleted: sha256:e38bc07ac18ee64e6d59cf2eafcdddf9cec2364dfe129fe0af75f1b0194e0c96
+Deleted: sha256:2b8cbd0846c5aeaa7265323e7cf085779eaf244ccbdd982c4931aef9be0d2faf
+</code></pre><ul>
+<li>也可以简写删除</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker rmi 0cfc34326bb0
+Untagged: thpffcj/hello-world:latest
+Deleted: sha256:0cfc34326bb0fb2ddcb7ad976f4653b7944fa3d6dbaeaabc66c0cc4ff54c26ed
+Deleted: sha256:c923f6eebd9fdf69189e2ef82f94d7aecd45c3f2a9a8c6f6add38292b6f44bc8
+Deleted: sha256:a662edf576adc03a9da217a2b006bb5e940b12bcec02e80d178021c96d8b3655
+</code></pre><ul>
+<li>我们可以通过docker rm $(docker container ls -aq)删除所有容器</li>
+<li>我们可以通过docker rm $(docker container ls -f “status=exited” -q)删除所有已经退出的容器</li>
+</ul>
+<h3 id="6-构建自己的Docker镜像"><a href="#6-构建自己的Docker镜像" class="headerlink" title="6. 构建自己的Docker镜像"></a>6. 构建自己的Docker镜像</h3><ul>
+<li>docker container commit</li>
+<li>docker image build</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker run -it centos
+[root@7b839b23d2c0 /]# vim
+bash: vim: command not found
+</code></pre><ul>
+<li>我们发现这个container没有vim，我们可以安装一个</li>
+</ul>
+<pre><code>[root@7b839b23d2c0 /]# yum install vim
+
+...
+Complete!
+</code></pre><ul>
+<li>现在这个container已经装好了vim，我们退出</li>
+</ul>
+<pre><code>[root@7b839b23d2c0 /]# exit
+exit
+</code></pre><ul>
+<li>我们现在想把这个container commit成为一个image</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+7b839b23d2c0        centos              &quot;/bin/bash&quot;         6 minutes ago       Exited (0) 24 seconds ago                       priceless_benz
+[thpffcj@thpffcj ~]$ docker commit priceless_benz thpffcj/centos-vim
+sha256:302c2b237afd1142b22b4475c8a760842493ef5f1df7f71e4b30e16fe9eb95d9
+[thpffcj@thpffcj ~]$ docker image ls
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/centos-vim   latest              302c2b237afd        16 seconds ago      357MB
+centos               latest              e934aafc2206        4 weeks ago         199MB
+</code></pre><ul>
+<li>我们可以看到他们公用很多layer，是在原来的基础上增加了一层，主要是安装了vim</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ docker image ls
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/centos-vim   latest              302c2b237afd        16 seconds ago      357MB
+centos               latest              e934aafc2206        4 weeks ago         199MB
+[thpffcj@thpffcj ~]$ docker history e934aafc2206
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+e934aafc2206        4 weeks ago         /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  
+&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  
+&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop) ADD file:f755805244a649ecc…   199MB               
+[thpffcj@thpffcj ~]$ docker history 302c2b237afd
+IMAGE               CREATED              CREATED BY                                      SIZE                COMMENT
+302c2b237afd        About a minute ago   /bin/bash                                       158MB               
+e934aafc2206        4 weeks ago          /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B                  
+&lt;missing&gt;           4 weeks ago          /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  
+&lt;missing&gt;           4 weeks ago          /bin/sh -c #(nop) ADD file:f755805244a649ecc…   199MB     
+</code></pre><ul>
+<li>这种创建image的方式并不提倡，对方并不知道我们的image是怎么产生的</li>
+<li><strong>接下来我们就来看通过dockerfile去build一个image</strong></li>
+<li>编写Dockerfile</li>
+</ul>
+<pre><code>FROM centos
+RUN yum install -y vim
+</code></pre><ul>
+<li>进行build</li>
+</ul>
+<pre><code>docker build -t thpffcj/centos-vim-new .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM centos
+ ---&gt; e934aafc2206
+Step 2/2 : RUN yum install -y vim
+ ---&gt; Running in 33452f2108dd
+Loaded plugins: fastestmirror, ovl
+
+...
+
+Complete!
+Removing intermediate container 33452f2108dd
+ ---&gt; 67df6b04b398
+Successfully built 67df6b04b398
+Successfully tagged thpffcj/centos-vim-new:latest
+</code></pre><ul>
+<li>可以看到我们是临时创建了container，在里面安装了vim，然后remove</li>
+</ul>
+<pre><code>[thpffcj@thpffcj docker-centos-vim]$ docker image ls
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+thpffcj/centos-vim-new   latest              67df6b04b398        22 seconds ago      357MB
+centos                   latest              e934aafc2206        4 weeks ago         199MB
+</code></pre><h3 id="7-dkfile语法梳理及最佳实践"><a href="#7-dkfile语法梳理及最佳实践" class="headerlink" title="7. dkfile语法梳理及最佳实践"></a>7. dkfile语法梳理及最佳实践</h3><p><strong>FROM</strong></p>
+<ul>
+<li>FROM scratch # 制作base image</li>
+<li>FROM centos # 制作base image</li>
+<li>FROM ubuntu:14.04</li>
+</ul>
+<ul>
+<li>尽量使用官方的image作为base image</li>
+</ul>
+<p><strong>LABEL</strong></p>
+<ul>
+<li>LABEL maintainer=”<a href="mailto:thpffcj@gmail.com" target="_blank" rel="noopener">thpffcj@gmail.com</a>“</li>
+<li>LABEL version=”1.0”</li>
+<li>LABEL description=”This is description”</li>
+</ul>
+<ul>
+<li>Meatadata不可少</li>
+</ul>
+<p><strong>RUN</strong></p>
+<ul>
+<li>为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行</li>
+</ul>
+<p><strong>WORKDIR</strong></p>
+<ul>
+<li>WORKDIR /root</li>
+</ul>
+<ul>
+<li>WORKDIR /test # 如果没有会自动创建test目录</li>
+<li>WORKDIR demo</li>
+<li>RUN pwd # 输出结果应该是 /test/demo</li>
+</ul>
+<ul>
+<li>用WORKDIR，不要用RUN cd，尽量使用绝对目录</li>
+</ul>
+<p><strong>ADD and COPY</strong></p>
+<ul>
+<li>ADD hello /</li>
+</ul>
+<ul>
+<li>ADD test.tar.gz / # 添加到根目录并解压</li>
+</ul>
+<ul>
+<li>WORKDIR /root</li>
+<li>ADD hello test / # /root/test/hello</li>
+</ul>
+<ul>
+<li>WORKDIR /root</li>
+<li>COPY hello test/</li>
+</ul>
+<ul>
+<li>大部分情况，COPY优于ADD，ADD除了COPY还有额外功能(解压)，添加远程文件/目录请使用curl或者wget</li>
+</ul>
+<p><strong>ENV</strong></p>
+<ul>
+<li>ENV MYSQL_VERSION 5.6 #设置常量</li>
+<li>RUN apt-get install -y mysql-server=”${MYSQL_VERSION}” &amp;&amp; rm -rf /var/lib/apt/lists/* #引用常量</li>
+</ul>
+<ul>
+<li>尽量使用ENV增加可维护性</li>
+</ul>
+<h3 id="8-run-vs-cmd-vs-entrypoint"><a href="#8-run-vs-cmd-vs-entrypoint" class="headerlink" title="8. run vs cmd vs entrypoint"></a>8. run vs cmd vs entrypoint</h3><ul>
+<li>RUN：执行命令并创建新的Image Layer</li>
+<li>CMD：设置容器启动后默认执行的命令和参数</li>
+<li>ENTRYPOINT：设置容器启动时运行的命令</li>
+</ul>
+<p><strong>Shell格式</strong></p>
+<pre><code>RUN apt-get install -y vim
+CMD echo &quot;hello docker&quot;
+ENTRYPOINT echo &quot;hello docker&quot;
+</code></pre><p><strong>Exec格式</strong></p>
+<pre><code>RUN [ &quot;apt-get&quot;, &quot;install&quot;, &quot;-y&quot;, &quot;vim&quot; ]
+CMD [ &quot;/bin/echo&quot;, &quot;hello docker&quot; ]
+ENTRYPOINT [ &quot;/bin/echo&quot;, &quot;hello docker&quot; ]
+</code></pre><h3 id="9-镜像的发布"><a href="#9-镜像的发布" class="headerlink" title="9. 镜像的发布"></a>9. 镜像的发布</h3><h3 id="10-Dockerfile实践"><a href="#10-Dockerfile实践" class="headerlink" title="10. Dockerfile实践"></a>10. Dockerfile实践</h3><h3 id="11-容器的操作"><a href="#11-容器的操作" class="headerlink" title="11. 容器的操作"></a>11. 容器的操作</h3><h3 id="12-Dockerfile实战"><a href="#12-Dockerfile实战" class="headerlink" title="12. Dockerfile实战"></a>12. Dockerfile实战</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/06/Big-Data-SparkSQL-5/" style="float: left;">
+        ← SparkSQL实战
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/03/Big-Data-SparkSQL-4/">
+        DateFrame & Dataset →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

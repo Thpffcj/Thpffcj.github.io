@@ -204,6 +204,190 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/05/02/Java-Concurrent-Programming-4/">线程调度-线程池</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-02T15:01:54.000Z" itemprop="datePublished">
+          2018-05-02
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 线程池
+new Thread 弊端
+每次 new Thread 新建对象，性能差
+线程缺乏统一管理，可能无限制的新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM
+缺少更多功能，如更多执行，定期执行，线程中断
+
+
+
+1. 线程池的好处
+重用存在的线程，减少对象创建，消亡的开销，性能佳
+可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞
+提供定时执行，定期执行，单线程，并发数控制等功能
+
+2. 
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/02/Java-Concurrent-Programming-4/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/28/Java-Concurrent-Programming-3/">J.U.C</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-28T12:41:58.000Z" itemprop="datePublished">
+          2018-04-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. J.U.C之AQS1. AQS介绍
+
+使用Node实现FIFO队列，可以用于构建锁或者其他同步装置的基础框架
+利用了一个int类型表示状态
+使用方法是继承
+子类通过继承并通过实现它的方法管理其状态(acquire 和 release)的方法操纵状态
+可以同时实现排它锁和共享锁模式(独占，共享)
+
+同步组件
+
+CountDownLatch
+Semaphore
+CyclicBarrier
+ReentrantLock
+Condition
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/28/Java-Concurrent-Programming-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/28/ZooKeeper-Distributed-Topics-3/">基于Zookeeper的应用</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-28T01:12:53.000Z" itemprop="datePublished">
+          2018-04-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 分布式协调服务dubbo1. dubbo 入门简介
+Apache Dubbo (incubating)
+国产的优秀开源框架
+诸如京东，当当等都在使用
+最大程度进行解耦，降低系统耦合性
+生产者/消费者模式
+ZK注册中心，admin监控中心，协议支持
+
+dubbo架构
+
+2. 单体到分层模式运行dubbo的三种方式
+
+Tomcat容器内启动
+Main主线程运行
+通过dubbo内置main打成jar包运行
+
+dubbo监控
+
+dubbo
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/28/ZooKeeper-Distributed-Topics-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/27/Big-Data-SparkSQL-3/">Spark SQL概述</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-27T10:16:10.000Z" itemprop="datePublished">
+          2018-04-27
+      </time>
+    
+    
+    | 
+    <a href="/tags/大数据/">大数据</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. Spark SQL概述1. Spark SQL前世今生为什么需要SQL
+
+事实上的标准
+易学易用
+受众面大
+
+Shark
+
+Hive：类似于sql的Hive QL语言，sql =&gt; MapReduce
+缺点：MapReduce
+改进：hive on tez，hive on spark，hive on mapreduce
+
+
+Spark: hive on spark =&gt; shark(hive on spark)
+sha
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/27/Big-Data-SparkSQL-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/04/25/Java-Concurrent-Programming-2/">Java 并发编程 2</a></h3>
                     <span>
                         <span class="post-meta">
@@ -234,6 +418,43 @@ public class UnsafePublish {
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/25/Java-Concurrent-Programming-2/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/04/24/ZooKeeper-Distributed-Topics-2/">使用ZooKeeper Java API进行客户端开发</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-24T01:53:42.000Z" itemprop="datePublished">
+          2018-04-24
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 原生Java API进行客户端开发1. 建立客户端与zk服务端的连接/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class ZKConnect implements Watcher {
+
+    final static Logger log = LoggerFactory.getLogger(ZKConnect.class);
+
+    public static fin
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/24/ZooKeeper-Distributed-Topics-2/">Read More...</a>
                     </p>
                     
                 </div>
@@ -330,36 +551,6 @@ IT运维管理复杂，构建一支全功能团队困难
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2018/04/21/ZooKeeper-Distributed-Topics/">ZooKeeper Distributed Topics</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-21T00:39:02.000Z" itemprop="datePublished">
-          2018-04-21
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/21/ZooKeeper-Distributed-Topics/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
                     <h3><a href="/2018/04/15/Big-Data-Interview/">大数据面试</a></h3>
                     <span>
                         <span class="post-meta">
@@ -392,114 +583,11 @@ Step1：遍历文件a，对每个url求取hash(url)%1000，然后根据所取得
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2018/04/14/Big-Data-SparkSQL/">Big Data SparkSQL</a></h3>
+                    <h3><a href="/2018/04/15/Big-Data-SparkSQL-2/">Spark及其生态圈</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2018-04-14T03:38:10.000Z" itemprop="datePublished">
-          2018-04-14
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/14/Big-Data-SparkSQL/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/14/Java-Concurrent-Programming-1/">Java 并发编程 1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-14T01:39:17.000Z" itemprop="datePublished">
-          2018-04-14
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 基本概念1. 并发基本概念
-并发：同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时”存在”的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行
-高并发(High Concurrency)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求
-
-并发：多个线
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/14/Java-Concurrent-Programming-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">逻辑回归</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-14T01:15:08.000Z" itemprop="datePublished">
-          2018-04-14
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 什么是逻辑回归逻辑回归(Logistic Regression)：解决分类问题
-
-回归问题怎么解决分类问题
-将样本的特征和样本发生的概率联系起来，概率是一个数
-
-
-逻辑回归既可以看作是回归算法，也可以看作是分类算法
-通常作为分类算法用，只可以解决二分类问题
-
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/14/Python-Machine-Learning-Logistic-Regression/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Storm综合项目实战</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-09T01:43:19.000Z" itemprop="datePublished">
-          2018-04-09
+      <time datetime="2018-04-15T01:42:43.000Z" itemprop="datePublished">
+          2018-04-15
       </time>
     
     
@@ -513,77 +601,17 @@ Step1：遍历文件a，对每个url求取hash(url)%1000，然后根据所取得
                 <div class="col-md-8">
                     <p>
                       
-                        
-下面是这段时间系统了解Storm的一些记录
-初识实时流处理Storm
-Storm编程
-Storm周边框架使用
-Storm架构及部署
-并行度
-分组策略与可靠性
-DRPC
-Storm整合其他大数据框架的使用
-Storm综合项目实战
-
-
-
-历经漫长的学习，积攒了足够的知识，我们终于迎来的Storm的实战项目。学习框架只有理论是不够的，这篇博客我们就来记录一下通过所学，使用Storm和周边框架解决一个实际生活中遇到的问题。
-
-1. 项目概述1
+                        1. Spark 概述及特点1. Spark 特点
+Spark - Lightning-fast unified analytics engine
+Apache Spark is a unified analytics engine for large-scale data processing.
+Speed
+Run workloads 100x faster.
+Apache Spark achieves high performanc
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2018/04/09/Big-Data-Storm-Real-time-Streaming-Data-Processing-9/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/">Storm整合其他大数据框架的使用</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-07T09:53:21.000Z" itemprop="datePublished">
-          2018-04-07
-      </time>
-    
-    
-    | 
-    <a href="/tags/大数据/">大数据</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Storm的一些记录
-初识实时流处理Storm
-Storm编程
-Storm周边框架使用
-Storm架构及部署
-并行度
-分组策略与可靠性
-DRPC
-Storm整合其他大数据框架的使用
-Storm综合项目实战
-
-
-
-Storm只是一个大数据处理框架，如果我们想要完成一个项目，只有Storm是不够的。现在，我们来了解一下Strom和一些常用工具的整合，不过能配合的工具是在太多了，我们这里抛砖引玉介绍一些常用的整合，如果
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/07/Big-Data-Storm-Real-time-Streaming-Data-Processing-8/">Read More...</a>
+                        <a href="/2018/04/15/Big-Data-SparkSQL-2/">Read More...</a>
                     </p>
                     
                 </div>

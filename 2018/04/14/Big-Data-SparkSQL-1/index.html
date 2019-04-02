@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>初探大数据 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-14T06:26:48.000Z" itemprop="datePublished">
+          2018-04-14
+      </time>
+    
+    
+    | 
+    <a href="/tags/大数据/">大数据</a>
+    
+    
+</span>
+                <h1>初探大数据</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>这篇博客记录的内容我们在前面都已经学习过，我这里主要是对下周的大数据面试对一些基础知识进行一个复习。</p>
+<h2 id="1-初识大数据"><a href="#1-初识大数据" class="headerlink" title="1. 初识大数据"></a>1. 初识大数据</h2><h3 id="1-如何学好大数据"><a href="#1-如何学好大数据" class="headerlink" title="1. 如何学好大数据"></a>1. 如何学好大数据</h3><ul>
+<li><strong>官网，官网，官网</strong></li>
+<li><strong>英文，英文，英文</strong></li>
+<li>项目实战对知识点进行巩固和融会贯通</li>
+<li>社区活动：Meetup，开源社区大会，线下沙龙等</li>
+<li>切记：多动手，多练习，贵在坚持</li>
+</ul>
+<h3 id="2-开发环境选择"><a href="#2-开发环境选择" class="headerlink" title="2. 开发环境选择"></a>2. 开发环境选择</h3><ul>
+<li>看过我以前学习记录的人知道，我学习大数据采用的框架都是CDH5.7.0版本 <strong><a href="http://archive.cloudera.com/cdh5/cdh/5/" target="_blank" rel="noopener">Index of /cdh5/cdh/5</a></strong><ul>
+<li>生产或者测试环境选择对应CDH版本时，一定要采用尾号是一样的版本</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-什么是大数据"><a href="#3-什么是大数据" class="headerlink" title="3. 什么是大数据"></a>3. 什么是大数据</h3><ul>
+<li>关于大数据的定义，不同行业有不同的声音</li>
+<li>专业咨询公司IDC对大数据特征的定义：4V<ul>
+<li>Volume 数据量</li>
+<li>Variety 多样性，复杂性</li>
+<li>Velocity 速度</li>
+<li>Value 基于高度分析的新价值</li>
+</ul>
+</li>
+</ul>
+<p><strong>大数据带来的技术变革</strong></p>
+<ul>
+<li>计算瓶颈</li>
+<li>存储瓶颈</li>
+<li>数据库瓶颈</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Hadoop概述"><a href="#2-Hadoop概述" class="headerlink" title="2. Hadoop概述"></a>2. Hadoop概述</h2><h3 id="1-什么是Hadoop"><a href="#1-什么是Hadoop" class="headerlink" title="1. 什么是Hadoop"></a>1. 什么是Hadoop</h3><ul>
+<li>一个分布式系统基础架构，由Apache基金会开发。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力高速运算和存储</li>
+<li><strong><a href="http://hadoop.apache.org/" target="_blank" rel="noopener">Welcome to Apache™ Hadoop®!</a></strong></li>
+<li>The Apache Hadoop project develops open-source software for reliable, scalable, distributed computing.</li>
+<li>The project includes these modules:<ul>
+<li>Hadoop Common: The common utilities that support the other Hadoop modules.</li>
+<li>Hadoop Distributed File System (HDFS™): A distributed file system that provides high-throughput access to application data.</li>
+<li>Hadoop YARN: A framework for job scheduling and cluster resource management.</li>
+<li>Hadoop MapReduce: A YARN-based system for parallel processing of large data sets.</li>
+</ul>
+</li>
+</ul>
+<p><strong>狭义Hadoop与广义Hadoop</strong></p>
+<ul>
+<li>狭义Hadoop：是一个适合大数据分布式存储(HDFS)，分布式计算(MapReduce)和资源调度(YRAN)的平台</li>
+<li>广义Hadoop：指的是Hadoop生态系统，Hadoop生态系统是一个很庞大的概念，Hadoop是其中最重要最基础的一个部分，生态系统的每一个子系统只解决某一个特定的问题域(甚至可能很窄)，不搞统一性的一个全能系统，而是小而精的多个子系统</li>
+</ul>
+<p><strong>为什么很多公司选择Hadoop作为大数据平台的解决方案？</strong></p>
+<ul>
+<li>源码开源</li>
+<li>社区活跃，参与者很多</li>
+<li>涉及到分布式存储和计算的方方面面： <ul>
+<li>Flume进行数据采集</li>
+<li>Spark/MR/Hive等进行数据处理</li>
+<li>HDFS/HBase进行数据存储</li>
+</ul>
+</li>
+<li>已得到企业界的验证</li>
+</ul>
+<h3 id="2-分布式文件系统HDFS"><a href="#2-分布式文件系统HDFS" class="headerlink" title="2. 分布式文件系统HDFS"></a>2. <a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="noopener">分布式文件系统HDFS</a></h3><h3 id="3-分布式资源调度YARN"><a href="#3-分布式资源调度YARN" class="headerlink" title="3. 分布式资源调度YARN"></a>3. <a href="http://www.thpffcj.com/2018/01/05/Big-Data-Getting-Started-4/" target="_blank" rel="noopener">分布式资源调度YARN</a></h3><h3 id="4-分布式计算框架MapReduce"><a href="#4-分布式计算框架MapReduce" class="headerlink" title="4. 分布式计算框架MapReduce"></a>4. <a href="http://www.thpffcj.com/2018/01/06/Big-Data-Getting-Started-5/" target="_blank" rel="noopener">分布式计算框架MapReduce</a></h3><p><br></p>
+<hr>
+<h2 id="3-大数据数据仓库Hive"><a href="#3-大数据数据仓库Hive" class="headerlink" title="3. 大数据数据仓库Hive"></a>3. 大数据数据仓库Hive</h2><h3 id="1-Hive产生背景"><a href="#1-Hive产生背景" class="headerlink" title="1. Hive产生背景"></a>1. Hive产生背景</h3><ul>
+<li>MapReduce编程的不便性</li>
+<li>HDFS上的文件缺少Schema</li>
+</ul>
+<h3 id="2-Hive是什么"><a href="#2-Hive是什么" class="headerlink" title="2. Hive是什么"></a>2. Hive是什么</h3><ul>
+<li>由Fcaebook开源，最初用于解决海量结构化的日志数据统计问题</li>
+<li>构建在Hadoop之上的数据仓库</li>
+<li>Hive定义了一种类SQL查询语言：HQL(类似SQL但不完全相同)</li>
+<li>通常用于进行离线数据处理(采用MapReduce)</li>
+<li>底层支持多种不同的执行引擎：MapReduce，Tez，Spark<ul>
+<li>Hive on MapReduce</li>
+<li>Hive on Tez</li>
+<li>Hive on Spark</li>
+</ul>
+</li>
+<li>支持多种不同的压缩格式，存储格式以及自定义函数<ul>
+<li>压缩：GZIP，LZO，Snappy，BZIP2..</li>
+<li>存储：TextFile，SequenceFile，RCFile，ORC，Parquet</li>
+<li>UDF：自定义函数</li>
+</ul>
+</li>
+<li><strong><a href="https://hive.apache.org/" target="_blank" rel="noopener">APACHE HIVE TM</a></strong></li>
+<li>The Apache Hive data warehouse software facilitates reading, writing, and managing large datasets residing in distributed storage using SQL. Structure can be projected onto data already in storage. A command line tool and JDBC driver are provided to connect users to Hive.</li>
+</ul>
+<h3 id="3-为什么要使用Hive"><a href="#3-为什么要使用Hive" class="headerlink" title="3. 为什么要使用Hive"></a>3. 为什么要使用Hive</h3><ul>
+<li>简单，容易上手(提供了类似SQL的查询语言HQL)</li>
+<li>为超大数据集设计的计算/存储扩展能力(MR计算，HDFS存储)</li>
+<li>统一的元数据管理(可与Presto/Impala/SparkSQL等共享数据)</li>
+</ul>
+<h3 id="4-Hive发展历程"><a href="#4-Hive发展历程" class="headerlink" title="4. Hive发展历程"></a>4. Hive发展历程</h3><ul>
+<li>08/2007 - Journey Start from Facebook</li>
+<li>05/2013 - Hive 0.11.0 as Stinger Phase 1 - ORC, HiveServer2</li>
+<li>10/2013 - Hive 0.12.0 as Stinger Phase 2 - ORC improvement</li>
+<li>04/2014 - Hive 0.13.0 as Stinger Phase 3 - vectorized query engine and Tez</li>
+<li>11/2014 - Hive 0.14.0 as Stinger.next Phase 1 - Cost-based optimizer</li>
+<li>01/2015 - Hive 1.0.0</li>
+<li>03/2015 - Hive 1.1.0</li>
+<li>05/2015 - Hive 1.2.0</li>
+<li>02/2016 - Hive 2.0.0</li>
+<li>06/2016 - Hive 2.1.0</li>
+</ul>
+<h3 id="5-Hive体系架构"><a href="#5-Hive体系架构" class="headerlink" title="5. Hive体系架构"></a>5. Hive体系架构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Hive%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<h3 id="6-Hive环境搭建"><a href="#6-Hive环境搭建" class="headerlink" title="6. Hive环境搭建"></a>6. Hive环境搭建</h3><ul>
+<li>下载，解压</li>
+</ul>
+<pre><code>[thpffcj@thpffcj software]$ tar -zxvf hive-1.1.0-cdh5.7.0.tar.gz -C ~/app/
+</code></pre><ul>
+<li>配置环境变量</li>
+</ul>
+<pre><code>[thpffcj@thpffcj hive-1.1.0-cdh5.7.0]$ vi ~/.bash_profile 
+
+export HIVE_HOME=/home/thpffcj/app/hive-1.1.0-cdh5.7.0
+export PATH=$HIVE_HOME/bin:$PATH
+
+[thpffcj@thpffcj hive-1.1.0-cdh5.7.0]$ source ~/.bash_profile 
+</code></pre><ul>
+<li>修改配置文件</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cp hive-env.sh.template hive-env.sh
+[thpffcj@thpffcj conf]$ vi hive-env.sh
+
+# Set HADOOP_HOME to point to a specific hadoop install directory
+# HADOOP_HOME=${bin}/../../hadoop
+HADOOP_HOME=/home/thpffcj/app/hadoop-2.6.0-cdh5.7.0
+</code></pre><ul>
+<li>我们还需要创建一个hive-site.xml配置MySQL信息</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cat hive-site.xml 
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+
+&lt;configuration&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+    &lt;value&gt;jdbc:mysql://localhost:3306/sparksql?createDatabaseIfNotExist=true&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+    &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+    &lt;value&gt;root&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+    &lt;value&gt;000000&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><ul>
+<li>拷贝mysql驱动包</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ pwd
+/home/thpffcj/app/hive-1.1.0-cdh5.7.0/lib
+[thpffcj@thpffcj lib]$ cp ~/lib/mysql-connector-java-5.1.38.jar .
+</code></pre><ul>
+<li>启动hive之前我们需要启动hafs，关闭安全模式是因为后面执行hive命令报错，百度之后解决办法是关闭安全模式</li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-dfs.sh 
+18/04/30 20:00:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [thpffcj]
+thpffcj: starting namenode, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/hadoop-thpffcj-namenode-thpffcj.out
+thpffcj: starting datanode, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/hadoop-thpffcj-datanode-thpffcj.out
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/hadoop-thpffcj-secondarynamenode-thpffcj.out
+18/04/30 20:00:36 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[thpffcj@thpffcj sbin]$ jps
+8016 SecondaryNameNode
+7828 DataNode
+7689 NameNode
+8335 Jps
+[thpffcj@thpffcj sbin]$ hadoop dfsadmin -safemode leave
+DEPRECATED: Use of this script to execute hdfs command is deprecated.
+Instead use the hdfs command for it.
+
+18/04/30 20:06:22 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Safe mode is OFF
+</code></pre><ul>
+<li>启动hive</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./hive
+ls: 无法访问/home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/lib/spark-assembly-*.jar: 没有那个文件或目录
+2018-04-30 20:06:31,259 WARN  [main] mapreduce.TableMapReduceUtil: The hbase-prefix-tree module jar containing PrefixTreeCodec is not present.  Continuing without it.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/thpffcj/app/hbase-1.2.0-cdh5.7.0/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/share/hadoop/common/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+2018-04-30 20:06:31,521 WARN  [main] util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+Logging initialized using configuration in jar:file:/home/thpffcj/app/hive-1.1.0-cdh5.7.0/lib/hive-common-1.1.0-cdh5.7.0.jar!/hive-log4j.properties
+WARNING: Hive CLI is deprecated and migration to Beeline is recommended.
+hive&gt; 
+</code></pre><ul>
+<li>登录mysql查看情况</li>
+</ul>
+<pre><code>[thpffcj@thpffcj ~]$ mysql -uroot -p000000
+Warning: Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 5.6.40 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
+
+mysql&gt; show databases；
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sparksql           |
++--------------------+
+4 rows in set (0.00 sec)
+</code></pre><h3 id="7-Hive基本使用"><a href="#7-Hive基本使用" class="headerlink" title="7. Hive基本使用"></a>7. Hive基本使用</h3><p><strong>创建表</strong></p>
+<pre><code>hive&gt; create table hive_wordcount(context string);
+OK
+Time taken: 1.31 seconds
+hive&gt; show tables;
+OK
+hive_wordcount
+Time taken: 0.129 seconds, Fetched: 1 row(s)
+</code></pre><ul>
+<li>我们到mysql查看一下</li>
+</ul>
+<pre><code>mysql&gt; use sparksql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; show tables;
++---------------------------+
+| Tables_in_sparksql        |
++---------------------------+
+| BUCKETING_COLS            |
+| CDS                       |
+| COLUMNS_V2                |
+| DATABASE_PARAMS           |
+| DBS                       |
+| FUNCS                     |
+| FUNC_RU                   |
+| GLOBAL_PRIVS              |
+| PARTITIONS                |
+| PARTITION_KEYS            |
+| PARTITION_KEY_VALS        |
+| PARTITION_PARAMS          |
+| PART_COL_STATS            |
+| ROLES                     |
+| SDS                       |
+| SD_PARAMS                 |
+| SEQUENCE_TABLE            |
+| SERDES                    |
+| SERDE_PARAMS              |
+| SKEWED_COL_NAMES          |
+| SKEWED_COL_VALUE_LOC_MAP  |
+| SKEWED_STRING_LIST        |
+| SKEWED_STRING_LIST_VALUES |
+| SKEWED_VALUES             |
+| SORT_COLS                 |
+| TABLE_PARAMS              |
+| TAB_COL_STATS             |
+| TBLS                      |
+| VERSION                   |
++---------------------------+
+29 rows in set (0.00 sec)
+</code></pre><ul>
+<li>从mysql查看表</li>
+</ul>
+<pre><code>mysql&gt; select * from TBLS;
++--------+-------------+-------+------------------+---------+-----------+-------+----------------+---------------+--------------------+--------------------+
+| TBL_ID | CREATE_TIME | DB_ID | LAST_ACCESS_TIME | OWNER   | RETENTION | SD_ID | TBL_NAME       | TBL_TYPE      | VIEW_EXPANDED_TEXT | VIEW_ORIGINAL_TEXT |
++--------+-------------+-------+------------------+---------+-----------+-------+----------------+---------------+--------------------+--------------------+
+|      1 |  1525090410 |     1 |                0 | thpffcj |         0 |     1 | hive_wordcount | MANAGED_TABLE | NULL               | NULL               |
++--------+-------------+-------+------------------+---------+-----------+-------+----------------+---------------+--------------------+--------------------+
+1 row in set (0.00 sec)
+</code></pre><ul>
+<li>从mysql查看字段</li>
+</ul>
+<pre><code>mysql&gt; select * from COLUMNS_V2;
++-------+---------+-------------+-----------+-------------+
+| CD_ID | COMMENT | COLUMN_NAME | TYPE_NAME | INTEGER_IDX |
++-------+---------+-------------+-----------+-------------+
+|     1 | NULL    | context     | string    |           0 |
++-------+---------+-------------+-----------+-------------+
+1 row in set (0.00 sec)
+</code></pre><p><strong>数据加载到表中</strong></p>
+<pre><code>[thpffcj@thpffcj data]$ cat hello.txt 
+hadoop welcome
+hadoop hdfs mapreduce
+hadoop hdfs
+</code></pre><ul>
+<li>加载数据</li>
+</ul>
+<pre><code>hive&gt; load data local inpath &apos;/home/thpffcj/data/hello.txt&apos; into table hive_wordcount;
+Loading data to table default.hive_wordcount
+Table default.hive_wordcount stats: [numFiles=1, totalSize=49]
+OK
+Time taken: 1.13 seconds
+
+hive&gt; select * from hive_wordcount;
+OK
+hadoop welcome
+hadoop hdfs mapreduce
+hadoop hdfs
+Time taken: 0.349 seconds, Fetched: 3 row(s)
+</code></pre><ul>
+<li>查询统计词频<ul>
+<li>这里需要一个函数：lateral view explode(): 是把每行记录按照指定分隔符进行拆解</li>
+</ul>
+</li>
+<li>不过之前又发现一个问题，还需要启动yarn</li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-yarn.sh 
+starting yarn daemons
+starting resourcemanager, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/yarn-thpffcj-resourcemanager-thpffcj.out
+thpffcj: starting nodemanager, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/yarn-thpffcj-nodemanager-thpffcj.out
+</code></pre><ul>
+<li>执行sql</li>
+</ul>
+<pre><code>hive&gt; select word, count(1) from hive_wordcount lateral view explode(split(context,&apos; &apos;)) wc as word group by word;
+Query ID = thpffcj_20180430201313_d0bae7ea-8469-4192-bd84-91935815d559
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Starting Job = job_1525091051459_0002, Tracking URL = http://thpffcj:8088/proxy/application_1525091051459_0002/
+Kill Command = /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/bin/hadoop job  -kill job_1525091051459_0002
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2018-04-30 20:25:38,275 Stage-1 map = 0%,  reduce = 0%
+2018-04-30 20:25:44,008 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.25 sec
+2018-04-30 20:25:51,501 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.65 sec
+MapReduce Total cumulative CPU time: 2 seconds 650 msec
+Ended Job = job_1525091051459_0002
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.65 sec   HDFS Read: 8803 HDFS Write: 38 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 650 msec
+OK
+hadoop    3
+hdfs    2
+mapreduce    1
+welcome    1
+Time taken: 22.677 seconds, Fetched: 4 row(s)
+</code></pre><ul>
+<li>hive ql提交执行以后会生成mr作业，并在yarn上运行</li>
+</ul>
+<p><strong>案例：员工表和部门表操作</strong></p>
+<pre><code>[thpffcj@thpffcj data]$ cat emp.txt 
+7369    SMITH    CLERK    7092    1980-12-17    800.00        20
+7499    ALLEN    SALESMAN    7968    1981-2-20    1600.00    300.00    30
+7521    WARD    SALESMAN    7968    1981-2-22    1250.00    500.00    30
+[thpffcj@thpffcj data]$ cat dept.txt 
+10    ACCOUNTING    NEW_YORK
+20    RESEARCH    DALLAS
+30    SALES    CHICAGO
+40    OPERATIONS    BOSTON
+</code></pre><ul>
+<li>创建员工表和部门表</li>
+</ul>
+<pre><code>hive&gt; create table emp(
+    &gt; empno int,
+    &gt; ename string,
+    &gt; job string,
+    &gt; mgr int,
+    &gt; hiredate string,
+    &gt; sal double,
+    &gt; comm double,
+    &gt; deptno int
+    &gt; ) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;\t&apos;;
+OK
+Time taken: 2.089 seconds
+hive&gt; 
+    &gt; create table dept(
+    &gt; deptno int,
+    &gt; dname string,
+    &gt; location string
+    &gt; ) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;\t&apos;;
+OK
+Time taken: 0.138 seconds
+</code></pre><ul>
+<li>加载数据</li>
+</ul>
+<pre><code>hive&gt; load data local inpath &apos;/home/thpffcj/data/emp.txt&apos; into table emp;
+Loading data to table default.emp
+Table default.emp stats: [numFiles=1, totalSize=149]
+OK
+Time taken: 4.642 seconds
+hive&gt; load data local inpath &apos;/home/thpffcj/data/dept.txt&apos; into table dept;
+Loading data to table default.dept
+Table default.dept stats: [numFiles=1, totalSize=80]
+OK
+Time taken: 1.447 seconds
+</code></pre><ul>
+<li>查看数据</li>
+</ul>
+<pre><code>hive&gt; select * from emp;
+OK
+7369    SMITH    CLERK    7092    1980-12-17    800.0    NULL    20
+7499    ALLEN    SALESMAN    7968    1981-2-20    1600.0    300.0    30
+7521    WARD    SALESMAN    7968    1981-2-22    1250.0    500.0    30
+Time taken: 0.57 seconds, Fetched: 3 row(s)
+</code></pre><ul>
+<li>求每个部门的人数</li>
+</ul>
+<pre><code>hive&gt; select deptno, count(1) from emp group by deptno;
+Query ID = thpffcj_20180502104949_6fdbda79-2c75-4091-b2b8-504ab253ed21
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Starting Job = job_1525228866190_0001, Tracking URL = http://thpffcj:8088/proxy/application_1525228866190_0001/
+Kill Command = /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/bin/hadoop job  -kill job_1525228866190_0001
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2018-05-02 10:53:08,218 Stage-1 map = 0%,  reduce = 0%
+2018-05-02 10:53:19,271 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 3.73 sec
+2018-05-02 10:53:27,944 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 5.23 sec
+MapReduce Total cumulative CPU time: 5 seconds 230 msec
+Ended Job = job_1525228866190_0001
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 5.23 sec   HDFS Read: 7415 HDFS Write: 10 SUCCESS
+Total MapReduce CPU Time Spent: 5 seconds 230 msec
+OK
+20    1
+30    2
+Time taken: 49.434 seconds, Fetched: 2 row(s)
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/15/Big-Data-SparkSQL-2/" style="float: left;">
+        ← Spark及其生态圈
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/14/Big-Data-SparkSQL/">
+        Big Data SparkSQL →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

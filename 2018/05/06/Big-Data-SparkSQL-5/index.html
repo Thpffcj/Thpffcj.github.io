@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>SparkSQL实战 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-06T10:23:43.000Z" itemprop="datePublished">
+          2018-05-06
+      </time>
+    
+    
+    | 
+    <a href="/tags/大数据/">大数据</a>
+    
+    
+</span>
+                <h1>SparkSQL实战</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-项目实战"><a href="#1-项目实战" class="headerlink" title="1. 项目实战"></a>1. 项目实战</h2><h3 id="1-项目需求"><a href="#1-项目需求" class="headerlink" title="1. 项目需求"></a>1. 项目需求</h3><ul>
+<li>需求一：统计imooc主站最受欢迎的课程/手记的Top N访问次数</li>
+<li>需求二：按地市统计imooc主站最受欢迎的Top N课程</li>
+<li>需求三：按流量统计imooc主站最受欢迎的Top N课程</li>
+</ul>
+<h3 id="2-用户行为日志概述"><a href="#2-用户行为日志概述" class="headerlink" title="2. 用户行为日志概述"></a>2. 用户行为日志概述</h3><ul>
+<li>用户行为日志：用户每次访问网站时所有的行为数据(访问，浏览，搜索，点击…)用户行为轨迹，流量日志</li>
+<li>为什么要记录用户访问行为日志<ul>
+<li>网站页面的访问量</li>
+<li>网站的黏性</li>
+<li>推荐</li>
+</ul>
+</li>
+<li>日志数据内容：<ul>
+<li>访问的系统属性： 操作系统，浏览器等等</li>
+<li>访问特征：点击的url，从哪个url跳转过来的(referer)，页面上的停留时间等</li>
+<li>访问信息：session_id，访问ip(访问城市)等</li>
+</ul>
+</li>
+<li>用户行为日志分析的意义<ul>
+<li>网站的眼睛</li>
+<li>网站的神经</li>
+<li>网站的大脑</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-离线数据处理架构"><a href="#3-离线数据处理架构" class="headerlink" title="3. 离线数据处理架构"></a>3. 离线数据处理架构</h3><ul>
+<li>数据采集<ul>
+<li>Flume：Web日志写入到HDFS</li>
+</ul>
+</li>
+<li>数据清洗<ul>
+<li>脏数据</li>
+<li>Spark，Hive，MapReduce 或者是其他的一些分布式计算框架  </li>
+<li>清洗完之后的数据可以存放在HDFS(Hive/Spark SQL)</li>
+</ul>
+</li>
+<li>数据处理<ul>
+<li>按照我们的需要进行相应业务的统计和分析</li>
+<li>Spark，Hive，MapReduce 或者是其他的一些分布式计算框架</li>
+</ul>
+</li>
+<li>处理结果入库<ul>
+<li>结果可以存放到RDBMS，NoSQL</li>
+</ul>
+</li>
+<li>数据的可视化<ul>
+<li>通过图形化展示的方式展现出来：饼图，柱状图，地图，折线图</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%A6%BB%E7%BA%BF%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<h3 id="4-imooc网主站日志内容构成"><a href="#4-imooc网主站日志内容构成" class="headerlink" title="4. imooc网主站日志内容构成"></a>4. imooc网主站日志内容构成</h3><ul>
+<li>访问时间</li>
+<li>访问URL</li>
+<li>访问过程耗费流量</li>
+<li>访问IP地址</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2. 数据处理"></a>2. 数据处理</h2><h3 id="1-数据清洗之第一步原始日志解析"><a href="#1-数据清洗之第一步原始日志解析" class="headerlink" title="1. 数据清洗之第一步原始日志解析"></a>1. 数据清洗之第一步原始日志解析</h3><ul>
+<li>我拿到的数据是清洗之后的，所以我们就以一条清洗之前的数据模拟清洗过程</li>
+</ul>
+<pre><code>106.39.41.166 - - [10/Nov/2016:00:01:02 +0800] &quot;POST /course/ajaxmediauser/ HTTP/1.1&quot; 200 54 &quot;www.imooc.com&quot; &quot;http://www.imooc.com/video/8701&quot; mid=8701&amp;time=120.0010000000002&amp;learn_time=16.1 &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.22 Safari/537.36 SE 2.X MetaSr 1.0&quot; &quot;-&quot; 10.100.136.64:80 200 0.016 0.016
+</code></pre><ul>
+<li>日志构成就是这样，我们编写清洗代码</li>
+<li>读取数据我们使用了textFile</li>
+</ul>
+<pre><code>/**
+* Read a text file from HDFS, a local file system (available on all nodes), or any
+* Hadoop-supported file system URI, and return it as an RDD of Strings.
+*/
+def textFile(
+  path: String,
+  minPartitions: Int = defaultMinPartitions): RDD[String] = withScope {
+assertNotStopped()
+hadoopFile(path, classOf[TextInputFormat], classOf[LongWritable], classOf[Text],
+  minPartitions).map(pair =&gt; pair._2.toString).setName(path)
+}
+</code></pre><ul>
+<li>接下来就需要编写原始日志解析代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 第一步清洗：抽取出我们所需要的指定列的数据
+  */
+object SparkStatFormatJob {
+
+  def main(args: Array[String]): Unit = {
+
+    val spark = SparkSession.builder().appName(&quot;SparkStatFormatJob&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    val access = spark.sparkContext.textFile(&quot;D:/access.log&quot;)
+//    access.take(10).foreach(println)
+
+    access.map(line =&gt; {
+      val splits = line.split(&quot; &quot;)
+      val ip = splits(0)
+
+      /**
+        * 原始日志的第三个和第四个字段拼接起来就是完整的访问时间：
+        * [10/Nov/2016:00:01:02 +0800] ==&gt; yyyy-MM-dd HH:mm:ss
+        */
+      val time = splits(3) + &quot; &quot; + splits(4)
+      val url = splits(11).replaceAll(&quot;\&quot;&quot;,&quot;&quot;)
+      val traffic = splits(9)
+      DateUtils.parse(time) + &quot;\t&quot; + url + &quot;\t&quot; + traffic + &quot;\t&quot; + ip
+    }).saveAsTextFile(&quot;D:/output&quot;)
+
+    spark.stop()
+  }
+}
+</code></pre><ul>
+<li>有人会想，我们怎么知道需要的字段都是第几个呢，其实我们可以直接打断点观察</li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/Sparksql%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<ul>
+<li>我们还需要自己编写一个日期解析工具类</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 日期时间解析工具类:
+  * 注意：SimpleDateFormat是线程不安全
+  */
+object DateUtils {
+
+  //输入文件日期时间格式
+  //10/Nov/2016:00:01:02 +0800
+  val YYYYMMDDHHMM_TIME_FORMAT = FastDateFormat.getInstance(&quot;dd/MMM/yyyy:HH:mm:ss Z&quot;, Locale.ENGLISH)
+
+  //目标日期格式
+  val TARGET_FORMAT = FastDateFormat.getInstance(&quot;yyyy-MM-dd HH:mm:ss&quot;)
+
+  /**
+    * 获取时间：yyyy-MM-dd HH:mm:ss
+    */
+  def parse(time: String) = {
+    TARGET_FORMAT.format(new Date(getTime(time)))
+  }
+
+  /**
+    * 获取输入日志时间：long类型
+    *
+    * time: [10/Nov/2016:00:01:02 +0800]
+    */
+  def getTime(time: String) = {
+    try {
+      YYYYMMDDHHMM_TIME_FORMAT.parse(time.substring(time.indexOf(&quot;[&quot;) + 1,
+        time.lastIndexOf(&quot;]&quot;))).getTime
+    } catch {
+      case e: Exception =&gt; {
+        0l
+      }
+    }
+  }
+
+  def main(args: Array[String]) {
+    println(parse(&quot;[10/Nov/2016:00:01:02 +0800]&quot;))
+  }
+}
+</code></pre><ul>
+<li>这时候我们就进行了初步的清洗，从原始数据中获得了时间，url，流量，和ip</li>
+</ul>
+<pre><code>2016-11-10 00:01:02    http://www.imooc.com/video/8701    54    106.39.41.166
+</code></pre><h3 id="2-数据清洗之二次清洗概述"><a href="#2-数据清洗之二次清洗概述" class="headerlink" title="2. 数据清洗之二次清洗概述"></a>2. 数据清洗之二次清洗概述</h3><ul>
+<li>使用Spark SQL解析访问日志</li>
+<li>解析出课程编号，类型</li>
+<li>根据IP解析出城市信息</li>
+<li>使用Spark SQL将访问时间按天进行分区输出<ul>
+<li>一般的日志处理方式，我们是需要进行分区的，按照日志中的访问时间进行相应的分区，比如：d,h,m5(每5分钟一个分区)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-数据清洗之日志解析"><a href="#3-数据清洗之日志解析" class="headerlink" title="3. 数据清洗之日志解析"></a>3. 数据清洗之日志解析</h3><ul>
+<li>输入：访问时间，访问URL，耗费的流量，访问IP地址信息</li>
+<li>输出：URL，cmsType(video/article)，cmsId(编号)，流量，ip，城市信息，访问时间，天</li>
+<li>清楚了输入和输出，我们先编写一个转换类</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 访问日志转换(输入==&gt;输出)工具类
+  */
+object AccessConvertUtil {
+
+  // 定义的输出的字段
+  val struct = StructType(
+    Array(
+      StructField(&quot;url&quot;, StringType),
+      StructField(&quot;cmsType&quot;, StringType),
+      StructField(&quot;cmsId&quot;, LongType),
+      StructField(&quot;traffic&quot;, LongType),
+      StructField(&quot;ip&quot;, StringType),
+      StructField(&quot;city&quot;, StringType),
+      StructField(&quot;time&quot;, StringType),
+      StructField(&quot;day&quot;, StringType)
+    )
+  )
+
+  /**
+    * 根据输入的每一行信息转换成输出的样式
+    *
+    * @param log 输入的每一行记录信息
+    */
+  def parseLog(log: String) = {
+
+    try {
+      val splits = log.split(&quot;\t&quot;)
+
+      val url = splits(1)
+      val traffic = splits(2).toLong
+      val ip = splits(3)
+
+      val domain = &quot;http://www.imooc.com/&quot;
+      val cms = url.substring(url.indexOf(domain) + domain.length)
+      val cmsTypeId = cms.split(&quot;/&quot;)
+
+      var cmsType = &quot;&quot;
+      var cmsId = 0l
+      if (cmsTypeId.length &gt; 1) {
+        cmsType = cmsTypeId(0)
+        cmsId = cmsTypeId(1).toLong
+      }
+
+      val city = &quot;&quot;
+      val time = splits(0)
+      val day = time.substring(0, 10).replaceAll(&quot;-&quot;, &quot;&quot;)
+
+      // 这个row里面的字段要和struct中的字段对应上
+      Row(url, cmsType, cmsId, traffic, ip, city, time, day)
+    } catch {
+      case e: Exception =&gt; Row(0)
+    }
+  }
+}
+</code></pre><ul>
+<li>关于城市我们先用””代替，后面再编写通过ip获得城市的方法</li>
+</ul>
+<h3 id="4-数据清洗之ip地址解析"><a href="#4-数据清洗之ip地址解析" class="headerlink" title="4. 数据清洗之ip地址解析"></a>4. 数据清洗之ip地址解析</h3><ul>
+<li>现在我们除了city字段，其他都已经解析完毕了</li>
+<li>我们直接借助于github上的一个工程ipdatabase</li>
+<li>使用github上已有的开源项目<ul>
+<li>git clone <a href="https://github.com/wzhe06/ipdatabase.git" target="_blank" rel="noopener">https://github.com/wzhe06/ipdatabase.git</a></li>
+<li>编译下载的项目：mvn clean package -DskipTests</li>
+<li>安装jar包到自己的maven仓库</li>
+</ul>
+</li>
+<li>安装好后我们可以直接在项目pom里引入</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.ggstar&lt;/groupId&gt;
+    &lt;artifactId&gt;ipdatabase&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+    &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+    &lt;version&gt;3.14&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+    &lt;artifactId&gt;poi&lt;/artifactId&gt;
+    &lt;version&gt;3.14&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>我们还需要把它resources下的ipDatabase.csv和ipRegion.xlsx也放进我们项目的resources中</li>
+<li>编写获取城市的方法</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * IP解析工具类
+  */
+object IpUtils {
+
+  def getCity(ip:String) = {
+    IpHelper.findRegionByIp(ip)
+  }
+}
+</code></pre><ul>
+<li>把刚才剩下的部分补全</li>
+</ul>
+<pre><code>val city = IpUtils.getCity(ip)
+</code></pre><ul>
+<li>编写清洗方法</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 使用Spark完成我们的数据清洗操作
+  */
+object SparkStatCleanJob {
+
+  def main(args: Array[String]): Unit = {
+
+    val spark = SparkSession.builder().appName(&quot;SparkStatCleanJob&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    val accessRDD = spark.sparkContext.textFile(&quot;D:/access.log&quot;)
+//    accessRDD.take(10).foreach(println)
+
+    // RDD ==&gt; DF
+    val accessDF = spark.createDataFrame(accessRDD.map(x =&gt; AccessConvertUtil.parseLog(x)),
+      AccessConvertUtil.struct)
+
+    accessDF.printSchema()
+    accessDF.show(false)
+
+    spark.stop()
+  }
+}
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>root
+ |-- url: string (nullable = true)
+ |-- cmsType: string (nullable = true)
+ |-- cmsId: long (nullable = true)
+ |-- traffic: long (nullable = true)
+ |-- ip: string (nullable = true)
+ |-- city: string (nullable = true)
+ |-- time: string (nullable = true)
+ |-- day: string (nullable = true)
+
++-------------------------------+-------+-----+-------+-------------+----+-------------------+--------+
+|url                            |cmsType|cmsId|traffic|ip           |city|time               |day     |
++-------------------------------+-------+-----+-------+-------------+----+-------------------+--------+
+|http://www.imooc.com/video/8701|video  |8701 |54     |106.39.41.166|北京市 |2016-11-10 00:01:02|20161110|
++-------------------------------+-------+-----+-------+-------------+----+-------------------+--------+
+</code></pre><h3 id="5-数据清洗存储到目标地址"><a href="#5-数据清洗存储到目标地址" class="headerlink" title="5. 数据清洗存储到目标地址"></a>5. 数据清洗存储到目标地址</h3><pre><code>//        accessDF.printSchema()
+//        accessDF.show(false)
+
+    accessDF.coalesce(1).write.format(&quot;parquet&quot;).mode(SaveMode.Overwrite)
+      .partitionBy(&quot;day&quot;).save(&quot;D:/clean&quot;)
+</code></pre><ul>
+<li>调优点：<ul>
+<li>控制文件输出的大小： coalesce</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-功能实现"><a href="#3-功能实现" class="headerlink" title="3. 功能实现"></a>3. 功能实现</h2><ul>
+<li>按照需求完成统计信息并将统计结果入库<ul>
+<li>使用DataFrame API完成统计分析</li>
+<li>使用SQL API完成统计分析</li>
+<li>将统计分析结果写入到MySQL数据库</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-统计功能实现"><a href="#1-统计功能实现" class="headerlink" title="1. 统计功能实现"></a>1. 统计功能实现</h3><ul>
+<li>我们通过两种方式来实现</li>
+<li>使用DataFrame的方式进行统计</li>
+</ul>
+<pre><code>/**
+* 按照地市进行统计TopN课程
+*/
+def videoAccessTopNStat(spark: SparkSession, accessDF: DataFrame, day: String): Unit = {
+
+    /**
+      * 使用DataFrame的方式进行统计
+      */
+    import spark.implicits._
+
+    val videoAccessTopNDF = accessDF.filter($&quot;day&quot; === day &amp;&amp; $&quot;cmsType&quot; === &quot;video&quot;)
+      .groupBy(&quot;day&quot;, &quot;cmsId&quot;).agg(count(&quot;cmsId&quot;).as(&quot;times&quot;)).orderBy($&quot;times&quot;.desc)
+
+    videoAccessTopNDF.show(false)
+}
+</code></pre><ul>
+<li>使用SQL的方式进行统计</li>
+</ul>
+<pre><code>/**
+* 按照地市进行统计TopN课程
+*/
+def videoAccessTopNStat(spark: SparkSession, accessDF: DataFrame, day: String): Unit = {
+
+    /**
+      * 使用SQL的方式进行统计
+      */
+    accessDF.createOrReplaceTempView(&quot;access_logs&quot;)
+    val videoAccessTopNDF = spark.sql(&quot;select day,cmsId, count(1) as times from access_logs &quot; +
+      &quot;where day=&apos;20180507&apos; and cmsType=&apos;video&apos; &quot; +
+      &quot;group by day,cmsId order by times desc&quot;)
+
+    videoAccessTopNDF.show(false)
+}
+</code></pre><ul>
+<li>以下是main函数</li>
+</ul>
+<pre><code>def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder().appName(&quot;TopNStatJob&quot;)
+      .config(&quot;spark.sql.sources.partitionColumnTypeInference.enabled&quot;, &quot;false&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    val accessDF = spark.read.format(&quot;parquet&quot;).load(&quot;D:/clean&quot;)
+
+    //    accessDF.printSchema()
+    //    accessDF.show(false)
+
+    val day = &quot;20180507&quot;
+
+    // 最受欢迎的TopN课程
+    videoAccessTopNStat(spark, accessDF, day)
+
+    spark.stop()
+}
+</code></pre><ul>
+<li>调优点：<ul>
+<li>分区字段的数据类型调整：spark.sql.sources.partitionColumnTypeInference.enabled</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-MySQL工具类开发"><a href="#2-MySQL工具类开发" class="headerlink" title="2. MySQL工具类开发"></a>2. MySQL工具类开发</h3><ul>
+<li>既然我们要把数据写到mysql中，首先编写一个工具类</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * MySQL操作工具类
+  */
+object MySQLUtils {
+
+  /**
+    * 获取数据库连接
+    */
+  def getConnection() = {
+    DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/sparksql?user=root&amp;password=000000&quot;)
+  }
+
+  /**
+    * 释放数据库连接等资源
+    * @param connection
+    * @param pstmt
+    */
+  def release(connection: Connection, pstmt: PreparedStatement): Unit = {
+    try {
+      if (pstmt != null) {
+        pstmt.close()
+      }
+    } catch {
+      case e: Exception =&gt; e.printStackTrace()
+    } finally {
+      if (connection != null) {
+        connection.close()
+      }
+    }
+  }
+
+  def main(args: Array[String]) {
+    println(getConnection())
+  }
+}
+</code></pre><h3 id="3-需求一统计结果写入到MySQL"><a href="#3-需求一统计结果写入到MySQL" class="headerlink" title="3. 需求一统计结果写入到MySQL"></a>3. 需求一统计结果写入到MySQL</h3><pre><code>create table day_video_access_topn_stat (
+    day varchar(8) not null,
+    cms_id bigint(10) not null,
+    times bigint(10) not null,
+    primary key (day, cms_id)
+);
+</code></pre><ul>
+<li>创建一个模型类</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 每天课程访问次数实体类
+  */
+case class DayVideoAccessStat(day: String, cmsId: Long, times: Long)
+</code></pre><ul>
+<li>编写DAO层代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * 各个维度统计的DAO操作
+  */
+object StatDAO {
+
+  /**
+    * 批量保存DayVideoAccessStat到数据库
+    */
+  def insertDayVideoAccessTopN(list: ListBuffer[DayVideoAccessStat]): Unit = {
+
+    var connection: Connection = null
+    var pstmt: PreparedStatement = null
+
+    try {
+      connection = MySQLUtils.getConnection()
+
+      connection.setAutoCommit(false) //设置手动提交
+
+      val sql = &quot;insert into day_video_access_topn_stat(day, cms_id, times) values (?,?,?) &quot;
+      pstmt = connection.prepareStatement(sql)
+
+      for (ele &lt;- list) {
+        pstmt.setString(1, ele.day)
+        pstmt.setLong(2, ele.cmsId)
+        pstmt.setLong(3, ele.times)
+
+        pstmt.addBatch()
+      }
+
+      pstmt.executeBatch() // 执行批量处理
+      connection.commit() //手工提交
+    } catch {
+      case e: Exception =&gt; e.printStackTrace()
+    } finally {
+      MySQLUtils.release(connection, pstmt)
+    }
+  }
+}
+</code></pre><ul>
+<li>调优点：<ul>
+<li>批量插入数据库数据，提交使用batch操作</li>
+</ul>
+</li>
+<li>完成插入操作</li>
+</ul>
+<pre><code>/**
+* 按照地市进行统计TopN课程
+*/
+def videoAccessTopNStat(spark: SparkSession, accessDF: DataFrame, day: String): Unit = {
+
+    /**
+      * 使用DataFrame的方式进行统计
+      */
+    import spark.implicits._
+
+    val videoAccessTopNDF = accessDF.filter($&quot;day&quot; === day &amp;&amp; $&quot;cmsType&quot; === &quot;video&quot;)
+      .groupBy(&quot;day&quot;, &quot;cmsId&quot;).agg(count(&quot;cmsId&quot;).as(&quot;times&quot;)).orderBy($&quot;times&quot;.desc)
+
+    videoAccessTopNDF.show(false)
+
+    /**
+      * 将统计结果写入到MySQL中
+      */
+    try {
+      videoAccessTopNDF.foreachPartition(partitionOfRecords =&gt; {
+        val list = new ListBuffer[DayVideoAccessStat]
+
+        partitionOfRecords.foreach(info =&gt; {
+          val day = info.getAs[String](&quot;day&quot;)
+          val cmsId = info.getAs[Long](&quot;cmsId&quot;)
+          val times = info.getAs[Long](&quot;times&quot;)
+
+          /**
+            * 不建议大家在此处进行数据库的数据插入
+            */
+          list.append(DayVideoAccessStat(day, cmsId, times))
+        })
+
+        StatDAO.insertDayVideoAccessTopN(list)
+      })
+    } catch {
+      case e:Exception =&gt; e.printStackTrace()
+    }
+}
+</code></pre><ul>
+<li>执行后我们发现数据库中已经有了数据</li>
+</ul>
+<h3 id="4-需求二功能实现"><a href="#4-需求二功能实现" class="headerlink" title="4. 需求二功能实现"></a>4. 需求二功能实现</h3><ul>
+<li>需求二：按地市统计imooc主站最受欢迎的Top N课程</li>
+</ul>
+<pre><code>create table day_video_city_access_topn_stat (
+    day varchar(8) not null,
+    cms_id bigint(10) not null,
+    city varchar(20) not null,
+    times bigint(10) not null,
+    times_rank int not null,
+    primary key (day, cms_id, city)
+);
+</code></pre><ul>
+<li>创建一个实体类</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  */
+case class DayCityVideoAccessStat(day:String, cmsId:Long, city:String,times:Long,timesRank:Int)
+</code></pre><ul>
+<li>在DAO层增加方法</li>
+</ul>
+<pre><code>/**
+* 批量保存DayCityVideoAccessStat到数据库
+*/
+def insertDayCityVideoAccessTopN(list: ListBuffer[DayCityVideoAccessStat]): Unit = {
+
+    var connection: Connection = null
+    var pstmt: PreparedStatement = null
+
+    try {
+      connection = MySQLUtils.getConnection()
+
+      connection.setAutoCommit(false) //设置手动提交
+
+      val sql = &quot;insert into day_video_city_access_topn_stat(day,cms_id,city,times,times_rank) values (?,?,?,?,?) &quot;
+      pstmt = connection.prepareStatement(sql)
+
+      for (ele &lt;- list) {
+        pstmt.setString(1, ele.day)
+        pstmt.setLong(2, ele.cmsId)
+        pstmt.setString(3, ele.city)
+        pstmt.setLong(4, ele.times)
+        pstmt.setInt(5, ele.timesRank)
+        pstmt.addBatch()
+      }
+
+      pstmt.executeBatch() // 执行批量处理
+      connection.commit() //手工提交
+    } catch {
+      case e: Exception =&gt; e.printStackTrace()
+    } finally {
+      MySQLUtils.release(connection, pstmt)
+    }
+}
+</code></pre><ul>
+<li>在spark作业中将统计结果写到数据库中</li>
+</ul>
+<pre><code>/**
+* 按照地市进行统计TopN课程
+*/
+def cityAccessTopNStat(spark: SparkSession, accessDF:DataFrame, day:String): Unit = {
+    import spark.implicits._
+
+    val cityAccessTopNDF = accessDF.filter($&quot;day&quot; === day &amp;&amp; $&quot;cmsType&quot; === &quot;video&quot;)
+      .groupBy(&quot;day&quot;,&quot;city&quot;,&quot;cmsId&quot;)
+      .agg(count(&quot;cmsId&quot;).as(&quot;times&quot;))
+
+    //cityAccessTopNDF.show(false)
+
+    // Window函数在Spark SQL的使用
+
+    val top3DF = cityAccessTopNDF.select(
+      cityAccessTopNDF(&quot;day&quot;),
+      cityAccessTopNDF(&quot;city&quot;),
+      cityAccessTopNDF(&quot;cmsId&quot;),
+      cityAccessTopNDF(&quot;times&quot;),
+      row_number().over(Window.partitionBy(cityAccessTopNDF(&quot;city&quot;))
+        .orderBy(cityAccessTopNDF(&quot;times&quot;).desc)
+      ).as(&quot;times_rank&quot;)
+    ).filter(&quot;times_rank &lt;=3&quot;) //.show(false)  //Top3
+
+    /**
+      * 将统计结果写入到MySQL中
+      */
+    try {
+      top3DF.foreachPartition(partitionOfRecords =&gt; {
+        val list = new ListBuffer[DayCityVideoAccessStat]
+
+        partitionOfRecords.foreach(info =&gt; {
+          val day = info.getAs[String](&quot;day&quot;)
+          val cmsId = info.getAs[Long](&quot;cmsId&quot;)
+          val city = info.getAs[String](&quot;city&quot;)
+          val times = info.getAs[Long](&quot;times&quot;)
+          val timesRank = info.getAs[Int](&quot;times_rank&quot;)
+          list.append(DayCityVideoAccessStat(day, cmsId, city, times, timesRank))
+        })
+
+        StatDAO.insertDayCityVideoAccessTopN(list)
+      })
+    } catch {
+      case e:Exception =&gt; e.printStackTrace()
+    }
+}
+</code></pre><h3 id="5-需求三统计功能实现"><a href="#5-需求三统计功能实现" class="headerlink" title="5. 需求三统计功能实现"></a>5. 需求三统计功能实现</h3><ul>
+<li><p>需求三：按流量统计imooc主站最受欢迎的Top N课程</p>
+<p>  create table day_video_traffics_topn_stat (</p>
+<pre><code>day varchar(8) not null,
+cms_id bigint(10) not null,
+traffics bigint(20) not null,
+primary key (day, cms_id)
+</code></pre><p>  );</p>
+</li>
+<li><p>创建一个模型类</p>
+</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  */
+case class DayVideoTrafficsStat(day:String,cmsId:Long,traffics:Long)
+</code></pre><ul>
+<li>编写DAO层代码</li>
+</ul>
+<pre><code>/**
+* 批量保存DayVideoTrafficsStat到数据库
+*/
+def insertDayVideoTrafficsAccessTopN(list: ListBuffer[DayVideoTrafficsStat]): Unit = {
+
+    var connection: Connection = null
+    var pstmt: PreparedStatement = null
+
+    try {
+      connection = MySQLUtils.getConnection()
+
+      connection.setAutoCommit(false) //设置手动提交
+
+      val sql = &quot;insert into day_video_traffics_topn_stat(day,cms_id,traffics) values (?,?,?) &quot;
+      pstmt = connection.prepareStatement(sql)
+
+      for (ele &lt;- list) {
+        pstmt.setString(1, ele.day)
+        pstmt.setLong(2, ele.cmsId)
+        pstmt.setLong(3, ele.traffics)
+        pstmt.addBatch()
+      }
+
+      pstmt.executeBatch() // 执行批量处理
+      connection.commit() //手工提交
+    } catch {
+      case e: Exception =&gt; e.printStackTrace()
+    } finally {
+      MySQLUtils.release(connection, pstmt)
+    }
+}
+</code></pre><ul>
+<li>在spark作业中将统计结果写到数据库中</li>
+</ul>
+<pre><code>/**
+* 按照流量进行统计
+*/
+def videoTrafficsTopNStat(spark: SparkSession, accessDF:DataFrame, day:String): Unit = {
+    import spark.implicits._
+
+    val cityAccessTopNDF = accessDF.filter($&quot;day&quot; === day &amp;&amp; $&quot;cmsType&quot; === &quot;video&quot;)
+      .groupBy(&quot;day&quot;,&quot;cmsId&quot;).agg(sum(&quot;traffic&quot;).as(&quot;traffics&quot;))
+      .orderBy($&quot;traffics&quot;.desc)
+
+    /**
+      * 将统计结果写入到MySQL中
+      */
+    try {
+      cityAccessTopNDF.foreachPartition(partitionOfRecords =&gt; {
+        val list = new ListBuffer[DayVideoTrafficsStat]
+
+        partitionOfRecords.foreach(info =&gt; {
+          val day = info.getAs[String](&quot;day&quot;)
+          val cmsId = info.getAs[Long](&quot;cmsId&quot;)
+          val traffics = info.getAs[Long](&quot;traffics&quot;)
+          list.append(DayVideoTrafficsStat(day, cmsId,traffics))
+        })
+
+        StatDAO.insertDayVideoTrafficsAccessTopN(list)
+      })
+    } catch {
+      case e:Exception =&gt; e.printStackTrace()
+    }
+}
+</code></pre><h3 id="6-删除指定日期已有的数据"><a href="#6-删除指定日期已有的数据" class="headerlink" title="6. 删除指定日期已有的数据"></a>6. 删除指定日期已有的数据</h3><ul>
+<li>到现在为止我们已经把三个功能开发完了，但我们现在每执行一次方法之前，应该把当天的数据删除掉</li>
+</ul>
+<pre><code>/**
+* 删除指定日期的数据
+*/
+def deleteData(day: String): Unit = {
+
+    val tables = Array(&quot;day_video_access_topn_stat&quot;,
+      &quot;day_video_city_access_topn_stat&quot;,
+      &quot;day_video_traffics_topn_stat&quot;)
+
+    var connection:Connection = null
+    var pstmt:PreparedStatement = null
+
+    try{
+      connection = MySQLUtils.getConnection()
+
+      for(table &lt;- tables) {
+        // delete from table ....
+        val deleteSQL = s&quot;delete from $table where day = ?&quot;
+        pstmt = connection.prepareStatement(deleteSQL)
+        pstmt.setString(1, day)
+        pstmt.executeUpdate()
+      }
+    }catch {
+      case e:Exception =&gt; e.printStackTrace()
+    } finally {
+      MySQLUtils.release(connection, pstmt)
+    }
+}
+</code></pre><ul>
+<li>然后在每次执行前，执行这个删除方法</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/7.
+  * TopN统计Spark作业
+  */
+object TopNStatJob {
+
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder().appName(&quot;TopNStatJob&quot;)
+      .config(&quot;spark.sql.sources.partitionColumnTypeInference.enabled&quot;, &quot;false&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    val accessDF = spark.read.format(&quot;parquet&quot;).load(&quot;D:/clean&quot;)
+
+    val day = &quot;20180507&quot;
+
+    StatDAO.deleteData(day)
+
+    // 最受欢迎的TopN课程
+    videoAccessTopNStat(spark, accessDF, day)
+
+    // 按照地市进行统计TopN课程
+    cityAccessTopNStat(spark, accessDF, day)
+
+    // 按照流量进行统计
+    videoTrafficsTopNStat(spark, accessDF, day)
+
+    spark.stop()
+  }
+}
+</code></pre><h3 id="9-ECharts图表展示"><a href="#9-ECharts图表展示" class="headerlink" title="9. ECharts图表展示"></a>9. ECharts图表展示</h3><ul>
+<li>我们之前的两个大数据项目都是使用了springboot进行的前端可视化，这次因为项目比较老，使用了servlet，编码也不规范，不过Java Web不是主要学习内容，我也不想自己重构这个项目了，直接照样编程</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/8.
+ */
+public class VideoAccessTopNServlet extends HttpServlet{
+
+    private VideoAccessTopNDAO dao;
+
+    @Override
+    public void init() throws ServletException {
+        dao = new VideoAccessTopNDAO();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String day = req.getParameter(&quot;day&quot;);
+
+        List&lt;VideoAccessTopN&gt; results =  dao.query(day);
+        JSONArray json = JSONArray.fromObject(results);
+
+        resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+
+        PrintWriter writer = resp.getWriter();
+        writer.println(json);
+        writer.flush();
+        writer.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
+}
+</code></pre><ul>
+<li>编写数据层</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/8.
+ */
+public class VideoAccessTopNDAO {
+
+
+    static Map&lt;String,String&gt; courses = new HashMap&lt;String,String&gt;();
+    static {
+        courses.put(&quot;8701&quot;, &quot;MySQL优化&quot;);
+        courses.put(&quot;8702&quot;, &quot;神经网络&quot;);
+        courses.put(&quot;8703&quot;, &quot;Swift&quot;);
+        courses.put(&quot;8709&quot;, &quot;机器学习&quot;);
+    }
+
+    /**
+     * 根据课程编号查询课程名称
+     */
+    public String getCourseName(String id) {
+        return courses.get(id);
+    }
+
+
+    /**
+     * 根据day查询当天的最受欢迎的Top5课程
+     * @param day
+     */
+    public List&lt;VideoAccessTopN&gt; query(String day) {
+        List&lt;VideoAccessTopN&gt; list = new ArrayList&lt;VideoAccessTopN&gt;();
+
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        try {
+            connection = MySQLUtils.getConnection();
+            String sql = &quot;select cms_id ,times  from  day_video_access_topn_stat where day =? order by times desc limit 5&quot;;
+            psmt = connection.prepareStatement(sql);
+            psmt.setString(1, day);
+
+            rs = psmt.executeQuery();
+
+            VideoAccessTopN domain = null;
+            while(rs.next()) {
+                domain = new VideoAccessTopN();
+                /**
+                 * TODO... 在页面上应该显示的是课程名称，而我们此时拿到的是课程编号
+                 *
+                 * 如何根据课程编号去获取课程名称呢？
+                 * 编号和名称是有一个对应关系的，一般是存放在关系型数据库
+                 */
+                domain.setName(getCourseName(rs.getLong(&quot;cms_id&quot;)+&quot;&quot;));
+                domain.setValue(rs.getLong(&quot;times&quot;));
+
+                list.add(domain);
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            MySQLUtils.release(connection, psmt, rs);
+        }
+        return list;
+    }
+}
+</code></pre><ul>
+<li>编写一个数据库操作类</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/8.
+ */
+public class MySQLUtils {
+
+    private static final String USERNAME = &quot;root&quot;;
+
+    private static final String PASSWORD = &quot;000000&quot;;
+
+    private static final String DRIVERCLASS = &quot;com.mysql.jdbc.Driver&quot;;
+
+    private static final String URL = &quot;jdbc:mysql://localhost:3306/sparksql&quot;;
+
+    /**
+     * 获取数据库连接
+     */
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName(DRIVERCLASS);
+            connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return connection;
+    }
+
+    /**
+     * 释放资源
+     */
+    public static void release(Connection connection, PreparedStatement pstmt, ResultSet rs) {
+        if(rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getConnection());
+    }
+}
+</code></pre><ul>
+<li>编写一个实体类</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/5/8.
+ */
+public class VideoAccessTopN {
+
+    private String name;
+    private long value ;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getValue() {
+        return value;
+    }
+
+    public void setValue(long value) {
+        this.value = value;
+    }
+}
+</code></pre><ul>
+<li>编写html使用echarts展示数据</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;主站最受欢迎的TopN课程&lt;/title&gt;
+
+    &lt;!-- 引入 ECharts 文件 --&gt;
+    &lt;script src=&quot;js/echarts.min.js&quot;&gt;&lt;/script&gt;
+    &lt;SCRIPT src=&quot;js/jquery.js&quot;&gt;&lt;/SCRIPT&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;
+&lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(&apos;main&apos;));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title : {
+            text: &apos;主站最受欢迎的TopN课程&apos;,
+            x:&apos;center&apos;
+        },
+        tooltip : {
+            trigger: &apos;item&apos;,
+            formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
+        },
+        legend: {
+            orient: &apos;vertical&apos;,
+            left: &apos;left&apos;,
+            data: []
+        },
+        series : [
+            {
+                name: &apos;访问次数&apos;,
+                type: &apos;pie&apos;,
+                radius : &apos;55%&apos;,
+                center: [&apos;50%&apos;, &apos;60%&apos;],
+                data:(function(){
+                    var courses = [];
+                    $.ajax({
+                        type:&quot;GET&quot;,
+                        url:&quot;/stat?day=20180507&quot;,
+                        dataType:&apos;json&apos;,
+                        async:false,
+                        success:function(result) {
+                            for(var i=0;i&lt;result.length; i++){
+                                courses.push({&quot;value&quot;: result[i].value,&quot;name&quot;:result[i].name});
+                            }
+                        }
+                    });
+                    return courses;
+                })(),
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: &apos;rgba(0, 0, 0, 0.5)&apos;
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>查看结果<a href="http://localhost:8080/topn.html" target="_blank" rel="noopener">http://localhost:8080/topn.html</a></li>
+</ul>
+<p><img src="http://oseihavwm.bkt.clouddn.com/SparkSQL%E5%8F%AF%E8%A7%86%E5%8C%96.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="4-功能调优"><a href="#4-功能调优" class="headerlink" title="4. 功能调优"></a>4. 功能调优</h2><h3 id="1-使用Zeppelin进行统计结果的展示"><a href="#1-使用Zeppelin进行统计结果的展示" class="headerlink" title="1. 使用Zeppelin进行统计结果的展示"></a>1. 使用Zeppelin进行统计结果的展示</h3><h3 id="2-Spark-on-YARN基础"><a href="#2-Spark-on-YARN基础" class="headerlink" title="2. Spark on YARN基础"></a>2. Spark on YARN基础</h3><p><strong>概述</strong></p>
+<ul>
+<li>Spark支持可插拔的集群管理模式</li>
+<li>在Spark中，支持4种运行模式：<ul>
+<li>Local：开发时使用</li>
+<li>Standalone： 是Spark自带的，如果一个集群是Standalone的话，那么就需要在多台机器上同时部署Spark环境</li>
+<li>YARN：建议大家在生产上使用该模式，统一使用YARN进行整个集群作业(MR，Spark)的资源调度</li>
+<li>Mesos</li>
+</ul>
+</li>
+<li>不管使用什么模式，Spark应用程序的代码是一模一样的，只需要在提交的时候通过–master参数来指定我们的运行模式即可</li>
+</ul>
+<p><strong>YARN模式</strong></p>
+<ul>
+<li>对于YARN而言，Spark Application仅仅是一个客户端而已</li>
+<li>Client模式<ul>
+<li>Driver运行在Client端(提交Spark作业的机器)</li>
+<li>Client会和请求到的Container进行通信来完成作业的调度和执行，Client是不能退出的</li>
+<li>日志信息会在控制台输出：便于我们测试</li>
+</ul>
+</li>
+<li>Cluster模式<ul>
+<li>Driver运行在ApplicationMaster中</li>
+<li>Client只要提交完作业之后就可以关掉，因为作业已经在YARN上运行了</li>
+<li>日志是在终端看不到的，因为日志是在Driver上，只能通过yarn logs -applicationIdapplication_id</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>我们使用以前使用过的PI的例子</li>
+<li>此处的yarn就是我们的yarn client模式。如果是yarn cluster模式的话，yarn-cluster</li>
+</ul>
+<pre><code>[thpffcj@thpffcj spark-2.2.0-bin-2.6.0-cdh5.7.0]$ ./bin/spark-submit \
+&gt; --class org.apache.spark.examples.SparkPi \
+&gt; --master yarn \
+&gt; --executor-memory 1G \
+&gt; --num-executors 1 \
+&gt; /home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/jars/spark-examples_2.11-2.2.0.jar \
+&gt; 4
+</code></pre><ul>
+<li>发现报错</li>
+</ul>
+<pre><code>Exception in thread &quot;main&quot; java.lang.Exception: When running with master &apos;yarn&apos; either HADOOP_CONF_DIR or YARN_CONF_DIR must be set in the environment.
+</code></pre><ul>
+<li>如果想运行在YARN之上，那么就必须要设置HADOOP_CONF_DIR或者是YARN_CONF_DIR<ul>
+<li>export HADOOP_CONF_DIR=/home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/etc/hadoop</li>
+<li>$SPARK_HOME/conf/spark-env.sh</li>
+</ul>
+</li>
+<li>我们直接在spark-env.sh中添加导出</li>
+</ul>
+<pre><code>export HADOOP_CONF_DIR=/home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/etc/hadoop
+</code></pre><ul>
+<li>重新启动</li>
+</ul>
+<pre><code>Pi is roughly 3.1394778486946215
+</code></pre><ul>
+<li>我们再来使用cluster模式</li>
+</ul>
+<pre><code>[thpffcj@thpffcj spark-2.2.0-bin-2.6.0-cdh5.7.0]$ ./bin/spark-submit \
+&gt; --class org.apache.spark.examples.SparkPi \
+&gt; --master yarn-cluster \
+&gt; --executor-memory 1G \
+&gt; --num-executors 1 \
+&gt; /home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/jars/spark-examples_2.11-2.2.0.jar \
+&gt; 4
+</code></pre><ul>
+<li>我们查看结果，applicationId是在输出结果中得到的</li>
+</ul>
+<pre><code>[thpffcj@thpffcj spark-2.2.0-bin-2.6.0-cdh5.7.0]$ yarn logs -applicationId application_1525865268260_0003
+
+Pi is roughly 3.1441278603196507
+</code></pre><h3 id="3-数据清洗作业运行到YARN上"><a href="#3-数据清洗作业运行到YARN上" class="headerlink" title="3. 数据清洗作业运行到YARN上"></a>3. 数据清洗作业运行到YARN上</h3><ul>
+<li>将我们的项目通过maven进行打包</li>
+<li>通过spark-submit方式提交</li>
+<li>我们首先重构一下项目</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/9.
+  * 使用Spark完成我们的数据清洗操作：运行在YARN之上
+  */
+object SparkStatCleanJobYARN {
+
+  def main(args: Array[String]) {
+
+    if(args.length !=2) {
+      println(&quot;Usage: SparkStatCleanJobYARN &lt;inputPath&gt; &lt;outputPath&gt;&quot;)
+      System.exit(1)
+    }
+
+    val Array(inputPath, outputPath) = args
+
+    val spark = SparkSession.builder().getOrCreate()
+
+    val accessRDD = spark.sparkContext.textFile(inputPath)
+
+    // RDD ==&gt; DF
+    val accessDF = spark.createDataFrame(accessRDD.map(x =&gt; AccessConvertUtil.parseLog(x)),
+      AccessConvertUtil.struct)
+
+    accessDF.coalesce(1).write.format(&quot;parquet&quot;).mode(SaveMode.Overwrite)
+      .partitionBy(&quot;day&quot;).save(outputPath)
+
+    spark.stop
+  }
+}
+</code></pre><ul>
+<li>重构统计方法</li>
+</ul>
+<h3 id="4-统计作业运行在YARN上"><a href="#4-统计作业运行在YARN上" class="headerlink" title="4. 统计作业运行在YARN上"></a>4. 统计作业运行在YARN上</h3><h3 id="5-性能优化之存储格式的选择"><a href="#5-性能优化之存储格式的选择" class="headerlink" title="5. 性能优化之存储格式的选择"></a>5. 性能优化之存储格式的选择</h3><h3 id="6-性能调优之压缩格式的选择"><a href="#6-性能调优之压缩格式的选择" class="headerlink" title="6. 性能调优之压缩格式的选择"></a>6. 性能调优之压缩格式的选择</h3><h3 id="7-性能优化之代码优化"><a href="#7-性能优化之代码优化" class="headerlink" title="7. 性能优化之代码优化"></a>7. 性能优化之代码优化</h3><h3 id="8-性能调优之参数优化"><a href="#8-性能调优之参数优化" class="headerlink" title="8. 性能调优之参数优化"></a>8. 性能调优之参数优化</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/08/Python-Machine-Learning-3/" style="float: left;">
+        ← 梯度下降法
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/04/System-Learning-Docker-1/">
+        Docker简介 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

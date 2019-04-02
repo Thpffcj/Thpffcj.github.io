@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>使用ZooKeeper Java API进行客户端开发 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-24T01:53:42.000Z" itemprop="datePublished">
+          2018-04-24
+      </time>
+    
+</span>
+                <h1>使用ZooKeeper Java API进行客户端开发</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-原生Java-API进行客户端开发"><a href="#1-原生Java-API进行客户端开发" class="headerlink" title="1. 原生Java API进行客户端开发"></a>1. 原生Java API进行客户端开发</h2><h3 id="1-建立客户端与zk服务端的连接"><a href="#1-建立客户端与zk服务端的连接" class="headerlink" title="1. 建立客户端与zk服务端的连接"></a>1. 建立客户端与zk服务端的连接</h3><pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class ZKConnect implements Watcher {
+
+    final static Logger log = LoggerFactory.getLogger(ZKConnect.class);
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public static void main(String[] args) throws Exception {
+        /**
+         * 客户端和zk服务端链接是一个异步的过程
+         * 当连接成功后后，客户端会收的一个watch通知
+         *
+         * 参数：
+         * connectString：连接服务器的ip字符串，
+         *         比如: &quot;192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181&quot;
+         *         可以是一个ip，也可以是多个ip，一个ip代表单机，多个ip代表集群
+         *         也可以在ip后加路径
+         * sessionTimeout：超时时间，心跳收不到了，那就超时
+         * watcher：通知事件，如果有对应的事件触发，则会收到一个通知；如果不需要，那就设置为null
+         * canBeReadOnly：可读，当这个物理机节点断开后，还是可以读到数据的，只是不能写，
+         *                            此时数据被读取到的可能是旧数据，此处建议设置为false，不推荐使用
+         * sessionId：会话的id
+         * sessionPasswd：会话密码    当会话丢失后，可以依据 sessionId 和 sessionPasswd 重新获取会话
+         */
+        ZooKeeper zk = new ZooKeeper(zkServerPath, timeout, new ZKConnect());
+
+        log.warn(&quot;客户端开始连接zookeeper服务器...&quot;);
+        log.warn(&quot;连接状态：{}&quot;, zk.getState());
+
+        new Thread().sleep(3000);
+
+        log.warn(&quot;连接状态：{}&quot;, zk.getState());
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+        log.warn(&quot;接受到watch通知：{}&quot;, event);
+    }
+}
+</code></pre><ul>
+<li>运行之前我们需要把前面学习的集群配置注释掉，然后启动虚拟机上的zookeeper</li>
+<li>运行main方法</li>
+</ul>
+<pre><code>2018-04-24 19:17:03,769 [main] [cn.edu.nju.zk.ZKConnect.main(ZKConnect.java:40)] - [WARN] 客户端开始连接zookeeper服务器...
+2018-04-24 19:17:03,773 [main] [cn.edu.nju.zk.ZKConnect.main(ZKConnect.java:41)] - [WARN] 连接状态：CONNECTING
+2018-04-24 19:17:03,800 [main-EventThread] [cn.edu.nju.zk.ZKConnect.process(ZKConnect.java:50)] - [WARN] 接受到watch通知：WatchedEvent state:SyncConnected type:None path:null
+2018-04-24 19:17:08,774 [main] [cn.edu.nju.zk.ZKConnect.main(ZKConnect.java:45)] - [WARN] 连接状态：CONNECTED
+</code></pre><ul>
+<li>这里我们信息很少是因为把日志级别设置为了warn</li>
+</ul>
+<pre><code>log4j.rootLogger=WARN,console
+
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.encoding=UTF-8
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%l] - [%p] %m%n
+</code></pre><h3 id="2-会话连接与恢复"><a href="#2-会话连接与恢复" class="headerlink" title="2. 会话连接与恢复"></a>2. 会话连接与恢复</h3><pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class ZKConnectSessionWatcher implements Watcher {
+
+    final static Logger log = LoggerFactory.getLogger(ZKConnectSessionWatcher.class);
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public static void main(String[] args) throws Exception {
+
+        ZooKeeper zk = new ZooKeeper(zkServerPath, timeout, new ZKConnectSessionWatcher());
+
+        long sessionId = zk.getSessionId();
+        String ssid = &quot;0x&quot; + Long.toHexString(sessionId);
+        System.out.println(ssid);
+        byte[] sessionPassword = zk.getSessionPasswd();
+
+        log.warn(&quot;客户端开始连接zookeeper服务器...&quot;);
+        log.warn(&quot;连接状态：{}&quot;, zk.getState());
+        new Thread().sleep(1000);
+        log.warn(&quot;连接状态：{}&quot;, zk.getState());
+
+        new Thread().sleep(200);
+
+        // 开始会话重连
+        log.warn(&quot;开始会话重连...&quot;);
+
+        ZooKeeper zkSession = new ZooKeeper(zkServerPath,
+                timeout,
+                new ZKConnectSessionWatcher(),
+                sessionId,
+                sessionPassword);
+        log.warn(&quot;重新连接状态zkSession：{}&quot;, zkSession.getState());
+        new Thread().sleep(1000);
+        log.warn(&quot;重新连接状态zkSession：{}&quot;, zkSession.getState());
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+        log.warn(&quot;接受到watch通知：{}&quot;, event);
+    }
+}
+</code></pre><ul>
+<li>运行main方法</li>
+</ul>
+<pre><code>0x0
+2018-04-24 19:34:28,505 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:28)] - [WARN] 客户端开始连接zookeeper服务器...
+2018-04-24 19:34:28,509 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:29)] - [WARN] 连接状态：CONNECTING
+2018-04-24 19:34:28,526 [main-EventThread] [cn.edu.nju.zk.ZKConnectSessionWatcher.process(ZKConnectSessionWatcher.java:50)] - [WARN] 接受到watch通知：WatchedEvent state:SyncConnected type:None path:null
+2018-04-24 19:34:29,510 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:31)] - [WARN] 连接状态：CONNECTED
+2018-04-24 19:34:29,711 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:36)] - [WARN] 开始会话重连...
+2018-04-24 19:34:29,714 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:43)] - [WARN] 重新连接状态zkSession：CONNECTING
+2018-04-24 19:34:29,732 [main-EventThread] [cn.edu.nju.zk.ZKConnectSessionWatcher.process(ZKConnectSessionWatcher.java:50)] - [WARN] 接受到watch通知：WatchedEvent state:SyncConnected type:None path:null
+2018-04-24 19:34:30,715 [main] [cn.edu.nju.zk.ZKConnectSessionWatcher.main(ZKConnectSessionWatcher.java:45)] - [WARN] 重新连接状态zkSession：CONNECTED
+</code></pre><ul>
+<li>通过sessionId和sessionPassword就可以实现我们的会话重连</li>
+</ul>
+<h3 id="3-节点的增删改查"><a href="#3-节点的增删改查" class="headerlink" title="3. 节点的增删改查"></a>3. 节点的增删改查</h3><ul>
+<li>命令行有的操作，Java的API都可以实现</li>
+</ul>
+<p><strong>新增节点</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class ZKNodeOperator implements Watcher {
+
+    private ZooKeeper zookeeper = null;
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public ZKNodeOperator() {}
+
+    public ZKNodeOperator(String connectString) {
+        try {
+            zookeeper = new ZooKeeper(connectString, timeout, new ZKNodeOperator());
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (zookeeper != null) {
+                try {
+                    zookeeper.close();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @Title: ZKOperatorDemo.java
+     * @Description: 创建zk节点
+     */
+    public void createZKNode(String path, byte[] data, List&lt;ACL&gt; acls) {
+
+        String result = &quot;&quot;;
+        try {
+            /**
+             * 同步或者异步创建节点，都不支持子节点的递归创建，异步有一个callback函数
+             * 参数：
+             * path：创建的路径
+             * data：存储的数据的byte[]
+             * acl：控制权限策略
+             *             Ids.OPEN_ACL_UNSAFE --&gt; world:anyone:cdrwa
+             *             CREATOR_ALL_ACL --&gt; auth:user:password:cdrwa
+             * createMode：节点类型, 是一个枚举
+             *             PERSISTENT：持久节点
+             *             PERSISTENT_SEQUENTIAL：持久顺序节点
+             *             EPHEMERAL：临时节点
+             *             EPHEMERAL_SEQUENTIAL：临时顺序节点
+             */
+            result = zookeeper.create(path, data, acls, CreateMode.PERSISTENT);
+
+//            String ctx = &quot;{&apos;create&apos;:&apos;success&apos;}&quot;;
+//            zookeeper.create(path, data, acls, CreateMode.PERSISTENT, new CreateCallBack(), ctx);
+
+            System.out.println(&quot;创建节点：\t&quot; + result + &quot;\t成功...&quot;);
+            new Thread().sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ZKNodeOperator zkServer = new ZKNodeOperator(zkServerPath);
+
+        // 创建zk节点
+        zkServer.createZKNode(&quot;/testnode&quot;, &quot;testnode&quot;.getBytes(), Ids.OPEN_ACL_UNSAFE);
+    }
+
+    public ZooKeeper getZookeeper() {
+        return zookeeper;
+    }
+    public void setZookeeper(ZooKeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+    }
+}
+</code></pre><ul>
+<li>运行main方法去创建节点</li>
+</ul>
+<pre><code>创建节点：    /testnode    成功...
+</code></pre><ul>
+<li>去虚拟机上查看结果</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 0] ls /
+[controller_epoch, brokers, zookeeper, data, testnode, thpffcj, admin, isr_change_notification, consumers, config, hbase]
+</code></pre><p><strong>修改节点</strong></p>
+<ul>
+<li>我们先查看需要修改数据的版本号</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] get /testnode
+testnode
+cZxid = 0x200000009
+ctime = Tue Apr 24 20:09:49 CST 2018
+mZxid = 0x200000009
+mtime = Tue Apr 24 20:09:49 CST 2018
+pZxid = 0x200000009
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 0
+</code></pre><ul>
+<li>编写修改数据方法</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    ZKNodeOperator zkServer = new ZKNodeOperator(zkServerPath);
+
+    /**
+     * 参数：
+     * path：节点路径
+     * data：数据
+     * version：数据状态
+     */
+    Stat status  = zkServer.getZookeeper().setData(&quot;/testnode&quot;, &quot;xyz&quot;.getBytes(), 0);
+    System.out.println(status.getVersion());
+}
+</code></pre><ul>
+<li>运行main方法并查看数据</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 3] get /testnode
+xyz
+cZxid = 0x200000009
+ctime = Tue Apr 24 20:09:49 CST 2018
+mZxid = 0x20000000c
+mtime = Tue Apr 24 20:22:25 CST 2018
+pZxid = 0x200000009
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+</code></pre><p><strong>删除节点</strong></p>
+<pre><code>public static void main(String[] args) throws Exception {
+    ZKNodeOperator zkServer = new ZKNodeOperator(zkServerPath);
+
+    String ctx = &quot;{&apos;delete&apos;:&apos;success&apos;}&quot;;
+    zkServer.getZookeeper().delete(&quot;/testnode&quot;, 1, new DeleteCallBack(), ctx);
+    Thread.sleep(2000);
+}
+</code></pre><ul>
+<li>这里我们演示一下异步操作，需要自己编写回调函数</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class DeleteCallBack implements AsyncCallback.VoidCallback {
+
+    @Override
+    public void processResult(int rc, String path, Object ctx) {
+        System.out.println(&quot;删除节点&quot; + path);
+        System.out.println((String)ctx);
+    }
+}
+</code></pre><ul>
+<li>执行main函数并到虚拟机查看结果</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 5] ls /
+[controller_epoch, brokers, zookeeper, data, thpffcj, admin, isr_change_notification, consumers, config, hbase]
+</code></pre><h3 id="4-CountDownLatch的使用"><a href="#4-CountDownLatch的使用" class="headerlink" title="4. CountDownLatch的使用"></a>4. CountDownLatch的使用</h3><ul>
+<li>它是一个计数器</li>
+<li>多用于多线程，可以暂停也可以继续</li>
+<li>.await()</li>
+<li>.countDown()</li>
+</ul>
+<h3 id="5-原生Java-API节点查询"><a href="#5-原生Java-API节点查询" class="headerlink" title="5. 原生Java API节点查询"></a>5. 原生Java API节点查询</h3><p><strong>获取节点数据</strong></p>
+<ul>
+<li>我们先去虚拟机查看一下数据</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] get /thpffcj
+123
+cZxid = 0x7f0
+ctime = Mon Apr 23 09:00:57 CST 2018
+mZxid = 0x7f0
+mtime = Mon Apr 23 09:00:57 CST 2018
+pZxid = 0x100000001
+cversion = 12
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 4
+</code></pre><ul>
+<li>编写获取节点代码</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ * zookeeper 获取节点数据的demo演示
+ */
+public class ZKGetNodeData implements Watcher {
+
+    private ZooKeeper zookeeper = null;
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+    private static Stat stat = new Stat();
+
+    public ZKGetNodeData() {}
+
+    public ZKGetNodeData(String connectString) {
+        try {
+            zookeeper = new ZooKeeper(connectString, timeout, new ZKGetNodeData());
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (zookeeper != null) {
+                try {
+                    zookeeper.close();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static CountDownLatch countDown = new CountDownLatch(1);
+
+    public static void main(String[] args) throws Exception {
+
+        ZKGetNodeData zkServer = new ZKGetNodeData(zkServerPath);
+
+        /**
+         * 参数：
+         * path：节点路径
+         * watch：true或者false，注册一个watch事件
+         * stat：状态
+         */
+        byte[] resByte = zkServer.getZookeeper().getData(&quot;/thpffcj&quot;, true, stat);
+        String result = new String(resByte);
+        System.out.println(&quot;当前值:&quot; + result);
+        countDown.await();
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+        try {
+            if(event.getType() == EventType.NodeDataChanged){
+                ZKGetNodeData zkServer = new ZKGetNodeData(zkServerPath);
+                byte[] resByte = zkServer.getZookeeper().getData(&quot;/thpffcj&quot;, false, stat);
+                String result = new String(resByte);
+                System.out.println(&quot;更改后的值:&quot; + result);
+                System.out.println(&quot;版本号变化dataVersion：&quot; + stat.getVersion());
+                countDown.countDown();
+            } else if(event.getType() == EventType.NodeCreated) {
+
+            } else if(event.getType() == EventType.NodeChildrenChanged) {
+
+            } else if(event.getType() == EventType.NodeDeleted) {
+
+            }
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ZooKeeper getZookeeper() {
+        return zookeeper;
+    }
+    public void setZookeeper(ZooKeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+}
+</code></pre><ul>
+<li>我们发现控制台输出了123，并且线程被挂起，正在等待监听事件</li>
+</ul>
+<pre><code>当前值:123
+</code></pre><ul>
+<li>我们现在去客户端修改数据</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] set /thpffcj abc
+cZxid = 0x7f0
+ctime = Mon Apr 23 09:00:57 CST 2018
+mZxid = 0x200000017
+mtime = Thu Apr 26 09:35:23 CST 2018
+pZxid = 0x100000001
+cversion = 12
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 4
+</code></pre><ul>
+<li>我们回到控制台发现事件监听已经接收到了</li>
+</ul>
+<pre><code>更改后的值:abc
+版本号变化dataVersion：1
+</code></pre><p><strong>获取子节点数据</strong></p>
+<ul>
+<li>查看子节点</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 3] ls /thpffcj
+[a, b, c, d]
+</code></pre><ul>
+<li>编写代码，这次我们使用异步调用</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ * zookeeper 获取子节点数据的demo演示
+ */
+public class ZKGetChildrenList implements Watcher {
+
+    private ZooKeeper zookeeper = null;
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public ZKGetChildrenList() {}
+
+    public ZKGetChildrenList(String connectString) {
+        try {
+            zookeeper = new ZooKeeper(connectString, timeout, new ZKGetChildrenList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (zookeeper != null) {
+                try {
+                    zookeeper.close();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static CountDownLatch countDown = new CountDownLatch(1);
+
+    public static void main(String[] args) throws Exception {
+
+        ZKGetChildrenList zkServer = new ZKGetChildrenList(zkServerPath);
+
+        // 异步调用
+        String ctx = &quot;{&apos;callback&apos;:&apos;ChildrenCallback&apos;}&quot;;
+//        zkServer.getZookeeper().getChildren(&quot;/thpffcj&quot;, true, new ChildrenCallBack(), ctx);
+        zkServer.getZookeeper().getChildren(&quot;/thpffcj&quot;, true, new Children2CallBack(), ctx);
+
+        countDown.await();
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+        try {
+            if(event.getType()==EventType.NodeChildrenChanged){
+                System.out.println(&quot;NodeChildrenChanged&quot;);
+                ZKGetChildrenList zkServer = new ZKGetChildrenList(zkServerPath);
+                List&lt;String&gt; strChildList = zkServer.getZookeeper().getChildren(event.getPath(), false);
+                for (String s : strChildList) {
+                    System.out.println(s);
+                }
+                countDown.countDown();
+            } else if(event.getType() == EventType.NodeCreated) {
+                System.out.println(&quot;NodeCreated&quot;);
+            } else if(event.getType() == EventType.NodeDataChanged) {
+                System.out.println(&quot;NodeDataChanged&quot;);
+            } else if(event.getType() == EventType.NodeDeleted) {
+                System.out.println(&quot;NodeDeleted&quot;);
+            }
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ZooKeeper getZookeeper() {
+        return zookeeper;
+    }
+    public void setZookeeper(ZooKeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+}
+</code></pre><ul>
+<li>需要编写自己的回调函数</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/24.
+ */
+public class Children2CallBack implements AsyncCallback.Children2Callback {
+
+    @Override
+    public void processResult(int rc, String path, Object ctx, List&lt;String&gt; children, Stat stat) {
+        for (String s : children) {
+            System.out.println(s);
+        }
+        System.out.println(&quot;ChildrenCallback:&quot; + path);
+        System.out.println((String)ctx);
+        System.out.println(stat.toString());
+    }
+}
+</code></pre><ul>
+<li>运行main函数我们发现可以异步获取信息</li>
+</ul>
+<pre><code>a
+b
+c
+d
+ChildrenCallback:/thpffcj
+{&apos;callback&apos;:&apos;ChildrenCallback&apos;}
+2032,8589934615,1524445257753,1524706523835,1,12,0,0,3,4,4294967297
+</code></pre><ul>
+<li>这里的stat其实就对应了我们在客户端输入stat得到的结果</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 4] get /thpffcj
+abc
+cZxid = 0x7f0
+ctime = Mon Apr 23 09:00:57 CST 2018
+mZxid = 0x200000017
+mtime = Thu Apr 26 09:35:23 CST 2018
+pZxid = 0x100000001
+cversion = 12
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 4
+</code></pre><ul>
+<li>接下来我们去触发监听事件</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 7] delete /thpffcj/b
+</code></pre><ul>
+<li>回到控制台查看信息</li>
+</ul>
+<pre><code>NodeChildrenChanged
+a
+c
+d
+</code></pre><p><strong>判断节点是否存在</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ * zookeeper 判断阶段是否存在demo
+ */
+public class ZKNodeExist implements Watcher {
+
+    private ZooKeeper zookeeper = null;
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public ZKNodeExist() {}
+
+    public ZKNodeExist(String connectString) {
+        try {
+            zookeeper = new ZooKeeper(connectString, timeout, new ZKNodeExist());
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (zookeeper != null) {
+                try {
+                    zookeeper.close();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static CountDownLatch countDown = new CountDownLatch(1);
+
+    public static void main(String[] args) throws Exception {
+
+        ZKNodeExist zkServer = new ZKNodeExist(zkServerPath);
+
+        /**
+         * 参数：
+         * path：节点路径
+         * watch：watch
+         */
+        Stat stat = zkServer.getZookeeper().exists(&quot;/thpffcj&quot;, true);
+        if (stat != null) {
+            System.out.println(&quot;查询的节点版本为dataVersion：&quot; + stat.getVersion());
+        } else {
+            System.out.println(&quot;该节点不存在...&quot;);
+        }
+
+        countDown.await();
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+        if (event.getType() == EventType.NodeCreated) {
+            System.out.println(&quot;节点创建&quot;);
+            countDown.countDown();
+        } else if (event.getType() == EventType.NodeDataChanged) {
+            System.out.println(&quot;节点数据改变&quot;);
+            countDown.countDown();
+        } else if (event.getType() == EventType.NodeDeleted) {
+            System.out.println(&quot;节点删除&quot;);
+            countDown.countDown();
+        }
+    }
+
+    public ZooKeeper getZookeeper() {
+        return zookeeper;
+    }
+    public void setZookeeper(ZooKeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+}
+</code></pre><ul>
+<li>直接运行</li>
+</ul>
+<pre><code>查询的节点版本为dataVersion：1
+</code></pre><h3 id="6-acl-的相关操作"><a href="#6-acl-的相关操作" class="headerlink" title="6. acl 的相关操作"></a>6. acl 的相关操作</h3><p><strong>任何人都可以访问</strong></p>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ * zookeeper 操作节点acl演示
+ */
+public class ZKNodeAcl implements Watcher {
+
+    private ZooKeeper zookeeper = null;
+
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+    public static final Integer timeout = 5000;
+
+    public ZKNodeAcl() {}
+
+    public ZKNodeAcl(String connectString) {
+        try {
+            zookeeper = new ZooKeeper(connectString, timeout, new ZKNodeAcl());
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (zookeeper != null) {
+                try {
+                    zookeeper.close();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void createZKNode(String path, byte[] data, List&lt;ACL&gt; acls) {
+
+        String result = &quot;&quot;;
+        try {
+            /**
+             * 同步或者异步创建节点，都不支持子节点的递归创建，异步有一个callback函数
+             * 参数：
+             * path：创建的路径
+             * data：存储的数据的byte[]
+             * acl：控制权限策略
+             *             Ids.OPEN_ACL_UNSAFE --&gt; world:anyone:cdrwa
+             *             CREATOR_ALL_ACL --&gt; auth:user:password:cdrwa
+             * createMode：节点类型, 是一个枚举
+             *             PERSISTENT：持久节点
+             *             PERSISTENT_SEQUENTIAL：持久顺序节点
+             *             EPHEMERAL：临时节点
+             *             EPHEMERAL_SEQUENTIAL：临时顺序节点
+             */
+            result = zookeeper.create(path, data, acls, CreateMode.PERSISTENT);
+            System.out.println(&quot;创建节点：&quot; + result + &quot; 成功...&quot;);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+        /**
+         * ======================  创建node start  ======================
+         */
+        // acl 任何人都可以访问
+        zkServer.createZKNode(&quot;/aclimooc&quot;, &quot;test&quot;.getBytes(), Ids.OPEN_ACL_UNSAFE);
+    }
+
+    public ZooKeeper getZookeeper() {
+        return zookeeper;
+    }
+    public void setZookeeper(ZooKeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+
+    @Override
+    public void process(WatchedEvent event) {
+
+    }
+}
+</code></pre><p><strong>自定义用户认证访问</strong></p>
+<ul>
+<li>修改main方法</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+
+    ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+    // 自定义用户认证访问
+    List&lt;ACL&gt; acls = new ArrayList&lt;ACL&gt;();
+    Id thpffcj1 = new Id(&quot;digest&quot;, AclUtils.getDigestUserPwd(&quot;thpffcj1:123456&quot;));
+    Id thpffcj2 = new Id(&quot;digest&quot;, AclUtils.getDigestUserPwd(&quot;thpffcj2:123456&quot;));
+    acls.add(new ACL(Perms.ALL, thpffcj1));
+    acls.add(new ACL(Perms.READ, thpffcj2));
+    acls.add(new ACL(Perms.DELETE | Perms.CREATE, thpffcj2));
+    zkServer.createZKNode(&quot;/aclthpffcj/testdigest&quot;, &quot;testdigest&quot;.getBytes(), acls);
+}
+</code></pre><ul>
+<li>因为是digest，我们需要一个加密方法</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+public class AclUtils {
+
+    public static String getDigestUserPwd(String id) throws Exception {
+        return DigestAuthenticationProvider.generateDigest(id);
+    }
+}
+</code></pre><ul>
+<li>运行main方法并去命令行查看</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 9] getAcl /aclthpffcj/testdigest
+&apos;digest,&apos;thpffcj1:p1/Z55ILORohvYF7QXyP6Dl2EgI=
+: cdrwa
+&apos;digest,&apos;thpffcj2:mhOaXeB2HZbXZ60XlfAB3McHzvU=
+: r
+&apos;digest,&apos;thpffcj2:mhOaXeB2HZbXZ60XlfAB3McHzvU=
+: cd
+</code></pre><ul>
+<li>编写代码测试权限</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+
+    ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+    // 注册过的用户必须通过addAuthInfo才能操作节点，参考命令行 addauth
+    zkServer.getZookeeper().addAuthInfo(&quot;digest&quot;, &quot;thpffcj2:123456&quot;.getBytes());
+    zkServer.createZKNode(&quot;/aclimooc/testdigest/childtest&quot;, &quot;childtest&quot;.getBytes(), Ids.CREATOR_ALL_ACL);
+}
+</code></pre><ul>
+<li>到命令行查看</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 10] ls /aclthpffcj/testdigest
+Authentication is not valid : /aclthpffcj/testdigest
+[zk: localhost:2181(CONNECTED) 11] addauth digest thpffcj2:123456
+[zk: localhost:2181(CONNECTED) 12] ls /aclthpffcj/testdigest
+[childtest]
+</code></pre><ul>
+<li>我们看一下是否能够设置值</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+
+    ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+    // 注册过的用户必须通过addAuthInfo才能操作节点，参考命令行 addauth
+    zkServer.getZookeeper().addAuthInfo(&quot;digest&quot;, &quot;thpffcj2:123456&quot;.getBytes());
+    zkServer.getZookeeper().setData(&quot;/aclthpffcj/testdigest&quot;, &quot;now&quot;.getBytes(), 0);
+}
+</code></pre><ul>
+<li>结果符合我们的预期，thpffcj2没有权限</li>
+</ul>
+<pre><code>Exception in thread &quot;main&quot; org.apache.zookeeper.KeeperException$NoAuthException: KeeperErrorCode = NoAuth for /aclthpffcj/testdigest
+    at org.apache.zookeeper.KeeperException.create(KeeperException.java:116)
+    at org.apache.zookeeper.KeeperException.create(KeeperException.java:54)
+    at org.apache.zookeeper.ZooKeeper.setData(ZooKeeper.java:1330)
+    at cn.edu.nju.zk.ZKNodeAcl.main(ZKNodeAcl.java:100)
+</code></pre><p><strong>ip权限</strong></p>
+<ul>
+<li><p>windows的ip地址可以通过ipconfig /all来查看</p>
+<p>  public static void main(String[] args) throws Exception {</p>
+<pre><code>ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+// ip方式的acl
+List&lt;ACL&gt; aclsIP = new ArrayList&lt;ACL&gt;();
+Id ipId1 = new Id(&quot;ip&quot;, &quot;114.212.242.15&quot;);
+aclsIP.add(new ACL(Perms.ALL, ipId1));
+zkServer.createZKNode(&quot;/aclthpffcj/iptest6&quot;, &quot;iptest&quot;.getBytes(), aclsIP);
+</code></pre><p>  }</p>
+</li>
+<li><p>我们发现命令行是没有权限的</p>
+</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 13] get /aclthpffcj/iptest
+Authentication is not valid : /aclthpffcj/iptest6
+</code></pre><ul>
+<li>我们通过本机是否可以访问呢</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+
+    ZKNodeAcl zkServer = new ZKNodeAcl(zkServerPath);
+
+    // 验证ip是否有权限
+    zkServer.getZookeeper().setData(&quot;/aclthpffcj/iptest&quot;, &quot;now&quot;.getBytes(), 0);
+    Stat stat = new Stat();
+    byte[] data = zkServer.getZookeeper().getData(&quot;/aclthpffcj/iptest&quot;, false, stat);
+    System.out.println(new String(data));
+    System.out.println(stat.getVersion());
+}
+</code></pre><ul>
+<li>运行main方法</li>
+</ul>
+<pre><code>now
+1
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-Apache-Curator客户端的使用"><a href="#2-Apache-Curator客户端的使用" class="headerlink" title="2. Apache Curator客户端的使用"></a>2. Apache Curator客户端的使用</h2><h3 id="1-curator简介与客户端之间的异同点"><a href="#1-curator简介与客户端之间的异同点" class="headerlink" title="1. curator简介与客户端之间的异同点"></a>1. curator简介与客户端之间的异同点</h3><p><strong>常用的ZK Java客户端</strong></p>
+<ul>
+<li>zk原生API</li>
+<li>zkclient</li>
+<li>Apache curator</li>
+</ul>
+<p><strong>ZK原生API的不足之处</strong></p>
+<ul>
+<li>超时重连，不支持自动，需要手动操作</li>
+<li>Watch注册一次后会失效</li>
+<li>不支持递归创建节点</li>
+</ul>
+<p><strong>Apache curator</strong></p>
+<ul>
+<li>Apache的开源项目</li>
+<li>解决Watcher的注册一次就失效</li>
+<li>API更加简单易用</li>
+<li>提供了更多解决方案并且实现简单：比如分布式锁</li>
+<li>提供常用的ZooKeeper工具类</li>
+<li>编程风格更爽</li>
+</ul>
+<h3 id="2-建立curator与zkserver的连接"><a href="#2-建立curator与zkserver的连接" class="headerlink" title="2. 建立curator与zkserver的连接"></a>2. 建立curator与zkserver的连接</h3><ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+    &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;
+    &lt;version&gt;4.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+    &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;
+    &lt;version&gt;4.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;3.4.11&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="3-ZK命名空间以及创建节点"><a href="#3-ZK命名空间以及创建节点" class="headerlink" title="3. ZK命名空间以及创建节点"></a>3. ZK命名空间以及创建节点</h3><pre><code>/**
+ * Created by Thpffcj on 2018/4/26.
+ */
+public class CuratorOperator {
+
+    public CuratorFramework client = null;
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+
+    /**
+     * 实例化zk客户端
+     */
+    public CuratorOperator() {
+
+        /**
+         * 同步创建zk示例，原生api是异步的
+         *
+         * curator链接zookeeper的策略:ExponentialBackoffRetry
+         * baseSleepTimeMs：初始sleep的时间
+         * maxRetries：最大重试次数
+         * maxSleepMs：最大重试时间
+         */
+//        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 5);
+
+        /**
+         * curator链接zookeeper的策略:RetryNTimes
+         * n：重试的次数
+         * sleepMsBetweenRetries：每次重试间隔的时间
+         */
+        RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
+
+        /**
+         * curator链接zookeeper的策略:RetryOneTime
+         * sleepMsBetweenRetry:每次重试间隔的时间
+         */
+//        RetryPolicy retryPolicy2 = new RetryOneTime(3000);
+
+        /**
+         * 永远重试，不推荐使用
+         */
+//        RetryPolicy retryPolicy3 = new RetryForever(retryIntervalMs);
+
+        /**
+         * curator链接zookeeper的策略:RetryUntilElapsed
+         * maxElapsedTimeMs:最大重试时间
+         * sleepMsBetweenRetries:每次重试间隔
+         * 重试时间超过maxElapsedTimeMs后，就不再重试
+         */
+//        RetryPolicy retryPolicy4 = new RetryUntilElapsed(2000, 3000);
+
+        client = CuratorFrameworkFactory.builder()
+                .connectString(zkServerPath)
+                .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
+                .build();
+        client.start();
+    }
+
+    /**
+     * @Description: 关闭zk客户端连接
+     */
+    public void closeZKClient() {
+        if (client != null) {
+            this.client.close();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // 实例化
+        CuratorOperator cto = new CuratorOperator();
+        boolean isZkCuratorStarted = cto.client.isStarted();
+        System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+        Thread.sleep(3000);
+
+        cto.closeZKClient();
+        boolean isZkCuratorStarted2 = cto.client.isStarted();
+        System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+    }
+}
+</code></pre><ul>
+<li>运行结果如下</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+当前客户的状态：已关闭
+</code></pre><h3 id="4-ZK命名空间以及创建节点"><a href="#4-ZK命名空间以及创建节点" class="headerlink" title="4. ZK命名空间以及创建节点"></a>4. ZK命名空间以及创建节点</h3><ul>
+<li>在构造函数中添加命名空间</li>
+</ul>
+<pre><code>client = CuratorFrameworkFactory.builder()
+        .connectString(zkServerPath)
+        .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
+        .namespace(&quot;workspace&quot;).build();
+client.start();
+</code></pre><ul>
+<li>编写添加节点操作</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    // 创建节点
+    String nodePath = &quot;/super/thpffcj&quot;;
+    byte[] data = &quot;superme&quot;.getBytes();
+    cto.client.create().creatingParentsIfNeeded()
+        .withMode(CreateMode.PERSISTENT)
+        .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
+        .forPath(nodePath, data);
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>运行main方法，并去虚拟机使用命令行查看</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] ls /
+[controller_epoch, workspace, brokers, zookeeper, data, thpffcj, aclthpffcj, admin, isr_change_notification, consumers, config, hbase]
+[zk: localhost:2181(CONNECTED) 2] ls /workspace
+[super]
+[zk: localhost:2181(CONNECTED) 3] get /workspace/super/thpffcj
+superme
+cZxid = 0x200000052
+ctime = Fri Apr 27 10:26:55 CST 2018
+mZxid = 0x200000052
+mtime = Fri Apr 27 10:26:55 CST 2018
+pZxid = 0x200000052
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 7
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 4] getAcl /workspace/super/thpffcj
+&apos;world,&apos;anyone
+: cdrwa
+</code></pre><h3 id="5-修改节点以及删除节点"><a href="#5-修改节点以及删除节点" class="headerlink" title="5. 修改节点以及删除节点"></a>5. 修改节点以及删除节点</h3><pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 更新节点数据
+    byte[] newData = &quot;batman&quot;.getBytes();
+    cto.client.setData().withVersion(0).forPath(nodePath, newData);    
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 5] get /workspace/super/thpffcj
+batman
+cZxid = 0x200000052
+ctime = Fri Apr 27 10:26:55 CST 2018
+mZxid = 0x200000055
+mtime = Fri Apr 27 10:32:47 CST 2018
+pZxid = 0x200000052
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 6
+numChildren = 0
+</code></pre><ul>
+<li>删除节点</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 删除节点
+    cto.client.delete()
+              .guaranteed()                    // 如果删除失败，那么在后端还是继续会删除，直到成功
+              .deletingChildrenIfNeeded()    // 如果有子节点，就删除
+              .withVersion(1)
+              .forPath(nodePath);    
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 6] ls /workspace/super
+[]
+</code></pre><h3 id="6-查询节点相关信息"><a href="#6-查询节点相关信息" class="headerlink" title="6. 查询节点相关信息"></a>6. 查询节点相关信息</h3><ul>
+<li>先把刚才删除的节点重新新建，然后编写查询代码</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 读取节点数据
+    Stat stat = new Stat();
+    byte[] data = cto.client.getData().storingStatIn(stat).forPath(nodePath);
+    System.out.println(&quot;节点&quot; + nodePath + &quot;的数据为: &quot; + new String(data));
+    System.out.println(&quot;该节点的版本号为: &quot; + stat.getVersion());      
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>直接运行，观察控制台</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+节点/super/thpffcj的数据为: superme
+该节点的版本号为: 0
+当前客户的状态：已关闭
+</code></pre><ul>
+<li>节点下面肯定会有子节点，我们查询一下子节点</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 查询子节点
+    List&lt;String&gt; childNodes = cto.client.getChildren()
+                                        .forPath(nodePath);
+    System.out.println(&quot;开始打印子节点：&quot;);
+    for (String s : childNodes) {
+        System.out.println(s);
+    }
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>运行之前我们先创建几个子节点</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 8] create /workspace/super/thpffcj/a aaa
+Created /workspace/super/thpffcj/a
+[zk: localhost:2181(CONNECTED) 9] create /workspace/super/thpffcj/b bbb
+Created /workspace/super/thpffcj/b
+[zk: localhost:2181(CONNECTED) 10] create /workspace/super/thpffcj/c ccc
+Created /workspace/super/thpffcj/c
+</code></pre><ul>
+<li>运行查看结果</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+开始打印子节点：
+a
+b
+c
+当前客户的状态：已关闭
+</code></pre><ul>
+<li>判断节点是否存在</li>
+</ul>
+<pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 判断节点是否存在,如果不存在则为空
+    Stat statExist = cto.client.checkExists().forPath(nodePath + &quot;/a&quot;);
+    System.out.println(statExist);
+
+    Thread.sleep(3000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+8589934689,8589934689,1524797517169,1524797517169,0,0,0,0,3,0,8589934689
+
+当前客户的状态：已关闭
+</code></pre><h3 id="7-curator之usingWatcher"><a href="#7-curator之usingWatcher" class="headerlink" title="7. curator之usingWatcher"></a>7. curator之usingWatcher</h3><pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // watcher 事件  当使用usingWatcher的时候，监听只会触发一次，监听完毕后就销毁
+    cto.client.getData().usingWatcher(new MyCuratorWatcher()).forPath(nodePath);
+    //        cto.client.getData().usingWatcher(new MyWatcher()).forPath(nodePath);
+
+    Thread.sleep(100000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>我们需要实现相应的监听类</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+public class MyWatcher implements Watcher {
+
+    @Override
+    public void process(WatchedEvent event) {
+        System.out.println(&quot;触发watcher，节点路径为：&quot; + event.getPath());
+    }
+}
+
+/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+public class MyCuratorWatcher implements CuratorWatcher {
+
+    @Override
+    public void process(WatchedEvent event) throws Exception {
+        System.out.println(&quot;触发watcher，节点路径为：&quot; + event.getPath());
+    }
+}
+</code></pre><ul>
+<li>原生的watcher我们就不演示了，所以注释掉了，运行main方法</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 1] set /workspace/super/thpffcj 123
+cZxid = 0x20000005b
+ctime = Fri Apr 27 10:45:01 CST 2018
+mZxid = 0x20000006d
+mtime = Fri Apr 27 14:49:59 CST 2018
+pZxid = 0x200000063
+cversion = 3
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 3
+</code></pre><ul>
+<li>只会触发一次监听</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+触发watcher，节点路径为：/super/thpffcj
+</code></pre><h3 id="8-NodeCache一次注册N次监听"><a href="#8-NodeCache一次注册N次监听" class="headerlink" title="8. NodeCache一次注册N次监听"></a>8. NodeCache一次注册N次监听</h3><pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 为节点添加watcher
+    // NodeCache: 监听数据节点的变更，会触发事件
+    final NodeCache nodeCache = new NodeCache(cto.client, nodePath);
+    // buildInitial : 初始化的时候获取node的值并且缓存
+    nodeCache.start(true);
+    if (nodeCache.getCurrentData() != null) {
+        System.out.println(&quot;节点初始化数据为：&quot; + new String(nodeCache.getCurrentData().getData()));
+    } else {
+        System.out.println(&quot;节点初始化数据为空...&quot;);
+    }
+    nodeCache.getListenable().addListener(new NodeCacheListener() {
+        public void nodeChanged() throws Exception {
+            if (nodeCache.getCurrentData() == null) {
+                System.out.println(&quot;空&quot;);
+                return;
+            }
+            String data = new String(nodeCache.getCurrentData().getData());
+            System.out.println(&quot;节点路径：&quot; + nodeCache.getCurrentData().getPath() + &quot;数据：&quot; + data);
+        }
+    });
+
+    Thread.sleep(100000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+</code></pre><ul>
+<li>直接运行</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 2] set /workspace/super/thpffcj 456
+[zk: localhost:2181(CONNECTED) 3] set /workspace/super/thpffcj 789
+</code></pre><ul>
+<li>在控制台观察输出</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+节点初始化数据为：123
+节点路径：/super/thpffcj数据：456
+节点路径：/super/thpffcj数据：789
+</code></pre><ul>
+<li>这样就完成了一次注册，多次监听</li>
+</ul>
+<h3 id="9-PathChildrenCache子节点监听"><a href="#9-PathChildrenCache子节点监听" class="headerlink" title="9. PathChildrenCache子节点监听"></a>9. PathChildrenCache子节点监听</h3><pre><code>public static void main(String[] args) throws Exception {
+    // 实例化
+    CuratorOperator cto = new CuratorOperator();
+    boolean isZkCuratorStarted = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+    String nodePath = &quot;/super/thpffcj&quot;;
+    // 为子节点添加watcher
+    // PathChildrenCache: 监听数据节点的增删改，会触发事件
+    String childNodePathCache =  nodePath;
+    // cacheData: 设置缓存节点的数据状态
+    final PathChildrenCache childrenCache = new PathChildrenCache(cto.client, childNodePathCache, true);
+
+    /**
+     * StartMode: 初始化方式
+     * POST_INITIALIZED_EVENT：异步初始化，初始化之后会触发事件
+     * NORMAL：异步初始化
+     * BUILD_INITIAL_CACHE：同步初始化
+     */
+    childrenCache.start(StartMode.POST_INITIALIZED_EVENT);
+
+    childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
+        public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+            if(event.getType().equals(PathChildrenCacheEvent.Type.INITIALIZED)){
+                System.out.println(&quot;子节点初始化ok...&quot;);
+            }
+
+            else if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_ADDED)){
+                String path = event.getData().getPath();
+                if (path.equals(ADD_PATH)) {
+                    System.out.println(&quot;添加子节点:&quot; + event.getData().getPath());
+                    System.out.println(&quot;子节点数据:&quot; + new String(event.getData().getData()));
+                } else if (path.equals(&quot;/super/thpffcj/e&quot;)) {
+                    System.out.println(&quot;添加不正确...&quot;);
+                }
+
+            }else if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_REMOVED)){
+                System.out.println(&quot;删除子节点:&quot; + event.getData().getPath());
+            }else if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_UPDATED)){
+                System.out.println(&quot;修改子节点路径:&quot; + event.getData().getPath());
+                System.out.println(&quot;修改子节点数据:&quot; + new String(event.getData().getData()));
+            }
+        }
+    });
+
+    Thread.sleep(100000);
+
+    cto.closeZKClient();
+    boolean isZkCuratorStarted2 = cto.client.isStarted();
+    System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+}
+
+public final static String ADD_PATH = &quot;/super/thpffcj/d&quot;;
+</code></pre><ul>
+<li>运行代码，去命令行操作</li>
+</ul>
+<pre><code>[zk: localhost:2181(CONNECTED) 4] create /workspace/super/thpffcj/e 123
+Created /workspace/super/thpffcj/e
+[zk: localhost:2181(CONNECTED) 5] create /workspace/super/thpffcj/d 123
+Created /workspace/super/thpffcj/d
+[zk: localhost:2181(CONNECTED) 6] set /workspace/super/thpffcj/d 456
+cZxid = 0x200000075
+ctime = Fri Apr 27 15:17:27 CST 2018
+mZxid = 0x200000076
+mtime = Fri Apr 27 15:17:42 CST 2018
+pZxid = 0x200000075
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 0
+[zk: localhost:2181(CONNECTED) 7] delete /workspace/super/thpffcj/d
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>当前客户的状态：连接中
+当前数据节点的子节点数据列表：
+子节点初始化ok...
+添加不正确...
+添加子节点:/super/thpffcj/d
+子节点数据:123
+修改子节点路径:/super/thpffcj/d
+修改子节点数据:456
+删除子节点:/super/thpffcj/d
+当前客户的状态：已关闭
+</code></pre><h3 id="10-ZK-watcher实例-统一更新N台节点的配置文件"><a href="#10-ZK-watcher实例-统一更新N台节点的配置文件" class="headerlink" title="10. ZK-watcher实例 统一更新N台节点的配置文件"></a>10. ZK-watcher实例 统一更新N台节点的配置文件</h3><ul>
+<li>运维修改配置(增/删/改)</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/28.
+ */
+public class Client1 {
+
+    public CuratorFramework client = null;
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+
+    public Client1() {
+        RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
+        client = CuratorFrameworkFactory.builder()
+                .connectString(zkServerPath)
+                .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
+                .namespace(&quot;workspace&quot;).build();
+        client.start();
+    }
+
+    public void closeZKClient() {
+        if (client != null) {
+            this.client.close();
+        }
+    }
+
+    //    public final static String CONFIG_NODE = &quot;/super/thpffcj/redis-config&quot;;
+    public final static String CONFIG_NODE_PATH = &quot;/super/thpffcj&quot;;
+    public final static String SUB_PATH = &quot;/redis-config&quot;;
+    public static CountDownLatch countDown = new CountDownLatch(1);
+
+    public static void main(String[] args) throws Exception {
+        Client1 cto = new Client1();
+        System.out.println(&quot;client1 启动成功...&quot;);
+
+        final PathChildrenCache childrenCache = new PathChildrenCache(cto.client, CONFIG_NODE_PATH, true);
+        childrenCache.start(StartMode.BUILD_INITIAL_CACHE);
+
+        // 添加监听事件
+        childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
+            public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+                // 监听节点变化
+                if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_UPDATED)){
+                    String configNodePath = event.getData().getPath();
+                    if (configNodePath.equals(CONFIG_NODE_PATH + SUB_PATH)) {
+                        System.out.println(&quot;监听到配置发生变化，节点路径为:&quot; + configNodePath);
+
+                        // 读取节点数据
+                        String jsonConfig = new String(event.getData().getData());
+                        System.out.println(&quot;节点&quot; + CONFIG_NODE_PATH + &quot;的数据为: &quot; + jsonConfig);
+
+                        // 从json转换配置
+                        RedisConfig redisConfig = null;
+                        if (StringUtils.isNotBlank(jsonConfig)) {
+                            redisConfig = JsonUtils.jsonToPojo(jsonConfig, RedisConfig.class);
+                        }
+
+                        // 配置不为空则进行相应操作
+                        if (redisConfig != null) {
+                            String type = redisConfig.getType();
+                            String url = redisConfig.getUrl();
+                            String remark = redisConfig.getRemark();
+                            // 判断事件
+                            if (type.equals(&quot;add&quot;)) {
+                                System.out.println(&quot;监听到新增的配置，准备下载...&quot;);
+                                // ... 连接ftp服务器，根据url找到相应的配置
+                                Thread.sleep(500);
+                                System.out.println(&quot;开始下载新的配置文件，下载路径为&lt;&quot; + url + &quot;&gt;&quot;);
+                                // ... 下载配置到你指定的目录
+                                Thread.sleep(1000);
+                                System.out.println(&quot;下载成功，已经添加到项目中&quot;);
+                                // ... 拷贝文件到项目目录
+                            } else if (type.equals(&quot;update&quot;)) {
+                                System.out.println(&quot;监听到更新的配置，准备下载...&quot;);
+                                // ... 连接ftp服务器，根据url找到相应的配置
+                                Thread.sleep(500);
+                                System.out.println(&quot;开始下载配置文件，下载路径为&lt;&quot; + url + &quot;&gt;&quot;);
+                                // ... 下载配置到你指定的目录
+                                Thread.sleep(1000);
+                                System.out.println(&quot;下载成功...&quot;);
+                                System.out.println(&quot;删除项目中原配置文件...&quot;);
+                                Thread.sleep(100);
+                                // ... 删除原文件
+                                System.out.println(&quot;拷贝配置文件到项目目录...&quot;);
+                                // ... 拷贝文件到项目目录
+                            } else if (type.equals(&quot;delete&quot;)) {
+                                System.out.println(&quot;监听到需要删除配置&quot;);
+                                System.out.println(&quot;删除项目中原配置文件...&quot;);
+                            }
+
+                            // TODO 视情况统一重启服务
+                        }
+                    }
+                }
+            }
+        });
+
+        countDown.await();
+
+        cto.closeZKClient();
+    }
+}
+</code></pre><h3 id="11-acl权限操作与认证授权"><a href="#11-acl权限操作与认证授权" class="headerlink" title="11. acl权限操作与认证授权"></a>11. acl权限操作与认证授权</h3><ul>
+<li>其实API都很人性，用法也基本一致，我们就不一一演示了，直接放出所有试验过的代码，可以打开相应注释进行运行查看</li>
+</ul>
+<pre><code>/**
+ * Created by Thpffcj on 2018/4/27.
+ */
+public class CuratorAcl {
+
+    public CuratorFramework client = null;
+    public static final String zkServerPath = &quot;192.168.92.130:2181&quot;;
+
+    public CuratorAcl() {
+        RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
+        client = CuratorFrameworkFactory.builder().authorization(&quot;digest&quot;, &quot;thpffcj:123456&quot;.getBytes())
+                .connectString(zkServerPath)
+                .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
+                .namespace(&quot;workspace&quot;).build();
+        client.start();
+    }
+
+    public void closeZKClient() {
+        if (client != null) {
+            this.client.close();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // 实例化
+        CuratorAcl cto = new CuratorAcl();
+        boolean isZkCuratorStarted = cto.client.isStarted();
+        System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted ? &quot;连接中&quot; : &quot;已关闭&quot;));
+
+        String nodePath = &quot;/acl/father/child/sub&quot;;
+
+        List&lt;ACL&gt; acls = new ArrayList&lt;ACL&gt;();
+        Id thpffcj1 = new Id(&quot;digest&quot;, AclUtils.getDigestUserPwd(&quot;thpffcj1:123456&quot;));
+        Id thpffcj2 = new Id(&quot;digest&quot;, AclUtils.getDigestUserPwd(&quot;thpffcj2:123456&quot;));
+        acls.add(new ACL(Perms.ALL, thpffcj1));
+        acls.add(new ACL(Perms.READ, thpffcj2));
+        acls.add(new ACL(Perms.DELETE | Perms.CREATE, thpffcj2));
+
+        // 创建节点
+//        byte[] data = &quot;spiderman&quot;.getBytes();
+//        cto.client.create().creatingParentsIfNeeded()
+//                .withMode(CreateMode.PERSISTENT)
+//                .withACL(acls, true)
+//                .forPath(nodePath, data);
+
+
+        cto.client.setACL().withACL(acls).forPath(&quot;/curatorNode&quot;);
+
+        // 更新节点数据
+//        byte[] newData = &quot;batman&quot;.getBytes();
+//        cto.client.setData().withVersion(0).forPath(nodePath, newData);
+
+        // 删除节点
+//        cto.client.delete().guaranteed().deletingChildrenIfNeeded().withVersion(0).forPath(nodePath);
+
+        // 读取节点数据
+//        Stat stat = new Stat();
+//        byte[] data = cto.client.getData().storingStatIn(stat).forPath(nodePath);
+//        System.out.println(&quot;节点&quot; + nodePath + &quot;的数据为: &quot; + new String(data));
+//        System.out.println(&quot;该节点的版本号为: &quot; + stat.getVersion());
+
+
+        cto.closeZKClient();
+        boolean isZkCuratorStarted2 = cto.client.isStarted();
+        System.out.println(&quot;当前客户的状态：&quot; + (isZkCuratorStarted2 ? &quot;连接中&quot; : &quot;已关闭&quot;));
+    }
+}
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/25/Java-Concurrent-Programming-2/" style="float: left;">
+        ← Java 并发编程 2
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/22/Docker-Kubernetes-k8s-1/">
+        初识微服务 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

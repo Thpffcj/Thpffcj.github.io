@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Spark SQL概述 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-04-27T10:16:10.000Z" itemprop="datePublished">
+          2018-04-27
+      </time>
+    
+    
+    | 
+    <a href="/tags/大数据/">大数据</a>
+    
+    
+</span>
+                <h1>Spark SQL概述</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Spark-SQL概述"><a href="#1-Spark-SQL概述" class="headerlink" title="1. Spark SQL概述"></a>1. Spark SQL概述</h2><h3 id="1-Spark-SQL前世今生"><a href="#1-Spark-SQL前世今生" class="headerlink" title="1. Spark SQL前世今生"></a>1. Spark SQL前世今生</h3><p><strong>为什么需要SQL</strong></p>
+<ul>
+<li>事实上的标准</li>
+<li>易学易用</li>
+<li>受众面大</li>
+</ul>
+<p><strong>Shark</strong></p>
+<ul>
+<li>Hive：类似于sql的Hive QL语言，sql =&gt; MapReduce<ul>
+<li>缺点：MapReduce</li>
+<li>改进：hive on tez，hive on spark，hive on mapreduce</li>
+</ul>
+</li>
+<li>Spark: hive on spark =&gt; shark(hive on spark)<ul>
+<li>shark推出：非常受欢迎，基于spark，基于内存的列式存储，与hive能够兼容</li>
+<li>缺点：hive ql的解析，逻辑执行计划生成，执行计划的优化是依赖于hive的，仅仅只是把物理执行计划从mr作业替换成spark作业</li>
+</ul>
+</li>
+<li>Shark终止以后，产生了2个分支：<ul>
+<li>hive on spark<ul>
+<li>Hive社区，源码是在Hive中</li>
+</ul>
+</li>
+<li>Spark SQL<ul>
+<li>Spark社区，源码是在Spark中。支持多种数据源，多种优化技术，扩展性好很多</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-SQL-on-Hadoop常用框架"><a href="#2-SQL-on-Hadoop常用框架" class="headerlink" title="2. SQL on Hadoop常用框架"></a>2. SQL on Hadoop常用框架</h3><ul>
+<li>Hive <ul>
+<li>sql ==&gt; mapreduce</li>
+<li>metastore：元数据 </li>
+<li>sql：database，table，view</li>
+<li>facebook</li>
+</ul>
+</li>
+<li>impala<ul>
+<li>cloudera：cdh(建议大家在生产上使用的hadoop系列版本)，cm</li>
+<li>sql：自己的守护进程执行的，非mr</li>
+<li>metastore</li>
+</ul>
+</li>
+<li>presto<ul>
+<li>facebook</li>
+<li>京东</li>
+<li>sql</li>
+</ul>
+</li>
+<li>drill<ul>
+<li>sql</li>
+<li>访问：hdfs，rdbms，json，hbase，mongodb，s3，hive</li>
+</ul>
+</li>
+<li>Spark SQL<ul>
+<li>sql</li>
+<li>dataframe/dataset api</li>
+<li>metastore</li>
+<li>访问：hdfs，rdbms，json，hbase，mongodb，s3，hive =&gt; 外部数据源</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Spark-SQL概述"><a href="#3-Spark-SQL概述" class="headerlink" title="3. Spark SQL概述"></a>3. Spark SQL概述</h3><ul>
+<li><strong><a href="http://spark.apache.org/sql/" target="_blank" rel="noopener">Spark SQL is Apache Spark’s module for working with structured data.</a></strong></li>
+<li>Part of the core distribution since Spark1.0(April 2014)</li>
+<li>Runs SQL/Hive QL queries including UDFs UDAFs and SerDes</li>
+<li>Connect existing BI tools to Spark througth JDBC</li>
+<li>Binding in Python, Scala, Java and R</li>
+<li><strong>Integrated</strong><ul>
+<li>Seamlessly mix SQL queries with Spark programs.</li>
+</ul>
+</li>
+<li><strong>Uniform Data Access</strong><ul>
+<li>Connect to any data source the same way.</li>
+</ul>
+</li>
+<li><strong>Hive Integration</strong><ul>
+<li>Run SQL or HiveQL queries on existing warehouses.</li>
+</ul>
+</li>
+<li><strong>Standard Connectivity</strong><ul>
+<li>Connect through JDBC or ODBC.</li>
+</ul>
+</li>
+<li><strong>Spark SQL它不仅仅有访问或者操作SQL的功能，还提供了其他的非常丰富的操作：外部数据源，优化</strong></li>
+<li><a href="http://spark.apache.org/docs/2.2.0/sql-programming-guide.html" target="_blank" rel="noopener">Spark SQL, DataFrames and Datasets Guide</a><ul>
+<li>Spark SQL is a Spark module for structured data processing. Unlike the basic Spark RDD API, the interfaces provided by Spark SQL provide Spark with more information about the structure of both the data and the computation being performed. Internally, Spark SQL uses this extra information to perform extra optimizations. There are several ways to interact with Spark SQL including SQL and the Dataset API. </li>
+</ul>
+</li>
+<li>Spark SQL概述小结：<ul>
+<li>Spark SQL的应用并不局限于SQL</li>
+<li>访问hive，json，parquet等文件的数据</li>
+<li>SQL只是Spark SQL的一个功能而已 =&gt; Spark SQL这个名字起的并不恰当</li>
+<li>Spark SQL提供了SQL的api，DataFrame和Dataset的API</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Spark-SQL愿景"><a href="#4-Spark-SQL愿景" class="headerlink" title="4. Spark SQL愿景"></a>4. Spark SQL愿景</h3><ul>
+<li>Write less code</li>
+<li>Read less data</li>
+<li>Let the optimizer do the hard work</li>
+</ul>
+<h3 id="5-Spark-SQL架构"><a href="#5-Spark-SQL架构" class="headerlink" title="5. Spark SQL架构"></a>5. Spark SQL架构</h3><p><img src="http://oseihavwm.bkt.clouddn.com/Spark%20SQL%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><br></p>
+<hr>
+<h2 id="2-从Hive平滑过渡到Spark-SQL"><a href="#2-从Hive平滑过渡到Spark-SQL" class="headerlink" title="2. 从Hive平滑过渡到Spark SQL"></a>2. 从Hive平滑过渡到Spark SQL</h2><h3 id="1-SQLContext的使用"><a href="#1-SQLContext的使用" class="headerlink" title="1. SQLContext的使用"></a>1. SQLContext的使用</h3><ul>
+<li>Spark1.x中Spark SQL的入口点：SQLContext<ul>
+<li>The entry point into all functionality in Spark SQL is the SQLContext class, or one of its descendants. To create a basic SQLContext, all you need is a SparkContext.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;!--scala--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;
+    &lt;artifactId&gt;scala-library&lt;/artifactId&gt;
+    &lt;version&gt;${scala.version}&lt;/version&gt;
+    &lt;!--
+    &lt;scope&gt;provided&lt;/scope&gt;
+    --&gt;
+&lt;/dependency&gt;
+
+&lt;!--SparkSQL--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-sql_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+    &lt;!--
+    &lt;scope&gt;provided&lt;/scope&gt;
+    --&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写程序</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/4/29.
+  * SQLContext的使用
+  * 注意：IDEA是在本地，而测试数据是在服务器上，能不能在本地进行开发测试的？
+  */
+object SQLContextApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val path = args(0)
+
+    // 1. 创建相应的Context
+    val sparkConf = new SparkConf()
+    sparkConf.setAppName(&quot;SQLContextApp&quot;).setMaster(&quot;local[2]&quot;)
+
+    val sc = new SparkContext(sparkConf)
+
+    val sqlContext = new SQLContext(sc)
+
+    // 2. 相关的处理: json
+    val people = sqlContext.read.format(&quot;json&quot;).load(path)
+    people.printSchema()
+    people.show()
+
+    // 3. 关闭资源
+    sc.stop()
+  }
+}
+</code></pre><ul>
+<li>我们在D盘有一个people.json文件</li>
+</ul>
+<pre><code>{&quot;name&quot;:&quot;Michael&quot;}
+{&quot;name&quot;:&quot;Andy&quot;, &quot;age&quot;:30}
+{&quot;name&quot;:&quot;Justin&quot;, &quot;age&quot;:19}
+</code></pre><ul>
+<li>运行程序并在Edit Configurations里传入参数D:/people.json</li>
+</ul>
+<pre><code>root
+ |-- age: long (nullable = true)
+ |-- name: string (nullable = true)
+
++----+-------+
+| age|   name|
++----+-------+
+|null|Michael|
+|  30|   Andy|
+|  19| Justin|
++----+-------+
+</code></pre><ul>
+<li>我们现在要把它放到服务器上运行，先注释掉一句设置</li>
+</ul>
+<pre><code>//在测试或者生产中，AppName和Master我们是通过脚本进行指定
+//sparkConf.setAppName(&quot;SQLContextApp&quot;).setMaster(&quot;local[2]&quot;)
+</code></pre><ul>
+<li>使用maven编译打包，并放到服务器上</li>
+</ul>
+<pre><code>[thpffcj@thpffcj lib]$ pwd
+/home/thpffcj/lib
+[thpffcj@thpffcj lib]$ ls
+DataVisualization-0.0.1.jar                    spark-sql-1.0.jar
+hadoop-1.0-SNAPSHOT.jar                        SparkTrain-1.0.jar
+hadoop-1.0-SNAPSHOT-jar-with-dependencies.jar  storm-1.0.jar
+</code></pre><ul>
+<li>使用spark-submit提交任务</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ spark-submit \
+&gt; --name SQLContextApp \
+&gt; --class cn.edu.nju.spark.SQLContextApp \
+&gt; --master local[2] \
+&gt; /home/thpffcj/lib/spark-sql-1.0.jar \
+&gt; /home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/people.json
+</code></pre><ul>
+<li>发现也可以正常运行</li>
+<li>不过在工作中我们可能会写一个shell脚本，把刚才的命令放到里面</li>
+</ul>
+<pre><code>[thpffcj@thpffcj shell]$ cat sqlcontext.sh 
+spark-submit \
+--name SQLContextApp \
+--class cn.edu.nju.spark.SQLContextApp \
+--master local[2] \
+/home/thpffcj/lib/spark-sql-1.0.jar \
+/home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/people.json
+</code></pre><ul>
+<li>注意加上可执行权限</li>
+</ul>
+<pre><code>[thpffcj@thpffcj shell]$ chmod u+x sqlcontext.sh 
+</code></pre><h3 id="2-HiveContext的使用"><a href="#2-HiveContext的使用" class="headerlink" title="2. HiveContext的使用"></a>2. HiveContext的使用</h3><ul>
+<li>Spark1.x中Spark SQL的入口点：HiveContext</li>
+<li>注意：<ul>
+<li>To use a HiveContext, you do not need to have an existing Hive setup</li>
+<li>hive-site.xml</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>添加依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;
+    &lt;version&gt;${spark.version}&lt;/version&gt;
+    &lt;!--
+    &lt;scope&gt;provided&lt;/scope&gt;
+    --&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>编写测试代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/4/29.
+  * HiveContext的使用
+  * 使用时需要通过--jars 把mysql的驱动传递到classpath
+  */
+object HiveContextApp {
+
+  def main(args: Array[String]) {
+    // 1. 创建相应的Context
+    val sparkConf = new SparkConf()
+
+    // 在测试或者生产中，AppName和Master我们是通过脚本进行指定
+    // sparkConf.setAppName(&quot;HiveContextApp&quot;).setMaster(&quot;local[2]&quot;)
+
+    val sc = new SparkContext(sparkConf)
+    val hiveContext = new HiveContext(sc)
+
+    // 2. 相关的处理:
+    hiveContext.table(&quot;emp&quot;).show
+
+    // 3. 关闭资源
+    sc.stop()
+  }
+}
+</code></pre><ul>
+<li>编译打包放到服务器</li>
+</ul>
+<pre><code>[thpffcj@thpffcj shell]$ cat hivecontext.sh 
+spark-submit \
+--name HiveContextApp \
+--class cn.edu.nju.spark.HiveContextApp \
+--master local[2] \
+--jars /home/thpffcj/lib/mysql-connector-java-5.1.38.jar \
+/home/thpffcj/lib/spark-sql-1.0.jar
+</code></pre><ul>
+<li>执行脚本</li>
+</ul>
+<pre><code>[thpffcj@thpffcj shell]$ ./hivecontext.sh 
+</code></pre><ul>
+<li>发现报错</li>
+</ul>
+<pre><code>Exception in thread &quot;main&quot; org.apache.spark.sql.catalyst.analysis.NoSuchTableException: Table or view &apos;emp&apos; not found in database &apos;default&apos;;
+    at org.apache.spark.sql.hive.client.HiveClient$$anonfun$getTable$1.apply(HiveClient.scala:74)
+</code></pre><ul>
+<li>经过谷歌发现需要拷贝hive配置文件到spark中</li>
+</ul>
+<pre><code>[thpffcj@thpffcj conf]$ cp hive-site.xml ~/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/conf/
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+
+&lt;configuration&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+    &lt;value&gt;jdbc:mysql://localhost:3306/sparksql?createDatabaseIfNotExist=true&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+    &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+    &lt;value&gt;root&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+    &lt;value&gt;000000&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre><ul>
+<li>再次执行</li>
+</ul>
+<pre><code>[thpffcj@thpffcj shell]$ ./hivecontext.sh 
+
+...
+18/05/02 11:30:35 INFO CodeGenerator: Code generated in 37.340969 ms
++-----+-----+--------+----+----------+------+-----+------+
+|empno|ename|     job| mgr|  hiredate|   sal| comm|deptno|
++-----+-----+--------+----+----------+------+-----+------+
+| 7369|SMITH|   CLERK|7092|1980-12-17| 800.0| null|    20|
+| 7499|ALLEN|SALESMAN|7968| 1981-2-20|1600.0|300.0|    30|
+| 7521| WARD|SALESMAN|7968| 1981-2-22|1250.0|500.0|    30|
++-----+-----+--------+----+----------+------+-----+------+
+</code></pre><h3 id="3-SparkSession的使用"><a href="#3-SparkSession的使用" class="headerlink" title="3. SparkSession的使用"></a>3. SparkSession的使用</h3><ul>
+<li>The entry point into all functionality in Spark is the SparkSession class. To create a basic SparkSession, just use SparkSession.builder():</li>
+</ul>
+<pre><code>import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder()
+  .appName(&quot;Spark SQL basic example&quot;)
+  .config(&quot;spark.some.config.option&quot;, &quot;some-value&quot;)
+  .getOrCreate()
+
+// For implicit conversions like converting RDDs to DataFrames
+import spark.implicits._
+</code></pre><ul>
+<li>我们来开发代码测试一下</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/2.
+  * SparkSession的使用
+  */
+object SparkSessionApp {
+
+  def main(args: Array[String]) {
+
+    val spark = SparkSession.builder().appName(&quot;SparkSessionApp&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    val people = spark.read.json(&quot;D:/people.json&quot;)
+    people.show()
+
+    spark.stop()
+  }
+}
+</code></pre><ul>
+<li>执行得到结果</li>
+</ul>
+<pre><code>+----+-------+
+| age|   name|
++----+-------+
+|null|Michael|
+|  30|   Andy|
+|  19| Justin|
++----+-------+
+</code></pre><h3 id="4-spark-shell-amp-spark-sql的使用"><a href="#4-spark-shell-amp-spark-sql的使用" class="headerlink" title="4. spark-shell &amp; spark-sql的使用"></a>4. spark-shell &amp; spark-sql的使用</h3><pre><code>[thpffcj@thpffcj ~]$ jps
+4721 NodeManager
+9430 Jps
+5016 RunJar
+4394 SecondaryNameNode
+4059 NameNode
+4555 ResourceManager
+4207 DataNode
+</code></pre><ul>
+<li>保证spark下面有hive.site，没有的话从hive配置文件里拷贝，我们上面已经拷贝了</li>
+<li>启动Spark</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-shell --master local[2] --jars ~/lib/mysql-connector-java-5.1.38.jar 
+Using Spark&apos;s default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to &quot;WARN&quot;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+18/05/02 12:04:11 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+18/05/02 12:04:23 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+18/05/02 12:04:24 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+18/05/02 12:04:24 WARN ObjectStore: Failed to get database global_temp, returning NoSuchObjectException
+Spark context Web UI available at http://192.168.92.130:4040
+Spark context available as &apos;sc&apos; (master = local[2], app id = local-1525233853464).
+Spark session available as &apos;spark&apos;.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  &apos;_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.2.0
+      /_/
+
+Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_151)
+Type in expressions to have them evaluated.
+Type :help for more information.
+</code></pre><ul>
+<li>我们hive在第一篇博客有三张表，用spark sql如何访问呢</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;show tables&quot;).show
++--------+--------------+-----------+
+|database|     tableName|isTemporary|
++--------+--------------+-----------+
+| default|          dept|      false|
+| default|           emp|      false|
+| default|hive_wordcount|      false|
++--------+--------------+-----------+
+
+scala&gt; spark.sql(&quot;select * from dept&quot;).show
++------+----------+--------+
+|deptno|     dname|location|
++------+----------+--------+
+|    10|ACCOUNTING|NEW_YORK|
+|    20|  RESEARCH|  DALLAS|
+|    30|     SALES| CHICAGO|
+|    40|OPERATIONS|  BOSTON|
++------+----------+--------+
+</code></pre><ul>
+<li>我们再来看一个复杂的查询</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;select * from emp e join dept d on e.deptno = d.deptno&quot;).show
++-----+-----+--------+----+----------+------+-----+------+------+--------+--------+
+|empno|ename|     job| mgr|  hiredate|   sal| comm|deptno|deptno|   dname|location|
++-----+-----+--------+----+----------+------+-----+------+------+--------+--------+
+| 7369|SMITH|   CLERK|7092|1980-12-17| 800.0| null|    20|    20|RESEARCH|  DALLAS|
+| 7499|ALLEN|SALESMAN|7968| 1981-2-20|1600.0|300.0|    30|    30|   SALES| CHICAGO|
+| 7521| WARD|SALESMAN|7968| 1981-2-22|1250.0|500.0|    30|    30|   SALES| CHICAGO|
++-----+-----+--------+----+----------+------+-----+------+------+--------+--------+
+</code></pre><ul>
+<li>这比我们hive里运行快一些，hive里还需要MR作业</li>
+<li>我们能不能跟hive一样只输入一个sql就能够得到结果呢</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-sql --master local[2] --jars ~/lib/mysql-connector-java-5.1.38.jar 
+
+spark-sql&gt; select * from emp;
+
+7369    SMITH    CLERK    7092    1980-12-17    800.0    NULL    20
+7499    ALLEN    SALESMAN    7968    1981-2-20    1600.0    300.0    30
+7521    WARD    SALESMAN    7968    1981-2-22    1250.0    500.0    30
+Time taken: 6.264 seconds, Fetched 3 row(s)
+18/05/02 12:18:00 INFO CliDriver: Time taken: 6.264 seconds, Fetched 3 row(s)
+</code></pre><ul>
+<li>我们可以访问<a href="http://192.168.92.130:4040查看任务" target="_blank" rel="noopener">http://192.168.92.130:4040查看任务</a></li>
+<li>创建一个表</li>
+</ul>
+<pre><code>sparrk-sql&gt; create table t(key string, value string);
+</code></pre><ul>
+<li>查看执行计划</li>
+</ul>
+<pre><code>spark-sql&gt; explain extended select a.key * (2 + 3), b.value from t a join t b on a.key = b.key and a.key &gt; 3;
+
+== Parsed Logical Plan ==
+&apos;Project [unresolvedalias((&apos;a.key * (2 + 3)), None), &apos;b.value]
++- &apos;Join Inner, ((&apos;a.key = &apos;b.key) &amp;&amp; (&apos;a.key &gt; 3))
+   :- &apos;SubqueryAlias a
+   :  +- &apos;UnresolvedRelation `t`
+   +- &apos;SubqueryAlias b
+      +- &apos;UnresolvedRelation `t`
+
+== Analyzed Logical Plan ==
+(CAST(key AS DOUBLE) * CAST((2 + 3) AS DOUBLE)): double, value: string
+Project [(cast(key#29 as double) * cast((2 + 3) as double)) AS (CAST(key AS DOUBLE) * CAST((2 + 3) AS DOUBLE))#33, value#32]
++- Join Inner, ((key#29 = key#31) &amp;&amp; (cast(key#29 as int) &gt; 3))
+   :- SubqueryAlias a
+   :  +- SubqueryAlias t
+   :     +- CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#29, value#30]
+   +- SubqueryAlias b
+      +- SubqueryAlias t
+         +- CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#31, value#32]
+
+== Optimized Logical Plan ==
+Project [(cast(key#29 as double) * 5.0) AS (CAST(key AS DOUBLE) * CAST((2 + 3) AS DOUBLE))#33, value#32]
++- Join Inner, (key#29 = key#31)
+   :- Project [key#29]
+   :  +- Filter (isnotnull(key#29) &amp;&amp; (cast(key#29 as int) &gt; 3))
+   :     +- CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#29, value#30]
+   +- Filter ((cast(key#31 as int) &gt; 3) &amp;&amp; isnotnull(key#31))
+      +- CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#31, value#32]
+
+== Physical Plan ==
+*Project [(cast(key#29 as double) * 5.0) AS (CAST(key AS DOUBLE) * CAST((2 + 3) AS DOUBLE))#33, value#32]
++- *SortMergeJoin [key#29], [key#31], Inner
+   :- *Sort [key#29 ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(key#29, 200)
+   :     +- *Filter (isnotnull(key#29) &amp;&amp; (cast(key#29 as int) &gt; 3))
+   :        +- HiveTableScan [key#29], CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#29, value#30]
+   +- *Sort [key#31 ASC NULLS FIRST], false, 0
+      +- Exchange hashpartitioning(key#31, 200)
+         +- *Filter ((cast(key#31 as int) &gt; 3) &amp;&amp; isnotnull(key#31))
+            +- HiveTableScan [key#31, value#32], CatalogRelation `default`.`t`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [key#31, value#32]
+Time taken: 0.269 seconds, Fetched 1 row(s)
+18/05/02 12:24:09 INFO CliDriver: Time taken: 0.269 seconds, Fetched 1 row(s)
+</code></pre><ul>
+<li>首先解析成一个逻辑执行计划</li>
+<li>优化逻辑执行计划</li>
+<li>然后生成物理计划交给spark执行</li>
+</ul>
+<p><strong>spark-shell/spark-sql的使用</strong></p>
+<ul>
+<li>hive-site.xml配置文件</li>
+<li>–jars传递mysql驱动包</li>
+</ul>
+<h3 id="5-thriftserver-amp-beeline的使用"><a href="#5-thriftserver-amp-beeline的使用" class="headerlink" title="5. thriftserver &amp; beeline的使用"></a>5. thriftserver &amp; beeline的使用</h3><ul>
+<li>我之前关了下电脑，重新启动hadoop</li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-all.sh 
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+18/05/02 20:24:52 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [thpffcj]
+thpffcj: starting namenode, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/hadoop-thpffcj-namenode-thpffcj.out
+thpffcj: datanode running as process 4207. Stop it first.
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/hadoop-thpffcj-secondarynamenode-thpffcj.out
+18/05/02 20:25:10 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+starting yarn daemons
+starting resourcemanager, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/yarn-thpffcj-resourcemanager-thpffcj.out
+thpffcj: starting nodemanager, logging to /home/thpffcj/app/hadoop-2.6.0-cdh5.7.0/logs/yarn-thpffcj-nodemanager-thpffcj.out
+</code></pre><ul>
+<li>启动thriftserver</li>
+</ul>
+<pre><code>[thpffcj@thpffcj sbin]$ ./start-thriftserver.sh --master local[2] --jars ~/lib/mysql-connector-java-5.1.38.jar 
+starting org.apache.spark.sql.hive.thriftserver.HiveThriftServer2, logging to /home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/logs/spark-thpffcj-org.apache.spark.sql.hive.thriftserver.HiveThriftServer2-1-thpffcj.out
+</code></pre><ul>
+<li>启动beeline</li>
+</ul>
+<pre><code>[thpffcj@thpffcj bin]$ ./beeline -u jdbc:hive2://192.168.92.130:10000 -n thpffcj
+Connecting to jdbc:hive2://localhost:10000
+log4j:WARN No appenders could be found for logger (org.apache.hive.jdbc.Utils).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Connected to: Spark SQL (version 2.2.0)
+Driver: Hive JDBC (version 1.2.1.spark2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+Beeline version 1.2.1.spark2 by Apache Hive
+0: jdbc:hive2://192.168.92.130:10000&gt; 
+</code></pre><ul>
+<li>查询数据</li>
+</ul>
+<pre><code>0: jdbc:hive2://192.168.92.130:10000&gt; select * from emp e join dept d on e.deptno=d.deptno;
++--------+--------+-----------+-------+-------------+---------+--------+---------+---------+-----------+-----------+--+
+| empno  | ename  |    job    |  mgr  |  hiredate   |   sal   |  comm  | deptno  | deptno  |   dname   | location  |
++--------+--------+-----------+-------+-------------+---------+--------+---------+---------+-----------+-----------+--+
+| 7369   | SMITH  | CLERK     | 7092  | 1980-12-17  | 800.0   | NULL   | 20      | 20      | RESEARCH  | DALLAS    |
+| 7499   | ALLEN  | SALESMAN  | 7968  | 1981-2-20   | 1600.0  | 300.0  | 30      | 30      | SALES     | CHICAGO   |
+| 7521   | WARD   | SALESMAN  | 7968  | 1981-2-22   | 1250.0  | 500.0  | 30      | 30      | SALES     | CHICAGO   |
++--------+--------+-----------+-------+-------------+---------+--------+---------+---------+-----------+-----------+--+
+3 rows selected (1.079 seconds)
+</code></pre><ul>
+<li>默认端口是10000，可以通过命令指定</li>
+</ul>
+<pre><code>./start-thriftserver.sh  \
+--master local[2] \
+--jars ~/lib/mysql-connector-java-5.1.27-bin.jar  \
+--hiveconf hive.server2.thrift.port=14000 
+
+beeline -u jdbc:hive2://192.168.92.130:14000 -n hadoop
+</code></pre><p><strong>thriftserver和普通的spark-shell/spark-sql有什么区别？</strong></p>
+<ul>
+<li>spark-shell，spark-sql都是一个spark application</li>
+<li>thriftserver，不管你启动多少个客户端(beeline/code)，永远都是一个spark application<ul>
+<li>解决了一个数据共享的问题，多个客户端可以共享数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-jdbc方式编程访问"><a href="#6-jdbc方式编程访问" class="headerlink" title="6. jdbc方式编程访问"></a>6. jdbc方式编程访问</h3><ul>
+<li>添加pom依赖</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.spark-project.hive&lt;/groupId&gt;
+    &lt;artifactId&gt;hive-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;1.2.1.spark2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>开发代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/2.
+  * 通过JDBC的方式访问
+  */
+object SparkSQLThriftServerApp {
+
+  def main(args: Array[String]): Unit = {
+
+    Class.forName(&quot;org.apache.hive.jdbc.HiveDriver&quot;)
+
+    val conn = DriverManager.getConnection(&quot;jdbc:hive2://thpffcj:10000&quot;,&quot;thpffcj&quot;,&quot;&quot;)
+    val pstmt = conn.prepareStatement(&quot;select empno, ename, sal from emp&quot;)
+    val rs = pstmt.executeQuery()
+
+    while (rs.next()) {
+      println(&quot;empno:&quot; + rs.getInt(&quot;empno&quot;) +
+        &quot; , ename:&quot; + rs.getString(&quot;ename&quot;) +
+        &quot; , sal:&quot; + rs.getDouble(&quot;sal&quot;))
+
+    }
+
+    rs.close()
+    pstmt.close()
+    conn.close()
+  }
+}
+</code></pre><ul>
+<li>执行一下看看能不能拿到结果</li>
+</ul>
+<pre><code>empno:7369 , ename:SMITH , sal:800.0
+empno:7499 , ename:ALLEN , sal:1600.0
+empno:7521 , ename:WARD , sal:1250.0
+</code></pre><ul>
+<li>注意事项：在使用jdbc开发时，一定要先启动thriftserver</li>
+</ul>
+<pre><code>Exception in thread &quot;main&quot; java.sql.SQLException: 
+Could not open client transport with JDBC Uri: jdbc:hive2://thpffcj:10000: 
+java.net.ConnectException: Connection refused
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/04/28/ZooKeeper-Distributed-Topics-3/" style="float: left;">
+        ← 基于Zookeeper的应用
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/04/25/Java-Concurrent-Programming-2/">
+        Java 并发编程 2 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

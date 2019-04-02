@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>DateFrame &amp; Dataset | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-05-03T01:36:43.000Z" itemprop="datePublished">
+          2018-05-03
+      </time>
+    
+    
+    | 
+    <a href="/tags/大数据/">大数据</a>
+    
+    
+</span>
+                <h1>DateFrame & Dataset</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-DateFrame-概述"><a href="#1-DateFrame-概述" class="headerlink" title="1. DateFrame 概述"></a>1. DateFrame 概述</h2><h3 id="1-DateFrame-产生背景"><a href="#1-DateFrame-产生背景" class="headerlink" title="1. DateFrame 产生背景"></a>1. DateFrame 产生背景</h3><ul>
+<li>DataFrame它不是Spark SQL提出的，而是早起在R，Pandas语言就已经有了的</li>
+<li>Spark RDD API vs MapReduce API</li>
+<li>R/Pandas</li>
+</ul>
+<h3 id="2-DateFrame-概述"><a href="#2-DateFrame-概述" class="headerlink" title="2. DateFrame 概述"></a>2. DateFrame 概述</h3><p><strong>官网：<a href="http://spark.apache.org/docs/2.2.0/sql-programming-guide.html" target="_blank" rel="noopener">Spark SQL, DataFrames and Datasets Guide</a></strong></p>
+<ul>
+<li>A Dataset is a distributed collection of data. <ul>
+<li>分布式的数据集</li>
+</ul>
+</li>
+<li>A DataFrame is a Dataset organized into named columns.(RDD with schema)<ul>
+<li>以列(列名，列的类型，列值)的形式构成的分布式数据集，按照列赋予不同的名称</li>
+<li>It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood.</li>
+<li>DataFrames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases, or existing RDDs. </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-DateFrame-对比-RDD"><a href="#3-DateFrame-对比-RDD" class="headerlink" title="3. DateFrame 对比 RDD"></a>3. DateFrame 对比 RDD</h3><ul>
+<li>RDD： <ul>
+<li>java/scala  ==&gt; jvm</li>
+<li>python ==&gt; python runtime</li>
+</ul>
+</li>
+<li>DataFrame:<ul>
+<li>java/scala/python ==&gt; Logic Plan</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-DateFrame-基本-API-的操作"><a href="#4-DateFrame-基本-API-的操作" class="headerlink" title="4. DateFrame 基本 API 的操作"></a>4. DateFrame 基本 API 的操作</h3><ul>
+<li>先把所有代码给出</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/3.
+  * DataFrame API基本操作
+  */
+object DataFrameApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val spark = SparkSession.builder().appName(&quot;DataFrameApp&quot;).master(&quot;local[2]&quot;).getOrCreate()
+
+    // 将json文件加载成一个dataframe
+    val peopleDF = spark.read.format(&quot;json&quot;).load(&quot;D:/people.json&quot;)
+
+    // 输出dataframe对应的schema信息
+    peopleDF.printSchema()
+
+    // 输出数据集的前20条记录
+    peopleDF.show()
+
+    //查询某列所有的数据： select name from table
+    peopleDF.select(&quot;name&quot;).show()
+
+    // 查询某几列所有的数据，并对列进行计算： select name, age+10 as age2 from table
+    peopleDF.select(peopleDF.col(&quot;name&quot;), (peopleDF.col(&quot;age&quot;) + 10).as(&quot;age2&quot;)).show()
+
+    //根据某一列的值进行过滤： select * from table where age&gt;19
+    peopleDF.filter(peopleDF.col(&quot;age&quot;) &gt; 19).show()
+
+    //根据某一列进行分组，然后再进行聚合操作： select age,count(1) from table group by age
+    peopleDF.groupBy(&quot;age&quot;).count().show()
+
+    spark.stop()
+  }
+}
+</code></pre><p><strong>Create DataFrame</strong></p>
+<ul>
+<li>通过load方法其实就可以得到一个DataFrame</li>
+</ul>
+<pre><code>/**
+* Loads input in as a `DataFrame`, for data sources that require a path (e.g. data backed by
+* a local or distributed file system).
+*
+* @since 1.4.0
+*/
+def load(path: String): DataFrame = {
+    option(&quot;path&quot;, path).load(Seq.empty: _*) // force invocation of `load(...varargs...)`
+}
+</code></pre><p><strong>printSchema</strong></p>
+<pre><code>/**
+* Prints the schema to the console in a nice tree format.
+*
+* @group basic
+* @since 1.6.0
+*/
+// scalastyle:off println
+def printSchema(): Unit = println(schema.treeString)
+// scalastyle:on println
+</code></pre><ul>
+<li>通过printSchema可以打印schema信息</li>
+</ul>
+<pre><code>root
+ |-- age: long (nullable = true)
+ |-- name: string (nullable = true)
+</code></pre><p><strong>show</strong></p>
+<pre><code>/**
+* Displays the top 20 rows of Dataset in a tabular form. Strings more than 20 characters
+* will be truncated, and all cells will be aligned right.
+*
+* @group action
+* @since 1.6.0
+*/
+def show(): Unit = show(20)
+</code></pre><ul>
+<li>默认展示前20条数据</li>
+</ul>
+<pre><code>+----+-------+
+| age|   name|
++----+-------+
+|null|Michael|
+|  30|   Andy|
+|  19| Justin|
++----+-------+
+</code></pre><p><strong>select</strong></p>
+<pre><code>/**
+* Selects a set of columns. This is a variant of `select` that can only select
+* existing columns using column names (i.e. cannot construct expressions).
+*
+* {{{
+    *   // The following two are equivalent:
+    *   ds.select("colA", "colB")
+    *   ds.select($"colA", $"colB")
+    * }}}
+*
+* @group untypedrel
+* @since 2.0.0
+*/
+@scala.annotation.varargs
+def select(col: String, cols
+</code></pre><ul>
+<li>select可以获得想查询的字段</li>
+</ul>
+<pre><code>+-------+
+|   name|
++-------+
+|Michael|
+|   Andy|
+| Justin|
++-------+
+
++-------+----+
+|   name|age2|
++-------+----+
+|Michael|null|
+|   Andy|  40|
+| Justin|  29|
++-------+----+
+</code></pre><p><strong>filter</strong></p>
+<pre><code>/**
+* Filters rows using the given condition.
+* {{{
+    *   // The following are equivalent:
+    *   peopleDs.filter($"age" > 15)
+    *   peopleDs.where($"age" > 15)
+    * }}}
+*
+* @group typedrel
+* @since 1.6.0
+*/
+def filter(condition: Column): Dataset[T] = withTypedPlan {
+Filter(condition.expr, logicalPlan)
+}
+</code></pre><ul>
+<li>filter可以实现过滤功能</li>
+</ul>
+<pre><code>+---+----+
+|age|name|
++---+----+
+| 30|Andy|
++---+----+
+</code></pre><p><strong>groupBy</strong></p>
+<pre><code>+----+-----+
+| age|count|
++----+-----+
+|  19|    1|
+|null|    1|
+|  30|    1|
++----+-----+
+</code></pre><h3 id="5-DateFrame-与-RDD-互操作"><a href="#5-DateFrame-与-RDD-互操作" class="headerlink" title="5. DateFrame 与 RDD 互操作"></a>5. DateFrame 与 RDD 互操作</h3><p><strong>1. 反射：前提：事先需要知道你的字段，字段类型</strong></p>
+<ul>
+<li>Spark SQL supports two different methods for converting existing RDDs into Datasets. The first method uses reflection to infer the schema of an RDD that contains specific types of objects. This reflection based approach leads to more concise code and works well when you already know the schema while writing your Spark application.</li>
+<li>The Scala interface for Spark SQL supports automatically converting an RDD containing case classes to a DataFrame. The case class defines the schema of the table.</li>
+</ul>
+<ul>
+<li>我们先准备一个infos.txt</li>
+</ul>
+<pre><code>1,zhangsan,20
+2,lisi,30
+3,wangwu,40
+</code></pre><ul>
+<li>编写转换代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/3.
+  * DataFrame和RDD的互操作
+  */
+object DataFrameRDDApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val spark = SparkSession.builder().appName(&quot;DataFrameRDDApp&quot;).master(&quot;local[2]&quot;).getOrCreate()
+
+    val rdd = spark.sparkContext.textFile(&quot;D:/infos.txt&quot;)
+
+    // 注意：需要导入隐式转换
+    import spark.implicits._
+    val infoDF = rdd.map(_.split(&quot;,&quot;)).map(line =&gt; Info(line(0).toInt, line(1), line(2).toInt)).toDF()
+
+    infoDF.show()
+
+    spark.stop()
+  }
+
+  case class Info(id: Int, name: String, age: Int)
+}
+</code></pre><ul>
+<li>运行查看结果</li>
+</ul>
+<pre><code>+---+--------+---+
+| id|    name|age|
++---+--------+---+
+|  1|zhangsan| 20|
+|  2|    lisi| 30|
+|  3|  wangwu| 40|
++---+--------+---+
+</code></pre><ul>
+<li>使用反射来推断包含了特定数据类型的RDD的元数据</li>
+<li>使用DataFrame API或者SQL方式编程</li>
+</ul>
+<p><strong>2. 编程：如果第一种情况不能满足你的要求(事先不知道列)</strong></p>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/3.
+  * DataFrame和RDD的互操作
+  */
+object DataFrameRDDApp {
+
+  def main(args: Array[String]) {
+
+    val spark = SparkSession.builder().appName(&quot;DataFrameRDDApp&quot;).master(&quot;local[2]&quot;).getOrCreate()
+
+    //inferReflection(spark)
+
+    program(spark)
+
+    spark.stop()
+  }
+
+  def program(spark: SparkSession): Unit = {
+    // RDD ==&gt; DataFrame
+    val rdd = spark.sparkContext.textFile(&quot;D:/infos.txt&quot;)
+
+    val infoRDD = rdd.map(_.split(&quot;,&quot;)).map(line =&gt; Row(line(0).toInt, line(1), line(2).toInt))
+
+    val structType = StructType(Array(StructField(&quot;id&quot;, IntegerType, true),
+      StructField(&quot;name&quot;, StringType, true),
+      StructField(&quot;age&quot;, IntegerType, true)))
+
+    val infoDF = spark.createDataFrame(infoRDD, structType)
+    infoDF.printSchema()
+    infoDF.show()
+
+
+    //通过df的api进行操作
+    infoDF.filter(infoDF.col(&quot;age&quot;) &gt; 30).show
+
+    //通过sql的方式进行操作
+    infoDF.createOrReplaceTempView(&quot;infos&quot;)
+    spark.sql(&quot;select * from infos where age &gt; 30&quot;).show()
+  }
+
+  def inferReflection(spark: SparkSession) {
+    // RDD ==&gt; DataFrame
+    val rdd = spark.sparkContext.textFile(&quot;D:/infos.txt&quot;)
+
+    //注意：需要导入隐式转换
+    import spark.implicits._
+    val infoDF = rdd.map(_.split(&quot;,&quot;)).map(line =&gt; Info(line(0).toInt, line(1), line(2).toInt)).toDF()
+
+    infoDF.show()
+
+    infoDF.filter(infoDF.col(&quot;age&quot;) &gt; 30).show
+
+    infoDF.createOrReplaceTempView(&quot;infos&quot;)
+    spark.sql(&quot;select * from infos where age &gt; 30&quot;).show()
+  }
+
+  case class Info(id: Int, name: String, age: Int)
+}
+</code></pre><h3 id="6-DataFrame-API操作案例实战"><a href="#6-DataFrame-API操作案例实战" class="headerlink" title="6. DataFrame API操作案例实战"></a>6. DataFrame API操作案例实战</h3><ul>
+<li>创建一个记录文件student.data</li>
+</ul>
+<pre><code>1|Burke|1-300-746-8446|ullamcorper.velit.in@ametnullaDonec.co.uk
+2|Kamal|1-668-571-5046|ullamcorper.velit.in@ametnullaDonec.co.uk
+3||1-711-710-6552|lectus@aliquetlibero.co.uk
+4||1-711-710-6552|lectus@aliquetlibero.co.uk
+5|NULL|1-711-710-6552|lectus@aliquetlibero.co.uk
+</code></pre><ul>
+<li>编写代码</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/3.
+  * DataFrame中的操作操作
+  */
+object DataFrameCase {
+
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder().appName(&quot;DataFrameRDDApp&quot;).master(&quot;local[2]&quot;).getOrCreate()
+
+    // RDD ==&gt; DataFrame
+    val rdd = spark.sparkContext.textFile(&quot;D:/student.data&quot;)
+
+    // 注意：需要导入隐式转换
+    import spark.implicits._
+    val studentDF = rdd.map(_.split(&quot;\\|&quot;)).map(line =&gt; Student(line(0).toInt, line(1), line(2), line(3))).toDF()
+
+    // show默认只显示前20条
+    studentDF.show
+    studentDF.show(30)
+    studentDF.show(30, false)
+
+    studentDF.take(10)
+    studentDF.first()
+    studentDF.head(3)
+
+    studentDF.select(&quot;email&quot;).show(30,false)
+
+    studentDF.filter(&quot;name=&apos;&apos;&quot;).show
+    studentDF.filter(&quot;name=&apos;&apos; OR name=&apos;NULL&apos;&quot;).show
+
+    // name以M开头的人
+    studentDF.filter(&quot;SUBSTR(name, 0, 1)=&apos;M&apos;&quot;).show
+
+    studentDF.sort(studentDF(&quot;name&quot;)).show
+    studentDF.sort(studentDF(&quot;name&quot;).desc).show
+
+    studentDF.sort(&quot;name&quot;,&quot;id&quot;).show
+    studentDF.sort(studentDF(&quot;name&quot;).asc, studentDF(&quot;id&quot;).desc).show
+
+    studentDF.select(studentDF(&quot;name&quot;).as(&quot;student_name&quot;)).show
+
+    val studentDF2 = rdd.map(_.split(&quot;\\|&quot;)).map(line =&gt; Student(line(0).toInt, line(1), line(2), line(3))).toDF()
+
+    studentDF.join(studentDF2, studentDF.col(&quot;id&quot;) === studentDF2.col(&quot;id&quot;)).show
+
+    spark.stop()
+  }
+
+  case class Student(id: Int, name: String, phone: String, email: String)
+}
+</code></pre><ul>
+<li>函数名都很简单易懂，可以自己测试一下</li>
+</ul>
+<h3 id="7-DataSet-概述"><a href="#7-DataSet-概述" class="headerlink" title="7. DataSet 概述"></a>7. DataSet 概述</h3><ul>
+<li>A Dataset is a distributed collection of data. Dataset is a new interface added in Spark 1.6 that provides the benefits of RDDs (strong typing, ability to use powerful lambda functions) with the benefits of Spark SQL’s optimized execution engine.</li>
+<li>DataFrame = Dataset[Row]</li>
+<li>Dataset：强类型 typed case class</li>
+<li>DataFrame：弱类型 Row</li>
+<li>静态类型和运行时类型安全<ul>
+<li>SQL: <ul>
+<li>seletc name from person;  <ul>
+<li>compile ok</li>
+<li>result no</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DF:<ul>
+<li>df.select(“name”)  compile no</li>
+<li>df.select(“nname”)  compile ok  </li>
+</ul>
+</li>
+<li>DS:<ul>
+<li>ds.map(line =&gt; line.itemid)  compile no</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/3.
+  * DataSet操作
+  */
+object DataSetApp {
+
+  def main(args: Array[String]) {
+    val spark = SparkSession.builder().appName(&quot;DatasetApp&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    //注意：需要导入隐式转换
+    import spark.implicits._
+
+    val path = &quot;D:/sales.csv&quot;
+
+    //spark如何解析csv文件？
+    val df = spark.read.option(&quot;header&quot;,&quot;true&quot;).option(&quot;inferSchema&quot;,&quot;true&quot;).csv(path)
+    df.show
+
+    val ds = df.as[Sales]
+    ds.map(line =&gt; line.itemId).show
+
+    ds.map(line =&gt; line.itemId)
+
+    spark.stop()
+  }
+
+  case class Sales(transactionId:Int,customerId:Int,itemId:Int,amountPaid:Double)
+}
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-External-Data-Source"><a href="#2-External-Data-Source" class="headerlink" title="2. External Data Source"></a>2. External Data Source</h2><h3 id="1-产生背景"><a href="#1-产生背景" class="headerlink" title="1. 产生背景"></a>1. 产生背景</h3><ul>
+<li>Every Spark application starts with loading data and ends with saving data</li>
+<li>Loading and saving Data is not easy</li>
+<li>Parse ram data: text/json/parquet</li>
+<li>Convert data format transformation</li>
+<li>Datasets stored in various Formats/Systems</li>
+<li>用户：方便快速从不同的数据源(json, parque, rdbms)，经过混合处理(json join parquet)，再将处理结果以特定的格式(json, parquet)写回到指定的系统(HDFS, S3)上去</li>
+<li>Spark SQL 1.2 ==&gt; 外部数据源API</li>
+</ul>
+<h3 id="2-目标"><a href="#2-目标" class="headerlink" title="2. 目标"></a>2. 目标</h3><ul>
+<li>Developer: build libraries for various data sources</li>
+<li>User: easy loading/saving DataFrames</li>
+</ul>
+<p><strong>外部数据源的目的</strong></p>
+<ul>
+<li>开发人员：是否需要把代码合并到spark中？</li>
+<li>用户<ul>
+<li>读：spark.read.format(format)  </li>
+<li>format<ul>
+<li>build-in: json parquet jdbc  csv(2+)</li>
+<li>packages: 外部的 并不是spark内置   <a href="https://spark-packages.org/" target="_blank" rel="noopener">https://spark-packages.org/</a></li>
+</ul>
+</li>
+<li>写：people.write.format(“parquet”).save(“path”)    </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-操作Parquet文件数据"><a href="#3-操作Parquet文件数据" class="headerlink" title="3. 操作Parquet文件数据"></a>3. 操作Parquet文件数据</h3><ul>
+<li>我们的外部数据源直接使用Spark提供的数据</li>
+</ul>
+<p><strong>使用spark shell</strong></p>
+<pre><code>[thpffcj@thpffcj bin]$ ./spark-shell --master local[2] --jars ~/lib/mysql-connector-java-5.1.38.jar
+</code></pre><ul>
+<li>加载数据源</li>
+</ul>
+<pre><code>scala&gt; val userDF = spark.read.format(&quot;parquet&quot;).load(&quot;file:///home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/users.parquet&quot;)
+userDF: org.apache.spark.sql.DataFrame = [name: string, favorite_color: string ... 1 more field]
+</code></pre><ul>
+<li>查看schema</li>
+</ul>
+<pre><code>scala&gt; userDF.printSchema()
+root
+ |-- name: string (nullable = true)
+ |-- favorite_color: string (nullable = true)
+ |-- favorite_numbers: array (nullable = true)
+ |    |-- element: integer (containsNull = true)
+</code></pre><ul>
+<li>查看数据</li>
+</ul>
+<pre><code>scala&gt; userDF.show
++------+--------------+----------------+
+|  name|favorite_color|favorite_numbers|
++------+--------------+----------------+
+|Alyssa|          null|  [3, 9, 15, 20]|
+|   Ben|           red|              []|
++------+--------------+----------------+
+
+scala&gt; userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).show
++------+--------------+
+|  name|favorite_color|
++------+--------------+
+|Alyssa|          null|
+|   Ben|           red|
++------+--------------+
+</code></pre><ul>
+<li>将输出写成json格式</li>
+</ul>
+<pre><code>scala&gt; userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).write.format(&quot;json&quot;).save(&quot;file:///home/thpffcj/tmp/jsonout&quot;)
+
+[thpffcj@thpffcj jsonout]$ ls
+part-00000-e8d1ee7a-c520-4e9e-bd3d-e32df6919f7f-c000.json  _SUCCESS
+[thpffcj@thpffcj jsonout]$ cat part-00000-e8d1ee7a-c520-4e9e-bd3d-e32df6919f7f-c000.json 
+{&quot;name&quot;:&quot;Alyssa&quot;}
+{&quot;name&quot;:&quot;Ben&quot;,&quot;favorite_color&quot;:&quot;red&quot;}
+</code></pre><ul>
+<li>我们也可以使用功能简化命令读取文件</li>
+</ul>
+<pre><code>spark.read.load(&quot;file:///home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/users.parquet&quot;).show
+
+// 会报错，因为sparksql默认处理的format就是parquet
+spark.read.load(&quot;file:///home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/people.json&quot;).show
+
+spark.read.format(&quot;parquet&quot;).option(&quot;path&quot;,&quot;file:///home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/users.parquet&quot;).load().show
+</code></pre><p><strong>使用spark sql</strong></p>
+<pre><code>#注意USING的用法
+CREATE TEMPORARY VIEW parquetTable
+USING org.apache.spark.sql.parquet
+OPTIONS (
+  path &quot;/home/thpffcj/app/spark-2.2.0-bin-2.6.0-cdh5.7.0/examples/src/main/resources/users.parquet&quot;
+)
+
+SELECT * FROM parquetTable
+</code></pre><h3 id="4-操作Hive表数据"><a href="#4-操作Hive表数据" class="headerlink" title="4. 操作Hive表数据"></a>4. 操作Hive表数据</h3><ul>
+<li>spark.table(tableName)</li>
+<li>df.write.saveAsTable(tableName)</li>
+</ul>
+<p><strong>操作</strong></p>
+<ul>
+<li>我们先看hive表里有哪些数据</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;show tables&quot;).show
++--------+--------------+-----------+
+|database|     tableName|isTemporary|
++--------+--------------+-----------+
+| default|          dept|      false|
+| default|           emp|      false|
+| default|hive_wordcount|      false|
+| default|             t|      false|
++--------+--------------+-----------+
+</code></pre><ul>
+<li>读数据</li>
+</ul>
+<pre><code>scala&gt; spark.table(&quot;emp&quot;).show
++-----+-----+--------+----+----------+------+-----+------+
+|empno|ename|     job| mgr|  hiredate|   sal| comm|deptno|
++-----+-----+--------+----+----------+------+-----+------+
+| 7369|SMITH|   CLERK|7092|1980-12-17| 800.0| null|    20|
+| 7499|ALLEN|SALESMAN|7968| 1981-2-20|1600.0|300.0|    30|
+| 7521| WARD|SALESMAN|7968| 1981-2-22|1250.0|500.0|    30|
++-----+-----+--------+----+----------+------+-----+------+
+</code></pre><ul>
+<li>一些查询</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;select deptno, count(1) from emp group by deptno&quot;).show
++------+--------+                                                               
+|deptno|count(1)|
++------+--------+
+|    20|       1|
+|    30|       2|
++------+--------+
+</code></pre><ul>
+<li>我们要想写到hive里怎么办呢</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;select deptno, count(1) from emp group by deptno&quot;).write.saveAsTable(&quot;hive_table&quot;)
+</code></pre><ul>
+<li>发现报错</li>
+</ul>
+<pre><code>18/05/05 10:59:40 ERROR CreateDataSourceTableAsSelectCommand: Failed to write to table hive_table
+org.apache.spark.sql.AnalysisException: Attribute name &quot;count(1)&quot; contains invalid character(s) among &quot; ,;{}()\n\t=&quot;. Please use alias to rename it.;
+</code></pre><ul>
+<li>他告诉我们需要别名</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;select deptno, count(1) as mount from emp group by deptno&quot;).write.saveAsTable(&quot;hive_table&quot;)
+</code></pre><ul>
+<li>查看是否有这张表</li>
+</ul>
+<pre><code>scala&gt; spark.sql(&quot;show tables&quot;).show
++--------+--------------+-----------+
+|database|     tableName|isTemporary|
++--------+--------------+-----------+
+| default|          dept|      false|
+| default|           emp|      false|
+| default|    hive_table|      false|
+| default|hive_wordcount|      false|
+| default|             t|      false|
++--------+--------------+-----------+
+</code></pre><ul>
+<li>看一下数据是否是我们想要的</li>
+</ul>
+<pre><code>scala&gt; spark.table(&quot;hive_table&quot;).show
++------+-----+                                                                  
+|deptno|mount|
++------+-----+
+|    20|    1|
+|    30|    2|
++------+-----+
+</code></pre><ul>
+<li>我们刚才执行的时候底下有一个200的进度条，这其实是分区数量<ul>
+<li>spark.sqlContext.setConf(“spark.sql.shuffle.partitions”,”10”)</li>
+<li>在生产环境中一定要注意设置spark.sql.shuffle.partitions，默认是200</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-操作MySQL表数据"><a href="#5-操作MySQL表数据" class="headerlink" title="5. 操作MySQL表数据"></a>5. 操作MySQL表数据</h3><pre><code>scala&gt; val jdbcDF = spark.read.format(&quot;jdbc&quot;).option(&quot;url&quot;, &quot;jdbc:mysql://localhost:3306/sparksql&quot;).option(&quot;dbtable&quot;, &quot;sparksql.TBLS&quot;).option(&quot;user&quot;, &quot;root&quot;).option(&quot;password&quot;, &quot;000000&quot;).option(&quot;driver&quot;, &quot;com.mysql.jdbc.Driver&quot;).load()
+</code></pre><ul>
+<li>查看Schema</li>
+</ul>
+<pre><code>scala&gt; jdbcDF.printSchema
+root
+ |-- TBL_ID: long (nullable = false)
+ |-- CREATE_TIME: integer (nullable = false)
+ |-- DB_ID: long (nullable = true)
+ |-- LAST_ACCESS_TIME: integer (nullable = false)
+ |-- OWNER: string (nullable = true)
+ |-- RETENTION: integer (nullable = false)
+ |-- SD_ID: long (nullable = true)
+ |-- TBL_NAME: string (nullable = true)
+ |-- TBL_TYPE: string (nullable = true)
+ |-- VIEW_EXPANDED_TEXT: string (nullable = true)
+ |-- VIEW_ORIGINAL_TEXT: string (nullable = true)
+</code></pre><ul>
+<li>查看数据</li>
+</ul>
+<pre><code>scala&gt; jdbcDF.show
++------+-----------+-----+----------------+-------+---------+-----+--------------+-------------+------------------+------------------+
+|TBL_ID|CREATE_TIME|DB_ID|LAST_ACCESS_TIME|  OWNER|RETENTION|SD_ID|      TBL_NAME|     TBL_TYPE|VIEW_EXPANDED_TEXT|VIEW_ORIGINAL_TEXT|
++------+-----------+-----+----------------+-------+---------+-----+--------------+-------------+------------------+------------------+
+|     1| 1525090410|    1|               0|thpffcj|        0|    1|hive_wordcount|MANAGED_TABLE|              null|              null|
+|     6| 1525229392|    1|               0|thpffcj|        0|    6|           emp|MANAGED_TABLE|              null|              null|
+|     7| 1525229398|    1|               0|thpffcj|        0|    7|          dept|MANAGED_TABLE|              null|              null|
+|    11| 1525234875|    1|               0|thpffcj|        0|   11|             t|MANAGED_TABLE|              null|              null|
+|    16| 1525489490|    1|               0|thpffcj|        0|   16|    hive_table|MANAGED_TABLE|              null|              null|
++------+-----------+-----+----------------+-------+---------+-----+--------------+-------------+------------------+------------------+
+</code></pre><p><strong>第二种方式</strong></p>
+<pre><code>import java.util.Properties
+val connectionProperties = new Properties()
+connectionProperties.put(&quot;user&quot;, &quot;root&quot;)
+connectionProperties.put(&quot;password&quot;, &quot;000000&quot;)
+connectionProperties.put(&quot;driver&quot;, &quot;com.mysql.jdbc.Driver&quot;)
+
+val jdbcDF2 = spark.read.jdbc(&quot;jdbc:mysql://localhost:3306&quot;, &quot;sparksql.TBLS&quot;, connectionProperties)
+</code></pre><p><strong>写数据</strong></p>
+<pre><code>// Saving data to a JDBC source
+jdbcDF.write
+  .format(&quot;jdbc&quot;)
+  .option(&quot;url&quot;, &quot;jdbc:postgresql:dbserver&quot;)
+  .option(&quot;dbtable&quot;, &quot;schema.tablename&quot;)
+  .option(&quot;user&quot;, &quot;username&quot;)
+  .option(&quot;password&quot;, &quot;password&quot;)
+  .save()
+</code></pre><p><strong>使用sparksql</strong></p>
+<pre><code>CREATE TEMPORARY VIEW jdbcTable
+USING org.apache.spark.sql.jdbc
+OPTIONS (
+  url &quot;jdbc:mysql://localhost:3306&quot;,
+  dbtable &quot;sparksql.TBLS&quot;,
+  user &apos;root&apos;,
+  password &apos;000000&apos;,
+  driver &apos;com.mysql.jdbc.Driver&apos;
+)
+</code></pre><h3 id="6-综合使用"><a href="#6-综合使用" class="headerlink" title="6. 综合使用"></a>6. 综合使用</h3><ul>
+<li>关联MySQL和Hive表数据关联操作</li>
+<li>先在mysql里创建数据</li>
+</ul>
+<pre><code>mysql&gt; create database spark;
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; use spark;
+Database changed
+mysql&gt; CREATE TABLE DEPT(
+    -&gt; DEPTNO int(2) PRIMARY KEY,
+    -&gt; DNAME VARCHAR(14) ,
+    -&gt; LOC VARCHAR(13) ) ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql&gt; INSERT INTO DEPT VALUES(10,&apos;ACCOUNTING&apos;,&apos;NEW YORK&apos;);
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; INSERT INTO DEPT VALUES(20,&apos;RESEARCH&apos;,&apos;DALLAS&apos;);
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; INSERT INTO DEPT VALUES(30,&apos;SALES&apos;,&apos;CHICAGO&apos;);
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; INSERT INTO DEPT VALUES(40,&apos;OPERATIONS&apos;,&apos;BOSTON&apos;);
+Query OK, 1 row affected (0.00 sec)
+</code></pre><ul>
+<li>我们现在要做的是如何在hive的emp表通过deptno和mysql的dept表联系</li>
+</ul>
+<pre><code>/**
+  * Created by Thpffcj on 2018/5/4.
+  * 使用外部数据源综合查询Hive和MySQL的表数据
+  * 不能直接运行，需要打包到服务器运行
+  */
+object HiveMySQLApp {
+
+  def main(args: Array[String]) {
+
+    val spark = SparkSession.builder().appName(&quot;HiveMySQLApp&quot;)
+      .master(&quot;local[2]&quot;).getOrCreate()
+
+    // 加载Hive表数据
+    val hiveDF = spark.table(&quot;emp&quot;)
+
+    // 加载MySQL表数据
+    val mysqlDF = spark.read.format(&quot;jdbc&quot;).option(&quot;url&quot;, &quot;jdbc:mysql://localhost:3306&quot;).option(&quot;dbtable&quot;, &quot;spark.DEPT&quot;).option(&quot;user&quot;, &quot;root&quot;).option(&quot;password&quot;, &quot;000000&quot;).option(&quot;driver&quot;, &quot;com.mysql.jdbc.Driver&quot;).load()
+
+    // JOIN
+    val resultDF = hiveDF.join(mysqlDF, hiveDF.col(&quot;deptno&quot;) === mysqlDF.col(&quot;DEPTNO&quot;))
+    resultDF.show
+
+
+    resultDF.select(hiveDF.col(&quot;empno&quot;),hiveDF.col(&quot;ename&quot;),
+      mysqlDF.col(&quot;deptno&quot;), mysqlDF.col(&quot;dname&quot;)).show
+
+    spark.stop()
+  }
+
+}
+</code></pre><ul>
+<li>编译打包上传到服务器，结果报错，找不到emp表，但我的spark的conf目录下有hive-site.xml，未能解决，使用spark-shell可以正常演示</li>
+<li>加载数据</li>
+</ul>
+<pre><code>scala&gt; val hiveDF = spark.table(&quot;emp&quot;)
+hiveDF: org.apache.spark.sql.DataFrame = [empno: int, ename: string ... 6 more fields]
+
+scala&gt; val mysqlDF = spark.read.format(&quot;jdbc&quot;).option(&quot;url&quot;, &quot;jdbc:mysql://localhost:3306&quot;).option(&quot;dbtable&quot;, &quot;spark.DEPT&quot;).option(&quot;user&quot;, &quot;root&quot;).option(&quot;password&quot;, &quot;000000&quot;).option(&quot;driver&quot;, &quot;com.mysql.jdbc.Driver&quot;).load()
+mysqlDF: org.apache.spark.sql.DataFrame = [DEPTNO: int, DNAME: string ... 1 more field]
+</code></pre><ul>
+<li>看一看join能不能成功</li>
+</ul>
+<pre><code>scala&gt; val resultDF = hiveDF.join(mysqlDF, hiveDF.col(&quot;deptno&quot;) === mysqlDF.col(&quot;DEPTNO&quot;))
+resultDF: org.apache.spark.sql.DataFrame = [empno: int, ename: string ... 9 more fields]
+
+scala&gt; resultDF.show
++-----+-----+--------+----+----------+------+-----+------+------+--------+-------+
+|empno|ename|     job| mgr|  hiredate|   sal| comm|deptno|DEPTNO|   DNAME|    LOC|
++-----+-----+--------+----+----------+------+-----+------+------+--------+-------+
+| 7369|SMITH|   CLERK|7092|1980-12-17| 800.0| null|    20|    20|RESEARCH| DALLAS|
+| 7521| WARD|SALESMAN|7968| 1981-2-22|1250.0|500.0|    30|    30|   SALES|CHICAGO|
+| 7499|ALLEN|SALESMAN|7968| 1981-2-20|1600.0|300.0|    30|    30|   SALES|CHICAGO|
++-----+-----+--------+----+----------+------+-----+------+------+--------+-------+
+</code></pre><ul>
+<li>可以进行结果进行查询</li>
+</ul>
+<pre><code>scala&gt; resultDF.select(hiveDF.col(&quot;empno&quot;),hiveDF.col(&quot;ename&quot;),
+     |       mysqlDF.col(&quot;deptno&quot;), mysqlDF.col(&quot;dname&quot;)).show
++-----+-----+------+--------+
+|empno|ename|deptno|   dname|
++-----+-----+------+--------+
+| 7369|SMITH|    20|RESEARCH|
+| 7521| WARD|    30|   SALES|
+| 7499|ALLEN|    30|   SALES|
++-----+-----+------+--------+
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-SparkSQL愿景"><a href="#3-SparkSQL愿景" class="headerlink" title="3. SparkSQL愿景"></a>3. SparkSQL愿景</h2><h3 id="1-SparkSQL愿景"><a href="#1-SparkSQL愿景" class="headerlink" title="1. SparkSQL愿景"></a>1. SparkSQL愿景</h3><h3 id="1-代码量和可读性"><a href="#1-代码量和可读性" class="headerlink" title="1. 代码量和可读性"></a>1. 代码量和可读性</h3><h3 id="2-统一访问操作接口"><a href="#2-统一访问操作接口" class="headerlink" title="2. 统一访问操作接口"></a>2. 统一访问操作接口</h3><h3 id="3-强有力的API支持"><a href="#3-强有力的API支持" class="headerlink" title="3. 强有力的API支持"></a>3. 强有力的API支持</h3><h3 id="4-Schema推导"><a href="#4-Schema推导" class="headerlink" title="4. Schema推导"></a>4. Schema推导</h3><h3 id="5-Schema-Merge"><a href="#5-Schema-Merge" class="headerlink" title="5. Schema Merge"></a>5. Schema Merge</h3><h3 id="6-Partition-Discovery"><a href="#6-Partition-Discovery" class="headerlink" title="6. Partition Discovery"></a>6. Partition Discovery</h3><h3 id="7-执行速度更快"><a href="#7-执行速度更快" class="headerlink" title="7. 执行速度更快"></a>7. 执行速度更快</h3><h3 id="8-读取更少的数据"><a href="#8-读取更少的数据" class="headerlink" title="8. 读取更少的数据"></a>8. 读取更少的数据</h3><h3 id="9-让查询优化器帮助我们优化执行效率"><a href="#9-让查询优化器帮助我们优化执行效率" class="headerlink" title="9. 让查询优化器帮助我们优化执行效率"></a>9. 让查询优化器帮助我们优化执行效率</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2018/05/04/System-Learning-Docker-1/" style="float: left;">
+        ← Docker简介
+    </a>
+    
+    
+    <a class="pull-right" href="/2018/05/02/Java-Concurrent-Programming-4/">
+        线程调度-线程池 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
