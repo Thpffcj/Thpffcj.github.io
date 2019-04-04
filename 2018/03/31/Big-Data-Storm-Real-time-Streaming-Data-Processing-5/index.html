@@ -210,7 +210,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%B9%B6%E8%A1%8C%E5%BA%A6.png" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1ohrq9ejgj20g10a1dgp.jpg" alt=""></p>
 <ul>
 <li>A worker process executes a subset of a topology. A worker process belongs to a specific topology and may run one or more executors for one or more components (spouts or bolts) of this topology. A running topology consists of many such processes running on many machines within a Storm cluster.</li>
 <li>An executor is a thread that is spawned by a worker process. It may run one or more tasks for the same component (spout or bolt).</li>
@@ -312,7 +312,7 @@ nohup: 忽略输入并把输出追加到&quot;nohup.out&quot;
 </code></pre><ul>
 <li>到UI界面查看</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/worker%E8%B0%83%E6%95%B4.png" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1ohsnc6yhj20o305h0sq.jpg" alt=""></p>
 <ul>
 <li>我们使用了两个slot，两个worker</li>
 <li>我们发现有两个executor两个task，是因为我们前面关闭了ack</li>
@@ -375,7 +375,7 @@ public SpoutDeclarer setSpout(String id, IRichSpout spout, Number parallelism_hi
 <pre><code>[thpffcj@thpffcj bin]$ storm jar /home/thpffcj/lib/storm-1.0.jar cn.edu.nju.ClusterSumStormExecutorsTopology
 ...
 1315 [main] INFO  o.a.s.StormSubmitter - Finished submitting topology: ClusterSumStormExecutorsTopology
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/executor%E8%AE%BE%E7%BD%AE.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bly1g1ohth4yicj20nv04tt8p.jpg" alt=""></p>
 <ul>
 <li>依然用掉了两个slot，worker的数量为2</li>
 <li>executor的数量和task的数量为4，我们我们设置了spout和blot的并行度为2</li>
@@ -421,7 +421,7 @@ public SpoutDeclarer setSpout(String id, IRichSpout spout, Number parallelism_hi
 </code></pre><ul>
 <li>可以看到executor数量依然是4，但是task的数量变成了6</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/task%E8%AE%BE%E7%BD%AE.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1ohuf0h8gj20o605d74a.jpg" alt=""></p>
 <h3 id="4-ack设置"><a href="#4-ack设置" class="headerlink" title="4. ack设置"></a>4. ack设置</h3><ul>
 <li>我们只需要将设置ack的地方去掉</li>
 </ul>
@@ -450,7 +450,7 @@ public SpoutDeclarer setSpout(String id, IRichSpout spout, Number parallelism_hi
 <pre><code>[thpffcj@thpffcj bin]$ storm jar /home/thpffcj/lib/storm-1.0.jar cn.edu.nju.ClusterSumStormAckerTopology
 ...
 1387 [main] INFO  o.a.s.StormSubmitter - Finished submitting topology: ClusterSumStormAckerTopology
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/ack%E8%AE%BE%E7%BD%AE.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1ohv9o5bkj20nz05874a.jpg" alt=""></p>
 <ul>
 <li>Used slots：2</li>
 <li>Executors：6(比上面多了两个ack)</li>
@@ -459,7 +459,7 @@ public SpoutDeclarer setSpout(String id, IRichSpout spout, Number parallelism_hi
 <h3 id="5-并行度案例分析"><a href="#5-并行度案例分析" class="headerlink" title="5. 并行度案例分析"></a>5. 并行度案例分析</h3><ul>
 <li>The following illustration shows how a simple topology would look like in operation. The topology consists of three components: one spout called BlueSpout and two bolts called GreenBolt and YellowBolt. The components are linked such that BlueSpout sends its output to GreenBolt, which in turns sends its own output to YellowBolt.</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%B9%B6%E8%A1%8C%E5%BA%A6%E6%A1%88%E4%BE%8B.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1ohw76hixj20gf0eoabn.jpg" alt=""></p>
 <pre><code>Config conf = new Config();
 conf.setNumWorkers(2); // use two worker processes
 

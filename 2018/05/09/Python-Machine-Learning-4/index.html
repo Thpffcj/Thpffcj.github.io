@@ -188,7 +188,7 @@
 <li>通过降维，可以发现更便于人类理解的特征</li>
 <li>其他应用：可视化，去噪</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A0%B7%E6%9C%AC%E9%97%B4%E8%B7%9D.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5gg6nh2j20io0aoq49.jpg" alt=""></p>
 <ul>
 <li>如何找到这个让样本间距最大的轴</li>
 <li>如何定义样本间距<ul>
@@ -199,10 +199,10 @@
 <li>我们想要求一个轴的方向w = (w1, w2)</li>
 <li>使得我们所有的样本，映射到w以后，方差最大</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90.png" alt=""></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%95.png" alt=""></p>
-<h3 id="2-使用梯度上升法求解PCA问题"><a href="#2-使用梯度上升法求解PCA问题" class="headerlink" title="2. 使用梯度上升法求解PCA问题"></a>2. 使用梯度上升法求解PCA问题</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%95.png" alt=""></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%A2%AF%E5%BA%A6%E4%B8%8A%E5%8D%87%E6%B3%952.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5i9akdoj20ir09mabe.jpg" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5hqd7fmj20jd0a90u9.jpg" alt=""></p>
+<h3 id="2-使用梯度上升法求解PCA问题"><a href="#2-使用梯度上升法求解PCA问题" class="headerlink" title="2. 使用梯度上升法求解PCA问题"></a>2. 使用梯度上升法求解PCA问题</h3><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5j10ulbj20ia090ta4.jpg" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5j67qnij20ks08s3zw.jpg" alt=""></p>
 <h3 id="3-求数据的主成分PCA"><a href="#3-求数据的主成分PCA" class="headerlink" title="3. 求数据的主成分PCA"></a>3. 求数据的主成分PCA</h3><ul>
 <li>生成虚拟测试用例</li>
 </ul>
@@ -215,7 +215,7 @@ X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 10., size=100)
 
 plt.scatter(X[:,0], X[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%901.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bly1g1p5kdqct8j20ai070t8m.jpg" alt=""></p>
 <ul>
 <li>首先我们需要进行demean操作</li>
 </ul>
@@ -226,7 +226,7 @@ X_demean = demean(X)
 
 plt.scatter(X_demean[:,0], X_demean[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%902.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5kh7m93j20ak070q2u.jpg" alt=""></p>
 <pre><code>np.mean(X_demean[:,0])
 </code></pre><blockquote>
 <p>2.6290081223123707e-15</p>
@@ -304,7 +304,7 @@ gradient_ascent(df_debug, X_demean, initial_w, eta)
 plt.scatter(X_demean[:,0], X_demean[:,1])
 plt.plot([0, w[0]*30], [0, w[1]*30], color=&apos;r&apos;)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%903.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5kmf2mij20am070jrb.jpg" alt=""></p>
 <ul>
 <li>我们最后尝试用一个极端数据看一看结果</li>
 </ul>
@@ -314,20 +314,20 @@ X2[:,1] = 0.75 * X2[:,0] + 3.
 
 plt.scatter(X2[:,0], X2[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%904.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5l1pqahj20ac070wee.jpg" alt=""></p>
 <pre><code>X2_demean = demean(X2)
 w2 = gradient_ascent(df_math, X2_demean, initial_w, eta)
 
 plt.scatter(X2_demean[:,0], X2_demean[:,1])
 plt.plot([0, w2[0]*30], [0, w2[1]*30], color=&apos;r&apos;)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%905.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5l6onemj20ak070glj.jpg" alt=""></p>
 <h3 id="4-求数据的前n个主成分"><a href="#4-求数据的前n个主成分" class="headerlink" title="4. 求数据的前n个主成分"></a>4. 求数据的前n个主成分</h3><ul>
 <li>当求出第一主成分后，如何求出下一个主成分</li>
 <li>数据进行改变，将数据在第一个主成分上的分量去掉</li>
 <li>在新的数据上求第一主成分</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8E%BB%E9%99%A4%E7%AC%AC%E4%B8%80%E4%B8%BB%E6%88%90%E5%88%86.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5q3eakfj20fz08q0u1.jpg" alt=""></p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -339,7 +339,7 @@ def demean(X):
     return X - np.mean(X, axis=0)
 
 X = demean(X)
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%906.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5lcma7dj20ak070mx2.jpg" alt=""></p>
 <ul>
 <li>求出第一主成分的代码</li>
 </ul>
@@ -387,7 +387,7 @@ for i in range(len(X)):
 
 plt.scatter(X2[:,0], X2[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%907.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5lqsnxij20ac070aa7.jpg" alt=""></p>
 <ul>
 <li><p>求第二主成分方向</p>
 <p>  w2 = first_component(X2, initial_w, eta)<br>  w2</p>
@@ -410,7 +410,7 @@ plt.show()
 
 plt.scatter(X2[:,0], X2[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%907.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5lqsnxij20ac070aa7.jpg" alt=""></p>
 <ul>
 <li>现在我们就可以把前面学习的内容合成一个部分了</li>
 </ul>
@@ -433,7 +433,7 @@ plt.show()
 </code></pre><blockquote>
 <p>[array([ 0.77724759,  0.62919487]), array([ 0.62919847, -0.77724467])]</p>
 </blockquote>
-<h3 id="5-高维数据映射为低维数据"><a href="#5-高维数据映射为低维数据" class="headerlink" title="5. 高维数据映射为低维数据"></a>5. 高维数据映射为低维数据</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E9%AB%98%E7%BB%B4%E6%95%B0%E6%8D%AE%E6%98%A0%E5%B0%84%E4%B8%BA%E4%BD%8E%E7%BB%B4%E6%95%B0%E6%8D%AE.png" alt=""></p>
+<h3 id="5-高维数据映射为低维数据"><a href="#5-高维数据映射为低维数据" class="headerlink" title="5. 高维数据映射为低维数据"></a>5. 高维数据映射为低维数据</h3><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5r5s871j20hz0aowg5.jpg" alt=""></p>
 <ul>
 <li>我们封装以前写过的代码，并添加transform和inverse_transform方法</li>
 </ul>
@@ -560,7 +560,7 @@ X_restore.shape
 <pre><code>plt.scatter(X[:,0], X[:,1], color=&apos;b&apos;, alpha=0.5)
 plt.scatter(X_restore[:,0], X_restore[:,1], color=&apos;r&apos;, alpha=0.5)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%908.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5mge9qkj20ai070mx8.jpg" alt=""></p>
 <ul>
 <li>我们的数据进行降维再恢复，其实就回到了所有数据点在主成分这个轴上的位置</li>
 <li>在降维中失去的信息并不能恢复</li>
@@ -582,7 +582,7 @@ X_restore = pca.inverse_transform(X_reduction)
 plt.scatter(X[:,0], X[:,1], color=&apos;b&apos;, alpha=0.5)
 plt.scatter(X_restore[:,0], X_restore[:,1], color=&apos;r&apos;, alpha=0.5)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%909.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5mlxw95j20ac070t8r.jpg" alt=""></p>
 <ul>
 <li>我们下面使用一个真实的数据集，真实看一下PCA的威力</li>
 <li>我们使用的是手写识别的数据</li>
@@ -669,7 +669,7 @@ pca.explained_variance_ratio_
 <pre><code>plt.plot([i for i in range(X_train.shape[1])], 
          [np.sum(pca.explained_variance_ratio_[:i+1]) for i in range(X_train.shape[1])])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9010.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5mrrhvwj20af070747.jpg" alt=""></p>
 <ul>
 <li>这个图就解释了主成分对应解释的方差，比如我们希望保持95%以上的信息</li>
 <li>这种功能已经被我们的sklearn封装好了</li>
@@ -707,7 +707,7 @@ X_reduction = pca.transform(X)
 for i in range(10):
     plt.scatter(X_reduction[y==i,0], X_reduction[y==i,1], alpha=0.8)
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9011.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5mwa7pnj20ak070dhd.jpg" alt=""></p>
 <ul>
 <li>可以看到我们把数据降到二维，有些数字也有很高的区分度</li>
 </ul>
@@ -800,7 +800,7 @@ X[:,1] = 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size=100)
 
 plt.scatter(X[:,0], X[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9012.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5n1tekaj20ac070a9z.jpg" alt=""></p>
 <pre><code>from sklearn.decomposition import PCA
 
 pca = PCA(n_components=1)
@@ -810,7 +810,7 @@ X_restore = pca.inverse_transform(X_reduction)
 
 plt.scatter(X_restore[:,0], X_restore[:,1])
 plt.show()
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9013.png" alt=""></p>
+</code></pre><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1p5nhwfntj20ae070mx2.jpg" alt=""></p>
 <ul>
 <li><strong>降维的过程可以理解成是去噪</strong></li>
 <li>手写识别的例子</li>
@@ -850,7 +850,7 @@ for num in range(1,10):
     plt.show()
 
 plot_digits(example_digits)
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9014.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5nlzj2nj20g20fp0td.jpg" alt=""></p>
 <ul>
 <li>下面我们使用PCA进行降噪</li>
 </ul>
@@ -862,7 +862,7 @@ pca.n_components_
 <pre><code>components = pca.transform(example_digits)
 filtered_digits = pca.inverse_transform(components)
 plot_digits(filtered_digits)
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%9015.png" alt=""></p>
+</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bly1g1p5o0074uj20g20fp0ta.jpg" alt=""></p>
 <h3 id="4-人脸识别与特征脸"><a href="#4-人脸识别与特征脸" class="headerlink" title="4. 人脸识别与特征脸"></a>4. 人脸识别与特征脸</h3><ul>
 <li>每一个特征脸相当于一个主成分</li>
 </ul>
@@ -909,7 +909,7 @@ example_faces.shape
     plt.show()
 
 plot_faces(example_faces)
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E6%9E%9016.png" alt=""></p>
+</code></pre><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1p5wpg85tj20fg0fpn38.jpg" alt=""></p>
 <ul>
 <li>特征脸，进行PCA过程</li>
 </ul>
@@ -928,7 +928,7 @@ pca.fit(X)
 <li>所谓特征脸就是将主成分每一行都当成一个样本看待</li>
 </ul>
 <pre><code>plot_faces(pca.components_[:36,:])
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E6%9E%9017.png" alt=""></p>
+</code></pre><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1p5wv8siyj20fg0fpjw6.jpg" alt=""></p>
 <ul>
 <li>更多关于lfw_people数据集</li>
 </ul>

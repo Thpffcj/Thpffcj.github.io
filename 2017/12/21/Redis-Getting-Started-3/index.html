@@ -212,7 +212,7 @@
 </ul>
 <p><br></p>
 <hr>
-<h2 id="2-RDB"><a href="#2-RDB" class="headerlink" title="2. RDB"></a>2. RDB</h2><h3 id="1-什么是RDB"><a href="#1-什么是RDB" class="headerlink" title="1. 什么是RDB"></a>1. 什么是RDB</h3><p><img src="http://oseihavwm.bkt.clouddn.com/RDB.png" alt=""></p>
+<h2 id="2-RDB"><a href="#2-RDB" class="headerlink" title="2. RDB"></a>2. RDB</h2><h3 id="1-什么是RDB"><a href="#1-什么是RDB" class="headerlink" title="1. 什么是RDB"></a>1. 什么是RDB</h3><p><img src="http://wx3.sinaimg.cn/mw690/e647f98bly1g1pf5rtoo6j20hh0ar0va.jpg" alt=""></p>
 <h3 id="2-触发机制-主要三种方式"><a href="#2-触发机制-主要三种方式" class="headerlink" title="2. 触发机制 - 主要三种方式"></a>2. 触发机制 - 主要三种方式</h3><p><strong>1. save(同步)</strong></p>
 <ul>
 <li>客户端向redis发送一条save命令，redis会帮我们生成RDB文件。</li>
@@ -472,7 +472,7 @@ OK
 <h3 id="2-AOF运行原理，创建"><a href="#2-AOF运行原理，创建" class="headerlink" title="2. AOF运行原理，创建"></a>2. AOF运行原理，创建</h3><ul>
 <li><strong>客户端写一条数据，就在日志追加一条写命令</strong></li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/AOF.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1pfe5maonj20kl0a7juc.jpg" alt=""></p>
 <h3 id="3-AOF的三种策略"><a href="#3-AOF的三种策略" class="headerlink" title="3. AOF的三种策略"></a>3. AOF的三种策略</h3><ul>
 <li><strong>always</strong><ul>
 <li>redis在执行写命令的时候，实际上不是直接写在文件系统当中，而是写在硬盘的缓冲区当中。缓冲区会根据一些策略刷新到硬盘当中。</li>
@@ -581,7 +581,7 @@ OK
 </ul>
 </li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/AOF%E9%87%8D%E5%86%99%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1pff63up0j20af0aodh2.jpg" alt=""></p>
 <h3 id="6-AOF配置"><a href="#6-AOF配置" class="headerlink" title="6. AOF配置"></a>6. AOF配置</h3><ul>
 <li>我们修改一下redis默认配置文件中给出的配置</li>
 </ul>

@@ -361,7 +361,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 </tbody>
 </table>
 <hr>
-<h3 id="2-数据结构和内部编码"><a href="#2-数据结构和内部编码" class="headerlink" title="2. 数据结构和内部编码"></a>2. 数据结构和内部编码</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E5%86%85%E9%83%A8%E7%BC%96%E7%A0%81.png" alt=""></p>
+<h3 id="2-数据结构和内部编码"><a href="#2-数据结构和内部编码" class="headerlink" title="2. 数据结构和内部编码"></a>2. 数据结构和内部编码</h3><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1peypf0p5j20io0jbwjw.jpg" alt=""></p>
 <ul>
 <li>数据结构有不同的实现方法：内存比较昂贵，在不同情况下可能使用不同的内部编码来达到时间换空间和空间换时间的效果。</li>
 <li>实际上对于redis的源码内部有一个redisObject这样一个对象，或者说结构体，它会有很多属性：<ul>
@@ -375,7 +375,7 @@ root       8447      1  0 09:49 ?        00:00:00 redis-server *:6382
 <li>用户不需要知道内部编码，其实也是面向接口编程的一种实践。</li>
 </ul>
 <hr>
-<h3 id="3-单线程"><a href="#3-单线程" class="headerlink" title="3. 单线程"></a>3. 单线程</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8D%95%E7%BA%BF%E7%A8%8B1.png" alt=""></p>
+<h3 id="3-单线程"><a href="#3-单线程" class="headerlink" title="3. 单线程"></a>3. 单线程</h3><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1pf1hqhslj20kd05daai.jpg" alt=""></p>
 <ul>
 <li>redis在一个瞬间只会执行一个命令。</li>
 <li>单线程为什么这么快？<ul>
@@ -895,13 +895,13 @@ String value = jedis.get(&quot;hello&quot;);
 </ul>
 <h3 id="2-Python客户端：redis-py"><a href="#2-Python客户端：redis-py" class="headerlink" title="2. Python客户端：redis-py"></a>2. Python客户端：redis-py</h3><h3 id="3-Go客户端：Redigo"><a href="#3-Go客户端：Redigo" class="headerlink" title="3. Go客户端：Redigo"></a>3. Go客户端：Redigo</h3><hr>
 <p><br></p>
-<h2 id="4-Redis的一些其他功能"><a href="#4-Redis的一些其他功能" class="headerlink" title="4. Redis的一些其他功能"></a>4. Redis的一些其他功能</h2><h3 id="1-慢查询"><a href="#1-慢查询" class="headerlink" title="1. 慢查询"></a>1. 慢查询</h3><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></p>
+<h2 id="4-Redis的一些其他功能"><a href="#4-Redis的一些其他功能" class="headerlink" title="4. Redis的一些其他功能"></a>4. Redis的一些其他功能</h2><h3 id="1-慢查询"><a href="#1-慢查询" class="headerlink" title="1. 慢查询"></a>1. 慢查询</h3><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1pf2rtf5xj20ey0an0tv.jpg" alt=""></p>
 <ul>
 <li>慢查询发生在第3阶段。</li>
 <li>客户端超时不一定慢查询，但慢查询是客户端超时的一个可能因素。</li>
 </ul>
 <p><strong>1. 两个配置 - slowlog-max-len：我们的慢查询队列长度是多少</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E6%85%A2%E6%9F%A5%E8%AF%A2%E9%98%9F%E5%88%97.png" alt=""></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1pf40aeeaj20cm0693zz.jpg" alt=""></p>
 <ul>
 <li>先进先出队列</li>
 <li>固定长度</li>
@@ -980,7 +980,7 @@ String value = jedis.get(&quot;hello&quot;);
 <li>订阅者(subscriber)</li>
 <li>频道(channel)</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%8F%91%E5%B8%83%E6%A8%A1%E5%9E%8B.png" alt=""></p>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1pf4w3fzjj20k30a1go6.jpg" alt=""></p>
 <p><strong>2. API</strong></p>
 <ul>
 <li>publish(发布命令)<ul>
