@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>高并发之扩容思路 | Thpffcj的树洞</title>
+  <title>循环神经网络 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,140 +172,161 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
-          2018-05-28
+      <time datetime="2019-04-06T00:56:13.000Z" itemprop="datePublished">
+          2019-04-06
       </time>
     
 </span>
-                <h1>高并发之扩容思路</h1>
+                <h1>循环神经网络</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-高并发之扩容思路"><a href="#1-高并发之扩容思路" class="headerlink" title="1. 高并发之扩容思路"></a>1. 高并发之扩容思路</h2><ul>
-<li>垂直扩容(纵向扩展)：提高系统部件能力</li>
-<li>水平扩容(横向扩展)：增加更多系统成员来实现</li>
+      		<h2 id="1-循环神经网络"><a href="#1-循环神经网络" class="headerlink" title="1. 循环神经网络"></a>1. 循环神经网络</h2><h3 id="1-为什么需要循环神经网络-序列式问题"><a href="#1-为什么需要循环神经网络-序列式问题" class="headerlink" title="1. 为什么需要循环神经网络 - 序列式问题"></a>1. 为什么需要循环神经网络 - 序列式问题</h3><ul>
+<li>1对多：图片生成描述</li>
+<li>多对1：文本分类(文本情感分析)</li>
+<li>多对多：encoding-decoding，机器翻译</li>
+<li>实时多对多：视频解说</li>
 </ul>
-<p><strong>扩容 - 数据库</strong></p>
+<h3 id="2-循环神经网络"><a href="#2-循环神经网络" class="headerlink" title="2. 循环神经网络"></a>2. 循环神经网络</h3><ul>
+<li>维护一个状态作为下一步的额外输入</li>
+<li>每一步使用同样的激活函数和参数</li>
+</ul>
+<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1snbewtosj214y0jkjyh.jpg" alt=""></p>
 <ul>
-<li>读操作扩展：memcache, redis, CDN等缓存</li>
-<li>写操作扩展：Cassandra, Hbase等</li>
+<li>反向传播<ul>
+<li>Tanh输出在-1和1之间</li>
+<li>梯度消失</li>
+<li>较远的步骤梯度贡献很小</li>
+<li>切换其他激活函数后，可能也会导致爆炸</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1snio80y0j217k0k2qg6.jpg" alt=""></p>
+<h3 id="3-多层网络与双向网络"><a href="#3-多层网络与双向网络" class="headerlink" title="3. 多层网络与双向网络"></a>3. 多层网络与双向网络</h3><p><strong>多层网络</strong></p>
+<ul>
+<li>底层输出作为高层输入</li>
+<li>同层之间依旧递归</li>
+<li>增加网络拟合能力</li>
+<li>一般隐层维数递增<ul>
+<li>64 - 128 - 256</li>
+</ul>
+</li>
+</ul>
+<p><strong>双向网络</strong></p>
+<ul>
+<li>另一路以未来状态为输入</li>
+<li>两个状态拼接后进入输出层</li>
+<li>进一步提高表达能力</li>
+<li>无法实时输出结果</li>
+</ul>
+<h3 id="4-长短期记忆网络-LSTM"><a href="#4-长短期记忆网络-LSTM" class="headerlink" title="4. 长短期记忆网络(LSTM)"></a>4. 长短期记忆网络(LSTM)</h3><p><strong>为什么需要LSTM</strong></p>
+<ul>
+<li>普通RNN的信息不能长久传播(存在于理论上)</li>
+<li>引入选择性机制<ul>
+<li>选择性输出</li>
+<li>选择性输入</li>
+<li>选择性遗忘</li>
+</ul>
+</li>
+<li>选择性 -&gt; 门<ul>
+<li>Sigmoid函数：[0， 1]</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1so0f1ermj212a0ho46x.jpg" alt=""></p>
+<ul>
+<li>遗忘门<ul>
+<li>新的一句有新的主语，就应该把之前的主语忘掉</li>
+</ul>
+</li>
+<li>传入门<ul>
+<li>是不是要把主语的性别信息添加进来</li>
+</ul>
+</li>
+<li>输出门<ul>
+<li>动词该用单数形式还是复数形式</li>
+</ul>
+</li>
+<li>当前状态<ul>
+<li>经过遗忘门的上一状态</li>
+<li>经过输入门的输入状态</li>
+</ul>
+</li>
 </ul>
 <p><br></p>
 <hr>
-<h2 id="2-高并发之缓存思路"><a href="#2-高并发之缓存思路" class="headerlink" title="2. 高并发之缓存思路"></a>2. 高并发之缓存思路</h2><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98.jpg" alt=""></p>
-<h3 id="1-缓存特征，场景及组件介绍"><a href="#1-缓存特征，场景及组件介绍" class="headerlink" title="1. 缓存特征，场景及组件介绍"></a>1. 缓存特征，场景及组件介绍</h3><p><strong>缓存特征</strong></p>
+<h2 id="2-文本分类模型"><a href="#2-文本分类模型" class="headerlink" title="2. 文本分类模型"></a>2. 文本分类模型</h2><h3 id="1-LSTM文本分类"><a href="#1-LSTM文本分类" class="headerlink" title="1. LSTM文本分类"></a>1. LSTM文本分类</h3><ul>
+<li>使用LSTM的最后一个状态<ul>
+<li>输入embedding</li>
+<li>输出全连接层</li>
+</ul>
+</li>
+<li>双向LSTM解决信息瓶颈</li>
+</ul>
+<h3 id="2-HAN文本分类"><a href="#2-HAN文本分类" class="headerlink" title="2. HAN文本分类"></a>2. HAN文本分类</h3><p><img src="http://wx2.sinaimg.cn/mw690/e647f98bly1g1sonx1u6zj218a0pu4ch.jpg" alt=""></p>
+<h3 id="3-基于CNN的文本分类模型"><a href="#3-基于CNN的文本分类模型" class="headerlink" title="3. 基于CNN的文本分类模型"></a>3. 基于CNN的文本分类模型</h3><ul>
+<li>需要每个句子截取为同样长度，可适用于短文本分类</li>
+</ul>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1su6tasu6j20sz0dbaeq.jpg" alt=""></p>
 <ul>
-<li>命中率：命中数 / (命中数 + 没有命中数)</li>
-<li>最大元素(空间)</li>
-<li>清空策略：FIFO, LFU, LRU, 过期时间, 随机等</li>
+<li>单通道一维卷积</li>
+<li>多通道一维卷积</li>
+<li>多个卷积核会有多个输出</li>
 </ul>
-<p><strong>缓存命中率影响因素</strong></p>
+<p><strong>CNN文本分类</strong></p>
 <ul>
-<li>业务场景和业务需求</li>
-<li>缓存的设计(粒度和策略)</li>
-<li>缓存容量和基础设施</li>
+<li>一维卷积<ul>
+<li>应用在时间维度上</li>
+<li>Embedding长度就是通道数目</li>
+<li>多种层次的卷积核</li>
 </ul>
-<p><strong>缓存分类和应用场景</strong></p>
+</li>
+<li>池化<ul>
+<li>在时间层次上pooling</li>
+</ul>
+</li>
+<li>全连接</li>
+</ul>
+<h3 id="4-CNN-vs-RNN"><a href="#4-CNN-vs-RNN" class="headerlink" title="4. CNN vs RNN"></a>4. CNN vs RNN</h3><ul>
+<li>CNN不能完美的解决序列式问题</li>
+<li>CNN卷积相当于N-gram，LSTM提取更长的依赖</li>
+<li>Pre-train的embedding</li>
+<li>双向RNN会增强效果</li>
+<li>CNN模型并行程度高，更快</li>
+<li>embedding模型压缩</li>
+</ul>
+<h3 id="5-R-CNN文本分类"><a href="#5-R-CNN文本分类" class="headerlink" title="5. R-CNN文本分类"></a>5. R-CNN文本分类</h3><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1suw8nslnj20rm0cf43m.jpg" alt=""></p>
 <ul>
-<li>本地缓存：编程实现(成员变量，局部变量，静态变量)，Guava Cache</li>
-<li>分布式缓存：Memcache, Redis</li>
-</ul>
-<p><strong>缓存 - Guava Cache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Guava%20Cache.png" alt=""></p>
+<li>双向RNN提取特征</li>
+<li>CNN进一步抽取</li>
+<li>Max-pooling</li>
+<li><p>全连接层</p>
+<h3 id="6-Embedding压缩"><a href="#6-Embedding压缩" class="headerlink" title="6. Embedding压缩"></a>6. Embedding压缩</h3></li>
+<li><p>Embedding层次参数过大</p>
 <ul>
-<li>使用多个细粒度segment锁，保证线程安全的同时满足高并发的需求</li>
+<li>无法实用</li>
+<li>过拟合</li>
 </ul>
-<p><strong>缓存 - Memcache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Memcache.png" alt=""></p>
-<ul>
-<li>Memcache内存结构</li>
+</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Memcache%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84.png" alt=""></p>
-<ul>
-<li>chunk中总会有内存浪费</li>
-<li>LRU算法不是针对全局的</li>
+<p><br></p>
+<hr>
+<h2 id="3-Tensorflow实战"><a href="#3-Tensorflow实战" class="headerlink" title="3. Tensorflow实战"></a>3. Tensorflow实战</h2><ul>
+<li>我们在本次实战使用的数据是一个新闻数据</li>
 </ul>
-<p><strong>缓存 - Redis</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Redis.png" alt=""></p>
-<h3 id="2-redis的使用"><a href="#2-redis的使用" class="headerlink" title="2. redis的使用"></a>2. redis的使用</h3><ul>
-<li>添加依赖</li>
-</ul>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
-    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
-    &lt;version&gt;2.8.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><ul>
-<li>application.properties中添加属性</li>
-</ul>
-<pre><code># redis
-jedis.host=127.0.0.1
-jedis.port=6379
-</code></pre><ul>
-<li>添加redis配置</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Configuration
-public class RedisConfig {
-
-    @Bean(name = &quot;redisPool&quot;)
-    public JedisPool jedisPool(@Value(&quot;${jedis.host}&quot;) String host,
-                               @Value(&quot;${jedis.port}&quot;) int port) {
-        return new JedisPool(host, port);
-    }
-}
-</code></pre><ul>
-<li>最后我们封装自己的RedisClient</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Component
-public class RedisClient {
-
-    @Resource(name = &quot;redisPool&quot;)
-    private JedisPool jedisPool;
-
-    public void set(String key, String value) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            jedis.set(key, value);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-
-
-    public String get(String key) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            return jedis.get(key);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-}
-</code></pre><h3 id="3-高并发场景问题及实战"><a href="#3-高并发场景问题及实战" class="headerlink" title="3. 高并发场景问题及实战"></a>3. 高并发场景问题及实战</h3>
+<h3 id="1-Tensorflow中使用LSTM实现文本分类"><a href="#1-Tensorflow中使用LSTM实现文本分类" class="headerlink" title="1. Tensorflow中使用LSTM实现文本分类"></a>1. Tensorflow中使用LSTM实现文本分类</h3><h3 id="2-Tensorflow中实现LSTM网络结构"><a href="#2-Tensorflow中实现LSTM网络结构" class="headerlink" title="2. Tensorflow中实现LSTM网络结构"></a>2. Tensorflow中实现LSTM网络结构</h3><h3 id="3-Tensorflow中使用CNN实现文本分类"><a href="#3-Tensorflow中使用CNN实现文本分类" class="headerlink" title="3. Tensorflow中使用CNN实现文本分类"></a>3. Tensorflow中使用CNN实现文本分类</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/12/12/Software-Engineering-and-Computing-Course-1/" style="float: left;">
-        ← 软件工程与计算 1
+    <a class="pull-left" href="/2019/04/07/HBase-SpringBoot-Combat-Distributed-File-Storage-2/" style="float: left;">
+        ← HBase+SpringBoot实战分布式文件存储 2
     </a>
     
     
-    <a class="pull-right" href="/2018/05/25/Python-Machine-Learning-9/">
-        决策树 →
+    <a class="pull-right" href="/2019/04/04/HBase-SpringBoot-Combat-Distributed-File-Storage-1/">
+        HBase+SpringBoot实战分布式文件存储 1 →
     </a>
     
 </nav>

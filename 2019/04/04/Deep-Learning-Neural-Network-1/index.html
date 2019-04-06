@@ -237,7 +237,61 @@
 </ul>
 </li>
 </ul>
-<h3 id="4-Tensorflow基础"><a href="#4-Tensorflow基础" class="headerlink" title="4. Tensorflow基础"></a>4. Tensorflow基础</h3><h3 id="5-神经网络Tensorflow实战"><a href="#5-神经网络Tensorflow实战" class="headerlink" title="5 神经网络Tensorflow实战"></a>5 神经网络Tensorflow实战</h3>
+<h3 id="4-Tensorflow基础"><a href="#4-Tensorflow基础" class="headerlink" title="4. Tensorflow基础"></a>4. Tensorflow基础</h3><ul>
+<li>Google Brain的第二代机器学习框架</li>
+<li>开源社区活跃</li>
+<li>可扩展性好</li>
+<li>API健全，对用户友好</li>
+</ul>
+<p><strong>计算图模型</strong></p>
+<ul>
+<li>声明式编程<ul>
+<li>如何执行：先构建计算图，再输入数值进行计算</li>
+<li>优点：先拿到计算图，便于优化。可视化计算图。方便存取</li>
+<li>缺点：很多语言特性用不上，不易于调试，监事中间结果不简单</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-神经网络Tensorflow实战"><a href="#5-神经网络Tensorflow实战" class="headerlink" title="5 神经网络Tensorflow实战"></a>5 神经网络Tensorflow实战</h3><ul>
+<li>我们使用的数据集是 CIFAR-10</li>
+</ul>
+<p><strong>神经元的Tensorflow实现</strong></p>
+<p>  import tensorflow as tf<br>  import os<br>  import pickle<br>  import numpy as np</p>
+<p>  CIFAR_DIR = “./../cifar-10-batches-py”<br>  print(os.listdir(CIFAR_DIR))</p>
+<blockquote>
+<p>[‘data_batch_1’, ‘readme.html’, ‘batches.meta’, ‘data_batch_2’, ‘data_batch_5’, ‘test_batch’, ‘data_batch_4’, ‘data_batch_3’]</p>
+</blockquote>
+<ul>
+<li>编写一个读取数据的方法</li>
+</ul>
+<p>  def load_data(filename):<br>      “””read data from data file.”””<br>      with open(filename, ‘rb’) as f:<br>          data = cPickle.load(f)<br>          return data[‘data’], data[‘labels’]</p>
+<ul>
+<li>现在我们来搭建计算图</li>
+</ul>
+<p>  x = tf.placeholder(tf.float32, [None, 3072])</p>
+<h1 id="None"><a href="#None" class="headerlink" title="[None]"></a>[None]</h1><p>  y = tf.placeholder(tf.int64, [None])</p>
+<h1 id="3072-1"><a href="#3072-1" class="headerlink" title="(3072, 1)"></a>(3072, 1)</h1><p>  w = tf.get_variable(‘w’, [x.get_shape()[-1], 1],<br>                     initializer=tf.random_normal_initializer(0, 1))</p>
+<h1 id="1"><a href="#1" class="headerlink" title="(1, )"></a>(1, )</h1><p>  b = tf.get_variable(‘b’, [1],<br>                     initializer=tf.constant_initializer(0.0))</p>
+<h1 id="None-3072-3072-1-None-1"><a href="#None-3072-3072-1-None-1" class="headerlink" title="[None, 3072] * [3072, 1] = [None, 1]"></a>[None, 3072] * [3072, 1] = [None, 1]</h1><p>  y_ = tf.matmul(x, w) + b</p>
+<ul>
+<li>将y值变为一个概率值，并计算损失函数</li>
+</ul>
+<h1 id="None-1"><a href="#None-1" class="headerlink" title="[None, 1]"></a>[None, 1]</h1><p>  p_y_1 = tf.nn.sigmoid(y_)</p>
+<h1 id="None-1-1"><a href="#None-1-1" class="headerlink" title="[None, 1]"></a>[None, 1]</h1><p>  y_reshaped = tf.reshape(y, (-1, 1))<br>  y_reshaped_float = tf.cast(y_reshaped, tf.float32)<br>  loss = tf.reduce_mean(tf.square(y_reshaped_float - p_y_1))</p>
+<ul>
+<li>计算准确率</li>
+</ul>
+<h1 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h1><p>  predict = p_y_1 &gt; 0.5</p>
+<h1 id="1-0-1-1-1-0-0-0"><a href="#1-0-1-1-1-0-0-0" class="headerlink" title="[1,0,1,1,1,0,0,0]"></a>[1,0,1,1,1,0,0,0]</h1><p>  correct_prediction = tf.equal(tf.cast(predict, tf.int64), y_reshaped)<br>  accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float64))</p>
+<ul>
+<li>定义梯度下降的方法</li>
+</ul>
+<p>  with tf.name_scope(‘train_op’):<br>      train_op = tf.train.AdamOptimizer(1e-3).minimize(loss)</p>
+<ul>
+<li>然后我们来看如何执行计算图</li>
+</ul>
+<p><strong>神经网络的Tensorflow实现</strong></p>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

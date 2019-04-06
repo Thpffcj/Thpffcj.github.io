@@ -195,6 +195,7 @@
 </ul>
 </li>
 </ul>
+<hr>
 <h2 id="1-HBase简介与环境部署"><a href="#1-HBase简介与环境部署" class="headerlink" title="1. HBase简介与环境部署"></a>1. HBase简介与环境部署</h2><h3 id="1-HBase简介"><a href="#1-HBase简介" class="headerlink" title="1. HBase简介"></a>1. HBase简介</h3><ul>
 <li>HBase是一个分布式的，面向列的开源数据库</li>
 <li>HBase在Hadoop之上提供了类似于Bigtable的能力</li>
@@ -375,14 +376,782 @@ drwxr-xr-x   - thpffcj supergroup          0 2019-04-04 14:52 /hbase
 </ul>
 </li>
 </ul>
+<p><br></p>
+<hr>
+<h2 id="2-HBase原理与实战"><a href="#2-HBase原理与实战" class="headerlink" title="2. HBase原理与实战"></a>2. HBase原理与实战</h2><h3 id="1-HBase写流程"><a href="#1-HBase写流程" class="headerlink" title="1. HBase写流程"></a>1. HBase写流程</h3><p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1rgbofjjij210s0ligs5.jpg" alt=""></p>
+<ul>
+<li>Client会先访问zookeeper，得到对应的RegionServer地址</li>
+<li>Client对RegionServer发起写请求，RegionServer接受数据写入内存</li>
+<li>当MemStore的大小达到一定的值后，flush到StoreFile并存储到HDFS</li>
+</ul>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1rgbr7o6wj213q0mgwp6.jpg" alt=""></p>
+<h3 id="2-HBase读流程"><a href="#2-HBase读流程" class="headerlink" title="2. HBase读流程"></a>2. HBase读流程</h3><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1rgx9k7pbj21360neagh.jpg" alt=""></p>
+<ul>
+<li>Client会先访问zookeeper，得到对应的RegionServer地址</li>
+<li>Client对RegionServer发起读请求</li>
+<li>当RegionServer收到Client的读请求后，先扫描自己的Memstore，再扫描BlockCache(加速读内容缓存区)，如果还没找到则在StoreFile中读取数据，然后将数据返回给Client</li>
+</ul>
+<h3 id="3-HBase模块协作"><a href="#3-HBase模块协作" class="headerlink" title="3. HBase模块协作"></a>3. HBase模块协作</h3><ul>
+<li>HBase启动时发生了什么<ul>
+<li>HMaster启动，注册到Zookeeper，等待RegionServer汇报</li>
+<li>RegionServer注册到Zookeeper，并向HMaster汇报</li>
+<li>对各个RegionServer(包括失效的)的数据进行整理，分配Region和meta信息</li>
+</ul>
+</li>
+<li>当RegionServer失效后会发生什么<ul>
+<li>HMaster将失效RegionServer上的Region分配到其他节点</li>
+<li>HMaster更新hbase：meta表以保证数据正常访问</li>
+</ul>
+</li>
+<li>当HMaster失效后会发生什么<ul>
+<li>处于Backup状态的其他HMaster节点推选出一个转为Active状态</li>
+<li>如果没有配置高可用，数据能正常读写，但是不能创建删除表，也不能更改表结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-HBase实战：Shell命令实战"><a href="#4-HBase实战：Shell命令实战" class="headerlink" title="4. HBase实战：Shell命令实战"></a>4. HBase实战：Shell命令实战</h3><ul>
+<li>help可以命令的详细信息</li>
+</ul>
+<pre><code>hbase(main):001:0&gt; help &apos;status&apos;
+Show cluster status. Can be &apos;summary&apos;, &apos;simple&apos;, &apos;detailed&apos;, or &apos;replication&apos;. The
+default is &apos;summary&apos;. Examples:
 
+  hbase&gt; status
+  hbase&gt; status &apos;simple&apos;
+  hbase&gt; status &apos;summary&apos;
+  hbase&gt; status &apos;detailed&apos;
+  hbase&gt; status &apos;replication&apos;
+  hbase&gt; status &apos;replication&apos;, &apos;source&apos;
+  hbase&gt; status &apos;replication&apos;, &apos;sink&apos;
+</code></pre><ul>
+<li>status可以查询服务器状态，list查看所有表</li>
+</ul>
+<pre><code>hbase(main):001:0&gt; status
+1 active master, 0 backup masters, 1 servers, 0 dead, 2.0000 average load
+
+hbase(main):002:0&gt; list
+TABLE                                                                           
+0 row(s) in 0.0580 seconds
+
+=&gt; []
+</code></pre><ul>
+<li>我们可以使用create创建一张表</li>
+</ul>
+<pre><code>hbase(main):003:0&gt; create &apos;FileTable&apos;,&apos;fileInfo&apos;,&apos;saveInfo&apos;
+0 row(s) in 1.3420 seconds
+
+=&gt; Hbase::Table - FileTable
+hbase(main):004:0&gt; list
+TABLE                                                                           
+FileTable                                                                       
+1 row(s) in 0.0130 seconds
+
+=&gt; [&quot;FileTable&quot;]
+</code></pre><ul>
+<li>看一下表的描述信息</li>
+</ul>
+<pre><code>hbase(main):005:0&gt; desc &apos;FileTable&apos;
+Table FileTable is ENABLED                                                      
+FileTable                                                                       
+COLUMN FAMILIES DESCRIPTION                                                     
+{NAME =&gt; &apos;fileInfo&apos;, BLOOMFILTER =&gt; &apos;ROW&apos;, VERSIONS =&gt; &apos;1&apos;, IN_MEMORY =&gt; &apos;false&apos;
+, KEEP_DELETED_CELLS =&gt; &apos;FALSE&apos;, DATA_BLOCK_ENCODING =&gt; &apos;NONE&apos;, TTL =&gt; &apos;FOREVER&apos;
+, COMPRESSION =&gt; &apos;NONE&apos;, MIN_VERSIONS =&gt; &apos;0&apos;, BLOCKCACHE =&gt; &apos;true&apos;, BLOCKSIZE =&gt;
+ &apos;65536&apos;, REPLICATION_SCOPE =&gt; &apos;0&apos;}                                             
+{NAME =&gt; &apos;saveInfo&apos;, BLOOMFILTER =&gt; &apos;ROW&apos;, VERSIONS =&gt; &apos;1&apos;, IN_MEMORY =&gt; &apos;false&apos;
+, KEEP_DELETED_CELLS =&gt; &apos;FALSE&apos;, DATA_BLOCK_ENCODING =&gt; &apos;NONE&apos;, TTL =&gt; &apos;FOREVER&apos;
+, COMPRESSION =&gt; &apos;NONE&apos;, MIN_VERSIONS =&gt; &apos;0&apos;, BLOCKCACHE =&gt; &apos;true&apos;, BLOCKSIZE =&gt;
+ &apos;65536&apos;, REPLICATION_SCOPE =&gt; &apos;0&apos;}                                             
+2 row(s) in 0.1190 seconds
+</code></pre><ul>
+<li>列族确定后，我们还是可以添加列族</li>
+</ul>
+<pre><code>hbase(main):006:0&gt; alter &apos;FileTable&apos;,&apos;cf&apos;
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 1.9540 seconds
+
+hbase(main):007:0&gt; desc &apos;FileTable&apos;
+Table FileTable is ENABLED                                                      
+FileTable                                                                       
+COLUMN FAMILIES DESCRIPTION                                                     
+{NAME =&gt; &apos;cf&apos;, BLOOMFILTER =&gt; &apos;ROW&apos;, VERSIONS =&gt; &apos;1&apos;, IN_MEMORY =&gt; &apos;false&apos;, KEEP
+_DELETED_CELLS =&gt; &apos;FALSE&apos;, DATA_BLOCK_ENCODING =&gt; &apos;NONE&apos;, TTL =&gt; &apos;FOREVER&apos;, COMP
+RESSION =&gt; &apos;NONE&apos;, MIN_VERSIONS =&gt; &apos;0&apos;, BLOCKCACHE =&gt; &apos;true&apos;, BLOCKSIZE =&gt; &apos;6553
+6&apos;, REPLICATION_SCOPE =&gt; &apos;0&apos;}                                                   
+{NAME =&gt; &apos;fileInfo&apos;, BLOOMFILTER =&gt; &apos;ROW&apos;, VERSIONS =&gt; &apos;1&apos;, IN_MEMORY =&gt; &apos;false&apos;
+, KEEP_DELETED_CELLS =&gt; &apos;FALSE&apos;, DATA_BLOCK_ENCODING =&gt; &apos;NONE&apos;, TTL =&gt; &apos;FOREVER&apos;
+, COMPRESSION =&gt; &apos;NONE&apos;, MIN_VERSIONS =&gt; &apos;0&apos;, BLOCKCACHE =&gt; &apos;true&apos;, BLOCKSIZE =&gt;
+ &apos;65536&apos;, REPLICATION_SCOPE =&gt; &apos;0&apos;}                                             
+{NAME =&gt; &apos;saveInfo&apos;, BLOOMFILTER =&gt; &apos;ROW&apos;, VERSIONS =&gt; &apos;1&apos;, IN_MEMORY =&gt; &apos;false&apos;
+, KEEP_DELETED_CELLS =&gt; &apos;FALSE&apos;, DATA_BLOCK_ENCODING =&gt; &apos;NONE&apos;, TTL =&gt; &apos;FOREVER&apos;
+, COMPRESSION =&gt; &apos;NONE&apos;, MIN_VERSIONS =&gt; &apos;0&apos;, BLOCKCACHE =&gt; &apos;true&apos;, BLOCKSIZE =&gt;
+ &apos;65536&apos;, REPLICATION_SCOPE =&gt; &apos;0&apos;}                                             
+3 row(s) in 0.0260 seconds
+</code></pre><ul>
+<li>删除一个列族</li>
+</ul>
+<pre><code>hbase(main):008:0&gt; alter &apos;FileTable&apos;, {NAME =&gt; &apos;cf&apos;, METHOD =&gt; &apos;delete&apos;}
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 1.9500 seconds
+</code></pre><ul>
+<li>插入数据</li>
+</ul>
+<pre><code>put &apos;FileTable&apos;, &apos;rowkey1&apos;,&apos;fileInfo:name&apos;,&apos;file1.txt&apos;
+put &apos;FileTable&apos;, &apos;rowkey1&apos;,&apos;fileInfo:type&apos;,&apos;txt&apos;
+put &apos;FileTable&apos;, &apos;rowkey1&apos;,&apos;fileInfo:size&apos;,&apos;1024&apos;
+put &apos;FileTable&apos;, &apos;rowkey1&apos;,&apos;saveInfo:path&apos;,&apos;/home&apos;
+put &apos;FileTable&apos;, &apos;rowkey1&apos;,&apos;saveInfo:creator&apos;,&apos;tom&apos;
+put &apos;FileTable&apos;, &apos;rowkey2&apos;,&apos;fileInfo:name&apos;,&apos;file2.jpg&apos;
+put &apos;FileTable&apos;, &apos;rowkey2&apos;,&apos;fileInfo:type&apos;,&apos;jpg&apos;
+put &apos;FileTable&apos;, &apos;rowkey2&apos;,&apos;fileInfo:size&apos;,&apos;2048&apos;
+put &apos;FileTable&apos;, &apos;rowkey2&apos;,&apos;saveInfo:path&apos;,&apos;/home/pic&apos;
+put &apos;FileTable&apos;, &apos;rowkey2&apos;,&apos;saveInfo:creator&apos;,&apos;jerry&apos;
+</code></pre><ul>
+<li>查询表中有多少行</li>
+</ul>
+<pre><code>hbase(main):019:0&gt; count &apos;FileTable&apos;
+2 row(s) in 0.0390 seconds
+
+=&gt; 2
+</code></pre><ul>
+<li>获取一个rowkey的所有数据</li>
+</ul>
+<pre><code>hbase(main):020:0&gt; get &apos;FileTable&apos;, &apos;rowkey1&apos;
+COLUMN                CELL                                                      
+ fileInfo:name        timestamp=1554428074180, value=file1.txt                  
+ fileInfo:size        timestamp=1554428074242, value=1024                       
+ fileInfo:type        timestamp=1554428074221, value=txt                        
+ saveInfo:creator     timestamp=1554428074293, value=tom                        
+ saveInfo:path        timestamp=1554428074265, value=/home                      
+5 row(s) in 0.0210 seconds
+</code></pre><ul>
+<li>获得一个id，一个列簇（一个列）中的所有数据</li>
+</ul>
+<pre><code>hbase(main):021:0&gt; get &apos;FileTable&apos;, &apos;rowkey1&apos;, &apos;fileInfo&apos;
+COLUMN                CELL                                                      
+ fileInfo:name        timestamp=1554428074180, value=file1.txt                  
+ fileInfo:size        timestamp=1554428074242, value=1024                       
+ fileInfo:type        timestamp=1554428074221, value=txt                        
+3 row(s) in 0.0120 seconds
+</code></pre><ul>
+<li>查询整表数据</li>
+</ul>
+<pre><code>hbase(main):022:0&gt; scan &apos;FileTable&apos;
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=fileInfo:name, timestamp=1554428074180, value=file1
+                      .txt                                                      
+ rowkey1              column=fileInfo:size, timestamp=1554428074242, value=1024 
+ rowkey1              column=fileInfo:type, timestamp=1554428074221, value=txt  
+ rowkey1              column=saveInfo:creator, timestamp=1554428074293, value=to
+                      m                                                         
+ rowkey1              column=saveInfo:path, timestamp=1554428074265, value=/home
+ rowkey2              column=fileInfo:name, timestamp=1554428074316, value=file2
+                      .jpg                                                      
+ rowkey2              column=fileInfo:size, timestamp=1554428074367, value=2048 
+ rowkey2              column=fileInfo:type, timestamp=1554428074346, value=jpg  
+ rowkey2              column=saveInfo:creator, timestamp=1554428076106, value=je
+                      rry                                                       
+ rowkey2              column=saveInfo:path, timestamp=1554428074397, value=/home
+                      /pic                                                      
+2 row(s) in 0.0360 seconds
+</code></pre><ul>
+<li>扫描整个列簇</li>
+</ul>
+<pre><code>hbase(main):023:0&gt; scan &apos;FileTable&apos;, {COLUMN=&gt;&apos;fileInfo&apos;}
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=fileInfo:name, timestamp=1554428074180, value=file1
+                      .txt                                                      
+ rowkey1              column=fileInfo:size, timestamp=1554428074242, value=1024 
+ rowkey1              column=fileInfo:type, timestamp=1554428074221, value=txt  
+ rowkey2              column=fileInfo:name, timestamp=1554428074316, value=file2
+                      .jpg                                                      
+ rowkey2              column=fileInfo:size, timestamp=1554428074367, value=2048 
+ rowkey2              column=fileInfo:type, timestamp=1554428074346, value=jpg  
+2 row(s) in 0.0210 seconds
+</code></pre><ul>
+<li>指定扫描其中的某个列</li>
+</ul>
+<pre><code>hbase(main):024:0&gt; scan &apos;FileTable&apos;, {COLUMNS=&gt; &apos;fileInfo:name&apos;}
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=fileInfo:name, timestamp=1554428074180, value=file1
+                      .txt                                                      
+ rowkey2              column=fileInfo:name, timestamp=1554428074316, value=file2
+                      .jpg                                                      
+2 row(s) in 0.0150 seconds
+</code></pre><ul>
+<li>除了列（COLUMNS）修饰词外，HBase还支持Limit（限制查询结果行数），STARTROW（ROWKEY起始行。会先根据这个key定位到region，再向后扫描）、STOPROW(结束行)、TIMERANGE（限定时间戳范围）、VERSIONS（版本数）、和FILTER（按条件过滤行）等</li>
+<li>比如我们从RowKey1这个rowkey开始，找下一个行的最新版本</li>
+</ul>
+<pre><code>hbase(main):025:0&gt; scan &apos;FileTable&apos;, { STARTROW =&gt; &apos;rowkey1&apos;, LIMIT=&gt;1, VERSIONS=&gt;1}
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=fileInfo:name, timestamp=1554428074180, value=file1
+                      .txt                                                      
+ rowkey1              column=fileInfo:size, timestamp=1554428074242, value=1024 
+ rowkey1              column=fileInfo:type, timestamp=1554428074221, value=txt  
+ rowkey1              column=saveInfo:creator, timestamp=1554428074293, value=to
+                      m                                                         
+ rowkey1              column=saveInfo:path, timestamp=1554428074265, value=/home
+1 row(s) in 0.0220 seconds
+</code></pre><ul>
+<li>Filter是一个非常强大的修饰词，可以设定一系列条件来进行过滤。比如我们要限制名称为file1.txt</li>
+<li>通过delete命令，我们可以删除某个字段，接下来的get就无结果</li>
+</ul>
+<pre><code>hbase(main):002:0&gt; delete &apos;FileTable&apos;,&apos;rowkey1&apos;,&apos;fileInfo:size&apos;
+0 row(s) in 0.1470 seconds
+
+hbase(main):003:0&gt; get &apos;FileTable&apos;,&apos;rowkey1&apos;,&apos;fileInfo:size&apos;
+COLUMN                CELL                                                      
+0 row(s) in 0.0260 seconds
+</code></pre><ul>
+<li>删除整行的值</li>
+</ul>
+<pre><code>hbase(main):004:0&gt; deleteall &apos;FileTable&apos;,&apos;rowkey1&apos;
+0 row(s) in 0.0140 seconds
+get &apos;FileTable&apos;,&apos;rowkey1&apos;
+
+hbase(main):001:0&gt; get &apos;FileTable&apos;,&apos;rowkey1&apos;
+COLUMN                CELL                                                      
+0 row(s) in 0.1660 seconds
+</code></pre><ul>
+<li>通过enable和disable来启用/禁用这个表,相应的可以通过is_enabled和is_disabled来检查表是否被禁用</li>
+</ul>
+<pre><code>hbase(main):002:0&gt; is_enabled &apos;FileTable&apos;
+true                                                                            
+0 row(s) in 0.0820 seconds
+
+hbase(main):003:0&gt; is_disabled &apos;FileTable&apos;
+false                                                                           
+0 row(s) in 0.0230 seconds
+</code></pre><ul>
+<li>使用exists来检查表是否存在</li>
+</ul>
+<pre><code>hbase(main):004:0&gt; exists &apos;FileTable&apos;
+Table FileTable does exist                                                      
+0 row(s) in 0.0210 seconds
+</code></pre><ul>
+<li>删除表需要先将表disable</li>
+</ul>
+<pre><code>hbase(main):005:0&gt; disable &apos;FileTable&apos;
+0 row(s) in 2.3270 seconds
+
+hbase(main):006:0&gt; drop &apos;FileTable&apos;
+0 row(s) in 1.2910 seconds
+</code></pre><h3 id="5-HBase实战：Java-Api实现HBase连接类"><a href="#5-HBase实战：Java-Api实现HBase连接类" class="headerlink" title="5. HBase实战：Java Api实现HBase连接类"></a>5. HBase实战：Java Api实现HBase连接类</h3><p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1rjt0d3tij212i0miqgr.jpg" alt=""></p>
+<ul>
+<li>添加maven依赖</li>
+</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+
+    &lt;parent&gt;
+        &lt;artifactId&gt;hbase-train&lt;/artifactId&gt;
+        &lt;groupId&gt;cn.edu.nju&lt;/groupId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;artifactId&gt;hbase-api-test&lt;/artifactId&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.hbase&lt;/groupId&gt;
+            &lt;artifactId&gt;hbase-client&lt;/artifactId&gt;
+            &lt;version&gt;1.2.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><ul>
+<li>获取数据库连接</li>
+</ul>
+<pre><code>import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiuration;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Connection;
+import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.Table;
+
+import java.io.IOException;
+
+/**
+ * Created by thpffcj on 2019-04-05.
+ */
+public class HBaseConn {
+
+    private static final HBaseConn INSTANCE = new HBaseConn();
+    private static Configuration configuration;
+    private static Connection connection;
+
+    private HBaseConn() {
+        try {
+            if (configuration == null) {
+                configuration = HBaseConfiguration.create();
+                configuration.set(&quot;hbase.zookeeper.quorum&quot;, &quot;localhost:2181&quot;);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection getConnection() {
+        if (connection == null || connection.isClosed()) {
+            try {
+                connection = ConnectionFactory.createConnection(configuration);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connection;
+    }
+
+    public static Connection getHBaseConn() {
+        return INSTANCE.getConnection();
+    }
+
+    public static Table getTable(String tableName) throws IOException {
+        return INSTANCE.getConnection().getTable(TableName.valueOf(tableName));
+    }
+
+    public static void closeConn() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre><ul>
+<li>编写测试用例测试一下我们的连接方法</li>
+</ul>
+<pre><code>/**
+ * Created by thpffcj on 2019-04-05.
+ */
+public class HBaseConnTest {
+
+    @Test
+    public void getConnTest() {
+        Connection conn = HBaseConn.getHBaseConn();
+        System.out.println(conn.isClosed());
+        HBaseConn.closeConn();
+        System.out.println(conn.isClosed());
+    }
+
+    @Test
+    public void getTableTest() {
+        try {
+            Table table = HBaseConn.getTable(&quot;US_POPULATION&quot;);
+            System.out.println(table.getName().getNameAsString());
+            table.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+}
+</code></pre><ul>
+<li>增删改查模块编写</li>
+<li>我们首先来看一下创建表的方法</li>
+</ul>
+<pre><code>/**
+ * 创建HBase表.
+ *
+ * @param tableName 表名
+ * @param cfs 列族的数组
+ * @return 是否创建成功
+ */
+public static boolean createTable(String tableName, String[] cfs) {
+    try (HBaseAdmin admin = (HBaseAdmin) HBaseConn.getHBaseConn().getAdmin()) {
+        if (admin.tableExists(tableName)) {
+            return false;
+        }
+        HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(tableName));
+        Arrays.stream(cfs).forEach(cf -&gt; {
+            HColumnDescriptor columnDescriptor = new HColumnDescriptor(cf);
+            columnDescriptor.setMaxVersions(1);
+            tableDescriptor.addFamily(columnDescriptor);
+        });
+        admin.createTable(tableDescriptor);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>删除表操作</li>
+</ul>
+<pre><code>/**
+ * 删除hbase表.
+ *
+ * @param tableName 表名
+ * @return 是否删除成功
+ */
+public static boolean deleteTable(String tableName) {
+    try (HBaseAdmin admin = (HBaseAdmin) HBaseConn.getHBaseConn().getAdmin()) {
+        admin.disableTable(tableName);
+        admin.deleteTable(tableName);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>接下来我们来开发插入数据的方法</li>
+</ul>
+<pre><code>/**
+ * hbase插入一条数据.
+ *
+ * @param tableName 表名
+ * @param rowKey 唯一标识
+ * @param cfName 列族名
+ * @param qualifier 列标识
+ * @param data 数据
+ * @return 是否插入成功
+ */
+public static boolean putRow(String tableName, String rowKey, String cfName, String qualifier,
+                             String data) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Put put = new Put(Bytes.toBytes(rowKey));
+        put.addColumn(Bytes.toBytes(cfName), Bytes.toBytes(qualifier), Bytes.toBytes(data));
+        table.put(put);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>那么我们如何来批量插入数据呢</li>
+</ul>
+<p>  public static boolean putRows(String tableName, List<put> puts) {<br>    try (Table table = HBaseConn.getTable(tableName)) {<br>      table.put(puts);<br>    } catch (IOException ioe) {<br>      ioe.printStackTrace();<br>    }<br>    return true;<br>  }</put></p>
+<ul>
+<li>接下来我们来开发读取数据的操作</li>
+</ul>
+<pre><code>/**
+ * 获取单条数据.
+ *
+ * @param tableName 表名
+ * @param rowKey 唯一标识
+ * @return 查询结果
+ */
+public static Result getRow(String tableName, String rowKey) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Get get = new Get(Bytes.toBytes(rowKey));
+        return table.get(get);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return null;
+}
+</code></pre><ul>
+<li>然后我们开发一个通过过滤器来查询数据的方法</li>
+</ul>
+<pre><code>public static Result getRow(String tableName, String rowKey, FilterList filterList) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Get get = new Get(Bytes.toBytes(rowKey));
+        get.setFilter(filterList);
+        return table.get(get);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return null;
+}
+</code></pre><ul>
+<li>通过Scan获取数据</li>
+</ul>
+<pre><code>public static ResultScanner getScanner(String tableName) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Scan scan = new Scan();
+        scan.setCaching(1000);
+        return table.getScanner(scan);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return null;
+}
+</code></pre><ul>
+<li>上面我们执行的是全表扫描，如果你知道你的rowkey的start值和end值，你就可以扫描某一区间范围内的数据</li>
+</ul>
+<pre><code>/**
+ * 批量检索数据.
+ *
+ * @param tableName 表名
+ * @param startRowKey 起始RowKey
+ * @param endRowKey 终止RowKey
+ * @return ResultScanner实例
+ */
+public static ResultScanner getScanner(String tableName, String startRowKey, String endRowKey) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Scan scan = new Scan();
+        scan.setStartRow(Bytes.toBytes(startRowKey));
+        scan.setStopRow(Bytes.toBytes(endRowKey));
+        scan.setCaching(1000);
+        return table.getScanner(scan);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return null;
+}
+
+public static ResultScanner getScanner(String tableName, String startRowKey, String endRowKey,
+                                       FilterList filterList) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Scan scan = new Scan();
+        scan.setStartRow(Bytes.toBytes(startRowKey));
+        scan.setStopRow(Bytes.toBytes(endRowKey));
+        scan.setFilter(filterList);
+        scan.setCaching(1000);
+        return table.getScanner(scan);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return null;
+}
+</code></pre><ul>
+<li>开发删除数据操作</li>
+</ul>
+<pre><code>/**
+ * HBase删除一行记录.
+ *
+ * @param tableName 表名
+ * @param rowKey 唯一标识
+ * @return 是否删除成功
+ */
+public static boolean deleteRow(String tableName, String rowKey) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Delete delete = new Delete(Bytes.toBytes(rowKey));
+        table.delete(delete);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>删除列族</li>
+</ul>
+<pre><code>public static boolean deleteColumnFamily(String tableName, String cfName) {
+    try (HBaseAdmin admin = (HBaseAdmin) HBaseConn.getHBaseConn().getAdmin()) {
+        admin.deleteColumn(tableName, cfName);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>删除列标识</li>
+</ul>
+<pre><code>public static boolean deleteQualifier(String tableName, String rowKey, String cfName,
+                                      String qualifier) {
+    try (Table table = HBaseConn.getTable(tableName)) {
+        Delete delete = new Delete(Bytes.toBytes(rowKey));
+        delete.addColumn(Bytes.toBytes(cfName), Bytes.toBytes(qualifier));
+        table.delete(delete);
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+    return true;
+}
+</code></pre><ul>
+<li>开发完基本方法后，我们就可以编写单元测试验证一下我们刚才开发的方法</li>
+</ul>
+<pre><code>/**
+ - Created by thpffcj on 2019-04-06.
+ */
+public class HBaseUtilTest {
+
+    @Test
+    public void createTable() {
+        HBaseUtil.createTable(&quot;FileTable&quot;, new String[]{&quot;fileInfo&quot;, &quot;saveInfo&quot;});
+    }
+
+    @Test
+    public void addFileDetails() {
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;name&quot;, &quot;file1.txt&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;type&quot;, &quot;txt&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;name&quot;, &quot;file2.jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;type&quot;, &quot;jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
+
+    }
+
+    @Test
+    public void getFileDetails() {
+        Result result = HBaseUtil.getRow(&quot;FileTable&quot;, &quot;rowkey1&quot;);
+        if (result != null) {
+            System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+            System.out.println(&quot;fileName=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+        }
+    }
+
+    @Test
+    public void scanFileDetails() {
+        ResultScanner scanner = HBaseUtil.getScanner(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;rowkey2&quot;);
+        if (scanner != null) {
+            scanner.forEach(result -&gt; {
+                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+                System.out.println(&quot;fileName=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+            });
+            scanner.close();
+        }
+    }
+
+    @Test
+    public void deleteRow() {
+        HBaseUtil.deleteRow(&quot;FileTable&quot;, &quot;rowkey1&quot;);
+    }
+
+    @Test
+    public void deleteTable() {
+        HBaseUtil.deleteTable(&quot;FileTable&quot;);
+    }
+}
+</code></pre><h3 id="6-HBase实战：用过滤器筛选数据"><a href="#6-HBase实战：用过滤器筛选数据" class="headerlink" title="6. HBase实战：用过滤器筛选数据"></a>6. HBase实战：用过滤器筛选数据</h3><ul>
+<li>过滤器能干什么？<ul>
+<li>HBase为筛选数据提供了一组过滤器，通过过滤器可以在HBase中的数据的多个维度(行，列，数据版本)上进行对数据的筛选操作</li>
+<li>通常来说，通过行键，列来筛选数据的应用场景较多</li>
+</ul>
+</li>
+<li>基于行的过滤器<ul>
+<li>PrefixFilter：行的前缀匹配</li>
+<li>PageFilter：基于行的分页</li>
+</ul>
+</li>
+<li>基于列的过滤器<ul>
+<li>ColumnPrefixFilter：列前缀匹配</li>
+<li>FirstKeyOnlyFilter：只返回每一行的第一列</li>
+</ul>
+</li>
+<li>基于单元值的过滤器<ul>
+<li>KeyOnlyFilter：返回的数据不包括单元值，只包含行键与列</li>
+<li>TimestampsFilter：根据数据的时间戳版本进行过滤</li>
+</ul>
+</li>
+<li>比较过滤器<ul>
+<li>比较过滤器通常需要一个比较运算符以及一个比较器来实现过滤</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ - Created by thpffcj on 2019-04-06.
+ */
+public class HBaseFilterTest {
+
+    @Test
+    public void createTable() {
+        HBaseUtil.createTable(&quot;FileTable&quot;, new String[]{&quot;fileInfo&quot;, &quot;saveInfo&quot;});
+    }
+
+    @Test
+    public void addFileDetails() {
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;name&quot;, &quot;file1.txt&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;type&quot;, &quot;txt&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;name&quot;, &quot;file2.jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;type&quot;, &quot;jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey2&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;fileInfo&quot;, &quot;name&quot;, &quot;file3.jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;fileInfo&quot;, &quot;type&quot;, &quot;jpg&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
+        HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
+    }
+
+    @Test
+    public void rowFilterTest() {
+        Filter filter = new RowFilter(CompareFilter.CompareOp.EQUAL, new BinaryComparator(Bytes.toBytes(&quot;rowkey1&quot;)));
+
+        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ONE, Arrays.asList(filter));
+
+        ResultScanner scanner = HBaseUtil
+                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+        if (scanner != null) {
+            scanner.forEach(result -&gt; {
+                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+                System.out.println(&quot;fileName=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+            });
+            scanner.close();
+        }
+    }
+
+    @Test
+    public void prefixFilterTest() {
+        Filter filter = new PrefixFilter(Bytes.toBytes(&quot;rowkey2&quot;));
+        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+        ResultScanner scanner = HBaseUtil
+                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+        if (scanner != null) {
+            scanner.forEach(result -&gt; {
+                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+                System.out.println(&quot;fileName=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+            });
+            scanner.close();
+        }
+
+    }
+
+    @Test
+    public void keyOnlyFilterTest() {
+        Filter filter = new KeyOnlyFilter(true);
+        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+        ResultScanner scanner = HBaseUtil
+                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+        if (scanner != null) {
+            scanner.forEach(result -&gt; {
+                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+                System.out.println(&quot;fileName=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+            });
+            scanner.close();
+        }
+    }
+
+    @Test
+    public void columnPrefixFilterTest() {
+        Filter filter = new ColumnPrefixFilter(Bytes.toBytes(&quot;nam&quot;));
+        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+        ResultScanner scanner = HBaseUtil
+                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+        if (scanner != null) {
+            scanner.forEach(result -&gt; {
+                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+                System.out.println(&quot;fileName=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+                System.out.println(&quot;fileType=&quot; + Bytes
+                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;type&quot;))));
+            });
+            scanner.close();
+        }
+    }
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/04/06/Deep-Learning-Neural-Network-3/" style="float: left;">
+        ← 循环神经网络
     </a>
     
     
