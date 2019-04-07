@@ -832,8 +832,15 @@ public static boolean putRow(String tableName, String rowKey, String cfName, Str
 </code></pre><ul>
 <li>那么我们如何来批量插入数据呢</li>
 </ul>
-<p>  public static boolean putRows(String tableName, List<put> puts) {<br>    try (Table table = HBaseConn.getTable(tableName)) {<br>      table.put(puts);<br>    } catch (IOException ioe) {<br>      ioe.printStackTrace();<br>    }<br>    return true;<br>  }</put></p>
-<ul>
+<pre><code>public static boolean putRows(String tableName, List&lt;Put&gt; puts) {
+  try (Table table = HBaseConn.getTable(tableName)) {
+    table.put(puts);
+  } catch (IOException ioe) {
+    ioe.printStackTrace();
+  }
+  return true;
+}
+</code></pre><ul>
 <li>接下来我们来开发读取数据的操作</li>
 </ul>
 <pre><code>/**
@@ -964,7 +971,7 @@ public static boolean deleteRow(String tableName, String rowKey) {
 <li>开发完基本方法后，我们就可以编写单元测试验证一下我们刚才开发的方法</li>
 </ul>
 <pre><code>/**
- - Created by thpffcj on 2019-04-06.
+ * Created by thpffcj on 2019-04-06.
  */
 public class HBaseUtilTest {
 
@@ -1046,7 +1053,7 @@ public class HBaseUtilTest {
 </li>
 </ul>
 <pre><code>/**
- - Created by thpffcj on 2019-04-06.
+ * Created by thpffcj on 2019-04-06.
  */
 public class HBaseFilterTest {
 
@@ -1070,81 +1077,119 @@ public class HBaseFilterTest {
         HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;fileInfo&quot;, &quot;size&quot;, &quot;1024&quot;);
         HBaseUtil.putRow(&quot;FileTable&quot;, &quot;rowkey3&quot;, &quot;saveInfo&quot;, &quot;creator&quot;, &quot;thpffcj&quot;);
     }
+}
+</code></pre><ul>
+<li>首先来实现一个RowFilter的实例</li>
+</ul>
+<pre><code>@Test
+public void rowFilterTest() {
+    Filter filter = new RowFilter(CompareFilter.CompareOp.EQUAL, new BinaryComparator(Bytes.toBytes(&quot;rowkey1&quot;)));
 
-    @Test
-    public void rowFilterTest() {
-        Filter filter = new RowFilter(CompareFilter.CompareOp.EQUAL, new BinaryComparator(Bytes.toBytes(&quot;rowkey1&quot;)));
+    FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ONE, Arrays.asList(filter));
 
-        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ONE, Arrays.asList(filter));
+    ResultScanner scanner = HBaseUtil
+            .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
 
-        ResultScanner scanner = HBaseUtil
-                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
-
-        if (scanner != null) {
-            scanner.forEach(result -&gt; {
-                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
-                System.out.println(&quot;fileName=&quot; + Bytes
-                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
-            });
-            scanner.close();
-        }
-    }
-
-    @Test
-    public void prefixFilterTest() {
-        Filter filter = new PrefixFilter(Bytes.toBytes(&quot;rowkey2&quot;));
-        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
-        ResultScanner scanner = HBaseUtil
-                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
-
-        if (scanner != null) {
-            scanner.forEach(result -&gt; {
-                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
-                System.out.println(&quot;fileName=&quot; + Bytes
-                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
-            });
-            scanner.close();
-        }
-
-    }
-
-    @Test
-    public void keyOnlyFilterTest() {
-        Filter filter = new KeyOnlyFilter(true);
-        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
-        ResultScanner scanner = HBaseUtil
-                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
-
-        if (scanner != null) {
-            scanner.forEach(result -&gt; {
-                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
-                System.out.println(&quot;fileName=&quot; + Bytes
-                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
-            });
-            scanner.close();
-        }
-    }
-
-    @Test
-    public void columnPrefixFilterTest() {
-        Filter filter = new ColumnPrefixFilter(Bytes.toBytes(&quot;nam&quot;));
-        FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
-        ResultScanner scanner = HBaseUtil
-                .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
-
-        if (scanner != null) {
-            scanner.forEach(result -&gt; {
-                System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
-                System.out.println(&quot;fileName=&quot; + Bytes
-                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
-                System.out.println(&quot;fileType=&quot; + Bytes
-                        .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;type&quot;))));
-            });
-            scanner.close();
-        }
+    if (scanner != null) {
+        scanner.forEach(result -&gt; {
+            System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+            System.out.println(&quot;fileName=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+        });
+        scanner.close();
     }
 }
-</code></pre>
+</code></pre><ul>
+<li>可以看到结果只输出了rowkey1的数据</li>
+</ul>
+<pre><code>rowkey=rowkey1
+fileName=file1.txt
+</code></pre><ul>
+<li>接下来添加一个PrefixFilter测试方法</li>
+</ul>
+<pre><code>@Test
+public void prefixFilterTest() {
+    Filter filter = new PrefixFilter(Bytes.toBytes(&quot;rowkey2&quot;));
+    FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+    ResultScanner scanner = HBaseUtil
+            .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+    if (scanner != null) {
+        scanner.forEach(result -&gt; {
+            System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+            System.out.println(&quot;fileName=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+        });
+        scanner.close();
+    }
+}
+</code></pre><ul>
+<li>结果只有rowkey2</li>
+</ul>
+<pre><code>rowkey=rowkey2
+fileName=file2.jpg
+</code></pre><ul>
+<li>接下来来看KeyOnlyFilter，他只会返回rowkey和列的值，而不会返回单元格的内容</li>
+</ul>
+<pre><code>@Test
+public void keyOnlyFilterTest() {
+    Filter filter = new KeyOnlyFilter(true);
+    FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+    ResultScanner scanner = HBaseUtil
+            .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+    if (scanner != null) {
+        scanner.forEach(result -&gt; {
+            System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+            System.out.println(&quot;fileName=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+        });
+        scanner.close();
+    }
+}
+</code></pre><ul>
+<li>我们可以看到filename是为空的</li>
+</ul>
+<pre><code>rowkey=rowkey1
+fileName=
+rowkey=rowkey2
+fileName=
+</code></pre><ul>
+<li>最后我们来看看ColumnPrefixFilter</li>
+</ul>
+<pre><code>@Test
+public void columnPrefixFilterTest() {
+    Filter filter = new ColumnPrefixFilter(Bytes.toBytes(&quot;nam&quot;));
+    FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL, Arrays.asList(filter));
+    ResultScanner scanner = HBaseUtil
+            .getScanner(&quot;FileTable&quot;, &quot;rowkey1&quot;, &quot;rowkey3&quot;, filterList);
+
+    if (scanner != null) {
+        scanner.forEach(result -&gt; {
+            System.out.println(&quot;rowkey=&quot; + Bytes.toString(result.getRow()));
+            System.out.println(&quot;fileName=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;name&quot;))));
+            System.out.println(&quot;fileType=&quot; + Bytes
+                    .toString(result.getValue(Bytes.toBytes(&quot;fileInfo&quot;), Bytes.toBytes(&quot;type&quot;))));
+        });
+        scanner.close();
+    }
+}
+</code></pre><ul>
+<li>fileType是获取不到的</li>
+</ul>
+<pre><code>rowkey=rowkey1
+fileName=file1.txt
+fileType=null
+rowkey=rowkey2
+fileName=file2.jpg
+fileType=null
+</code></pre><p><strong>自定义过滤器</strong></p>
+<ul>
+<li>你真的需要自定义过滤器吗？</li>
+<li>如何实现自定义过滤器</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
