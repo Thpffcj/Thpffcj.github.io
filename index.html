@@ -270,7 +270,17 @@ Leet
                 <div class="col-md-8">
                     <p>
                       
-                        
+                        1. HBase进阶什么导致HBase性能下降
+
+JVM内存分配与GC回收策略
+与HBase运行机制相关的部分配置不合理
+表结构设计及用户使用方式不合理
+
+HBase数据存储过程
+
+HBase写入时当memstore达到一定大小会flush到磁盘保存成HFile，当HFile小文件太多会执行compact操作进行合并
+minor compaction：选取一些小的，相邻的StoreFile将他们合并成一个更大的StoreFile
+maj
                       
                     </p>
                     

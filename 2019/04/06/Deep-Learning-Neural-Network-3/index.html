@@ -300,10 +300,10 @@
 <li>双向RNN提取特征</li>
 <li>CNN进一步抽取</li>
 <li>Max-pooling</li>
-<li><p>全连接层</p>
-<h3 id="6-Embedding压缩"><a href="#6-Embedding压缩" class="headerlink" title="6. Embedding压缩"></a>6. Embedding压缩</h3></li>
-<li><p>Embedding层次参数过大</p>
-<ul>
+<li>全连接层</li>
+</ul>
+<h3 id="6-Embedding压缩"><a href="#6-Embedding压缩" class="headerlink" title="6. Embedding压缩"></a>6. Embedding压缩</h3><ul>
+<li>Embedding层次参数过大<ul>
 <li>无法实用</li>
 <li>过拟合</li>
 </ul>
@@ -361,8 +361,542 @@ print(&apos;/ &apos;.join(word_iter))
 <blockquote>
 <p>黄蜂vs湖人首发：科比带伤战保罗 加索尔救赎之战 新浪体育讯北京时间4月27日，NBA季后赛首轮洛杉矶湖人主场迎战新奥尔良黄蜂，此前的比赛中，双方战成2-2平，因此本场比赛对于两支球队来说都非常重要，赛前双方也公布了首发阵容：湖人队：费舍尔、科比、阿泰斯特、加索尔、拜纳姆黄蜂队：保罗、贝里内利、阿里扎、兰德里、奥卡福[新浪NBA官方微博][新浪NBA湖人新闻动态微博][新浪NBA专题]<a href="新浪体育">黄蜂vs湖人图文直播室</a><br>黄蜂/ vs/ 湖人/ 首发/ ：/ 科比/ 带伤/ 战/ 保罗/  / 加索尔/ 救赎/ 之战/  / 新浪/ 体育讯/ 北京/ 时间/ 4/ 月/ 27/ 日/ ，/ NBA/ 季后赛/ 首轮/ 洛杉矶/ 湖人/ 主场/ 迎战/ 新奥尔良/ 黄蜂/ ，/ 此前/ 的/ 比赛/ 中/ ，/ 双方/ 战成/ 2/ -/ 2/ 平/ ，/ 因此/ 本场/ 比赛/ 对于/ 两支/ 球队/ 来说/ 都/ 非常/ 重要/ ，/ 赛前/ 双方/ 也/ 公布/ 了/ 首发/ 阵容/ ：/ 湖人队/ ：/ 费舍尔/ 、/ 科比/ 、/ 阿泰斯特/ 、/ 加索尔/ 、/ 拜纳姆/ 黄蜂队/ ：/ 保罗/ 、/ 贝里/ 内利/ 、/ 阿里/ 扎/ 、/ 兰德/ 里/ 、/ 奥卡福/ [/ 新浪/ NBA/ 官方/ 微博/ ]/ [/ 新浪/ NBA/ 湖人/ 新闻动态/ 微博/ ]/ [/ 新浪/ NBA/ 专题/ ]/ [/ 黄蜂/ vs/ 湖人/ 图文/ 直播室/ ]/ (/ 新浪/ 体育/ )</p>
 </blockquote>
+<ul>
+<li>接下来我们就开始预处理任务</li>
+</ul>
+<pre><code>def generate_seg_file(input_file, output_seg_file):
+    &quot;&quot;&quot;Segment the sentences in each line in input_file&quot;&quot;&quot;
+    with open(input_file, &apos;r&apos;) as f:
+        lines = f.readlines()
+    with open(output_seg_file, &apos;w&apos;) as f:
+        for line in lines:
+            label, content = line.strip(&apos;\r\n&apos;).split(&apos;\t&apos;)
+            word_iter = jieba.cut(content)
+            word_content = &apos;&apos;
+            for word in word_iter:
+                word = word.strip(&apos; &apos;)
+                if word != &apos;&apos;:
+                    word_content += word + &apos; &apos;
+            out_line = &apos;%s\t%s\n&apos; % (label, word_content.strip(&apos; &apos;))
+            f.write(out_line)
+
+generate_seg_file(train_file, seg_train_file)
+generate_seg_file(val_file, seg_val_file)
+generate_seg_file(test_file, seg_test_file)
+</code></pre><ul>
+<li>这样我们就可以获得分词后的训练验证测试数据集了</li>
+</ul>
 <p><strong>数据预处理之词表生成与类别表生成</strong></p>
-<h3 id="1-Tensorflow中使用LSTM实现文本分类"><a href="#1-Tensorflow中使用LSTM实现文本分类" class="headerlink" title="1. Tensorflow中使用LSTM实现文本分类"></a>1. Tensorflow中使用LSTM实现文本分类</h3><h3 id="2-Tensorflow中实现LSTM网络结构"><a href="#2-Tensorflow中实现LSTM网络结构" class="headerlink" title="2. Tensorflow中实现LSTM网络结构"></a>2. Tensorflow中实现LSTM网络结构</h3><h3 id="3-Tensorflow中使用CNN实现文本分类"><a href="#3-Tensorflow中使用CNN实现文本分类" class="headerlink" title="3. Tensorflow中使用CNN实现文本分类"></a>3. Tensorflow中使用CNN实现文本分类</h3>
+<ul>
+<li>我们下一个任务就是把词表构建出来，我们使用词频对词语进行过滤</li>
+</ul>
+<pre><code>def generate_vocab_file(input_seg_file, output_vocab_file):
+    with open(input_seg_file, &apos;r&apos;) as f:
+        lines = f.readlines()
+    word_dict = {}
+    for line in lines:
+        label, content = line.strip(&apos;\r\n&apos;).split(&apos;\t&apos;)
+        for word in content.split():
+            word_dict.setdefault(word, 0)
+            word_dict[word] += 1
+    # [(word, frequency), ..., ()]
+    sorted_word_dict = sorted(
+        word_dict.items(), key = lambda d:d[1], reverse=True)
+    with open(output_vocab_file, &apos;w&apos;) as f:
+        f.write(&apos;&lt;UNK&gt;\t10000000\n&apos;)
+        for item in sorted_word_dict:
+            f.write(&apos;%s\t%d\n&apos; % (item[0], item[1]))
+
+generate_vocab_file(seg_train_file, vocab_file)
+</code></pre><ul>
+<li>输出格式是词语+词频，我们在训练集上生成词表，我们可以看下执行结果</li>
+</ul>
+<pre><code>&lt;UNK&gt; 10000000
+， 1871208
+的 1390830
+。 822140
+在 303879
+、 258508
+了 248160
+是 240938
+“ 208968
+” 208536
+和 163533
+： 148977
+也 126821
+</code></pre><ul>
+<li>然后我们去生成label信息</li>
+</ul>
+<pre><code>def generate_category_dict(input_file, category_file):
+    with open(input_file, &apos;r&apos;) as f:
+        lines = f.readlines()
+    category_dict = {}
+    for line in lines:
+        label, content = line.strip(&apos;\r\n&apos;).split(&apos;\t&apos;)
+        category_dict.setdefault(label, 0)
+        category_dict[label] += 1
+    category_number = len(category_dict)
+    with open(category_file, &apos;w&apos;) as f:
+        for category in category_dict:
+            line = &apos;%s\n&apos; % category
+            print(&apos;%s\t%d&apos; % (
+                category, category_dict[category]))
+            f.write(line)
+
+generate_category_dict(train_file, category_file)
+</code></pre><ul>
+<li>我们可以看到每个类别的数据量都是相当的</li>
+</ul>
+<pre><code>游戏  5000
+教育  5000
+房产  5000
+体育  5000
+娱乐  5000
+时政  5000
+家居  5000
+财经  5000
+时尚  5000
+科技  5000
+</code></pre><h3 id="1-Tensorflow中使用LSTM实现文本分类"><a href="#1-Tensorflow中使用LSTM实现文本分类" class="headerlink" title="1. Tensorflow中使用LSTM实现文本分类"></a>1. Tensorflow中使用LSTM实现文本分类</h3><ul>
+<li>我们首先需要思考我们需要什么模块，每个模块完成什么样的功能</li>
+</ul>
+<pre><code># 构建计算图——LSTM模型
+#    embedding
+#    LSTM
+#    fc
+#    train_op
+# 训练流程代码
+# 数据集封装
+#    api: next_batch(batch_size)
+# 词表封装:
+#    api: sentence2id(text_sentence): 句子转换id
+# 类别的封装：
+#    api: category2id(text_category).
+
+import tensorflow as tf
+import os
+import sys
+import numpy as np
+import math
+
+tf.logging.set_verbosity(tf.logging.INFO)
+</code></pre><ul>
+<li>接下来我们先来定义超参数</li>
+</ul>
+<pre><code>def get_default_params():
+    return tf.contrib.training.HParams(
+        num_embedding_size = 16,
+        num_timesteps = 50,
+        num_lstm_nodes = [32, 32],
+        num_lstm_layers = 2,
+        num_fc_nodes = 32,
+        batch_size = 100,
+        clip_lstm_grads = 1.0,
+        learning_rate = 0.001,
+        num_word_threshold = 10,
+    )
+
+hps = get_default_params()
+
+train_file = &apos;../text_classification_data/cnews.train.seg.txt&apos;
+val_file = &apos;../text_classification_data/cnews.val.seg.txt&apos;
+test_file = &apos;../text_classification_data/cnews.test.seg.txt&apos;
+vocab_file = &apos;../text_classification_data/cnews.vocab.txt&apos;
+category_file = &apos;../text_classification_data/cnews.category.txt&apos;
+output_folder = &apos;./run_text_rnn&apos;
+
+if not os.path.exists(output_folder):
+    os.mkdir(output_folder)
+</code></pre><p><strong>词表封装与类别封装</strong></p>
+<ul>
+<li>现在我们来实现词表封装的模块</li>
+</ul>
+<pre><code>class Vocab:
+    def __init__(self, filename, num_word_threshold):
+        self._word_to_id = {}
+        self._unk = -1
+        self._num_word_threshold = num_word_threshold
+        self._read_dict(filename)
+
+    def _read_dict(self, filename):
+        with open(filename, &apos;r&apos;) as f:
+            lines = f.readlines()
+        for line in lines:
+            word, frequency = line.strip(&apos;\r\n&apos;).split(&apos;\t&apos;)
+            frequency = int(frequency)
+            if frequency &lt; self._num_word_threshold:
+                continue
+            idx = len(self._word_to_id)
+            if word == &apos;&lt;UNK&gt;&apos;:
+                self._unk = idx
+            self._word_to_id[word] = idx
+
+    def word_to_id(self, word):
+        return self._word_to_id.get(word, self._unk)
+
+    @property
+    def unk(self):
+        return self._unk
+
+    def size(self):
+        return len(self._word_to_id)
+
+    def sentence_to_id(self, sentence):
+        word_ids = [self.word_to_id(cur_word) \
+                    for cur_word in sentence.split()]
+        return word_ids
+</code></pre><ul>
+<li>测试一下这个方法</li>
+</ul>
+<pre><code>vocab = Vocab(vocab_file, hps.num_word_threshold)
+vocab_size = vocab.size()
+tf.logging.info(&apos;vocab_size: %d&apos; % vocab_size)
+</code></pre><ul>
+<li>我们这个词表有77323个词</li>
+</ul>
+<blockquote>
+<p>INFO:tensorflow:vocab_size: 77323</p>
+</blockquote>
+<ul>
+<li>接下来实现类别的封装</li>
+</ul>
+<pre><code>class CategoryDict:
+    def __init__(self, filename):
+        self._category_to_id = {}
+        with open(filename, &apos;r&apos;) as f:
+            lines = f.readlines()
+        for line in lines:
+            category = line.strip(&apos;\r\n&apos;)
+            idx = len(self._category_to_id)
+            self._category_to_id[category] = idx
+
+    def size(self):
+        return len(self._category_to_id)
+
+    def category_to_id(self, category):
+        if not category in self._category_to_id:
+            raise Execption(
+                &quot;%s is not in our category list&quot; % category_name)
+        return self._category_to_id[category]
+</code></pre><ul>
+<li>对他进行一下测试</li>
+</ul>
+<blockquote>
+<p>INFO:tensorflow:num_classes: 10<br>INFO:tensorflow:label: 时尚, id: 8</p>
+</blockquote>
+<p><strong>数据集封装</strong></p>
+<ul>
+<li>下面来写封装数据集的方法</li>
+</ul>
+<pre><code>class TextDataSet:
+    def __init__(self, filename, vocab, category_vocab, num_timesteps):
+        self._vocab = vocab
+        self._category_vocab = category_vocab
+        self._num_timesteps = num_timesteps
+        # matrix
+        self._inputs = []
+        # vector
+        self._outputs = []
+        self._indicator = 0
+        self._parse_file(filename)
+
+    def _parse_file(self, filename):
+        tf.logging.info(&apos;Loading data from %s&apos;, filename)
+        with open(filename, &apos;r&apos;) as f:
+            lines = f.readlines()
+        for line in lines:
+            label, content = line.strip(&apos;\r\n&apos;).split(&apos;\t&apos;)
+            id_label = self._category_vocab.category_to_id(label)
+            id_words = self._vocab.sentence_to_id(content)
+            id_words = id_words[0: self._num_timesteps]
+            padding_num = self._num_timesteps - len(id_words)
+            id_words = id_words + [
+                self._vocab.unk for i in range(padding_num)]
+            self._inputs.append(id_words)
+            self._outputs.append(id_label)
+        self._inputs = np.asarray(self._inputs, dtype = np.int32)
+        self._outputs = np.asarray(self._outputs, dtype = np.int32)
+        self._random_shuffle()
+
+    def _random_shuffle(self):
+        p = np.random.permutation(len(self._inputs))
+        self._inputs = self._inputs[p]
+        self._outputs = self._outputs[p]
+
+    def next_batch(self, batch_size):
+        end_indicator = self._indicator + batch_size
+        if end_indicator &gt; len(self._inputs):
+            self._random_shuffle()
+            self._indicator = 0
+            end_indicator = batch_size
+        if end_indicator &gt; len(self._inputs):
+            raise Execption(&quot;batch_size: %d is too large&quot; % batch_size)
+
+        batch_inputs = self._inputs[self._indicator: end_indicator]
+        batch_outputs = self._outputs[self._indicator: end_indicator]
+        self._indicator = end_indicator
+        return batch_inputs, batch_outputs
+</code></pre><ul>
+<li>我们建立三个数据集进行测试</li>
+</ul>
+<pre><code>train_dataset = TextDataSet(
+    train_file, vocab, category_vocab, hps.num_timesteps) 
+val_dataset = TextDataSet(
+    val_file, vocab, category_vocab, hps.num_timesteps)
+test_dataset = TextDataSet(
+    test_file, vocab, category_vocab, hps.num_timesteps)
+
+print(train_dataset.next_batch(2))
+print(val_dataset.next_batch(2))
+print(test_dataset.next_batch(2))
+</code></pre><ul>
+<li>返回的结果每个numpy元组都是拥有两个样本，第一个数组是2 <em> 50的矩阵，第二个是1 </em> 2的向量</li>
+</ul>
+<blockquote>
+<p>INFO:tensorflow:Loading data from ../text_classification_data/cnews.train.seg.txt<br>INFO:tensorflow:Loading data from ../text_classification_data/cnews.val.seg.txt<br>INFO:tensorflow:Loading data from ../text_classification_data/cnews.test.seg.txt<br>(array([[  467,    11, 10989,   108,  1498,   324, 25270,  4510,    11,<br>          776,  2419, 10989,   457,  1900,   236,    13,  1291,     1,<br>          104,    41,   352,     7, 17117,    10,  2815,  9434,     2,<br>         8752,   984,     3,    88,     2,  3924,   220,    20,     7,<br>         1491,   165, 12209,     2,  1727,     1,    97,    46,    12,<br>          192,     4,    60,  2247,     4],<br>       [ 6251,   282,  3809, 59229, 22109,   159, 15801,   921, 45494,<br>         4358,  5461,  1416,  9716, 46662,  2073,    17,    76,     0,<br>            0,    16,   402,     8, 12030,     9,   875, 13131,     0,<br>        46662,  1061,     4,  1411,    76,  3108,    65,    66,     1,<br>         3809, 59229,     2, 22109,   159, 15801,    42,   340,     1,<br>           12,    57,    51,  1266, 45494]], dtype=int32), array([8, 5], dtype=int32))<br>(array([[ 3404,   189, 10805,  3121,  2197, 15485,     0,  1766,  1215,<br>        17608,  2933,    17,  4221,  2046,   707,  1006,  1478,    16,<br>        15485,  5645, 11198,  7662,  5514,    30, 12689,     1,   353,<br>         4259,   293,  1918,     2,  4738,   262,     1,   211,   414,<br>         1894,  5213,   400,     1, 15962, 18243,     0,   326,     5,<br>           75,   114,     0,     2,  2858],<br>       [  495,   523,   211,   523,    94,   341,  2953, 10771,  1396,<br>         3439,  1396,   179, 22073,    12,     0,  1715,   156,   708,<br>        10145,  2317,  8258,     1,  2525,   953,  6014,    30, 11512,<br>        11227,  8856,     2, 12455,     1, 35795,  2269,    64,  1736,<br>           30,    75,  1695,     3,  2525,   955,   371, 38813,    30,<br>        12559,  1396,  1710,  3277,   658]], dtype=int32), array([9, 3], dtype=int32))<br>(array([[  467,    11,   324,  4464,  4539,   204,  3071,  3905,  9914,<br>         2095,   423,    99,    15,    53,  1942,  1937,    14,     4,<br>          706,     2, 12019,    10,   372,   675,     2,    15,  3919,<br>         7501,    14,     1,  4539,   451,   196,  2836,    12,   589,<br>            6,   183,     2,   306,     3,  4539,    63,   140,     0,<br>            2,  2419,     6,     1,   109],<br>       [ 2981,     4,     0,  2581,     2,  2444,    11,  7586,    57,<br>         2823,   122,    17,   250,    16,    40,    34,  2581,     1,<br>         2812,     7,   296,     8, 12790,  1083,     9,    20,    47,<br>          645,     2,   757,     1,   610,  1005,  2619, 19782,     2,<br>         1920,     1,    20,   187,    73,    34,    31,    48,  3380,<br>            2,   696,  2581,     1,   780]], dtype=int32), array([8, 1], dtype=int32))</p>
+</blockquote>
+<p><strong>计算图输入定义</strong></p>
+<pre><code>def create_model(hps, vocab_size, num_classes):
+    num_timesteps = hps.num_timesteps
+    batch_size = hps.batch_size
+
+    inputs = tf.placeholder(tf.int32, (batch_size, num_timesteps))
+    outputs = tf.placeholder(tf.int32, (batch_size, ))
+    keep_prob = tf.placeholder(tf.float32, name = &apos;keep_prob&apos;)
+
+    global_step = tf.Variable(
+        tf.zeros([], tf.int64), name = &apos;global_step&apos;, trainable=False)
+</code></pre><p><strong>计算图实现</strong></p>
+<ul>
+<li>首先写embedding层</li>
+</ul>
+<pre><code>embedding_initializer = tf.random_uniform_initializer(-1.0, 1.0)
+with tf.variable_scope(
+    &apos;embedding&apos;, initializer = embedding_initializer):
+    embeddings = tf.get_variable(
+        &apos;embedding&apos;,
+        [vocab_size, hps.num_embedding_size],
+        tf.float32)
+    # [1, 10, 7] -&gt; [embeddings[1], embeddings[10], embeddings[7]]
+    embed_inputs = tf.nn.embedding_lookup(embeddings, inputs)
+</code></pre><ul>
+<li>接下来编写LSTM层，我们获取LSTM最后一步的输出</li>
+</ul>
+<pre><code>scale = 1.0 / math.sqrt(hps.num_embedding_size + hps.num_lstm_nodes[-1]) / 3.0
+lstm_init = tf.random_uniform_initializer(-scale, scale)
+with tf.variable_scope(&apos;lstm_nn&apos;, initializer = lstm_init):
+    cells = []
+    for i in range(hps.num_lstm_layers):
+        cell = tf.contrib.rnn.BasicLSTMCell(
+            hps.num_lstm_nodes[i],
+            state_is_tuple = True)
+        cell = tf.contrib.rnn.DropoutWrapper(
+            cell,
+            output_keep_prob = keep_prob)
+        cells.append(cell)
+    cell = tf.contrib.rnn.MultiRNNCell(cells)
+
+    initial_state = cell.zero_state(batch_size, tf.float32)
+    # rnn_outputs: [batch_size, num_timesteps, lstm_outputs[-1]]
+    rnn_outputs, _ = tf.nn.dynamic_rnn(
+        cell, embed_inputs, initial_state = initial_state)
+    last = rnn_outputs[:, -1, :]
+</code></pre><ul>
+<li>然后我们将这个输出连接到全连接层，算出输入的类别结果</li>
+</ul>
+<pre><code>fc_init = tf.uniform_unit_scaling_initializer(factor=1.0)
+with tf.variable_scope(&apos;fc&apos;, initializer = fc_init):
+    fc1 = tf.layers.dense(last, 
+                          hps.num_fc_nodes,
+                          activation = tf.nn.relu,
+                          name = &apos;fc1&apos;)
+    fc1_dropout = tf.contrib.layers.dropout(fc1, keep_prob)
+    logits = tf.layers.dense(fc1_dropout,
+                             num_classes,
+                             name = &apos;fc2&apos;)
+</code></pre><ul>
+<li>指标计算与梯度算子实现</li>
+</ul>
+<pre><code>with tf.name_scope(&apos;metrics&apos;):
+    softmax_loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
+        logits = logits, labels = outputs)
+    loss = tf.reduce_mean(softmax_loss)
+    # [0, 1, 5, 4, 2] -&gt; argmax: 2
+    y_pred = tf.argmax(tf.nn.softmax(logits),
+                       1, 
+                       output_type = tf.int32)
+    correct_pred = tf.equal(outputs, y_pred)
+    accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
+with tf.name_scope(&apos;train_op&apos;):
+    tvars = tf.trainable_variables()
+    for var in tvars:
+        tf.logging.info(&apos;variable name: %s&apos; % (var.name))
+    grads, _ = tf.clip_by_global_norm(
+        tf.gradients(loss, tvars), hps.clip_lstm_grads)
+    optimizer = tf.train.AdamOptimizer(hps.learning_rate)
+    train_op = optimizer.apply_gradients(
+        zip(grads, tvars), global_step = global_step)
+</code></pre><ul>
+<li>我们返回输入和输出的值</li>
+</ul>
+<pre><code>return ((inputs, outputs, keep_prob),
+        (loss, accuracy),
+        (train_op, global_step))
+</code></pre><p><strong>训练流程实现</strong></p>
+<pre><code>placeholders, metrics, others = create_model(
+    hps, vocab_size, num_classes)
+
+inputs, outputs, keep_prob = placeholders
+loss, accuracy = metrics
+train_op, global_step = others
+</code></pre><ul>
+<li>接下来编写训练流程</li>
+</ul>
+<pre><code>init_op = tf.global_variables_initializer()
+train_keep_prob_value = 0.8
+test_keep_prob_value = 1.0
+
+num_train_steps = 10000
+
+# Train: 99.7%
+# Valid: 92.7%
+# Test:  93.2%
+with tf.Session() as sess:
+    sess.run(init_op)
+    for i in range(num_train_steps):
+        batch_inputs, batch_labels = train_dataset.next_batch(
+            hps.batch_size)
+        outputs_val = sess.run([loss, accuracy, train_op, global_step],
+                               feed_dict = {
+                                   inputs: batch_inputs,
+                                   outputs: batch_labels,
+                                   keep_prob: train_keep_prob_value,
+                               })
+        loss_val, accuracy_val, _, global_step_val = outputs_val
+        if global_step_val % 20 == 0:
+            tf.logging.info(&quot;Step: %5d, loss: %3.3f, accuracy: %3.3f&quot;
+                            % (global_step_val, loss_val, accuracy_val))
+</code></pre><ul>
+<li>可以看到他开始逐步训练了</li>
+</ul>
+<pre><code>INFO:tensorflow:Step:    20, loss: 2.297, accuracy: 0.110
+INFO:tensorflow:Step:    40, loss: 2.290, accuracy: 0.190
+</code></pre><h3 id="2-Tensorflow中实现LSTM网络结构"><a href="#2-Tensorflow中实现LSTM网络结构" class="headerlink" title="2. Tensorflow中实现LSTM网络结构"></a>2. Tensorflow中实现LSTM网络结构</h3><ul>
+<li>我们只需要修改模型架构部分</li>
+</ul>
+<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1so0f1ermj212a0ho46x.jpg" alt=""></p>
+<ul>
+<li>定义一个函数，帮我们生成每一组参数</li>
+</ul>
+<pre><code>def _generate_params_for_lstm_cell(x_size, h_size, bias_size):
+    &quot;&quot;&quot;generates parameters for pure lstm implementation.&quot;&quot;&quot;
+    x_w = tf.get_variable(&apos;x_weights&apos;, x_size)
+    h_w = tf.get_variable(&apos;h_weights&apos;, h_size)
+    b = tf.get_variable(&apos;biases&apos;, bias_size,
+                        initializer=tf.constant_initializer(0.0))
+    return x_w, h_w, b
+</code></pre><ul>
+<li>实现输入门</li>
+</ul>
+<pre><code>with tf.variable_scope(&apos;lstm_nn&apos;, initializer = lstm_init):
+    with tf.variable_scope(&apos;inputs&apos;):
+        ix, ih, ib = _generate_params_for_lstm_cell(
+            x_size = [hps.num_embedding_size, hps.num_lstm_nodes[0]],
+            h_size = [hps.num_lstm_nodes[0], hps.num_lstm_nodes[0]],
+            bias_size = [1, hps.num_lstm_nodes[0]]
+        )
+    with tf.variable_scope(&apos;outputs&apos;):
+        ox, oh, ob = _generate_params_for_lstm_cell(
+            x_size = [hps.num_embedding_size, hps.num_lstm_nodes[0]],
+            h_size = [hps.num_lstm_nodes[0], hps.num_lstm_nodes[0]],
+            bias_size = [1, hps.num_lstm_nodes[0]]
+        )
+    with tf.variable_scope(&apos;forget&apos;):
+        fx, fh, fb = _generate_params_for_lstm_cell(
+            x_size = [hps.num_embedding_size, hps.num_lstm_nodes[0]],
+            h_size = [hps.num_lstm_nodes[0], hps.num_lstm_nodes[0]],
+            bias_size = [1, hps.num_lstm_nodes[0]]
+        )
+    with tf.variable_scope(&apos;memory&apos;):
+        cx, ch, cb = _generate_params_for_lstm_cell(
+            x_size = [hps.num_embedding_size, hps.num_lstm_nodes[0]],
+            h_size = [hps.num_lstm_nodes[0], hps.num_lstm_nodes[0]],
+            bias_size = [1, hps.num_lstm_nodes[0]]
+        )
+</code></pre><ul>
+<li>我们还需要两个初始状态</li>
+</ul>
+<pre><code>with tf.variable_scope(&apos;lstm_nn&apos;, initializer = lstm_init):
+    ...
+    state = tf.Variable(
+        tf.zeros([batch_size, hps.num_lstm_nodes[0]]),
+        trainable = False
+    )
+    h = tf.Variable(
+        tf.zeros([batch_size, hps.num_lstm_nodes[0]]),
+        trainable = False
+    )
+</code></pre><ul>
+<li>我们就可以循环的实现每一步的LSTM了</li>
+</ul>
+<pre><code>with tf.variable_scope(&apos;lstm_nn&apos;, initializer = lstm_init):
+    ...
+    for i in range(num_timesteps):
+        # [batch_size, 1, embed_size]
+        embed_input = embed_inputs[:, i, :]
+        embed_input = tf.reshape(embed_input,
+                                 [batch_size, hps.num_embedding_size])
+        forget_gate = tf.sigmoid(
+            tf.matmul(embed_input, fx) + tf.matmul(h, fh) + fb)
+        input_gate = tf.sigmoid(
+            tf.matmul(embed_input, ix) + tf.matmul(h, ih) + ib)
+        output_gate = tf.sigmoid(
+            tf.matmul(embed_input, ox) + tf.matmul(h, oh) + ob)
+        mid_state = tf.tanh(
+            tf.matmul(embed_input, cx) + tf.matmul(h, ch) + cb)
+        state = mid_state * input_gate + state * forget_gate
+        h = output_gate * tf.tanh(state)
+    last = h
+</code></pre><ul>
+<li>到此，我们就手动的实现了LSTM内部的结构</li>
+</ul>
+<h3 id="3-Tensorflow中使用CNN实现文本分类"><a href="#3-Tensorflow中使用CNN实现文本分类" class="headerlink" title="3. Tensorflow中使用CNN实现文本分类"></a>3. Tensorflow中使用CNN实现文本分类</h3><ul>
+<li>首先我们要修改超参数的定义</li>
+</ul>
+<pre><code>def get_default_params():
+    return tf.contrib.training.HParams(
+        num_embedding_size = 16,
+        num_timesteps = 50,
+        num_filters = 64,
+        num_kernel_size = 3,
+        num_fc_nodes = 32,
+        batch_size = 100,
+        learning_rate = 0.001,
+        num_word_threshold = 10,
+    )
+</code></pre><ul>
+<li>然后我们修改计算图的实现</li>
+</ul>
+<pre><code>scale = 1.0 / math.sqrt(hps.num_embedding_size + hps.num_filters) / 3.0
+cnn_init = tf.random_uniform_initializer(-scale, scale)
+with tf.variable_scope(&apos;cnn&apos;, initializer = cnn_init):
+    # embed_inputs: [batch_size, timesteps, embed_size]
+    # conv1d: [batch_size, timesteps, num_filters]
+    conv1d = tf.layers.conv1d(
+        embed_inputs,
+        hps.num_filters,
+        hps.num_kernel_size,
+        activation = tf.nn.relu,
+    )
+    global_maxpooling = tf.reduce_max(conv1d, axis=[1])
+</code></pre><ul>
+<li>修改train_op</li>
+</ul>
+<pre><code>with tf.name_scope(&apos;train_op&apos;):
+    train_op = tf.train.AdamOptimizer(hps.learning_rate).minimize(
+        loss, global_step=global_step)
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

@@ -181,7 +181,77 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<h2 id="1-HBase进阶"><a href="#1-HBase进阶" class="headerlink" title="1. HBase进阶"></a>1. HBase进阶</h2><p><strong>什么导致HBase性能下降</strong></p>
+<ul>
+<li>JVM内存分配与GC回收策略</li>
+<li>与HBase运行机制相关的部分配置不合理</li>
+<li>表结构设计及用户使用方式不合理</li>
+</ul>
+<p><strong>HBase数据存储过程</strong></p>
+<ul>
+<li>HBase写入时当memstore达到一定大小会flush到磁盘保存成HFile，当HFile小文件太多会执行compact操作进行合并<ul>
+<li>minor compaction：选取一些小的，相邻的StoreFile将他们合并成一个更大的StoreFile</li>
+<li>major compaction：将所有的StoreFile合并成一个StoreFile，清理无意义数据：被删除的数据，TTL过期数据，版本号超过设定版本号的数据</li>
+</ul>
+</li>
+<li>当Region的大小达到某一阈值之后，会执行split操作<ul>
+<li>split：当一个region达到一定的大小就会自动split成两个region</li>
+</ul>
+</li>
+</ul>
+<p><strong>HBase Compact检查</strong></p>
+<ul>
+<li>MemStore被flush到磁盘</li>
+<li>用户执行shell命令compact，major_compact或者调用了相应的API</li>
+<li>HBase后台线程周期性触发检查</li>
+</ul>
+<h3 id="1-HBase优化策略一：服务端优化策略"><a href="#1-HBase优化策略一：服务端优化策略" class="headerlink" title="1. HBase优化策略一：服务端优化策略"></a>1. HBase优化策略一：服务端优化策略</h3><p><strong>JVM设置与GC设置</strong></p>
+<p><strong>hbase-site.xml部分属性配置</strong></p>
+<ul>
+<li>hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10</li>
+<li>hbase.hregion.max.filesize：当region的大小大于设定值后hbase就会开始split</li>
+<li>hbase.hregion.majorcompaction：major compaction的执行周期</li>
+<li>hbase.hstore.compaction.min：一个store里的storefile总数超过该值，会触发默认的合并操作</li>
+<li>hbase.hstore.compaction.max：一次最多合并多少个storefile</li>
+<li>hbase.hstore.blockingStoreFiles：一个region中的Store(CoulmnFamily)内有超过xx个storefile时，则block所有的写请求进行compaction</li>
+<li>hfile.block.cache.size：regionserver的block cache的内存大小限制</li>
+<li>hbase.hregion.memstore.flush.size：memstore超过该值将被flush</li>
+<li>hbase.hregion.memstore.block.multiplier：如果memstore的内存大小超过flush.size * multiplier，会阻塞该memstore的写操作</li>
+</ul>
+<h3 id="2-HBase优化策略二：常用优化策略"><a href="#2-HBase优化策略二：常用优化策略" class="headerlink" title="2. HBase优化策略二：常用优化策略"></a>2. HBase优化策略二：常用优化策略</h3><p><strong>预先分区</strong></p>
+<ul>
+<li>创建HBase表的时候会自动创建一个Region分区</li>
+<li>创建HBase表的时候预先创建一些空的Regions</li>
+</ul>
+<p><strong>RowKey优化</strong></p>
+<ul>
+<li>利用HBase默认排序特点，将一起访问的数据放到一起</li>
+<li>防止热点问题，避免使用时序或者单调的递增递减等</li>
+</ul>
+<p><strong>Column优化</strong></p>
+<ul>
+<li>列族的名称和列的描述命名尽量简短</li>
+<li>同一张表中ColumnFamily的数量不要超过3个</li>
+</ul>
+<p><strong>Schema优化</strong></p>
+<ul>
+<li>宽表：一种“列多行少”的设计</li>
+<li>高表：一种“列少行多”的设计</li>
+</ul>
+<h3 id="3-HBase优化策略三：读写优化策略"><a href="#3-HBase优化策略三：读写优化策略" class="headerlink" title="3. HBase优化策略三：读写优化策略"></a>3. HBase优化策略三：读写优化策略</h3><p><strong>HBase写优化策略</strong></p>
+<ul>
+<li>同步批量提交 or 异步批量提交</li>
+<li>WAL优化，是否必须，持久化等级</li>
+</ul>
+<p><strong>HBase读优化策略</strong></p>
+<ul>
+<li>客户端：Scan缓存设置，批量获取</li>
+<li>服务端：BlockCache配置是否合理，HFile是否过多</li>
+<li>表结构设计问题</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-容灾与监控"><a href="#2-容灾与监控" class="headerlink" title="2. 容灾与监控"></a>2. 容灾与监控</h2><h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
