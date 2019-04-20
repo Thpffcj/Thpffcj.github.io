@@ -181,7 +181,273 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-事务原则与实现"><a href="#1-事务原则与实现" class="headerlink" title="1. 事务原则与实现"></a>1. 事务原则与实现</h2><h2 id="2-使用Docker搭建环境"><a href="#2-使用Docker搭建环境" class="headerlink" title="2. 使用Docker搭建环境"></a>2. 使用Docker搭建环境</h2>
+      		<h2 id="1-事务原则与实现"><a href="#1-事务原则与实现" class="headerlink" title="1. 事务原则与实现"></a>1. 事务原则与实现</h2><p><strong>数据一致性问题</strong></p>
+<ul>
+<li>数据的并发访问，修改</li>
+<li>不同请求之前的数据隔离</li>
+<li>多个服务共同完成一个业务请求，保证都完成或失败</li>
+<li>发生异常时的数据回滚</li>
+</ul>
+<h3 id="1-事务"><a href="#1-事务" class="headerlink" title="1. 事务"></a>1. 事务</h3><p><strong>事务是什么</strong></p>
+<ul>
+<li>是以一种可靠，一致的方式，访问和操作数据库中数据的程序单元</li>
+</ul>
+<p><strong>原则</strong></p>
+<ul>
+<li>A 原子性</li>
+<li>C 一致性</li>
+<li>I 隔离性</li>
+<li>D 持久性</li>
+</ul>
+<h3 id="2-SQL事务"><a href="#2-SQL事务" class="headerlink" title="2. SQL事务"></a>2. SQL事务</h3><pre><code>START TRANSACTION;
+UPDATE t_user SET amount = amount + 100 WHERE username = &apos;BatMan&apos;;
+UPDATE t_user SET amount = amount - 100 WHERE username = &apos;SuperMan&apos;;
+COMMIT;
+</code></pre><ul>
+<li>我们可以查看数据库的隔离级别</li>
+</ul>
+<pre><code>SELECT @@GLOBAL.transaction_isolation, @@transaction_isolation;
+</code></pre><ul>
+<li>发现结果都是可重复读REPEATABLE-READ</li>
+<li>设置隔离级别</li>
+</ul>
+<pre><code>SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+</code></pre><ul>
+<li>MySQL主要提供了四种隔离级别READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ,  SERIALIZABLE</li>
+</ul>
+<h3 id="3-JDBC事务"><a href="#3-JDBC事务" class="headerlink" title="3. JDBC事务"></a>3. JDBC事务</h3><pre><code>public class LocalTranJdbcApplication {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LocalTranJdbcApplication.class);
+
+    public static void main(String[] args) throws SQLException {
+
+
+        String plusAmountSQL = &quot;UPDATE T_USER SET amount = amount + 100 WHERE username = ?&quot;;
+        String minusAmountSQL = &quot;UPDATE T_USER SET amount = amount - 100 WHERE username = ?&quot;;
+
+        Connection dbConnection = getDBConnection();
+        LOG.debug(&quot;Begin&quot;);
+        dbConnection.setAutoCommit(false);
+
+        PreparedStatement plusAmountPS = dbConnection.prepareStatement(plusAmountSQL);
+        plusAmountPS.setString(1, &quot;SuperMan&quot;);
+        plusAmountPS.executeUpdate();
+
+        PreparedStatement minusAmountPS = dbConnection.prepareStatement(minusAmountSQL);
+        minusAmountPS.setString(1, &quot;BatMan&quot;);
+        minusAmountPS.executeUpdate();
+
+        dbConnection.commit();
+        LOG.debug(&quot;Done!&quot;);
+
+        plusAmountPS.close();
+        minusAmountPS.close();
+        dbConnection.close();
+    }
+
+    private static Connection getDBConnection() throws SQLException {
+        String DB_DRIVER = &quot;com.mysql.jdbc.Driver&quot;;
+        String DB_CONNECTION = &quot;jdbc:mysql://localhost:3306/test&quot;;
+        String DB_USER = &quot;root&quot;;
+        String DB_PASSWORD = &quot;000000&quot;;
+        try {
+            Class.forName(DB_DRIVER);
+        } catch (ClassNotFoundException e) {
+            LOG.error(e.getMessage());
+        }
+        return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+    }
+}
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-使用Docker搭建环境"><a href="#2-使用Docker搭建环境" class="headerlink" title="2. 使用Docker搭建环境"></a>2. 使用Docker搭建环境</h2><h3 id="1-docker简介与MySQL安装"><a href="#1-docker简介与MySQL安装" class="headerlink" title="1. docker简介与MySQL安装"></a>1. docker简介与MySQL安装</h3><p><strong>Docker介绍</strong></p>
+<ul>
+<li>轻量级容器</li>
+<li>与虚拟机的异同</li>
+<li>使用方便</li>
+<li>Docker镜像 - docker资源库</li>
+<li>Docker容器 - Dockerfile</li>
+<li>Docker服务 - docker-compose</li>
+<li>Docker集群 - swam, Kubernetes</li>
+</ul>
+<p><strong>安装MySQL</strong></p>
+<pre><code>Thpffcj:~ thpffcj$ docker run --name mysql1 mysql/mysql-server:5.7
+</code></pre><ul>
+<li>上面这条命令如果你没有MySQL的镜像，他会帮助你下载镜像并运行</li>
+</ul>
+<pre><code>Thpffcj:~ thpffcj$ docker ps
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                   PORTS                 NAMES
+b400237a510d        mysql/mysql-server:5.7   &quot;/entrypoint.sh mysq…&quot;   2 minutes ago       Up 2 minutes (healthy)   3306/tcp, 33060/tcp   mysql1
+</code></pre><ul>
+<li>关闭启动mysql1</li>
+</ul>
+<pre><code>Thpffcj:~ thpffcj$ docker stop mysql1
+mysql1
+Thpffcj:~ thpffcj$ docker start mysql1
+mysql1
+Thpffcj:~ thpffcj$ docker ps
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS                             PORTS                 NAMES
+b400237a510d        mysql/mysql-server:5.7   &quot;/entrypoint.sh mysq…&quot;   4 minutes ago       Up 10 seconds (health: starting)   3306/tcp, 33060/tcp   mysql1
+</code></pre><ul>
+<li>现在我们要进入MySQL容器，并执行MySQL命令</li>
+</ul>
+<pre><code>Thpffcj:~ thpffcj$ docker exec -it mysql1 /bin/bash
+bash-4.2# 
+</code></pre><ul>
+<li>输入MySQL时需要我们输入密码，刚才执行run命令时它有一个默认密码，但我没有记住，所以我们仙子阿退出去自己设置一个密码</li>
+<li>同时我们还要设置本机可以访问这个MySQL，现在必须要进入容器才能访问这个MySQL</li>
+<li>先删除刚才那个镜像</li>
+</ul>
+<pre><code>Thpffcj:~ thpffcj$ docker rm mysql1
+mysql1
+</code></pre><ul>
+<li>重新run一个镜像</li>
+</ul>
+<pre><code>Thpffcj:docker thpffcj$ docker run --name mysql1 --env MYSQL_ROOT_HOST=172.17.%.% --env MYSQL_ROOT_PASSWORD=000000 -v $PWD/mysql_data:/var/lib/mysql -p 3306:3306 -d mysql/mysql-server:5.7
+9f2da9852b49d46d58664b67cc1eb03a30c69120882a64867832c4f6c4838ae3
+Thpffcj:docker thpffcj$ docker ps -a
+CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS                             PORTS                                              NAMES
+9f2da9852b49        mysql/mysql-server:5.7                    &quot;/entrypoint.sh mysq…&quot;   13 seconds ago      Up 12 seconds (health: starting)   0.0.0.0:3306-&gt;3306/tcp, 33060/tcp                  mysql1
+c08f0fbaec0e        quay.io/openai/universe.gym-core:0.20.6   &quot;/app/universe-envs/…&quot;   8 weeks ago         Exited (255) 8 weeks ago           0.0.0.0:5901-&gt;5900/tcp, 0.0.0.0:15901-&gt;15900/tcp   universe-3lUzWR-0
+</code></pre><ul>
+<li>我们可以发现本机navicat可以连接docker的数据库了</li>
+</ul>
+<h3 id="2-springboot基础"><a href="#2-springboot基础" class="headerlink" title="2. springboot基础"></a>2. springboot基础</h3><ul>
+<li>Spring框架之间的集成</li>
+<li>Spring框架版本更新</li>
+<li>框架扩展与自定义</li>
+<li>兼容与bug</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-Spring事务基础"><a href="#3-Spring事务基础" class="headerlink" title="3. Spring事务基础"></a>3. Spring事务基础</h2><h3 id="1-Spring事务机制-基本接口"><a href="#1-Spring事务机制-基本接口" class="headerlink" title="1. Spring事务机制 - 基本接口"></a>1. Spring事务机制 - 基本接口</h3><p><strong>Spring事务管理</strong></p>
+<ul>
+<li>提供的统一的API接口支持不同的资源</li>
+<li>提供声明式事务管理</li>
+<li>方便的与Spring框架集成</li>
+<li>多个资源的事务管理，同步</li>
+</ul>
+<p><strong>Spring事务抽象</strong></p>
+<ul>
+<li>PlatformTransactionManager</li>
+<li>TransactionDefinition</li>
+<li><p>TransactionStatus</p>
+</li>
+<li><p>事务管理器</p>
+</li>
+</ul>
+<pre><code>public interface PlatformTransactionManager {
+
+    TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException;
+
+    void commit(TransactionStatus status) throws TransactionException;
+
+    void rollback(TransactionStatus status) throws TransactionException;
+
+}
+</code></pre><ul>
+<li>事务定义</li>
+</ul>
+<pre><code>public interface TransactionDefinition {
+    int getPropagationBehavior();
+    int getIsolationLevel();
+    int getTimeout();
+    boolean isReadOnly();
+    @Nullable
+    String getName();
+}
+</code></pre><ul>
+<li>事务隔离机制</li>
+</ul>
+<pre><code>int ISOLATION_READ_UNCOMMITTED = Connection.TRANSACTION_READ_UNCOMMITTED;
+int ISOLATION_READ_COMMITTED = Connection.TRANSACTION_READ_COMMITTED;
+int ISOLATION_REPEATABLE_READ = Connection.TRANSACTION_REPEATABLE_READ;
+int ISOLATION_SERIALIZABLE = Connection.TRANSACTION_SERIALIZABLE;
+</code></pre><ul>
+<li>事务传播机制</li>
+</ul>
+<pre><code>int PROPAGATION_REQUIRED = 0;
+int PROPAGATION_SUPPORTS = 1;
+int PROPAGATION_MANDATORY = 2;
+int PROPAGATION_REQUIRES_NEW = 3;
+int PROPAGATION_NOT_SUPPORTED = 4;
+int PROPAGATION_NEVER = 5;
+int PROPAGATION_NESTED = 6;
+</code></pre><ul>
+<li>事务管理器</li>
+</ul>
+<pre><code>public interface TransactionStatus extends SavepointManager, Flushable {
+    boolean isNewTransaction();
+    boolean hasSavepoint();
+    void setRollbackOnly();
+    boolean isRollbackOnly();
+    @Override
+    void flush();
+    boolean isCompleted();
+}
+</code></pre><h3 id="2-Spring事务机制-实现"><a href="#2-Spring事务机制-实现" class="headerlink" title="2. Spring事务机制 - 实现"></a>2. Spring事务机制 - 实现</h3><p><strong>PlatformTransactionManager的常见实现</strong></p>
+<ul>
+<li>DataSourceTransactionManager</li>
+<li>JpaTransactionManager</li>
+<li>JmsTransactionManager</li>
+<li>JtaTransactionManager</li>
+</ul>
+<h3 id="3-Jpa事务实例"><a href="#3-Jpa事务实例" class="headerlink" title="3. Jpa事务实例"></a>3. Jpa事务实例</h3><ul>
+<li>标签实现</li>
+</ul>
+<pre><code>@Service
+public class CustomerServiceTxInAnnotation {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Transactional
+    public Customer create(Customer customer) {
+        return customerRepository.save(customer);
+    }
+}
+</code></pre><ul>
+<li>代码实现</li>
+</ul>
+<pre><code>@Service
+public class CustomerServiceTxInCode {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+
+    public Customer create(Customer customer) {
+
+        DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+        definition.setIsolationLevel(TransactionDefinition.ISOLATION_SERIALIZABLE);
+        definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_SUPPORTS);
+
+        TransactionStatus status = transactionManager.getTransaction(definition);
+
+        try {
+            customerRepository.save(customer);
+            transactionManager.commit(status);
+            return customer;
+        } catch (Exception e) {
+            transactionManager.rollback(status);
+            throw  e;
+        }
+    }
+}
+</code></pre><h3 id="4-Jms事务原理"><a href="#4-Jms事务原理" class="headerlink" title="4. Jms事务原理"></a>4. Jms事务原理</h3><p><strong>Spring JMS Session</strong></p>
+<ul>
+<li>通过Session进行事务管理</li>
+<li>Session是thread-bound</li>
+<li>事务上下文：在一个线程中的一个Session</li>
+</ul>
+<p><strong>Spring JMS事务类型</strong></p>
+<ul>
+<li>Session管理的事务 - 原生事务</li>
+<li>外部管理的事务 - JmsTransactionManager, JTA</li>
+</ul>
+<h3 id="5-Jms-session事务实例"><a href="#5-Jms-session事务实例" class="headerlink" title="5. Jms-session事务实例"></a>5. Jms-session事务实例</h3><h3 id="6-Jms-spring事务实例"><a href="#6-Jms-spring事务实例" class="headerlink" title="6. Jms-spring事务实例"></a>6. Jms-spring事务实例</h3><h3 id="7-外部事务与JTA"><a href="#7-外部事务与JTA" class="headerlink" title="7. 外部事务与JTA"></a>7. 外部事务与JTA</h3><h3 id="8-JTA单数据源事务实例"><a href="#8-JTA单数据源事务实例" class="headerlink" title="8. JTA单数据源事务实例"></a>8. JTA单数据源事务实例</h3><h3 id="9-JTA多数据源事务实例"><a href="#9-JTA多数据源事务实例" class="headerlink" title="9. JTA多数据源事务实例"></a>9. JTA多数据源事务实例</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

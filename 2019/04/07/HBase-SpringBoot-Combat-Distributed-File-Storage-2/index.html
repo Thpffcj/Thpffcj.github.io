@@ -249,6 +249,142 @@
 <li>服务端：BlockCache配置是否合理，HFile是否过多</li>
 <li>表结构设计问题</li>
 </ul>
+<h3 id="4-HBase协处理器简介"><a href="#4-HBase协处理器简介" class="headerlink" title="4. HBase协处理器简介"></a>4. HBase协处理器简介</h3><ul>
+<li>HBase协处理器受BigTable协处理器启发，为用户提供类库和运行时环境，使得代码能够在HBase RegionServer和Master上处理</li>
+<li>系统协处理器 and 表协处理器<ul>
+<li>系统协处理器：全局加载到RegionServer托管的所有表和Region上</li>
+<li>表协处理器：用户可以指定一张表使用协处理器</li>
+</ul>
+</li>
+<li>Observer and Endpoint<ul>
+<li>Observer：类似于关系数据库的触发器<ul>
+<li>安全性：例如执行Get或Put前，通过preGet或prePut方法检查是否允许该操作</li>
+<li>引用完整性约束：HBase并不支持关系型数据库中的引用完整性约束概念，即通常所说的外键。我们可以使用协处理器增强这种约束</li>
+<li>二级索引：可以使用协处理器来维持一个二级索引</li>
+</ul>
+</li>
+<li>Endpoint：动态的终端有点像存储过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-协处理器实战"><a href="#5-协处理器实战" class="headerlink" title="5. 协处理器实战"></a>5. 协处理器实战</h3><p><strong>开发RegionObserver协处理器</strong></p>
+<pre><code>/**
+ * Created by thpffcj on 2019-04-10.
+ */
+public class RegionObserverTest extends BaseRegionObserver {
+
+    private byte[] columnFamily = Bytes.toBytes(&quot;cf&quot;);
+    private byte[] countCol = Bytes.toBytes(&quot;countCol&quot;);
+    private byte[] unDeleteCol = Bytes.toBytes(&quot;unDeleteCol&quot;);
+    private RegionCoprocessorEnvironment environment;
+
+    // regionserver 打开region前执行
+    @Override
+    public void start(CoprocessorEnvironment e) throws IOException {
+        environment = (RegionCoprocessorEnvironment) e;
+    }
+
+    // RegionServer关闭region前调用
+    @Override
+    public void stop(CoprocessorEnvironment e) throws IOException {
+
+    }
+
+    /**
+     * 1. cf:countCol 进行累加操作。每次插入的时候都要与之前的值进行相加
+     */
+    @Override
+    public void prePut(ObserverContext&lt;RegionCoprocessorEnvironment&gt; e, Put put, WALEdit edit,
+                       Durability durability) throws IOException {
+        if (put.has(columnFamily, countCol)) {
+            // 获取old countcol value
+            Result rs = e.getEnvironment().getRegion().get(new Get(put.getRow()));
+            int oldNum = 0;
+            for (Cell cell : rs.rawCells()) {
+                if (CellUtil.matchingColumn(cell, columnFamily, countCol)) {
+                    oldNum = Integer.valueOf(Bytes.toString(CellUtil.cloneValue(cell)));
+                }
+            }
+
+            // 获取new countcol value
+            List&lt;Cell&gt; cells = put.get(columnFamily, countCol);
+            int newNum = 0;
+            for (Cell cell : cells) {
+                if (CellUtil.matchingColumn(cell, columnFamily, countCol)) {
+                    newNum = Integer.valueOf(Bytes.toString(CellUtil.cloneValue(cell)));
+                }
+            }
+
+            // sum AND update Put实例
+            put.addColumn(columnFamily, countCol, Bytes.toBytes(String.valueOf(oldNum + newNum)));
+        }
+    }
+
+    /**
+     * 2. 不能直接删除unDeleteCol。删除countCol的时候将unDeleteCol一同删除
+     */
+    @Override
+    public void preDelete(ObserverContext&lt;RegionCoprocessorEnvironment&gt; e, Delete delete,
+                          WALEdit edit,
+                          Durability durability) throws IOException {
+        // 判断是否操作cf列族
+        List&lt;Cell&gt; cells = delete.getFamilyCellMap().get(columnFamily);
+        if (cells == null || cells.size() == 0) {
+            return;
+        }
+
+        boolean deleteFlag = false;
+        for (Cell cell : cells) {
+            byte[] qualifier = CellUtil.cloneQualifier(cell);
+
+            if (Arrays.equals(qualifier, unDeleteCol)) {
+                throw new IOException(&quot;can not delete unDel column&quot;);
+            }
+
+            if (Arrays.equals(qualifier, countCol)) {
+                deleteFlag = true;
+            }
+        }
+
+        if (deleteFlag) {
+            delete.addColumn(columnFamily, unDeleteCol);
+        }
+    }
+}
+</code></pre><p><strong>开发endpoint协处理器</strong></p>
+<ul>
+<li>endpoint协处理器需要与服务端直接通信，他们两个之间会有一个基于ProtoBuffer的RPC接口，客户端和服务端都需要基于接口的逻辑实现，我们现在想实现一个统计行数的协处理器</li>
+<li>首先定义RPC接口</li>
+</ul>
+<pre><code>syntax = &quot;proto2&quot;;
+
+option java_package = &quot;cn.edu.nju&quot;;
+
+option java_outer_classname = &quot;GetRowCount&quot;;
+option java_generic_services = true;
+option optimize_for = SPEED;
+
+message getRowCountRequest{
+
+}
+
+message getRowCountResponse {
+  optional int64 rowCount = 1;
+}
+
+
+service hbaseEndPointTestService {
+  rpc getRowCount(getRowCountRequest)
+  returns(getRowCountResponse);
+}
+</code></pre><ul>
+<li>执行命令生成Java文件</li>
+</ul>
+<pre><code>Thpffcj:proto thpffcj$ protoc --java_out=../java RowCountTest.proto
+</code></pre><ul>
+<li>开发业务处理类</li>
+</ul>
+<h3 id="6-HBase协处理器加载"><a href="#6-HBase协处理器加载" class="headerlink" title="6. HBase协处理器加载"></a>6. HBase协处理器加载</h3><hr>
 <p><br></p>
 <hr>
 <h2 id="2-容灾与监控"><a href="#2-容灾与监控" class="headerlink" title="2. 容灾与监控"></a>2. 容灾与监控</h2><h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2>
@@ -257,8 +393,8 @@
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/04/11/Sword-Refers-To-Java-Interview-1/" style="float: left;">
+        ← 剑指Java面试
     </a>
     
     
