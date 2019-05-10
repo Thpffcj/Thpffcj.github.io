@@ -384,16 +384,198 @@ service hbaseEndPointTestService {
 </code></pre><ul>
 <li>开发业务处理类</li>
 </ul>
-<h3 id="6-HBase协处理器加载"><a href="#6-HBase协处理器加载" class="headerlink" title="6. HBase协处理器加载"></a>6. HBase协处理器加载</h3><hr>
+<pre><code>/**
+ - Created by thpffcj on 2019-04-16.
+ */
+public class TestRowCountEndPoint extends hbaseEndPointTestService
+        implements Coprocessor, CoprocessorService {
+
+    // 单个region的上下文环境信息
+    private RegionCoprocessorEnvironment envi;
+
+    // rpc服务，返回本身即可，因为此类实例就是一个服务实现
+    @Override
+    public Service getService() {
+        return this;
+    }
+
+    // 协处理器是运行于region中的，每一个region都会加载协处理器
+    // 这个方法会在regionserver打开region时候执行（还没有真正打开）
+    @Override
+    public void start(CoprocessorEnvironment env) throws IOException {
+        // 需要检查当前环境是否在region上
+        if (env instanceof RegionCoprocessorEnvironment) {
+            this.envi = (RegionCoprocessorEnvironment) env;
+
+        } else {
+            throw new CoprocessorException(&quot;Must be loaded on a table region!&quot;);
+        }
+
+    }
+
+    // 这个方法会在regionserver关闭region时候执行（还没有真正关闭）
+    @Override
+    public void stop(CoprocessorEnvironment env) throws IOException {
+        // nothing to do
+
+    }
+
+    // 服务端（每一个region上）的接口实现方法
+    // 第一个参数是固定的，其余的request参数和response参数是proto接口文件中指明的。
+    @Override
+    public void getRowCount(RpcController controller,
+                            getRowCountRequest request,
+                            RpcCallback&lt;getRowCountResponse&gt; done) {
+        // 单个region上的计算结果值
+        int result = 0;
+
+        // 定义返回response
+        getRowCountResponse.Builder responseBuilder = getRowCountResponse.newBuilder();
+        // 进行行数统计
+        InternalScanner scanner = null;
+        try {
+            Scan scan = new Scan();
+            scanner = this.envi.getRegion().getScanner(scan);
+            List&lt;Cell&gt; results = new ArrayList&lt;Cell&gt;();
+            boolean hasMore = false;
+
+            do {
+                hasMore = scanner.next(results);
+                result++;
+            } while (hasMore);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            if (scanner != null) {
+                try {
+                    scanner.close();
+                } catch (IOException ignored) {
+                    // nothing to do
+                }
+            }
+        }
+
+        responseBuilder.setRowCount(result);
+        done.run(responseBuilder.build());
+        return;
+    }
+}
+</code></pre><h3 id="6-HBase协处理器加载"><a href="#6-HBase协处理器加载" class="headerlink" title="6. HBase协处理器加载"></a>6. HBase协处理器加载</h3><ul>
+<li>上面我们开发了协处理器，我们如何将它加载到HBase集群呢</li>
+</ul>
+<p><strong>HBase加载协处理器</strong></p>
+<ul>
+<li>配置文件加载：即通过hbase-site.xml文件配置加载，一般这样的协处理器是系统级别的</li>
+<li>shell加载：可以通过alter命令来对表进行schema修改来加载协处理器</li>
+<li>通过API代码加载：即通过API的方式来加载协处理器</li>
+</ul>
+<p><strong>shell加载</strong></p>
+<ul>
+<li>我们先将开发的RegionObserverTest打包上传到HDFS</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./hdfs dfs -copyFromLocal /Users/thpffcj/Public/local-repository/BigData-Getting-Started/hbase-train/hbase-observer-test/target/hbase-observer-test-1.0-SNAPSHOT.jar /coprocessor
+</code></pre><ul>
+<li>查看是否长传成功</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./hdfs dfs -ls /coprocessor
+19/04/26 18:48:40 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   1 thpffcj supergroup       4056 2019-04-26 18:48 /coprocessor/hbase-observer-test-1.0-SNAPSHOT.jar
+</code></pre><ul>
+<li>打开hbase shell，创建表，并禁用，之后加载协处理器</li>
+</ul>
+<pre><code>hbase(main):001:0&gt; create &apos;CoprocessorTest&apos;,&apos;cf&apos;
+0 row(s) in 1.5430 seconds
+
+=&gt; Hbase::Table - CoprocessorTest
+hbase(main):002:0&gt; disable &apos;CoprocessorTest&apos;
+0 row(s) in 2.3620 seconds
+
+hbase(main):003:0&gt; alter &apos;CoprocessorTest&apos;,&apos;coprocessor&apos;=&gt;&apos;hdfs://localhost:8020/coprocessor/hbase-observer-test-1.0-SNAPSHOT.jar|cn.edu.nju.RegionObserverTest|1001|&apos;
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 2.0120 seconds
+</code></pre><ul>
+<li>启用表，检测协处理器是否有效</li>
+</ul>
+<pre><code>hbase(main):004:0&gt; enable &apos;CoprocessorTest&apos;
+0 row(s) in 1.2900 seconds
+
+hbase(main):005:0&gt; put &apos;CoprocessorTest&apos;,&apos;rowkey1&apos;,&apos;cf:countCol&apos;,&apos;10&apos;
+0 row(s) in 0.0780 seconds
+
+hbase(main):006:0&gt; put &apos;CoprocessorTest&apos;,&apos;rowkey1&apos;,&apos;cf:countCol&apos;,&apos;10&apos;
+0 row(s) in 0.0210 seconds
+
+hbase(main):007:0&gt; get &apos;CoprocessorTest&apos;,&apos;rowkey1&apos;,&apos;cf:countCol&apos;
+COLUMN                CELL                                                      
+ cf:countCol          timestamp=1556276705759, value=20                         
+1 row(s) in 0.0220 seconds
+</code></pre><ul>
+<li>可以看到协处理器正常运行</li>
+</ul>
+<p><strong>HBase卸载/更新协处理器</strong></p>
+<ul>
+<li>重复加载的第二个Coprocessor实例不会发挥作用</li>
+<li>要完成卸载/更新就需要重启JVM，也就是重启RegionServer</li>
+</ul>
 <p><br></p>
 <hr>
-<h2 id="2-容灾与监控"><a href="#2-容灾与监控" class="headerlink" title="2. 容灾与监控"></a>2. 容灾与监控</h2><h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2>
+<h2 id="2-容灾与监控"><a href="#2-容灾与监控" class="headerlink" title="2. 容灾与监控"></a>2. 容灾与监控</h2><h3 id="1-HBase备份与恢复"><a href="#1-HBase备份与恢复" class="headerlink" title="1. HBase备份与恢复"></a>1. HBase备份与恢复</h3><p><strong>CopyTable</strong></p>
+<ul>
+<li>支持时间区间，row区间，改变表名称，改变列族名称，指定是否copy已经删除的数据等功能</li>
+<li>CopyTable工具采用scan查询，写入新表时采用put和delete API，全是基于HBase的client api进行读写</li>
+</ul>
+<pre><code>hbase(main):001:0&gt; list
+TABLE                                                                           
+CoprocessorTest                                                                 
+FileTable                                                                       
+2 row(s) in 0.1530 seconds
+
+=&gt; [&quot;CoprocessorTest&quot;, &quot;FileTable&quot;]
+hbase(main):002:0&gt; scan &apos;CoprocessorTest&apos;
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=cf:countCol, timestamp=1556276705759, value=20     
+1 row(s) in 0.1110 seconds
+
+hbase(main):003:0&gt; create &apos;CoprocessorTestNew&apos;,&apos;cf&apos;
+0 row(s) in 1.3510 seconds
+
+=&gt; Hbase::Table - CoprocessorTestNew
+hbase(main):004:0&gt; list
+TABLE                                                                           
+CoprocessorTest                                                                 
+CoprocessorTestNew                                                              
+FileTable                                                                       
+3 row(s) in 0.0110 seconds
+</code></pre><ul>
+<li>接下来我们就要执行CopyTable的操作了</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ hbase org.apache.hadoop.hbase.mapreduce.CopyTable --new.name=CoprocessorTestNew CoprocessorTest
+</code></pre><ul>
+<li>去hbase shell里看看效果</li>
+</ul>
+<pre><code>hbase(main):005:0&gt; scan &apos;CoprocessorTestNew&apos;
+ROW                   COLUMN+CELL                                               
+ rowkey1              column=cf:countCol, timestamp=1556276705759, value=20     
+1 row(s) in 0.0150 seconds
+</code></pre><ul>
+<li>可以看到CoprocessorTestNew里已经多了一条数据</li>
+</ul>
+<p><strong>Export/Import</strong></p>
+<ul>
+<li>Export可导出数据到目标集群，然后可在目标集群Import导入数据，Export支持指定开始时间和结束时间，因此可以做增量备份</li>
+</ul>
+<p><strong>Snapshot</strong></p>
+<p><strong>Replication</strong></p>
+<h3 id="2-HBase监控"><a href="#2-HBase监控" class="headerlink" title="2. HBase监控"></a>2. HBase监控</h3><h3 id="3-Hadoop-JMX监控实战"><a href="#3-Hadoop-JMX监控实战" class="headerlink" title="3. Hadoop JMX监控实战"></a>3. Hadoop JMX监控实战</h3><h3 id="4-HBase-JMX监控实战"><a href="#4-HBase-JMX监控实战" class="headerlink" title="4. HBase JMX监控实战"></a>4. HBase JMX监控实战</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2019/04/11/Sword-Refers-To-Java-Interview-1/" style="float: left;">
+    <a class="pull-left" href="/2019/05/08/Sword-Refers-To-Java-Interview-1/" style="float: left;">
         ← 剑指Java面试
     </a>
     

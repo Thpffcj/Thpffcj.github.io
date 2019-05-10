@@ -204,6 +204,80 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2017/10/23/Database-Course/">数据库开发技术复习</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-10-23T03:35:00.000Z" itemprop="datePublished">
+          2017-10-23
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 为性能而设计1. 提高性能的方法1. 数据结构的设计
+
+对数据表进行规范化，可以保持适当的冗余量，建立有用的索引，尽量减少表与表之间的关联，运用存储过程等。
+
+2. 处理流程
+
+采用异步处理可以允许用户发出操作之后去做其他工作，数据库进行集中的批处理，当处理完毕后通知用户。
+采用同步处理时用户必须等待数据库操作并返回结果，期间不能做其他操作，适合数据库进行实时交易。
+要根据系统的需求选择一种合适的手段，这会影响物理结构的设计。
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/10/23/Database-Course/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2017/10/12/LeetCode-Greedy-Algorithms/">LeetCode 算法面试分类解法 Greedy-Algorithms</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2017-10-12T14:17:04.000Z" itemprop="datePublished">
+          2017-10-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        前言通常贪心算法的代码会非常短而且思路也非常的简单，但贪心算法真正的难点在于确定我们当前的问题确实可以使用贪心算法。
+
+455. Assign Cookies/**
+ * Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one
+ * cookie. E
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2017/10/12/LeetCode-Greedy-Algorithms/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2017/10/11/LeetCode-Dynamic-Programming/">LeetCode 算法面试分类解法 Dynamic-Programming</a></h3>
                     <span>
                         <span class="post-meta">
@@ -494,72 +568,6 @@ int fib( int n ){
                     
                     <p class="pull-right readMore">
                         <a href="/2017/10/08/TreeMap-Source-Code/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/10/07/HashSet-Source-Code/">Java 源码学习系列7——HashSet</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-10-07T00:14:43.000Z" itemprop="datePublished">
-          2017-10-07
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        对于HashSet而言，它是基于HashMap实现的，HashSet底层使用HashMap来保存所有元素，因此HashSet 的实现比较简单，相关HashSet的操作，基本上都是直接调用底层HashMap的相关方法来完成。
-
-实现了Set接口。
-内部维护的一个HashMap实例来保存数据。也就是对HashMap做了一层封装而已。
-不保证元素的插入顺序和迭代时的顺序一致，也不保证元素内部的顺序始终不变。
-允许存null。
-隐藏特性：set
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/10/07/HashSet-Source-Code/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2017/10/06/LinkedHashMap-Source-Code/">Java 源码学习系列6——LinkedHashMap</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2017-10-06T06:38:36.000Z" itemprop="datePublished">
-          2017-10-06
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        同 HashMap 一样，LinkedHashMap 也是对 Map 接口的一种基于链表和哈希表的实现。实际上， LinkedHashMap 是 HashMap 的子类，其扩展了 HashMap 增加了双向链表的实现。相较于 HashMap 的迭代器中混乱的访问顺序，LinkedHashMap 可以提供可以预测的迭代访问，即按照插入序 (insertion-order) 或访问序 (access-order) 来对哈希表中的元素进行迭代
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2017/10/06/LinkedHashMap-Source-Code/">Read More...</a>
                     </p>
                     
                 </div>
