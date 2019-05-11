@@ -465,31 +465,101 @@ res5: scala.collection.immutable.Range = Range 1 until 10
 </ul>
 </li>
 </ul>
-<h3 id="2-类的定义与使用"><a href="#2-类的定义与使用" class="headerlink" title="2. 类的定义与使用"></a>2. 类的定义与使用</h3><pre><code>object FunctionApp {
+<h3 id="2-类的定义与使用"><a href="#2-类的定义与使用" class="headerlink" title="2. 类的定义与使用"></a>2. 类的定义与使用</h3><pre><code>object SimpleObjectApp {
 
   def main(args: Array[String]): Unit = {
-    for (i &lt;- 1 to 10 if i % 2 == 0) {
-      println(i)
-    }
+    val person = new People()
+    person.name = &quot;Messi&quot;
+    println(person.name + &quot; .. &quot; + person.age)
 
-    val courses = Array(&quot;Hadoop&quot;, &quot;Spark&quot;, &quot;Storm&quot;)
-    for (course &lt;- courses) {
-      println(course)
-    }
+    println(&quot;invoke eat method: &quot; + person.eat())
 
-    // course 其实就是 courses 里面的每个元素
-    // =&gt; 就是将左边的 course 作用上一个函数，变成另外一个结果
-    // println 就是作用到 course 上的一个函数
-    courses.foreach(course =&gt; println(course))
+    person.watchFootball(&quot;Barcelona&quot;)
 
-    var (num, sum) = (100, 0)
-    while (num &gt; 0) {
-      sum = sum + num
-      num = num - 1
-    }
+    person.printInfo()
   }
 }
-</code></pre><h3 id="3-构造器"><a href="#3-构造器" class="headerlink" title="3. 构造器"></a>3. 构造器</h3><h3 id="4-继承与重写"><a href="#4-继承与重写" class="headerlink" title="4. 继承与重写"></a>4. 继承与重写</h3><h3 id="5-抽象类"><a href="#5-抽象类" class="headerlink" title="5. 抽象类"></a>5. 抽象类</h3><h3 id="6-伴生类和伴生对象"><a href="#6-伴生类和伴生对象" class="headerlink" title="6. 伴生类和伴生对象"></a>6. 伴生类和伴生对象</h3><h3 id="7-apply"><a href="#7-apply" class="headerlink" title="7. apply"></a>7. apply</h3><h3 id="8-case-class"><a href="#8-case-class" class="headerlink" title="8. case class"></a>8. case class</h3><h3 id="9-trait"><a href="#9-trait" class="headerlink" title="9. trait"></a>9. trait</h3><p><br></p>
+
+class People {
+
+  // 定义属性
+  var name:String = _
+  val age:Int = 10
+  private [this] val gender = &quot;male&quot;
+
+  // 定义方法
+  def eat():String = {
+    name + &quot;eat...&quot;
+  }
+
+  def watchFootball(teamName:String): Unit = {
+    println(name + &quot; is watching match of &quot; + teamName)
+  }
+
+  def printInfo(): Unit = {
+    println(&quot;gender: &quot; + gender)
+  }
+}
+</code></pre><h3 id="3-构造器"><a href="#3-构造器" class="headerlink" title="3. 构造器"></a>3. 构造器</h3><pre><code>object ConstructorApp {
+
+  def main(args: Array[String]): Unit = {
+    val person = new Person(&quot;zhangsan&quot;, 30)
+    println(person.name + &quot;:&quot; + person.age + &quot;:&quot; + person.school)
+
+    val person2 = new Person(&quot;lisi&quot;, 18, &quot;M&quot;)
+    println(person2.name + &quot;:&quot; + person2.age + &quot;:&quot; + person2.school + &quot;:&quot; + person2.gender)
+  }
+}
+
+// 主构造器
+class Person(val name:String, val age:Int) {
+
+  println(&quot;Person Constructor enter...&quot; )
+
+  val school = &quot;ustc&quot;
+  var gender:String = _
+
+  // 附属构造器
+  def this(name: String, age:Int, gender:String) {
+    this(name, age)  // 附属构造器的第一行的代码必须要调用主构造器或者其他附属构造器
+    this.gender = gender
+  }
+
+  println(&quot;Person Constructor leave...&quot; )
+}
+</code></pre><h3 id="4-继承与重写"><a href="#4-继承与重写" class="headerlink" title="4. 继承与重写"></a>4. 继承与重写</h3><ul>
+<li>继承</li>
+</ul>
+<pre><code>object ConstructorApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val student = new Student(&quot;zhangsan&quot;, 18, &quot;Math&quot;)
+    println(student.name + &quot;:&quot; + student.major)
+  }
+}
+
+// major 属性需要使用var修饰
+class Student(name:String, age:Int, var major:String) extends Person(name, age) {
+
+  println(&quot;Student Constructor enter...&quot; )
+
+  println(&quot;Student Constructor leave...&quot; )
+}
+</code></pre><ul>
+<li>重写</li>
+</ul>
+<pre><code>class Student(name:String, age:Int, var major:String) extends Person(name, age) {
+
+  println(&quot;Student Constructor enter...&quot; )
+
+  override val school = &quot;peking&quot;
+
+  override def toString: String = &quot;override def toString : &quot; + school
+
+  println(&quot;Student Constructor leave...&quot; )
+}
+</code></pre><h3 id="5-抽象类"><a href="#5-抽象类" class="headerlink" title="5. 抽象类"></a>5. 抽象类</h3><h3 id="6-伴生类和伴生对象"><a href="#6-伴生类和伴生对象" class="headerlink" title="6. 伴生类和伴生对象"></a>6. 伴生类和伴生对象</h3><h3 id="7-apply"><a href="#7-apply" class="headerlink" title="7. apply"></a>7. apply</h3><h3 id="8-case-class"><a href="#8-case-class" class="headerlink" title="8. case class"></a>8. case class</h3><h3 id="9-trait"><a href="#9-trait" class="headerlink" title="9. trait"></a>9. trait</h3><p><br></p>
 <hr>
 <h2 id="5-Scala集合"><a href="#5-Scala集合" class="headerlink" title="5. Scala集合"></a>5. Scala集合</h2><h2 id="6-Scala模式匹配"><a href="#6-Scala模式匹配" class="headerlink" title="6. Scala模式匹配"></a>6. Scala模式匹配</h2><h2 id="7-Scala函数高级操作"><a href="#7-Scala函数高级操作" class="headerlink" title="7. Scala函数高级操作"></a>7. Scala函数高级操作</h2><h2 id="8-Scala隐式转换"><a href="#8-Scala隐式转换" class="headerlink" title="8. Scala隐式转换"></a>8. Scala隐式转换</h2><h2 id="9-Scala操作外部数据"><a href="#9-Scala操作外部数据" class="headerlink" title="9. Scala操作外部数据"></a>9. Scala操作外部数据</h2>
             <div class="clearfix"></div>
