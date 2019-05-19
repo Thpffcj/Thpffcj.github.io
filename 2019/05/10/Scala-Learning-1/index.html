@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Scala 学习 | Thpffcj的树洞</title>
+  <title>Scala 学习 1 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,7 +177,7 @@
       </time>
     
 </span>
-                <h1>Scala 学习</h1>
+                <h1>Scala 学习 1</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -559,21 +559,358 @@ class Student(name:String, age:Int, var major:String) extends Person(name, age) 
 
   println(&quot;Student Constructor leave...&quot; )
 }
-</code></pre><h3 id="5-抽象类"><a href="#5-抽象类" class="headerlink" title="5. 抽象类"></a>5. 抽象类</h3><h3 id="6-伴生类和伴生对象"><a href="#6-伴生类和伴生对象" class="headerlink" title="6. 伴生类和伴生对象"></a>6. 伴生类和伴生对象</h3><h3 id="7-apply"><a href="#7-apply" class="headerlink" title="7. apply"></a>7. apply</h3><h3 id="8-case-class"><a href="#8-case-class" class="headerlink" title="8. case class"></a>8. case class</h3><h3 id="9-trait"><a href="#9-trait" class="headerlink" title="9. trait"></a>9. trait</h3><p><br></p>
+</code></pre><h3 id="5-抽象类"><a href="#5-抽象类" class="headerlink" title="5. 抽象类"></a>5. 抽象类</h3><pre><code>object AbstractApp {
+
+  def main(args: Array[String]): Unit = {
+    val student = new Student2()
+    println(student.name)
+    student.speak
+  }
+}
+
+/**
+  * 类的一个或者多个方法没有完整的实现（只有定义，没有实现）
+  */
+abstract class Person2 {
+
+  def speak
+
+  val name:String
+  val age:Int
+}
+
+class Student2 extends Person2 {
+  override def speak: Unit = {
+    println(&quot;speak&quot;)
+  }
+  override val name: String = &quot;thpffcj&quot;
+  override val age: Int = 18
+}
+</code></pre><h3 id="6-伴生类和伴生对象"><a href="#6-伴生类和伴生对象" class="headerlink" title="6. 伴生类和伴生对象"></a>6. 伴生类和伴生对象</h3><pre><code>/**
+  * 伴生类和伴生对象
+  * 如果有一个class，还有一个与class同名的object
+  * 那么就称这个object是class的伴生对象，class是object的伴生类
+  */
+class ApplyTest {
+
+}
+
+object ApplyTest {
+
+}
+</code></pre><h3 id="7-apply"><a href="#7-apply" class="headerlink" title="7. apply"></a>7. apply</h3><pre><code>object ApplyApp {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10) {
+      ApplyTest.incr
+    }
+
+    println(ApplyTest.count) // 10 说明object本身就是一个单例对象
+
+    val b = ApplyTest() // ==&gt; Object.apply
+
+    val c = new ApplyTest()
+    c()
+
+    // 类名() ==&gt; Object.apply
+    // 对象() ==&gt; Class.apply
+  }
+}
+
+class ApplyTest {
+  def apply() = {
+    println(&quot;Class ApplyTest apply...&quot;)
+  }
+}
+
+object ApplyTest {
+
+  println(&quot;Object ApplyTest enter...&quot;)
+
+  var count = 0
+
+  def incr = {
+    count = count + 1
+  }
+
+  // 最佳实践：在Object的apply方法中去new Class
+  def apply() = {
+    println(&quot;Object ApplyTest apply...&quot;)
+
+    // 在object中的apply中new class
+    new ApplyTest
+  }
+
+  println(&quot;Object ApplyTest leave...&quot;)
+}
+</code></pre><h3 id="8-case-class"><a href="#8-case-class" class="headerlink" title="8. case class"></a>8. case class</h3><pre><code>// 通常用在模式匹配
+object CaseClassApp {
+  def main(args: Array[String]): Unit = {
+    println(Dog(&quot;wangcai&quot;).name)
+  }
+}
+
+// case class 不用new
+case class Dog(name:String)
+</code></pre><h3 id="9-trait"><a href="#9-trait" class="headerlink" title="9. trait"></a>9. trait</h3><ul>
+<li>Scala中的Triat是一种特殊的概念</li>
+<li>首先我们可以将Trait作为接口来使用，此时的Triat就与Java中的接口非常类似</li>
+<li>在triat中可以定义抽象方法，就与抽象类中的抽象方法一样，只要不给出方法的具体实现即可</li>
+<li>类可以使用extends关键字继承trait，注意，这里不是implement，而是extends，在scala中没有implement的概念，无论继承类还是trait，统一都是extends</li>
+<li>类继承trait后，必须实现其中的抽象方法，实现时不需要使用override关键字</li>
+<li>scala不支持对类进行多继承，但是支持多重继承trait，使用with关键字即可</li>
+<li>xxx extends ATrait with BTrait</li>
+</ul>
+<pre><code>class SparkConf(loadDefaults: Boolean) extends Cloneable with Logging with Serializable {
+</code></pre><p><br></p>
 <hr>
-<h2 id="5-Scala集合"><a href="#5-Scala集合" class="headerlink" title="5. Scala集合"></a>5. Scala集合</h2><h2 id="6-Scala模式匹配"><a href="#6-Scala模式匹配" class="headerlink" title="6. Scala模式匹配"></a>6. Scala模式匹配</h2><h2 id="7-Scala函数高级操作"><a href="#7-Scala函数高级操作" class="headerlink" title="7. Scala函数高级操作"></a>7. Scala函数高级操作</h2><h2 id="8-Scala隐式转换"><a href="#8-Scala隐式转换" class="headerlink" title="8. Scala隐式转换"></a>8. Scala隐式转换</h2><h2 id="9-Scala操作外部数据"><a href="#9-Scala操作外部数据" class="headerlink" title="9. Scala操作外部数据"></a>9. Scala操作外部数据</h2>
+<h2 id="5-Scala集合"><a href="#5-Scala集合" class="headerlink" title="5. Scala集合"></a>5. Scala集合</h2><h3 id="1-数组"><a href="#1-数组" class="headerlink" title="1. 数组"></a>1. 数组</h3><p><strong>定长数组</strong></p>
+<pre><code>scala&gt; val a = new Array[String](5)
+a: Array[String] = Array(null, null, null, null, null)
+
+scala&gt; a.length
+res0: Int = 5
+
+scala&gt; a(1) = &quot;hello&quot;
+
+scala&gt; a
+res2: Array[String] = Array(null, hello, null, null, null)
+</code></pre><ul>
+<li>我们再来看一种其他创建数组的方法，其实它就是用了上面我们提到的apply</li>
+</ul>
+<pre><code>scala&gt; val b = Array(&quot;hadoop&quot;, &quot;spark&quot;, &quot;storm&quot;)
+b: Array[String] = Array(hadoop, spark, storm)
+
+scala&gt; b(1) = &quot;flink&quot;
+
+scala&gt; b
+res4: Array[String] = Array(hadoop, flink, storm)
+</code></pre><ul>
+<li>我们看看数组的其他方法</li>
+</ul>
+<pre><code>scala&gt; val c = Array(2, 3, 4, 5, 6, 7, 8, 9)
+c: Array[Int] = Array(2, 3, 4, 5, 6, 7, 8, 9)
+
+scala&gt; c.sum
+res5: Int = 44
+
+scala&gt; c.min
+res7: Int = 2
+
+scala&gt; c.mkString(&quot;,&quot;)
+res8: String = 2,3,4,5,6,7,8,9
+</code></pre><p><strong>变长数组</strong></p>
+<pre><code>scala&gt; val d = scala.collection.mutable.ArrayBuffer[Int]()
+d: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
+</code></pre><ul>
+<li>对可变数组进行操作</li>
+</ul>
+<pre><code>d += 1
+d += 2
+d += (3, 4, 5)
+d ++= Array(6, 7, 8)
+d.insert(0, 0)
+d.remove(1)
+d.trimEnd(2)
+println(d)
+</code></pre><ul>
+<li>我们看到最后的结果是ArrayBuffer(0, 2, 3, 4, 5, 6)</li>
+<li>我们如何对变长数组迭代呢</li>
+</ul>
+<pre><code>for (i &lt;- (0 until d.length).reverse) {
+  println(d(i))
+}
+
+for (ele &lt;- d) {
+  println(ele)
+}
+</code></pre><ul>
+<li>可变数组可以通过toArray方法变为定长数组</li>
+</ul>
+<pre><code>scala&gt; d.toArray
+res10: Array[Int] = Array()
+</code></pre><h3 id="2-List"><a href="#2-List" class="headerlink" title="2. List"></a>2. List</h3><pre><code>scala&gt; val l = List(1, 2, 3, 4, 5)
+l: List[Int] = List(1, 2, 3, 4, 5)
+
+scala&gt; l.head
+res1: Int = 1
+
+scala&gt; l.tail
+res2: List[Int] = List(2, 3, 4, 5)
+
+scala&gt; Nil
+res0: scala.collection.immutable.Nil.type = List()
+
+scala&gt; val l2 = 1 :: Nil
+l2: List[Int] = List(1)
+
+scala&gt; val l3 = 2 :: l2
+l3: List[Int] = List(2, 1)
+</code></pre><ul>
+<li>我们也可以创建变长list</li>
+</ul>
+<pre><code>scala&gt; val l5 = scala.collection.mutable.ListBuffer[Int]()
+l5: scala.collection.mutable.ListBuffer[Int] = ListBuffer()
+
+scala&gt; l5 += (4, 5, 6, 7)
+res3: l5.type = ListBuffer(4, 5, 6, 7)
+
+scala&gt; l5.toList
+res4: List[Int] = List(4, 5, 6, 7)
+
+scala&gt; l5.toArray
+res5: Array[Int] = Array(4, 5, 6, 7)
+</code></pre><ul>
+<li>接下来我们看个方法，这个方法可以完成求和操作</li>
+</ul>
+<pre><code>def sum(nums:Int*):Int = {
+  if (nums.length == 0) {
+    0
+  } else {
+    nums.head + sum(nums.tail:_*)
+  }
+}
+</code></pre><h3 id="3-Set"><a href="#3-Set" class="headerlink" title="3. Set"></a>3. Set</h3><pre><code>scala&gt; val set = Set(1, 2, 2, 1, 4, 3)
+set: scala.collection.immutable.Set[Int] = Set(1, 2, 4, 3)
+</code></pre><h3 id="4-Map"><a href="#4-Map" class="headerlink" title="4. Map"></a>4. Map</h3><ul>
+<li>Map(映射)是一种可迭代的键值对（key/value）结构</li>
+<li>所有的值都可以通过键来获取</li>
+<li>Map 中的键都是唯一的</li>
+<li>Map 也叫哈希表（Hash tables）</li>
+<li>Map 有两种类型，可变与不可变，区别在于可变对象可以修改它，而不可变对象不可以</li>
+<li>默认情况下 Scala 使用不可变 Map。如果你需要使用可变集合，你需要显式的引入 import scala.collection.mutable.Map 类</li>
+</ul>
+<pre><code>// 空哈希表，键为字符串，值为整型
+var A:Map[Char,Int] = Map()
+
+// Map 键值对演示
+val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;, &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;)
+</code></pre><ul>
+<li>定义 Map 时，需要为键值对定义类型。如果需要添加 key-value 对，可以使用 + 号</li>
+</ul>
+<pre><code>A += (&apos;I&apos; -&gt; 1)
+A += (&apos;J&apos; -&gt; 5)
+</code></pre><p><strong>Map 基本操作</strong></p>
+<ul>
+<li>keys：返回 Map 所有的键(key)</li>
+<li>values：返回 Map 所有的值(value)</li>
+<li>isEmpty：在 Map 为空时返回true</li>
+</ul>
+<pre><code>object Test {
+   def main(args: Array[String]) {
+      val colors = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
+                       &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;,
+                       &quot;peru&quot; -&gt; &quot;#CD853F&quot;)
+
+      val nums: Map[Int, Int] = Map()
+
+      println( &quot;colors 中的键为 : &quot; + colors.keys )
+      println( &quot;colors 中的值为 : &quot; + colors.values )
+      println( &quot;检测 colors 是否为空 : &quot; + colors.isEmpty )
+      println( &quot;检测 nums 是否为空 : &quot; + nums.isEmpty )
+   }
+}
+</code></pre><ul>
+<li>输出结果为：</li>
+</ul>
+<pre><code>colors 中的键为 : Set(red, azure, peru)
+colors 中的值为 : MapLike(#FF0000, #F0FFFF, #CD853F)
+检测 colors 是否为空 : false
+检测 nums 是否为空 : true
+</code></pre><ul>
+<li>你可以使用 ++ 运算符或 Map.++() 方法来连接两个 Map，Map 合并时会移除重复的 key</li>
+</ul>
+<pre><code>object Test {
+   def main(args: Array[String]) {
+      val colors1 = Map(&quot;red&quot; -&gt; &quot;#FF0000&quot;,
+                        &quot;azure&quot; -&gt; &quot;#F0FFFF&quot;,
+                        &quot;peru&quot; -&gt; &quot;#CD853F&quot;)
+      val colors2 = Map(&quot;blue&quot; -&gt; &quot;#0033FF&quot;,
+                        &quot;yellow&quot; -&gt; &quot;#FFFF00&quot;,
+                        &quot;red&quot; -&gt; &quot;#FF0000&quot;)
+
+      //  ++ 作为运算符
+      var colors = colors1 ++ colors2
+      println( &quot;colors1 ++ colors2 : &quot; + colors )
+
+      //  ++ 作为方法
+      colors = colors1.++(colors2)
+      println( &quot;colors1.++(colors2)) : &quot; + colors )
+
+   }
+}
+</code></pre><ul>
+<li>以下通过 foreach 循环输出 Map 中的 keys 和 values</li>
+</ul>
+<pre><code>object Test {
+   def main(args: Array[String]) {
+      val sites = Map(&quot;runoob&quot; -&gt; &quot;http://www.runoob.com&quot;,
+                       &quot;baidu&quot; -&gt; &quot;http://www.baidu.com&quot;,
+                       &quot;taobao&quot; -&gt; &quot;http://www.taobao.com&quot;)
+
+      sites.keys.foreach{ i =&gt;  
+                           print( &quot;Key = &quot; + i )
+                           println(&quot; Value = &quot; + sites(i) )}
+   }
+}
+</code></pre><h3 id="5-Option-amp-Some-amp-None"><a href="#5-Option-amp-Some-amp-None" class="headerlink" title="5. Option &amp; Some &amp; None"></a>5. Option &amp; Some &amp; None</h3><pre><code>object OptionApp extends App {
+
+  val m = Map(1 -&gt; 2)
+  println(m.get(1))
+  println(m.getOrElse(2, &quot;None&quot;))
+}
+
+/**
+  * final case class Some[+A](@deprecatedName(&apos;x, &quot;2.12.0&quot;) value: A) extends Option[A] {
+  *   def isEmpty = false
+  *   def get = value
+  * }
+  *
+  * case object None extends Option[Nothing] {
+  *   def isEmpty = true
+  *   def get = throw new NoSuchElementException(&quot;None.get&quot;)
+  * }
+  */
+</code></pre><h3 id="6-Tuple"><a href="#6-Tuple" class="headerlink" title="6. Tuple"></a>6. Tuple</h3><ul>
+<li>与列表一样，元组也是不可变的，但与列表不同的是元组可以包含不同类型的元素</li>
+<li>元组的值是通过将单个的值包含在圆括号中构成的</li>
+</ul>
+<pre><code>scala&gt; val t = (1, 3.14, &quot;Fred&quot;)  
+t: (Int, Double, String) = (1,3.14,Fred)
+</code></pre><ul>
+<li>访问元组的元素可以通过数字索引，我们可以使用 t._1 访问第一个元素， t._2 访问第二个元素</li>
+</ul>
+<pre><code>object Test {
+   def main(args: Array[String]) {
+      val t = (4,3,2,1)
+
+      val sum = t._1 + t._2 + t._3 + t._4
+
+      println( &quot;元素之和为: &quot;  + sum )
+   }
+}
+</code></pre><ul>
+<li>你可以使用 Tuple.productIterator() 方法来迭代输出元组的所有元素</li>
+</ul>
+<pre><code>object Test {
+   def main(args: Array[String]) {
+      val t = (4,3,2,1)
+
+      t.productIterator.foreach{ i =&gt;println(&quot;Value = &quot; + i )}
+   }
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/05/11/Scala-Learning-2/" style="float: left;">
+        ← Scala 学习 2
     </a>
     
     
-    <a class="pull-right" href="/2019/05/08/Python3-Develop-Spark-Big-Data-Analysis-And-Scheduling-1/">
-        Python3实战Spark大数据分析及调度 →
+    <a class="pull-right" href="/2019/05/08/Sword-Refers-To-Java-Interview-1/">
+        剑指Java面试 →
     </a>
     
 </nav>
