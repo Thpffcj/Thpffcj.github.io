@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Python3实战Spark大数据分析及调度 | Thpffcj的树洞</title>
+  <title>新一代大数据计算引擎 Flink从入门到实战 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,151 +172,268 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2019-05-14T02:00:38.000Z" itemprop="datePublished">
-          2019-05-14
+      <time datetime="2019-06-27T23:52:20.000Z" itemprop="datePublished">
+          2019-06-28
       </time>
     
 </span>
-                <h1>Python3实战Spark大数据分析及调度</h1>
+                <h1>新一代大数据计算引擎 Flink从入门到实战</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h2><ul>
-<li>我们以前已经做过三个大数据实战项目了，所以环境基本都搭建好了，这里只记录主要步骤</li>
-</ul>
-<h3 id="1-Java"><a href="#1-Java" class="headerlink" title="1. Java"></a>1. Java</h3><ul>
-<li>下载jkd并解压</li>
-<li>配置环境变量</li>
-</ul>
-<pre><code>Thpffcj:~ thpffcj$ vi ~/.bash_profile
-
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
-export PATH=$PATH:$JAVA_HOME/bin
-
-Thpffcj:~ thpffcj$ source ~/.bash_profile
-</code></pre><ul>
-<li>检测环境</li>
-</ul>
-<pre><code>Thpffcj:~ thpffcj$ java -version
-java version &quot;1.8.0_191&quot;
-Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
-</code></pre><h3 id="2-Scala"><a href="#2-Scala" class="headerlink" title="2. Scala"></a>2. Scala</h3><ul>
-<li>下载解压</li>
-<li>配置环境变量</li>
-</ul>
-<pre><code>Thpffcj:~ thpffcj$ scala -version
-Scala code runner version 2.12.8 -- Copyright 2002-2018, LAMP/EPFL and Lightbend, Inc.
-</code></pre><h3 id="3-Hadoop"><a href="#3-Hadoop" class="headerlink" title="3. Hadoop"></a>3. Hadoop</h3><ul>
-<li>我们使用的hadoop-2.6.0-cdh5.7.0</li>
-<li>下载解压，配置环境变量</li>
-</ul>
-<p><strong>修改配置文件</strong></p>
+      		<h2 id="1-初识Flink"><a href="#1-初识Flink" class="headerlink" title="1. 初识Flink"></a>1. 初识Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><p><strong>Flink是什么</strong></p>
 <ul>
-<li>hadoop-env.sh，这里我并没有做修改，没有写成绝对路径</li>
+<li><a href="https://flink.apache.org/" target="_blank" rel="noopener">Apache Flink - Stateful Computations over Data Streams</a></li>
+<li>Apache Flink is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. </li>
 </ul>
-<pre><code>export JAVA_HOME=${JAVA_HOME}
-</code></pre><ul>
-<li>core-site.xml</li>
-</ul>
-<pre><code>&lt;configuration&gt;
-    &lt;property&gt;
-        &lt;name&gt;fs.default.name&lt;/name&gt;
-        &lt;value&gt;hdfs://127.0.0.1:8020&lt;/value&gt;
-    &lt;/property&gt;
-
-
-    &lt;property&gt;
-        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-        &lt;value&gt;/Users/thpffcj/Public/software/tmp&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><ul>
-<li>hdfs-site.xml，这里我感觉和上面配置重复了，以前学的时候上面配置了hadoop.tmp.dir，底下没有配置dfs.namenode.name.dir和dfs.namenode.data.dir，以前配置参考<a href="http://www.thpffcj.com/2018/01/04/Big-Data-Getting-Started-3/" target="_blank" rel="noopener">分布式文件系统HDFS</a></li>
-</ul>
-<pre><code>&lt;configuration&gt;
-   &lt;property&gt;
-        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
-        &lt;value&gt;/Users/thpffcj/Public/software/tmp/dfs/name&lt;/value&gt;
-    &lt;/property&gt;
-
-   &lt;property&gt;
-        &lt;name&gt;dfs.namenode.data.dir&lt;/name&gt;
-        &lt;value&gt;/Users/thpffcj/Public/software/tmp/dfs/data&lt;/value&gt;
-    &lt;/property&gt;
-
-    &lt;property&gt;
-        &lt;name&gt;dfs.replication&lt;/name&gt;
-        &lt;value&gt;1&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><ul>
-<li>mapred-site.xml</li>
-</ul>
-<pre><code>&lt;configuration&gt;
-    &lt;property&gt;
-        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
-        &lt;value&gt;yarn&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><ul>
-<li>yarn-site.xml </li>
-</ul>
-<pre><code>&lt;configuration&gt;
-
-&lt;!-- Site specific YARN configuration properties --&gt;
-    &lt;property&gt;
-        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><ul>
-<li>启动HDFS</li>
-</ul>
-<pre><code>Thpffcj:sbin thpffcj$ ./start-dfs.sh
-
-Thpffcj:sbin thpffcj$ jps
-20721 SecondaryNameNode
-20789 Jps
-20536 NameNode
-20618 DataNode
-</code></pre><h3 id="4-Maven"><a href="#4-Maven" class="headerlink" title="4. Maven"></a>4. Maven</h3><ul>
-<li>下载解压，配置环境变量</li>
-<li>修改仓库地址，settings.xml</li>
-</ul>
-<pre><code>&lt;localRepository&gt;/Users/thpffcj/Public/mvnrepository&lt;/localRepository&gt;
-</code></pre><h3 id="5-Python3"><a href="#5-Python3" class="headerlink" title="5. Python3"></a>5. Python3</h3><ul>
-<li>我这里直接使用Anaconda安装了Python环境</li>
-</ul>
-<h3 id="6-Spark"><a href="#6-Spark" class="headerlink" title="6. Spark"></a>6. Spark</h3><p>spark 安装</p>
+<p><strong>Unbounded vs Bounded data</strong></p>
 <ul>
-<li>在官网下载Spark源码</li>
+<li>Unbounded streams have a start but no defined end. </li>
+<li>Bounded streams have a defined start and end.</li>
 </ul>
-<pre><code>Thpffcj:software thpffcj$ tar -zxvf spark-2.3.3.tgz
-</code></pre><ul>
-<li>接下来我们编译源码</li>
-<li><a href="http://spark.apache.org/docs/2.3.3/building-spark.html" target="_blank" rel="noopener">Building Spark</a></li>
+<p><img src="" alt=""></p>
+<ul>
+<li>都可以使用Flink来处理，对应的就是流处理和批处理</li>
 </ul>
-<pre><code>Thpffcj:spark-2.3.3 thpffcj$ ./dev/make-distribution.sh --name 2.6.0-cdh5.7.0 --tgz -Pyarn -Phadoop-2.6 -Phive -Phive-thriftserver -Dhadoop.version=2.6.0-cdh5.7.0
-</code></pre><ul>
-<li>我们会在目录下得到spark-2.3.3-bin-2.6.0-cdh5.7.0.tgz，解压</li>
+<p><img src="" alt=""></p>
+<h3 id="2-Flink-Layered-API"><a href="#2-Flink-Layered-API" class="headerlink" title="2. Flink Layered API"></a>2. Flink Layered API</h3><ul>
+<li>Flink provides three layered APIs. Each API offers a different trade-off between conciseness and expressiveness and targets different use cases.</li>
 </ul>
-<pre><code>Thpffcj:software thpffcj$ tar -zxvf spark-2.3.3-bin-2.6.0-cdh5.7.0.tgz 
-</code></pre><p><br></p>
+<p><img src="" alt=""></p>
+<h3 id="3-Flink运行多样化"><a href="#3-Flink运行多样化" class="headerlink" title="3. Flink运行多样化"></a>3. Flink运行多样化</h3><ul>
+<li>Apache Flink is a distributed system and requires compute resources in order to execute applications. </li>
+<li>Flink integrates with all common cluster resource managers such as Hadoop YARN, Apache Mesos, and Kubernetes but can also be setup to run as a stand-alone cluster.</li>
+<li>Flink is designed to run stateful streaming applications at any scale. </li>
+</ul>
+<h3 id="4-业界流处理框架对比"><a href="#4-业界流处理框架对比" class="headerlink" title="4. 业界流处理框架对比"></a>4. 业界流处理框架对比</h3><ul>
+<li>Spark：Streaming 结构化流<ul>
+<li>批处理为主，流式处理是批处理的一个特例(mini batch)</li>
+</ul>
+</li>
+<li>Flink：流式为主，批处理是流式处理的一个特例</li>
+<li>Storm：流式 Tuple</li>
+</ul>
+<h3 id="5-Flink应用场景"><a href="#5-Flink应用场景" class="headerlink" title="5. Flink应用场景"></a>5. Flink应用场景</h3><ul>
+<li>Event-driven Applications<ul>
+<li>Fraud detection</li>
+<li>Anomaly detection</li>
+<li>Rule-based alerting</li>
+<li>Business process monitoring</li>
+<li>Web application (social network)</li>
+</ul>
+</li>
+<li>Data Analytics Applications<ul>
+<li>Quality monitoring of Telco networks</li>
+<li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
+<li>Ad-hoc analysis of live data in consumer technology</li>
+<li>Large-scale graph analysis</li>
+</ul>
+</li>
+<li>Data Pipeline Applications<ul>
+<li>Real-time search index building in e-commerce</li>
+<li>Continuous ETL in e-commerce</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Flink发展趋势"><a href="#6-Flink发展趋势" class="headerlink" title="6. Flink发展趋势"></a>6. Flink发展趋势</h3><ul>
+<li>阿里 收购了Flink的母公司<ul>
+<li>Blink</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-如何以正确的姿势来学习Flink-一个新的框架"><a href="#7-如何以正确的姿势来学习Flink-一个新的框架" class="headerlink" title="7. 如何以正确的姿势来学习Flink(一个新的框架)"></a>7. 如何以正确的姿势来学习Flink(一个新的框架)</h3><ul>
+<li>官网</li>
+<li>通过源码 maven</li>
+</ul>
+<p><br></p>
 <hr>
-<h2 id="2-Spark-Core-核心-RDD"><a href="#2-Spark-Core-核心-RDD" class="headerlink" title="2. Spark Core 核心 RDD"></a>2. Spark Core 核心 RDD</h2><h2 id="3-Spark-Core-RDD-编程"><a href="#3-Spark-Core-RDD-编程" class="headerlink" title="3. Spark Core RDD 编程"></a>3. Spark Core RDD 编程</h2><h2 id="4-Spark-运行模式"><a href="#4-Spark-运行模式" class="headerlink" title="4. Spark 运行模式"></a>4. Spark 运行模式</h2><h2 id="5-Spark-Core-进阶"><a href="#5-Spark-Core-进阶" class="headerlink" title="5. Spark Core 进阶"></a>5. Spark Core 进阶</h2><h2 id="6-Spark-Core-调优"><a href="#6-Spark-Core-调优" class="headerlink" title="6. Spark Core 调优"></a>6. Spark Core 调优</h2><h2 id="7-Spark-SQL"><a href="#7-Spark-SQL" class="headerlink" title="7. Spark SQL"></a>7. Spark SQL</h2><h2 id="8-Spark-Streaming"><a href="#8-Spark-Streaming" class="headerlink" title="8. Spark Streaming"></a>8. Spark Streaming</h2><h2 id="9-Azkaban-基础篇"><a href="#9-Azkaban-基础篇" class="headerlink" title="9. Azkaban 基础篇"></a>9. Azkaban 基础篇</h2><h2 id="10-Azkaban-实战篇"><a href="#10-Azkaban-实战篇" class="headerlink" title="10. Azkaban 实战篇"></a>10. Azkaban 实战篇</h2><h2 id="11-Azkaban-进阶篇"><a href="#11-Azkaban-进阶篇" class="headerlink" title="11. Azkaban 进阶篇"></a>11. Azkaban 进阶篇</h2><h2 id="12-项目实战"><a href="#12-项目实战" class="headerlink" title="12. 项目实战"></a>12. 项目实战</h2>
+<h2 id="2-快速上手开发第一个Flink应用程序"><a href="#2-快速上手开发第一个Flink应用程序" class="headerlink" title="2. 快速上手开发第一个Flink应用程序"></a>2. 快速上手开发第一个Flink应用程序</h2><h3 id="1-开发环境准备"><a href="#1-开发环境准备" class="headerlink" title="1. 开发环境准备"></a>1. 开发环境准备</h3><p><strong>JDK</strong></p>
+<pre><code>Thpffcj:~ thpffcj$ echo $JAVA_HOME
+/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
+</code></pre><p><strong>Maven</strong></p>
+<p><strong>IDEA</strong></p>
+<h3 id="2-使用Flink开发一个批处理应用程序"><a href="#2-使用Flink开发一个批处理应用程序" class="headerlink" title="2. 使用Flink开发一个批处理应用程序"></a>2. 使用Flink开发一个批处理应用程序</h3><p><strong>需求描述</strong></p>
+<ul>
+<li>词频统计(word count)<ul>
+<li>一个文件，统计文件中每个单词出现的次数</li>
+<li>分隔符是\t</li>
+<li>统计结果我们直接打印在控制台(生产上肯定是Sink到目的地)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Flink + Java</strong></p>
+<ul>
+<li>前置条件：The only requirements are working Maven 3.0.4 (or higher) and Java 8.x installations.</li>
+<li>创建方式</li>
+</ul>
+<pre><code>$ mvn archetype:generate                               \
+  -DarchetypeGroupId=org.apache.flink              \
+  -DarchetypeArtifactId=flink-quickstart-java      \
+  -DarchetypeVersion=1.8.0
+</code></pre><ul>
+<li>开发流程/开发八股文编程<ul>
+<li>set up the batch execution environment</li>
+<li>read</li>
+<li>transform operations 开发核心所在：开发业务逻辑</li>
+<li>execute program</li>
+</ul>
+</li>
+<li>功能拆解<ul>
+<li>读取数据</li>
+<li>每一行的数据按照指定的分隔符拆分</li>
+<li>为每一个单词赋上次数为1</li>
+<li>合并操作</li>
+</ul>
+</li>
+</ul>
+<pre><code>/**
+ * 使用Java API来开发Flink的批处理应用程序
+ * Created by thpffcj on 2019-06-28.
+ */
+public class BatchWCJavaApp {
+
+    public static void main(String[] args) throws Exception {
+
+        String input = &quot;file:///Users/thpffcj/Public/data/hello.txt&quot;;
+
+        // step1：获取运行环境
+        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+
+        // step2：read data
+        DataSource&lt;String&gt; text = env.readTextFile(input);
+
+        // step3：transform
+        text.flatMap(new FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt;() {
+            @Override
+            public void flatMap(String value, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; collector) throws Exception {
+                String[] tokens = value.toLowerCase().split(&quot;\t&quot;);
+                for (String token : tokens) {
+                    if (token.length() &gt; 0) {
+                        collector.collect(new Tuple2&lt;String, Integer&gt;(token, 1));
+                    }
+                }
+            }
+        }).groupBy(0).sum(1).print();
+
+        // step4：
+    }
+}
+</code></pre><p><strong>Flink + Scala</strong></p>
+<ul>
+<li>创建方式</li>
+</ul>
+<pre><code>$ mvn archetype:generate                               \
+  -DarchetypeGroupId=org.apache.flink              \
+  -DarchetypeArtifactId=flink-quickstart-scala     \
+  -DarchetypeVersion=1.8.0
+</code></pre><ul>
+<li>功能开发</li>
+</ul>
+<pre><code>/**
+  * 使用Scala开发Flink的批处理应用程序
+  * Created by thpffcj on 2019-06-28.
+  */
+object BatchWCScalaApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val input = &quot;file:///Users/thpffcj/Public/data/hello.txt&quot;
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    val text = env.readTextFile(input)
+
+    // 引入隐式转换
+    import org.apache.flink.api.scala._
+
+    text.flatMap(_.toLowerCase.split(&quot;\t&quot;))
+      .filter(_.nonEmpty)
+      .map((_, 1))
+      .groupBy(0)
+      .sum(1).print()
+  }
+}
+</code></pre><h3 id="3-使用Flink开发一个实时处理应用程序"><a href="#3-使用Flink开发一个实时处理应用程序" class="headerlink" title="3. 使用Flink开发一个实时处理应用程序"></a>3. 使用Flink开发一个实时处理应用程序</h3><p><strong>Flink + Java</strong></p>
+<pre><code>/**
+ * 使用Java API来开发Flink的实时处理应用程序
+ * wc统计的数据我们源自于socket
+ * Created by thpffcj on 2019-06-28.
+ */
+public class StreamingWCJavaApp {
+
+    public static void main(String[] args) throws Exception {
+
+        // 获取参数
+        int port = 0;
+
+        try {
+            ParameterTool tool = ParameterTool.fromArgs(args);
+            port = tool.getInt(&quot;port&quot;);
+        } catch (Exception e) {
+            System.err.println(&quot;端口未设置，使用默认端口9999&quot;);
+            port = 9999;
+        }
+
+        // step1：获取执行环境
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        // step2：读取数据
+        DataStreamSource&lt;String&gt; text = env.socketTextStream(&quot;localhost&quot;, port);
+
+        // step3：transform
+        text.flatMap(new FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt;() {
+            @Override
+            public void flatMap(String value, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; collector) throws Exception {
+                String[] tokens = value.toLowerCase().split(&quot;,&quot;);
+                for (String token : tokens) {
+                    if (token.length() &gt; 0) {
+                        collector.collect(new Tuple2&lt;String, Integer&gt;(token, 1));
+                    }
+                }
+            }
+        }).keyBy(0).timeWindow(Time.seconds(5)).sum(1).print();
+
+        env.execute(&quot;StreamingWCJavaApp&quot;);
+    }
+}
+</code></pre><p><strong>Flink + Scala</strong></p>
+<pre><code>/**
+  * 使用Scala开发Flink的实时处理应用程序
+  * Created by thpffcj on 2019-06-29.
+  */
+object StreamingWCScalaApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val text = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    import org.apache.flink.api.scala._
+
+    text.flatMap(_.split(&quot;,&quot;))
+      .filter(_.nonEmpty)
+      .map((_, 1))
+      .keyBy(0)
+      .timeWindow(Time.seconds(5))
+      .sum(1).print()
+
+    env.execute(&quot;StreamingWCScalaApp&quot;)
+  }
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2019/06/28/Big-Data-Flink-Getting-Started-1/" style="float: left;">
-        ← 新一代大数据计算引擎 Flink从入门到实战
+    <a class="pull-left" href="/2019/06/29/Big-Data-Flink-Getting-Started-2/" style="float: left;">
+        ← Big-Data-Flink-Getting-Started-2
     </a>
     
     
-    <a class="pull-right" href="/2019/05/11/Scala-Learning-2/">
-        Scala 学习 2 →
+    <a class="pull-right" href="/2019/05/14/Python3-Develop-Spark-Big-Data-Analysis-And-Scheduling-1/">
+        Python3实战Spark大数据分析及调度 →
     </a>
     
 </nav>

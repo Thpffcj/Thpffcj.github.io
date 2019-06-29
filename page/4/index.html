@@ -204,6 +204,50 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/04/28/Java-Concurrent-Programming-3/">J.U.C</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-04-28T12:41:58.000Z" itemprop="datePublished">
+          2018-04-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. J.U.C之AQS1. AQS介绍
+
+使用Node实现FIFO队列，可以用于构建锁或者其他同步装置的基础框架
+利用了一个int类型表示状态
+使用方法是继承
+子类通过继承并通过实现它的方法管理其状态(acquire 和 release)的方法操纵状态
+可以同时实现排它锁和共享锁模式(独占，共享)
+
+同步组件
+
+CountDownLatch
+Semaphore
+CyclicBarrier
+ReentrantLock
+Condition
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/04/28/Java-Concurrent-Programming-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/04/28/ZooKeeper-Distributed-Topics-3/">基于Zookeeper的应用</a></h3>
                     <span>
                         <span class="post-meta">
@@ -570,40 +614,6 @@ Apache Spark achieves high performanc
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/14/Big-Data-SparkSQL-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/14/Java-Concurrent-Programming-1/">Java 并发编程 1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-14T01:39:17.000Z" itemprop="datePublished">
-          2018-04-14
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 基本概念1. 并发基本概念
-并发：同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时”存在”的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行
-高并发(High Concurrency)：是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求
-
-并发：多个线
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/14/Java-Concurrent-Programming-1/">Read More...</a>
                     </p>
                     
                 </div>
