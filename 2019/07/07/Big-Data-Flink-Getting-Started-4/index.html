@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Big-Data-Flink-Getting-Started-4 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2019-07-06T23:09:41.000Z" itemprop="datePublished">
+          2019-07-07
+      </time>
+    
+</span>
+                <h1>Big-Data-Flink-Getting-Started-4</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Filnk-Connectors"><a href="#1-Filnk-Connectors" class="headerlink" title="1. Filnk Connectors"></a>1. Filnk Connectors</h2><h3 id="1-Connector是什么"><a href="#1-Connector是什么" class="headerlink" title="1. Connector是什么"></a>1. Connector是什么</h3><p><strong>Bundled Connectors</strong></p>
+<p>Connectors provide code for interfacing with various third-party systems. </p>
+<h3 id="2-Hadoop-FileSystem"><a href="#2-Hadoop-FileSystem" class="headerlink" title="2. Hadoop FileSystem"></a>2. Hadoop FileSystem</h3><p><strong>HDFS Connector</strong></p>
+<pre><code>This connector provides a Sink that writes partitioned files to any filesystem supported by Hadoop FileSystem. 
+
+object FileSystemSinkApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val data = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    val filePath = &quot;file:///Users/thpffcj/Public/data&quot;
+    val sink = new BucketingSink[String](filePath)
+    sink.setBucketer(new DateTimeBucketer(&quot;yyyy-MM-dd--HHmm&quot;))
+    sink.setWriter(new StringWriter[String]())
+    sink.setBatchSize(1024 * 1024 * 400) // this is 400 MB,
+    sink.setBatchRolloverInterval(20 * 60 * 1000); // this is 20 mins
+
+    data.addSink(sink)
+    env.execute(&quot;FileSystemSinkApp&quot;)
+  }
+}
+</code></pre><h3 id="3-Apache-Kafka"><a href="#3-Apache-Kafka" class="headerlink" title="3. Apache Kafka"></a>3. Apache Kafka</h3><p><strong>Apache Kafka Connector</strong></p>
+<p>This connector provides access to event streams served by Apache Kafka.</p>
+<p><strong>Zookeeper部署</strong></p>
+<p><strong><img src="https://archive.cloudera.com/cdh5/cdh/5" alt="Index of cdh5/cdh/5/"></strong></p>
+<ul>
+<li>下载解压，配置环境变量</li>
+<li>修改配置文件zoo.cfg</li>
+</ul>
+<pre><code># do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/Users/thpffcj/Public/software/tmp/zookeeper
+</code></pre><ul>
+<li>启动ZK</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./zkServer.sh start
+JMX enabled by default
+Using config: /Users/thpffcj/Public/software/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+Thpffcj:bin thpffcj$ jps
+9156 QuorumPeerMain
+</code></pre><p><strong>Kafka部署</strong></p>
+<ul>
+<li>下载解压，配置环境变量</li>
+<li>修改server.properties</li>
+</ul>
+<pre><code># A comma separated list of directories under which to store log files
+log.dirs=/Users/thpffcj/Public/software/tmp/kafka-logs
+</code></pre><ul>
+<li>启动kafka</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./kafka-server-start.sh -daemon /Users/thpffcj/Public/software/kafka_2.12-2.2.0/config/server.properties 
+
+Thpffcj:bin thpffcj$ jps
+9440 Kafka
+</code></pre><ul>
+<li>创建topic</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+Created topic test.
+
+Thpffcj:bin thpffcj$ ./kafka-topics.sh --list --zookeeper localhost:2181
+__consumer_offsets
+merchants-template
+test
+</code></pre><ul>
+<li><p>启动生产者和消费者</p>
+<p>  Thpffcj:bin thpffcj$ ./kafka-console-producer.sh –broker-list localhost:9092 –topic test</p>
+<p>  Thpffcj:bin thpffcj$ ./kafka-console-consumer.sh –bootstrap-server localhost:9092 –topic test –from-beginning</p>
+</li>
+<li><p>我们在生产者端发送消息，可以发现消费者端可以顺利接收消息</p>
+</li>
+</ul>
+<h3 id="4-整合Flink与Kafka"><a href="#4-整合Flink与Kafka" class="headerlink" title="4. 整合Flink与Kafka"></a>4. 整合Flink与Kafka</h3><p><strong>flink对接kafka作为source使用</strong></p>
+<pre><code>object KafkaConnectorConsumerApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val topic = &quot;test&quot;
+    val properties = new Properties()
+    properties.setProperty(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;)
+    properties.setProperty(&quot;group.id&quot;, &quot;test&quot;)
+    val data = env.addSource(new FlinkKafkaConsumer[String](topic, new SimpleStringSchema(), properties))
+
+    data.print()
+
+    env.execute(&quot;KafkaConnectorConsumerApp&quot;)
+  }
+}
+</code></pre><p><strong>flink对接kafka作为sink使用</strong></p>
+<pre><code>object KafkaConnectorProducerApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    // 从socket接收数据，通过Flink，将数据sink到Kafka
+    val data = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    val topic = &quot;test&quot;
+    val properties = new Properties()
+    properties.setProperty(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;)
+    val kafkaSink = new FlinkKafkaProducer[String](topic,
+      new KeyedSerializationSchemaWrapper[String](new SimpleStringSchema()), properties)
+
+    data.addSink(kafkaSink)
+
+    env.execute(&quot;KafkaConnectorProducerApp&quot;)
+  }
+}
+</code></pre><p><strong>Kafka Consumers Start Position Configuration</strong></p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-consumers-start-position-configuration" alt="Kafka Consumers Start Position Configuration"></p>
+<p><strong>Kafka Producers and Fault Tolerance</strong></p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-producers-and-fault-tolerance" alt="Kafka Producers and Fault Tolerance"></p>
+<p><strong>Kafka Consumers and Fault Toleranc</strong></p>
+<p>With Flink’s checkpointing enabled, the Flink Kafka Consumer will consume records from a topic and periodically checkpoint all its Kafka offsets, together with the state of other operations, in a consistent manner. </p>
+<pre><code>// checkpoint常用设置参数
+env.enableCheckpointing(4000)
+env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
+env.getCheckpointConfig.setCheckpointTimeout(10000)
+env.getCheckpointConfig.setMaxConcurrentCheckpoints(1)
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-Flink部署及作业提交"><a href="#2-Flink部署及作业提交" class="headerlink" title="2. Flink部署及作业提交"></a>2. Flink部署及作业提交</h2><h3 id="1-Flink源码编译"><a href="#1-Flink源码编译" class="headerlink" title="1. Flink源码编译"></a>1. Flink源码编译</h3><ul>
+<li>前置条件：<ul>
+<li>JDK8</li>
+<li>Maven3</li>
+</ul>
+</li>
+<li>下载解压</li>
+</ul>
+<pre><code>Thpffcj:software thpffcj$ tar -zxvf flink-release-1.8.0.tar.gz 
+</code></pre><ul>
+<li>编译：<strong><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/flinkDev/building.html#building-flink-from-source" alt="Building Flink from Source"></strong></li>
+<li>第一次编译是需要花费很长时间的，因为需要去中央仓库下载flink源码中所有的依赖包，可能由于网络的问题，我编译了3个小时</li>
+</ul>
+<pre><code>Thpffcj:flink-release-1.8.0 thpffcj$ mvn clean install -DskipTests -Dfast -Pvendor-repos -Dhadoop.version=2.6.0-cdh5.7.0
+</code></pre><ul>
+<li>编译好的flink在flink-dist/target/flink-1.8.0-bin中</li>
+</ul>
+<h3 id="2-Standalone单机模式"><a href="#2-Standalone单机模式" class="headerlink" title="2. Standalone单机模式"></a>2. Standalone单机模式</h3><pre><code>Thpffcj:bin thpffcj$ ./start-cluster.sh 
+Starting cluster.
+Starting standalonesession daemon on host Thpffcj.local.
+Starting taskexecutor daemon on host Thpffcj.local.
+</code></pre><ul>
+<li>我们可以访问<a href="http://localhost:8081访问前端界面" target="_blank" rel="noopener">http://localhost:8081访问前端界面</a></li>
+<li>接下来我们看一个例子，首先启动netcat</li>
+</ul>
+<pre><code>Thpffcj:~ thpffcj$ nc -lk 9000
+</code></pre><ul>
+<li>提交Flink程序</li>
+</ul>
+<pre><code>Thpffcj:flink-1.8.0 thpffcj$ ./bin/flink run examples/streaming/SocketWindowWordCount.jar --port 9000
+</code></pre><ul>
+<li>在log中查看结果</li>
+</ul>
+<pre><code>Thpffcj:log thpffcj$ tail -200f flink-thpffcj-taskexecutor-0-Thpffcj.local.out
+a : 2
+d : 1
+c : 1
+b : 2
+</code></pre><ul>
+<li>停止Flink</li>
+</ul>
+<pre><code>Thpffcj:flink-1.8.0 thpffcj$ ./bin/stop-cluster.sh
+Stopping taskexecutor daemon (pid: 12890) on host Thpffcj.local.
+Stopping standalonesession daemon (pid: 12475) on host Thpffcj.local.
+</code></pre><h3 id="3-Standalone集群模式"><a href="#3-Standalone集群模式" class="headerlink" title="3. Standalone集群模式"></a>3. Standalone集群模式</h3><p><strong><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html#configuring-flink" alt="Configuring Flink"></strong></p>
+<p><strong>配置文件</strong></p>
+<ul>
+<li>flink-conf.yaml<ul>
+<li>jobmanager.rpc.address: 10.0.0.1</li>
+<li>jobmanager：主节点</li>
+<li>TaskManager：从节点</li>
+</ul>
+</li>
+<li>salves<ul>
+<li>每一行配置一个ip/host</li>
+</ul>
+</li>
+</ul>
+<p><strong>常用配置</strong></p>
+<ul>
+<li>jobmanager.rpc.address：master节点的地址</li>
+<li>jobmanager.heap.mb：jobmanager节点可用的内存</li>
+<li>taskmanager.heap.mb：taskmanager节点可用的内存</li>
+<li>taskmanager.numberOfTaskSlots：每个机器可用的CPU个数</li>
+<li>parallelism.default：任务的并行度</li>
+<li>io.tmp.dirs：临时数据存储目录</li>
+</ul>
+<h3 id="4-YARN模式"><a href="#4-YARN模式" class="headerlink" title="4. YARN模式"></a>4. YARN模式</h3><p>ON YARN是企业级用的最多的方式</p>
+<ul>
+<li>flink on yarn两种方式</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/flink-on-yarn两种方式.png" alt=""></p>
+<p><strong>Flink与YARN如何交互</strong></p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/yarn_setup.html#background--internals" alt="Background / Internals"></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink与YARN的交互.png" alt=""></p>
+<p><strong>第一种方式</strong></p>
+<ul>
+<li>不会使用时我们可以使用./yarn-session.sh –help查看使用说明<ul>
+<li>-n：taskmanager的数量</li>
+<li>-jm：jobmanager的内存</li>
+<li>-tm；taskmanager的内存</li>
+</ul>
+</li>
+</ul>
+<pre><code>Thpffcj:flink-1.8.0 thpffcj$ ./bin/yarn-session.sh -n -1 -jm 1024m -tm 1024m
+</code></pre><ul>
+<li>接下来我们提交作业到Flink</li>
+</ul>
+<pre><code>Thpffc:data thpffcj$ wget -O LICENSE-2.0.txt http://www.apache.org/licenses/LICENSE-2.0.txt
+
+Thpffc:data thpffcj$ hadoop fs -put LICENSE-2.0.txt /
+
+./bin/flink run ./examples/batch/WordCount.jar \
+       --input hdfs://localhost:8020/LICENSE-2.0.txt --output hdfs://localhost:8020/wordcount-result.txt
+</code></pre><ul>
+<li>查看运行结果</li>
+</ul>
+<pre><code>Thpffc:flink-1.8.0 thpffcj$ hadoop fs -text /wordcount-result.txt
+</code></pre><p><strong>第二种方式</strong></p>
+<ul>
+<li>首先我们需要停掉刚才的作业，到8088端口查看作业ID</li>
+</ul>
+<pre><code>Thpffc:flink-1.8.0 thpffcj$ yarn application -kill application_1562669957409_0001
+</code></pre><ul>
+<li>Run a single Flink job on YARN</li>
+</ul>
+<pre><code>Thpffc:flink-1.8.0 thpffcj$ ./bin/flink run -m yarn-cluster ./examples/batch/WordCount.jar
+</code></pre><h3 id="5-常用属性"><a href="#5-常用属性" class="headerlink" title="5. 常用属性"></a>5. 常用属性</h3><p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/config.html#configuration" alt="Configuration"></p>
+<h3 id="6-Flink-scala-shell"><a href="#6-Flink-scala-shell" class="headerlink" title="6. Flink scala shell"></a>6. Flink scala shell</h3><pre><code>Thpffc:bin thpffcj$ ./start-scala-shell.sh local
+</code></pre><ul>
+<li>遇到报错</li>
+</ul>
+<pre><code>[ERROR] Failed to construct terminal; falling back to unsupported
+java.lang.NumberFormatException: For input string: &quot;0x100&quot;
+    at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+</code></pre><ul>
+<li>经过stackoverflow</li>
+</ul>
+<pre><code>export TERM=xterm-color
+</code></pre><ul>
+<li>接下来我们使用shell来进行编程</li>
+</ul>
+<pre><code>scala&gt; val dataSet = benv.readTextFile(&quot;file:///Users/thpffcj/Public/data/hello.txt&quot;)
+dataSet: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@52c482d9
+
+scala&gt; dataSet.print()
+hadoop
+spark
+flink
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-Flink监控及调优"><a href="#3-Flink监控及调优" class="headerlink" title="3. Flink监控及调优"></a>3. Flink监控及调优</h2><h3 id="1-HistoryServer"><a href="#1-HistoryServer" class="headerlink" title="1. HistoryServer"></a>1. HistoryServer</h3><p>Flink has a history server that can be used to query the statistics of completed jobs after the corresponding Flink cluster has been shut down.</p>
+<p><strong>JobManager</strong></p>
+<p>The archiving of completed jobs happens on the JobManager, which uploads the archived job information to a file system directory. You can configure the directory to archive completed jobs in flink-conf.yaml by setting a directory via jobmanager.archive.fs.dir.</p>
+<p><strong>HistoryServer</strong></p>
+<p>The HistoryServer can be configured to monitor a comma-separated list of directories in via historyserver.archive.fs.dir. The configured directories are regularly polled for new archives; the polling interval can be configured via historyserver.archive.fs.refresh-interval.</p>
+<ul>
+<li>修改配置文件</li>
+</ul>
+<pre><code>#==============================================================================
+# HistoryServer
+#==============================================================================
+
+# The HistoryServer is started and stopped via bin/historyserver.sh (start|stop)
+
+# Directory to upload completed jobs to. Add this directory to the list of
+# monitored directories of the HistoryServer as well (see below).
+jobmanager.archive.fs.dir: hdfs://localhost:8020/completed-jobs/
+
+# The address under which the web-based HistoryServer listens.
+historyserver.web.address: 0.0.0.0
+
+# The port under which the web-based HistoryServer listens.
+historyserver.web.port: 8082
+
+# Comma separated list of directories to monitor for completed jobs.
+historyserver.archive.fs.dir: hdfs://localhost:8020/completed-jobs/
+
+# Interval in milliseconds for refreshing the monitored directories.
+historyserver.archive.fs.refresh-interval: 10000
+</code></pre><ul>
+<li>启动History Server</li>
+</ul>
+<pre><code>Thpffcj:bin thpffcj$ ./historyserver.sh start
+Starting historyserver daemon on host Thpffcj.local.
+</code></pre><ul>
+<li>我们可以访问8082端口查看Completed Jobs</li>
+</ul>
+<p><strong>History Server的使用</strong></p>
+<ul>
+<li>启动一个flink程序</li>
+</ul>
+<pre><code>Thpffc:flink-1.8.0 thpffcj$ ./bin/flink run -m yarn-cluster -yn 1 ./examples/batch/WordCount.jar 
+</code></pre><ul>
+<li>访问8082端口，我们可以看到刚才执行程序的历史记录</li>
+</ul>
+<h3 id="2-REST-API"><a href="#2-REST-API" class="headerlink" title="2. REST API"></a>2. REST API</h3><p>Below is a list of available requests, with a sample JSON response. All requests are of the sample form <a href="http://hostname:8082/jobs" target="_blank" rel="noopener">http://hostname:8082/jobs</a>, below we list only the path part of the URLs.</p>
+<p>Values in angle brackets are variables, for example <a href="http://hostname:port/jobs/" target="_blank" rel="noopener">http://hostname:port/jobs/</a><jobid>/exceptions will have to requested for example as <a href="http://hostname:port/jobs/7684be6004e4e955c2a558a9bc463f65/exceptions" target="_blank" rel="noopener">http://hostname:port/jobs/7684be6004e4e955c2a558a9bc463f65/exceptions</a>.</jobid></p>
+<ul>
+<li>/config</li>
+<li>/jobs/overview</li>
+<li>/jobs/<jobid></jobid></li>
+<li>/jobs/<jobid>/vertices</jobid></li>
+<li>/jobs/<jobid>/config</jobid></li>
+<li>/jobs/<jobid>/exceptions</jobid></li>
+<li>/jobs/<jobid>/accumulators</jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid></vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/subtasktimes</vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/taskmanagers</vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/accumulators</vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/subtasks/accumulators</vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/subtasks/<subtasknum></subtasknum></vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/subtasks/<subtasknum>/attempts/<attempt></attempt></subtasknum></vertexid></jobid></li>
+<li>/jobs/<jobid>/vertices/<vertexid>/subtasks/<subtasknum>/attempts/<attempt>/accumulators</attempt></subtasknum></vertexid></jobid></li>
+<li>/jobs/<jobid>/plan</jobid></li>
+</ul>
+<p><strong>Monitoring REST API</strong></p>
+<p>Flink has a monitoring API that can be used to query status and statistics of running jobs, as well as recent completed jobs.</p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/monitoring/rest_api.html#monitoring-rest-api" alt="Monitoring REST API"></p>
+<h3 id="3-常用优化"><a href="#3-常用优化" class="headerlink" title="3. 常用优化"></a>3. 常用优化</h3><ul>
+<li>资源</li>
+<li>并行度<ul>
+<li>默认是1 适当的调整：好几种 =&gt; 项目实战</li>
+</ul>
+</li>
+<li>数据倾斜<ul>
+<li>100task 98-99跑完了 1-2很慢 =&gt; 能跑完，跑不完</li>
+<li>group by：二次聚合<ul>
+<li>random_key + random_</li>
+<li>key - random_</li>
+</ul>
+</li>
+<li>join<ul>
+<li>repartition-repartition strategy 大大</li>
+<li>broadcast-forward strategy 大小</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><img src="https://dzone.com/articles/four-ways-to-optimize-your-flink-applications" alt="4 Ways to Optimize Your Flink Applications"></strong></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/07/10/Big-Data-Flink-Getting-Started-5/" style="float: left;">
+        ← Big-Data-Flink-Getting-Started-5
+    </a>
+    
+    
+    <a class="pull-right" href="/2019/07/04/Big-Data-Flink-Getting-Started-3/">
+        Big-Data-Flink-Getting-Started-3 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

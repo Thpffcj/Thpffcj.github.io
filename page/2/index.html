@@ -204,6 +204,148 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2019/04/07/HBase-SpringBoot-Combat-Distributed-File-Storage-2/">HBase+SpringBoot实战分布式文件存储 2</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2019-04-07T06:45:11.000Z" itemprop="datePublished">
+          2019-04-07
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. HBase进阶什么导致HBase性能下降
+
+JVM内存分配与GC回收策略
+与HBase运行机制相关的部分配置不合理
+表结构设计及用户使用方式不合理
+
+HBase数据存储过程
+
+HBase写入时当memstore达到一定大小会flush到磁盘保存成HFile，当HFile小文件太多会执行compact操作进行合并
+minor compaction：选取一些小的，相邻的StoreFile将他们合并成一个更大的StoreFile
+maj
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2019/04/07/HBase-SpringBoot-Combat-Distributed-File-Storage-2/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2019/04/06/Deep-Learning-Neural-Network-3/">循环神经网络</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2019-04-06T00:56:13.000Z" itemprop="datePublished">
+          2019-04-06
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 循环神经网络1. 为什么需要循环神经网络 - 序列式问题
+1对多：图片生成描述
+多对1：文本分类(文本情感分析)
+多对多：encoding-decoding，机器翻译
+实时多对多：视频解说
+
+2. 循环神经网络
+维护一个状态作为下一步的额外输入
+每一步使用同样的激活函数和参数
+
+
+
+反向传播
+Tanh输出在-1和1之间
+梯度消失
+较远的步骤梯度贡献很小
+切换其他激活函数后，可能也会导致爆炸
+
+
+
+
+3. 多层网络与双向网络多层网络
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2019/04/06/Deep-Learning-Neural-Network-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2019/04/04/HBase-SpringBoot-Combat-Distributed-File-Storage-1/">HBase+SpringBoot实战分布式文件存储 1</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2019-04-04T03:01:44.000Z" itemprop="datePublished">
+          2019-04-04
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+我想学习大数据
+我想学习大数据却无从下手
+大数据技术原理涉及的知识体系太庞大
+我已经可以简单的操作Hadoop之后如何进一步提高自己
+
+
+如何学习大数据
+会用
+会想
+会玩 
+
+
+
+
+1. HBase简介与环境部署1. HBase简介
+HBase是一个分布式的，面向列的开源数据库
+HBase在Hadoop之上提供了类似于Bigtable的能力
+HBase不同于一般的关系数据库，它适合非结构化数据存储
+
+HBase在大数据生态圈中的位置
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2019/04/04/HBase-SpringBoot-Combat-Distributed-File-Storage-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2019/04/04/Distributed-Transaction-Practice-1/">分布式事务实践 1</a></h3>
                     <span>
                         <span class="post-meta">
@@ -392,6 +534,44 @@ UPDATE t_user SET amount = amount + 100 WHE
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Computer-Network-Course-1/">计算机网络(未完)</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:45:00.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 计算机网络及其参考模型1. 一些概念
+LAN：Local Area Network，局域网
+WAN：Wide Area Network，广域网
+ISP: Internet Service Provider，网络服务供应商
+局域网设备：集线器(hub)、网桥(bridge)、交换机(switch)、路由器(router)
+广域网设备：路由器(router)、调制解调器(modem)
+以太网是局域网。
+为什么要使用数据包？
+计算机可以
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Computer-Network-Course-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/12/12/Computer-Network-Course-2/">计算机网络(未完)</a></h3>
                     <span>
                         <span class="post-meta">
@@ -432,103 +612,6 @@ TCP不支持单播和组播。
                     
                     <p class="pull-right readMore">
                         <a href="/2018/12/12/Computer-Network-Course-2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/12/12/Computer-Network-Course-1/">计算机网络(未完)</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-12-12T00:45:00.000Z" itemprop="datePublished">
-          2018-12-12
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 计算机网络及其参考模型1. 一些概念
-LAN：Local Area Network，局域网
-WAN：Wide Area Network，广域网
-ISP: Internet Service Provider，网络服务供应商
-局域网设备：集线器(hub)、网桥(bridge)、交换机(switch)、路由器(router)
-广域网设备：路由器(router)、调制解调器(modem)
-以太网是局域网。
-为什么要使用数据包？
-计算机可以
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/12/12/Computer-Network-Course-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">软件工程与计算 1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
-          2018-12-12
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        项目管理基础1. 项目和项目管理项目
-
-项目是具有下列特征的一系列活动和任务
-具有一个明确的目标
-有限定的开始和结束日期
-有成本限制
-消耗人力和非人力资源
-多工种合作
-
-
-
-项目管理的目标
-
-项目管理的目标是做到以下方面
-在限定时间内
-在一定的成本内
-在要求的质量水平上
-高效使用资源
-获得客户认可
-
-
-
-过程组与活动
-
-过程组
-项目启动，项目计划，项目执行，项目跟踪 与控制和项目收尾
-
-
-活动
-计划制定，团队管理，成本控制，质量保障，度
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">Read More...</a>
                     </p>
                     
                 </div>
@@ -582,97 +665,6 @@ ISP: Internet Service Provider，网络服务供应商
                     
                     <p class="pull-right readMore">
                         <a href="/2018/12/12/Software-Engineering-and-Computing-Course-2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/28/Java-Concurrent-Programming-5/">高并发之扩容思路</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
-          2018-05-28
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 高并发之扩容思路
-垂直扩容(纵向扩展)：提高系统部件能力
-水平扩容(横向扩展)：增加更多系统成员来实现
-
-扩容 - 数据库
-
-读操作扩展：memcache, redis, CDN等缓存
-写操作扩展：Cassandra, Hbase等
-
-
-
-2. 高并发之缓存思路
-1. 缓存特征，场景及组件介绍缓存特征
-
-命中率：命中数 / (命中数 + 没有命中数)
-最大元素(空间)
-清空策略：FIFO, LFU, LRU, 过期时间, 随机等
-
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/28/Java-Concurrent-Programming-5/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/25/Python-Machine-Learning-9/">决策树</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-25T02:50:18.000Z" itemprop="datePublished">
-          2018-05-25
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 决策树1. 什么是决策树
-
-直接使用决策树进行具体分类
-使用鸢尾花数据集
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn import datasets
-
-iris = datasets.load_iris()
-X = iris.data[:,2:]
-y = iris.target
-
-plt.scatter(X[y==0,0], X[y==0,1]
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/25/Python-Machine-Learning-9/">Read More...</a>
                     </p>
                     
                 </div>

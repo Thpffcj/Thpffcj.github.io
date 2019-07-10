@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Big-Data-Flink-Getting-Started-3 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2019-07-04T11:33:01.000Z" itemprop="datePublished">
+          2019-07-04
+      </time>
+    
+</span>
+                <h1>Big-Data-Flink-Getting-Started-3</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-DataStream-API编程"><a href="#1-DataStream-API编程" class="headerlink" title="1. DataStream API编程"></a>1. DataStream API编程</h2><ul>
+<li>DataStream programs in Flink are regular programs that implement transformations on data streams (e.g., filtering, updating state, defining windows, aggregating). </li>
+<li>The data streams are initially created from various sources (e.g., message queues, socket streams, files). </li>
+<li>Results are returned via sinks, which may for example write the data to files, or to standard output (for example the command line terminal). </li>
+</ul>
+<h3 id="1-Data-Source"><a href="#1-Data-Source" class="headerlink" title="1. Data Source"></a>1. Data Source</h3><p>Sources are where your program reads its input from.</p>
+<ul>
+<li>Flink中使用数据源：StreamExecutionEnvironment.addSource(sourceFunction)<ul>
+<li>implementing the SourceFunction for non-parallel sources</li>
+<li>implementing the ParallelSourceFunction interface</li>
+<li>extending the RichParallelSourceFunction for parallel sources</li>
+</ul>
+</li>
+</ul>
+<p><strong>Socket-based</strong></p>
+<pre><code>object DataStreamSourceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    socketFunction(env)
+
+    env.execute(&quot;DataStreamSourceApp&quot;)
+  }
+
+  def socketFunction(env: StreamExecutionEnvironment): Unit = {
+
+    val data = env.socketTextStream(&quot;localhost&quot;, 9999)
+    data.print()
+  }
+}
+</code></pre><ul>
+<li>我们使用netcat发送数据</li>
+</ul>
+<pre><code>nc -lk 9999
+</code></pre><p><strong>Custom：实现自定义数据源</strong></p>
+<ul>
+<li>方式一：implementing the SourceFunction for non-parallel sources</li>
+</ul>
+<pre><code>class CustomNonParallelSourceFunction extends SourceFunction[Long]{
+
+  var count = 1L
+
+  var isRunning = true
+
+  override def run(ctx: SourceFunction.SourceContext[Long]): Unit = {
+    while (isRunning) {
+      ctx.collect(count)
+      count += 1
+      Thread.sleep(1000)
+    }
+  }
+
+  override def cancel(): Unit = {
+    isRunning = false
+  }
+}
+</code></pre><ul>
+<li>接着我们需要将数据源添加到环境中</li>
+</ul>
+<pre><code>object DataStreamSourceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    nonParallelSourceFunction(env)
+
+    env.execute(&quot;DataStreamSourceApp&quot;)
+  }
+
+  def nonParallelSourceFunction(env: StreamExecutionEnvironment): Unit = {
+    val data = env.addSource(new CustomNonParallelSourceFunction)
+    data.print()
+  }
+}
+</code></pre><ul>
+<li>方式二：implementing the ParallelSourceFunction interface</li>
+</ul>
+<pre><code>class CustomParallelSourceFunction extends ParallelSourceFunction[Long]
+</code></pre><ul>
+<li>这种方式我们可以设置并行度了</li>
+</ul>
+<pre><code>def parallelSourceFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomParallelSourceFunction).setParallelism(2)
+  data.print()
+}
+</code></pre><ul>
+<li>方式三：extending the RichParallelSourceFunction for parallel sources</li>
+</ul>
+<pre><code>class CustomRichParallelSourceFunction extends RichParallelSourceFunction[Long]
+</code></pre><h3 id="2-Transformation"><a href="#2-Transformation" class="headerlink" title="2. Transformation"></a>2. Transformation</h3><p>Operators transform one or more DataStreams into a new DataStream.</p>
+<p><strong>Map和Filter</strong></p>
+<ul>
+<li>我们直接使用上面的自定义数据源产生数据</li>
+</ul>
+<pre><code>def filterFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomNonParallelSourceFunction)
+
+  data.map(x =&gt;{
+    println(&quot;received: &quot; + x)
+    x
+  }).filter(_%2 == 0).print().setParallelism(1)
+}
+</code></pre><p><strong>Union</strong></p>
+<p>Union of two or more data streams creating a new stream containing all the elements from all the streams. </p>
+<pre><code>def unionFunction(env: StreamExecutionEnvironment): Unit = {
+  val data1 = env.addSource(new CustomNonParallelSourceFunction)
+  val data2 = env.addSource(new CustomNonParallelSourceFunction)
+  data1.union(data2).print().setParallelism(1)
+}
+</code></pre><p><strong>Split和Select</strong></p>
+<p>Split the stream into two or more streams according to some criterion.<br>Select one or more streams from a split stream.</p>
+<pre><code>def splitSelectFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomNonParallelSourceFunction)
+
+  val splits = data.split(new OutputSelector[Long] {
+    override def select(value: Long): lang.Iterable[String] = {
+      val list = new util.ArrayList[String]()
+      if (value % 2 == 0) {
+        list.add(&quot;even&quot;)
+      } else {
+        list.add(&quot;odd&quot;)
+      }
+      list
+    }
+  })
+
+  splits.select(&quot;even&quot;).print().setParallelism(1)
+}
+</code></pre><h3 id="3-Sink"><a href="#3-Sink" class="headerlink" title="3. Sink"></a>3. Sink</h3><p>Data sinks consume DataStreams and forward them to files, sockets, external systems, or print them. </p>
+<p><strong>自定义Sink</strong></p>
+<ul>
+<li>需求：socket发送数据过来，把String类型转换成对象，然后把Java对象保存到MySQL数据库中</li>
+<li>数据库建表</li>
+</ul>
+<pre><code>create table student(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(25),
+    age int(10),
+    primary key(id)
+)；
+</code></pre><ul>
+<li>继承RichSinkFunction<t>，T是你想要写入对象的类型</t></li>
+<li>重写open/close：生命周期方法</li>
+<li>重写invoke：每条记录执行一次</li>
+</ul>
+<pre><code>public class SinkToMySQL extends RichSinkFunction&lt;Student&gt; {
+
+    Connection connection;
+    PreparedStatement preparedStatement;
+
+    private Connection getConnection() {
+        Connection conn = null;
+        try {
+            String url = &quot;jdbc:mysql://localhost:3306/test&quot;;
+            conn = DriverManager.getConnection(url, &quot;root&quot;, &quot;00000000&quot;);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    @Override
+    public void open(Configuration parameters) throws Exception {
+        super.open(parameters);
+
+        connection = getConnection();
+        String sql = &quot;insert into Student(id, name, age) values (?, ?, ?)&quot;;
+        preparedStatement = connection.prepareStatement(sql);
+    }
+
+    // 每条记录插入时调用一次
+    public void invoke(Student value, Context context) throws Exception {
+
+        // 为前面的占位符赋值
+        preparedStatement.setInt(1, value.getId());
+        preparedStatement.setString(2, value.getName());
+        preparedStatement.setInt(3, value.getAge());
+
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void close() throws Exception {
+        if(connection != null) {
+            try {
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            connection = null;
+        }
+    }
+}
+</code></pre><ul>
+<li>开发测试方法</li>
+</ul>
+<pre><code>public class JavaCustomSinkToMySQL {
+
+    public static void main(String[] args) throws Exception {
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        DataStreamSource&lt;String&gt; source = env.socketTextStream(&quot;localhost&quot;, 7777);
+
+        SingleOutputStreamOperator&lt;Student&gt; studentStream = source.map(new MapFunction&lt;String, Student&gt;() {
+            @Override
+            public Student map(String value) throws Exception {
+                System.out.println(value);
+                String[] splits = value.split(&quot;,&quot;);
+                Student stu = new Student();
+                stu.setId(Integer.parseInt(splits[0]));
+                stu.setName(splits[1]);
+                stu.setAge(Integer.parseInt(splits[2]));
+                return stu;
+            }
+        });
+
+        studentStream.addSink(new SinkToMySQL());
+
+        env.execute(&quot;JavaCustomSinkToMySQL&quot;);
+    }
+}
+</code></pre><h2 id="2-Flink-Table-API-amp-SQL编程"><a href="#2-Flink-Table-API-amp-SQL编程" class="headerlink" title="2. Flink Table API &amp; SQL编程"></a>2. Flink Table API &amp; SQL编程</h2><h3 id="1-什么是Flink关系型API"><a href="#1-什么是Flink关系型API" class="headerlink" title="1. 什么是Flink关系型API"></a>1. 什么是Flink关系型API</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Layered-APIs.png" alt=""></p>
+<ul>
+<li>DataSet &amp; DataStream API<ul>
+<li>熟悉两套API：DataSet/DataStream<ul>
+<li>MapReduce =&gt; Hive SQL</li>
+<li>Spark =&gt; Spark SQL</li>
+<li>Flink =&gt; SQL</li>
+</ul>
+</li>
+<li>Flink是支持批处理/流处理，如何做到API层面的统一</li>
+</ul>
+</li>
+<li>Table &amp; SQL API：关系型API</li>
+</ul>
+<h3 id="2-Table-API-amp-SQL开发概述"><a href="#2-Table-API-amp-SQL开发概述" class="headerlink" title="2. Table API &amp; SQL开发概述"></a>2. Table API &amp; SQL开发概述</h3><ul>
+<li>Apache Flink features two relational APIs - the Table API and SQL - for unified stream and batch processing. </li>
+<li>The Table API is a language-integrated query API for Scala and Java that allows the composition of queries from relational operators such as selection, filter, and join in a very intuitive way. </li>
+</ul>
+<h3 id="3-Table-API-amp-SQL编程"><a href="#3-Table-API-amp-SQL编程" class="headerlink" title="3. Table API &amp; SQL编程"></a>3. Table API &amp; SQL编程</h3><ul>
+<li>准备一份数据</li>
+</ul>
+<pre><code>Thpffcj:data thpffcj$ cat sales.csv 
+transactionId,customerId,itemId,amountPaid
+111,1,1,100.0
+112,2,2,505.0
+113,3,3,510.0
+114,4,4,600.0
+115,1,2,500.0
+</code></pre><ul>
+<li>Scala实现</li>
+</ul>
+<pre><code>object TableSQLAPI {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+    val tableEnv = TableEnvironment.getTableEnvironment(env)
+
+    val filePath = &quot;file:///Users/thpffcj/Public/data/sales.csv&quot;
+    // 已经拿到DataSet
+    val csv = env.readCsvFile[SalesLog](filePath, ignoreFirstLine = true)
+
+    // DataSet =&gt; Table
+    val salesTable = tableEnv.fromDataSet(csv)
+    // Table =&gt; table
+    tableEnv.registerTable(&quot;sales&quot;, salesTable)
+
+    // sql
+    val resultTable = tableEnv.sqlQuery(&quot;select customerId, sum(amountPaid) money from sales group by customerId&quot;)
+
+    tableEnv.toDataSet[Row](resultTable).print()
+  }
+
+  case class SalesLog(transactionId: String, customerId: String, itemId: String, amountPaid: Double)
+}
+</code></pre><ul>
+<li>Java实现</li>
+</ul>
+<pre><code>public class JavaTableSQLAPI {
+
+    public static void main(String[] args) throws Exception {
+        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        BatchTableEnvironment tableEnv = BatchTableEnvironment.create(env);
+
+        String filePath = &quot;file:///Users/thpffcj/Public/data/sales.csv&quot;;
+        DataSet&lt;Sales&gt; csv = env.readCsvFile(filePath)
+                .ignoreFirstLine()
+                .pojoType(Sales.class, &quot;transactionId&quot;, &quot;customerId&quot;, &quot;itemId&quot;, &quot;amountPaid&quot;);
+
+        Table sales = tableEnv.fromDataSet(csv);
+        tableEnv.registerTable(&quot;sales&quot;, sales);
+        Table resultTable = tableEnv.sqlQuery(&quot;select customerId, sum(amountPaid) money from sales group by customerId&quot;);
+
+        DataSet&lt;Row&gt; result = tableEnv.toDataSet(resultTable, Row.class);
+        result.print();
+    }
+
+    public static class Sales {
+        public String transactionId;
+        public String customerId;
+        public String itemId;
+        public Double amountPaid;
+    }
+}
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-Flink中的Time及Windows的操作"><a href="#3-Flink中的Time及Windows的操作" class="headerlink" title="3. Flink中的Time及Windows的操作"></a>3. Flink中的Time及Windows的操作</h2><h3 id="1-Flink中的Time类型"><a href="#1-Flink中的Time类型" class="headerlink" title="1. Flink中的Time类型"></a>1. Flink中的Time类型</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Event-time.png" alt=""></p>
+<ul>
+<li>对于Flink里面的三种时间<ul>
+<li>事件时间 10:30</li>
+<li>摄取时间 11:00</li>
+<li>处理时间 11:30</li>
+</ul>
+</li>
+<li>对于流处理来说，你们觉得应该是以哪个时间作为基准时间来进行业务逻辑的处理呢？</li>
+</ul>
+<p><strong>Processing time</strong></p>
+<ul>
+<li>Processing time refers to the system time of the machine that is executing the respective operation.</li>
+<li>When a streaming program runs on processing time, all time-based operations (like time windows) will use the system clock of the machines that run the respective operator.</li>
+<li>Processing time is the simplest notion of time and requires no coordination between streams and machines. </li>
+<li>It provides the best performance and the lowest latency. </li>
+<li>However, in distributed and asynchronous environments processing time does not provide determinism, because it is susceptible to the speed at which records arrive in the system (for example from the message queue), to the speed at which the records flow between operators inside the system, and to outages (scheduled, or otherwise).</li>
+</ul>
+<p><strong>Event time</strong></p>
+<ul>
+<li>Event time is the time that each individual event occurred on its producing device. </li>
+<li>This time is typically embedded within the records before they enter Flink, and that event timestamp can be extracted from each record. </li>
+<li>Event time programs must specify how to generate Event Time Watermarks, which is the mechanism that signals progress in event time. </li>
+<li>In a perfect world, event time processing would yield completely consistent and deterministic results, regardless of when events arrive, or their ordering. </li>
+<li>However, unless the events are known to arrive in-order (by timestamp), event time processing incurs some latency while waiting for out-of-order events. </li>
+</ul>
+<p><strong>Ingestion time</strong></p>
+<ul>
+<li>Ingestion time is the time that events enter Flink. </li>
+<li>At the source operator each record gets the source’s current time as a timestamp, and time-based operations (like time windows) refer to that timestamp.</li>
+</ul>
+<p><strong>设置方法</strong></p>
+<pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
+</code></pre><h3 id="2-Flink中的Windows编程"><a href="#2-Flink中的Windows编程" class="headerlink" title="2. Flink中的Windows编程"></a>2. Flink中的Windows编程</h3><ul>
+<li>Windows are at the heart of processing infinite streams. </li>
+<li>Windows split the stream into “buckets” of finite size, over which we can apply computations. </li>
+</ul>
+<p><strong>Window Lifecycle</strong></p>
+<ul>
+<li>A window is created as soon as the first element that should belong to this window arrives, and the window is completely removed when the time (event or processing time) passes its end timestamp plus the user-specified allowed lateness.</li>
+<li>Each window will have a Trigger and a function attached to it. </li>
+<li>The function will contain the computation to be applied to the contents of the window, while the Trigger specifies the conditions under which the window is considered ready for the function to be applied. </li>
+</ul>
+<p><strong>Keyed vs Non-Keyed Windows</strong></p>
+<ul>
+<li>The first thing to specify is whether your stream should be keyed or not.</li>
+<li>Having a keyed stream will allow your windowed computation to be performed in parallel by multiple tasks, as each logical keyed stream can be processed independently from the rest. </li>
+<li>All elements referring to the same key will be sent to the same parallel task.</li>
+</ul>
+<p><strong>Window Assigners</strong></p>
+<ul>
+<li>After specifying whether your stream is keyed or not, the next step is to define a window assigner. </li>
+<li>The window assigner defines how elements are assigned to windows. 定义如何将数据分配给窗口</li>
+<li>A WindowAssigner is responsible for assigning each incoming element to one or more windows.每个传入的数据分配给一个或者多个窗口<ul>
+<li>tumbling windows 滚动窗口</li>
+<li>sliding windows 滑动窗口 </li>
+<li>session windows 会话窗口</li>
+<li>global windows 全局窗口</li>
+</ul>
+</li>
+</ul>
+<p><strong>Flink里面对于Windows来说有两大类，基于Time的和基于Count的</strong></p>
+<p><strong>Tumbling Windows</strong></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Tumbling-Windows.png" alt=""></p>
+<ul>
+<li>Tumbling windows have a fixed size and do not overlap. </li>
+</ul>
+<pre><code>object WindowsApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env= StreamExecutionEnvironment.getExecutionEnvironment
+
+    val text = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    text.flatMap(_.split(&quot;,&quot;))
+      .map((_, 1))
+      .keyBy(0)
+      .timeWindow(Time.seconds(5))
+      .sum(1).print().setParallelism(1)
+
+    env.execute(&quot;WindowsApp&quot;)
+  }
+}
+</code></pre><p><strong>Sliding Windows</strong></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Sliding-Windows.png" alt=""></p>
+<ul>
+<li>The sliding windows assigner assigns elements to windows of fixed length.</li>
+<li>An additional window slide parameter controls how frequently a sliding window is started. Hence, sliding windows can be overlapping if the slide is smaller than the window size.</li>
+</ul>
+<pre><code>text.flatMap(_.split(&quot;,&quot;))
+  .map((_, 1))
+  .keyBy(0)
+  .timeWindow(Time.seconds(10), Time.seconds(5))
+  .sum(1).print().setParallelism(1)
+</code></pre><p><strong>Window Functions</strong></p>
+<ul>
+<li>After defining the window assigner, we need to specify the computation that we want to perform on each of these windows.<ul>
+<li>ReduceFunction</li>
+<li>AggregateFunction</li>
+<li>FoldFunction</li>
+<li>ProcessWindowFunction</li>
+</ul>
+</li>
+</ul>
+<p><strong>ReduceFunction</strong></p>
+<ul>
+<li>A ReduceFunction specifies how two elements from the input are combined to produce an output element of the same type. </li>
+</ul>
+<pre><code>object WindowsReduceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val text = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    // 原来传递进来的是字符串，此处我们就使用数值类型，通过数值类型来演示增量的效果
+    text.flatMap(_.split(&quot;,&quot;))
+      .map(x =&gt; (1, x.toInt))  // 1,2,3,4,5 =&gt; (1,1)(1,2)(1,3)(1,4)(1,5)
+      .keyBy(0)  // 因为key都是1，所以所有的元素都要一个task去执行
+      .timeWindow(Time.seconds(5))
+      .reduce((v1, v2) =&gt; {  // 不是等待窗口所有的数据进行一次性处理，而是数据两两处理
+        println(v1 + &quot;...&quot; + v2)
+        (v1._1, v1._2 + v2._2)
+      }).print().setParallelism(1)
+
+    env.execute(&quot;WindowsReduceApp&quot;)
+  }
+}
+</code></pre><p><strong>ProcessWindowFunction</strong></p>
+<ul>
+<li>A ProcessWindowFunction gets an Iterable containing all the elements of the window, and a Context object with access to time and state information, which enables it to provide more flexibility than other window functions. </li>
+</ul>
+<pre><code>object WindowsProcessApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val text = env.socketTextStream(&quot;localhost&quot;, 9999)
+
+    text.flatMap(_.split(&quot;,&quot;))
+      .map(x =&gt; (1, x.toInt))
+      .keyBy(0)
+      .timeWindow(Time.seconds(5))
+      .process(new MyProcessWindowFunction())
+      .print().setParallelism(1)
+
+    env.execute(&quot;WindowsReduceApp&quot;)
+  }
+
+  class MyProcessWindowFunction extends ProcessWindowFunction[(Int, Int), String, Tuple, TimeWindow] {
+
+    def process(key: Tuple, context: Context, input: Iterable[(Int, Int)], out: Collector[String]): Unit = {
+      var count = 0L
+      for (in &lt;- input) {
+        count = count + 1
+      }
+      out.collect(s&quot;Window ${context.window} count: $count&quot;)
+    }
+  }
+}
+</code></pre><h3 id="3-Flink的watermarks"><a href="#3-Flink的watermarks" class="headerlink" title="3. Flink的watermarks"></a>3. Flink的watermarks</h3><p><img src="https://blog.csdn.net/xorxos/article/details/80715113" alt="Flink流计算编程--watermark（水位线）简介"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2019/07/07/Big-Data-Flink-Getting-Started-4/" style="float: left;">
+        ← Big-Data-Flink-Getting-Started-4
+    </a>
+    
+    
+    <a class="pull-right" href="/2019/06/29/Big-Data-Flink-Getting-Started-2/">
+        编程模型及核心概念 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

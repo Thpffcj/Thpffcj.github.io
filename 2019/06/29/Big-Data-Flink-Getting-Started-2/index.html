@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Big-Data-Flink-Getting-Started-2 | Thpffcj的树洞</title>
+  <title>编程模型及核心概念 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,18 +177,514 @@
       </time>
     
 </span>
-                <h1>Big-Data-Flink-Getting-Started-2</h1>
+                <h1>编程模型及核心概念</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<h2 id="1-Flink编程模型及核心概念"><a href="#1-Flink编程模型及核心概念" class="headerlink" title="1. Flink编程模型及核心概念"></a>1. Flink编程模型及核心概念</h2><h3 id="1-核心概念概述"><a href="#1-核心概念概述" class="headerlink" title="1. 核心概念概述"></a>1. 核心概念概述</h3><ul>
+<li>Flink programs are regular programs that implement transformations on distributed collections (e.g., filtering, mapping, updating state, joining, grouping, defining windows, aggregating). </li>
+<li>Collections are initially created from sources (e.g., by reading from files, kafka topics, or from local, in-memory collections). </li>
+<li>Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example, the command line terminal). </li>
+</ul>
+<p><strong>大数据处理的流程</strong></p>
+<ul>
+<li>MapReduce：input -&gt; map(reduce) -&gt; output</li>
+<li>Storm：input -&gt; Spout/Bolt -&gt; output</li>
+<li>Spark：input -&gt; transformation/action -&gt; output</li>
+<li>Flink：input -&gt; transformation/sink -&gt; output</li>
+</ul>
+<h3 id="2-DataSet-amp-DataStream"><a href="#2-DataSet-amp-DataStream" class="headerlink" title="2. DataSet &amp; DataStream"></a>2. DataSet &amp; DataStream</h3><ul>
+<li>Flink has the special classes DataSet and DataStream to represent data in a program. </li>
+<li>You can think of them as immutable collections of data that can contain duplicates. </li>
+<li>In the case of DataSet the data is finite while for a DataStream the number of elements can be unbounded.</li>
+<li>immutable</li>
+<li>批处理：DataSet</li>
+<li>流处理：DataStream</li>
+</ul>
+<h3 id="3-Flink编程模型"><a href="#3-Flink编程模型" class="headerlink" title="3. Flink编程模型"></a>3. Flink编程模型</h3><ul>
+<li><strong><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html#anatomy-of-a-flink-program" alt="Anatomy of a Flink Program"></strong></li>
+</ul>
+<p>Flink programs look like regular programs that transform collections of data. Each program consists of the same basic parts:</p>
+<ul>
+<li>Obtain an execution environment</li>
+<li>Load/create the initial data</li>
+<li>Specify transformations on this data</li>
+<li>Specify where to put the results of your computations</li>
+<li>Trigger the program execution</li>
+</ul>
+<h3 id="4-延迟执行"><a href="#4-延迟执行" class="headerlink" title="4. 延迟执行"></a>4. 延迟执行</h3><ul>
+<li>All Flink programs are executed lazily</li>
+<li>When the program’s main method is executed, the data loading and transformations do not happen directly. </li>
+<li>Rather, each operation is created and added to the program’s plan.</li>
+<li>The operations are actually executed when the execution is explicitly triggered by an execute() call on the execution environment.</li>
+<li>The lazy evaluation lets you construct sophisticated programs that Flink executes as one holistically planned unit.</li>
+</ul>
+<h3 id="5-编程如何指定Key"><a href="#5-编程如何指定Key" class="headerlink" title="5. 编程如何指定Key"></a>5. 编程如何指定Key</h3><ul>
+<li>Some transformations (join, coGroup, keyBy, groupBy) require that a key be defined on a collection of elements. </li>
+<li>Other transformations (Reduce, GroupReduce, Aggregate, Windows) allow data being grouped on a key before they are applied.</li>
+</ul>
+<p><strong>Define keys for Tuple</strong></p>
+<pre><code>DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
+KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0)
+
+DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
+KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0,1)
+</code></pre><p><strong>Define keys using Field Expressions</strong></p>
+<ul>
+<li>Java</li>
+</ul>
+<pre><code>// some ordinary POJO (Plain old Java Object)
+public class WC {
+  public String word;
+  public int count;
+}
+DataStream&lt;WC&gt; words = // [...]
+DataStream&lt;WC&gt; wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/);
+</code></pre><ul>
+<li>Scala</li>
+</ul>
+<pre><code>// or, as a case class, which is less typing
+case class WC(word: String, count: Int)
+val words: DataStream[WC] = // [...]
+val wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/)
+</code></pre><p><strong>Define keys using Key Selector Functions</strong></p>
+<pre><code>// some ordinary POJO
+public class WC {public String word; public int count;}
+DataStream&lt;WC&gt; words = // [...]
+KeyedStream&lt;WC&gt; keyed = words
+  .keyBy(new KeySelector&lt;WC, String&gt;() {
+     public String getKey(WC wc) { return wc.word; }
+   });
+</code></pre><h3 id="6-编程如何指定转换函数"><a href="#6-编程如何指定转换函数" class="headerlink" title="6. 编程如何指定转换函数"></a>6. 编程如何指定转换函数</h3><ul>
+<li>Most transformations require user-defined functions. This section lists different ways of how they can be specified</li>
+</ul>
+<p><strong>Implementing an interface</strong></p>
+<pre><code>class MyMapFunction implements MapFunction&lt;String, Integer&gt; {
+  public Integer map(String value) { return Integer.parseInt(value); }
+};
+data.map(new MyMapFunction());
+</code></pre><p><strong>Anonymous classes</strong></p>
+<pre><code>data.map(new MapFunction&lt;String, Integer&gt; () {
+  public Integer map(String value) { return Integer.parseInt(value); }
+});
+</code></pre><p><strong>Java 8 Lambdas</strong></p>
+<p><strong>Rich functions</strong></p>
+<h3 id="7-支持的数据类型"><a href="#7-支持的数据类型" class="headerlink" title="7. 支持的数据类型"></a>7. 支持的数据类型</h3><p>Flink places some restrictions on the type of elements that can be in a DataSet or DataStream. The reason for this is that the system analyzes the types to determine efficient execution strategies.</p>
+<ul>
+<li>Java Tuples and Scala Case Classes</li>
+<li>Java POJOs</li>
+<li>Primitive Types</li>
+<li>Regular Classes</li>
+<li>Values</li>
+<li>Hadoop Writables</li>
+<li>Special Types</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-DataSet-API编程"><a href="#2-DataSet-API编程" class="headerlink" title="2. DataSet API编程"></a>2. DataSet API编程</h2><h3 id="1-DataSet-API开发概述"><a href="#1-DataSet-API开发概述" class="headerlink" title="1. DataSet API开发概述"></a>1. DataSet API开发概述</h3><ul>
+<li>DataSet programs in Flink are regular programs that implement transformations on data sets (e.g., filtering, mapping, joining, grouping).</li>
+<li>The data sets are initially created from certain sources (e.g., by reading files, or from local collections). </li>
+<li>Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example the command line terminal).</li>
+<li>Source：源/源头</li>
+<li>Sink：目的地</li>
+<li>Source =&gt; Flink(transformations) =&gt; Sink</li>
+</ul>
+<h3 id="2-DataSource"><a href="#2-DataSource" class="headerlink" title="2. DataSource"></a>2. DataSource</h3><ul>
+<li>Data sources create the initial data sets, such as from files or from Java collections. </li>
+<li>The general mechanism of creating data sets is abstracted behind an InputFormat.</li>
+<li>基于文件</li>
+<li>基于集合</li>
+</ul>
+<p><strong>从集合创建dataset</strong></p>
+<ul>
+<li>Scala实现</li>
+</ul>
+<pre><code>object DataSetDataSourceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    fromCollection(env)
+  }
+
+  def fromCollection(env: ExecutionEnvironment): Unit = {
+
+    import org.apache.flink.api.scala._
+    val data = 1 to 10
+    env.fromCollection(data).print()
+  }
+}
+</code></pre><ul>
+<li>Java实现</li>
+</ul>
+<pre><code>public class JavaDataSetDataSourceApp {
+
+    public static void main(String[] args) throws Exception {
+        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        fromCollection(env);
+    }
+
+    public static void fromCollection(ExecutionEnvironment env) throws Exception {
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        for (int i = 1; i &lt;= 10; i++) {
+            list.add(i);
+        }
+        env.fromCollection(list).print();
+    }
+}
+</code></pre><p><strong>从文件创建dataset</strong></p>
+<ul>
+<li>Scala实现</li>
+</ul>
+<pre><code>def textFile(env: ExecutionEnvironment): Unit = {
+  val filePath = &quot;file:///Users/thpffcj/Public/data/hello.txt&quot;
+  env.readTextFile(filePath).print()
+}
+</code></pre><ul>
+<li>Java实现</li>
+</ul>
+<pre><code>public static void textFile(ExecutionEnvironment env) throws Exception {
+    String filePath = &quot;file:///Users/thpffcj/Public/data/hello.txt&quot;;
+    env.readTextFile(filePath).print();
+}
+</code></pre><p><strong>从csv文件创建dataset</strong></p>
+<pre><code>case class MyCaseClass(name:String, age:Int)
+
+def csvFile(env: ExecutionEnvironment): Unit = {
+
+  import org.apache.flink.api.scala._
+  val filePath = &quot;file:///Users/thpffcj/Public/data/people.csv&quot;
+
+  env.readCsvFile[(String, Int, String)](filePath, ignoreFirstLine = true).print()
+
+  env.readCsvFile[(String, Int)](filePath, ignoreFirstLine = true, includedFields = Array(0, 1)).print()
+
+  env.readCsvFile[MyCaseClass](filePath, ignoreFirstLine = true, includedFields = Array(0, 1)).print()
+
+  env.readCsvFile[Person](filePath, ignoreFirstLine = true, pojoFields = Array(&quot;name&quot;, &quot;age&quot;, &quot;work&quot;)).print()
+}
+</code></pre><p><strong>从递归文件夹创建dataset</strong></p>
+<pre><code>def readRecursiveFiles(env: ExecutionEnvironment): Unit = {
+  val filePath = &quot;file:///Users/thpffcj/Public/data/nested&quot;
+  val parameters = new Configuration()
+  parameters.setBoolean(&quot;recursive.file.enumeration&quot;, true)
+  env.readTextFile(filePath).withParameters(parameters).print()
+}
+</code></pre><p><strong>从压缩文件中创建dataset</strong></p>
+<ul>
+<li>Flink currently supports transparent decompression of input files if these are marked with an appropriate file extension. </li>
+<li>In particular, this means that no further configuration of the input formats is necessary and any FileInputFormat support the compression, including custom input formats. </li>
+<li>Please notice that compressed files might not be read in parallel, thus impacting job scalability.</li>
+</ul>
+<pre><code>def readCompressionFiles(env: ExecutionEnvironment): Unit = {
+  val filePath = &quot;file:///Users/thpffcj/Public/data/compression&quot;
+  env.readTextFile(filePath).print()
+}
+</code></pre><h3 id="3-Transformation"><a href="#3-Transformation" class="headerlink" title="3. Transformation"></a>3. Transformation</h3><ul>
+<li>Data transformations transform one or more DataSets into a new DataSet.</li>
+</ul>
+<p><strong>Map</strong></p>
+<p>Takes one element and produces one element.</p>
+<ul>
+<li>Scala</li>
+</ul>
+<pre><code>def mapFunction(env: ExecutionEnvironment): Unit = {
+
+  val data = env.fromCollection(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+  // 对data中的每个元素做一个+1操作
+  data.map((x:Int) =&gt; x + 1)
+  data.map((x) =&gt; x + 1)
+  data.map(x =&gt; x + 1)
+  data.map(_ + 1).print()
+}
+</code></pre><ul>
+<li>Java</li>
+</ul>
+<pre><code>public static void mapFunction(ExecutionEnvironment env) throws Exception {
+    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    for (int i = 1; i &lt;= 10; i++) {
+        list.add(i);
+    }
+    DataSource&lt;Integer&gt; data = env.fromCollection(list);
+
+    data.map(new MapFunction&lt;Integer, Integer&gt;() {
+        @Override
+        public Integer map(Integer input) throws Exception {
+            return input + 1;
+        }
+    }).print();
+}
+</code></pre><p><strong>Filter</strong></p>
+<p>Evaluates a boolean function for each element and retains those for which the function returns true.</p>
+<ul>
+<li>Scala</li>
+</ul>
+<pre><code>def filterFunction(env: ExecutionEnvironment): Unit = {
+  env.fromCollection(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+    .map(_ + 1)
+    .filter(_ &gt; 5).print()
+}
+</code></pre><ul>
+<li>Java</li>
+</ul>
+<pre><code>data.map(new MapFunction&lt;Integer, Integer&gt;() {
+    @Override
+    public Integer map(Integer input) throws Exception {
+        return input + 1;
+    }
+}).filter(new FilterFunction&lt;Integer&gt;() {
+    @Override
+    public boolean filter(Integer input) throws Exception {
+        return input &gt; 5;
+    }
+}).print();
+</code></pre><p><strong>MapPartition</strong></p>
+<p>Transforms a parallel partition in a single function call. The function get the partition as an <code>Iterator</code> and can produce an arbitrary number of result values. The number of elements in each partition depends on the degree-of-parallelism and previous operations.</p>
+<ul>
+<li>Scala</li>
+</ul>
+<pre><code>// DataSource 100个元素，把结果存储到数据库中
+def mapPartitionFunction(env: ExecutionEnvironment): Unit = {
+  val students = new ListBuffer[String]
+  for (i &lt;- 1 to 100) {
+    students.append(&quot;student: &quot; + i)
+  }
+
+  val data = env.fromCollection(students).setParallelism(5)
+
+  data.mapPartition(x =&gt; {
+
+    val connection = DBUtils.getConnection()
+    println(connection + &quot;...&quot;)
+
+    // TODO... 保存数据到DB
+
+    DBUtils.returnConnection(connection)
+    x
+  }).print()
+}
+</code></pre><ul>
+<li>Java</li>
+</ul>
+<pre><code>public static void mapPartitionFunction(ExecutionEnvironment env) throws Exception {
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    for (int i = 1; i &lt;= 10; i++) {
+        list.add(&quot;student: &quot; + i);
+    }
+    DataSource&lt;String&gt; data = env.fromCollection(list);
+
+    data.mapPartition(new MapPartitionFunction&lt;String, String&gt;() {
+        @Override
+        public void mapPartition(Iterable&lt;String&gt; inputs, Collector&lt;String&gt; out) throws Exception {
+            String connection = DBUtils.getConnection();
+            System.out.println(&quot;connection = &quot; + connection);
+            DBUtils.returnConnection(connection);
+        }
+    }).print();
+}
+</code></pre><p><strong>First</strong></p>
+<p>Returns the first n (arbitrary) elements of a data set.</p>
+<pre><code>def firstFunction(env: ExecutionEnvironment): Unit = {
+  val info = ListBuffer[(Int, String)]()
+  info.append((1, &quot;Hadoop&quot;))
+  info.append((1, &quot;Spark&quot;))
+  info.append((1, &quot;Flink&quot;))
+  info.append((2, &quot;Java&quot;))
+  info.append((2, &quot;Spring Boot&quot;))
+  info.append((3, &quot;Linux&quot;))
+  info.append((4, &quot;Vue&quot;))
+
+  val data = env.fromCollection(info)
+  data.first(3).print()
+  data.groupBy(0).first(2).print()
+  data.groupBy(0).sortGroup(1, Order.ASCENDING).first(2).print()
+}
+</code></pre><p><strong>FlatMap</strong></p>
+<p>Takes one element and produces zero, one, or more elements.</p>
+<pre><code>def flatMapFunction(env: ExecutionEnvironment): Unit = {
+  val info = ListBuffer[String]()
+  info.append(&quot;hadoop,spark&quot;)
+  info.append(&quot;hadoop,flink&quot;)
+  info.append(&quot;flink,flink&quot;)
+
+  val data = env.fromCollection(info)
+  data.map(_.split(&quot;,&quot;)).print()
+  data.flatMap(_.split(&quot;,&quot;)).print()
+  data.flatMap(_.split(&quot;,&quot;)).map((_, 1)).groupBy(0).sum(1).print()
+}
+</code></pre><p><strong>Distinct</strong></p>
+<p>Returns the distinct elements of a data set. </p>
+<pre><code>def distinctFunction(env: ExecutionEnvironment): Unit = {
+  val info = ListBuffer[String]()
+  info.append(&quot;hadoop,spark&quot;)
+  info.append(&quot;hadoop,flink&quot;)
+  info.append(&quot;flink,flink&quot;)
+
+  val data = env.fromCollection(info)
+
+  data.flatMap(_.split(&quot;,&quot;)).distinct().print()
+}
+</code></pre><p><strong>Join</strong></p>
+<p>Joins two data sets by creating all pairs of elements that are equal on their keys.</p>
+<pre><code>def joinFunction(env: ExecutionEnvironment): Unit = {
+  val info1 = ListBuffer[(Int, String)]() // 编号 名字
+  info1.append((1, &quot;Thpffcj1&quot;))
+  info1.append((2, &quot;Thpffcj2&quot;))
+  info1.append((3, &quot;Thpffcj3&quot;))
+  info1.append((4, &quot;Thpffcj4&quot;))
+
+  val info2 = ListBuffer[(Int, String)]() // 编号 城市
+  info2.append((1, &quot;南京&quot;))
+  info2.append((2, &quot;北京&quot;))
+  info2.append((3, &quot;上海&quot;))
+  info2.append((5, &quot;成都&quot;))
+
+  val data1 = env.fromCollection(info1)
+  val data2 = env.fromCollection(info2)
+
+  data1.join(data2).where(0).equalTo(0).apply((first, second) =&gt; {
+    (first._1, first._2, second._2)
+  }).print()
+}
+</code></pre><p><strong>OuterJoin</strong></p>
+<p>Performs a left, right, or full outer join on two data sets. </p>
+<pre><code>def outJoinFunction(env: ExecutionEnvironment): Unit = {
+  val info1 = ListBuffer[(Int, String)]() // 编号 名字
+  info1.append((1, &quot;Thpffcj1&quot;))
+  info1.append((2, &quot;Thpffcj2&quot;))
+  info1.append((3, &quot;Thpffcj3&quot;))
+  info1.append((4, &quot;Thpffcj4&quot;))
+
+  val info2 = ListBuffer[(Int, String)]() // 编号 城市
+  info2.append((1, &quot;南京&quot;))
+  info2.append((2, &quot;北京&quot;))
+  info2.append((3, &quot;上海&quot;))
+  info2.append((5, &quot;成都&quot;))
+
+  val data1 = env.fromCollection(info1)
+  val data2 = env.fromCollection(info2)
+
+  data1.leftOuterJoin(data2).where(0).equalTo(0).apply((first, second) =&gt; {
+    if (second == null) {
+      (first._1, first._2, &quot;-&quot;)
+    } else {
+      (first._1, first._2, second._2)
+    }
+  }).print()
+}
+</code></pre><p><strong>cross</strong></p>
+<p>Builds the Cartesian product (cross product) of two inputs, creating all pairs of elements. </p>
+<pre><code>def crossFunction(env: ExecutionEnvironment): Unit = {
+  val info1 = ListBuffer[String]()
+  info1.append(&quot;曼联&quot;)
+  info1.append(&quot;曼城&quot;)
+
+  val info2 = ListBuffer[String]()
+  info2.append(&quot;3&quot;)
+  info2.append(&quot;1&quot;)
+  info2.append(&quot;0&quot;)
+
+  val data1 = env.fromCollection(info1)
+  val data2 = env.fromCollection(info2)
+
+  data1.cross(data2).print()
+}
+</code></pre><h3 id="4-Sink"><a href="#4-Sink" class="headerlink" title="4. Sink"></a>4. Sink</h3><p>Data sinks consume DataSets and are used to store or return them. Data sink operations are described using an OutputFormat.</p>
+<pre><code>object DataSetSinkApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    val data = 1.to(10)
+    val text = env.fromCollection(data)
+
+    val filePath = &quot;file:///Users/thpffcj/Public/data/sink-out&quot;
+
+    text.writeAsText(filePath, WriteMode.OVERWRITE).setParallelism(2)
+
+    env.execute(&quot;DataSetSinkApp&quot;)
+  }
+}
+</code></pre><h3 id="5-计数器"><a href="#5-计数器" class="headerlink" title="5. 计数器"></a>5. 计数器</h3><pre><code>object CounterApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    val data = env.fromElements(&quot;hadoop&quot;, &quot;spark&quot;, &quot;flink&quot;, &quot;pyspark&quot;, &quot;storm&quot;)
+
+    val info = data.map(new RichMapFunction[String, String] {
+
+      // step1：定义计数器
+      var counter = new LongCounter()
+
+      override def open(parameters: Configuration): Unit = {
+        // step2：注册计数器
+        getRuntimeContext.addAccumulator(&quot;ele-counts-scala&quot;, counter)
+      }
+
+      override def map(value: String): String = {
+        counter.add(1)
+        value
+      }
+    }).setParallelism(5)
+
+    val filePath = &quot;file:///Users/thpffcj/Public/data/sink-scala-count-out&quot;
+    info.writeAsText(filePath, WriteMode.OVERWRITE)
+    val jobResult = env.execute(&quot;CounterApp&quot;)
+    // step3：获取计数器
+    val num = jobResult.getAccumulatorResult[Long](&quot;ele-counts-scala&quot;)
+
+    println(&quot;num: &quot; + num)
+  }
+}
+</code></pre><h3 id="6-分布式缓存"><a href="#6-分布式缓存" class="headerlink" title="6. 分布式缓存"></a>6. 分布式缓存</h3><p>Flink offers a distributed cache, similar to Apache Hadoop, to make files locally accessible to parallel instances of user functions. </p>
+<pre><code>object DistributedCacheApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    val filePath = &quot;file:///Users/thpffcj/Public/data/hello.txt&quot;
+
+    // step1：注册一个本地/HDFS文件
+    env.registerCachedFile(filePath, &quot;scala-dc&quot;)
+
+    val data = env.fromElements(&quot;hadoop&quot;, &quot;spark&quot;, &quot;flink&quot;, &quot;pyspark&quot;, &quot;storm&quot;)
+
+    data.map(new RichMapFunction[String, String] {
+
+      // step2：在open方法中获取到分布式缓存的内容即可
+      override def open(parameters: Configuration): Unit = {
+        val dcFile = getRuntimeContext.getDistributedCache().getFile(&quot;scala-dc&quot;)
+        val lines = FileUtils.readLines(dcFile)
+
+        /**
+          * 此时会出现一个异常，Java集合和Scala集合不兼容的问题
+          */
+        import scala.collection.JavaConverters._
+        for (ele &lt;- lines.asScala) {
+          println(ele)
+        }
+      }
+
+      override def map(value: String): String = {
+        value
+      }
+    }).print()
+  }
+}
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/07/04/Big-Data-Flink-Getting-Started-3/" style="float: left;">
+        ← Big-Data-Flink-Getting-Started-3
     </a>
     
     

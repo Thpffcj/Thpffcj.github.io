@@ -204,6 +204,156 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">软件工程与计算 1</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-12-12T00:04:40.000Z" itemprop="datePublished">
+          2018-12-12
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        项目管理基础1. 项目和项目管理项目
+
+项目是具有下列特征的一系列活动和任务
+具有一个明确的目标
+有限定的开始和结束日期
+有成本限制
+消耗人力和非人力资源
+多工种合作
+
+
+
+项目管理的目标
+
+项目管理的目标是做到以下方面
+在限定时间内
+在一定的成本内
+在要求的质量水平上
+高效使用资源
+获得客户认可
+
+
+
+过程组与活动
+
+过程组
+项目启动，项目计划，项目执行，项目跟踪 与控制和项目收尾
+
+
+活动
+计划制定，团队管理，成本控制，质量保障，度
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/12/12/Software-Engineering-and-Computing-Course-1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/05/28/Java-Concurrent-Programming-5/">高并发之扩容思路</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
+          2018-05-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 高并发之扩容思路
+垂直扩容(纵向扩展)：提高系统部件能力
+水平扩容(横向扩展)：增加更多系统成员来实现
+
+扩容 - 数据库
+
+读操作扩展：memcache, redis, CDN等缓存
+写操作扩展：Cassandra, Hbase等
+
+
+
+2. 高并发之缓存思路
+1. 缓存特征，场景及组件介绍缓存特征
+
+命中率：命中数 / (命中数 + 没有命中数)
+最大元素(空间)
+清空策略：FIFO, LFU, LRU, 过期时间, 随机等
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/28/Java-Concurrent-Programming-5/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/05/25/Python-Machine-Learning-9/">决策树</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-25T02:50:18.000Z" itemprop="datePublished">
+          2018-05-25
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 决策树1. 什么是决策树
+
+直接使用决策树进行具体分类
+使用鸢尾花数据集
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import datasets
+
+iris = datasets.load_iris()
+X = iris.data[:,2:]
+y = iris.target
+
+plt.scatter(X[y==0,0], X[y==0,1]
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/25/Python-Machine-Learning-9/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/05/22/Python-Machine-Learning-8/">支撑向量机 SVM</a></h3>
                     <span>
                         <span class="post-meta">
@@ -537,140 +687,6 @@ x = np.random.uniform(-3, 3, size=100)
                     
                     <p class="pull-right readMore">
                         <a href="/2018/05/06/Big-Data-SparkSQL-5/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/04/System-Learning-Docker-1/">Docker简介</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-04T05:24:43.000Z" itemprop="datePublished">
-          2018-05-04
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 容器技术和Docker简介1. Docker导学Docker能干什么
-
-简化配置
-代码流水线管理
-提高开发效率
-隔离应用
-整合服务器
-调试能力
-多租户
-快速部署
-
-2. 容器技术概述虚拟化的优点
-
-资源池 - 一个物理机的资源分配到了不同的虚拟机里
-很容易扩展 - 加物理机器 or 加虚拟机
-很容易云化 - 亚马逊AWS，阿里云等
-
-虚拟化的局限性
-
-每一个虚拟机都是一个完整的操作系统，要给其分配资源，当虚拟机数量增多时，操作系统
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/04/System-Learning-Docker-1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/03/Big-Data-SparkSQL-4/">DateFrame & Dataset</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-03T01:36:43.000Z" itemprop="datePublished">
-          2018-05-03
-      </time>
-    
-    
-    | 
-    <a href="/tags/大数据/">大数据</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. DateFrame 概述1. DateFrame 产生背景
-DataFrame它不是Spark SQL提出的，而是早起在R，Pandas语言就已经有了的
-Spark RDD API vs MapReduce API
-R/Pandas
-
-2. DateFrame 概述官网：Spark SQL, DataFrames and Datasets Guide
-
-A Dataset is a distributed collection o
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/03/Big-Data-SparkSQL-4/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/05/02/Java-Concurrent-Programming-4/">线程调度-线程池</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-05-02T15:01:54.000Z" itemprop="datePublished">
-          2018-05-02
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 线程池
-new Thread 弊端
-每次 new Thread 新建对象，性能差
-线程缺乏统一管理，可能无限制的新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM
-缺少更多功能，如更多执行，定期执行，线程中断
-
-
-
-1. 线程池的好处
-重用存在的线程，减少对象创建，消亡的开销，性能佳
-可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞
-提供定时执行，定期执行，单线程，并发数控制等功能
-
-2. 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/05/02/Java-Concurrent-Programming-4/">Read More...</a>
                     </p>
                     
                 </div>
