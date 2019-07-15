@@ -181,7 +181,436 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<h2 id="1-Flink项目实战"><a href="#1-Flink项目实战" class="headerlink" title="1. Flink项目实战"></a>1. Flink项目实战</h2><h3 id="1-项目背景"><a href="#1-项目背景" class="headerlink" title="1. 项目背景"></a>1. 项目背景</h3><p><strong>CDN</strong></p>
+<ul>
+<li>根据业务日志，按照需求，进行功能的实现</li>
+<li>接入的数据类型就是日志<ul>
+<li>离线：Flume =&gt; HDFS</li>
+<li>实时：Kafka =&gt; 流处理引擎 =&gt; ES =&gt; Kibana</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-功能描述"><a href="#2-功能描述" class="headerlink" title="2. 功能描述"></a>2. 功能描述</h3><ul>
+<li>统计一分钟内每个域名访问产生的流量<ul>
+<li>Flink接收Kafka的数据进行处理</li>
+</ul>
+</li>
+<li>统计一分钟内每个用户产生的流量<ul>
+<li>域名和用户是有对应关系的</li>
+<li>Flink接收Kafka的数据 + Flink读取域名和用户的配置数据 进行处理</li>
+</ul>
+</li>
+<li>数据来源：Mock</li>
+</ul>
+<h3 id="3-项目架构"><a href="#3-项目架构" class="headerlink" title="3. 项目架构"></a>3. 项目架构</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/项目架构.png" alt=""></p>
+<h3 id="4-功能一实现"><a href="#4-功能一实现" class="headerlink" title="4. 功能一实现"></a>4. 功能一实现</h3><ul>
+<li>Mock数据：务必掌握的<ul>
+<li>数据敏感</li>
+<li>多团队协作，你依赖了其他团队提供的服务或者接口</li>
+<li>通过Mock的方式往kafka的broker里面发送数据</li>
+</ul>
+</li>
+</ul>
+<p><strong>kafka生产者代码</strong></p>
+<ul>
+<li>启动ZK</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ ./zkServer.sh start
+</code></pre><ul>
+<li>启动kafka</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ ./kafka-server-start.sh -daemon ~/Public/software/kafka_2.12-2.2.0/config/server.properties 
+
+Thpffc:bin thpffcj$ ./kafka-topics.sh --list --zookeeper localhost:2181
+__consumer_offsets
+merchants-template
+test
+</code></pre><ul>
+<li>编写kafka producer</li>
+</ul>
+<pre><code>public class MyKafkaProducer {
+
+    public static void main(String[] args) throws Exception {
+
+        Properties properties = new Properties();
+        properties.setProperty(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
+        properties.setProperty(&quot;key.serializer&quot;, StringSerializer.class.getName());
+        properties.setProperty(&quot;value.serializer&quot;, StringSerializer.class.getName());
+
+        KafkaProducer&lt;String, String&gt; producer = new KafkaProducer&lt;String, String&gt;(properties);
+
+        String topic = &quot;test&quot;;
+
+        // 通过死循环一直不停的往Kafka的Broker里面生产数据
+        while (true) {
+
+            StringBuilder builder = new StringBuilder();
+
+            builder.append(&quot;aliyun&quot;).append(&quot;\t&quot;)
+                    .append(&quot;CN&quot;).append(&quot;\t&quot;)
+                    .append(getLevels()).append(&quot;\t&quot;)
+                    .append(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;).format(new Date())).append(&quot;\t&quot;)
+                    .append(getIps()).append(&quot;\t&quot;)
+                    .append(getDomains()).append(&quot;\t&quot;)
+                    .append(getTraffic()).append(&quot;\t&quot;);
+
+            System.out.println(builder.toString());
+            producer.send(new ProducerRecord&lt;String, String&gt;(topic, builder.toString()));
+
+            Thread.sleep(2000);
+        }
+    }
+
+    private static long getTraffic() {
+        return new Random().nextInt(10000);
+    }
+
+    private static String getDomains() {
+        String[] domains = new String[] {
+                &quot;v1.go2yd.com&quot;,
+                &quot;v2.go2yd.com&quot;,
+                &quot;v3.go2yd.com&quot;,
+                &quot;v4.go2yd.com&quot;,
+                &quot;vmi.go2yd.com&quot;
+        };
+        return domains[new Random().nextInt(domains.length)];
+    }
+
+    private static String getIps() {
+        String[] ips = new String[] {
+                &quot;223.104.18.110&quot;,
+                &quot;113.101.75.194&quot;,
+                &quot;27.17.127.135&quot;,
+                &quot;183.225.139.16&quot;,
+                &quot;112.1.66.34&quot;,
+                &quot;175.148.211.190&quot;,
+                &quot;183.227.58.21&quot;,
+                &quot;59.83.198.84&quot;,
+                &quot;117.28.38.28&quot;,
+                &quot;117.59.39.169&quot;
+        };
+        return ips[new Random().nextInt(ips.length)];
+    }
+
+    // 生产level数据
+    public static String getLevels() {
+        String[] levels = new String[]{&quot;M&quot;, &quot;E&quot;};
+        return levels[new Random().nextInt(levels.length)];
+    }
+}
+</code></pre><ul>
+<li>打开kafka consumer查看是否能接收到数据</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test
+</code></pre><p><strong>使用flink消费kafka产生的数据</strong></p>
+<pre><code>object LogAnalysis {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    val topic = &quot;test&quot;
+    val properties = new Properties()
+    properties.setProperty(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;)
+    properties.setProperty(&quot;group.id&quot;, &quot;test-group&quot;)
+
+    val consumer = new FlinkKafkaConsumer[String](topic, new SimpleStringSchema(), properties)
+
+    // 接收kafka数据
+    val data = env.addSource(consumer)
+
+    data.print().setParallelism(1)
+
+    env.execute(&quot;LogAnalysis&quot;)
+  }
+}
+</code></pre><p><strong>使用flink完成日志清洗功能</strong></p>
+<pre><code>// 在生产上记录日志建议采用这种方式
+val logger = LoggerFactory.getLogger(&quot;LogAnalysis&quot;)
+
+// 接收kafka数据
+val data = env.addSource(consumer)
+
+val logData = data.map(x =&gt; {
+  val splits = x.split(&quot;\t&quot;)
+  val level = splits(2)
+  val timeStr = splits(3)
+  var time = 0l
+
+  try {
+    val sourceFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;)
+    time = sourceFormat.parse(timeStr).getTime
+  } catch {
+    case e: Exception =&gt; {
+      logger.error(s&quot;time parse error: $timeStr&quot;, e.getMessage)
+    }
+  }
+
+  val domain = splits(5)
+  val traffic = splits(6).toLong
+
+  (level, time, domain, traffic)
+})
+</code></pre><p><strong>清洗过程中添加业务逻辑条件的过滤</strong></p>
+<ul>
+<li>对于我们的业务来说，我们只需要统计level=E的即可，对于level非E的，不作为我们业务指标的统计范畴</li>
+<li>我们还需要去除时间不符合规则的数据</li>
+<li>在生产上进行业务处理的时候，一定要考虑处理的健壮性以及你数据的准确性，脏数据或者是不符合业务规则的数据是需要全部过滤掉之后，再进行业务逻辑的处理</li>
+<li>数据清洗：就是按照我们的业务规则把原始输入的数据进行一定业务规则的处理使得满足我们的业务需求为准</li>
+</ul>
+<pre><code>val logData = data.map(x =&gt; {
+
+  ...
+  (level, time, domain, traffic)
+}).filter(_._2 != 0).filter(_._1 == &quot;E&quot;)
+    .map(x =&gt; {
+      (x._2, x._3, x._4)  // 1 level(抛弃) 2 time 3 domain 4 traffic
+    })
+</code></pre><p><strong>Flink中Watermark的定义及使用</strong></p>
+<pre><code>env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
+
+logData.assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks[(Long, String, String)] {
+
+  val maxOutOfOrderness = 10000L
+
+  var currentMaxTimestamp: Long = _
+
+  override def getCurrentWatermark: Watermark = {
+    new Watermark(currentMaxTimestamp - maxOutOfOrderness)
+  }
+
+  override def extractTimestamp(element: (Long, String, String), previousElementTimestamp: Long): Long = {
+    val timestamp = element._1
+    currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp)
+    timestamp
+  }
+})
+</code></pre><ul>
+<li>代码中的extractTimestamp方法是从数据本身中提取EventTime</li>
+<li>getCurrentWatermar方法是获取当前水位线，利用currentMaxTimestamp - maxOutOfOrderness</li>
+<li>这里的maxOutOfOrderness表示是允许数据的最大乱序时间</li>
+</ul>
+<p><strong>WindowFunction业务逻辑的实现</strong></p>
+<pre><code>val resultData = logData.assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks[(Long, String, Long)] {
+
+  ...
+
+}).keyBy(1)  // 此处是按照域名进行KeyBy的
+    .window(TumblingEventTimeWindows.of(Time.seconds(60)))
+    .apply(new WindowFunction[(Long, String, Long), (String, String, Long), Tuple, TimeWindow] {
+      override def apply(key: Tuple, window: TimeWindow, input: Iterable[(Long, String, Long)], out: Collector[(String, String, Long)]): Unit = {
+
+        val domain = key.getField(0).toString
+        var sum = 0l
+
+        val iterator = input.iterator
+        var inputTime = 0l
+        while (iterator.hasNext) {
+          val next = iterator.next()
+          sum += next._3  // traffic求和
+          inputTime = next._1
+        }
+
+        val resultFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm&quot;)
+        val time = resultFormat.format(inputTime)
+
+        /**
+          * 第一个参数：这一分钟的时间 2019-09-09 20:20
+          * 第二个参数：域名
+          * 第三个参数：traffic的和
+          */
+        out.collect((time, domain, sum))
+      }
+    })
+</code></pre><p><strong>ES部署</strong></p>
+<ul>
+<li>下载解压</li>
+<li>修改配置文件elasticsearch.yml</li>
+</ul>
+<pre><code># Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+</code></pre><ul>
+<li>启动</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ ./elasticsearch -d
+</code></pre><ul>
+<li>我们可以访问9200端口查看基本信息</li>
+</ul>
+<p><strong>Kibana部署</strong></p>
+<ul>
+<li>下载解压</li>
+<li>启动</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ ./kibana
+</code></pre><ul>
+<li>我们可以访问5601端口访问web界面</li>
+</ul>
+<p><strong>统计分析数据写入ES并通过Kibana展示出来</strong></p>
+<ul>
+<li>创建索引</li>
+</ul>
+<pre><code>Thpffc:bin thpffcj$ curl -XPUT &apos;http://localhost:9200/cdn&apos;
+{&quot;acknowledged&quot;:true,&quot;shards_acknowledged&quot;:true,&quot;index&quot;:&quot;cdn&quot;}Thpffc:bin thpffcj$ 
+</code></pre><ul>
+<li>设置mapping</li>
+</ul>
+<pre><code>curl -H &quot;Content-Type: application/json&quot; -XPOST &apos;http://localhost:9200/cdn/traffic/_mapping?pretty&apos; -d &apos;
+{
+    &quot;traffic&quot;:{
+        &quot;properties&quot;:{
+            &quot;domain&quot;:{&quot;type&quot;:&quot;keyword&quot;},
+            &quot;traffics&quot;:{&quot;type&quot;:&quot;long&quot;},
+            &quot;time&quot;:{&quot;type&quot;:&quot;date&quot;,&quot;format&quot;:&quot;yyyy-MM-dd HH:mm&quot;}
+        }
+    }
+}
+&apos;
+</code></pre><ul>
+<li>开发代码，flink官网就有模板代码</li>
+</ul>
+<pre><code>// ES部分
+val httpHosts = new java.util.ArrayList[HttpHost]
+httpHosts.add(new HttpHost(&quot;127.0.0.1&quot;, 9200, &quot;http&quot;))
+
+val esSinkBuilder = new ElasticsearchSink.Builder[(String, String, Long)](
+  httpHosts,
+  new ElasticsearchSinkFunction[(String, String, Long)] {
+    def createIndexRequest(element: (String, String, Long)): IndexRequest = {
+      val json = new java.util.HashMap[String, Any]
+      json.put(&quot;time&quot;, element._1)
+      json.put(&quot;domain&quot;, element._2)
+      json.put(&quot;traffics&quot;, element._3)
+
+      val id = element._1 + &quot;-&quot; + element._2
+
+      return Requests.indexRequest()
+        .index(&quot;cdn&quot;)
+        .`type`(&quot;traffic&quot;)
+        .id(id)
+        .source(json)
+    }
+
+    override def process(t: (String, String, Long), runtimeContext: RuntimeContext, requestIndexer: RequestIndexer): Unit = {
+      requestIndexer.add(createIndexRequest(t))
+    }
+  }
+)
+
+// configuration for the bulk requests; this instructs the sink to emit after every element, otherwise they would be buffered
+esSinkBuilder.setBulkFlushMaxActions(1)
+
+// finally, build and add the sink to the job&apos;s pipeline
+resultData.addSink(esSinkBuilder.build)
+</code></pre><p><strong>通过Kibana图形化展示ES中存储的结果</strong></p>
+<ul>
+<li>去Kinana中创建cdn的index pattern，接着就可以通过图形界面创建各种图表，非常方便</li>
+</ul>
+<p>！<a href="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/表格展示.png" target="_blank" rel="noopener"></a></p>
+<h3 id="5-功能二实现"><a href="#5-功能二实现" class="headerlink" title="5. 功能二实现"></a>5. 功能二实现</h3><ul>
+<li>需求：CDN业务<ul>
+<li>userid对应多个域名</li>
+<li>用户id和域名的映射关系：从日志里能拿到domain，还得从另外一个表(MySQL)里面去获取userid和domain的映射关系</li>
+</ul>
+</li>
+</ul>
+<pre><code>CREATE TABLE user_domain_config(
+id int unsigned auto_increment,
+user_id varchar(40) not null,
+domain varchar(40) not null,
+primary key(id)
+);
+
+insert into user_domain_config(user_id, domain) values(&apos;8000000&apos;, &apos;v1.go2yd.com&apos;);
+insert into user_domain_config(user_id, domain) values(&apos;8000000&apos;, &apos;v2.go2yd.com&apos;);
+insert into user_domain_config(user_id, domain) values(&apos;8000000&apos;, &apos;v3.go2yd.com&apos;);
+insert into user_domain_config(user_id, domain) values(&apos;8000000&apos;, &apos;v4.go2yd.com&apos;);
+insert into user_domain_config(user_id, domain) values(&apos;8000000&apos;, &apos;vmi.go2yd.com&apos;);
+</code></pre><ul>
+<li>在做实时数据清洗的时候，不仅需要处理raw日志，还需要关联MySQL表里的数据</li>
+<li>自定义一个Flink去读MySQL数据的数据源，然后把两个Stream关联起来</li>
+</ul>
+<p><strong>自定义MySQL数据源</strong></p>
+<pre><code>class MyMySQLSource extends RichParallelSourceFunction[mutable.HashMap[String, String]] {
+
+  var connection:Connection = null
+  var ps:PreparedStatement = null
+
+  // open：建立连接
+  override def open(parameters: Configuration): Unit = {
+
+    val url = &quot;jdbc:mysql://localhost:3306/test&quot;
+    val user = &quot;root&quot;
+    val password = &quot;00000000&quot;
+    connection = DriverManager.getConnection(url, user, password)
+
+    val sql = &quot;select user_id, domain from user_domain_config&quot;
+    ps = connection.prepareStatement(sql)
+  }
+
+  // 释放资源
+  override def close(): Unit = {
+    if (ps != null) {
+      ps.close()
+    }
+
+    if (connection != null) {
+      connection.close()
+    }
+  }
+
+  /**
+    * 此处是代码的关键：要从MySQL表中把数据读取出来转成Map进行数据的封装
+    * @param ctx
+    */
+  override def run(ctx: SourceFunction.SourceContext[mutable.HashMap[String, String]]): Unit = {
+
+    val resultMap = new mutable.HashMap[String, String]()
+
+    val result = ps.executeQuery()
+    while (result.next()) {
+      val userId = result.getString(1)
+      val domain = result.getString(2)
+      resultMap.put(domain, userId)
+    }
+    ctx.collect(resultMap)
+  }
+
+  override def cancel(): Unit = {}
+}
+</code></pre><p><strong>两个流关联数据清洗</strong></p>
+<pre><code>val mysqlData = env.addSource(new MyMySQLSource)
+
+val connectData = logData.connect(mysqlData)
+    .flatMap(new CoFlatMapFunction[(Long, String, Long), mutable.HashMap[String, String], String] {
+
+      var userDomainMap = new mutable.HashMap[String, String]()
+
+      // log
+      override def flatMap1(value: (Long, String, Long), out: Collector[String]): Unit = {
+        val domain = value._2
+        val userId = userDomainMap.getOrElse(domain, &quot;&quot;)
+
+        out.collect(value._1 + &quot;\t&quot; + value._2 + &quot;\t&quot; + value._3 + &quot;\t&quot; + userId)
+      }
+
+      // MySQL
+      override def flatMap2(value: mutable.HashMap[String, String], out: Collector[String]): Unit = {
+        userDomainMap = value
+      }
+    })
+
+connectData.print().setParallelism(1)
+</code></pre><h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>Flink进行数据的清洗</p>
+<ul>
+<li>读取Kafka的数据</li>
+<li>读取MySQL的数据</li>
+<li>connect</li>
+<li>业务逻辑的处理分析：水印 WindowFunction</li>
+<li>ES 注意数据类型 &lt;= Kibana 图形化的统计结果展示</li>
+<li>Kibana：各个环节的监控，监控图形化</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

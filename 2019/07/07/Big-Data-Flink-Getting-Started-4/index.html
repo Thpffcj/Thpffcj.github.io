@@ -208,7 +208,7 @@ object FileSystemSinkApp {
 </code></pre><h3 id="3-Apache-Kafka"><a href="#3-Apache-Kafka" class="headerlink" title="3. Apache Kafka"></a>3. Apache Kafka</h3><p><strong>Apache Kafka Connector</strong></p>
 <p>This connector provides access to event streams served by Apache Kafka.</p>
 <p><strong>Zookeeper部署</strong></p>
-<p><strong><img src="https://archive.cloudera.com/cdh5/cdh/5" alt="Index of cdh5/cdh/5/"></strong></p>
+<p><strong><a href="https://archive.cloudera.com/cdh5/cdh/5" target="_blank" rel="noopener">Index of cdh5/cdh/5/</a></strong></p>
 <ul>
 <li>下载解压，配置环境变量</li>
 <li>修改配置文件zoo.cfg</li>
@@ -298,9 +298,9 @@ test
   }
 }
 </code></pre><p><strong>Kafka Consumers Start Position Configuration</strong></p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-consumers-start-position-configuration" alt="Kafka Consumers Start Position Configuration"></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-consumers-start-position-configuration" target="_blank" rel="noopener">Kafka Consumers Start Position Configuration</a></p>
 <p><strong>Kafka Producers and Fault Tolerance</strong></p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-producers-and-fault-tolerance" alt="Kafka Producers and Fault Tolerance"></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/kafka.html#kafka-producers-and-fault-tolerance" target="_blank" rel="noopener">Kafka Producers and Fault Tolerance</a></p>
 <p><strong>Kafka Consumers and Fault Toleranc</strong></p>
 <p>With Flink’s checkpointing enabled, the Flink Kafka Consumer will consume records from a topic and periodically checkpoint all its Kafka offsets, together with the state of other operations, in a consistent manner. </p>
 <pre><code>// checkpoint常用设置参数
@@ -320,7 +320,7 @@ env.getCheckpointConfig.setMaxConcurrentCheckpoints(1)
 </ul>
 <pre><code>Thpffcj:software thpffcj$ tar -zxvf flink-release-1.8.0.tar.gz 
 </code></pre><ul>
-<li>编译：<strong><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/flinkDev/building.html#building-flink-from-source" alt="Building Flink from Source"></strong></li>
+<li>编译：<strong><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/flinkDev/building.html#building-flink-from-source" target="_blank" rel="noopener">Building Flink from Source</a></strong></li>
 <li>第一次编译是需要花费很长时间的，因为需要去中央仓库下载flink源码中所有的依赖包，可能由于网络的问题，我编译了3个小时</li>
 </ul>
 <pre><code>Thpffcj:flink-release-1.8.0 thpffcj$ mvn clean install -DskipTests -Dfast -Pvendor-repos -Dhadoop.version=2.6.0-cdh5.7.0
@@ -354,7 +354,7 @@ b : 2
 <pre><code>Thpffcj:flink-1.8.0 thpffcj$ ./bin/stop-cluster.sh
 Stopping taskexecutor daemon (pid: 12890) on host Thpffcj.local.
 Stopping standalonesession daemon (pid: 12475) on host Thpffcj.local.
-</code></pre><h3 id="3-Standalone集群模式"><a href="#3-Standalone集群模式" class="headerlink" title="3. Standalone集群模式"></a>3. Standalone集群模式</h3><p><strong><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html#configuring-flink" alt="Configuring Flink"></strong></p>
+</code></pre><h3 id="3-Standalone集群模式"><a href="#3-Standalone集群模式" class="headerlink" title="3. Standalone集群模式"></a>3. Standalone集群模式</h3><p><strong><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html#configuring-flink" target="_blank" rel="noopener">Configuring Flink</a></strong></p>
 <p><strong>配置文件</strong></p>
 <ul>
 <li>flink-conf.yaml<ul>
@@ -383,7 +383,7 @@ Stopping standalonesession daemon (pid: 12475) on host Thpffcj.local.
 </ul>
 <p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/flink-on-yarn两种方式.png" alt=""></p>
 <p><strong>Flink与YARN如何交互</strong></p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/yarn_setup.html#background--internals" alt="Background / Internals"></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/yarn_setup.html#background--internals" target="_blank" rel="noopener">Background / Internals</a></p>
 <p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink与YARN的交互.png" alt=""></p>
 <p><strong>第一种方式</strong></p>
 <ul>
@@ -417,7 +417,7 @@ Thpffc:data thpffcj$ hadoop fs -put LICENSE-2.0.txt /
 <li>Run a single Flink job on YARN</li>
 </ul>
 <pre><code>Thpffc:flink-1.8.0 thpffcj$ ./bin/flink run -m yarn-cluster ./examples/batch/WordCount.jar
-</code></pre><h3 id="5-常用属性"><a href="#5-常用属性" class="headerlink" title="5. 常用属性"></a>5. 常用属性</h3><p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/config.html#configuration" alt="Configuration"></p>
+</code></pre><h3 id="5-常用属性"><a href="#5-常用属性" class="headerlink" title="5. 常用属性"></a>5. 常用属性</h3><p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/config.html#configuration" target="_blank" rel="noopener">Configuration</a></p>
 <h3 id="6-Flink-scala-shell"><a href="#6-Flink-scala-shell" class="headerlink" title="6. Flink scala shell"></a>6. Flink scala shell</h3><pre><code>Thpffc:bin thpffcj$ ./start-scala-shell.sh local
 </code></pre><ul>
 <li>遇到报错</li>
@@ -508,7 +508,7 @@ Starting historyserver daemon on host Thpffcj.local.
 </ul>
 <p><strong>Monitoring REST API</strong></p>
 <p>Flink has a monitoring API that can be used to query status and statistics of running jobs, as well as recent completed jobs.</p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/monitoring/rest_api.html#monitoring-rest-api" alt="Monitoring REST API"></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/monitoring/rest_api.html#monitoring-rest-api" target="_blank" rel="noopener">Monitoring REST API</a></p>
 <h3 id="3-常用优化"><a href="#3-常用优化" class="headerlink" title="3. 常用优化"></a>3. 常用优化</h3><ul>
 <li>资源</li>
 <li>并行度<ul>
@@ -530,7 +530,7 @@ Starting historyserver daemon on host Thpffcj.local.
 </ul>
 </li>
 </ul>
-<p><strong><img src="https://dzone.com/articles/four-ways-to-optimize-your-flink-applications" alt="4 Ways to Optimize Your Flink Applications"></strong></p>
+<p><strong><a href="https://dzone.com/articles/four-ways-to-optimize-your-flink-applications" target="_blank" rel="noopener">4 Ways to Optimize Your Flink Applications</a></strong></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
