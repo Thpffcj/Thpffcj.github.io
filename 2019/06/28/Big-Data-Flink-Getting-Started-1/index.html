@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>新一代大数据计算引擎 Flink从入门到实战 | Thpffcj的树洞</title>
+  <title>初识Flink | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,11 +177,23 @@
       </time>
     
 </span>
-                <h1>新一代大数据计算引擎 Flink从入门到实战</h1>
+                <h1>初识Flink</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-初识Flink"><a href="#1-初识Flink" class="headerlink" title="1. 初识Flink"></a>1. 初识Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><p><strong>Flink是什么</strong></p>
+      		<ul>
+<li>下面是这段时间系统了解Flink的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2019/06/28/Big-Data-Flink-Getting-Started-1/" target="_blank" rel="noopener">初识Flink</a></li>
+<li><a href="http://www.thpffcj.com/2019/06/29/Big-Data-Flink-Getting-Started-2" target="_blank" rel="noopener">DataSet &amp; DataStream API 编程</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/04/Big-Data-Flink-Getting-Started-3" target="_blank" rel="noopener">Flink Table API 和 Time 操作</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/07/Big-Data-Flink-Getting-Started-4" target="_blank" rel="noopener">Filnk Connectors 和部署</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/10/Big-Data-Flink-Getting-Started-5" target="_blank" rel="noopener">Flink项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>这个假期准备了解一下很多工地都在使用的大数据处理框架Flink，和以前的学习一样，我们主要通过官网学习基本知识，然后使用一些基本的例子来便于理解。</p>
+<hr>
+<h2 id="1-初识Flink"><a href="#1-初识Flink" class="headerlink" title="1. 初识Flink"></a>1. 初识Flink</h2><h3 id="1-Flink概述"><a href="#1-Flink概述" class="headerlink" title="1. Flink概述"></a>1. Flink概述</h3><p><strong>Flink是什么</strong></p>
 <ul>
 <li><a href="https://flink.apache.org/" target="_blank" rel="noopener">Apache Flink - Stateful Computations over Data Streams</a></li>
 <li>Apache Flink is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. </li>
@@ -421,14 +433,114 @@ object StreamingWCScalaApp {
     env.execute(&quot;StreamingWCScalaApp&quot;)
   }
 }
-</code></pre>
+</code></pre><p><br></p>
+<hr>
+<h2 id="3-Flink编程模型及核心概念"><a href="#3-Flink编程模型及核心概念" class="headerlink" title="3. Flink编程模型及核心概念"></a>3. Flink编程模型及核心概念</h2><h3 id="1-核心概念概述"><a href="#1-核心概念概述" class="headerlink" title="1. 核心概念概述"></a>1. 核心概念概述</h3><ul>
+<li>Flink programs are regular programs that implement transformations on distributed collections (e.g., filtering, mapping, updating state, joining, grouping, defining windows, aggregating). </li>
+<li>Collections are initially created from sources (e.g., by reading from files, kafka topics, or from local, in-memory collections). </li>
+<li>Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example, the command line terminal). </li>
+</ul>
+<p><strong>大数据处理的流程</strong></p>
+<ul>
+<li>MapReduce：input -&gt; map(reduce) -&gt; output</li>
+<li>Storm：input -&gt; Spout/Bolt -&gt; output</li>
+<li>Spark：input -&gt; transformation/action -&gt; output</li>
+<li>Flink：input -&gt; transformation/sink -&gt; output</li>
+</ul>
+<h3 id="2-DataSet-amp-DataStream"><a href="#2-DataSet-amp-DataStream" class="headerlink" title="2. DataSet &amp; DataStream"></a>2. DataSet &amp; DataStream</h3><ul>
+<li>Flink has the special classes DataSet and DataStream to represent data in a program. </li>
+<li>You can think of them as immutable collections of data that can contain duplicates. </li>
+<li>In the case of DataSet the data is finite while for a DataStream the number of elements can be unbounded.</li>
+<li>immutable</li>
+<li>批处理：DataSet</li>
+<li>流处理：DataStream</li>
+</ul>
+<h3 id="3-Flink编程模型"><a href="#3-Flink编程模型" class="headerlink" title="3. Flink编程模型"></a>3. Flink编程模型</h3><ul>
+<li><strong><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html#anatomy-of-a-flink-program" target="_blank" rel="noopener">Anatomy of a Flink Program</a></strong></li>
+</ul>
+<p>Flink programs look like regular programs that transform collections of data. Each program consists of the same basic parts:</p>
+<ul>
+<li>Obtain an execution environment</li>
+<li>Load/create the initial data</li>
+<li>Specify transformations on this data</li>
+<li>Specify where to put the results of your computations</li>
+<li>Trigger the program execution</li>
+</ul>
+<h3 id="4-延迟执行"><a href="#4-延迟执行" class="headerlink" title="4. 延迟执行"></a>4. 延迟执行</h3><ul>
+<li>All Flink programs are executed lazily</li>
+<li>When the program’s main method is executed, the data loading and transformations do not happen directly. </li>
+<li>Rather, each operation is created and added to the program’s plan.</li>
+<li>The operations are actually executed when the execution is explicitly triggered by an execute() call on the execution environment.</li>
+<li>The lazy evaluation lets you construct sophisticated programs that Flink executes as one holistically planned unit.</li>
+</ul>
+<h3 id="5-编程如何指定Key"><a href="#5-编程如何指定Key" class="headerlink" title="5. 编程如何指定Key"></a>5. 编程如何指定Key</h3><ul>
+<li>Some transformations (join, coGroup, keyBy, groupBy) require that a key be defined on a collection of elements. </li>
+<li>Other transformations (Reduce, GroupReduce, Aggregate, Windows) allow data being grouped on a key before they are applied.</li>
+</ul>
+<p><strong>Define keys for Tuple</strong></p>
+<pre><code>DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
+KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0)
+
+DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
+KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0,1)
+</code></pre><p><strong>Define keys using Field Expressions</strong></p>
+<ul>
+<li>Java</li>
+</ul>
+<pre><code>// some ordinary POJO (Plain old Java Object)
+public class WC {
+  public String word;
+  public int count;
+}
+DataStream&lt;WC&gt; words = // [...]
+DataStream&lt;WC&gt; wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/);
+</code></pre><ul>
+<li>Scala</li>
+</ul>
+<pre><code>// or, as a case class, which is less typing
+case class WC(word: String, count: Int)
+val words: DataStream[WC] = // [...]
+val wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/)
+</code></pre><p><strong>Define keys using Key Selector Functions</strong></p>
+<pre><code>// some ordinary POJO
+public class WC {public String word; public int count;}
+DataStream&lt;WC&gt; words = // [...]
+KeyedStream&lt;WC&gt; keyed = words
+  .keyBy(new KeySelector&lt;WC, String&gt;() {
+     public String getKey(WC wc) { return wc.word; }
+   });
+</code></pre><h3 id="6-编程如何指定转换函数"><a href="#6-编程如何指定转换函数" class="headerlink" title="6. 编程如何指定转换函数"></a>6. 编程如何指定转换函数</h3><ul>
+<li>Most transformations require user-defined functions. This section lists different ways of how they can be specified</li>
+</ul>
+<p><strong>Implementing an interface</strong></p>
+<pre><code>class MyMapFunction implements MapFunction&lt;String, Integer&gt; {
+  public Integer map(String value) { return Integer.parseInt(value); }
+};
+data.map(new MyMapFunction());
+</code></pre><p><strong>Anonymous classes</strong></p>
+<pre><code>data.map(new MapFunction&lt;String, Integer&gt; () {
+  public Integer map(String value) { return Integer.parseInt(value); }
+});
+</code></pre><p><strong>Java 8 Lambdas</strong></p>
+<p><strong>Rich functions</strong></p>
+<h3 id="7-支持的数据类型"><a href="#7-支持的数据类型" class="headerlink" title="7. 支持的数据类型"></a>7. 支持的数据类型</h3><p>Flink places some restrictions on the type of elements that can be in a DataSet or DataStream. The reason for this is that the system analyzes the types to determine efficient execution strategies.</p>
+<ul>
+<li>Java Tuples and Scala Case Classes</li>
+<li>Java POJOs</li>
+<li>Primitive Types</li>
+<li>Regular Classes</li>
+<li>Values</li>
+<li>Hadoop Writables</li>
+<li>Special Types</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2019/06/29/Big-Data-Flink-Getting-Started-2/" style="float: left;">
-        ← 编程模型及核心概念
+        ← DataSet & DataStream API 编程
     </a>
     
     

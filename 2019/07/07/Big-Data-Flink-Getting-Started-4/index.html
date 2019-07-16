@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Big-Data-Flink-Getting-Started-4 | Thpffcj的树洞</title>
+  <title>Filnk Connectors 和部署 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,11 +177,23 @@
       </time>
     
 </span>
-                <h1>Big-Data-Flink-Getting-Started-4</h1>
+                <h1>Filnk Connectors 和部署</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-Filnk-Connectors"><a href="#1-Filnk-Connectors" class="headerlink" title="1. Filnk Connectors"></a>1. Filnk Connectors</h2><h3 id="1-Connector是什么"><a href="#1-Connector是什么" class="headerlink" title="1. Connector是什么"></a>1. Connector是什么</h3><p><strong>Bundled Connectors</strong></p>
+      		<ul>
+<li>下面是这段时间系统了解Flink的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2019/06/28/Big-Data-Flink-Getting-Started-1/" target="_blank" rel="noopener">初识Flink</a></li>
+<li><a href="http://www.thpffcj.com/2019/06/29/Big-Data-Flink-Getting-Started-2" target="_blank" rel="noopener">DataSet &amp; DataStream API 编程</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/04/Big-Data-Flink-Getting-Started-3" target="_blank" rel="noopener">Flink Table API 和 Time 操作</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/07/Big-Data-Flink-Getting-Started-4" target="_blank" rel="noopener">Filnk Connectors 和部署</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/10/Big-Data-Flink-Getting-Started-5" target="_blank" rel="noopener">Flink项目实战</a></li>
+</ul>
+</li>
+</ul>
+<p>我们使用Flink处理程序，我们可能会从第三方系统读取数据，处理之后再将结果写到第三方系统之中，Filnk Connectors就是提供Flink与第三方系统的交互。前面一直都是在进行单机开发，我们还需要掌握以下如何Flink如何部署并提交作业，最常见的部署方式是将Flink部署在YARN上。</p>
+<hr>
+<h2 id="1-Filnk-Connectors"><a href="#1-Filnk-Connectors" class="headerlink" title="1. Filnk Connectors"></a>1. Filnk Connectors</h2><h3 id="1-Connector是什么"><a href="#1-Connector是什么" class="headerlink" title="1. Connector是什么"></a>1. Connector是什么</h3><p><strong>Bundled Connectors</strong></p>
 <p>Connectors provide code for interfacing with various third-party systems. </p>
 <h3 id="2-Hadoop-FileSystem"><a href="#2-Hadoop-FileSystem" class="headerlink" title="2. Hadoop FileSystem"></a>2. Hadoop FileSystem</h3><p><strong>HDFS Connector</strong></p>
 <pre><code>This connector provides a Sink that writes partitioned files to any filesystem supported by Hadoop FileSystem. 
@@ -538,12 +550,12 @@ Starting historyserver daemon on host Thpffcj.local.
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2019/07/10/Big-Data-Flink-Getting-Started-5/" style="float: left;">
-        ← Big-Data-Flink-Getting-Started-5
+        ← Flink项目实战
     </a>
     
     
     <a class="pull-right" href="/2019/07/04/Big-Data-Flink-Getting-Started-3/">
-        Big-Data-Flink-Getting-Started-3 →
+        Flink Table API 和 Time 操作 →
     </a>
     
 </nav>

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>编程模型及核心概念 | Thpffcj的树洞</title>
+  <title>DataSet &amp; DataStream API 编程 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,111 +177,23 @@
       </time>
     
 </span>
-                <h1>编程模型及核心概念</h1>
+                <h1>DataSet & DataStream API 编程</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-Flink编程模型及核心概念"><a href="#1-Flink编程模型及核心概念" class="headerlink" title="1. Flink编程模型及核心概念"></a>1. Flink编程模型及核心概念</h2><h3 id="1-核心概念概述"><a href="#1-核心概念概述" class="headerlink" title="1. 核心概念概述"></a>1. 核心概念概述</h3><ul>
-<li>Flink programs are regular programs that implement transformations on distributed collections (e.g., filtering, mapping, updating state, joining, grouping, defining windows, aggregating). </li>
-<li>Collections are initially created from sources (e.g., by reading from files, kafka topics, or from local, in-memory collections). </li>
-<li>Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example, the command line terminal). </li>
+      		<ul>
+<li>下面是这段时间系统了解Flink的一些记录<ul>
+<li><a href="http://www.thpffcj.com/2019/06/28/Big-Data-Flink-Getting-Started-1/" target="_blank" rel="noopener">初识Flink</a></li>
+<li><a href="http://www.thpffcj.com/2019/06/29/Big-Data-Flink-Getting-Started-2" target="_blank" rel="noopener">DataSet &amp; DataStream API 编程</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/04/Big-Data-Flink-Getting-Started-3" target="_blank" rel="noopener">Flink Table API 和 Time 操作</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/07/Big-Data-Flink-Getting-Started-4" target="_blank" rel="noopener">Filnk Connectors 和部署</a></li>
+<li><a href="http://www.thpffcj.com/2019/07/10/Big-Data-Flink-Getting-Started-5" target="_blank" rel="noopener">Flink项目实战</a></li>
 </ul>
-<p><strong>大数据处理的流程</strong></p>
-<ul>
-<li>MapReduce：input -&gt; map(reduce) -&gt; output</li>
-<li>Storm：input -&gt; Spout/Bolt -&gt; output</li>
-<li>Spark：input -&gt; transformation/action -&gt; output</li>
-<li>Flink：input -&gt; transformation/sink -&gt; output</li>
+</li>
 </ul>
-<h3 id="2-DataSet-amp-DataStream"><a href="#2-DataSet-amp-DataStream" class="headerlink" title="2. DataSet &amp; DataStream"></a>2. DataSet &amp; DataStream</h3><ul>
-<li>Flink has the special classes DataSet and DataStream to represent data in a program. </li>
-<li>You can think of them as immutable collections of data that can contain duplicates. </li>
-<li>In the case of DataSet the data is finite while for a DataStream the number of elements can be unbounded.</li>
-<li>immutable</li>
-<li>批处理：DataSet</li>
-<li>流处理：DataStream</li>
-</ul>
-<h3 id="3-Flink编程模型"><a href="#3-Flink编程模型" class="headerlink" title="3. Flink编程模型"></a>3. Flink编程模型</h3><ul>
-<li><strong><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html#anatomy-of-a-flink-program" target="_blank" rel="noopener">Anatomy of a Flink Program</a></strong></li>
-</ul>
-<p>Flink programs look like regular programs that transform collections of data. Each program consists of the same basic parts:</p>
-<ul>
-<li>Obtain an execution environment</li>
-<li>Load/create the initial data</li>
-<li>Specify transformations on this data</li>
-<li>Specify where to put the results of your computations</li>
-<li>Trigger the program execution</li>
-</ul>
-<h3 id="4-延迟执行"><a href="#4-延迟执行" class="headerlink" title="4. 延迟执行"></a>4. 延迟执行</h3><ul>
-<li>All Flink programs are executed lazily</li>
-<li>When the program’s main method is executed, the data loading and transformations do not happen directly. </li>
-<li>Rather, each operation is created and added to the program’s plan.</li>
-<li>The operations are actually executed when the execution is explicitly triggered by an execute() call on the execution environment.</li>
-<li>The lazy evaluation lets you construct sophisticated programs that Flink executes as one holistically planned unit.</li>
-</ul>
-<h3 id="5-编程如何指定Key"><a href="#5-编程如何指定Key" class="headerlink" title="5. 编程如何指定Key"></a>5. 编程如何指定Key</h3><ul>
-<li>Some transformations (join, coGroup, keyBy, groupBy) require that a key be defined on a collection of elements. </li>
-<li>Other transformations (Reduce, GroupReduce, Aggregate, Windows) allow data being grouped on a key before they are applied.</li>
-</ul>
-<p><strong>Define keys for Tuple</strong></p>
-<pre><code>DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
-KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0)
-
-DataStream&lt;Tuple3&lt;Integer,String,Long&gt;&gt; input = // [...]
-KeyedStream&lt;Tuple3&lt;Integer,String,Long&gt;,Tuple&gt; keyed = input.keyBy(0,1)
-</code></pre><p><strong>Define keys using Field Expressions</strong></p>
-<ul>
-<li>Java</li>
-</ul>
-<pre><code>// some ordinary POJO (Plain old Java Object)
-public class WC {
-  public String word;
-  public int count;
-}
-DataStream&lt;WC&gt; words = // [...]
-DataStream&lt;WC&gt; wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/);
-</code></pre><ul>
-<li>Scala</li>
-</ul>
-<pre><code>// or, as a case class, which is less typing
-case class WC(word: String, count: Int)
-val words: DataStream[WC] = // [...]
-val wordCounts = words.keyBy(&quot;word&quot;).window(/*window specification*/)
-</code></pre><p><strong>Define keys using Key Selector Functions</strong></p>
-<pre><code>// some ordinary POJO
-public class WC {public String word; public int count;}
-DataStream&lt;WC&gt; words = // [...]
-KeyedStream&lt;WC&gt; keyed = words
-  .keyBy(new KeySelector&lt;WC, String&gt;() {
-     public String getKey(WC wc) { return wc.word; }
-   });
-</code></pre><h3 id="6-编程如何指定转换函数"><a href="#6-编程如何指定转换函数" class="headerlink" title="6. 编程如何指定转换函数"></a>6. 编程如何指定转换函数</h3><ul>
-<li>Most transformations require user-defined functions. This section lists different ways of how they can be specified</li>
-</ul>
-<p><strong>Implementing an interface</strong></p>
-<pre><code>class MyMapFunction implements MapFunction&lt;String, Integer&gt; {
-  public Integer map(String value) { return Integer.parseInt(value); }
-};
-data.map(new MyMapFunction());
-</code></pre><p><strong>Anonymous classes</strong></p>
-<pre><code>data.map(new MapFunction&lt;String, Integer&gt; () {
-  public Integer map(String value) { return Integer.parseInt(value); }
-});
-</code></pre><p><strong>Java 8 Lambdas</strong></p>
-<p><strong>Rich functions</strong></p>
-<h3 id="7-支持的数据类型"><a href="#7-支持的数据类型" class="headerlink" title="7. 支持的数据类型"></a>7. 支持的数据类型</h3><p>Flink places some restrictions on the type of elements that can be in a DataSet or DataStream. The reason for this is that the system analyzes the types to determine efficient execution strategies.</p>
-<ul>
-<li>Java Tuples and Scala Case Classes</li>
-<li>Java POJOs</li>
-<li>Primitive Types</li>
-<li>Regular Classes</li>
-<li>Values</li>
-<li>Hadoop Writables</li>
-<li>Special Types</li>
-</ul>
-<p><br></p>
+<p>我们在初步了解了Flink和它的编程模型之后，我们学习使用DataSet API和DataStream API来使用Flink进行基本的批处理和流处理。</p>
 <hr>
-<h2 id="2-DataSet-API编程"><a href="#2-DataSet-API编程" class="headerlink" title="2. DataSet API编程"></a>2. DataSet API编程</h2><h3 id="1-DataSet-API开发概述"><a href="#1-DataSet-API开发概述" class="headerlink" title="1. DataSet API开发概述"></a>1. DataSet API开发概述</h3><ul>
+<h2 id="1-DataSet-API编程"><a href="#1-DataSet-API编程" class="headerlink" title="1. DataSet API编程"></a>1. DataSet API编程</h2><h3 id="1-DataSet-API开发概述"><a href="#1-DataSet-API开发概述" class="headerlink" title="1. DataSet API开发概述"></a>1. DataSet API开发概述</h3><ul>
 <li>DataSet programs in Flink are regular programs that implement transformations on data sets (e.g., filtering, mapping, joining, grouping).</li>
 <li>The data sets are initially created from certain sources (e.g., by reading files, or from local collections). </li>
 <li>Results are returned via sinks, which may for example write the data to (distributed) files, or to standard output (for example the command line terminal).</li>
@@ -677,6 +589,232 @@ def mapPartitionFunction(env: ExecutionEnvironment): Unit = {
     }).print()
   }
 }
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-DataStream-API编程"><a href="#2-DataStream-API编程" class="headerlink" title="2. DataStream API编程"></a>2. DataStream API编程</h2><ul>
+<li>DataStream programs in Flink are regular programs that implement transformations on data streams (e.g., filtering, updating state, defining windows, aggregating). </li>
+<li>The data streams are initially created from various sources (e.g., message queues, socket streams, files). </li>
+<li>Results are returned via sinks, which may for example write the data to files, or to standard output (for example the command line terminal). </li>
+</ul>
+<h3 id="1-Data-Source"><a href="#1-Data-Source" class="headerlink" title="1. Data Source"></a>1. Data Source</h3><p>Sources are where your program reads its input from.</p>
+<ul>
+<li>Flink中使用数据源：StreamExecutionEnvironment.addSource(sourceFunction)<ul>
+<li>implementing the SourceFunction for non-parallel sources</li>
+<li>implementing the ParallelSourceFunction interface</li>
+<li>extending the RichParallelSourceFunction for parallel sources</li>
+</ul>
+</li>
+</ul>
+<p><strong>Socket-based</strong></p>
+<pre><code>object DataStreamSourceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    socketFunction(env)
+
+    env.execute(&quot;DataStreamSourceApp&quot;)
+  }
+
+  def socketFunction(env: StreamExecutionEnvironment): Unit = {
+
+    val data = env.socketTextStream(&quot;localhost&quot;, 9999)
+    data.print()
+  }
+}
+</code></pre><ul>
+<li>我们使用netcat发送数据</li>
+</ul>
+<pre><code>nc -lk 9999
+</code></pre><p><strong>Custom：实现自定义数据源</strong></p>
+<ul>
+<li>方式一：implementing the SourceFunction for non-parallel sources</li>
+</ul>
+<pre><code>class CustomNonParallelSourceFunction extends SourceFunction[Long]{
+
+  var count = 1L
+
+  var isRunning = true
+
+  override def run(ctx: SourceFunction.SourceContext[Long]): Unit = {
+    while (isRunning) {
+      ctx.collect(count)
+      count += 1
+      Thread.sleep(1000)
+    }
+  }
+
+  override def cancel(): Unit = {
+    isRunning = false
+  }
+}
+</code></pre><ul>
+<li>接着我们需要将数据源添加到环境中</li>
+</ul>
+<pre><code>object DataStreamSourceApp {
+
+  def main(args: Array[String]): Unit = {
+
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    nonParallelSourceFunction(env)
+
+    env.execute(&quot;DataStreamSourceApp&quot;)
+  }
+
+  def nonParallelSourceFunction(env: StreamExecutionEnvironment): Unit = {
+    val data = env.addSource(new CustomNonParallelSourceFunction)
+    data.print()
+  }
+}
+</code></pre><ul>
+<li>方式二：implementing the ParallelSourceFunction interface</li>
+</ul>
+<pre><code>class CustomParallelSourceFunction extends ParallelSourceFunction[Long]
+</code></pre><ul>
+<li>这种方式我们可以设置并行度了</li>
+</ul>
+<pre><code>def parallelSourceFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomParallelSourceFunction).setParallelism(2)
+  data.print()
+}
+</code></pre><ul>
+<li>方式三：extending the RichParallelSourceFunction for parallel sources</li>
+</ul>
+<pre><code>class CustomRichParallelSourceFunction extends RichParallelSourceFunction[Long]
+</code></pre><h3 id="2-Transformation"><a href="#2-Transformation" class="headerlink" title="2. Transformation"></a>2. Transformation</h3><p>Operators transform one or more DataStreams into a new DataStream.</p>
+<p><strong>Map和Filter</strong></p>
+<ul>
+<li>我们直接使用上面的自定义数据源产生数据</li>
+</ul>
+<pre><code>def filterFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomNonParallelSourceFunction)
+
+  data.map(x =&gt;{
+    println(&quot;received: &quot; + x)
+    x
+  }).filter(_%2 == 0).print().setParallelism(1)
+}
+</code></pre><p><strong>Union</strong></p>
+<p>Union of two or more data streams creating a new stream containing all the elements from all the streams. </p>
+<pre><code>def unionFunction(env: StreamExecutionEnvironment): Unit = {
+  val data1 = env.addSource(new CustomNonParallelSourceFunction)
+  val data2 = env.addSource(new CustomNonParallelSourceFunction)
+  data1.union(data2).print().setParallelism(1)
+}
+</code></pre><p><strong>Split和Select</strong></p>
+<p>Split the stream into two or more streams according to some criterion.<br>Select one or more streams from a split stream.</p>
+<pre><code>def splitSelectFunction(env: StreamExecutionEnvironment): Unit = {
+  val data = env.addSource(new CustomNonParallelSourceFunction)
+
+  val splits = data.split(new OutputSelector[Long] {
+    override def select(value: Long): lang.Iterable[String] = {
+      val list = new util.ArrayList[String]()
+      if (value % 2 == 0) {
+        list.add(&quot;even&quot;)
+      } else {
+        list.add(&quot;odd&quot;)
+      }
+      list
+    }
+  })
+
+  splits.select(&quot;even&quot;).print().setParallelism(1)
+}
+</code></pre><h3 id="3-Sink"><a href="#3-Sink" class="headerlink" title="3. Sink"></a>3. Sink</h3><p>Data sinks consume DataStreams and forward them to files, sockets, external systems, or print them. </p>
+<p><strong>自定义Sink</strong></p>
+<ul>
+<li>需求：socket发送数据过来，把String类型转换成对象，然后把Java对象保存到MySQL数据库中</li>
+<li>数据库建表</li>
+</ul>
+<pre><code>create table student(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(25),
+    age int(10),
+    primary key(id)
+)；
+</code></pre><ul>
+<li>继承RichSinkFunction<t>，T是你想要写入对象的类型</t></li>
+<li>重写open/close：生命周期方法</li>
+<li>重写invoke：每条记录执行一次</li>
+</ul>
+<pre><code>public class SinkToMySQL extends RichSinkFunction&lt;Student&gt; {
+
+    Connection connection;
+    PreparedStatement preparedStatement;
+
+    private Connection getConnection() {
+        Connection conn = null;
+        try {
+            String url = &quot;jdbc:mysql://localhost:3306/test&quot;;
+            conn = DriverManager.getConnection(url, &quot;root&quot;, &quot;00000000&quot;);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    @Override
+    public void open(Configuration parameters) throws Exception {
+        super.open(parameters);
+
+        connection = getConnection();
+        String sql = &quot;insert into Student(id, name, age) values (?, ?, ?)&quot;;
+        preparedStatement = connection.prepareStatement(sql);
+    }
+
+    // 每条记录插入时调用一次
+    public void invoke(Student value, Context context) throws Exception {
+
+        // 为前面的占位符赋值
+        preparedStatement.setInt(1, value.getId());
+        preparedStatement.setString(2, value.getName());
+        preparedStatement.setInt(3, value.getAge());
+
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void close() throws Exception {
+        if(connection != null) {
+            try {
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            connection = null;
+        }
+    }
+}
+</code></pre><ul>
+<li>开发测试方法</li>
+</ul>
+<pre><code>public class JavaCustomSinkToMySQL {
+
+    public static void main(String[] args) throws Exception {
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        DataStreamSource&lt;String&gt; source = env.socketTextStream(&quot;localhost&quot;, 7777);
+
+        SingleOutputStreamOperator&lt;Student&gt; studentStream = source.map(new MapFunction&lt;String, Student&gt;() {
+            @Override
+            public Student map(String value) throws Exception {
+                System.out.println(value);
+                String[] splits = value.split(&quot;,&quot;);
+                Student stu = new Student();
+                stu.setId(Integer.parseInt(splits[0]));
+                stu.setName(splits[1]);
+                stu.setAge(Integer.parseInt(splits[2]));
+                return stu;
+            }
+        });
+
+        studentStream.addSink(new SinkToMySQL());
+
+        env.execute(&quot;JavaCustomSinkToMySQL&quot;);
+    }
+}
 </code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -684,12 +822,12 @@ def mapPartitionFunction(env: ExecutionEnvironment): Unit = {
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2019/07/04/Big-Data-Flink-Getting-Started-3/" style="float: left;">
-        ← Big-Data-Flink-Getting-Started-3
+        ← Flink Table API 和 Time 操作
     </a>
     
     
     <a class="pull-right" href="/2019/06/28/Big-Data-Flink-Getting-Started-1/">
-        新一代大数据计算引擎 Flink从入门到实战 →
+        初识Flink →
     </a>
     
 </nav>
