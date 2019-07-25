@@ -220,7 +220,7 @@
 </ol>
 <h3 id="3-例子"><a href="#3-例子" class="headerlink" title="3. 例子"></a>3. 例子</h3><p>也就是说两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。</p>
 <p>比如说，一个方法可能是这样定义的：<br>Employee getEmployeeByName(String fullName)</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/RPC%E4%BE%8B%E5%AD%90.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Storm-Real-time-Streaming-Data-Processing/RPC%E4%BE%8B%E5%AD%90.png" alt=""></p>
 <ul>
 <li>首先，要解决通讯的问题，主要是通过在客户端和服务器之间建立TCP连接，远程过程调用的所有交换的数据都在这个连接里传输。连接可以是按需连接，调用结束后就断掉，也可以是长连接，多个远程过程调用共享同一个连接。</li>
 <li>第二，要解决寻址的问题，也就是说，A服务器上的应用怎么告诉底层的RPC框架，如何连接到B服务器（如主机或IP地址）以及特定的端口，方法的名称名称是什么，这样才能完成调用。比如基于Web服务协议栈的RPC，就要提供一个endpoint URI，或者是从UDDI服务上查找。如果是RMI调用的话，还需要一个RMI Registry来注册服务的地址。</li>
@@ -228,7 +228,7 @@
 <li>第四，B服务器收到请求后，需要对参数进行反序列化（序列化的逆操作），恢复为内存中的表达方式，然后找到对应的方法（寻址的一部分）进行本地调用，然后得到返回值。</li>
 <li>第五，返回值还要发送回服务器A上的应用，也要经过序列化的方式发送，服务器A接到后，再反序列化，恢复为内存中的表达方式，交给A服务器上的应用</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E5%85%B3%E4%BA%8ERPC.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Storm-Real-time-Streaming-Data-Processing/%E5%85%B3%E4%BA%8ERPC.png" alt=""></p>
 <h3 id="4-基于Hadoop的RPC实现"><a href="#4-基于Hadoop的RPC实现" class="headerlink" title="4. 基于Hadoop的RPC实现"></a>4. 基于Hadoop的RPC实现</h3><ul>
 <li>添加依赖</li>
 </ul>
@@ -351,7 +351,7 @@ public class RPCClient {
 <li>The idea behind distributed RPC (DRPC) is to parallelize the computation of really intense functions on the fly using Storm. The Storm topology takes in as input a stream of function arguments, and it emits an output stream of the results for each of those function calls.</li>
 <li>DRPC is not so much a feature of Storm as it is a pattern expressed from Storm’s primitives of streams, spouts, bolts, and topologies. DRPC could have been packaged as a separate library from Storm, but it’s so useful that it’s bundled with Storm.</li>
 </ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/distributed%20RPC.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Storm-Real-time-Streaming-Data-Processing/distributed-RPC.png" alt=""></p>
 <ul>
 <li>A client sends the DRPC server the name of the function to execute and the arguments to that function. The topology implementing that function uses a DRPCSpout to receive a function invocation stream from the DRPC server. Each function invocation is tagged with a unique id by the DRPC server. The topology then computes the result and at the end of the topology a bolt called ReturnResults connects to the DRPC server and gives it the result for the function invocation id. The DRPC server then uses the id to match up that result with which client is waiting, unblocks the waiting client, and sends it the result.</li>
 </ul>
