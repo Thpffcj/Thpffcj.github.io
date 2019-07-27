@@ -181,7 +181,356 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		
+      		<h2 id="1-Flink-Runtime核心机制剖析"><a href="#1-Flink-Runtime核心机制剖析" class="headerlink" title="1. Flink Runtime核心机制剖析"></a>1. Flink Runtime核心机制剖析</h2><h3 id="1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"><a href="#1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构" class="headerlink" title="1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"></a>1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构</h3><p><img src="" alt=""></p>
+<ul>
+<li>物理资源层</li>
+<li>Runtime统一执行引擎</li>
+<li>API层</li>
+<li>High-level API层</li>
+</ul>
+<p><img src="" alt=""></p>
+<p><strong>运行模式</strong></p>
+<ul>
+<li>Per-Job<ul>
+<li>独享Dispatcher与Resource Manager</li>
+<li>按需要申请资源(即TaskExecutor)</li>
+<li>适合执行时间较长的大作业</li>
+</ul>
+</li>
+<li>Session<ul>
+<li>共享Dispatcher和Resource Manager</li>
+<li>共享资源(即TaskExecutor)</li>
+<li>适合规模小，执行时间短的作业</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-资源管理与作业调度"><a href="#2-资源管理与作业调度" class="headerlink" title="2. 资源管理与作业调度"></a>2. 资源管理与作业调度</h3><ul>
+<li>调度：任务与资源匹配</li>
+<li>资源：Slot<ul>
+<li>大小(未启用)</li>
+<li>Location</li>
+<li>每个TaskManager包含一个或多个Slot</li>
+</ul>
+</li>
+<li>任务<ul>
+<li>大小(未启用)</li>
+<li>CoLocation Constraint</li>
+</ul>
+</li>
+</ul>
+<p><strong>Slot管理</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>ResourceManager<ul>
+<li>Slot Manager</li>
+<li>管理Slot状态</li>
+<li>分配Slot资源</li>
+</ul>
+</li>
+<li>TaskExecutor<ul>
+<li>实际持有Slot资源</li>
+</ul>
+</li>
+<li>JobMaster<ul>
+<li>Slot资源的申请者</li>
+</ul>
+</li>
+</ul>
+<p><strong>Slot划分</strong></p>
+<ul>
+<li>社区版未启用Slot大小<ul>
+<li>TM启动固定个数的Slot</li>
+<li>默认每个Task占用一个Slot<ul>
+<li>可以通过Slot Sharing在单个Slot中启动多个Task</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Blink开源版<ul>
+<li>增加Slot资源严格匹配</li>
+<li>ResourceProfile：(CPU, Heap, …)</li>
+<li>Per-Job模式：根据Task资源申请合适的Slot资源</li>
+<li>Session模式：从预先申请好的资源中扣除</li>
+</ul>
+</li>
+</ul>
+<p><strong>Slot Sharing</strong></p>
+<ul>
+<li>单个Slot中部署多个Task<ul>
+<li>同一Vertex的多个Task不能共享Slot</li>
+</ul>
+</li>
+</ul>
+<p><strong>作业DAG图结构</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>JobGraph<ul>
+<li>客户端提交的作业DAG图结构</li>
+<li>逻辑结构，不考虑并发</li>
+</ul>
+</li>
+<li>ExecutionGraph<ul>
+<li>JobManager实际维护的数据结构</li>
+<li>物理结构，考虑并发</li>
+</ul>
+</li>
+</ul>
+<p><strong>调度</strong></p>
+<ul>
+<li>Eager调度<ul>
+<li>适用于流作业</li>
+<li>一次性调度所有的Task</li>
+</ul>
+</li>
+<li>LAZY_FROM_SOURCE<ul>
+<li>适用于批作业</li>
+<li>上游作业执行完成后，调度下游的作业</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-错误恢复"><a href="#3-错误恢复" class="headerlink" title="3. 错误恢复"></a>3. 错误恢复</h3><ul>
+<li>Task Failover<ul>
+<li>单个Task执行失败或TM出错退出等</li>
+<li>可以有多种不同的恢复策略</li>
+</ul>
+</li>
+<li>Master Failover<ul>
+<li>AM执行失败</li>
+</ul>
+</li>
+</ul>
+<p><strong>Task Failover:Restart-all</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>重启所有Task<ul>
+<li>从上次的Checkpoint开始重新执行</li>
+</ul>
+</li>
+</ul>
+<p><strong>Task Failover:Restart-individual</strong></p>
+<ul>
+<li>只重启出错的Task<ul>
+<li>只能用于Task间无连接的情况</li>
+<li>应用极为有限</li>
+</ul>
+</li>
+</ul>
+<p><strong>Task Failover:Restart-Region</strong></p>
+<p><img src="" alt=""></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>重启Pipeline Region<ul>
+<li>Blocking数据落盘，可以直接读取</li>
+<li>逻辑上仅需重启通过Pipeline边关联的Task</li>
+</ul>
+</li>
+<li>两种类型错误<ul>
+<li>作业自身执行失败</li>
+<li>作业读取上游数据失败 </li>
+</ul>
+</li>
+</ul>
+<p><strong>Master Failover</strong></p>
+<ul>
+<li>多个Master通过ZK进行选主</li>
+<li>目前Master Failover要求全图重启</li>
+</ul>
+<h3 id="4-未来展望"><a href="#4-未来展望" class="headerlink" title="4. 未来展望"></a>4. 未来展望</h3><ul>
+<li>完善的资源管理</li>
+<li>同一Stream和Batch</li>
+<li>更灵活的调度策略</li>
+<li>Master Failover优化</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="2-Flink-Time-深度解析"><a href="#2-Flink-Time-深度解析" class="headerlink" title="2. Flink Time 深度解析"></a>2. Flink Time 深度解析</h2><h3 id="1-􏰍􏰎􏰏􏰐􏰑􏲐􏲑􏳽􏳾Flink时间语义"><a href="#1-􏰍􏰎􏰏􏰐􏰑􏲐􏲑􏳽􏳾Flink时间语义" class="headerlink" title="1. 􏰍􏰎􏰏􏰐􏰑􏲐􏲑􏳽􏳾Flink时间语义"></a>1. 􏰍􏰎􏰏􏰐􏰑􏲐􏲑􏳽􏳾Flink时间语义</h3><ul>
+<li>时间不是绝对的，不同”世界“中的时间语义各不相同</li>
+<li>Processing Time<ul>
+<li>真实世界的时间</li>
+<li>处理数据节点的本地时间</li>
+<li>处理简单</li>
+<li>结果不确定(无法重现)</li>
+</ul>
+</li>
+<li>Event Time(Row Time)<ul>
+<li>数据世界的时间</li>
+<li>记录携带的Timestamp</li>
+<li>处理复杂</li>
+<li>结果确定(可重现)</li>
+</ul>
+</li>
+</ul>
+<p><strong>时间的特性</strong></p>
+<ul>
+<li>Processing Time：递增</li>
+<li>Event Time：一定程度的乱序</li>
+</ul>
+<h3 id="2-Timestamp和Watermark"><a href="#2-Timestamp和Watermark" class="headerlink" title="2. Timestamp和Watermark"></a>2. Timestamp和Watermark</h3><p><strong>Timestamp分配和Watermark生成</strong></p>
+<ul>
+<li>在SourceFunction中产生<ul>
+<li>collectWithTimestamp(T element, long timestamp)</li>
+<li>endWatermark(Watermark mark)</li>
+</ul>
+</li>
+<li>在流程中指定<ul>
+<li>DataStream.assignTimestampAndWatermarks(…)</li>
+<li>定期生成<ul>
+<li>现实时间驱动</li>
+<li>每隔一段时间调用生成方法</li>
+<li>实现AssignerWithPeriodicWatermarks</li>
+</ul>
+</li>
+<li>根据特殊记录生成<ul>
+<li>数据驱动</li>
+<li>每一次分配Timestamp都会调用生成方法</li>
+<li>实现AssignerWithPunctuatedWatermarks</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Watermark传播</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>Watermark以广播的形式在算子之间进行传播</li>
+<li>Long.MAX_VALUE表示不会再有数据</li>
+<li>单输入取其大，多输入取其小</li>
+<li>局限：没有区分逻辑上的单流和多流，强制同步时钟</li>
+</ul>
+<p><strong>ProcessFunction</strong></p>
+<ul>
+<li>获取记录的Timestamp或当前ProcTime</li>
+<li>获取算子时间(Watermark)</li>
+<li>注册Timer并提供回调逻辑<ul>
+<li>registerEventTimeTimer()</li>
+<li>registerProcessionTimeTimer()</li>
+<li>onTime()</li>
+</ul>
+</li>
+</ul>
+<p><strong>Watermark处理</strong></p>
+<ul>
+<li>更新算子时间</li>
+<li>便利计时器队列触发回调</li>
+<li>将Watermark发送至下游</li>
+</ul>
+<h3 id="3-Table中的时间"><a href="#3-Table中的时间" class="headerlink" title="3. Table中的时间"></a>3. Table中的时间</h3><p><strong>Table中指定时间列</strong></p>
+<ul>
+<li>Processing Time<ul>
+<li>从DataStream转化<ul>
+<li>tEnv.fromDataStream(stream, “f1, f2, f3.proctime”)</li>
+</ul>
+</li>
+<li>通过TableSource生成<ul>
+<li>TableSource实现DefinedProctimeAttributes接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Event Time<ul>
+<li>从DataStream转化<ul>
+<li>原始DataStream必须有Timestamp及Watermark</li>
+<li>tEnv.fromDataStream(stream, “f1, f2, f3.proctime”)</li>
+<li>tEnv.fromDataStream(stream, “f1.proctime, f2, f3”)</li>
+</ul>
+</li>
+<li>通过TableSource生成<ul>
+<li>数据中存在类型为long或timestamp的时间字段</li>
+<li>TableSource实现DefinedRowtimeAttributes接口</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>时间列和Table操作</strong></p>
+<ul>
+<li>Over窗口聚合(Over Window Aggregation)</li>
+<li>Group By窗口聚合(Group By Window Aggregation)</li>
+<li>时间窗口连接(Time-Windowed Join)</li>
+<li>排序(Order By)</li>
+</ul>
+<h3 id="4-深入思考"><a href="#4-深入思考" class="headerlink" title="4. 深入思考"></a>4. 深入思考</h3><p><strong>数据 or 元数据？</strong></p>
+<ul>
+<li>DataStream API中，时间是元数据</li>
+<li>SQL/Table API中，时间是数据</li>
+<li>在Upsert Stream中不允许出现时间字段</li>
+</ul>
+<p><strong>干涉Watermark传播</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>在发送Watermark之前减去一个固定值</li>
+</ul>
+<p><strong>统一EventTime和ProcTime处理</strong></p>
+<p><img src="" alt=""></p>
+<p><strong>时间和Watermark本质</strong></p>
+<ul>
+<li>流处理中时间本质上就是一个普通的递增字段，不一定真的表示时间</li>
+<li>Watermark只是应对乱序的办法之一，大多是启发式的，在延迟和完整性之间抉择</li>
+</ul>
+<p><br></p>
+<hr>
+<h2 id="3-Flink-Checkpoint-轻量级分布式快照"><a href="#3-Flink-Checkpoint-轻量级分布式快照" class="headerlink" title="3. Flink Checkpoint-轻量级分布式快照"></a>3. Flink Checkpoint-轻量级分布式快照</h2><h3 id="1-总览：Checkpoint与state"><a href="#1-总览：Checkpoint与state" class="headerlink" title="1. 总览：Checkpoint与state"></a>1. 总览：Checkpoint与state</h3><ul>
+<li>Checkpoint，在Flink中是一个执行操作，最后产生的结果作为分布式快照提供容错机制</li>
+<li>State是构成Checkpoint的数据构成</li>
+</ul>
+<h3 id="2-什么是state"><a href="#2-什么是state" class="headerlink" title="2. 什么是state"></a>2. 什么是state</h3><ul>
+<li>State：流式计算中持久化了的状态</li>
+</ul>
+<p><strong>Keyed State</strong></p>
+<ul>
+<li>只能应用于KeyedStream的函数与操作中，例如Keyed UDF, window state</li>
+<li>Keyed State是已经分区/划分好的，每一个key只能属于某一个keyed State</li>
+</ul>
+<p><strong>Operator State</strong></p>
+<ul>
+<li>又称为non-keyed state，每一个operator state都仅与一个operator的实例绑定</li>
+<li>常见的operator state是source state，例如记录当前source的offset</li>
+</ul>
+<h3 id="3-如何在Flink中使用state"><a href="#3-如何在Flink中使用state" class="headerlink" title="3. 如何在Flink中使用state"></a>3. 如何在Flink中使用state</h3><h3 id="4-Checkpoint的执行机制"><a href="#4-Checkpoint的执行机制" class="headerlink" title="4. Checkpoint的执行机制"></a>4. Checkpoint的执行机制</h3><p><br></p>
+<hr>
+<h2 id="4-Flink-on-Yarn-K8S原理剖析及实践"><a href="#4-Flink-on-Yarn-K8S原理剖析及实践" class="headerlink" title="4. Flink on Yarn/K8S原理剖析及实践"></a>4. Flink on Yarn/K8S原理剖析及实践</h2><h3 id="1-Flink架构概览"><a href="#1-Flink架构概览" class="headerlink" title="1. Flink架构概览"></a>1. Flink架构概览</h3><p><img src="" alt=""></p>
+<p><strong>JobManager</strong></p>
+<p><img src="" alt=""></p>
+<ul>
+<li>Execution Graph</li>
+<li>Scheduler</li>
+<li>Checkpoint Coordinator</li>
+<li>Actor System</li>
+</ul>
+<p><strong>TaskManager</strong></p>
+<p><strong>Flink Standalone</strong></p>
+<p><strong>Flink 运行时相关组件</strong></p>
+<h3 id="2-Flink-on-Yarn原理及实践"><a href="#2-Flink-on-Yarn原理及实践" class="headerlink" title="2. Flink on Yarn原理及实践"></a>2. Flink on Yarn原理及实践</h3><p><strong>Yarn架构原理-总览</strong></p>
+<p><strong>Yarn架构原理-组件</strong></p>
+<p><strong>Yarn架构原理-交互</strong></p>
+<p><strong>Flink on Yarn - Per Job</strong></p>
+<p><strong>Flink on Yarn - Session</strong></p>
+<p><strong>Yarn模式优点</strong></p>
+<h3 id="3-Flink-on-Kubernetes原理及实践"><a href="#3-Flink-on-Kubernetes原理及实践" class="headerlink" title="3. Flink on Kubernetes原理及实践"></a>3. Flink on Kubernetes原理及实践</h3><p><strong>Kubernetes-基本概念</strong></p>
+<p><strong>Kubernetes-架构图</strong></p>
+<p><strong>Kubernetes-核心概念</strong></p>
+<p><strong>Flink on Kubernetes - 架构</strong></p>
+<p><strong>Flink on Kubernetes - JobManager</strong></p>
+<p><strong>Flink on Kubernetes - TaskManager</strong></p>
+<p><strong>Flink on Kubernetes - 交互</strong></p>
+<p><strong>Flink on Kubernetes - 实践</strong></p>
+<p><br></p>
+<hr>
+<h2 id="5-Flink-数据类型与序列化"><a href="#5-Flink-数据类型与序列化" class="headerlink" title="5. Flink 数据类型与序列化"></a>5. Flink 数据类型与序列化</h2><p><br></p>
+<hr>
+<h2 id="6-Flink-作业执行解析"><a href="#6-Flink-作业执行解析" class="headerlink" title="6. Flink 作业执行解析"></a>6. Flink 作业执行解析</h2><p><br></p>
+<hr>
+<h2 id="7-Flink网络流控及反压剖析"><a href="#7-Flink网络流控及反压剖析" class="headerlink" title="7. Flink网络流控及反压剖析"></a>7. Flink网络流控及反压剖析</h2><p><br></p>
+<hr>
+<h2 id="8-Metrics-与监控"><a href="#8-Metrics-与监控" class="headerlink" title="8. Metrics 与监控"></a>8. Metrics 与监控</h2><p><br></p>
+<hr>
+<h2 id="9-Flink-Connector开发"><a href="#9-Flink-Connector开发" class="headerlink" title="9. Flink Connector开发"></a>9. Flink Connector开发</h2><p><br></p>
+<hr>
+<h2 id="10-本地部署Zeppelin开发Flink程序"><a href="#10-本地部署Zeppelin开发Flink程序" class="headerlink" title="10. 本地部署Zeppelin开发Flink程序"></a>10. 本地部署Zeppelin开发Flink程序</h2><p><br></p>
+<hr>
+<h2 id="11-Flink-State-最佳实践"><a href="#11-Flink-State-最佳实践" class="headerlink" title="11. Flink State 最佳实践"></a>11. Flink State 最佳实践</h2><p><br></p>
+<hr>
+<h2 id="12-TensorFlow-On-Flink"><a href="#12-TensorFlow-On-Flink" class="headerlink" title="12. TensorFlow On Flink"></a>12. TensorFlow On Flink</h2>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
