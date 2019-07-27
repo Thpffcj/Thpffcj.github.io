@@ -181,14 +181,14 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-Flink-Runtime核心机制剖析"><a href="#1-Flink-Runtime核心机制剖析" class="headerlink" title="1. Flink Runtime核心机制剖析"></a>1. Flink Runtime核心机制剖析</h2><h3 id="1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"><a href="#1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构" class="headerlink" title="1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"></a>1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构</h3><p><img src="" alt=""></p>
+      		<h2 id="1-Flink-Runtime核心机制剖析"><a href="#1-Flink-Runtime核心机制剖析" class="headerlink" title="1. Flink Runtime核心机制剖析"></a>1. Flink Runtime核心机制剖析</h2><h3 id="1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"><a href="#1-􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构" class="headerlink" title="1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构"></a>1. 􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐􏱖􏱊􏱏􏱐整体架构</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=""></p>
 <ul>
 <li>物理资源层</li>
 <li>Runtime统一执行引擎</li>
 <li>API层</li>
 <li>High-level API层</li>
 </ul>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Runtime%E5%B1%82%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=""></p>
 <p><strong>运行模式</strong></p>
 <ul>
 <li>Per-Job<ul>
@@ -219,7 +219,7 @@
 </li>
 </ul>
 <p><strong>Slot管理</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Slot%E7%AE%A1%E7%90%86.png" alt=""></p>
 <ul>
 <li>ResourceManager<ul>
 <li>Slot Manager</li>
@@ -255,6 +255,7 @@
 </li>
 </ul>
 <p><strong>Slot Sharing</strong></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Slot-Sharing.png" alt=""></p>
 <ul>
 <li>单个Slot中部署多个Task<ul>
 <li>同一Vertex的多个Task不能共享Slot</li>
@@ -262,7 +263,7 @@
 </li>
 </ul>
 <p><strong>作业DAG图结构</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/%E4%BD%9C%E4%B8%9ADAG%E5%9B%BE%E7%BB%93%E6%9E%84.png" alt=""></p>
 <ul>
 <li>JobGraph<ul>
 <li>客户端提交的作业DAG图结构</li>
@@ -300,7 +301,7 @@
 </li>
 </ul>
 <p><strong>Task Failover:Restart-all</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Task-Failover-Restart-all.png" alt=""></p>
 <ul>
 <li>重启所有Task<ul>
 <li>从上次的Checkpoint开始重新执行</li>
@@ -316,8 +317,8 @@
 </li>
 </ul>
 <p><strong>Task Failover:Restart-Region</strong></p>
-<p><img src="" alt=""></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Task-Failover-Restart-Region.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Task-Failover-Restart-Region-2.png" alt=""></p>
 <ul>
 <li>重启Pipeline Region<ul>
 <li>Blocking数据落盘，可以直接读取</li>
@@ -390,7 +391,7 @@
 </li>
 </ul>
 <p><strong>Watermark传播</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Watermark%E4%BC%A0%E6%92%AD.png" alt=""></p>
 <ul>
 <li>Watermark以广播的形式在算子之间进行传播</li>
 <li>Long.MAX_VALUE表示不会再有数据</li>
@@ -456,12 +457,12 @@
 <li>在Upsert Stream中不允许出现时间字段</li>
 </ul>
 <p><strong>干涉Watermark传播</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/%E5%B9%B2%E6%B6%89Watermark%E4%BC%A0%E6%92%AD.png" alt=""></p>
 <ul>
 <li>在发送Watermark之前减去一个固定值</li>
 </ul>
 <p><strong>统一EventTime和ProcTime处理</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/%E7%BB%9F%E4%B8%80EventTime%E5%92%8CProcTime%E5%A4%84%E7%90%86.png" alt=""></p>
 <p><strong>时间和Watermark本质</strong></p>
 <ul>
 <li>流处理中时间本质上就是一个普通的递增字段，不一定真的表示时间</li>
@@ -488,9 +489,9 @@
 </ul>
 <h3 id="3-如何在Flink中使用state"><a href="#3-如何在Flink中使用state" class="headerlink" title="3. 如何在Flink中使用state"></a>3. 如何在Flink中使用state</h3><h3 id="4-Checkpoint的执行机制"><a href="#4-Checkpoint的执行机制" class="headerlink" title="4. Checkpoint的执行机制"></a>4. Checkpoint的执行机制</h3><p><br></p>
 <hr>
-<h2 id="4-Flink-on-Yarn-K8S原理剖析及实践"><a href="#4-Flink-on-Yarn-K8S原理剖析及实践" class="headerlink" title="4. Flink on Yarn/K8S原理剖析及实践"></a>4. Flink on Yarn/K8S原理剖析及实践</h2><h3 id="1-Flink架构概览"><a href="#1-Flink架构概览" class="headerlink" title="1. Flink架构概览"></a>1. Flink架构概览</h3><p><img src="" alt=""></p>
+<h2 id="4-Flink-on-Yarn-K8S原理剖析及实践"><a href="#4-Flink-on-Yarn-K8S原理剖析及实践" class="headerlink" title="4. Flink on Yarn/K8S原理剖析及实践"></a>4. Flink on Yarn/K8S原理剖析及实践</h2><h3 id="1-Flink架构概览"><a href="#1-Flink架构概览" class="headerlink" title="1. Flink架构概览"></a>1. Flink架构概览</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink%E6%9E%B6%E6%9E%84-Job.png" alt=""></p>
 <p><strong>JobManager</strong></p>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A7%88-JobManager.png" alt=""></p>
 <ul>
 <li>Execution Graph</li>
 <li>Scheduler</li>
@@ -498,7 +499,9 @@
 <li>Actor System</li>
 </ul>
 <p><strong>TaskManager</strong></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink%E6%9E%B6%E6%9E%84%E6%A6%82%E8%A7%88-TaskManager.png" alt=""></p>
 <p><strong>Flink Standalone</strong></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink-Standalone.png" alt=""></p>
 <p><strong>Flink 运行时相关组件</strong></p>
 <h3 id="2-Flink-on-Yarn原理及实践"><a href="#2-Flink-on-Yarn原理及实践" class="headerlink" title="2. Flink on Yarn原理及实践"></a>2. Flink on Yarn原理及实践</h3><p><strong>Yarn架构原理-总览</strong></p>
 <p><strong>Yarn架构原理-组件</strong></p>
@@ -518,7 +521,16 @@
 <hr>
 <h2 id="5-Flink-数据类型与序列化"><a href="#5-Flink-数据类型与序列化" class="headerlink" title="5. Flink 数据类型与序列化"></a>5. Flink 数据类型与序列化</h2><p><br></p>
 <hr>
-<h2 id="6-Flink-作业执行解析"><a href="#6-Flink-作业执行解析" class="headerlink" title="6. Flink 作业执行解析"></a>6. Flink 作业执行解析</h2><p><br></p>
+<h2 id="6-Flink-作业执行解析"><a href="#6-Flink-作业执行解析" class="headerlink" title="6. Flink 作业执行解析"></a>6. Flink 作业执行解析</h2><h3 id="1-Flink-4层转化流程"><a href="#1-Flink-4层转化流程" class="headerlink" title="1. Flink 4层转化流程"></a>1. Flink 4层转化流程</h3><ul>
+<li>第一层：Program -&gt; StreamGraph</li>
+<li>第二层：StreamGraph -&gt; JobGraph</li>
+<li>第三层：JobGraph -&gt; ExecutionGraph</li>
+<li>第四层：ExecutionGraph -&gt; 物理执行计划</li>
+</ul>
+<p><strong>如何转换成StreamGraph</strong></p>
+<p><strong>StreamGraph到JobGraph的转化</strong></p>
+<p><strong>JobGraph到ExecutionGraph以及物理执行</strong></p>
+<h3 id="2-Flink-job执行流程"><a href="#2-Flink-job执行流程" class="headerlink" title="2. Flink job执行流程"></a>2. Flink job执行流程</h3><p><br></p>
 <hr>
 <h2 id="7-Flink网络流控及反压剖析"><a href="#7-Flink网络流控及反压剖析" class="headerlink" title="7. Flink网络流控及反压剖析"></a>7. Flink网络流控及反压剖析</h2><p><br></p>
 <hr>
