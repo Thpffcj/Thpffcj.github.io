@@ -487,7 +487,40 @@
 <li>又称为non-keyed state，每一个operator state都仅与一个operator的实例绑定</li>
 <li>常见的operator state是source state，例如记录当前source的offset</li>
 </ul>
-<h3 id="3-如何在Flink中使用state"><a href="#3-如何在Flink中使用state" class="headerlink" title="3. 如何在Flink中使用state"></a>3. 如何在Flink中使用state</h3><h3 id="4-Checkpoint的执行机制"><a href="#4-Checkpoint的执行机制" class="headerlink" title="4. Checkpoint的执行机制"></a>4. Checkpoint的执行机制</h3><p><br></p>
+<h3 id="3-Checkpoint的执行机制"><a href="#3-Checkpoint的执行机制" class="headerlink" title="3. Checkpoint的执行机制"></a>3. Checkpoint的执行机制</h3><p><strong>State的存储</strong></p>
+<p><img src="" alt=""></p>
+<p><strong>Checkpoint执行流程</strong></p>
+<ul>
+<li>checkpoint coordinator向所有source节点trigger checkpoint</li>
+<li>当task收到所有barrier之后，会执行快照，向自己的输出基础传递barrier，并将自己的状态(异步)写入到持久化存储中</li>
+<li>当task完成备份后，会将备份数据的地址(state handle)通知给checkpoint coordinator</li>
+<li>为了实现EXACTLY ONCE语义，Flink通过一个input buffer将在对齐阶段收到的数据缓存起来，等对齐完成之后再进行处理</li>
+<li>对于AT LEAST ONCE语义，无需缓存收集到的数据，会对后续直接处理，所以导致restore时，数据可能会被多次处理</li>
+<li>Flink的checkpoint机制只能保证Flink的计算过程可以做到EXACTLY ONCE，end-to-end的EXACTLY ONCE需要source和sink的支持</li>
+</ul>
+<p><strong>基于RocksDB的增量checkpoint</strong></p>
+<ul>
+<li>本地snapshot目录创建当前DB内容的备份</li>
+<li>与上一次成功的checkpoint本地sst文件列表比对，将不在其中的文件上传到DFS中</li>
+<li>所有文件都会重命名防止冲突</li>
+<li>包含了所有新旧文件的handle返回给checkpoint coordinator</li>
+</ul>
+<p><strong>从已停止的作业进行状态恢复</strong></p>
+<ul>
+<li>Savepoint<ul>
+<li>用户通过命令触发，由用户管理其创建与删除</li>
+<li>标准化格式存储，允许作业升级或者配置变更</li>
+<li>用户在恢复时需要提供用于恢复作业状态的savepoint路径</li>
+</ul>
+</li>
+<li>Externalized Checkpoint<ul>
+<li>Checkpoint完成时，在用户给定的外部持久化存储保存</li>
+<li>当作业FAILED(或者CANCELED)时，外部存储的checkpoint会保留下来</li>
+<li>用户在恢复时需要提供用于恢复的作业状态的checkpoint路径</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
 <hr>
 <h2 id="4-Flink-on-Yarn-K8S原理剖析及实践"><a href="#4-Flink-on-Yarn-K8S原理剖析及实践" class="headerlink" title="4. Flink on Yarn/K8S原理剖析及实践"></a>4. Flink on Yarn/K8S原理剖析及实践</h2><h3 id="1-Flink架构概览"><a href="#1-Flink架构概览" class="headerlink" title="1. Flink架构概览"></a>1. Flink架构概览</h3><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Big-Data-Flink-Getting-Started/Flink%E6%9E%B6%E6%9E%84-Job.png" alt=""></p>
 <p><strong>JobManager</strong></p>
@@ -527,8 +560,97 @@
 <li>第三层：JobGraph -&gt; ExecutionGraph</li>
 <li>第四层：ExecutionGraph -&gt; 物理执行计划</li>
 </ul>
+<p><img src="" alt=""></p>
 <p><strong>如何转换成StreamGraph</strong></p>
+<ul>
+<li>从StreamExecutionEnvironment.execute开始执行程序，将transform添加到StreamExecutionEnvironment的transformations</li>
+<li>调用StreamGraphGenerator的generateInternal方法，遍历transformations构建StreamNode及StreamEdge</li>
+<li>通过StreamEdge连接StreamNode</li>
+</ul>
+<p><strong>StreamNode及StreamEdge</strong></p>
+<pre><code>public class WindowWordCount {
+
+    public static void main(String[] args) throws Exception {
+
+        final ParameterTool params = ParameterTool.fromArgs(args);
+
+        // set up the execution environment
+        final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        // get input data
+        DataStream&lt;String&gt; text = env.readTextFile(params.get(&quot;input&quot;)).setParallelism(2);
+
+        // make parameters available in the web interface
+        env.getConfig().setGlobalJobParameters(params);
+
+        final int windowSize = params.getInt(&quot;window&quot;, 10);
+        final int slideSize = params.getInt(&quot;slide&quot;, 5);
+
+        DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; counts =
+                // split up the lines in pairs (2-tuples) containing: (word,1)
+                text.flatMap(new Tokenizer()).setParallelism(4).slotSharingGroup(&quot;flatMap_sg&quot;)
+                        // create windows of windowSize records slided every slideSize records
+                        .keyBy(0)
+                        .countWindow(windowSize, slideSize)
+                        // group by the tuple field &quot;0&quot; and sum up tuple field &quot;1&quot;
+                        .sum(1).setParallelism(3).slotSharingGroup(&quot;sum_sg&quot;);
+
+        // emit result
+        counts.print().setParallelism(3);
+
+        // execute program
+        env.execute(&quot;WindowWordCount&quot;);
+    }
+
+    public static final class Tokenizer implements FlatMapFunction&lt;String, Tuple2&lt;String, Integer&gt;&gt; {
+
+        @Override
+        public void flatMap(String value, Collector&lt;Tuple2&lt;String, Integer&gt;&gt; out) {
+            // normalize and split the line
+            String[] tokens = value.toLowerCase().split(&quot;\\W+&quot;);
+
+            // emit the pairs
+            for (String token : tokens) {
+                if (token.length() &gt; 0) {
+                    out.collect(new Tuple2&lt;&gt;(token, 1));
+                }
+            }
+        }
+    }
+}
+</code></pre><ul>
+<li>从官网拷贝了一份代码到本地，可以看到在env里有4个transformations</li>
+</ul>
+<p><img src="" alt=""></p>
+<ul>
+<li>StreamNode<ul>
+<li>描述operator的逻辑节点</li>
+<li>关键成员变量<ul>
+<li>slotSharingGroup</li>
+<li>jobVertexClass</li>
+<li>inEdges</li>
+<li>outEdges</li>
+<li>transformationUID</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>StreamEdge<ul>
+<li>描述operator的逻辑的链接边</li>
+<li>关键成员变量<ul>
+<li>sourceVertex</li>
+<li>targetVertex</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="" alt=""></p>
 <p><strong>StreamGraph到JobGraph的转化</strong></p>
+<ul>
+<li>设置调度模式，Eager所有节点立即启动</li>
+<li>广度优先遍历StreamGraph，为每个streamNode生成byte数组类型的hash值</li>
+</ul>
 <p><strong>JobGraph到ExecutionGraph以及物理执行</strong></p>
 <h3 id="2-Flink-job执行流程"><a href="#2-Flink-job执行流程" class="headerlink" title="2. Flink job执行流程"></a>2. Flink job执行流程</h3><p><br></p>
 <hr>

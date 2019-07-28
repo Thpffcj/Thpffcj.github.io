@@ -400,7 +400,7 @@ Return 3. The paths that sum to 8 are:
 3. -3 -&gt; 11
  */
 </code></pre><p>猛地一看这个描述，和我们之前的Path Sum是一样的。但是区别在于我们对于路径的定义不一定要起始于根节点，终止于叶子结点，路径可以从任意节点开始，但是只能是向下走的。</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Path%20Sum.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Path-Sum.png" alt=""></p>
 <p>在一个节点上要通过三个部分获得答案，第一个部分看看有没有一条路径，它包含node这个节点，并且它的和为sum,这个路径我们进入findPath这个子过程，这个子过程本身又是一个递归函数。另外的两部分就是要在node的左右子树去寻找没有这个ndoe节点的值，有没有这样的路径，他们的和仍然为sum，这件事就是我们PathSum这个函数所做的。在node-&gt;left和node-&gt;right分别调用PathSum的过程中，他们也会调用findPath来求解。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/23

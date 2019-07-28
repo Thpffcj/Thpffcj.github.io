@@ -442,7 +442,7 @@ private:
  * difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
  */
 </code></pre><p>这个问题可以使用我们之前使用过的滑动窗口</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Contains%20Duplicate.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Contains-Duplicate.png" alt=""></p>
 <p>在区间l到l+k中如果我们能找到i位置的值等于j的话，他们索引的差一定是小于k的。这样我们的问题就变成了，在数组中我们能不能找到一个长度为k+1的区间，在这个区间里存在两个元素，这两个元素相等。如果没有，我们就要看下一个元素，相应的l+1,看新元素在l+1到l+k区间中有没有和它一样的元素，一旦有的话，我们就找到了这个问题的答案。如果没有的话，我们要把新的元素纳入我们区间中，右区间+1，以此类推，区间不断右移。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/20

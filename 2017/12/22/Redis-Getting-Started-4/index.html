@@ -183,7 +183,6 @@
         <div class="col-md-8 col-md-offset-2">
       		<ul>
 <li>下面是这段时间系统了解Redis的一些记录<ul>
-<li><a href="http://www.thpffcj.com/2017/12/02/Redis-Getting-Started-1/" target="_blank" rel="noopener">Redis 基础命令演示</a></li>
 <li><a href="http://www.thpffcj.com/2017/12/20/Redis-Getting-Started-2/" target="_blank" rel="noopener">Redis 入门</a></li>
 <li><a href="http://www.thpffcj.com/2017/12/21/Redis-Getting-Started-3/" target="_blank" rel="noopener">Redis 持久化</a></li>
 <li><a href="http://www.thpffcj.com/2017/12/22/Redis-Getting-Started-4/" target="_blank" rel="noopener">Redis 复制的原理与优化及 Reids Sentinel实现高可用</a></li>
@@ -380,7 +379,7 @@ repl_backlog_histlen:337
 <ul>
 <li>redis提供了全量复制的功能，首先将本身的RDB文件，也就是当前状态去同步给slave，在此期间，它写入的命令会单独记录起来，当RDB文件加载完之后，它会通过偏移量的对比，将这个期间写入的值同步给slave。</li>
 </ul>
-<p><img src="http://wx1.sinaimg.cn/mw690/e647f98bly1g1pnluw8ncj20if0ajjt7.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Redis-Getting-Start/%E5%85%A8%E9%87%8F%E5%A4%8D%E5%88%B6.png" alt=""></p>
 <p><strong>4. 全量复制开销</strong></p>
 <ul>
 <li>bgsive时间</li>
@@ -395,7 +394,7 @@ repl_backlog_histlen:337
 <li>在redis 2.8中提供了部分复制。</li>
 <li>如果发生了抖动，相当于连接断开了，但是在master写命令的时候，它会写一份复制缓冲区的命令，当slave再次连接master的时候，使用pysnc命令告诉我当前的偏移量是多少。如果你传输的偏移量是在buffer的范围内的，会返回continue(如果offset不在buffer范围内，说明你错过了太多信息，需要全量复制)，会将offset开始，到buffer队列结尾的返回。有效降低了全量复制的开销。</li>
 </ul>
-<p><img src="http://wx3.sinaimg.cn/mw690/e647f98bly1g1pnmsomdhj20fo0aq3zz.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Redis-Getting-Start/%E9%83%A8%E5%88%86%E5%A4%8D%E5%88%B6.png" alt=""></p>
 <h3 id="5-开发与运维中的问题"><a href="#5-开发与运维中的问题" class="headerlink" title="5. 开发与运维中的问题"></a>5. 开发与运维中的问题</h3><p><strong>1. 读写分离</strong></p>
 <ul>
 <li>读写分离：读流量分摊到从节点</li>
@@ -460,7 +459,7 @@ repl_backlog_histlen:337
 <li>客户端不会直接向redis获取数据，不会记住redis的某个ip，而是直接记住Redis Sentinel的地址</li>
 <li>Redis Sentinel会时刻对master和slave进行一个监控，他知道谁是master谁是slave</li>
 </ul>
-<p><img src="http://wx4.sinaimg.cn/mw690/e647f98bly1g1pnnsara3j20i00bjtbm.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Redis-Getting-Start/Redis-Sentinel%E6%9E%B6%E6%9E%84.png" alt=""></p>
 <ul>
 <li>故障转移和手动过程很类似</li>
 <li>多个sentinel发现并确认master有问题</li>

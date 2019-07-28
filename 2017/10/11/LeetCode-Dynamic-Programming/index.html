@@ -223,7 +223,7 @@ int main() {
     return 0;
 }
 </code></pre><p>通过计时我们会发现这个算法很慢，为什么这个解法效率这么低呢？当我们需要计算fib(5)时，它的递归树是：</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Fibonacci.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Fibonacci.png" alt=""></p>
 <p>从这个图可以看出这里面有大量的重复计算，我们怎样避免呢，我们可以在程序的外面做一个数组memo，其实memo[i]就记忆了第i个斐波那契数列。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/25
@@ -317,7 +317,7 @@ int main() {
  * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
  */
 </code></pre><p>我们来看一下递归的思路，把一个大的问题分解成小的问题。</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Climbing%20Stars.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Climbing-Stars.png" alt=""></p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/25
  */
@@ -384,7 +384,7 @@ public:
  * Note: You may assume that n is not less than 2 and not larger than 58.
  */
 </code></pre><p>对于一个问题如果没有思路时，我们可以先考虑暴力解法。话句话说，我们使用什么样的方式，才能把正整数n的所有分割枚举出来，我们无法知道有几重循环，通常我们需要使用递归的手段。<br>暴力解法：回溯遍历将一个数做分割的所有可能性。O(2^n)</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Integer%20Break.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Integer-Break.png" alt=""></p>
 <p>之所以递归树存在，是因为它有最优子结构<br>通过求子问题的最优解，可以获得原问题的最优解。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/26
@@ -502,7 +502,7 @@ public:
  * can rob tonight without alerting the police.
  */
 </code></pre><p>首先依然是如果没有思路的话，先考虑暴力解法。检查所有的房子，对每个组合，检查是否有相邻的房子，如果没有，记录其价值，找最大值。O((2^n)*n)</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/House%20Robber.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/House-Robber.png" alt=""></p>
 <p>注意其中对状态的定义：<br>考虑偷取[x…n-1]范围里的房子(函数的定义)</p>
 <p>根据对状态的定义，决定状态的转移：<br>f(0) = max{ v(0) + f(2), v(1) + f(3), v(2) + f(4), … , v(n-3) + f(n-1), v(n-2), v(n-1)}(状态转移方程)</p>
 <p>实际上我们的递归函数就是在实现状态转移。</p>
@@ -699,7 +699,7 @@ public:
     }
 };
 </code></pre><p>使用动态规划自底向上解决：</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/0-1%E8%83%8C%E5%8C%85.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/0-1%E8%83%8C%E5%8C%85.png" alt=""></p>
 <p>每个位置都由两个位置决定。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/26
@@ -782,7 +782,7 @@ public:
     }
 };
 </code></pre><p>只使用一行完成背包问题，比较复杂：我们从右向左刷新内容</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/0-1%E8%83%8C%E5%8C%852.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/0-1%E8%83%8C%E5%8C%852.png" alt=""></p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/27
  */
@@ -940,7 +940,7 @@ public:
 </code></pre><p>暴力解法：选择所有的子序列进行判断。O((2^n)*n)</p>
 <p>LIS(i)表示以第i个数字为结尾的最长上升子序列的长度。<br>LIS(i)表示[0…i]的范围内，选择数字nums[i]可以获得的最长上升子序列的长度。</p>
 <p><strong>LIS(i) = max(1+LIS(j) if nums[i]&gt;nums[j]) (j&lt;i)</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Increasing%20Subsequence.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Longest-Increasing-Subsequence.png" alt=""></p>
 <p>使用递归加记忆化搜索：</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/28
@@ -1027,7 +1027,7 @@ public:
 <h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给出两个字符串S1，S2，求这两个字符串的最长公共子序列的长度。</p>
 <p>LCS(m,n)表示S1[0…m]和S2[0…n]的最长公共子序列的长度。</p>
 <p>S1[m] == S2[n]：<br>LCS(m,n) = 1 + LCS(m-1, n-1)<br>S1[m] != S2[n]：<br>LCS(m,n) = max( LCS(m-1, n), LCS(m, n-1) )</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Longest%20Common%20Subsequence.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Longest-Common-Subsequence.png" alt=""></p>
 <p>记忆化搜索：</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/28

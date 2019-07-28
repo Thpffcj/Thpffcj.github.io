@@ -271,7 +271,7 @@ public:
 ]
  */
 </code></pre><p>回溯算法能处理一类重要的问题是排列问题，如果我们要用1,2,3进行排列，我们可以先抽出一个元素，比如我们现在抽出1，那么我们下面要做的事就是使用2,3两个元素构造排列。我们又需要抽出一个元素，如果我们抽出2，我们剩下唯一的元素就是3，我们通过这个路径获得排列123，用23排列如果选3，那么就剩下2我们得到排列132。相应的我们考虑最开始选择2或者选择3。</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Permutations.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Permutations.png" alt=""></p>
 <p>这也是一个树形问题<br>Perms(nums[0…n-1]) = {取出一个数字} + Perms(nums[{0…n-1} - 这个数字])</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/24
@@ -399,7 +399,7 @@ public:
         return res;
     }
 };
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/Combinations.png" alt=""></p>
+</code></pre><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Combinations.png" alt=""></p>
 <p>这是我们对这道题递归树建立的模型，在这个模型里存在一个地方我们是明显没必要去走的，就是在于最后的地方，我们根本不需要去尝试取4，这是因为我们取4之后无法再取任意一个数了。在我们上面的算法中我们还是尝试取了4，取完4之后当取第二个数时发现我们什么都取不了了，所以只好再返回回去，对于这一部分我们完全可以把它剪掉。换句话说，我们只尝试取1,2,3。</p>
 <p>回溯法的剪枝</p>
 <pre><code>/**
@@ -464,7 +464,7 @@ word = &quot;SEE&quot;, -&gt; returns true,
 word = &quot;ABCB&quot;, -&gt; returns false.
  */
 </code></pre><p>对于每一个位置，我们按照上右下左从四个方向寻找，当选择的方向匹配时，则选择这个位置继续进行上右下左寻找，如果四个方向都不匹配，则退回上一步的位置寻找下一个方向。</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Word%20Search.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Word-Search.png" alt=""></p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/24
  */

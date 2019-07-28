@@ -324,7 +324,7 @@ public:
  * Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
  * Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
  */
-</code></pre><p><img src="http://oseihavwm.bkt.clouddn.com/Swap%20Nodes%20in%20Pairs.png" alt=""></p>
+</code></pre><p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Swap-Nodes-in-Pairs.png" alt=""></p>
 <p>之后我们要做的事情就是将P指针挪向node1，也就是下面一对节点之前的节点，我们现在根据新的p的位置，下一个节点就是node1，下一个节点是node2，在下一个节点是next。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/21
@@ -471,7 +471,7 @@ public:
     }
 };
 </code></pre><p>这个思路遍历了两遍链表，我们可以不可以优化呢？</p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Remove%20Nth%20Node%20From%20End%20of%20List.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/LeetCode/Remove-Nth-Node-From-End-of-List.png" alt=""></p>
 <p>两个指针间的距离是题目给的n，当后面一个指针移动到最后时，前一个指针指向的就是要删除的节点的前一个节点。</p>
 <pre><code>/**
  * Created by Thpffcj on 2017/9/21
