@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>Elasticsearch 入门 | Thpffcj的树洞</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Hexo">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close">
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                    
+                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
+                    
+                    <li><a href="http://domain.com/" class="animsition-link">Name</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Thpffcj</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+</div>
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2019-08-27T14:20:39.000Z" itemprop="datePublished">
+          2019-08-27
+      </time>
+    
+</span>
+                <h1>Elasticsearch 入门</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="1-Elasticsearch之入门"><a href="#1-Elasticsearch之入门" class="headerlink" title="1. Elasticsearch之入门"></a>1. Elasticsearch之入门</h2><h3 id="1-术语介绍"><a href="#1-术语介绍" class="headerlink" title="1. 术语介绍"></a>1. 术语介绍</h3><ul>
+<li>文档 Document：用户存储在es中的数据文档</li>
+<li>索引 Index：由具有相同字段的文档列表组成</li>
+<li>节点 Node：一个Elasticsearch的运行实例，是集群的构成单元</li>
+<li>集群 Cluster：由一个或多个节点组成，对外提供服务</li>
+</ul>
+<h3 id="2-Document介绍"><a href="#2-Document介绍" class="headerlink" title="2. Document介绍"></a>2. Document介绍</h3><p>Json Object，由字段(Field)组成，常见数据类型如下：</p>
+<ul>
+<li>字符串：text，keyword</li>
+<li>数值型：long，integer，short，byte，double，float，half_float，scaled_float</li>
+<li>布尔：boolean</li>
+<li>日期：date</li>
+<li>二进制：binary</li>
+<li>范围类型：integer_range，float_range，long_range，double_range，date_range</li>
+</ul>
+<p><strong>每个文档有一个唯一id标志</strong></p>
+<ul>
+<li>自行指定</li>
+<li>es自动生成</li>
+</ul>
+<p><strong>Document MetaData</strong></p>
+<p>元数据，用于标注文档的相关信息</p>
+<ul>
+<li>_index：文档所在的索引名</li>
+<li>_type：文档所在的类型名</li>
+<li>_id：文档唯一id</li>
+<li>_uid：组合id，由_type和_id组成(6.X _type不再起作用，同_id一样)</li>
+<li>_source：文档的原始Json数据，可以从这里获取每个字段的内容</li>
+<li>_all：整合所有字段内容到该字段，默认禁用</li>
+</ul>
+<h3 id="3-Index介绍"><a href="#3-Index介绍" class="headerlink" title="3. Index介绍"></a>3. Index介绍</h3><ul>
+<li>索引中存储具有相同结构的文档(Document)<ul>
+<li>每个索引都有自己的mapping定义，用于定义字段名和类型</li>
+</ul>
+</li>
+<li>一个集群可以有多个索引，比如：<ul>
+<li>nginx日志存储的时候可以按照日期每天生成一个索引来存储<ul>
+<li>nginx-log-2017-01-01</li>
+<li>nginx-log-2017-01-02</li>
+<li>nginx-log-2017-01-03</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-restapi介绍"><a href="#4-restapi介绍" class="headerlink" title="4. restapi介绍"></a>4. restapi介绍</h3><ul>
+<li>Elasticsreach集群对外提供RESTful API<ul>
+<li>REST - REpresentational State Transfer</li>
+<li>URI指定资源，如Index，Document等</li>
+<li>Http Method指明资源操作类型，如GET，POST，PUT，DELETE等</li>
+</ul>
+</li>
+<li>常用的两种交互方式<ul>
+<li>Curl命令行</li>
+<li>Kibana DevTools</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-index-api"><a href="#5-index-api" class="headerlink" title="5. index_api"></a>5. index_api</h3><p>es有专门的Index API，用于创建，更新，删除索引配置等</p>
+<pre><code>Thpffcj:elasticsearch-6.5.4 thpffcj$ bin/elasticsearch
+
+Thpffcj:kibana-6.5.4-darwin-x86_64 thpffcj$ bin/kibana
+</code></pre><ul>
+<li>访问localhost:5601端口可以访问kibana的图形化界面，我们可以使用Kibana DevTools使用REST API</li>
+</ul>
+<pre><code>PUT /test_index
+
+#! Deprecation: the default number of shards will change from [5] to [1] in 7.0.0; if you wish to continue using the default of [5] shards, you must manage this on the create index request or with an index template
+{
+  &quot;acknowledged&quot; : true,
+  &quot;shards_acknowledged&quot; : true,
+  &quot;index&quot; : &quot;test_index&quot;
+}
+
+GET _cat/indices
+
+yellow open test_index xbR-XQYDT7C-4GZZ1vRjfA 5 1 0 0 1.1kb 1.1kb
+
+DELETE /test_index
+
+{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h3 id="6-document-api"><a href="#6-document-api" class="headerlink" title="6. document_api"></a>6. document_api</h3><p>es有专门的Document API</p>
+<ul>
+<li>创建文档</li>
+<li>查询文档</li>
+<li>更新文档</li>
+<li>删除文档</li>
+</ul>
+<ul>
+<li>创建index为test_index，type为doc，id为1的文档，高版本后没有type的概念</li>
+</ul>
+<pre><code>PUT /test_index/doc/1
+{
+  &quot;username&quot;:&quot;thpffcj&quot;,
+  &quot;age&quot;:22
+}
+
+{
+  &quot;_index&quot; : &quot;test_index&quot;,
+  &quot;_type&quot; : &quot;doc&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><ul>
+<li>不指定id创建文档</li>
+</ul>
+<pre><code>POST /test_index/doc
+{
+  &quot;username&quot;:&quot;tom&quot;,
+  &quot;age&quot;:20
+}
+
+{
+  &quot;_index&quot; : &quot;test_index&quot;,
+  &quot;_type&quot; : &quot;doc&quot;,
+  &quot;_id&quot; : &quot;yfg31mwBWHG_wS6wM641&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><ul>
+<li>指定要查询的文档id</li>
+</ul>
+<pre><code>GET /test_index/doc/1
+
+{
+  &quot;_index&quot; : &quot;test_index&quot;,
+  &quot;_type&quot; : &quot;doc&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 1,
+  &quot;found&quot; : true,
+  &quot;_source&quot; : {
+    &quot;username&quot; : &quot;thpffcj&quot;,
+    &quot;age&quot; : 22
+  }
+}
+</code></pre><ul>
+<li>搜索所有文档，用到_search</li>
+</ul>
+<pre><code>GET /test_index/doc/_search
+
+{
+  &quot;took&quot; : 12,  查询耗时，单位ms
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 2,  符合条件的总文档数
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [  返回文档详情数据数据，默认前10个文档
+      {
+        &quot;_index&quot; : &quot;test_index&quot;,  索引名
+        &quot;_type&quot; : &quot;doc&quot;, 
+        &quot;_id&quot; : &quot;yfg31mwBWHG_wS6wM641&quot;,  文档的id
+        &quot;_score&quot; : 1.0,  文档的得分
+        &quot;_source&quot; : {  文档详情
+          &quot;username&quot; : &quot;tom&quot;,
+          &quot;age&quot; : 20
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;test_index&quot;,
+        &quot;_type&quot; : &quot;doc&quot;,
+        &quot;_id&quot; : &quot;1&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;username&quot; : &quot;thpffcj&quot;,
+          &quot;age&quot; : 22
+        }
+      }
+    ]
+  }
+}
+</code></pre><ul>
+<li>指定查询条件</li>
+</ul>
+<pre><code>GET /test_index/doc/_search
+{
+  &quot;query&quot;: {
+    &quot;term&quot;: {
+      &quot;_id&quot;:&quot;1&quot;
+    }
+  }
+}
+</code></pre><ul>
+<li><strong>es允许一次创建多个文档，从而减少网络传输开销，提升写入速率</strong><ul>
+<li>endpoint为_bulk</li>
+<li>endpoint为_mget</li>
+</ul>
+</li>
+</ul>
+<pre><code>POST _bulk
+{&quot;index&quot;:{&quot;_index&quot;:&quot;test_index&quot;,&quot;_type&quot;:&quot;doc&quot;,&quot;_id&quot;:&quot;3&quot;}}
+{&quot;username&quot;:&quot;lilei&quot;,&quot;age&quot;:10}
+{&quot;delete&quot;:{&quot;_index&quot;:&quot;test_index&quot;,&quot;_type&quot;:&quot;doc&quot;,&quot;_id&quot;:&quot;1&quot;}}
+{&quot;update&quot;:{&quot;_index&quot;:&quot;test_index&quot;,&quot;_type&quot;:&quot;doc&quot;,&quot;_id&quot;:&quot;2&quot;}}
+{&quot;doc&quot;:{&quot;age&quot;:100}}
+
+GET _mget
+{
+  &quot;docs&quot;: [
+    {
+      &quot;_index&quot;: &quot;test_index&quot;,
+      &quot;_type&quot;: &quot;doc&quot;,
+      &quot;_id&quot;: &quot;1&quot;
+    },
+    {
+      &quot;_index&quot;: &quot;test_index&quot;,
+      &quot;_type&quot;: &quot;doc&quot;,
+      &quot;_id&quot;: &quot;2&quot;
+    }
+  ]
+}
+</code></pre><p><br></p>
+<hr>
+<h2 id="2-Elasticsearch之倒排索引与分词"><a href="#2-Elasticsearch之倒排索引与分词" class="headerlink" title="2. Elasticsearch之倒排索引与分词"></a>2. Elasticsearch之倒排索引与分词</h2><h3 id="1-书的目录与索引"><a href="#1-书的目录与索引" class="headerlink" title="1. 书的目录与索引"></a>1. 书的目录与索引</h3><p>如何查找”ACID“关键词所在的页面？</p>
+<p><strong>书与搜索引擎</strong></p>
+<ul>
+<li>目录页对应正排索引</li>
+<li>索引页对应倒排索引</li>
+</ul>
+<h3 id="2-正排与倒排索引简介"><a href="#2-正排与倒排索引简介" class="headerlink" title="2. 正排与倒排索引简介"></a>2. 正排与倒排索引简介</h3><ul>
+<li>正排索引<ul>
+<li>文档Id到文档内容，单词的关联关系</li>
+</ul>
+</li>
+<li>倒排索引<ul>
+<li>单词到文档Id的关联关系</li>
+</ul>
+</li>
+</ul>
+<p><img src="" alt=""></p>
+<ul>
+<li>查询包含“搜索引擎”的文档<ul>
+<li>通过倒排索引获得“搜索引擎”对应的文档Id有1和3</li>
+<li>通过正排索引查询1和3的完整内容</li>
+<li>返回用户最终结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-倒排索引详解"><a href="#3-倒排索引详解" class="headerlink" title="3. 倒排索引详解"></a>3. 倒排索引详解</h3><ul>
+<li>倒排索引是搜索引擎的核心，主要包含两部分：<ul>
+<li>单词词典(Term Dictionary)<ul>
+<li>是倒排索引的重要组成</li>
+<li>记录所有文档的单词，一般都比较大</li>
+<li>记录单词到倒排列表的关联信息</li>
+<li>单词字典的实现一般是用B+ Tree</li>
+</ul>
+</li>
+<li>倒排列表(Posting List)<ul>
+<li>记录了单词对应的文档集合，由倒排索引项(Posing)组成</li>
+<li>主要包含了如下信息：</li>
+<li>文档Id，用于获取原始信息</li>
+<li>单词频率(TF，Term Frequency)，记录该单词在该文档中的出现次数，用于后续相关性算分</li>
+<li>位置(Position)，记录单词在文档中的分词位置(多个)，用于做词语搜索(Phrase Query)</li>
+<li>偏移(Offset)，记录单词在文档的开始和结束位置，用于做高亮显示</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="" alt=""></p>
+<ul>
+<li>es存储的是一个json格式的文档，其中包含多个字段，每个字段会有自己的倒排索引</li>
+</ul>
+<h3 id="4-分词介绍"><a href="#4-分词介绍" class="headerlink" title="4. 分词介绍"></a>4. 分词介绍</h3><ul>
+<li>分词是指将文本转换成一系列单词(term or token)的过程，也可以叫做文本分析，在es里面称为Analysis</li>
+<li>分词器是es中专门处理分词的组件，它的组成如下：<ul>
+<li>Character Filters：针对原始文本进行处理，比如去除html特殊标记符</li>
+<li>Tokenizer：将原始文本按照一定规则切分为单词</li>
+<li>Token Filters：针对tokenizer处理的单词进行再加工，比如转小写，删除或新增等处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-analyze-api"><a href="#5-analyze-api" class="headerlink" title="5. analyze_api"></a>5. analyze_api</h3><p>es提供了一个测试分词的api接口，方便验证分词效果，endpoint是_analyze</p>
+<ul>
+<li>可以直接指定analyzer进行测试</li>
+</ul>
+<pre><code>POST _analyze
+{
+  &quot;analyzer&quot;: &quot;standard&quot;,  分词器
+  &quot;text&quot;: &quot;hello world!&quot;  测试文本
+}
+
+{
+  &quot;tokens&quot; : [
+    {
+      &quot;token&quot; : &quot;hello&quot;,  粉刺结果
+      &quot;start_offset&quot; : 0,  起始偏移
+      &quot;end_offset&quot; : 5,  结束偏移
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 0  分词位置
+    },
+    {
+      &quot;token&quot; : &quot;world&quot;,
+      &quot;start_offset&quot; : 6,
+      &quot;end_offset&quot; : 11,
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 1
+    }
+  ]
+}
+</code></pre><ul>
+<li>可以直接指定索引中的字段进行测试</li>
+</ul>
+<pre><code>POST test_index/_analyze
+{
+  &quot;field&quot;: &quot;username&quot;, 
+  &quot;text&quot;: &quot;hello world!&quot;
+}
+</code></pre><ul>
+<li>可以自定义分词器进行测试</li>
+</ul>
+<pre><code>POST _analyze
+{
+  &quot;tokenizer&quot;: &quot;standard&quot;, 
+  &quot;filter&quot;: [&quot;lowercase&quot;], 
+  &quot;text&quot;: &quot;hello world!&quot;
+}
+</code></pre><h3 id="6-自带分词器"><a href="#6-自带分词器" class="headerlink" title="6. 自带分词器"></a>6. 自带分词器</h3><p>es自带如下的分词器</p>
+<ul>
+<li>Standard<ul>
+<li>默认分词器</li>
+<li>按词切分，支持多语言</li>
+</ul>
+</li>
+<li>Simple<ul>
+<li>按照非字母切分</li>
+</ul>
+</li>
+<li>Whitespace<ul>
+<li>按照空格切分</li>
+</ul>
+</li>
+<li>Stop<ul>
+<li>相比Simple Analyzer多了Stop World处理</li>
+</ul>
+</li>
+<li>Keyword<ul>
+<li>不分词，直接将输入作为一个单词输出</li>
+</ul>
+</li>
+<li>Pattern<ul>
+<li>通过正则表达式自定义分隔符</li>
+<li>默认是\W+，即非字词的符号作为分隔符</li>
+</ul>
+</li>
+<li>Language<ul>
+<li>提供了30+常见语言的分词器</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-中文分词"><a href="#7-中文分词" class="headerlink" title="7. 中文分词"></a>7. 中文分词</h3><ul>
+<li>难点<ul>
+<li>中文分词指的是将一个汉字序列切分成一个一个单独的词，在英文中，单词之间是以空格作为自然分界符，汉语中词没有一个形式上的分界符</li>
+<li>上下文不同，分词结果迥异</li>
+</ul>
+</li>
+<li>常用分词系统<ul>
+<li>IK<ul>
+<li>实现中英文单词的切分</li>
+<li>可自定义词库，支持热更新分词词典</li>
+</ul>
+</li>
+<li>jieba<ul>
+<li>Python中最流行的分词系统，支持分词和词性标注</li>
+<li>支持繁体分词，自定义词典，并行分词等</li>
+</ul>
+</li>
+<li>Hanlp<ul>
+<li>有一系列模型与算法组成的Java工具包，目标是普及自然语言处理在生产环境中的应用</li>
+</ul>
+</li>
+<li>THULAC<ul>
+<li>THU Lexical Analyzer for Chinese，有清华大学自然语言处理与社会人文计算实验室研制推出的一套中文词法分析工具包，具有中文分词和词性标注功能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-自定义分词之Character-Filter"><a href="#8-自定义分词之Character-Filter" class="headerlink" title="8. 自定义分词之Character Filter"></a>8. 自定义分词之Character Filter</h3><ul>
+<li>当自带的分词无法满足需求时，可以自定义分词<ul>
+<li>通过自定义Character Filter，Tokenizer和Token Filter实现</li>
+</ul>
+</li>
+</ul>
+<p><strong>Character Filter</strong></p>
+<ul>
+<li>在Tokenizer之前对原始文本进行处理，比如增加，删除或替换字符等</li>
+<li>自带的如下：<ul>
+<li>HTML Strip去除html标签和转换html实体</li>
+<li>Mapping进行字符替换操作</li>
+<li>Pattern Replace进行正则匹配替换</li>
+</ul>
+</li>
+<li>会影响后续tokenizer解析的position和offset信息</li>
+</ul>
+<h3 id="9-自定义分词之Tokenizer"><a href="#9-自定义分词之Tokenizer" class="headerlink" title="9. 自定义分词之Tokenizer"></a>9. 自定义分词之Tokenizer</h3><ul>
+<li>将原始文本按照一定规则切分为单词(term or token)</li>
+<li>自带的如下：<ul>
+<li>standard：按照单词进行分割</li>
+<li>letter：按照非字符类进行分割</li>
+<li>whitespace：按照空格进行分割</li>
+<li>UAX URL Email：按照standard分割，但不会分割邮箱和url</li>
+<li>NGram和Edge NGram：连词分割</li>
+<li>Path Hierarchy：按照文件路径进行切割</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-自定义分词之Token-Filter"><a href="#10-自定义分词之Token-Filter" class="headerlink" title="10. 自定义分词之Token Filter"></a>10. 自定义分词之Token Filter</h3><ul>
+<li>对于Tokenizer输出的单词(term)进行增加，删除，修改等操作</li>
+<li>自带的如下：<ul>
+<li>lowercase：将所有term转换为小写</li>
+<li>stop：删除stop words</li>
+<li>NGram和Edge NGram：连词分割</li>
+<li>Synonym：添加近义词的term</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-自定义分词"><a href="#11-自定义分词" class="headerlink" title="11. 自定义分词"></a>11. 自定义分词</h3><ul>
+<li>自定义分词需要在索引的配置中设定</li>
+</ul>
+<pre><code>PUT test_index_1
+{
+  &quot;settings&quot;: {
+    &quot;analysis&quot;: {
+      &quot;analyzer&quot;: {
+        &quot;my_custom_analyzer&quot;: {
+          &quot;type&quot;: &quot;custom&quot;,
+          &quot;tokenizer&quot;: &quot;standard&quot;,
+
+          &quot;char_filter&quot;: [
+            &quot;html_strip&quot;
+          ],
+          &quot;filter&quot;: [
+            &quot;lowercase&quot;,
+            &quot;asciifolding&quot;
+          ]
+        }
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>测试效果</li>
+</ul>
+<pre><code>POST test_index_1/_analyze
+{
+  &quot;analyzer&quot;: &quot;my_custom_analyzer&quot;,
+  &quot;text&quot;: &quot;Is this &lt;b&gt;a box&lt;/b&gt;?&quot;
+}
+
+{
+  &quot;tokens&quot; : [
+    {
+      &quot;token&quot; : &quot;is&quot;,
+      &quot;start_offset&quot; : 0,
+      &quot;end_offset&quot; : 2,
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 0
+    },
+    {
+      &quot;token&quot; : &quot;this&quot;,
+      &quot;start_offset&quot; : 3,
+      &quot;end_offset&quot; : 7,
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 1
+    },
+    {
+      &quot;token&quot; : &quot;a&quot;,
+      &quot;start_offset&quot; : 11,
+      &quot;end_offset&quot; : 12,
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 2
+    },
+    {
+      &quot;token&quot; : &quot;box&quot;,
+      &quot;start_offset&quot; : 13,
+      &quot;end_offset&quot; : 20,
+      &quot;type&quot; : &quot;&lt;ALPHANUM&gt;&quot;,
+      &quot;position&quot; : 3
+    }
+  ]
+}
+</code></pre><h3 id="12-分词使用说明"><a href="#12-分词使用说明" class="headerlink" title="12. 分词使用说明"></a>12. 分词使用说明</h3><ul>
+<li>分词会在如下两个时机使用：<ul>
+<li>创建或更新文档时(Index Time)，会对相应的文档进行分词处理</li>
+<li>查询时(Search Time)，会对查询语句进行分词</li>
+</ul>
+</li>
+<li>一般不需要特别指定查询时分词器，直接使用索引时分词器即可，否则会出现无法匹配的情况</li>
+</ul>
+<p><strong>分词的使用建议</strong></p>
+<ul>
+<li>明确字段是否需要分词，不需要分词的字段就将type设置为keyword，可以节省空间和提高写性能</li>
+<li>善用_analyze API，查看文档的具体分词结果</li>
+<li>动手测试</li>
+</ul>
+<h3 id="13-官方文档说明"><a href="#13-官方文档说明" class="headerlink" title="13. 官方文档说明"></a>13. 官方文档说明</h3><p><br></p>
+<hr>
+<h2 id="3-Elasticsearch之Mapping设置"><a href="#3-Elasticsearch之Mapping设置" class="headerlink" title="3. Elasticsearch之Mapping设置"></a>3. Elasticsearch之Mapping设置</h2><h3 id="1-mapping简介"><a href="#1-mapping简介" class="headerlink" title="1. mapping简介"></a>1. mapping简介</h3><h3 id="2-自定义-mapping"><a href="#2-自定义-mapping" class="headerlink" title="2. 自定义 mapping"></a>2. 自定义 mapping</h3><h3 id="3-mapping演示"><a href="#3-mapping演示" class="headerlink" title="3. mapping演示"></a>3. mapping演示</h3><h3 id="4-copy-to参数说明"><a href="#4-copy-to参数说明" class="headerlink" title="4. copy_to参数说明"></a>4. copy_to参数说明</h3><h3 id="5-index参数说明"><a href="#5-index参数说明" class="headerlink" title="5. index参数说明"></a>5. index参数说明</h3><h3 id="6-index-options参数说明"><a href="#6-index-options参数说明" class="headerlink" title="6. index_options参数说明"></a>6. index_options参数说明</h3><h3 id="7-mapping文档说明"><a href="#7-mapping文档说明" class="headerlink" title="7. mapping文档说明"></a>7. mapping文档说明</h3><h3 id="8-数据类型"><a href="#8-数据类型" class="headerlink" title="8. 数据类型"></a>8. 数据类型</h3><h3 id="9-dynamic-mapping简介"><a href="#9-dynamic-mapping简介" class="headerlink" title="9. dynamic-mapping简介"></a>9. dynamic-mapping简介</h3><h3 id="10-dynamic日期与数字识别"><a href="#10-dynamic日期与数字识别" class="headerlink" title="10. dynamic日期与数字识别"></a>10. dynamic日期与数字识别</h3><h3 id="11-dynamic-template简介"><a href="#11-dynamic-template简介" class="headerlink" title="11. dynamic-template简介"></a>11. dynamic-template简介</h3><h3 id="12-自定义mapping的建议"><a href="#12-自定义mapping的建议" class="headerlink" title="12. 自定义mapping的建议"></a>12. 自定义mapping的建议</h3><h3 id="13-索引模板-mp4"><a href="#13-索引模板-mp4" class="headerlink" title="13. 索引模板.mp4"></a>13. 索引模板.mp4</h3><p><br></p>
+<hr>
+<h2 id="4-Elasticsearch之Search-API介绍"><a href="#4-Elasticsearch之Search-API介绍" class="headerlink" title="4. Elasticsearch之Search API介绍"></a>4. Elasticsearch之Search API介绍</h2><h3 id="1-SearchAPI概览"><a href="#1-SearchAPI概览" class="headerlink" title="1. SearchAPI概览"></a>1. SearchAPI概览</h3><h3 id="2-URISearch详解与演示"><a href="#2-URISearch详解与演示" class="headerlink" title="2. URISearch详解与演示"></a>2. URISearch详解与演示</h3><h3 id="3-QueryDSL简介"><a href="#3-QueryDSL简介" class="headerlink" title="3. QueryDSL简介"></a>3. QueryDSL简介</h3><h3 id="4-字段类查询简介及match-query"><a href="#4-字段类查询简介及match-query" class="headerlink" title="4. 字段类查询简介及match-query"></a>4. 字段类查询简介及match-query</h3><h3 id="5-相关性算分-mp4"><a href="#5-相关性算分-mp4" class="headerlink" title="5. 相关性算分.mp4"></a>5. 相关性算分.mp4</h3><h3 id="6-match-phrase-query-音频-mp4"><a href="#6-match-phrase-query-音频-mp4" class="headerlink" title="6. match-phrase-query_音频.mp4"></a>6. match-phrase-query_音频.mp4</h3><h3 id="7-query-string-query"><a href="#7-query-string-query" class="headerlink" title="7. query-string-query"></a>7. query-string-query</h3><h3 id="8-simple-query-string-query"><a href="#8-simple-query-string-query" class="headerlink" title="8. simple-query-string-query"></a>8. simple-query-string-query</h3><h3 id="9-term-terms-query"><a href="#9-term-terms-query" class="headerlink" title="9. term-terms-query"></a>9. term-terms-query</h3><h3 id="10-range-query"><a href="#10-range-query" class="headerlink" title="10. range-query"></a>10. range-query</h3><h3 id="11-复合查询介绍及ConstantScore"><a href="#11-复合查询介绍及ConstantScore" class="headerlink" title="11. 复合查询介绍及ConstantScore"></a>11. 复合查询介绍及ConstantScore</h3><h3 id="12-bool-query"><a href="#12-bool-query" class="headerlink" title="12. bool-query"></a>12. bool-query</h3><h3 id="13-count-and-source-filtering"><a href="#13-count-and-source-filtering" class="headerlink" title="13. count-and-source-filtering"></a>13. count-and-source-filtering</h3><p><br></p>
+<hr>
+<h2 id="5-Elasticsearch之分布式特性介绍"><a href="#5-Elasticsearch之分布式特性介绍" class="headerlink" title="5. Elasticsearch之分布式特性介绍"></a>5. Elasticsearch之分布式特性介绍</h2><h3 id="1-分布式介绍及cerebro"><a href="#1-分布式介绍及cerebro" class="headerlink" title="1. 分布式介绍及cerebro"></a>1. 分布式介绍及cerebro</h3><h3 id="2-构建集群"><a href="#2-构建集群" class="headerlink" title="2. 构建集群"></a>2. 构建集群</h3><h3 id="3-副本与分片"><a href="#3-副本与分片" class="headerlink" title="3. 副本与分片"></a>3. 副本与分片</h3><h3 id="4-两个问题"><a href="#4-两个问题" class="headerlink" title="4. 两个问题"></a>4. 两个问题</h3><h3 id="5-集群状态"><a href="#5-集群状态" class="headerlink" title="5. 集群状态"></a>5. 集群状态</h3><h3 id="6-故障转移-mp4"><a href="#6-故障转移-mp4" class="headerlink" title="6. 故障转移.mp4"></a>6. 故障转移.mp4</h3><h3 id="7-文档分布式存储"><a href="#7-文档分布式存储" class="headerlink" title="7.文档分布式存储"></a>7.文档分布式存储</h3><h3 id="8-脑裂问题"><a href="#8-脑裂问题" class="headerlink" title="8. 脑裂问题"></a>8. 脑裂问题</h3><h3 id="9-shard详解"><a href="#9-shard详解" class="headerlink" title="9. shard详解"></a>9. shard详解</h3><p><br></p>
+<hr>
+<h2 id="6-Elasticsearch之深入了解Search的运行机制"><a href="#6-Elasticsearch之深入了解Search的运行机制" class="headerlink" title="6. Elasticsearch之深入了解Search的运行机制"></a>6. Elasticsearch之深入了解Search的运行机制</h2><h3 id="1-Query-Then-Fetch"><a href="#1-Query-Then-Fetch" class="headerlink" title="1. Query-Then-Fetch"></a>1. Query-Then-Fetch</h3><h3 id="2-相关性算分"><a href="#2-相关性算分" class="headerlink" title="2. 相关性算分"></a>2. 相关性算分</h3><h3 id="3-sorting-doc-values-fielddata"><a href="#3-sorting-doc-values-fielddata" class="headerlink" title="3. sorting-doc-values-fielddata"></a>3. sorting-doc-values-fielddata</h3><h3 id="4-分页与遍历-fromsize"><a href="#4-分页与遍历-fromsize" class="headerlink" title="4. 分页与遍历-fromsize"></a>4. 分页与遍历-fromsize</h3><h3 id="5-分页与遍历-scroll"><a href="#5-分页与遍历-scroll" class="headerlink" title="5. 分页与遍历-scroll"></a>5. 分页与遍历-scroll</h3><h3 id="6-分页与遍历-search-after"><a href="#6-分页与遍历-search-after" class="headerlink" title="6. 分页与遍历-search_after"></a>6. 分页与遍历-search_after</h3><h3 id="7-文档说明"><a href="#7-文档说明" class="headerlink" title="7. 文档说明"></a>7. 文档说明</h3><p><br></p>
+<hr>
+<h2 id="7-Elasticsearch之聚合分析入门"><a href="#7-Elasticsearch之聚合分析入门" class="headerlink" title="7. Elasticsearch之聚合分析入门"></a>7. Elasticsearch之聚合分析入门</h2><h3 id="1-聚合分析简介"><a href="#1-聚合分析简介" class="headerlink" title="1. 聚合分析简介"></a>1. 聚合分析简介</h3><h3 id="2-metric聚合分析"><a href="#2-metric聚合分析" class="headerlink" title="2. metric聚合分析"></a>2. metric聚合分析</h3><h3 id="3-bucket聚合分析"><a href="#3-bucket聚合分析" class="headerlink" title="3. bucket聚合分析"></a>3. bucket聚合分析</h3><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9.文档说明"></a>9.文档说明</h3>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
+        ← 【置顶】 博客目录
+    </a>
+    
+    
+    <a class="pull-right" href="/2019/08/23/Netty-In-depth-Analysis/">
+        Netty 深入剖析 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+				<span id="busuanzi_container_site_pv">
+					本站总访问量<span id="busuanzi_value_site_pv"></span>次
+				</span>	
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Thpffcj.
+                </p>
+                <p>私は再び1日満たすためにあなたとの重要な人々を望みます</p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- ============================ END Footer =========================== -->
+
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      (function(){
+        console.log('font');
+        var getCss = function(path) {
+          var head = document.getElementsByTagName('head')[0];
+          link = document.createElement('link');
+          link.href = path;
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          head.appendChild(link);
+        };
+        getCss('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        getCss('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+      })();
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

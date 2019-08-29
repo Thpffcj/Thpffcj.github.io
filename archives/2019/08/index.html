@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>高并发之扩容思路 | Thpffcj的树洞</title>
+  <title>Archives: 2019/8 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -166,158 +166,78 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 </div>
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
-          2018-05-28
-      </time>
-    
-</span>
-                <h1>高并发之扩容思路</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-高并发之扩容思路"><a href="#1-高并发之扩容思路" class="headerlink" title="1. 高并发之扩容思路"></a>1. 高并发之扩容思路</h2><ul>
-<li>垂直扩容(纵向扩展)：提高系统部件能力</li>
-<li>水平扩容(横向扩展)：增加更多系统成员来实现</li>
-</ul>
-<p><strong>扩容 - 数据库</strong></p>
-<ul>
-<li>读操作扩展：memcache, redis, CDN等缓存</li>
-<li>写操作扩展：Cassandra, Hbase等</li>
-</ul>
-<p><br></p>
-<hr>
-<h2 id="2-高并发之缓存思路"><a href="#2-高并发之缓存思路" class="headerlink" title="2. 高并发之缓存思路"></a>2. 高并发之缓存思路</h2><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98.jpg" alt=""></p>
-<h3 id="1-缓存特征，场景及组件介绍"><a href="#1-缓存特征，场景及组件介绍" class="headerlink" title="1. 缓存特征，场景及组件介绍"></a>1. 缓存特征，场景及组件介绍</h3><p><strong>缓存特征</strong></p>
-<ul>
-<li>命中率：命中数 / (命中数 + 没有命中数)</li>
-<li>最大元素(空间)</li>
-<li>清空策略：FIFO, LFU, LRU, 过期时间, 随机等</li>
-</ul>
-<p><strong>缓存命中率影响因素</strong></p>
-<ul>
-<li>业务场景和业务需求</li>
-<li>缓存的设计(粒度和策略)</li>
-<li>缓存容量和基础设施</li>
-</ul>
-<p><strong>缓存分类和应用场景</strong></p>
-<ul>
-<li>本地缓存：编程实现(成员变量，局部变量，静态变量)，Guava Cache</li>
-<li>分布式缓存：Memcache, Redis</li>
-</ul>
-<p><strong>缓存 - Guava Cache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Guava%20Cache.png" alt=""></p>
-<ul>
-<li>使用多个细粒度segment锁，保证线程安全的同时满足高并发的需求</li>
-</ul>
-<p><strong>缓存 - Memcache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Memcache.png" alt=""></p>
-<ul>
-<li>Memcache内存结构</li>
-</ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Memcache%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84.png" alt=""></p>
-<ul>
-<li>chunk中总会有内存浪费</li>
-<li>LRU算法不是针对全局的</li>
-</ul>
-<p><strong>缓存 - Redis</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Redis.png" alt=""></p>
-<h3 id="2-redis的使用"><a href="#2-redis的使用" class="headerlink" title="2. redis的使用"></a>2. redis的使用</h3><ul>
-<li>添加依赖</li>
-</ul>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
-    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
-    &lt;version&gt;2.8.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><ul>
-<li>application.properties中添加属性</li>
-</ul>
-<pre><code># redis
-jedis.host=127.0.0.1
-jedis.port=6379
-</code></pre><ul>
-<li>添加redis配置</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Configuration
-public class RedisConfig {
-
-    @Bean(name = &quot;redisPool&quot;)
-    public JedisPool jedisPool(@Value(&quot;${jedis.host}&quot;) String host,
-                               @Value(&quot;${jedis.port}&quot;) int port) {
-        return new JedisPool(host, port);
-    }
-}
-</code></pre><ul>
-<li>最后我们封装自己的RedisClient</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Component
-public class RedisClient {
-
-    @Resource(name = &quot;redisPool&quot;)
-    private JedisPool jedisPool;
-
-    public void set(String key, String value) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            jedis.set(key, value);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-
-
-    public String get(String key) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            return jedis.get(key);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-}
-</code></pre><h3 id="3-高并发场景问题及实战"><a href="#3-高并发场景问题及实战" class="headerlink" title="3. 高并发场景问题及实战"></a>3. 高并发场景问题及实战</h3>
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="pagination" role="pagination">
-    
-    <a class="pull-left" href="/2018/12/12/Software-Engineering-and-Computing-Course-1/" style="float: left;">
-        ← 软件工程与计算 1
-    </a>
-    
-    
-    <a class="pull-right" href="/2018/05/25/Python-Machine-Learning-9/">
-        决策树 →
-    </a>
-    
-</nav>
-
-        <div class="duoshuo">
-
-
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2019/08/27/Elastic-Stack-From-Entry-To-Practice-1/">Elasticsearch 入门</a></h4>
+                            
+                            <p><time datetime="2019-08-27T14:20:39.000Z"><a href="/2019/08/27/Elastic-Stack-From-Entry-To-Practice-1/">2019-08-27</a></time></p>
+                        </div>
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2019/08/23/Netty-In-depth-Analysis/">Netty 深入剖析</a></h4>
+                            
+                            <p><time datetime="2019-08-23T02:06:34.000Z"><a href="/2019/08/23/Netty-In-depth-Analysis/">2019-08-23</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
