@@ -432,7 +432,7 @@ GET _mget
 </ul>
 </li>
 </ul>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Elastic-Stack-From-Entry-To-Practice/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95.png" alt=""></p>
 <ul>
 <li>查询包含“搜索引擎”的文档<ul>
 <li>通过倒排索引获得“搜索引擎”对应的文档Id有1和3</li>
@@ -462,7 +462,7 @@ GET _mget
 </ul>
 </li>
 </ul>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Elastic-Stack-From-Entry-To-Practice/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E8%AF%A6%E8%A7%A3.png" alt=""></p>
 <ul>
 <li>es存储的是一个json格式的文档，其中包含多个字段，每个字段会有自己的倒排索引</li>
 </ul>
@@ -699,24 +699,358 @@ GET _mget
 <li>善用_analyze API，查看文档的具体分词结果</li>
 <li>动手测试</li>
 </ul>
-<h3 id="13-官方文档说明"><a href="#13-官方文档说明" class="headerlink" title="13. 官方文档说明"></a>13. 官方文档说明</h3><p><br></p>
+<p><br></p>
 <hr>
-<h2 id="3-Elasticsearch之Mapping设置"><a href="#3-Elasticsearch之Mapping设置" class="headerlink" title="3. Elasticsearch之Mapping设置"></a>3. Elasticsearch之Mapping设置</h2><h3 id="1-mapping简介"><a href="#1-mapping简介" class="headerlink" title="1. mapping简介"></a>1. mapping简介</h3><h3 id="2-自定义-mapping"><a href="#2-自定义-mapping" class="headerlink" title="2. 自定义 mapping"></a>2. 自定义 mapping</h3><h3 id="3-mapping演示"><a href="#3-mapping演示" class="headerlink" title="3. mapping演示"></a>3. mapping演示</h3><h3 id="4-copy-to参数说明"><a href="#4-copy-to参数说明" class="headerlink" title="4. copy_to参数说明"></a>4. copy_to参数说明</h3><h3 id="5-index参数说明"><a href="#5-index参数说明" class="headerlink" title="5. index参数说明"></a>5. index参数说明</h3><h3 id="6-index-options参数说明"><a href="#6-index-options参数说明" class="headerlink" title="6. index_options参数说明"></a>6. index_options参数说明</h3><h3 id="7-mapping文档说明"><a href="#7-mapping文档说明" class="headerlink" title="7. mapping文档说明"></a>7. mapping文档说明</h3><h3 id="8-数据类型"><a href="#8-数据类型" class="headerlink" title="8. 数据类型"></a>8. 数据类型</h3><h3 id="9-dynamic-mapping简介"><a href="#9-dynamic-mapping简介" class="headerlink" title="9. dynamic-mapping简介"></a>9. dynamic-mapping简介</h3><h3 id="10-dynamic日期与数字识别"><a href="#10-dynamic日期与数字识别" class="headerlink" title="10. dynamic日期与数字识别"></a>10. dynamic日期与数字识别</h3><h3 id="11-dynamic-template简介"><a href="#11-dynamic-template简介" class="headerlink" title="11. dynamic-template简介"></a>11. dynamic-template简介</h3><h3 id="12-自定义mapping的建议"><a href="#12-自定义mapping的建议" class="headerlink" title="12. 自定义mapping的建议"></a>12. 自定义mapping的建议</h3><h3 id="13-索引模板-mp4"><a href="#13-索引模板-mp4" class="headerlink" title="13. 索引模板.mp4"></a>13. 索引模板.mp4</h3><p><br></p>
-<hr>
-<h2 id="4-Elasticsearch之Search-API介绍"><a href="#4-Elasticsearch之Search-API介绍" class="headerlink" title="4. Elasticsearch之Search API介绍"></a>4. Elasticsearch之Search API介绍</h2><h3 id="1-SearchAPI概览"><a href="#1-SearchAPI概览" class="headerlink" title="1. SearchAPI概览"></a>1. SearchAPI概览</h3><h3 id="2-URISearch详解与演示"><a href="#2-URISearch详解与演示" class="headerlink" title="2. URISearch详解与演示"></a>2. URISearch详解与演示</h3><h3 id="3-QueryDSL简介"><a href="#3-QueryDSL简介" class="headerlink" title="3. QueryDSL简介"></a>3. QueryDSL简介</h3><h3 id="4-字段类查询简介及match-query"><a href="#4-字段类查询简介及match-query" class="headerlink" title="4. 字段类查询简介及match-query"></a>4. 字段类查询简介及match-query</h3><h3 id="5-相关性算分-mp4"><a href="#5-相关性算分-mp4" class="headerlink" title="5. 相关性算分.mp4"></a>5. 相关性算分.mp4</h3><h3 id="6-match-phrase-query-音频-mp4"><a href="#6-match-phrase-query-音频-mp4" class="headerlink" title="6. match-phrase-query_音频.mp4"></a>6. match-phrase-query_音频.mp4</h3><h3 id="7-query-string-query"><a href="#7-query-string-query" class="headerlink" title="7. query-string-query"></a>7. query-string-query</h3><h3 id="8-simple-query-string-query"><a href="#8-simple-query-string-query" class="headerlink" title="8. simple-query-string-query"></a>8. simple-query-string-query</h3><h3 id="9-term-terms-query"><a href="#9-term-terms-query" class="headerlink" title="9. term-terms-query"></a>9. term-terms-query</h3><h3 id="10-range-query"><a href="#10-range-query" class="headerlink" title="10. range-query"></a>10. range-query</h3><h3 id="11-复合查询介绍及ConstantScore"><a href="#11-复合查询介绍及ConstantScore" class="headerlink" title="11. 复合查询介绍及ConstantScore"></a>11. 复合查询介绍及ConstantScore</h3><h3 id="12-bool-query"><a href="#12-bool-query" class="headerlink" title="12. bool-query"></a>12. bool-query</h3><h3 id="13-count-and-source-filtering"><a href="#13-count-and-source-filtering" class="headerlink" title="13. count-and-source-filtering"></a>13. count-and-source-filtering</h3><p><br></p>
-<hr>
-<h2 id="5-Elasticsearch之分布式特性介绍"><a href="#5-Elasticsearch之分布式特性介绍" class="headerlink" title="5. Elasticsearch之分布式特性介绍"></a>5. Elasticsearch之分布式特性介绍</h2><h3 id="1-分布式介绍及cerebro"><a href="#1-分布式介绍及cerebro" class="headerlink" title="1. 分布式介绍及cerebro"></a>1. 分布式介绍及cerebro</h3><h3 id="2-构建集群"><a href="#2-构建集群" class="headerlink" title="2. 构建集群"></a>2. 构建集群</h3><h3 id="3-副本与分片"><a href="#3-副本与分片" class="headerlink" title="3. 副本与分片"></a>3. 副本与分片</h3><h3 id="4-两个问题"><a href="#4-两个问题" class="headerlink" title="4. 两个问题"></a>4. 两个问题</h3><h3 id="5-集群状态"><a href="#5-集群状态" class="headerlink" title="5. 集群状态"></a>5. 集群状态</h3><h3 id="6-故障转移-mp4"><a href="#6-故障转移-mp4" class="headerlink" title="6. 故障转移.mp4"></a>6. 故障转移.mp4</h3><h3 id="7-文档分布式存储"><a href="#7-文档分布式存储" class="headerlink" title="7.文档分布式存储"></a>7.文档分布式存储</h3><h3 id="8-脑裂问题"><a href="#8-脑裂问题" class="headerlink" title="8. 脑裂问题"></a>8. 脑裂问题</h3><h3 id="9-shard详解"><a href="#9-shard详解" class="headerlink" title="9. shard详解"></a>9. shard详解</h3><p><br></p>
-<hr>
-<h2 id="6-Elasticsearch之深入了解Search的运行机制"><a href="#6-Elasticsearch之深入了解Search的运行机制" class="headerlink" title="6. Elasticsearch之深入了解Search的运行机制"></a>6. Elasticsearch之深入了解Search的运行机制</h2><h3 id="1-Query-Then-Fetch"><a href="#1-Query-Then-Fetch" class="headerlink" title="1. Query-Then-Fetch"></a>1. Query-Then-Fetch</h3><h3 id="2-相关性算分"><a href="#2-相关性算分" class="headerlink" title="2. 相关性算分"></a>2. 相关性算分</h3><h3 id="3-sorting-doc-values-fielddata"><a href="#3-sorting-doc-values-fielddata" class="headerlink" title="3. sorting-doc-values-fielddata"></a>3. sorting-doc-values-fielddata</h3><h3 id="4-分页与遍历-fromsize"><a href="#4-分页与遍历-fromsize" class="headerlink" title="4. 分页与遍历-fromsize"></a>4. 分页与遍历-fromsize</h3><h3 id="5-分页与遍历-scroll"><a href="#5-分页与遍历-scroll" class="headerlink" title="5. 分页与遍历-scroll"></a>5. 分页与遍历-scroll</h3><h3 id="6-分页与遍历-search-after"><a href="#6-分页与遍历-search-after" class="headerlink" title="6. 分页与遍历-search_after"></a>6. 分页与遍历-search_after</h3><h3 id="7-文档说明"><a href="#7-文档说明" class="headerlink" title="7. 文档说明"></a>7. 文档说明</h3><p><br></p>
-<hr>
-<h2 id="7-Elasticsearch之聚合分析入门"><a href="#7-Elasticsearch之聚合分析入门" class="headerlink" title="7. Elasticsearch之聚合分析入门"></a>7. Elasticsearch之聚合分析入门</h2><h3 id="1-聚合分析简介"><a href="#1-聚合分析简介" class="headerlink" title="1. 聚合分析简介"></a>1. 聚合分析简介</h3><h3 id="2-metric聚合分析"><a href="#2-metric聚合分析" class="headerlink" title="2. metric聚合分析"></a>2. metric聚合分析</h3><h3 id="3-bucket聚合分析"><a href="#3-bucket聚合分析" class="headerlink" title="3. bucket聚合分析"></a>3. bucket聚合分析</h3><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9.文档说明"></a>9.文档说明</h3>
+<h2 id="3-Elasticsearch之Mapping设置"><a href="#3-Elasticsearch之Mapping设置" class="headerlink" title="3. Elasticsearch之Mapping设置"></a>3. Elasticsearch之Mapping设置</h2><h3 id="1-mapping简介"><a href="#1-mapping简介" class="headerlink" title="1. mapping简介"></a>1. mapping简介</h3><ul>
+<li>类似数据库中的表结构定义，主要作用如下：<ul>
+<li>定义Index下的字段名(Field Name)</li>
+<li>定义字段的类型，比如数值型，字符串型，布尔型等</li>
+<li>定义倒排索引相关的配置，比如是否索引，记录position等</li>
+</ul>
+</li>
+</ul>
+<pre><code>GET /test_index/_mapping
+
+{
+  &quot;test_index&quot; : {
+    &quot;mappings&quot; : {
+      &quot;doc&quot; : {
+        &quot;properties&quot; : {
+          &quot;age&quot; : {
+            &quot;type&quot; : &quot;long&quot;
+          },
+          &quot;username&quot; : {
+            &quot;type&quot; : &quot;text&quot;,
+            &quot;fields&quot; : {
+              &quot;keyword&quot; : {
+                &quot;type&quot; : &quot;keyword&quot;,
+                &quot;ignore_above&quot; : 256
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="2-自定义-mapping"><a href="#2-自定义-mapping" class="headerlink" title="2. 自定义 mapping"></a>2. 自定义 mapping</h3><ul>
+<li>Mapping中的字段类型一旦设定后，禁止直接修改，原因如下：<ul>
+<li>Lucene实现的倒排索引生成后不允许修改</li>
+</ul>
+</li>
+<li>重新建立新的索引，然后做reindex操作</li>
+<li>允许新增字段<ul>
+<li>通过dunamic参数来控制自动新增字段<ul>
+<li>true(默认)：允许自动新增字段</li>
+<li>false：不允许自动新增字段，但是文档可以正常写入，但无法对字段进行查询等操作</li>
+<li>strict：文档不能写入，报错</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-mapping演示"><a href="#3-mapping演示" class="headerlink" title="3. mapping演示"></a>3. mapping演示</h3><pre><code>PUT my_index
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;dynamic&quot;: false,
+      &quot;properties&quot;: {
+        &quot;title&quot;: {
+          &quot;type&quot;: &quot;text&quot;
+        },
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;
+        },
+        &quot;age&quot;: {
+          &quot;type&quot;: &quot;integer&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>写入数据</li>
+</ul>
+<pre><code>PUT my_index/doc/1
+{
+  &quot;title&quot;: &quot;hello world&quot;,
+  &quot;desc&quot;: &quot;nothing here&quot;
+}
+
+{
+  &quot;_index&quot; : &quot;my_index&quot;,
+  &quot;_type&quot; : &quot;doc&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><ul>
+<li>查询数据</li>
+</ul>
+<pre><code>GET my_index/doc/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;title&quot;: &quot;hello&quot;
+    }
+  }
+}
+
+{
+  &quot;took&quot; : 10,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 1,
+    &quot;max_score&quot; : 0.2876821,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;my_index&quot;,
+        &quot;_type&quot; : &quot;doc&quot;,
+        &quot;_id&quot; : &quot;1&quot;,
+        &quot;_score&quot; : 0.2876821,
+        &quot;_source&quot; : {
+          &quot;title&quot; : &quot;hello world&quot;,
+          &quot;desc&quot; : &quot;nothing here&quot;
+        }
+      }
+    ]
+  }
+}
+
+
+GET my_index/doc/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;title&quot;: &quot;here&quot;
+    }
+  }
+}
+
+{
+  &quot;took&quot; : 2,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 0,
+    &quot;max_score&quot; : null,
+    &quot;hits&quot; : [ ]
+  }
+}
+</code></pre><h3 id="4-copy-to参数说明"><a href="#4-copy-to参数说明" class="headerlink" title="4. copy_to参数说明"></a>4. copy_to参数说明</h3><ul>
+<li>将该字段的值复制到目标字段，实现类似_all的作用</li>
+<li>不会出现在_source中，只用来搜索</li>
+</ul>
+<h3 id="5-index参数说明"><a href="#5-index参数说明" class="headerlink" title="5. index参数说明"></a>5. index参数说明</h3><ul>
+<li>控制当前字段是否索引，默认为true，即记录索引，false不记录，即不可搜索</li>
+</ul>
+<pre><code>PUT my_index
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;cookie&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;index&quot;: false
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="6-index-options参数说明"><a href="#6-index-options参数说明" class="headerlink" title="6. index_options参数说明"></a>6. index_options参数说明</h3><ul>
+<li>index_options用于控制倒排索引记录的内容，有如下4种配置<ul>
+<li>docs只记录doc id</li>
+<li>freqs记录doc id和term frequencies</li>
+<li>positions记录doc id，term frequencies和term position</li>
+<li>offsets记录doc id，term frequencies，term position和character offsets</li>
+</ul>
+</li>
+<li>text类型默认配置为positions，其他默认为docs</li>
+<li>记录内容越多，占用空间越大</li>
+</ul>
+<pre><code>PUT my_index
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;cookie&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;index_options&quot;: &quot;offsets&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>null_value</li>
+<li>当字段遇到null值时的处理策略，默认为null，即空值，此时es会忽略该值，可以通过设定该值设定字段的默认值</li>
+</ul>
+<h3 id="7-数据类型"><a href="#7-数据类型" class="headerlink" title="7. 数据类型"></a>7. 数据类型</h3><ul>
+<li>核心数据类型<ul>
+<li>字符串型text，keyword</li>
+<li>数值型long，integer，short，byte，double，float，half_float，scaled_float</li>
+<li>日期类型date</li>
+<li>布尔类型boolean</li>
+<li>二进制类型binary</li>
+<li>范围类型integer_range，float_range，long_range，double_range，date_range</li>
+</ul>
+</li>
+<li>复杂数据类型<ul>
+<li>数组类型array</li>
+<li>对象类型object</li>
+<li>嵌套类型nested object</li>
+</ul>
+</li>
+<li>地理位置数据类型<ul>
+<li>geo_point</li>
+<li>geo_shape</li>
+</ul>
+</li>
+<li>专用类型<ul>
+<li>记录ip地址ip</li>
+<li>实现自动补全completion</li>
+<li>记录分词数token_count</li>
+<li>记录字符串hash值murmur3</li>
+<li>percolator</li>
+<li>join</li>
+</ul>
+</li>
+<li>多字段特性muti-fields<ul>
+<li>允许对同一个字段采用不同的配置，比如分词，常见例子如对人名实现拼音搜索，只需要在人名中新增一个子字段pinyin即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-dynamic-mapping简介"><a href="#8-dynamic-mapping简介" class="headerlink" title="8. dynamic-mapping简介"></a>8. dynamic-mapping简介</h3><ul>
+<li>es可以自动识别文档字段类型，从而降低用户使用成本<ul>
+<li>es是依靠JSON文档的字段类型来实现自动识别字段类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-dynamic日期与数字识别"><a href="#9-dynamic日期与数字识别" class="headerlink" title="9. dynamic日期与数字识别"></a>9. dynamic日期与数字识别</h3><ul>
+<li>日期的自动识别可以自行配置日期格式，以满足各种需求</li>
+<li>字符串是数字时，默认不会自动识别为整型，因为字符串中出现数字是完全合理的</li>
+</ul>
+<h3 id="10-dynamic-template简介"><a href="#10-dynamic-template简介" class="headerlink" title="10. dynamic-template简介"></a>10. dynamic-template简介</h3><ul>
+<li>允许根据es自动识别的数据类型，字段名等来动态设定字段类型，可以实现如下效果：<ul>
+<li>所有字符串类型都设定为keyword类型，即默认不分词</li>
+<li>所有以message开头的字段都设定为text类型，即分词</li>
+<li>所有以long_开头的字段都设定为long类型</li>
+<li>所有自动匹配为double类型的都设定为float类型，以节省空间</li>
+</ul>
+</li>
+<li>匹配规则一般有有如下几个参数：<ul>
+<li>match_mapping_type匹配es自动识别的字段类型，如boolean，long，string等</li>
+<li>match，unmatch匹配字段名</li>
+<li>path_match，path_unmatch匹配路径</li>
+</ul>
+</li>
+</ul>
+<pre><code>PUT test_index
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;dynamic_templates&quot;: [
+        {
+          &quot;message_as_text&quot;: {
+            &quot;match_mapping_type&quot;: &quot;string&quot;,
+            &quot;match&quot;: &quot;message&quot;,
+            &quot;mapping&quot;: {
+              &quot;type&quot;: &quot;text&quot;
+            }
+          } 
+        },
+        {
+          &quot;string_as_keywords&quot;: {
+            &quot;match_mapping_type&quot;: &quot;string&quot;,
+            &quot;mapping&quot;: {
+              &quot;type&quot;: &quot;keyword&quot;
+            }
+          } 
+        }
+        ]
+    }
+  }
+}
+
+PUT test_index/doc/1
+{
+  &quot;name&quot;: &quot;Thpffcj&quot;,
+  &quot;message&quot;: &quot;hello world&quot;
+}
+</code></pre><ul>
+<li>查看索引类型</li>
+</ul>
+<pre><code>GET test_index/_mapping
+
+{
+  &quot;test_index&quot; : {
+    &quot;mappings&quot; : {
+      &quot;doc&quot; : {
+        &quot;dynamic_templates&quot; : [
+          {
+            &quot;message_as_text&quot; : {
+              &quot;match&quot; : &quot;message&quot;,
+              &quot;match_mapping_type&quot; : &quot;string&quot;,
+              &quot;mapping&quot; : {
+                &quot;type&quot; : &quot;text&quot;
+              }
+            }
+          },
+          {
+            &quot;string_as_keywords&quot; : {
+              &quot;match_mapping_type&quot; : &quot;string&quot;,
+              &quot;mapping&quot; : {
+                &quot;type&quot; : &quot;keyword&quot;
+              }
+            }
+          }
+        ],
+        &quot;properties&quot; : {
+          &quot;message&quot; : {
+            &quot;type&quot; : &quot;text&quot;
+          },
+          &quot;name&quot; : {
+            &quot;type&quot; : &quot;keyword&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="11-自定义mapping的建议"><a href="#11-自定义mapping的建议" class="headerlink" title="11. 自定义mapping的建议"></a>11. 自定义mapping的建议</h3><ul>
+<li>自定义Mapping的操作步骤如下：<ul>
+<li>写入一条文档到es的临时索引中，获取es自动生成的mapping</li>
+<li>修改步骤1得到的mapping，自定义相关配置</li>
+<li>使用步骤2的mapping创建实际所需索引</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-索引模板"><a href="#12-索引模板" class="headerlink" title="12. 索引模板"></a>12. 索引模板</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/09/03/Elastic-Stack-From-Entry-To-Practice-2/" style="float: left;">
+        ← Elasticsearch 进阶
     </a>
     
     
