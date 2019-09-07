@@ -257,6 +257,101 @@ Leet
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-4/">Elastic-Stack-From-Entry-To-Practice-4</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2019-09-07T10:12:22.000Z" itemprop="datePublished">
+          2019-09-07
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        Logstash 篇之入门与运行机制1. 入门及架构简介
+数据收集处理引擎
+ETL工具
+
+架构简介
+
+Pipeline
+input-filter-output的3阶段处理流程
+队列管理
+插件生命周期管理
+
+
+Logstash Event
+内部流传的数据表现形式
+原始数据在input被转换为Event，在output event被转换为目标格式数据
+在配置文件中可以对Event中的属性进行增删改查
+
+
+
+
+2. Life_of_an_Ev
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-4/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-3/">深入了解 ElasticSearch</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2019-09-07T10:11:14.000Z" itemprop="datePublished">
+          2019-09-07
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. Elasticsearch之聚合分析入门1. 聚合分析简介
+搜索引擎用来回答如下问题：
+请告诉我地址为上海的所有订单？
+请告诉我最近1天内创建但没有付款的所有订单？
+
+
+聚合分析可以回答如下问题：
+请告诉我最近1周每天的订单成交量有多少？
+请告诉我最近1个月每天的平均订单金额是多少？
+请告诉我最近半年卖的最火的前5个商品是那些？
+
+
+
+聚合分析
+
+聚合分析，英文为Aggregation，是es除搜索功能外提供的针对es数据做统计分
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-3/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2019/09/03/Elastic-Stack-From-Entry-To-Practice-2/">Elasticsearch 进阶</a></h3>
                     <span>
                         <span class="post-meta">
@@ -270,7 +365,23 @@ Leet
                 <div class="col-md-8">
                     <p>
                       
-                        4. Elasticsearch之Search API介绍1. SearchAPI概览2. URISearch详解与演示3. QueryDSL简介4. 字段类查询简介及match-query5. 相关性算分6. match-phrase-query_音频7. query-string-query8. simple-query-string-query9. term-terms-query10. range-query11. 复合查询介绍
+                        1. Elasticsearch之Search API介绍1. SearchAPI概览
+实现了对es中存储的数据进行查询分析，endpoint为_search
+查询主要有两种形式
+URI Search
+操作简便，方便通过命令行测试
+仅包含部分查询语法
+
+
+Request Body Search
+es提供的完备查询语法Query DSL(Domain Specific Language)
+
+
+
+
+
+2. URI Search详解与演示
+通
                       
                     </p>
                     
@@ -528,90 +639,6 @@ Flink项目实战
                     
                     <p class="pull-right readMore">
                         <a href="/2019/07/04/Big-Data-Flink-Getting-Started-3/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2019/06/29/Big-Data-Flink-Getting-Started-2/">DataSet & DataStream API 编程</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2019-06-29T01:20:42.000Z" itemprop="datePublished">
-          2019-06-29
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Flink的一些记录
-初识Flink
-DataSet &amp; DataStream API 编程
-Flink Table API 和 Time 操作
-Filnk Connectors 和部署
-Flink项目实战
-
-
-
-我们在初步了解了Flink和它的编程模型之后，我们学习使用DataSet API和DataStream API来使用Flink进行基本的批处理和流处理。
-
-1. DataSet API编程1. 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2019/06/29/Big-Data-Flink-Getting-Started-2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2019/06/28/Big-Data-Flink-Getting-Started-1/">初识Flink</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2019-06-27T23:52:20.000Z" itemprop="datePublished">
-          2019-06-28
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-下面是这段时间系统了解Flink的一些记录
-初识Flink
-DataSet &amp; DataStream API 编程
-Flink Table API 和 Time 操作
-Filnk Connectors 和部署
-Flink项目实战
-
-
-
-这个假期准备了解一下很多工地都在使用的大数据处理框架Flink，和以前的学习一样，我们主要通过官网学习基本知识，然后使用一些基本的例子来便于理解。
-
-1. 初识Flink1. Flink概述Fl
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2019/06/28/Big-Data-Flink-Getting-Started-1/">Read More...</a>
                     </p>
                     
                 </div>

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>高并发之扩容思路 | Thpffcj的树洞</title>
+  <title>深入了解 ElasticSearch | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -172,140 +172,155 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2018-05-28T14:38:06.000Z" itemprop="datePublished">
-          2018-05-28
+      <time datetime="2019-09-07T10:11:14.000Z" itemprop="datePublished">
+          2019-09-07
       </time>
     
 </span>
-                <h1>高并发之扩容思路</h1>
+                <h1>深入了解 ElasticSearch</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="1-高并发之扩容思路"><a href="#1-高并发之扩容思路" class="headerlink" title="1. 高并发之扩容思路"></a>1. 高并发之扩容思路</h2><ul>
-<li>垂直扩容(纵向扩展)：提高系统部件能力</li>
-<li>水平扩容(横向扩展)：增加更多系统成员来实现</li>
+      		<h2 id="1-Elasticsearch之聚合分析入门"><a href="#1-Elasticsearch之聚合分析入门" class="headerlink" title="1. Elasticsearch之聚合分析入门"></a>1. Elasticsearch之聚合分析入门</h2><h3 id="1-聚合分析简介"><a href="#1-聚合分析简介" class="headerlink" title="1. 聚合分析简介"></a>1. 聚合分析简介</h3><ul>
+<li>搜索引擎用来回答如下问题：<ul>
+<li>请告诉我地址为上海的所有订单？</li>
+<li>请告诉我最近1天内创建但没有付款的所有订单？</li>
 </ul>
-<p><strong>扩容 - 数据库</strong></p>
+</li>
+<li>聚合分析可以回答如下问题：<ul>
+<li>请告诉我最近1周每天的订单成交量有多少？</li>
+<li>请告诉我最近1个月每天的平均订单金额是多少？</li>
+<li>请告诉我最近半年卖的最火的前5个商品是那些？</li>
+</ul>
+</li>
+</ul>
+<p><strong>聚合分析</strong></p>
 <ul>
-<li>读操作扩展：memcache, redis, CDN等缓存</li>
-<li>写操作扩展：Cassandra, Hbase等</li>
+<li>聚合分析，英文为Aggregation，是es除搜索功能外提供的针对es数据做统计分析的功能<ul>
+<li>功能丰富，提供Bucket，Metric，Pipeline等多种分析方式，可以满足大部分的分析需求</li>
+<li>实时性高，所有的计算结果都是及时返回的，而Hadoop等大数据系统一般都是T+1的</li>
 </ul>
-<p><br></p>
+</li>
+</ul>
+<p><strong>分类</strong></p>
+<ul>
+<li>为了便于理解，es将聚合分析主要分为如下4类<ul>
+<li>Bucket，分桶类型，类似SQL中的GROUP BY语法</li>
+<li>Metric，指标分析类型，如计算最大值，最小值，平均值等等</li>
+<li>Pipeline，管道分析类型，基于上一级的聚合分析结果进行再分析</li>
+<li>Matrix，矩阵分析类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-metric聚合分析"><a href="#2-metric聚合分析" class="headerlink" title="2. metric聚合分析"></a>2. metric聚合分析</h3><pre><code>POST test_search_index/doc/_bulk
+{&quot;index&quot;:{&quot;_id&quot;:&quot;1&quot;}}
+{&quot;username&quot;:&quot;alfred way&quot;,&quot;job&quot;:&quot;java engineer&quot;,&quot;age&quot;:18,&quot;birth&quot;:&quot;1990-01-02&quot;,&quot;isMarried&quot;:false,&quot;salary&quot;:10000}
+{&quot;index&quot;:{&quot;_id&quot;:&quot;2&quot;}}
+{&quot;username&quot;:&quot;tom&quot;,&quot;job&quot;:&quot;java senior engineer&quot;,&quot;age&quot;:28,&quot;birth&quot;:&quot;1980-05-07&quot;,&quot;isMarried&quot;:true,&quot;salary&quot;:30000}
+{&quot;index&quot;:{&quot;_id&quot;:&quot;3&quot;}}
+{&quot;username&quot;:&quot;lee&quot;,&quot;job&quot;:&quot;ruby engineer&quot;,&quot;age&quot;:22,&quot;birth&quot;:&quot;1985-08-07&quot;,&quot;isMarried&quot;:false,&quot;salary&quot;:15000}
+{&quot;index&quot;:{&quot;_id&quot;:&quot;4&quot;}}
+{&quot;username&quot;:&quot;Nick&quot;,&quot;job&quot;:&quot;web engineer&quot;,&quot;age&quot;:23,&quot;birth&quot;:&quot;1989-08-07&quot;,&quot;isMarried&quot;:false,&quot;salary&quot;:8000}
+{&quot;index&quot;:{&quot;_id&quot;:&quot;5&quot;}}
+{&quot;username&quot;:&quot;Niko&quot;,&quot;job&quot;:&quot;web engineer&quot;,&quot;age&quot;:18,&quot;birth&quot;:&quot;1994-08-07&quot;,&quot;isMarried&quot;:false,&quot;salary&quot;:5000}
+{&quot;index&quot;:{&quot;_id&quot;:&quot;6&quot;}}
+{&quot;username&quot;:&quot;Michell&quot;,&quot;job&quot;:&quot;ruby engineer&quot;,&quot;age&quot;:26,&quot;birth&quot;:&quot;1987-08-07&quot;,&quot;isMarried&quot;:false,&quot;salary&quot;:12000}
+</code></pre><ul>
+<li>主要分如下两类：<ul>
+<li>单值分析，只输出一个分析结果<ul>
+<li>min，max，avg，sum</li>
+<li>cardinality</li>
+</ul>
+</li>
+<li>多值分析，输出多个分析结果<ul>
+<li>stats，entended stats</li>
+<li>percentile，percentile rank</li>
+<li>top hits</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Min</strong></p>
+<ul>
+<li><p>返回数值类字段的最小值</p>
+<p>  GET test_search_index/_search<br>  {</p>
+<pre><code>&quot;size&quot;:0,
+&quot;aggs&quot;:{
+  &quot;min_age&quot;:{
+    &quot;min&quot;: {
+      &quot;field&quot;: &quot;age&quot;
+    }
+  }
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p><strong>Max</strong></p>
+<ul>
+<li>返回数值类字段的最大值</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;max_age&quot;:{
+      &quot;max&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Avg</strong></p>
+<ul>
+<li>返回数值类字段的平均值</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;avg_age&quot;:{
+      &quot;avg&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Sum</strong></p>
+<ul>
+<li>返回数值类字段的总和</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;sum_age&quot;:{
+      &quot;sum&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>一次返回多个聚合结果</li>
+</ul>
+<h3 id="3-bucket聚合分析"><a href="#3-bucket聚合分析" class="headerlink" title="3. bucket聚合分析"></a>3. bucket聚合分析</h3><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
 <hr>
-<h2 id="2-高并发之缓存思路"><a href="#2-高并发之缓存思路" class="headerlink" title="2. 高并发之缓存思路"></a>2. 高并发之缓存思路</h2><p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98.jpg" alt=""></p>
-<h3 id="1-缓存特征，场景及组件介绍"><a href="#1-缓存特征，场景及组件介绍" class="headerlink" title="1. 缓存特征，场景及组件介绍"></a>1. 缓存特征，场景及组件介绍</h3><p><strong>缓存特征</strong></p>
-<ul>
-<li>命中率：命中数 / (命中数 + 没有命中数)</li>
-<li>最大元素(空间)</li>
-<li>清空策略：FIFO, LFU, LRU, 过期时间, 随机等</li>
-</ul>
-<p><strong>缓存命中率影响因素</strong></p>
-<ul>
-<li>业务场景和业务需求</li>
-<li>缓存的设计(粒度和策略)</li>
-<li>缓存容量和基础设施</li>
-</ul>
-<p><strong>缓存分类和应用场景</strong></p>
-<ul>
-<li>本地缓存：编程实现(成员变量，局部变量，静态变量)，Guava Cache</li>
-<li>分布式缓存：Memcache, Redis</li>
-</ul>
-<p><strong>缓存 - Guava Cache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Guava%20Cache.png" alt=""></p>
-<ul>
-<li>使用多个细粒度segment锁，保证线程安全的同时满足高并发的需求</li>
-</ul>
-<p><strong>缓存 - Memcache</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Memcache.png" alt=""></p>
-<ul>
-<li>Memcache内存结构</li>
-</ul>
-<p><img src="http://oseihavwm.bkt.clouddn.com/Memcache%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84.png" alt=""></p>
-<ul>
-<li>chunk中总会有内存浪费</li>
-<li>LRU算法不是针对全局的</li>
-</ul>
-<p><strong>缓存 - Redis</strong></p>
-<p><img src="http://oseihavwm.bkt.clouddn.com/%E7%BC%93%E5%AD%98%20-%20Redis.png" alt=""></p>
-<h3 id="2-redis的使用"><a href="#2-redis的使用" class="headerlink" title="2. redis的使用"></a>2. redis的使用</h3><ul>
-<li>添加依赖</li>
-</ul>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
-    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
-    &lt;version&gt;2.8.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><ul>
-<li>application.properties中添加属性</li>
-</ul>
-<pre><code># redis
-jedis.host=127.0.0.1
-jedis.port=6379
-</code></pre><ul>
-<li>添加redis配置</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Configuration
-public class RedisConfig {
-
-    @Bean(name = &quot;redisPool&quot;)
-    public JedisPool jedisPool(@Value(&quot;${jedis.host}&quot;) String host,
-                               @Value(&quot;${jedis.port}&quot;) int port) {
-        return new JedisPool(host, port);
-    }
-}
-</code></pre><ul>
-<li>最后我们封装自己的RedisClient</li>
-</ul>
-<pre><code>/**
- * Created by Thpffcj on 2018/6/1.
- */
-@Component
-public class RedisClient {
-
-    @Resource(name = &quot;redisPool&quot;)
-    private JedisPool jedisPool;
-
-    public void set(String key, String value) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            jedis.set(key, value);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-
-
-    public String get(String key) throws Exception {
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-            return jedis.get(key);
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-    }
-}
-</code></pre><h3 id="3-高并发场景问题及实战"><a href="#3-高并发场景问题及实战" class="headerlink" title="3. 高并发场景问题及实战"></a>3. 高并发场景问题及实战</h3>
+<h2 id="Elasticsearch-篇之数据建模"><a href="#Elasticsearch-篇之数据建模" class="headerlink" title="Elasticsearch 篇之数据建模"></a>Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><h3 id="2-ES数据建模配置相关介绍"><a href="#2-ES数据建模配置相关介绍" class="headerlink" title="2. ES数据建模配置相关介绍"></a>2. ES数据建模配置相关介绍</h3><h3 id="3-ES数据建模实例-mp4"><a href="#3-ES数据建模实例-mp4" class="headerlink" title="3. ES数据建模实例.mp4"></a>3. ES数据建模实例.mp4</h3><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><br></p>
+<hr>
+<h2 id="Elasticsearch-篇之集群调优建议"><a href="#Elasticsearch-篇之集群调优建议" class="headerlink" title="Elasticsearch 篇之集群调优建议"></a>Elasticsearch 篇之集群调优建议</h2><h3 id="1-生产环境部署建议"><a href="#1-生产环境部署建议" class="headerlink" title="1. 生产环境部署建议"></a>1. 生产环境部署建议</h3><h3 id="2-写性能优化"><a href="#2-写性能优化" class="headerlink" title="2. 写性能优化"></a>2. 写性能优化</h3><h3 id="3-读性能优化"><a href="#3-读性能优化" class="headerlink" title="3. 读性能优化"></a>3. 读性能优化</h3><h3 id="4-如何设定shard数"><a href="#4-如何设定shard数" class="headerlink" title="4. 如何设定shard数"></a>4. 如何设定shard数</h3><h3 id="5-xpack监控功能介绍"><a href="#5-xpack监控功能介绍" class="headerlink" title="5. xpack监控功能介绍"></a>5. xpack监控功能介绍</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2018/12/12/Software-Engineering-and-Computing-Course-1/" style="float: left;">
-        ← 软件工程与计算 1
+    <a class="pull-left" href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-4/" style="float: left;">
+        ← Elastic-Stack-From-Entry-To-Practice-4
     </a>
     
     
-    <a class="pull-right" href="/2018/05/25/Python-Machine-Learning-9/">
-        决策树 →
+    <a class="pull-right" href="/2019/09/03/Elastic-Stack-From-Entry-To-Practice-2/">
+        Elasticsearch 进阶 →
     </a>
     
 </nav>

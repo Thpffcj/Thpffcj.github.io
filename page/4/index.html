@@ -204,6 +204,93 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2018/05/13/Python-Machine-Learning-5/">多项式回归与模型泛化</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-13T06:41:25.000Z" itemprop="datePublished">
+          2018-05-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 多项式回归1. 什么是多项式回归
+多项式回归，回归函数是回归变量多项式的回归。多项式回归模型是线性回归模型的一种，此时回归函数关于回归系数是线性的。由于任一函数都可以用多项式逼近，因此多项式回归有着广泛应用。
+下面我们就来实际编程实现一下多项式回归
+
+import numpy as np 
+import matplotlib.pyplot as plt
+
+x = np.random.uniform(-3, 3, size=100)
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/13/Python-Machine-Learning-5/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2018/05/09/Python-Machine-Learning-4/">PCA与梯度上升法</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2018-05-09T04:47:57.000Z" itemprop="datePublished">
+          2018-05-09
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1. 初识PCA1. 什么是PCA主成分分析 Principal Component Analysis
+
+一个非监督的机器学习算法
+主要用于数据的降维
+通过降维，可以发现更便于人类理解的特征
+其他应用：可视化，去噪
+
+
+
+如何找到这个让样本间距最大的轴
+如何定义样本间距
+使用方差
+
+
+第一步：将样例的均值归为0(demean)
+我们想要求一个轴的方向w = (w1, w2)
+使得我们所有的样本，映射到w以后，方差最大
+
+
+
+2. 使用梯
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2018/05/09/Python-Machine-Learning-4/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2018/05/08/Python-Machine-Learning-3/">梯度下降法</a></h3>
                     <span>
                         <span class="post-meta">
@@ -564,84 +651,6 @@ sha
                     
                     <p class="pull-right readMore">
                         <a href="/2018/04/27/Big-Data-SparkSQL-3/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/25/Java-Concurrent-Programming-2/">Java 并发编程 2</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-25T13:55:17.000Z" itemprop="datePublished">
-          2018-04-25
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 安全发布对象1. 发布与逸出
-发布对象：使一个对象能够被当前范围之外的代码所使用
-对象溢出：一种错误的发布，当一个对象还没有构造完成时，就使其他线程所见
-
-/**
- * Created by Thpffcj on 2018/4/24.
- */
-@Slf4j
-@NotThreadSafe
-public class UnsafePublish {
-
-    private String[] states = {&quot;a&quot
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/25/Java-Concurrent-Programming-2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2018/04/24/ZooKeeper-Distributed-Topics-2/">使用ZooKeeper Java API进行客户端开发</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2018-04-24T01:53:42.000Z" itemprop="datePublished">
-          2018-04-24
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        1. 原生Java API进行客户端开发1. 建立客户端与zk服务端的连接/**
- * Created by Thpffcj on 2018/4/24.
- */
-public class ZKConnect implements Watcher {
-
-    final static Logger log = LoggerFactory.getLogger(ZKConnect.class);
-
-    public static fin
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2018/04/24/ZooKeeper-Distributed-Topics-2/">Read More...</a>
                     </p>
                     
                 </div>
