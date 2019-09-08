@@ -304,7 +304,281 @@
 </code></pre><ul>
 <li>一次返回多个聚合结果</li>
 </ul>
-<h3 id="3-bucket聚合分析"><a href="#3-bucket聚合分析" class="headerlink" title="3. bucket聚合分析"></a>3. bucket聚合分析</h3><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;min_age&quot;: {
+      &quot;min&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    },
+    &quot;max_age&quot;: {
+      &quot;max&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    },
+    &quot;avg_age&quot;: {
+      &quot;avg&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    },
+    &quot;sum_age&quot;: {
+      &quot;sum&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Cardinality</strong></p>
+<ul>
+<li>Cardinality，意为集合的势，或者基数，是指不同数值的个数，类似SQL中的distinct count概念</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;count_of_job&quot;:{
+      &quot;cardinality&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Stats</strong></p>
+<ul>
+<li>返回一系列数值类型的统计值，包含min，max，avg，sum和count</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;stats_age&quot;:{
+      &quot;stats&quot;: {
+        &quot;field&quot;: &quot;age&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Extended Stats</strong></p>
+<ul>
+<li>对stats的扩展，包含了更多的统计数据，如方差，标准差等</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;exstats_salary&quot;:{
+      &quot;extended_stats&quot;: {
+        &quot;field&quot;: &quot;salary&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>Percentile</strong></p>
+<ul>
+<li>百分位数统计</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;per_salary&quot;:{
+      &quot;percentiles&quot;: {
+        &quot;field&quot;: &quot;salary&quot;
+      }
+    }
+  }
+}
+
+GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;per_age&quot;: {
+      &quot;percentiles&quot;: {
+        &quot;field&quot;: &quot;salary&quot;,
+        &quot;percents&quot;: [
+          95,
+          99,
+          99.9
+        ]
+      }
+    }
+  }
+}
+</code></pre><p><strong>Percentile Rank</strong></p>
+<ul>
+<li>百分位数统计</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;per_salary&quot;: {
+      &quot;percentile_ranks&quot;: {
+        &quot;field&quot;: &quot;salary&quot;,
+        &quot;values&quot;: [
+          11000,
+          30000
+        ]
+      }
+    }
+  }
+}
+</code></pre><p><strong>Top Hits</strong></p>
+<ul>
+<li>一般用于分桶后获取桶内最匹配的顶部文档列表，即详情数据</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;,
+        &quot;size&quot;: 10
+      },
+      &quot;aggs&quot;: {
+        &quot;top_employee&quot;: {
+          &quot;top_hits&quot;: {
+            &quot;size&quot;: 10,
+            &quot;sort&quot;: [
+              {
+                &quot;age&quot;: {
+                  &quot;order&quot;: &quot;desc&quot;
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="3-bucket聚合分析"><a href="#3-bucket聚合分析" class="headerlink" title="3. bucket聚合分析"></a>3. bucket聚合分析</h3><ul>
+<li>Bucket，意为桶，即按照一定的规则将文档分配到不同的桶中，达到分类分析的目的</li>
+<li>按照Bucket的分桶策略，常见的Bucket聚合分析如下：<ul>
+<li>Terms</li>
+<li>Range</li>
+<li>Date Range</li>
+<li>Histogram</li>
+<li>Date Histogram</li>
+</ul>
+</li>
+</ul>
+<p><strong>Terms</strong></p>
+<ul>
+<li>该分桶策略最简单，直接按照term来分桶，如果是text类型，则按照分词后的结果分桶</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job&quot;,
+        &quot;size&quot;: 5
+      }
+    }
+  }
+}
+</code></pre><p><strong>Range</strong></p>
+<ul>
+<li>按照指定数值的范围来设定分桶规则</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;salary_range&quot;: {
+      &quot;range&quot;: {
+        &quot;field&quot;: &quot;salary&quot;,
+        &quot;ranges&quot;: [
+          {
+            &quot;key&quot;:&quot;&lt;10000&quot;,
+            &quot;to&quot;: 10000
+          },
+          {
+            &quot;from&quot;: 10000,
+            &quot;to&quot;: 20000
+          },
+          {
+            &quot;key&quot;:&quot;&gt;20000&quot;,
+            &quot;from&quot;: 20000
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre><p><strong>Date Range</strong></p>
+<ul>
+<li>通过指定日期的范围来设定分桶规则</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;date_range&quot;: {
+      &quot;range&quot;: {
+        &quot;field&quot;: &quot;birth&quot;,
+        &quot;format&quot;: &quot;yyyy&quot;,
+        &quot;ranges&quot;: [
+          {
+            &quot;from&quot;:&quot;1980&quot;,
+            &quot;to&quot;: &quot;1990&quot;
+          },
+          {
+            &quot;from&quot;: &quot;1990&quot;,
+            &quot;to&quot;: &quot;2000&quot;
+          },
+          {
+            &quot;from&quot;: &quot;2000&quot;
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre><p><strong>Histogram</strong></p>
+<ul>
+<li>直方图，以固定间隔的策略来分割数据</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;salary_hist&quot;:{
+      &quot;histogram&quot;: {
+        &quot;field&quot;: &quot;salary&quot;,
+        &quot;interval&quot;: 5000,
+        &quot;extended_bounds&quot;: {
+          &quot;min&quot;: 0,
+          &quot;max&quot;: 40000
+        }
+      }
+    }
+  }
+}
+</code></pre><p><strong>Date Histogram</strong></p>
+<ul>
+<li>针对日期的直方图或者柱状图，是时序数据分析中常用的聚合分析类型</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;by_year&quot;:{
+      &quot;date_histogram&quot;: {
+        &quot;field&quot;: &quot;birth&quot;,
+        &quot;interval&quot;: &quot;year&quot;,
+        &quot;format&quot;:&quot;yyyy&quot;
+      }
+    }
+  }
+}
+</code></pre><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
 <hr>
 <h2 id="Elasticsearch-篇之数据建模"><a href="#Elasticsearch-篇之数据建模" class="headerlink" title="Elasticsearch 篇之数据建模"></a>Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><h3 id="2-ES数据建模配置相关介绍"><a href="#2-ES数据建模配置相关介绍" class="headerlink" title="2. ES数据建模配置相关介绍"></a>2. ES数据建模配置相关介绍</h3><h3 id="3-ES数据建模实例-mp4"><a href="#3-ES数据建模实例-mp4" class="headerlink" title="3. ES数据建模实例.mp4"></a>3. ES数据建模实例.mp4</h3><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><br></p>
 <hr>
