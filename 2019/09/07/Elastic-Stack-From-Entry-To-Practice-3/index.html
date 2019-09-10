@@ -578,11 +578,529 @@ GET test_search_index/_search
     }
   }
 }
-</code></pre><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
+</code></pre><h3 id="4-bucket和metric聚合分析"><a href="#4-bucket和metric聚合分析" class="headerlink" title="4. bucket和metric聚合分析"></a>4. bucket和metric聚合分析</h3><ul>
+<li>Bucket聚合分析允许通过添加子分析来进一步进行分析，该子分析可以是Bucket也可以是Metric，这也使得es的聚合分析能力变得异常强大</li>
+<li>分桶后再分桶</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;,
+        &quot;size&quot;: 10
+      },
+      &quot;aggs&quot;: {
+        &quot;age_range&quot;: {
+          &quot;range&quot;: {
+            &quot;field&quot;: &quot;age&quot;,
+            &quot;ranges&quot;: [
+              {
+                &quot;to&quot;: 20
+              },
+              {
+                &quot;from&quot;: 20,
+                &quot;to&quot;: 30
+              },
+              {
+                &quot;from&quot;: 30
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>分桶后进行数据分析</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;,
+        &quot;size&quot;: 10
+      },
+      &quot;aggs&quot;: {
+        &quot;salary&quot;: {
+          &quot;stats&quot;: {
+            &quot;field&quot;: &quot;salary&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="5-pipeline聚合分析"><a href="#5-pipeline聚合分析" class="headerlink" title="5. pipeline聚合分析"></a>5. pipeline聚合分析</h3><ul>
+<li>针对聚合分析的结果进行再次聚合分析，而且支持链式调用，可以回答如下问题：<ul>
+<li>订单月平均销售额是多少？</li>
+</ul>
+</li>
+<li>Pipeline的分析结果会输出到原结果中，根据输出位置的不同，分为以下两类：<ul>
+<li>Parent结果内嵌到现有的聚合分析结果中<ul>
+<li>Derivative</li>
+<li>Moving Average</li>
+<li>Cumulative Sum</li>
+</ul>
+</li>
+<li>Sibling结果与聚合分析结果同级<ul>
+<li>Max/Min/Avg/Sum Bucket</li>
+<li>Stats/Extended Stats Bucket</li>
+<li>Percentiles Bucket</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Min Bucket</strong></p>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;:0,
+  &quot;aggs&quot;:{
+    &quot;jobs&quot;:{
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;,
+        &quot;size&quot;: 10
+      },
+      &quot;aggs&quot;:{
+        &quot;avg_salary&quot;:{
+          &quot;avg&quot;: {
+            &quot;field&quot;: &quot;salary&quot;
+          }
+        }
+      }
+    },
+    &quot;min_salary_by_job&quot;:{
+      &quot;min_bucket&quot;: {
+        &quot;buckets_path&quot;: &quot;jobs&gt;avg_salary&quot;
+      }
+    }
+  }
+} 
+</code></pre><p><strong>Derivative</strong></p>
+<ul>
+<li>计算Bucket值的导数</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;birth&quot;: {
+      &quot;date_histogram&quot;: {
+        &quot;field&quot;: &quot;birth&quot;,
+        &quot;interval&quot;: &quot;year&quot;,
+        &quot;min_doc_count&quot;: 0
+      },
+      &quot;aggs&quot;: {
+        &quot;avg_salary&quot;: {
+          &quot;avg&quot;: {
+            &quot;field&quot;: &quot;salary&quot;
+          }
+        },
+        &quot;derivative_avg_salary&quot;: {
+          &quot;derivative&quot;: {
+            &quot;buckets_path&quot;: &quot;avg_salary&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><p><strong>Moving Average</strong></p>
+<ul>
+<li>计算Bucket值的移动平均值</li>
+</ul>
+<p><strong>Cumulative Sum</strong></p>
+<ul>
+<li>计算Bucket值得累计加和</li>
+</ul>
+<h3 id="6-作用范围"><a href="#6-作用范围" class="headerlink" title="6. 作用范围"></a>6. 作用范围</h3><ul>
+<li>es聚合分析默认作用范围是query的结果集，可以通过如下的方式改变其作用范围：<ul>
+<li>filter</li>
+<li>post_filter</li>
+<li>global</li>
+</ul>
+</li>
+</ul>
+<p><strong>filter</strong></p>
+<ul>
+<li>为某个聚合分析设定过滤条件，从而在不更改整体query语句的情况下修改了作用范围</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs_salary_small&quot;: {
+      &quot;filter&quot;: {
+        &quot;range&quot;: {
+          &quot;salary&quot;: {
+            &quot;to&quot;: 10000
+          }
+        }
+      },
+      &quot;aggs&quot;: {
+        &quot;jobs&quot;: {
+          &quot;terms&quot;: {
+            &quot;field&quot;: &quot;job.keyword&quot;
+          }
+        }
+      }
+    },
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;
+      }
+    }
+  }
+}
+</code></pre><p><strong>post_filter</strong></p>
+<ul>
+<li>作用于文本过滤，但在聚合分析后生效</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;
+      }
+    }
+  },
+  &quot;post_filter&quot;: {
+    &quot;match&quot;:{
+      &quot;job.keyword&quot;:&quot;java engineer&quot;
+    }
+  }
+}
+</code></pre><p><strong>global</strong></p>
+<ul>
+<li>无视query过滤条件，基于全部文档进行分析</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;job.keyword&quot;: &quot;java engineer&quot;
+    }
+  },
+  &quot;aggs&quot;: {
+    &quot;java_avg_salary&quot;: {
+      &quot;avg&quot;: {
+        &quot;field&quot;: &quot;salary&quot;
+      }
+    },
+    &quot;all&quot;: {
+      &quot;global&quot;: {},
+      &quot;aggs&quot;: {
+        &quot;avg_salary&quot;: {
+          &quot;avg&quot;: {
+            &quot;field&quot;: &quot;salary&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="7-排序"><a href="#7-排序" class="headerlink" title="7. 排序"></a>7. 排序</h3><ul>
+<li>可以使用自带的关键数据进行排序，比如：<ul>
+<li>_count文档数</li>
+<li>_key按照key值排序</li>
+</ul>
+</li>
+</ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;size&quot;: 0,
+  &quot;aggs&quot;: {
+    &quot;jobs&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;job.keyword&quot;,
+        &quot;size&quot;: 10,
+        &quot;order&quot;: [
+          {
+            &quot;avg_salary&quot;: &quot;desc&quot;
+          }
+        ]
+      },
+      &quot;aggs&quot;: {
+        &quot;avg_salary&quot;: {
+          &quot;avg&quot;: {
+            &quot;field&quot;: &quot;salary&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
 <hr>
-<h2 id="Elasticsearch-篇之数据建模"><a href="#Elasticsearch-篇之数据建模" class="headerlink" title="Elasticsearch 篇之数据建模"></a>Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><h3 id="2-ES数据建模配置相关介绍"><a href="#2-ES数据建模配置相关介绍" class="headerlink" title="2. ES数据建模配置相关介绍"></a>2. ES数据建模配置相关介绍</h3><h3 id="3-ES数据建模实例-mp4"><a href="#3-ES数据建模实例-mp4" class="headerlink" title="3. ES数据建模实例.mp4"></a>3. ES数据建模实例.mp4</h3><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><br></p>
+<h2 id="Elasticsearch-篇之数据建模"><a href="#Elasticsearch-篇之数据建模" class="headerlink" title="Elasticsearch 篇之数据建模"></a>Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><ul>
+<li>英文为Data Modeling，为创建数据模型的过程</li>
+<li>数据模型(Data Model)<ul>
+<li>对现实世界进行抽象描述的一种工具和方法</li>
+<li>通过抽象的实体及实体之间的联系的形式去描述业务规则，从而实现对现实世界的映射</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据建模的过程</strong></p>
+<ul>
+<li>概念模型<ul>
+<li>确定系统的核心需求和范围边界，设计实体和实体间的关系</li>
+</ul>
+</li>
+<li>逻辑模型<ul>
+<li>进一步梳理业务需求，确定每个实体的属性，关系和约束等</li>
+</ul>
+</li>
+<li>物理模型<ul>
+<li>结合具体的数据库产品，在满足也读读写性能等需求的前提下确定最终的定义</li>
+<li>MySQL，MongoDB，elasticsearch等</li>
+<li>第三范式</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ES数据建模配置相关介绍"><a href="#2-ES数据建模配置相关介绍" class="headerlink" title="2. ES数据建模配置相关介绍"></a>2. ES数据建模配置相关介绍</h3><ul>
+<li>ES是基于Lucene以倒排索引为基础实现的存储体系，不遵循关系型数据库中的范式约定</li>
+</ul>
+<p><strong>Mapping字段的相关设置</strong></p>
+<ul>
+<li>enbaled<ul>
+<li>true | false</li>
+<li>仅存储，不搜索或聚合分析</li>
+</ul>
+</li>
+<li>index<ul>
+<li>true | false</li>
+<li>是否构建倒排索引</li>
+</ul>
+</li>
+<li>index_options<ul>
+<li>docs | freqs | positions | offsets</li>
+<li>存储倒排索引的哪些信息</li>
+</ul>
+</li>
+<li>norms<ul>
+<li>true | false</li>
+<li>是否存储归一化相关参数，如果字段仅用于过滤和聚合分析，可关闭</li>
+</ul>
+</li>
+<li>doc_values<ul>
+<li>true | false</li>
+<li>是否启用doc_values，用于排序和聚合分析</li>
+</ul>
+</li>
+<li>field_data<ul>
+<li>false | true</li>
+<li>是否为text类型启动fielddata，实现排序和聚合分析</li>
+</ul>
+</li>
+<li>store<ul>
+<li>false | true</li>
+<li>是否存储该字段值</li>
+</ul>
+</li>
+<li>coerce<ul>
+<li>true | false</li>
+<li>是否开启自动数据类型转换功能，比如字符串转为数字，浮点转为整型等</li>
+</ul>
+</li>
+<li>multifields 多字段<ul>
+<li>灵活使用多字段特性来解决多样的业务需求</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-ES数据建模实例"><a href="#3-ES数据建模实例" class="headerlink" title="3. ES数据建模实例"></a>3. ES数据建模实例</h3><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><br></p>
 <hr>
-<h2 id="Elasticsearch-篇之集群调优建议"><a href="#Elasticsearch-篇之集群调优建议" class="headerlink" title="Elasticsearch 篇之集群调优建议"></a>Elasticsearch 篇之集群调优建议</h2><h3 id="1-生产环境部署建议"><a href="#1-生产环境部署建议" class="headerlink" title="1. 生产环境部署建议"></a>1. 生产环境部署建议</h3><h3 id="2-写性能优化"><a href="#2-写性能优化" class="headerlink" title="2. 写性能优化"></a>2. 写性能优化</h3><h3 id="3-读性能优化"><a href="#3-读性能优化" class="headerlink" title="3. 读性能优化"></a>3. 读性能优化</h3><h3 id="4-如何设定shard数"><a href="#4-如何设定shard数" class="headerlink" title="4. 如何设定shard数"></a>4. 如何设定shard数</h3><h3 id="5-xpack监控功能介绍"><a href="#5-xpack监控功能介绍" class="headerlink" title="5. xpack监控功能介绍"></a>5. xpack监控功能介绍</h3>
+<h2 id="Elasticsearch-篇之集群调优建议"><a href="#Elasticsearch-篇之集群调优建议" class="headerlink" title="Elasticsearch 篇之集群调优建议"></a>Elasticsearch 篇之集群调优建议</h2><h3 id="1-生产环境部署建议"><a href="#1-生产环境部署建议" class="headerlink" title="1. 生产环境部署建议"></a>1. 生产环境部署建议</h3><ul>
+<li>遵照官方建议设置所有的系统参数</li>
+<li>参见文档”Setup Elasticsearch -&gt; Important System Configuration”<ul>
+<li>Disable swapping</li>
+<li>Increase file descriptors</li>
+<li>Ensure sufficient virtual memory</li>
+<li>Ensure sufficient threads</li>
+<li>JVM DNS cache settings</li>
+<li>Temporary directory not mounted with noexec</li>
+</ul>
+</li>
+</ul>
+<p><strong>ES设置尽量简洁</strong></p>
+<ul>
+<li>elasticsearch.yml中尽量只写必备的参数，其他可以通过api动态设置的参数都通过api来设定</li>
+<li>参见文档”Setup Elasticsearch -&gt; Important Elasticsearch Configuration”<ul>
+<li>Path settings</li>
+<li>Cluster name</li>
+<li>Node name</li>
+<li>Network host</li>
+<li>Discovery settings</li>
+<li>Heap size</li>
+<li>Heap dump path</li>
+<li>GC logging</li>
+<li>Temp directory</li>
+</ul>
+</li>
+<li>随着ES的版本升级，很多网络流传的配置参数已经不再支持，因此不要随便复制别人的集群配置参数</li>
+</ul>
+<p><strong>elasticsearch.yml中建议设定的基本参数</strong></p>
+<ul>
+<li>cluster name</li>
+<li>node name</li>
+<li>node.master/node.data/node.ingest</li>
+<li>network.host建议显示指定为内网ip，不要偷懒直接设定为0.0.0.0</li>
+<li>discovery.zen.ping.unicast.host设定集群其他节点地址</li>
+<li>discovery.zen.minimum_master_nodes一般设定为2</li>
+<li>path.data/pata.log</li>
+<li>处上述参数外再根据需要增加其他的静态配置参数</li>
+</ul>
+<p><strong>动态设定的基本参数</strong></p>
+<ul>
+<li>动态设定的参数有transient和persistent两种配置，前者在集群重启后会消失，后者不会，但两种设定都会覆盖elasticsearch.yml中的配置</li>
+</ul>
+<p><strong>关于JVM内存设定</strong></p>
+<ul>
+<li>不要超过31GB</li>
+<li>预留一般内存给操作系统，用来做文件缓存</li>
+<li>具体大小根据该node要存储的数据量来估算，为了保证性能，在内存和数据量间有一个建议的比例<ul>
+<li>搜索类项目的比例建议在1：16以内</li>
+<li>日志类项目的比例建议在1：48 ~ 1：96</li>
+</ul>
+</li>
+<li>建设总数据量大小为1TB，3个node，1个副本，那么每个node要存储的数据量为2TB/3=666GB，即700GB左右，做20%的预留空间，每个node要存储大约850GB的数据<ul>
+<li>如果是搜索类项目，每个node内存大小为850GB/16=53GB，大于31GB。31*16=496，即每个node最多存储496GB数据，所以至少需要5个node</li>
+<li>如果是日志类型项目，每个node内存大小为850GB/48=18GB，因此3个节点足够</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-写性能优化"><a href="#2-写性能优化" class="headerlink" title="2. 写性能优化"></a>2. 写性能优化</h3><p><strong>ES写数据过程</strong></p>
+<ul>
+<li>refresh<ul>
+<li>segment写入磁盘的过程依然很耗时，可以借助文件系统缓存的特性，先将segment在缓存中创建并开放查询来进一步提升实时性，该过程在es中被称为refresh</li>
+<li>在refresh之前文档会先存储在一个buffer中，refresh时将buffer中的所有文档清空并生成segment</li>
+<li>es默认每1秒执行一次refresh，因此文档的实时性被提高到1秒，这也是es被称为近实时(Near Real Time)的原因</li>
+</ul>
+</li>
+<li>tanslog<ul>
+<li>如果在内存中的segment还没有写入磁盘前发生了宕机，那么其中的文档就无法恢复了，如何解决这个问题？</li>
+<li>es引入translog机制，写入文档到buffer时，同时将该操作写入translog</li>
+<li>translog文件会即时写入磁盘(fsync)，6.X默认每个请求都会落盘，可以修改为每5秒写一次，这样的风险便是丢失5秒的数据</li>
+<li>es启动时会检查translog文件，并从中恢复数据</li>
+</ul>
+</li>
+<li>flush<ul>
+<li>负责将内存中的segment写入磁盘，主要做如下的工作：</li>
+<li>将translog写入磁盘</li>
+<li>将index buffer清空，其中的文档生成一个新的segment，相当于一个refresh操作</li>
+<li>更新commit point并写入磁盘</li>
+<li>执行fsync操作，将内存中的segment写入磁盘</li>
+<li>删除旧的translog文件</li>
+</ul>
+</li>
+</ul>
+<p><strong>写性能优化</strong></p>
+<ul>
+<li>目标是增大写吞吐量 - EPS(Event Per Second)越高越好</li>
+<li>优化方案<ul>
+<li>客户端：多线程写，批量写</li>
+<li>ES：在高质量数据建模的前提下，主要是在refresh，translog和flush之间做文章</li>
+</ul>
+</li>
+</ul>
+<p><strong>refresh</strong></p>
+<ul>
+<li>目标为降低refresh的频率<ul>
+<li>增大refresh_interval，降低实时性，以增大一次refresh处理的文档数，默认是1s，设置为-1直接禁止自动refresh</li>
+<li>增大index_buffer_size，参数为indices.memory.index_buffer_size(静态参数，需要设定在elasticsearch.yml中)，默认为10%</li>
+</ul>
+</li>
+</ul>
+<p><strong>tanslog</strong></p>
+<ul>
+<li>目标是降低translog写磁盘的频率，从而提高写效率，但会降低容灾能力<ul>
+<li>index.translog.durability设置为async，index.translog.sync_interval设置需要的大小，比如120s，那么translog会改为每120s写一次磁盘</li>
+<li>index.translog.flush_threshold_size默认为512mb，即translog超过该大小时会触发一次flush，那么调大该大小可以避免flush的发生</li>
+</ul>
+</li>
+</ul>
+<p><strong>flush</strong></p>
+<ul>
+<li>目标为降低flush的次数，在6.X可优化的点不多，多为es自动完成</li>
+</ul>
+<p><strong>其他</strong></p>
+<ul>
+<li>副本设置为0，写入完毕再增加</li>
+<li>合理的设计shard数，并保证shard均匀的分配在所有node上，充分利用所有node的资源<ul>
+<li>index.routing.allocation.total_shards_per_node限定每个索引在每个node上可分配的总主副分片数</li>
+<li>5个node，某索引有10个主分片，1个副本，上述值应该设置为多少？<ul>
+<li>(10+10)/5 = 4</li>
+<li>实际要设置为5个，防止在某个node下线时，分片迁移失败的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>写性能优化</strong></p>
+<ul>
+<li>主要为index级别的设置优化</li>
+</ul>
+<h3 id="3-读性能优化"><a href="#3-读性能优化" class="headerlink" title="3. 读性能优化"></a>3. 读性能优化</h3><ul>
+<li>读性能主要受以下几方面影响：<ul>
+<li>数据模型是否符合业务模型？</li>
+<li>数据规模是否过大？</li>
+<li>索引配置是否优化？</li>
+<li>查询语句是否优化？</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据建模</strong></p>
+<ul>
+<li>高质量的数据建模是优化的基础<ul>
+<li>将需要通过script脚本动态计算的值提前算好作为字段存到文档中</li>
+<li>尽量使得数据模型贴近业务模型</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据规模</strong></p>
+<ul>
+<li>根据不同的数据规模设定不同的SLA<ul>
+<li>上万条数据与上千万条数据性能肯定存在差异</li>
+</ul>
+</li>
+</ul>
+<p><strong>索引配置调优</strong></p>
+<ul>
+<li>索引配置优化主要包括如下：<ul>
+<li>根据数据规模设置合理的主分片数，可以通过测试得到最适合的分片数</li>
+<li>设定合理的副本数目，不是越多越好</li>
+</ul>
+</li>
+</ul>
+<p><strong>查询语句调优</strong></p>
+<ul>
+<li>查询语句调优主要有以下几种常见手段：<ul>
+<li>尽量使用Filter上下文，减少算分的场景，由于Filter有缓存机制，可以极大提升查询性能</li>
+<li>尽量不适用Script进行字段计算或者算分排序等</li>
+<li>结合profile，explain API分析慢查询语句的症结所在，然后再去优化数据模型</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-如何设定shard数"><a href="#4-如何设定shard数" class="headerlink" title="4. 如何设定shard数"></a>4. 如何设定shard数</h3><ul>
+<li>ES的性能基本是线性扩展的，因此我们只要测出1个Shard的性能指标，然后根据实际性能需求就能算出需要的Shard数。比如但Shard写入eps是10000，而线上eps需求是50000，那么你需要5个shard(实际还要考虑副本的情况)</li>
+<li>测试1个shard的流程如下：<ul>
+<li>搭建与生产环境相同配置的单节点集群</li>
+<li>设定一个单分片零副本的索引</li>
+<li>写入实际生产数据进行测试，获取写新能指标</li>
+<li>针对数据进行查询请求，获取读性能指标</li>
+</ul>
+</li>
+<li>压测工具可以采用esrally</li>
+</ul>
+<h3 id="5-xpack监控功能介绍"><a href="#5-xpack监控功能介绍" class="headerlink" title="5. xpack监控功能介绍"></a>5. xpack监控功能介绍</h3><ul>
+<li>官方推出的免费集群监控功能</li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
