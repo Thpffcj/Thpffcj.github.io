@@ -304,7 +304,411 @@ Thpffcj:sbin thpffcj$ jps
 <pre><code>Thpffcj:software thpffcj$ tar -zxvf spark-2.3.3-bin-2.6.0-cdh5.7.0.tgz 
 </code></pre><p><br></p>
 <hr>
-<h2 id="2-Spark-Core-核心-RDD"><a href="#2-Spark-Core-核心-RDD" class="headerlink" title="2. Spark Core 核心 RDD"></a>2. Spark Core 核心 RDD</h2><h2 id="3-Spark-Core-RDD-编程"><a href="#3-Spark-Core-RDD-编程" class="headerlink" title="3. Spark Core RDD 编程"></a>3. Spark Core RDD 编程</h2><h2 id="4-Spark-运行模式"><a href="#4-Spark-运行模式" class="headerlink" title="4. Spark 运行模式"></a>4. Spark 运行模式</h2><h2 id="5-Spark-Core-进阶"><a href="#5-Spark-Core-进阶" class="headerlink" title="5. Spark Core 进阶"></a>5. Spark Core 进阶</h2><h2 id="6-Spark-Core-调优"><a href="#6-Spark-Core-调优" class="headerlink" title="6. Spark Core 调优"></a>6. Spark Core 调优</h2><h2 id="7-Spark-SQL"><a href="#7-Spark-SQL" class="headerlink" title="7. Spark SQL"></a>7. Spark SQL</h2><h2 id="8-Spark-Streaming"><a href="#8-Spark-Streaming" class="headerlink" title="8. Spark Streaming"></a>8. Spark Streaming</h2><h2 id="9-Azkaban-基础篇"><a href="#9-Azkaban-基础篇" class="headerlink" title="9. Azkaban 基础篇"></a>9. Azkaban 基础篇</h2><h2 id="10-Azkaban-实战篇"><a href="#10-Azkaban-实战篇" class="headerlink" title="10. Azkaban 实战篇"></a>10. Azkaban 实战篇</h2><h2 id="11-Azkaban-进阶篇"><a href="#11-Azkaban-进阶篇" class="headerlink" title="11. Azkaban 进阶篇"></a>11. Azkaban 进阶篇</h2><h2 id="12-项目实战"><a href="#12-项目实战" class="headerlink" title="12. 项目实战"></a>12. 项目实战</h2>
+<h2 id="2-Spark-Core-核心-RDD"><a href="#2-Spark-Core-核心-RDD" class="headerlink" title="2. Spark Core 核心 RDD"></a>2. Spark Core 核心 RDD</h2><h2 id="3-Spark-Core-RDD-编程"><a href="#3-Spark-Core-RDD-编程" class="headerlink" title="3. Spark Core RDD 编程"></a>3. Spark Core RDD 编程</h2><h2 id="4-Spark-运行模式"><a href="#4-Spark-运行模式" class="headerlink" title="4. Spark 运行模式"></a>4. Spark 运行模式</h2><h2 id="5-Spark-Core-进阶"><a href="#5-Spark-Core-进阶" class="headerlink" title="5. Spark Core 进阶"></a>5. Spark Core 进阶</h2><h2 id="6-Spark-Core-调优"><a href="#6-Spark-Core-调优" class="headerlink" title="6. Spark Core 调优"></a>6. Spark Core 调优</h2><h2 id="7-Spark-SQL"><a href="#7-Spark-SQL" class="headerlink" title="7. Spark SQL"></a>7. Spark SQL</h2><h2 id="8-Spark-Streaming"><a href="#8-Spark-Streaming" class="headerlink" title="8. Spark Streaming"></a>8. Spark Streaming</h2><h2 id="9-Azkaban-基础篇"><a href="#9-Azkaban-基础篇" class="headerlink" title="9. Azkaban 基础篇"></a>9. Azkaban 基础篇</h2><h2 id="10-Azkaban-实战篇"><a href="#10-Azkaban-实战篇" class="headerlink" title="10. Azkaban 实战篇"></a>10. Azkaban 实战篇</h2><h2 id="11-Azkaban-进阶篇"><a href="#11-Azkaban-进阶篇" class="headerlink" title="11. Azkaban 进阶篇"></a>11. Azkaban 进阶篇</h2><h2 id="12-项目实战"><a href="#12-项目实战" class="headerlink" title="12. 项目实战"></a>12. 项目实战</h2><h3 id="1-企业级大数据开发流程"><a href="#1-企业级大数据开发流程" class="headerlink" title="1. 企业级大数据开发流程"></a>1. 企业级大数据开发流程</h3><ul>
+<li>调研<ul>
+<li>业务</li>
+</ul>
+</li>
+<li>需求分析<ul>
+<li>项目的需求<ul>
+<li>显式</li>
+<li>隐式</li>
+</ul>
+</li>
+<li>甘特图：项目周期管理</li>
+</ul>
+</li>
+<li>方案设计<ul>
+<li>概要设计</li>
+<li>详细设计<ul>
+<li>基本要求</li>
+<li>系统要求：扩展性，容错性，高可用(HDFS, YARN HA ???)，定制化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>功能开发<ul>
+<li>开发</li>
+<li>单元测试：Junit</li>
+</ul>
+</li>
+<li>测试<ul>
+<li>测试环境：QA</li>
+<li>功能，性能，压力</li>
+<li>用户测试</li>
+</ul>
+</li>
+<li>部署上线<ul>
+<li>试运行：DIFF，”双活“</li>
+<li>正式上线</li>
+</ul>
+</li>
+<li>运维<ul>
+<li>7 * 24</li>
+</ul>
+</li>
+<li>后期迭代开发</li>
+</ul>
+<h3 id="2-企业级大数据应用"><a href="#2-企业级大数据应用" class="headerlink" title="2. 企业级大数据应用"></a>2. 企业级大数据应用</h3><ul>
+<li>数据分析<ul>
+<li>商业：<a href="https://www.umeng.com/analytics" target="_blank" rel="noopener">友盟</a></li>
+<li>自研</li>
+</ul>
+</li>
+<li>搜索/引擎<ul>
+<li>Lucene/Solr/ELK</li>
+</ul>
+</li>
+<li>机器学习</li>
+<li>精准营销</li>
+<li>人工智能</li>
+</ul>
+<h3 id="3-数据量预估及集群规划"><a href="#3-数据量预估及集群规划" class="headerlink" title="3. 数据量预估及集群规划"></a>3. 数据量预估及集群规划</h3><ul>
+<li>Q：一条日志多大，多少个字段，一天多少数据<ul>
+<li>300 ~ 500字节 <em> 1000W </em> 每人访问5次 * 每次访问5个页面 = 100G</li>
+<li>HDFS 3副本 <em> 100G </em> (2 ~ 3年)</li>
+</ul>
+</li>
+<li>服务器一台：磁盘多少？ =&gt; Node数量<ul>
+<li>集群规模：数据量 + 存储周期</li>
+</ul>
+</li>
+<li>集群机器规模：<ul>
+<li>DN：数据量大小/每个Node的磁盘大小</li>
+<li>NN：2</li>
+<li>RM：2</li>
+<li>NM：DN</li>
+<li>ZK：3/5/7/9</li>
+<li>GATEWAY</li>
+</ul>
+</li>
+<li>资源设置：cpu/memory/disk/network</li>
+<li>作业规划：<ul>
+<li>MapReduce/Hive/Spark</li>
+<li>Server</li>
+<li>调度：AZ，OOZIE</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-项目需求"><a href="#4-项目需求" class="headerlink" title="4. 项目需求"></a>4. 项目需求</h3><ul>
+<li>需求：使用PySpark分析空气质量</li>
+<li>数据来源：<a href="http://stateair.net/web/historical/1/1.html" target="_blank" rel="noopener">Beijing - Historical Data</a></li>
+<li>根据北京的数据进行统计分析</li>
+</ul>
+<pre><code>thpffcj:Public thpffcj$ cd file/
+thpffcj:file thpffcj$ ls
+Beijing_2015_HourlyPM25_created20160201.csv
+Beijing_2016_HourlyPM25_created20170201.csv
+Beijing_2017_HourlyPM25_created20170803.csv
+</code></pre><ul>
+<li>我们把前面几行没用的数据删除了</li>
+<li>空气质量指数：pm2.5 健康建议<ul>
+<li>0 - 50：健康</li>
+<li>51 - 100：中等</li>
+<li>101 - 150：对敏感人群不健康</li>
+<li>151 - 200：不健康</li>
+<li>201 - 300：非常不健康</li>
+<li>301 - 500：危险</li>
+</ul>
+</li>
+</ul>
+<p><strong>过程</strong></p>
+<ul>
+<li>数据分析 =&gt; ES =&gt; Kibana</li>
+</ul>
+<h3 id="5-功能实现"><a href="#5-功能实现" class="headerlink" title="5. 功能实现"></a>5. 功能实现</h3><pre><code>thpffcj:bin thpffcj$ ./pyspark --master local[2]
+</code></pre><ul>
+<li>读取数据</li>
+</ul>
+<pre><code>&gt;&gt;&gt; df = spark.read.format(&quot;csv&quot;).option(&quot;header&quot;, &quot;true&quot;).option(&quot;inferSchema&quot;, &quot;true&quot;).load(&quot;file:///Users/thpffcj/Public/file/Beijing_2017_HourlyPM25_created20170803.csv&quot;)
+&gt;&gt;&gt; df.show()
++-------+---------+--------------+----+-----+---+----+-----+-----+--------+-------+
+|   Site|Parameter|    Date (LST)|Year|Month|Day|Hour|Value| Unit|Duration|QC Name|
++-------+---------+--------------+----+-----+---+----+-----+-----+--------+-------+
+|Beijing|    PM2.5| 1/1/2017 0:00|2017|    1|  1|   0|  505|�g/m�|    1 Hr|  Valid|
+|Beijing|    PM2.5| 1/1/2017 1:00|2017|    1|  1|   1|  485|�g/m�|    1 Hr|  Valid|
+|Beijing|    PM2.5| 1/1/2017 2:00|2017|    1|  1|   2|  466|�g/m�|    1 Hr|  Val
+</code></pre><ul>
+<li>打印schema</li>
+</ul>
+<pre><code>&gt;&gt;&gt; df.printSchema()
+root
+ |-- Site: string (nullable = true)
+ |-- Parameter: string (nullable = true)
+ |-- Date (LST): string (nullable = true)
+ |-- Year: string (nullable = true)
+ |-- Month: string (nullable = true)
+ |-- Day: string (nullable = true)
+ |-- Hour: string (nullable = true)
+ |-- Value: string (nullable = true)
+ |-- Unit: string (nullable = true)
+ |-- Duration: string (nullable = true)
+ |-- QC Name: string (nullable = true)
+</code></pre><ul>
+<li>选出我们需要的列</li>
+</ul>
+<pre><code>df.select(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;, &quot;Hour&quot;, &quot;Value&quot;, &quot;QC Name&quot;).show()
+</code></pre><ul>
+<li>我们需要根据pm2.5的值，获得对应的健康建议</li>
+</ul>
+<pre><code>def get_grade(value):
+    if value &lt;= 50 and value &gt;= 0:
+        return &quot;健康&quot;
+    elif value &lt;= 100:
+        return &quot;中等&quot;
+    elif value &lt;= 150:
+        return &quot;对敏感人群不健康&quot;
+    elif value &lt;= 200:
+        return &quot;不健康&quot;
+    elif value &lt;= 300:
+        return &quot;非常不健康&quot;
+    elif value &lt;= 500:
+        return &quot;危险&quot;
+    elif value &gt; 500:
+        return &quot;报表&quot;
+    else:
+        return None
+
+
+grade_function_udf = udf(get_grade, StringType())
+
+# 进来一个Value，出去一个Grade
+data2017.withColumn(&quot;Grade&quot;, grade_function_udf(data2017[&apos;Value&apos;])).show()
+data2016.withColumn(&quot;Grade&quot;, grade_function_udf(data2016[&apos;Value&apos;])).show()
+data2015.withColumn(&quot;Grade&quot;, grade_function_udf(data2015[&apos;Value&apos;])).show()
+</code></pre><ul>
+<li>统计不同分类的次数</li>
+</ul>
+<pre><code>data2017.withColumn(&quot;Grade&quot;, grade_function_udf(data2017[&apos;Value&apos;])).groupBy(&quot;Grade&quot;).count().show()
+
++----------------+-----+
+|           Grade|count|
++----------------+-----+
+|对敏感人群不健康|  374|
+|      非常不健康|  179|
+|            爆表|   27|
+|            危险|  107|
+|            中等| 1052|
+|            健康| 2438|
+|          不健康|  167|
++----------------+-----+
+</code></pre><ul>
+<li>可以看到不同程度所占的比例</li>
+</ul>
+<pre><code>group2015.select(&quot;Grade&quot;, &quot;count&quot;, group2015[&apos;count&apos;] / data2015.count()).show()
+
++----------------+-----+-------------------+
+|           Grade|count|     (count / 8760)|
++----------------+-----+-------------------+
+|对敏感人群不健康| 1038| 0.1184931506849315|
+|      非常不健康|  552|0.06301369863013699|
+|            爆表|   44|0.00502283105022831|
+|            危险|  255|0.02910958904109589|
+|            健康| 4129|0.47134703196347033|
+|            中等| 2228|  0.254337899543379|
+|          不健康|  514|0.05867579908675799|
++----------------+-----+-------------------+
+</code></pre><h3 id="6-Elasticsearch即Kibana部署"><a href="#6-Elasticsearch即Kibana部署" class="headerlink" title="6. Elasticsearch即Kibana部署"></a>6. Elasticsearch即Kibana部署</h3><p><strong>Elasticsearch</strong></p>
+<ul>
+<li>修改es配置文件</li>
+</ul>
+<pre><code>path.data: /Users/thpffcj/Public/data/es
+
+network.host: 0.0.0.0
+</code></pre><ul>
+<li>启动</li>
+</ul>
+<pre><code>thpffcj:bin thpffcj$ ./elasticsearch
+</code></pre><p><strong>Kibana</strong></p>
+<pre><code>thpffcj:bin thpffcj$ ./kibana
+</code></pre><h3 id="7-通过Azkaban进行调度"><a href="#7-通过Azkaban进行调度" class="headerlink" title="7. 通过Azkaban进行调度"></a>7. 通过Azkaban进行调度</h3><ul>
+<li>上传数据</li>
+</ul>
+<pre><code>thpffcj:file thpffcj$ hadoop fs -mkdir /data
+19/10/21 19:51:30 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+thpffcj:file thpffcj$ hadoop fs -put Beijing* /data/
+19/10/21 19:51:55 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+thpffcj:file thpffcj$ hadoop fs -ls /data
+19/10/21 19:52:03 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 3 items
+-rw-r--r--   1 thpffcj supergroup     554681 2019-10-21 19:51 /data/Beijing_2015_HourlyPM25_created20160201.csv
+-rw-r--r--   1 thpffcj supergroup     555399 2019-10-21 19:51 /data/Beijing_2016_HourlyPM25_created20170201.csv
+-rw-r--r--   1 thpffcj supergroup     272438 2019-10-21 19:51 /data/Beijing_2017_HourlyPM25_created20170803.csv
+</code></pre><ul>
+<li>将代码拷贝到脚本里</li>
+</ul>
+<pre><code>thpffcj:scripts thpffcj$ cat sparkyarn.py 
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+from pyspark.sql.functions import udf
+
+if __name__ == &apos;__main__&apos;:
+    spark = SparkSession.builder.appName(&quot;project&quot;).getOrCreate()
+
+    data2015 = spark.read.format(&quot;csv&quot;)\
+        .option(&quot;header&quot;, &quot;true&quot;)\
+        .option(&quot;inferSchema&quot;, &quot;true&quot;)\
+        .load(&quot;/data/Beijing_2015_HourlyPM25_created20160201.csv&quot;)\
+        .select(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;, &quot;Hour&quot;, &quot;Value&quot;, &quot;QC Name&quot;)
+
+    data2016 = spark.read.format(&quot;csv&quot;)\
+        .option(&quot;header&quot;, &quot;true&quot;)\
+        .option(&quot;inferSchema&quot;, &quot;true&quot;)\
+        .load(&quot;/data/Beijing_2016_HourlyPM25_created20170201.csv&quot;)\
+        .select(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;, &quot;Hour&quot;, &quot;Value&quot;, &quot;QC Name&quot;)
+
+    data2017 = spark.read.format(&quot;csv&quot;)\
+        .option(&quot;header&quot;, &quot;true&quot;)\
+        .option(&quot;inferSchema&quot;, &quot;true&quot;)\
+        .load(&quot;/data/Beijing_2017_HourlyPM25_created20170803.csv&quot;)\
+        .select(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;, &quot;Hour&quot;, &quot;Value&quot;, &quot;QC Name&quot;)
+
+
+    def get_grade(value):
+        if value &lt;= 50 and value &gt;= 0:
+            return &quot;健康&quot;
+        elif value &lt;= 100:
+            return &quot;中等&quot;
+        elif value &lt;= 150:
+            return &quot;对敏感人群不健康&quot;
+        elif value &lt;= 200:
+            return &quot;不健康&quot;
+        elif value &lt;= 300:
+            return &quot;非常不健康&quot;
+        elif value &lt;= 500:
+            return &quot;危险&quot;
+        elif value &gt; 500:
+            return &quot;爆表&quot;
+        else:
+            return None
+
+    grade_function_udf = udf(get_grade, StringType())
+
+    # 进来一个Value，出去一个Grade
+    group2017 = data2017.withColumn(&quot;Grade&quot;, grade_function_udf(data2017[&apos;Value&apos;])).groupBy(&quot;Grade&quot;).count()
+    group2016 = data2016.withColumn(&quot;Grade&quot;, grade_function_udf(data2016[&apos;Value&apos;])).groupBy(&quot;Grade&quot;).count()
+    group2015 = data2015.withColumn(&quot;Grade&quot;, grade_function_udf(data2015[&apos;Value&apos;])).groupBy(&quot;Grade&quot;).count()
+
+    group2017.select(&quot;Grade&quot;, &quot;count&quot;, group2017[&apos;count&apos;] / data2017.count()).show()
+    group2016.select(&quot;Grade&quot;, &quot;count&quot;, group2016[&apos;count&apos;] / data2016.count()).show()
+    group2015.select(&quot;Grade&quot;, &quot;count&quot;, group2015[&apos;count&apos;] / data2015.count()).show()
+
+    spark.stop()
+</code></pre><ul>
+<li><p>提交作业</p>
+<p>  thpffcj:bin thpffcj$ ./spark-submit –master yarn ~/Public/scripts/sparkyarn.py  </p>
+</li>
+<li><p>发现报错</p>
+</li>
+</ul>
+<pre><code>Exception: Python in worker has different version 2.7 than that in driver 3.5, PySpark cannot run with different minor versions.Please check environment variables PYSPARK_PYTHON and PYSPARK_DRIVER_PYTHON are correctly set.
+</code></pre><ul>
+<li>设置环境变量</li>
+</ul>
+<pre><code>export PYSPARK_PYTHON=/Users/thpffcj/anaconda3/bin/python 
+</code></pre><ul>
+<li>再次提交发现可以成功运行，现在我们需要把我们的数据写到ES中去</li>
+<li>下载需要的jar包</li>
+</ul>
+<pre><code>thpffcj:lib thpffcj$ ls
+</code></pre><p>elasticsearch-spark-20_2.11-6.5.4.jar</p>
+<ul>
+<li><p>启动</p>
+<p>  thpffcj:bin thpffcj$ ./pyspark –master local[2] –jars ~/Public/lib/elasticsearch-spark-20_2.11-6.5.4.jar </p>
+</li>
+<li><p>把代码扔到命令行中</p>
+</li>
+</ul>
+<pre><code>from pyspark.sql.types import *
+from pyspark.sql.functions import udf
+
+
+data2017 = spark.read.format(&quot;csv&quot;)\
+    .option(&quot;header&quot;, &quot;true&quot;)\
+    .option(&quot;inferSchema&quot;, &quot;true&quot;)\
+    .load(&quot;/data/Beijing_2017_HourlyPM25_created20170803.csv&quot;)\
+    .select(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;, &quot;Hour&quot;, &quot;Value&quot;, &quot;QC Name&quot;)
+
+
+def get_grade(value):
+    if value &lt;= 50 and value &gt;= 0:
+        return &quot;健康&quot;
+    elif value &lt;= 100:
+        return &quot;中等&quot;
+    elif value &lt;= 150:
+        return &quot;对敏感人群不健康&quot;
+    elif value &lt;= 200:
+        return &quot;不健康&quot;
+    elif value &lt;= 300:
+        return &quot;非常不健康&quot;
+    elif value &lt;= 500:
+        return &quot;危险&quot;
+    elif value &gt; 500:
+        return &quot;爆表&quot;
+    else:
+        return None
+
+grade_function_udf = udf(get_grade, StringType())
+
+group2017 = data2017.withColumn(&quot;Grade&quot;, grade_function_udf(data2017[&apos;Value&apos;])).groupBy(&quot;Grade&quot;).count()
+
+result2017 = group2017.select(&quot;Grade&quot;, &quot;count&quot;, group2017[&apos;count&apos;] / data2017.count())
+</code></pre><ul>
+<li>查看结果</li>
+</ul>
+<pre><code>&gt;&gt;&gt; result2017.show()
++----------------+-----+--------------------+                                   
+|           Grade|count|      (count / 4344)|
++----------------+-----+--------------------+
+|对敏感人群不健康|  374| 0.08609576427255985|
+|      非常不健康|  179| 0.04120626151012891|
+|            爆表|   27|0.006215469613259668|
+|            危险|  107|0.024631675874769797|
+|            中等| 1052|  0.2421731123388582|
+|            健康| 2438|  0.5612338858195212|
+|          不健康|  167| 0.03844383057090239|
++----------------+-----+--------------------+
+</code></pre><ul>
+<li>写入ES</li>
+</ul>
+<pre><code>result2017.write.format(&quot;org.elasticsearch.spark.sql&quot;).option(&quot;es.nodes&quot;, &quot;172.19.170.131:9200&quot;).mode(&quot;overwrite&quot;).save(&quot;weaes/weather&quot;)
+</code></pre><ul>
+<li>然后到kibana上查看数据</li>
+</ul>
+<pre><code>&gt;&gt;&gt; group2017.selectExpr(&quot;Grade as grade&quot;, &quot;count&quot;).withColumn(&quot;percent&quot;,  group2017[&apos;count&apos;] / data2017.count()).show()
++----------------+-----+--------------------+
+|           grade|count|             percent|
++----------------+-----+--------------------+
+|对敏感人群不健康|  374| 0.08609576427255985|
+|      非常不健康|  179| 0.04120626151012891|
+|            爆表|   27|0.006215469613259668|
+|            危险|  107|0.024631675874769797|
+|            中等| 1052|  0.2421731123388582|
+|            健康| 2438|  0.5612338858195212|
+|          不健康|  167| 0.03844383057090239|
++----------------+-----+--------------------+
+</code></pre><ul>
+<li><p>现在我们如何来展示呢</p>
+</li>
+<li><p>练习：</p>
+<ul>
+<li>同一个地方不同年份的对比</li>
+<li>相同年份的不同城市的对比</li>
+<li>月份为统计维度：3-1 3-2</li>
+<li>小时为统计维度</li>
+</ul>
+</li>
+<li><p>删除索引</p>
+</li>
+</ul>
+<pre><code>thpffcj:bin thpffcj$ curl -XDELETE &apos;http://thpffcj:9200/weather2017&apos;
+{&quot;acknowledged&quot;:true}thpffcj:bin thpffcj$ curl -XDELETE &apos;http://thpffcj:9200/weather2016&apos;
+{&quot;acknowledged&quot;:true}thpffcj:bin thpffcj$ curl -XDELETE &apos;http://thpffcj:9200/weather2015&apos;
+{&quot;acknowledged&quot;:true}thpffcj:bin thpffcj$ 
+</code></pre><ul>
+<li><h3 id="8-项目总结"><a href="#8-项目总结" class="headerlink" title="8. 项目总结"></a>8. 项目总结</h3></li>
+</ul>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

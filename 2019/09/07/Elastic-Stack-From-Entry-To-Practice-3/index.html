@@ -838,7 +838,7 @@ GET test_search_index/_search
 }
 </code></pre><h3 id="8-原理与精准度问题"><a href="#8-原理与精准度问题" class="headerlink" title="8. 原理与精准度问题"></a>8. 原理与精准度问题</h3><h3 id="9-文档说明"><a href="#9-文档说明" class="headerlink" title="9. 文档说明"></a>9. 文档说明</h3><p><br></p>
 <hr>
-<h2 id="Elasticsearch-篇之数据建模"><a href="#Elasticsearch-篇之数据建模" class="headerlink" title="Elasticsearch 篇之数据建模"></a>Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><ul>
+<h2 id="2-Elasticsearch-篇之数据建模"><a href="#2-Elasticsearch-篇之数据建模" class="headerlink" title="2. Elasticsearch 篇之数据建模"></a>2. Elasticsearch 篇之数据建模</h2><h3 id="1-数据建模简介"><a href="#1-数据建模简介" class="headerlink" title="1. 数据建模简介"></a>1. 数据建模简介</h3><ul>
 <li>英文为Data Modeling，为创建数据模型的过程</li>
 <li>数据模型(Data Model)<ul>
 <li>对现实世界进行抽象描述的一种工具和方法</li>
@@ -912,10 +912,391 @@ GET test_search_index/_search
 <li>灵活使用多字段特性来解决多样的业务需求</li>
 </ul>
 </li>
+<li>dynamic<ul>
+<li>true | false | strict</li>
+<li>控制mapping自动更新</li>
 </ul>
-<h3 id="3-ES数据建模实例"><a href="#3-ES数据建模实例" class="headerlink" title="3. ES数据建模实例"></a>3. ES数据建模实例</h3><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><br></p>
+</li>
+<li>data_detection<ul>
+<li>true | false</li>
+<li>是否自动识别日期类型</li>
+</ul>
+</li>
+</ul>
+<p><strong>设定流程</strong></p>
+<ul>
+<li>是何种类型？<ul>
+<li>字符串类型</li>
+<li>枚举类型</li>
+<li>数值类型</li>
+<li>其他类型</li>
+</ul>
+</li>
+<li>是否需要检索？<ul>
+<li>完全不需要检索，排序，聚合分析的字段<ul>
+<li>enabled设置为false</li>
+</ul>
+</li>
+<li>不需要检索的字段<ul>
+<li>index设置为false</li>
+</ul>
+</li>
+<li>需要检索的字段，可以通过如下配置设定需要的存储力度<ul>
+<li>index_options结合需要设定</li>
+<li>norms不需要归一化数据时关闭即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>是否需要排序和聚合分析？<ul>
+<li>doc_values设定为false</li>
+<li>fielddata设定为false</li>
+</ul>
+</li>
+<li>是否需要另行存储？<ul>
+<li>是否需要专门存储当前字段的数据？</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-ES数据建模实例"><a href="#3-ES数据建模实例" class="headerlink" title="3. ES数据建模实例"></a>3. ES数据建模实例</h3><ul>
+<li>博客文章blog_index<ul>
+<li>标题title</li>
+<li>发布日期publish_date</li>
+<li>作者author</li>
+<li>摘要abstract</li>
+<li>内容content</li>
+<li>网络地址url</li>
+</ul>
+</li>
+</ul>
+<pre><code>PUT blog_index
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;_source&quot;: {
+        &quot;enabled&quot;: false
+      },
+      &quot;properties&quot;: {
+        &quot;title&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;fields&quot;: {
+            &quot;keyword&quot;: {
+              &quot;type&quot;: &quot;keyword&quot;,
+              &quot;ignore_above&quot;: 100
+            }
+          },
+          &quot;store&quot;: true
+        },
+        &quot;publish_date&quot;: {
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;store&quot;: true
+        },
+        &quot;author&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;,
+          &quot;ignore_above&quot;: 100, 
+          &quot;store&quot;: true
+        },
+        &quot;abstract&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;store&quot;: true
+        },
+        &quot;content&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;store&quot;: true
+        },
+        &quot;url&quot;: {
+          &quot;type&quot;: &quot;keyword&quot;,
+          &quot;doc_values&quot;:false,
+          &quot;norms&quot;:false,
+          &quot;ignore_above&quot;: 100, 
+          &quot;store&quot;: true
+        }
+      }
+    }
+  }
+}
+</code></pre><ul>
+<li>查询</li>
+</ul>
+<pre><code>GET blog_index/_search
+{
+  &quot;stored_fields&quot;: [&quot;title&quot;,&quot;publish_date&quot;,&quot;author&quot;,&quot;abstract&quot;,&quot;url&quot;], 
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;content&quot;: &quot;blog&quot;
+    }
+  },
+  &quot;highlight&quot;: {
+    &quot;fields&quot;:{
+      &quot;content&quot;: {}
+    }
+  }
+}
+</code></pre><h3 id="4-Nested-Object"><a href="#4-Nested-Object" class="headerlink" title="4. Nested_Object"></a>4. Nested_Object</h3><ul>
+<li>ES不擅长处理关系型数据库中的关联关系，比如文章表blog与评论表comment之间通过blog_id关联，在ES中可以通过如下两种手段变相解决<ul>
+<li>Nested Object</li>
+<li>Parent/Child</li>
+</ul>
+</li>
+</ul>
+<p><strong>关联关系处理</strong></p>
+<ul>
+<li>文章Id blog_id</li>
+<li>评论人 username</li>
+<li>评论日期 date</li>
+<li>评论内容 content</li>
+</ul>
+<pre><code>DELETE blog_index_nested
+PUT blog_index_nested
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;:{
+      &quot;properties&quot;: {
+        &quot;title&quot;:{
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;fields&quot;: {
+            &quot;keyword&quot;:{
+              &quot;type&quot;:&quot;keyword&quot;,
+              &quot;ignore_above&quot;: 100
+            }
+          }
+        },
+        &quot;publish_date&quot;:{
+          &quot;type&quot;:&quot;date&quot;
+        },
+        &quot;author&quot;:{
+          &quot;type&quot;:&quot;keyword&quot;,
+          &quot;ignore_above&quot;: 100
+        },
+        &quot;abstract&quot;:{
+          &quot;type&quot;: &quot;text&quot;
+        },
+        &quot;url&quot;:{
+          &quot;enabled&quot;:false
+        },
+        &quot;comments&quot;:{
+          &quot;type&quot;:&quot;nested&quot;, 
+          &quot;properties&quot;: {
+            &quot;username&quot;:{
+              &quot;type&quot;:&quot;keyword&quot;,
+              &quot;ignore_above&quot;:100
+            },
+            &quot;date&quot;:{
+              &quot;type&quot;:&quot;date&quot;
+            },
+            &quot;content&quot;:{
+              &quot;type&quot;:&quot;text&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+PUT blog_index_nested/doc/2
+{
+  &quot;title&quot;: &quot;Blog Number One&quot;,
+  &quot;author&quot;: &quot;alfred&quot;,
+  &quot;comments&quot;: [
+    {
+      &quot;username&quot;: &quot;lee&quot;,
+      &quot;date&quot;: &quot;2017-01-02&quot;,
+      &quot;content&quot;: &quot;awesome article!&quot;
+    },
+    {
+      &quot;username&quot;: &quot;fax&quot;,
+      &quot;date&quot;: &quot;2017-04-02&quot;,
+      &quot;content&quot;: &quot;thanks!&quot;
+    }
+  ]
+}
+
+
+GET blog_index_nested/_search
+{
+  &quot;query&quot;: {
+    &quot;nested&quot;: {
+      &quot;path&quot;: &quot;comments&quot;,
+      &quot;query&quot;: {
+        &quot;bool&quot;: {
+          &quot;must&quot;: [
+            {
+              &quot;match&quot;: {
+                &quot;comments.username&quot;: &quot;lee&quot;
+              }
+            },
+            {
+              &quot;match&quot;: {
+                &quot;comments.content&quot;: &quot;thanks&quot;
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="5-Parent-Child"><a href="#5-Parent-Child" class="headerlink" title="5. Parent_Child"></a>5. Parent_Child</h3><ul>
+<li>ES还提供了类似关系数据库中join的实现方式，使用join数据类型实现</li>
+</ul>
+<pre><code>PUT blog_index_parent_child
+{
+  &quot;mappings&quot;: {
+    &quot;doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;join&quot;: {
+          &quot;type&quot;: &quot;join&quot;,
+          &quot;relations&quot;: {
+            &quot;blog&quot;: &quot;comment&quot;
+          }
+        }
+      }
+    }
+  }
+}
+
+PUT blog_index_parent_child/doc/1
+{
+  &quot;title&quot;:&quot;blog&quot;,
+  &quot;join&quot;:&quot;blog&quot;  指明父类型
+}
+
+PUT blog_index_parent_child/doc/2
+{
+  &quot;title&quot;:&quot;blog2&quot;,
+  &quot;join&quot;:&quot;blog&quot;
+}
+
+
+PUT blog_index_parent_child/doc/comment-1?routing=1  指明routing值，确保父子文档在一个分片上，一般使用父文档Id
+{
+  &quot;comment&quot;:&quot;comment world&quot;,
+  &quot;join&quot;:{
+    &quot;name&quot;:&quot;comment&quot;,  指明子类型
+    &quot;parent&quot;:1  指明父文档Id
+  }
+}
+
+
+PUT blog_index_parent_child/doc/comment-2?routing=2
+{
+  &quot;comment&quot;:&quot;comment hello&quot;,
+  &quot;join&quot;:{
+    &quot;name&quot;:&quot;comment&quot;,
+    &quot;parent&quot;:2
+  }
+}
+</code></pre><ul>
+<li>常见query语法包括如下几种：<ul>
+<li>parent_id：返回某父文档的子文档</li>
+<li>has_child：返回包含某子文档的父文档</li>
+<li>has_parent：返回包含某父文档的子文档</li>
+</ul>
+</li>
+</ul>
+<pre><code>GET blog_index_parent_child/_search
+{
+  &quot;query&quot;:{
+    &quot;parent_id&quot;:{
+      &quot;type&quot;:&quot;comment&quot;,
+      &quot;id&quot;:&quot;2&quot;
+    }
+  }
+}
+
+GET blog_index_parent_child/_search
+{
+  &quot;query&quot;:{
+    &quot;has_child&quot;: {
+      &quot;type&quot;: &quot;comment&quot;,
+      &quot;query&quot;: {
+        &quot;match&quot;: {
+          &quot;comment&quot;: &quot;world&quot;
+        }
+      }
+    }
+  }
+}
+
+
+GET blog_index_parent_child/_search
+{
+  &quot;query&quot;:{
+    &quot;has_parent&quot;: {
+      &quot;parent_type&quot;: &quot;blog&quot;,
+      &quot;query&quot;: {
+        &quot;match&quot;: {
+          &quot;title&quot;: &quot;blog&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre><h3 id="6-nested-vs-parent-child"><a href="#6-nested-vs-parent-child" class="headerlink" title="6. nested_vs_parent_child"></a>6. nested_vs_parent_child</h3><p><strong>nested object</strong></p>
+<ul>
+<li>优点：文档存储在一起，因此读取性能高</li>
+<li>缺点：更新父或子文档时需要更新整个文档</li>
+<li>场景：子文档偶尔更新，查询频繁</li>
+</ul>
+<p><strong>parent child</strong></p>
+<ul>
+<li>优点：父子文档可以独立更新，互不影响</li>
+<li>缺点：为了维护join的关系，需要占用部分内存，读取性能较差</li>
+<li>场景：子文档更新频繁</li>
+</ul>
+<p><strong>建议尽量选择nested object来解决问题</strong></p>
+<h3 id="7-reindex"><a href="#7-reindex" class="headerlink" title="7. reindex"></a>7. reindex</h3><ul>
+<li>指重建所有数据的过程，一般发生在如下情况：<ul>
+<li>mapping设置更改，比如字段类型变化，分词器字典更新等</li>
+<li>index设置变更，比如分片数更改等</li>
+<li>迁移数据</li>
+</ul>
+</li>
+<li>ES提供了现成的API用于完成该工作<ul>
+<li>_update_by_query在现有索引上重建</li>
+<li>_reindex在其他索引上重建</li>
+</ul>
+</li>
+</ul>
+<pre><code>POST blog_index/_update_by_query?conflicts=proceed
+
+POST _reindex
+{
+  &quot;source&quot;: {
+    &quot;index&quot;: &quot;blog_index&quot;
+  },
+  &quot;dest&quot;: {
+    &quot;index&quot;: &quot;blog_new_index&quot;
+  }
+}
+</code></pre><ul>
+<li>数据重建的时间受原索引文档规模的影响，当规模越大时，所需时间越多，此时需要通过设定url参数wait_for_completion为false来异步执行，ES以task来描述此类执行任务</li>
+</ul>
+<pre><code>POST blog_index/_update_by_query?conflicts=proceed&amp;wait_for_completion=false
+
+GET _tasks/_qKI6E8_TDWjXyo_x-bhmw:11996
+</code></pre><h3 id="8-其他建议"><a href="#8-其他建议" class="headerlink" title="8. 其他建议"></a>8. 其他建议</h3><p><strong>数据模型版本管理</strong></p>
+<ul>
+<li>对Mapping进行版本管理<ul>
+<li>包含在代码或者以专门的文件进行管理，添加好注释，并加入Git等版本管理仓库中，方便回顾</li>
+<li>为每个增加一个metadata字段，在其中维护一些文档相关的元数据，方便对数据进行管理</li>
+</ul>
+</li>
+</ul>
+<p><strong>防止字段过多</strong></p>
+<ul>
+<li>字段过多主要有如下的坏处：<ul>
+<li>难于维护，当字段成百上千时，基本很难有人明确知道每个字段的含义</li>
+<li>mapping的信息存储在cluster state里面，过多的字段会导致mapping过大，最终导致更新变慢</li>
+<li>一般字段过多的原因是由于没有高质量的数据建模导致的，比如dynamic设置为true</li>
+<li>考虑拆分多个索引来解决问题</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
 <hr>
-<h2 id="Elasticsearch-篇之集群调优建议"><a href="#Elasticsearch-篇之集群调优建议" class="headerlink" title="Elasticsearch 篇之集群调优建议"></a>Elasticsearch 篇之集群调优建议</h2><h3 id="1-生产环境部署建议"><a href="#1-生产环境部署建议" class="headerlink" title="1. 生产环境部署建议"></a>1. 生产环境部署建议</h3><ul>
+<h2 id="3-Elasticsearch-篇之集群调优建议"><a href="#3-Elasticsearch-篇之集群调优建议" class="headerlink" title="3. Elasticsearch 篇之集群调优建议"></a>3. Elasticsearch 篇之集群调优建议</h2><h3 id="1-生产环境部署建议"><a href="#1-生产环境部署建议" class="headerlink" title="1. 生产环境部署建议"></a>1. 生产环境部署建议</h3><ul>
 <li>遵照官方建议设置所有的系统参数</li>
 <li>参见文档”Setup Elasticsearch -&gt; Important System Configuration”<ul>
 <li>Disable swapping</li>
@@ -1107,7 +1488,7 @@ GET test_search_index/_search
         <nav class="pagination" role="pagination">
     
     <a class="pull-left" href="/2019/09/07/Elastic-Stack-From-Entry-To-Practice-4/" style="float: left;">
-        ← Elastic-Stack-From-Entry-To-Practice-4
+        ← Logstash 入门
     </a>
     
     

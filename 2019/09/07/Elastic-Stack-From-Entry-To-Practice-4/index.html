@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Elastic-Stack-From-Entry-To-Practice-4 | Thpffcj的树洞</title>
+  <title>Logstash 入门 | Thpffcj的树洞</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,11 +177,11 @@
       </time>
     
 </span>
-                <h1>Elastic-Stack-From-Entry-To-Practice-4</h1>
+                <h1>Logstash 入门</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="Logstash-篇之入门与运行机制"><a href="#Logstash-篇之入门与运行机制" class="headerlink" title="Logstash 篇之入门与运行机制"></a>Logstash 篇之入门与运行机制</h2><h3 id="1-入门及架构简介"><a href="#1-入门及架构简介" class="headerlink" title="1. 入门及架构简介"></a>1. 入门及架构简介</h3><ul>
+      		<h2 id="1-Logstash-篇之入门与运行机制"><a href="#1-Logstash-篇之入门与运行机制" class="headerlink" title="1. Logstash 篇之入门与运行机制"></a>1. Logstash 篇之入门与运行机制</h2><h3 id="1-入门及架构简介"><a href="#1-入门及架构简介" class="headerlink" title="1. 入门及架构简介"></a>1. 入门及架构简介</h3><ul>
 <li>数据收集处理引擎</li>
 <li>ETL工具</li>
 </ul>
@@ -201,24 +201,139 @@
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Elastic-Stack-From-Entry-To-Practice/Logstash%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B.png" alt=""></p>
-<h3 id="2-Life-of-an-Event"><a href="#2-Life-of-an-Event" class="headerlink" title="2. Life_of_an_Event"></a>2. Life_of_an_Event</h3><h3 id="3-queue简介"><a href="#3-queue简介" class="headerlink" title="3. queue简介"></a>3. queue简介</h3><h3 id="4-线程简介"><a href="#4-线程简介" class="headerlink" title="4. 线程简介"></a>4. 线程简介</h3><h3 id="5-配置简介"><a href="#5-配置简介" class="headerlink" title="5. 配置简介"></a>5. 配置简介</h3><h3 id="6-多实例运行"><a href="#6-多实例运行" class="headerlink" title="6. 多实例运行"></a>6. 多实例运行</h3><h3 id="7-pipeline配置简介"><a href="#7-pipeline配置简介" class="headerlink" title="7. pipeline配置简介"></a>7. pipeline配置简介</h3><p><br></p>
+<pre><code>Thpffcj:logstash-6.5.4 thpffcj$ cat config/codec.conf 
+input {
+  stdin {
+    codec =&gt; line
+  }
+}
+
+output {
+  stdout {
+    codec =&gt; json
+  }
+}
+
+Thpffcj:logstash-6.5.4 thpffcj$ echo &quot;foo
+&gt; bar
+&gt; &quot; | bin/logstash -f config/codec.conf
+&gt; 
+&gt; 
+</code></pre><h3 id="2-Life-of-an-Event"><a href="#2-Life-of-an-Event" class="headerlink" title="2. Life_of_an_Event"></a>2. Life_of_an_Event</h3><p><img src="" alt=""></p>
+<h3 id="3-queue简介"><a href="#3-queue简介" class="headerlink" title="3. queue简介"></a>3. queue简介</h3><p><strong>Queue的分类</strong></p>
+<ul>
+<li>In Memory<ul>
+<li>无法处理进程Crash，机器宕机等情况，回导致数据流失</li>
+</ul>
+</li>
+<li>Persistent Queue In Disk<ul>
+<li>可处理进程Crash等情况，保证数据不丢失</li>
+<li>保证数据至少消费一次</li>
+<li>充当缓冲区，可以替代Kafka等消息队列的作用</li>
+</ul>
+</li>
+</ul>
+<p><strong>PQ的基本配置</strong></p>
+<ul>
+<li>queue.type.persisted<ul>
+<li>默认是memory</li>
+</ul>
+</li>
+<li>queue.max_bytes<ul>
+<li>队列存储最大数据量，默认是1gb</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-线程简介"><a href="#4-线程简介" class="headerlink" title="4. 线程简介"></a>4. 线程简介</h3><ul>
+<li>pipeline.workers | -w<ul>
+<li>pipeline线程数，即filter_output的处理线程数，默认是cpu核数</li>
+</ul>
+</li>
+<li>pipeline.batch.size | -b<ul>
+<li>Batcher一次批量获取的待处理文档数，默认125，可以根据输出进行调整，越大会占用越多的heap空间，可以通过jvm.options调整</li>
+</ul>
+</li>
+<li>pipeline.batch.delay | -u<ul>
+<li>Batcher等待的时长，单位为ms</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-配置简介"><a href="#5-配置简介" class="headerlink" title="5. 配置简介"></a>5. 配置简介</h3><ul>
+<li>logstash设置相关的配置文件(在conf文件夹中，setting files)<ul>
+<li>logstash.yml：logstash相关的配置，比如node.name，path.data，pipeline.wokers，queue.type等，这其中的配置可以被命令行参数中的相关配置覆盖</li>
+<li>jvm.options修改jvm的相关参数，比如修改heap size等</li>
+</ul>
+</li>
+<li>pipeline配置文件<ul>
+<li>定义数据处理流程的文件，以.conf结尾</li>
+</ul>
+</li>
+</ul>
+<p><strong>配置方式建议</strong></p>
+<ul>
+<li>线上环境推荐采用配置文件来设定logstash的相关配置，这样可以减少犯错的机会，而且文件便于进行版本话管理</li>
+<li>命令行形式多用来进行快速的配置测试，验证，检查等</li>
+</ul>
+<h3 id="6-多实例运行"><a href="#6-多实例运行" class="headerlink" title="6. 多实例运行"></a>6. 多实例运行</h3><ul>
+<li>bin/logstash –path.settings instance1</li>
+<li>bin/logstash –path.settings instance2</li>
+<li>不同instance中修改logshtash.yml，自定义path.data，确保其不相同即可</li>
+</ul>
+<h3 id="7-pipeline配置简介"><a href="#7-pipeline配置简介" class="headerlink" title="7. pipeline配置简介"></a>7. pipeline配置简介</h3><ul>
+<li>用于配置input，filter和output插件</li>
+</ul>
+<p><strong>配置语法</strong></p>
+<ul>
+<li>布尔类型Boolean<ul>
+<li>isFailed =&gt; true</li>
+</ul>
+</li>
+<li>数值类型Number<ul>
+<li>port =&gt; 33</li>
+</ul>
+</li>
+<li>字符串类型String<ul>
+<li>name =&gt; “Hello world”</li>
+</ul>
+</li>
+<li>数组Array/List<ul>
+<li>user =&gt; [{id =&gt; 1, name =&gt; bob}, {id =&gt; 2, name =&gt; jane}]</li>
+</ul>
+</li>
+<li>哈希类型Hash</li>
+<li>注释</li>
+<li>在配置中可以引用Logstash Event的属性(字段)，主要有如下两种方式：<ul>
+<li>直接引用字段值</li>
+<li>在字符串中以sprintf方式引用</li>
+</ul>
+</li>
+<li>支持条件判断语法，从而扩展了配置的多样性</li>
+</ul>
+<p><br></p>
 <hr>
-<h2 id="Logstash-篇之实例分析"><a href="#Logstash-篇之实例分析" class="headerlink" title="Logstash 篇之实例分析"></a>Logstash 篇之实例分析</h2><h3 id="1-Logstash实战建议"><a href="#1-Logstash实战建议" class="headerlink" title="1. Logstash实战建议"></a>1. Logstash实战建议</h3><h3 id="2-实战之apacheLogs（上）"><a href="#2-实战之apacheLogs（上）" class="headerlink" title="2. 实战之apacheLogs（上）"></a>2. 实战之apacheLogs（上）</h3><h3 id="3-实战之apacheLogs（下）"><a href="#3-实战之apacheLogs（下）" class="headerlink" title="3. 实战之apacheLogs（下）"></a>3. 实战之apacheLogs（下）</h3><h3 id="4-实战之csv"><a href="#4-实战之csv" class="headerlink" title="4. 实战之csv"></a>4. 实战之csv</h3><h3 id="5-监控运维建议"><a href="#5-监控运维建议" class="headerlink" title="5. 监控运维建议"></a>5. 监控运维建议</h3><p><br></p>
+<h2 id="2-Logstash-篇之插件详解"><a href="#2-Logstash-篇之插件详解" class="headerlink" title="2. Logstash 篇之插件详解"></a>2. Logstash 篇之插件详解</h2><h3 id="1-input插件详解及glob讲解"><a href="#1-input插件详解及glob讲解" class="headerlink" title="1. input插件详解及glob讲解"></a>1. input插件详解及glob讲解</h3><ul>
+<li>input插件指定数据输入源，一个pipeline可以有多个input插件</li>
+</ul>
+<p><strong>stdin</strong></p>
+<ul>
+<li>最简单的输入，从标准输入读取数据，通用配置为：<ul>
+<li>codec类型为codec</li>
+<li>type类型为string，自定义该事件的类型，可用于后续判断</li>
+<li>tags类型为array，自定义该事件的tag，可用于后续判断</li>
+<li>add_field类型为hash，为该事件添加字段</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-codec插件详解"><a href="#2-codec插件详解" class="headerlink" title="2. codec插件详解"></a>2. codec插件详解</h3><h3 id="3-filter插件简介及date插件讲解"><a href="#3-filter插件简介及date插件讲解" class="headerlink" title="3. filter插件简介及date插件讲解"></a>3. filter插件简介及date插件讲解</h3><h3 id="4-filter插件之grok简介"><a href="#4-filter插件之grok简介" class="headerlink" title="4. filter插件之grok简介"></a>4. filter插件之grok简介</h3><h3 id="5-filter插件之dissect讲解"><a href="#5-filter插件之dissect讲解" class="headerlink" title="5. filter插件之dissect讲解"></a>5. filter插件之dissect讲解</h3><h3 id="6-filter插件之mutate讲解"><a href="#6-filter插件之mutate讲解" class="headerlink" title="6. filter插件之mutate讲解"></a>6. filter插件之mutate讲解</h3><h3 id="7-filter插件之json讲解"><a href="#7-filter插件之json讲解" class="headerlink" title="7. filter插件之json讲解"></a>7. filter插件之json讲解</h3><h3 id="8-filter插件之geoip和ruby讲解"><a href="#8-filter插件之geoip和ruby讲解" class="headerlink" title="8. filter插件之geoip和ruby讲解"></a>8. filter插件之geoip和ruby讲解</h3><h3 id="9-output插件简介"><a href="#9-output插件简介" class="headerlink" title="9. output插件简介"></a>9. output插件简介</h3><p><br></p>
 <hr>
-<h2 id="Beats-篇之Filebeat"><a href="#Beats-篇之Filebeat" class="headerlink" title="Beats 篇之Filebeat"></a>Beats 篇之Filebeat</h2><h3 id="1-beats简介"><a href="#1-beats简介" class="headerlink" title="1. beats简介"></a>1. beats简介</h3><h3 id="2-Filebeat-Demo"><a href="#2-Filebeat-Demo" class="headerlink" title="2. Filebeat_Demo"></a>2. Filebeat_Demo</h3><h3 id="3-Filebeat-简介及流程介绍"><a href="#3-Filebeat-简介及流程介绍" class="headerlink" title="3. Filebeat 简介及流程介绍"></a>3. Filebeat 简介及流程介绍</h3><h3 id="4-Filebeat常见架构及ingest-node介绍"><a href="#4-Filebeat常见架构及ingest-node介绍" class="headerlink" title="4. Filebeat常见架构及ingest_node介绍"></a>4. Filebeat常见架构及ingest_node介绍</h3><h3 id="5-Filebeat-Module简介"><a href="#5-Filebeat-Module简介" class="headerlink" title="5. Filebeat_Module简介"></a>5. Filebeat_Module简介</h3><p><br></p>
-<hr>
-<h2 id="Beats-篇之Metricbeat"><a href="#Beats-篇之Metricbeat" class="headerlink" title="Beats 篇之Metricbeat"></a>Beats 篇之Metricbeat</h2><h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><h3 id="2-Module简介"><a href="#2-Module简介" class="headerlink" title="2. Module简介"></a>2. Module简介</h3><h3 id="3-实战"><a href="#3-实战" class="headerlink" title="3. 实战"></a>3. 实战</h3><p><br></p>
-<hr>
-<h2 id="Beats-篇之Packetbeat"><a href="#Beats-篇之Packetbeat" class="headerlink" title="Beats 篇之Packetbeat"></a>Beats 篇之Packetbeat</h2><h3 id="1-简介-1"><a href="#1-简介-1" class="headerlink" title="1. 简介"></a>1. 简介</h3><h3 id="2-实战"><a href="#2-实战" class="headerlink" title="2. 实战"></a>2. 实战</h3><p><br></p>
-<hr>
-<h2 id="Beats-篇之其他-beat"><a href="#Beats-篇之其他-beat" class="headerlink" title="Beats 篇之其他 beat"></a>Beats 篇之其他 beat</h2><h3 id="1-Heartbeat"><a href="#1-Heartbeat" class="headerlink" title="1. Heartbeat"></a>1. Heartbeat</h3><h3 id="2-Community-beats"><a href="#2-Community-beats" class="headerlink" title="2. Community_beats"></a>2. Community_beats</h3>
+<h2 id="3-Logstash-篇之实例分析"><a href="#3-Logstash-篇之实例分析" class="headerlink" title="3. Logstash 篇之实例分析"></a>3. Logstash 篇之实例分析</h2><h3 id="1-Logstash实战建议"><a href="#1-Logstash实战建议" class="headerlink" title="1. Logstash实战建议"></a>1. Logstash实战建议</h3><h3 id="2-实战之apacheLogs（上）"><a href="#2-实战之apacheLogs（上）" class="headerlink" title="2. 实战之apacheLogs（上）"></a>2. 实战之apacheLogs（上）</h3><h3 id="3-实战之apacheLogs（下）"><a href="#3-实战之apacheLogs（下）" class="headerlink" title="3. 实战之apacheLogs（下）"></a>3. 实战之apacheLogs（下）</h3><h3 id="4-实战之csv"><a href="#4-实战之csv" class="headerlink" title="4. 实战之csv"></a>4. 实战之csv</h3><h3 id="5-监控运维建议"><a href="#5-监控运维建议" class="headerlink" title="5. 监控运维建议"></a>5. 监控运维建议</h3>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2020/01/01/置顶目录/" style="float: left;">
-        ← 【置顶】 博客目录
+    <a class="pull-left" href="/2019/12/19/Implementing-A-Simple-RPC-Framework/" style="float: left;">
+        ← 实现一个简单的RPC框架
     </a>
     
     
