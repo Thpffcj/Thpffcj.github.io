@@ -342,13 +342,7 @@ GET test_search_index/_search?q=username:(alfred way)
 <li>注意大写，不能小写</li>
 </ul>
 </li>
-<li><ul>
-<li><ul>
-<li>分别对应must和must_not</li>
-</ul>
-</li>
-</ul>
-<ul>
+<li>+ - 分别对应must和must_not<ul>
 <li>name:(tom +lee -alfred)</li>
 <li>+在url中会被解析为空格，要使用encode后的结果才可以，为%2B</li>
 </ul>
@@ -597,9 +591,27 @@ GET test_search_index/_search
 </code></pre><h3 id="8-simple-query-string-query"><a href="#8-simple-query-string-query" class="headerlink" title="8. simple-query-string-query"></a>8. simple-query-string-query</h3><ul>
 <li>类似Query String，但是会忽略错误的查询语法，并且仅支持部分查询语法</li>
 </ul>
-<p>GET test_search_index/_search<br>{<br>  “profile”:true,<br>  “query”:{<br>    “simple_query_string”: {<br>     “query”: “alfred +way \”java”,<br>     “fields”: [“username”]<br>    }<br>  }<br>}</p>
-<p>GET test_search_index/_search<br>{<br>  “query”:{<br>    “query_string”: {<br>      “default_field”: “username”,<br>      “query”: “alfred +way \”java”<br>    }<br>  }<br>}</p>
-<h3 id="9-term-terms-query"><a href="#9-term-terms-query" class="headerlink" title="9. term-terms-query"></a>9. term-terms-query</h3><ul>
+<pre><code>GET test_search_index/_search
+{
+  &quot;profile&quot;:true,
+  &quot;query&quot;:{
+    &quot;simple_query_string&quot;: {
+     &quot;query&quot;: &quot;alfred +way \&quot;java&quot;,
+     &quot;fields&quot;: [&quot;username&quot;]
+    }
+  }
+}
+
+GET test_search_index/_search
+{
+  &quot;query&quot;:{
+    &quot;query_string&quot;: {
+      &quot;default_field&quot;: &quot;username&quot;,
+      &quot;query&quot;: &quot;alfred +way \&quot;java&quot;
+    }
+  }
+}
+</code></pre><h3 id="9-term-terms-query"><a href="#9-term-terms-query" class="headerlink" title="9. term-terms-query"></a>9. term-terms-query</h3><ul>
 <li>将查询语句作为整个单词进行查询，即不对查询语句做分词处理</li>
 </ul>
 <pre><code>GET test_search_index/_search
@@ -1096,10 +1108,10 @@ GET test_search_index/_search
 </li>
 <li>坏处为需要写入新文档时，必须重新构建倒排索引文件，然后替换老文件后，新文档才能被检索，导致文档实时性差</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Elastic-Stack-From-Entry-To-Practice/%E6%96%87%E6%A1%A3%E5%88%9B%E5%BB%BA%E7%9A%84%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thpffcj/Thpffcj.github.io/master/picture/Elastic-Stack-From-Entry-To-Practice/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%8D%E5%8F%AF%E6%9B%B4%E6%94%B9.png" alt=""></p>
 <p><strong>文档搜索实时性</strong></p>
 <ul>
-<li>解决方案是新文档直接生成熄灯呢倒排索引文件，查询的时候同时查询所有的倒排文件，然后做结果的汇总计算即可</li>
+<li>解决方案是新文档直接生成新的倒排索引文件，查询的时候同时查询所有的倒排文件，然后做结果的汇总计算即可</li>
 <li>Lucene便是采用了这种方案，它构建的单个倒排索引称为segment，合在一起称为Index，与ES中的Index概念不同，ES中的一个Shard对应一个Lucene Index</li>
 <li>Lucene会有一个专门的文件来记录所有的segment信息，称为commit point</li>
 </ul>
